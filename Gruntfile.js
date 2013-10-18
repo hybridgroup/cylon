@@ -153,5 +153,5 @@ module.exports = function (grunt) {
     'clean',
     'coffee',
     'coverageBackend'
-  ])
+  ]);
 };
