@@ -8,5 +8,5 @@
 
 'use strict';
 
-exports = module.exports = class Robot
+module.exports = class Robot
   constructor: (@name) ->

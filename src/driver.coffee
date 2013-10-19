@@ -8,5 +8,5 @@
 
 'use strict';
 
-exports = module.exports = class Driver
+module.exports = class Driver
   constructor: (@name) ->

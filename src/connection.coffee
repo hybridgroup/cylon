@@ -8,5 +8,5 @@
 
 'use strict';
 
-exports = module.exports = class Connection
+module.exports = class Connection
   constructor: (@name) ->

@@ -8,5 +8,5 @@
 
 'use strict';
 
-exports = module.exports = class Adaptor
+module.exports = class Adaptor
   constructor: (@name) ->

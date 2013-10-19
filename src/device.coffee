@@ -8,5 +8,5 @@
 
 'use strict';
 
-exports = module.exports = class Device
+module.exports = class Device
   constructor: (@name) ->
