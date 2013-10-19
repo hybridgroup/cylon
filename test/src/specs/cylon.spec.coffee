@@ -30,7 +30,7 @@ describe "basic tests", ->
     data[0].should.be.equal obj
 
   # Now on to a `real` test
-  it "cylon should be awesome", ->
-    cylon.should.have.keys 'awesome'
-    cylon.awesome.should.be.a 'function'
-    cylon.awesome().should.be.equal 'awesome'
+  it "cylon should create a robot", ->
+    cylon.should.have.keys 'robot'
+    cylon.robot.should.be.a 'function'
+    cylon.robot().should.be.equal 'irobot'
