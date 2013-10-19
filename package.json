@@ -4,7 +4,7 @@
   "main": "lib/cylon.js",
   "description": "A small robotics framework based on nactor",
   "homepage": "cylonjs.com",
-  "bugs": "https://github.com/deadprogram/cylon/issues",
+  "bugs": "https://github.com/hybridgroup/cylon/issues",
   "author": {
     "name": "Ron Evans",
     "email": "",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/deadprogram/cylon"
+    "url": "https://github.com/hybridgroup/cylon"
   },
   "licenses": [
     {
