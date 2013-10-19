@@ -11,12 +11,12 @@ describe "basic tests", ->
       bool.should.be.false
       bool = true
       bool.should.be.true
-    150
+    , 150
 
     setTimeout ->
       bool.should.be.true
       done()
-    300
+    , 300
 
   it "standard sync test", ->
     data = []
