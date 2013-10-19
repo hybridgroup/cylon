@@ -1,4 +1,4 @@
-# cylon [![Build Status](https://secure.travis-ci.org/deadprogram/cylon.png?branch=master)](http://travis-ci.org/deadprogram/cylon)
+# cylon [![Build Status](https://secure.travis-ci.org/hybridgroup/cylon.png?branch=master)](http://travis-ci.org/hybridgroup/cylon)
 
 A JavaScript robotics framework using node.js and nactor
 
