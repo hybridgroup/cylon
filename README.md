@@ -39,8 +39,8 @@ robot = cylon.robot
   
   work: ->
     # we do our thing here
-    every 1.second(), ->
-      led.toggle()
+    every 1.second, ->
+      led.toggle
 
 # start working
 robot.work
