@@ -3,8 +3,8 @@
 Device = source("device")
 
 describe "basic tests", ->
-  r = new Device("irobot")
+  r = new Device(name: "devisive")
 
   it "device should have a name", ->
     r.should.have.keys 'name'
-    r.name.should.be.equal 'irobot'
+    r.name.should.be.equal 'devisive'

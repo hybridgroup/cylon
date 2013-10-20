@@ -9,4 +9,5 @@
 'use strict';
 
 module.exports = class Adaptor
-  constructor: (@name) ->
+  constructor: (opts) ->
+    @name = opts.name

@@ -3,8 +3,8 @@
 Driver = source("driver")
 
 describe "basic tests", ->
-  r = new Driver("irobot")
+  r = new Driver(name: "driving")
 
   it "driver should have a name", ->
     r.should.have.keys 'name'
-    r.name.should.be.equal 'irobot'
+    r.name.should.be.equal 'driving'

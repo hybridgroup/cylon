@@ -9,4 +9,5 @@
 'use strict';
 
 module.exports = class Device
-  constructor: (@name) ->
+  constructor: (opts) ->
+    @name = opts.name
