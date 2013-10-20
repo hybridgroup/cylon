@@ -1,7 +1,6 @@
 'use strict';
 
 cylon = source("cylon")
-Robot = source("robot")
 
 describe "basic tests", ->
   it "standard async test", (done) ->
