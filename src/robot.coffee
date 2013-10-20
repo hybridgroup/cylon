@@ -9,15 +9,22 @@
 'use strict';
 
 Connection = source("connection")
+Device = source("device")
 
 module.exports = class Robot
   constructor: (opts) ->
+    opts ?= {}
     @_connections = {}
     @_devices = {}
-    @name = opts.name
+    @name = opts.name or  @constructor.randomName()
     @connections = initConnections(opts.connection or opts.connections or {})
     @devices = initDevices(opts.device or opts.devices or {})
     @work = opts.work or -> (console.log "No work yet")
+
+  start: ->
+    startConnections()
+    startDevices()
+    (@work)
 
   initConnections = (connections) ->
     console.log "Initializing connections..."
@@ -35,13 +42,11 @@ module.exports = class Robot
     console.log "Initializing device '#{ device.name }'..."
     @_devices[device.name] = new Device(device)
 
-  start: ->
-    startConnections()
-    startDevices()
-    (@work)
-
   startConnections = ->
     console.log "Starting connections..."
 
   startDevices = ->
     console.log "Starting devices..."
+
+  @randomName: ->
+    "Robot #{ Math.floor(Math.random() * 100000) }"

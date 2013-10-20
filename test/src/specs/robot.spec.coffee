@@ -6,10 +6,15 @@ describe "basic tests", ->
   testWork = ->
     console.log "hi"
 
-  r = new Robot(name: "irobot", work: testWork)
+  robot = new Robot(name: "irobot", work: testWork)
 
-  it "robot should have a name", ->
-    r.name.should.be.equal 'irobot'
+  it "robot should have a name, if given", ->
+    robot.name.should.be.equal 'irobot'
+
+  it "robot should have a random name, if not given", ->
+    sinon.stub(Robot, 'randomName').returns('Electra')
+    r = new Robot
+    r.name.should.be.equal 'Electra'
 
   it "robot should have work", ->
-    r.work.should.be.equal testWork
+    robot.work.should.be.equal testWork
