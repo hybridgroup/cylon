@@ -24,7 +24,7 @@ module.exports = class Robot
   start: ->
     @startConnections()
     @startDevices()
-    (@work)
+    (@work)()
 
   initConnections = (connections) ->
     console.log "Initializing connections..."
