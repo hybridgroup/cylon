@@ -29,8 +29,7 @@ describe "basic tests", ->
     # hard equal
     data[0].should.be.equal obj
 
-  # Now on to a `real` test
   it "cylon should create a robot", ->
     cylon.should.have.keys 'robot'
-    robot = cylon.robot(name: 'caprica')
-    robot.name.should.be.eql 'caprica'
+    robot = cylon.robot(name: 'caprica six')
+    robot.name.should.be.eql 'caprica six'
