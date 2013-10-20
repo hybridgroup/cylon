@@ -1,12 +1,9 @@
 # cylon [![Build Status](https://secure.travis-ci.org/hybridgroup/cylon.png?branch=master)](http://travis-ci.org/hybridgroup/cylon)
 
-A JavaScript robotics framework using node.js and nactor
+A JavaScript framework for robotics and physical computing using node.js and nactor
 
 ## Getting Started
 Install the module with: `npm install cylon`
-
-## Documentation
-_(Coming soon)_
 
 ## Examples
 ```javascript
@@ -44,6 +41,9 @@ robot = cylon.robot
 
 robot.start
 ```
+
+## Documentation
+_(Coming soon)_
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
