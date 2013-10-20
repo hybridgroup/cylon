@@ -14,8 +14,8 @@ Device = source("device")
 module.exports = class Robot
   constructor: (opts) ->
     opts ?= {}
-    @_connections = {}
-    @_devices = {}
+    @connectionTypes = {}
+    @deviceTypes = {}
     @name = opts.name or @constructor.randomName()
     @connections = initConnections(opts.connection or opts.connections or {})
     @devices = initDevices(opts.device or opts.devices or {})
@@ -32,7 +32,7 @@ module.exports = class Robot
 
   initConnection = (connection) ->
     console.log "Initializing connection '#{ connection.name }'..."
-    @_connections[connection.name] = new Connection(connection)
+    @connectionTypes[connection.name] = new Connection(connection)
 
   initDevices = (devices) ->
     console.log "Initializing devices..."
@@ -40,7 +40,7 @@ module.exports = class Robot
 
   initDevice = (device) ->
     console.log "Initializing device '#{ device.name }'..."
-    @_devices[device.name] = new Device(device)
+    @deviceTypes[device.name] = new Device(device)
 
   startConnections = ->
     console.log "Starting connections..."
