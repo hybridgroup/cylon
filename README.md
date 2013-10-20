@@ -6,13 +6,40 @@ A JavaScript robotics framework using node.js and nactor
 Install the module with: `npm install cylon`
 
 ```javascript
-var cylon = require('cylon');
-cylon.robot(); // "awesome"
+var cylon = require("cylon");
+ 
+// Initialize the robot
+var robot = cylon.robot({
+  connection : { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+  device : { name: 'led', driver: 'led', pin: 13 },
+  
+  work : function() {
+    // we do our thing here
+    every(1.second(), function() { led.toggle(); });
+  }
+});
+
+// start working
+robot.work();
 ```
 
 ```coffee-script
-cylon = require 'cylon'
-cylon.robot() // "awesome"
+cylon = require("cylon")
+ 
+# Initialize the robot
+robot = cylon.robot
+  connection:
+    name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
+  device: 
+    name: 'led', driver: 'led', pin: 13
+  
+  work : ->
+    # we do our thing here
+    every 1.second(), ->
+      led.toggle()
+
+# start working
+robot.work
 ```
 
 ## Documentation
