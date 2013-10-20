@@ -3,8 +3,13 @@
 Robot = source("robot")
 
 describe "basic tests", ->
-  r = new Robot(name: "irobot")
+  testWork = ->
+    console.log "hi"
+
+  r = new Robot(name: "irobot", work: testWork)
 
   it "robot should have a name", ->
-    r.should.have.keys 'name'
     r.name.should.be.equal 'irobot'
+
+  it "robot should have work", ->
+    r.work.should.be.equal testWork

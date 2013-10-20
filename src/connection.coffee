@@ -11,3 +11,4 @@
 module.exports = class Connection
   constructor: (opts) ->
     @name = opts.name
+    @adaptor = opts.adaptor

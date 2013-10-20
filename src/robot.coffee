@@ -11,3 +11,7 @@
 module.exports = class Robot
   constructor: (opts) ->
     @name = opts.name
+    @work = opts.work or -> (console.log "No work yet")
+
+  start: ->
+    (@work)

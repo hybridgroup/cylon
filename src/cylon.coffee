@@ -8,5 +8,7 @@
 
 'use strict';
 
-exports.robot = ->
-  'irobot'
+Robot = source("robot")
+
+exports.robot = (opts) ->
+  new Robot(opts)

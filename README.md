@@ -24,7 +24,7 @@ var robot = cylon.robot({
 });
 
 // start working
-robot.work();
+robot.start();
 ```
 
 ```coffee-script
@@ -42,8 +42,7 @@ robot = cylon.robot
     every 1.second, ->
       led.toggle
 
-# start working
-robot.work
+robot.start
 ```
 
 ## Contributing

@@ -1,6 +1,7 @@
 'use strict';
 
 cylon = source("cylon")
+Robot = source("robot")
 
 describe "basic tests", ->
   it "standard async test", (done) ->
@@ -32,5 +33,5 @@ describe "basic tests", ->
   # Now on to a `real` test
   it "cylon should create a robot", ->
     cylon.should.have.keys 'robot'
-    cylon.robot.should.be.a 'function'
-    cylon.robot().should.be.equal 'irobot'
+    robot = cylon.robot(name: 'caprica')
+    robot.name.should.be.eql 'caprica'
