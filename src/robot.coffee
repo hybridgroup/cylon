@@ -22,8 +22,8 @@ module.exports = class Robot
     @work = opts.work or -> (console.log "No work yet")
 
   start: ->
-    startConnections()
-    startDevices()
+    @startConnections()
+    @startDevices()
     (@work)
 
   initConnections = (connections) ->
@@ -42,11 +42,21 @@ module.exports = class Robot
     console.log "Initializing device '#{ device.name }'..."
     @deviceTypes[device.name] = new Device(device)
 
-  startConnections = ->
+  startConnections: ->
     console.log "Starting connections..."
+    startConnection connection for n, connection of @connectionTypes
 
-  startDevices = ->
+  startConnection: (connection) ->
+    console.log "Starting connection '#{ connection.name }'..."
+    connection.start()
+
+  startDevices: ->
     console.log "Starting devices..."
+    startDevice device for n, device of @deviceTypes
+
+  startDevice: (device) ->
+    console.log "Starting device '#{ device.name }'..."
+    device.start()
 
   @randomName: ->
     "Robot #{ Math.floor(Math.random() * 100000) }"

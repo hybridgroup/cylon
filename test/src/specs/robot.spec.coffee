@@ -18,3 +18,10 @@ describe "basic tests", ->
 
   it "robot should have work", ->
     robot.work.should.be.equal testWork
+
+  it "robot should be able to start", ->
+    startConnections = sinon.stub(robot, 'startConnections')
+    startDevices = sinon.stub(robot, 'startDevices')
+    robot.start()
+    startConnections.should.have.been.called
+    startDevices.should.have.been.called
