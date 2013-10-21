@@ -1,6 +1,7 @@
 'use strict';
 
 Robot = source("robot")
+RobotActor = source("actors/robot")
 
 describe "robots", ->
   testWork = ->
@@ -12,7 +13,7 @@ describe "robots", ->
     robot.name (name) -> name.should.be.equal 'irobot'
 
   it "should have a random name, if not given", ->
-    sinon.stub(Robot.Actor, 'randomName').returns('Electra')
+    sinon.stub(RobotActor, 'randomName').returns('Electra')
     r = new Robot
     r.name (name) -> name.should.be.equal 'Electra'
 
