@@ -8,7 +8,15 @@
 
 'use strict';
 
+Port = source("port")
+
 module.exports = class Connection
   constructor: (opts) ->
+    opts ?= {}
     @name = opts.name
     @adaptor = opts.adaptor
+    @port = new Port(opts.port)
+
+  start: ->
+    console.log "started"
+

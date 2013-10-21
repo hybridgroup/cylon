@@ -2,11 +2,11 @@
 
 Device = source("device")
 
-describe "basic tests", ->
-  r = new Device(name: "devisive", driver: 'driving')
+describe "devices", ->
+  device = new Device(name: "devisive", driver: 'driving')
 
-  it "device should have a name", ->
-    r.name.should.be.equal 'devisive'
+  it "should have a name", ->
+    device.name.should.be.equal 'devisive'
 
-  it "device should have an driver", ->
-    r.driver.should.be.equal 'driving'
+  it "should have an driver", ->
+    device.driver.should.be.equal 'driving'

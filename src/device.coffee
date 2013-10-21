@@ -12,3 +12,7 @@ module.exports = class Device
   constructor: (opts) ->
     @name = opts.name
     @driver = opts.driver
+
+  start: ->
+    console.log "started"
+    

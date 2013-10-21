@@ -2,9 +2,9 @@
 
 Driver = source("driver")
 
-describe "basic tests", ->
-  r = new Driver(name: "driving")
+describe "drivers", ->
+  driver = new Driver(name: "driving")
 
-  it "driver should have a name", ->
-    r.should.have.keys 'name'
-    r.name.should.be.equal 'driving'
+  it "should have a name", ->
+    driver.should.have.keys 'name'
+    driver.name.should.be.equal 'driving'

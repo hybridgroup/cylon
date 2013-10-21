@@ -2,9 +2,9 @@
 
 Adaptor = source("adaptor")
 
-describe "basic tests", ->
-  r = new Adaptor(name: "adaptive")
+describe "adaptors", ->
+  adaptor = new Adaptor(name: "adaptive")
 
-  it "adaptor should have a name", ->
-    r.should.have.keys 'name'
-    r.name.should.be.equal 'adaptive'
+  it "should have a name", ->
+    adaptor.should.have.keys 'name'
+    adaptor.name.should.be.equal 'adaptive'

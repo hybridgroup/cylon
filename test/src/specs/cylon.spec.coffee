@@ -2,7 +2,7 @@
 
 cylon = source("cylon")
 
-describe "basic tests", ->
+describe "cylons", ->
   it "standard async test", (done) ->
     bool = false
     bool.should.be.false
@@ -29,7 +29,7 @@ describe "basic tests", ->
     # hard equal
     data[0].should.be.equal obj
 
-  it "cylon should create a robot", ->
+  it "should create a robot", ->
     cylon.should.have.keys 'robot'
     robot = cylon.robot(name: 'caprica six')
     robot.name.should.be.eql 'caprica six'
