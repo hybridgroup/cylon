@@ -12,8 +12,7 @@ Connection = source("connection")
 Device = source("device")
 
 module.exports = class Robot
-  constructor: (opts) ->
-    opts ?= {}
+  constructor: (opts = {}) ->
     @connectionTypes = {}
     @deviceTypes = {}
     @name = opts.name or @constructor.randomName()
