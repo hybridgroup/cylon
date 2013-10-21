@@ -8,47 +8,66 @@
 
 'use strict';
 
+nactor = require 'nactor'
+
 Connection = source("connection")
 Device = source("device")
 
 module.exports = class Robot
-  @connectionTypes = {}
-  @deviceTypes = {}
+  Actor = (opts = {}) ->
+    self = this
 
-  constructor: (opts = {}) ->
-    @name = opts.name or @constructor.randomName()
-    @connections = initConnections(opts.connection or opts.connections or {})
-    @devices = initDevices(opts.device or opts.devices or {})
+    @connectionTypes = {}
+    @devicetypes = {}
+
+    @randomName = ->
+      "Robot #{ Math.floor(Math.random() * 100000) }"
+
+    @initConnections = (connections) ->
+      console.log "Initializing connections..."
+      for connection in connections
+        console.log "Initializing connection '#{ connection.name }'..."
+        @connectionTypes[connection.name] = new Connection(connection)
+
+    @initDevices = (devices) ->
+      console.log "Initializing devices..."
+      for device in devices
+        console.log "Initializing device '#{ device.name }'..."
+        @deviceTypes[device.name] = new Device(device)
+
+    @name = opts.name or randomName()
+    @connections = @initConnections(opts.connection or opts.connections or {})
+    @devices = @initDevices(opts.device or opts.devices or {})
     @work = opts.work or -> (console.log "No work yet")
 
-  @randomName: ->
-    "Robot #{ Math.floor(Math.random() * 100000) }"
+    return {
+      name: -> @name
+      connections: -> @connections
+      devices: -> @devices
+      work: -> @work
 
-  initConnections = (connections) ->
-    console.log "Initializing connections..."
-    for connection in connections
-      console.log "Initializing connection '#{ connection.name }'..."
-      @connectionTypes[connection.name] = new Connection(connection)
+      start: ->
+        self.post 'startConnections'
+        self.post 'startDevices'
+        self.post 'performWork'
 
-  initDevices = (devices) ->
-    console.log "Initializing devices..."
-    for device in devices
-      console.log "Initializing device '#{ device.name }'..."
-      @deviceTypes[device.name] = new Device(device)
+      startConnections: ->
+        console.log "Starting connections..."
+        for n, connection of self.connectionTypes
+          console.log "Starting connection '#{connection.name}'..."
+          connection.connect()
 
-  start: ->
-    @startConnections()
-    @startDevices()
-    (@work)()
+      startDevices: ->
+        console.log "Starting devices..."
+        for n, device of @deviceTypes
+          console.log "Starting device '#{ device.name }'..."
+          device.start()
 
-  startConnections: ->
-    console.log "Starting connections..."
-    for n, connection of @connectionTypes
-      console.log "Starting connection '#{ connection.name }'..."
-      connection.connect()
+      performWork: ->
+        (@work)()
+    }
 
-  startDevices: ->
-    console.log "Starting devices..."
-    for n, device of @deviceTypes
-      console.log "Starting device '#{ device.name }'..."
-      device.start()
+  constructor: (opts = {}) ->
+    @actor = nactor.actor(Actor)
+    @actor.init(opts)
+    return @actor

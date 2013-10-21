@@ -32,4 +32,4 @@ describe "cylons", ->
   it "should create a robot", ->
     cylon.should.have.keys 'robot'
     robot = cylon.robot(name: 'caprica six')
-    robot.name.should.be.eql 'caprica six'
+    robot.name (name) -> name.should.be.eql 'caprica six'
