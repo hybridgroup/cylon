@@ -10,3 +10,7 @@ describe "connections", ->
 
   it "should have an adaptor", ->
     connection.adaptor.should.be.equal 'adaptive'
+
+  it "should be able to require an external adaptor module"
+  it "should be able to connect"
+  it "should be able to disconnect"

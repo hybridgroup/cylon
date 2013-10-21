@@ -11,3 +11,6 @@
 module.exports = class Driver
   constructor: (opts) ->
     @name = opts.name
+
+  start: ->
+    console.log "started"

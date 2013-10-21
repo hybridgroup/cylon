@@ -10,3 +10,5 @@ describe "devices", ->
 
   it "should have an driver", ->
     device.driver.should.be.equal 'driving'
+
+  it "should be able to require an external driver module"

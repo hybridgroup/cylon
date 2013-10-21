@@ -17,3 +17,6 @@ module.exports = class Port
     @host = "localhost"
     @port = "4567"
     # TODO: actual parsing of the incoming data string
+
+  toString: ->
+    "#{@host}:#{@port}"

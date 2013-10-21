@@ -17,6 +17,8 @@ module.exports = class Connection
     @adaptor = opts.adaptor
     @port = new Port(opts.port)
 
-  start: ->
-    console.log "started"
+  connect: ->
+    console.log "Connecting to '#{@name}' on port '#{@port.toString}'..."
 
+  disconnect: ->
+    console.log "Disconnecting from '#{@name}' on port '#{@port.toString}'..."

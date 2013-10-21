@@ -48,7 +48,7 @@ module.exports = class Robot
 
   startConnection: (connection) ->
     console.log "Starting connection '#{ connection.name }'..."
-    connection.start()
+    connection.connect()
 
   startDevices: ->
     console.log "Starting devices..."
