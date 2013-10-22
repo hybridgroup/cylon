@@ -9,10 +9,20 @@
 'use strict';
 
 module.exports = class Device
-  constructor: (opts) ->
+  constructor: (opts = {}) ->
+    @parent = opts.parent
     @name = opts.name
-    @driver = opts.driver
+    @connection = @determineConnection(opts.connection) or @defaultConnection
+    @driver = @requireDriver(opts.driver)
 
   start: ->
     console.log "started"
     
+  determineConnection: (c) ->
+    @parent.connections(c) if c
+
+  defaultConnection: ->
+    @parent.connections.first
+
+  requireDriver: (driverName) ->
+    console.log "dynamic load driver"

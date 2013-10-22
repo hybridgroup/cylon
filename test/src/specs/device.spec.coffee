@@ -8,7 +8,5 @@ describe "devices", ->
   it "should have a name", ->
     device.name.should.be.equal 'devisive'
 
-  it "should have an driver", ->
-    device.driver.should.be.equal 'driving'
-
-  it "should be able to require an external driver module"
+  it "should have a connection"
+  it "should have an driver"
