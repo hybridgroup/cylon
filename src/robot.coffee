@@ -12,6 +12,7 @@ Connection = require("./connection")
 Device = require("./device")
 
 module.exports = class Robot
+  self = this
   @connectionTypes = {}
   @deviceTypes = {}
 
@@ -27,15 +28,19 @@ module.exports = class Robot
 
   initConnections = (connections) ->
     console.log "Initializing connections..."
+    # make sure we're dealing with an Array
+    connections = [].concat connections
     for connection in connections
       console.log "Initializing connection '#{ connection.name }'..."
-      @connectionTypes[connection.name] = new Connection(connection)
+      self.connectionTypes[connection.name] = new Connection(connection)
 
   initDevices = (devices) ->
     console.log "Initializing devices..."
+    # make sure we're dealing with an Array
+    devices = [].concat devices
     for device in devices
       console.log "Initializing device '#{ device.name }'..."
-      @deviceTypes[device.name] = new Device(device)
+      self.deviceTypes[device.name] = new Device(device)
 
   start: ->
     @startConnections()
@@ -44,12 +49,14 @@ module.exports = class Robot
 
   startConnections: ->
     console.log "Starting connections..."
-    for n, connection of @connectionTypes
+    for n, connection of self.connectionTypes
       console.log "Starting connection '#{ connection.name }'..."
       connection.connect()
+      self[connection.name] = connection
 
   startDevices: ->
     console.log "Starting devices..."
-    for n, device of @deviceTypes
+    for n, device of self.deviceTypes
       console.log "Starting device '#{ device.name }'..."
       device.start()
+      self[device.name] = device
