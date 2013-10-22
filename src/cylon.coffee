@@ -9,6 +9,7 @@
 'use strict';
 
 Robot = source("robot")
+utils = source('utils')
 
 exports.robot = (opts) ->
   new Robot(opts)
