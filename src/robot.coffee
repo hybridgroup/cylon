@@ -8,8 +8,8 @@
 
 'use strict';
 
-Connection = source("connection")
-Device = source("device")
+Connection = require("./connection")
+Device = require("./device")
 
 module.exports = class Robot
   @connectionTypes = {}

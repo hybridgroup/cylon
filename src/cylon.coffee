@@ -8,7 +8,7 @@
 
 'use strict';
 
-Robot = source("robot")
+Robot = require("./robot")
 
 exports.robot = (opts) ->
   new Robot(opts)

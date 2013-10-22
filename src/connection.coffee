@@ -8,7 +8,7 @@
 
 'use strict';
 
-Port = source("port")
+Port = require("./port")
 
 module.exports = class Connection
   constructor: (opts) ->
