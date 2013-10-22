@@ -9,6 +9,7 @@
 'use strict';
 
 Robot = require("./robot")
+utils = require('./utils')
 
 exports.robot = (opts) ->
   new Robot(opts)

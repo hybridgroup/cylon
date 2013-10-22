@@ -10,13 +10,36 @@
 
 module.exports = class Port
   constructor: (data) ->
-    [@isTcp, @isSerial, @isPortless] = [false, false, false]
+    @isTcp = @isSerial = @isPortless = false
     @parse(data)
 
   parse: (data) ->
-    @host = "localhost"
-    @port = "4567"
-    # TODO: actual parsing of the incoming data string
+    if data is undefined
+      @port = undefined
+      @isPortless = true
+
+    # is TCP host/port?
+    else if match = /(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}):(\d{1,5})/.exec(data)
+      @port = match[2]
+      @host = match[1]
+      @isTcp = true
+
+    # is it a numeric port for localhost tcp?
+    else if /^[0-9]{1,5}$/.exec(data)
+      @port = data
+      @host = "localhost"
+      @isTcp = true
+
+    # must be a serial port
+    else
+      @port = data
+      @host = undefined
+      @isSerial = true
 
   toString: ->
-    "#{@host}:#{@port}"
+    if @isPortless
+      "none"
+    else if @isSerial
+      @port
+    else
+      "#{@host}:#{@port}"
