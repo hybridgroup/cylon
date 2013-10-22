@@ -10,7 +10,7 @@
 
 module.exports = class Device
   constructor: (opts = {}) ->
-    @parent = opts.parent
+    @robot = opts.robot
     @name = opts.name
     @connection = @determineConnection(opts.connection) or @defaultConnection
     @driver = @requireDriver(opts.driver)

@@ -29,12 +29,14 @@ module.exports = class Robot
     console.log "Initializing connections..."
     for connection in connections
       console.log "Initializing connection '#{ connection.name }'..."
+      connection['robot'] = this
       @connectionTypes[connection.name] = new Connection(connection)
 
   initDevices = (devices) ->
     console.log "Initializing devices..."
     for device in devices
       console.log "Initializing device '#{ device.name }'..."
+      device['robot'] = this
       @deviceTypes[device.name] = new Device(device)
 
   start: ->

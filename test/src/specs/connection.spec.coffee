@@ -3,7 +3,10 @@
 Connection = source("connection")
 
 describe "connections", ->
-  connection = new Connection(name: "connective", adaptor: "adaptive")
+  connection = new Connection(name: "connective", adaptor: "adaptive", robot: 'me')
+
+  it "should belong to a robot", ->
+    connection.robot.should.be.equal 'me'
 
   it "should have a name", ->
     connection.name.should.be.equal 'connective'

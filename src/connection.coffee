@@ -11,8 +11,8 @@
 Port = require("./port")
 
 module.exports = class Connection
-  constructor: (opts) ->
-    opts ?= {}
+  constructor: (opts = {}) ->
+    @robot = opts.robot
     @name = opts.name
     @adaptor = opts.adaptor
     @port = new Port(opts.port)
