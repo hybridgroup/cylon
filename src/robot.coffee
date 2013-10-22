@@ -17,6 +17,7 @@ module.exports = class Robot
 
   constructor: (opts = {}) ->
     @name = opts.name or @constructor.randomName()
+    @master = opts.master
     @connections = initConnections(opts.connection or opts.connections or {})
     @devices = initDevices(opts.device or opts.devices or {})
     @work = opts.work or -> (console.log "No work yet")

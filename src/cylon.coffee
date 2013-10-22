@@ -11,5 +11,6 @@
 Robot = require("./robot")
 utils = require('./utils')
 
-exports.robot = (opts) ->
+exports.robot = (opts = {}) ->
+  opts.master = this
   new Robot(opts)

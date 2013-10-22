@@ -26,3 +26,5 @@ module.exports = class Device
 
   requireDriver: (driverName) ->
     console.log "dynamic load driver"
+    self = this
+    #new require("cylon-#{driverName}")(device: self)
