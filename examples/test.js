@@ -6,8 +6,10 @@ var robot = cylon.robot({
   device: { name: 'led', driver: 'led', pin: 13 },
 
   work: function() {
+    robot = this
+
     // we do our thing here
-    every((1).second(), function() { console.log("ehlo"); });
+    every((1).second(), function() { console.log(robot.led.name); });
   }
 });
 
