@@ -15,7 +15,7 @@
 # Returns an interval
 # Examples:
 #   every(10.seconds(), -> console.log("hello world (and again in 5 seconds)!"))
-exports.every = (interval, action) ->
+global.every = (interval, action) ->
   setInterval action, interval
 
 # Public: Alias to setTimeout, combined with Number monkeypatches below to
@@ -27,7 +27,7 @@ exports.every = (interval, action) ->
 # Returns an interval
 # Examples:
 #   after(10.seconds(), -> console.log("hello world from ten seconds ago!"))
-exports.after = (delay, action) ->
+global.after = (delay, action) ->
   setTimeout action, delay
 
 Number::seconds = ->
