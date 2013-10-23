@@ -14,7 +14,7 @@ describe "Connection", ->
     connection.name.should.be.equal 'connective'
 
   it "should have an adaptor", ->
-    connection.adaptor.name.should.be.equal 'loopback'
+    connection.adaptor.name.should.be.equal 'Loopback'
 
   it "should be able to require an external adaptor module"
   it "should be able to connect"
