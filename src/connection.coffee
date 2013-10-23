@@ -30,4 +30,4 @@ module.exports = class Connection
 
   requireAdaptor: (adaptorName) ->
     console.log "dynamic load adaptor"
-    #@robot.requireAdaptor(adaptorName, self)
+    @robot.requireAdaptor(adaptorName, self)
