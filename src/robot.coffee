@@ -21,24 +21,24 @@ module.exports = class Robot
     @master = opts.master
     initConnections(opts.connection or opts.connections or {})
     initDevices(opts.device or opts.devices or {})
-    @work = opts.work or -> (console.log "No work yet")
+    @work = opts.work or -> (Logger.info "No work yet")
 
   @randomName: ->
     "Robot #{ Math.floor(Math.random() * 100000) }"
 
   initConnections = (connections) ->
-    console.log "Initializing connections..."
+    Logger.info "Initializing connections..."
     connections = [].concat connections
     for connection in connections
-      console.log "Initializing connection '#{ connection.name }'..."
+      Logger.info "Initializing connection '#{ connection.name }'..."
       connection['robot'] = self
       self.connections[connection.name] = new Connection(connection)
 
   initDevices = (devices) ->
-    console.log "Initializing devices..."
+    Logger.info "Initializing devices..."
     devices = [].concat devices
     for device in devices
-      console.log "Initializing device '#{ device.name }'..."
+      Logger.info "Initializing device '#{ device.name }'..."
       device['robot'] = self
       self.devices[device.name] = new Device(device)
 
@@ -48,15 +48,15 @@ module.exports = class Robot
     @work.call(self, self)
 
   startConnections: ->
-    console.log "Starting connections..."
+    Logger.info "Starting connections..."
     for n, connection of self.connections
-      console.log "Starting connection '#{ connection.name }'..."
+      Logger.info "Starting connection '#{ connection.name }'..."
       connection.connect()
       self[connection.name] = connection
 
   startDevices: ->
-    console.log "Starting devices..."
+    Logger.info "Starting devices..."
     for n, device of self.devices
-      console.log "Starting device '#{ device.name }'..."
+      Logger.info "Starting device '#{ device.name }'..."
       device.start()
       self[device.name] = device

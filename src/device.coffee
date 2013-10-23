@@ -18,8 +18,8 @@ module.exports = class Device
     @driver = @requireDriver(opts.driver)
 
   start: ->
-    console.log "started"
-    
+    Logger.info "started"
+
   determineConnection: (c) ->
     @robot.connections[c] if c
 
@@ -27,5 +27,5 @@ module.exports = class Device
     @robot.connections.first
 
   requireDriver: (driverName) ->
-    console.log "dynamic load driver"
+    Logger.info "dynamic load driver"
     #new require("cylon-#{driverName}")(device: self)

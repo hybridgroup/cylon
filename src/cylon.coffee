@@ -9,7 +9,11 @@
 'use strict';
 
 Robot = require("./robot")
+
 require('./utils')
+require('./logger')
+
+Logger.setup()
 
 exports.robot = (opts = {}) ->
   opts.master = this
