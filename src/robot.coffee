@@ -43,7 +43,6 @@ module.exports = class Robot
   start: ->
     @startConnections()
     @startDevices()
-    #eval("var myled = 'hi';")
     @work.bind(self)(self)
 
   startConnections: ->
