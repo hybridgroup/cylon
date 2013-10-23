@@ -18,7 +18,7 @@ module.exports = class Connection
     @port = new Port(opts.port)
 
   connect: ->
-    console.log "Connecting to '#{@name}' on port '#{@port.toString()}'..."
+    Logger.info "Connecting to '#{@name}' on port '#{@port.toString()}'..."
 
   disconnect: ->
-    console.log "Disconnecting from '#{@name}' on port '#{@port.toString()}'..."
+    Logger.info "Disconnecting from '#{@name}' on port '#{@port.toString()}'..."

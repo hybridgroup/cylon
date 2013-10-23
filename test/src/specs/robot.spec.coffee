@@ -1,10 +1,13 @@
 'use strict';
 
 Robot = source("robot")
+source("logger")
+
+Logger.setup(false) # quiet logger for tests
 
 describe "robots", ->
   testWork = ->
-    console.log "hi"
+    Logger.info "hi"
 
   robot = new Robot(name: "irobot", work: testWork)
 

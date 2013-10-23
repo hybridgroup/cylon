@@ -14,12 +14,12 @@ module.exports = class Device
   constructor: (opts = {}) ->
     @robot = opts.robot
     @name = opts.name
-    @connection = @determineConnection(opts.connection) or @defaultConnection()
+    @connection = @determineConnection(opts.connection) or @defaultConnection
     @driver = @requireDriver(opts.driver)
 
   start: ->
-    console.log "started"
-    
+    Logger.info "started"
+
   determineConnection: (c) ->
     @robot.connections[c] if c
 
@@ -27,4 +27,5 @@ module.exports = class Device
     @robot.connections.first
 
   requireDriver: (driverName) ->
+    Logger.info "dynamic load driver"
     @robot.requireDriver(driverName, self)
