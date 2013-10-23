@@ -11,3 +11,6 @@
 module.exports = class Adaptor
   constructor: (opts) ->
     @name = opts.name
+
+  addProxy: (object, method) ->
+    this[method] = (args...) -> object[method](args...)
