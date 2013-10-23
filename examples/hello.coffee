@@ -3,6 +3,9 @@ cylon = require('..')
 cylon.robot
   work: ->
     every 1.second(), ->
-      Logger.info("hello, human!")
+      Logger.info("Hello, human!")
+
+    after 10.seconds(), ->
+      Logger.info "Impressive."
 
 .start()
