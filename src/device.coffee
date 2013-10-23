@@ -14,7 +14,7 @@ module.exports = class Device
   constructor: (opts = {}) ->
     @robot = opts.robot
     @name = opts.name
-    @connection = @determineConnection(opts.connection) or @defaultConnection
+    @connection = @determineConnection(opts.connection) or @defaultConnection()
     @driver = @requireDriver(opts.driver)
 
   start: ->
@@ -27,5 +27,4 @@ module.exports = class Device
     @robot.connections.first
 
   requireDriver: (driverName) ->
-    console.log "dynamic load driver"
-    #new require("cylon-#{driverName}")(device: self)
+    @robot.requireDriver(driverName, self)

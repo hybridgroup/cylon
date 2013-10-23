@@ -13,14 +13,15 @@ Device = require("./device")
 
 module.exports = class Robot
   self = this
-  @connections = {}
-  @devices = {}
 
   constructor: (opts = {}) ->
     @name = opts.name or @constructor.randomName()
     @master = opts.master
-    initConnections(opts.connection or opts.connections or {})
-    initDevices(opts.device or opts.devices or {})
+    @connections = {}
+    @devices = {}
+
+    initConnections(opts.connection or opts.connections)
+    initDevices(opts.device or opts.devices)
     @work = opts.work or -> (console.log "No work yet")
 
   @randomName: ->
@@ -28,6 +29,7 @@ module.exports = class Robot
 
   initConnections = (connections) ->
     console.log "Initializing connections..."
+    return unless connections?
     connections = [].concat connections
     for connection in connections
       console.log "Initializing connection '#{ connection.name }'..."
@@ -36,6 +38,7 @@ module.exports = class Robot
 
   initDevices = (devices) ->
     console.log "Initializing devices..."
+    return unless devices?
     devices = [].concat devices
     for device in devices
       console.log "Initializing device '#{ device.name }'..."
@@ -60,3 +63,7 @@ module.exports = class Robot
       console.log "Starting device '#{ device.name }'..."
       device.start()
       self[device.name] = device
+
+  requireDriver: (driverName, device) ->
+    console.log "load the driver"
+    #new require("cylon-#{driverName}")(device: device)
