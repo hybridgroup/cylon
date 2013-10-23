@@ -13,8 +13,6 @@ Device = require("./device")
 
 module.exports = class Robot
   self = this
-  @connections = {}
-  @devices = {}
 
   constructor: (opts = {}) ->
     @name = opts.name or @constructor.randomName()
@@ -66,5 +64,20 @@ module.exports = class Robot
       device.start()
       self[device.name] = device
 
+  requireAdaptor: (adaptorName, connection) ->
+    require("cylon-#{@adaptors[adaptorName]}").register(self) unless @adaptors[adaptorName]?
+    require(@adaptors[adaptorName]).adaptor(adaptorName)(connection: connection)
+
+  registerAdaptor: (moduleName, adaptorName) ->
+    @adaptors ?= {}
+    return if @adaptors[adaptorName]?
+    @adaptors[adaptorName] = moduleName
+
   requireDriver: (driverName, device) ->
-    console.log "load the driver"
+    require("cylon-#{@drivers[driverName]}").register(self) unless @drivers[driverName]?
+    require(@drivers[driverName]).driver(driverName)(device: device)
+
+  registerDriver: (moduleName, driverName) ->
+    @drivers ?= {}
+    return if @drivers[driverName]?
+    @drivers[driverName] = moduleName
