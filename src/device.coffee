@@ -21,10 +21,10 @@ module.exports = class Device
     console.log "started"
     
   determineConnection: (c) ->
-    @parent.connections(c) if c
+    @robot.connections[c] if c
 
   defaultConnection: ->
-    @parent.connections.first
+    @robot.connections.first
 
   requireDriver: (driverName) ->
     console.log "dynamic load driver"
