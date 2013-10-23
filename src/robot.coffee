@@ -28,7 +28,6 @@ module.exports = class Robot
 
   initConnections = (connections) ->
     console.log "Initializing connections..."
-    # make sure we're dealing with an Array
     connections = [].concat connections
     for connection in connections
       console.log "Initializing connection '#{ connection.name }'..."
@@ -36,6 +35,7 @@ module.exports = class Robot
 
   initDevices = (devices) ->
     console.log "Initializing devices..."
+    devices = [].concat devices
     for device in devices
       console.log "Initializing device '#{ device.name }'..."
       self.deviceTypes[device.name] = new Device(device)
@@ -43,7 +43,8 @@ module.exports = class Robot
   start: ->
     @startConnections()
     @startDevices()
-    (@work.bind(self))()
+    #eval("var myled = 'hi';")
+    @work.bind(self)(self)
 
   startConnections: ->
     console.log "Starting connections..."
