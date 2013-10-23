@@ -1,18 +1,20 @@
 'use strict';
 
 Connection = source("connection")
+Robot = source("robot")
 
 describe "Connection", ->
-  connection = new Connection(name: "connective", adaptor: "adaptive", robot: 'me')
+  robot = new Robot(name: 'me')
+  connection = new Connection(name: "connective", adaptor: "loopback", robot: robot)
 
   it "should belong to a robot", ->
-    connection.robot.should.be.equal 'me'
+    connection.robot.name.should.be.equal 'me'
 
   it "should have a name", ->
     connection.name.should.be.equal 'connective'
 
   it "should have an adaptor", ->
-    connection.adaptor.should.be.equal 'adaptive'
+    connection.adaptor.name.should.be.equal 'loopback'
 
   it "should be able to require an external adaptor module"
   it "should be able to connect"

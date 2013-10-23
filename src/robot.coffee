@@ -20,30 +20,32 @@ module.exports = class Robot
     @connections = {}
     @devices = {}
 
-    initConnections(opts.connection or opts.connections)
-    initDevices(opts.device or opts.devices)
+    @registerAdaptor "./loopback", "loopback"
+
+    @initConnections(opts.connection or opts.connections)
+    @initDevices(opts.device or opts.devices)
     @work = opts.work or -> (Logger.info "No work yet")
 
   @randomName: ->
     "Robot #{ Math.floor(Math.random() * 100000) }"
 
-  initConnections = (connections) ->
+  initConnections: (connections) ->
     Logger.info "Initializing connections..."
     return unless connections?
     connections = [].concat connections
     for connection in connections
       Logger.info "Initializing connection '#{ connection.name }'..."
       connection['robot'] = self
-      self.connections[connection.name] = new Connection(connection)
+      @connections[connection.name] = new Connection(connection)
 
-  initDevices = (devices) ->
+  initDevices: (devices) ->
     Logger.info "Initializing devices..."
     return unless devices?
     devices = [].concat devices
     for device in devices
       Logger.info "Initializing device '#{ device.name }'..."
       device['robot'] = self
-      self.devices[device.name] = new Device(device)
+      @devices[device.name] = new Device(device)
 
   start: ->
     @startConnections()
