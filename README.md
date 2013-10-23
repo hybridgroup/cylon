@@ -30,7 +30,7 @@ var robot = cylon.robot({
 robot.start();
 ```
 
-### CoffeeScrip:
+### CoffeeScript:
 ```coffee-script
 cylon = require "cylon"
 
