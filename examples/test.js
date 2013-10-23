@@ -1,7 +1,7 @@
-var cylon = require('..');
+var Cylon = require('..');
 
 // Initialize the robot
-var robot = cylon.robot({
+var robot = Cylon.robot({
   connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
   device: { name: 'led', driver: 'led', pin: 13 },
 

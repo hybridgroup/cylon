@@ -1,6 +1,6 @@
-var cylon = require('..');
+var Cylon = require('..');
 
-cylon.robot({
+Cylon.robot({
   work: function() {
     every((1).second(), function() { Logger.info("Hello, human!"); });
     after((10).seconds(), function() { Logger.info("Impressive."); });
