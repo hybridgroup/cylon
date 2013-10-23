@@ -29,5 +29,5 @@ module.exports = class Connection
     @adaptor.disconnect
 
   requireAdaptor: (adaptorName) ->
-    console.log "dynamic load adaptor"
+    Logger.info "dynamic load adaptor"
     @robot.requireAdaptor(adaptorName, self)

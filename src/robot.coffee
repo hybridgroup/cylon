@@ -72,6 +72,9 @@ module.exports = class Robot
     require("cylon-#{adaptorName}").register(self) unless self.adaptors[adaptorName]?
     require(self.adaptors[adaptorName]).adaptor(name: adaptorName).connect(connection: connection)
 
+  requireAdaptor: (adaptorName, connection) ->
+    self.requireAdaptor(adaptorName, connection)
+
   registerAdaptor: (moduleName, adaptorName) ->
     return if self.adaptors[adaptorName]?
     self.adaptors[adaptorName] = moduleName

@@ -20,6 +20,7 @@ class Loopback
 
   connect: ->
     console.log  "Connecting to adaptor '#{@name}'..."
+    self
 
   disconnect: ->
     console.log  "Disconnecting from adaptor '#{@name}'..."
