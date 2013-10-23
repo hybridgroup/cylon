@@ -22,11 +22,11 @@ module.exports = class Connection
 
   connect: ->
     Logger.info "Connecting to '#{@name}' on port '#{@port.toString()}'..."
-    @adaptor.connect
+    @adaptor.connect(connection: self)
 
   disconnect: ->
     Logger.info "Disconnecting from '#{@name}' on port '#{@port.toString()}'..."
-    @adaptor.disconnect
+    @adaptor.disconnect(connection: self)
 
   requireAdaptor: (adaptorName) ->
     Logger.info "dynamic load adaptor"

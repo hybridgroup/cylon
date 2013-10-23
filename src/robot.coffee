@@ -70,8 +70,9 @@ module.exports = class Robot
       this[device.name] = device
 
   @requireAdaptor = (adaptorName, connection) =>
-    require("cylon-#{adaptorName}").register(this) unless @adaptors[adaptorName]?
-    require(@adaptors[adaptorName]).adaptor(name: adaptorName).connect(connection: connection)
+    unless @adaptors[adaptorName]?
+      require("cylon-#{adaptorName}").register(this)
+      @adaptors[adaptorName] = require("cylon-#{adaptorName}").adaptor(name: adaptorName)
 
   requireAdaptor: (adaptorName, connection) ->
     self.requireAdaptor(adaptorName, connection)
