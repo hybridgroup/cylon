@@ -9,6 +9,8 @@
 'use strict';
 
 module.exports = class Device
+  self = this
+
   constructor: (opts = {}) ->
     @robot = opts.robot
     @name = opts.name
@@ -26,5 +28,4 @@ module.exports = class Device
 
   requireDriver: (driverName) ->
     console.log "dynamic load driver"
-    self = this
     #new require("cylon-#{driverName}")(device: self)
