@@ -9,9 +9,9 @@
 'use strict';
 
 exports.adaptor = (opts = {}) ->
-  new Adaptor.Loopback(opts)
+  new Loopback(opts)
 
-module.exports = class Adaptor.Loopback
+module.exports = class Loopback
   constructor: (opts) ->
     @name = opts.name
 

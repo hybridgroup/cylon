@@ -8,6 +8,7 @@
 
 'use strict';
 
+require('./cylon')
 Connection = require("./connection")
 Device = require("./device")
 
