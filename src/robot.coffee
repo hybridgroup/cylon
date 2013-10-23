@@ -19,8 +19,11 @@ module.exports = class Robot
   constructor: (opts = {}) ->
     @name = opts.name or @constructor.randomName()
     @master = opts.master
-    initConnections(opts.connection or opts.connections or {})
-    initDevices(opts.device or opts.devices or {})
+    @connections = {}
+    @devices = {}
+
+    initConnections(opts.connection or opts.connections)
+    initDevices(opts.device or opts.devices)
     @work = opts.work or -> (Logger.info "No work yet")
 
   @randomName: ->
@@ -28,6 +31,7 @@ module.exports = class Robot
 
   initConnections = (connections) ->
     Logger.info "Initializing connections..."
+    return unless connections?
     connections = [].concat connections
     for connection in connections
       Logger.info "Initializing connection '#{ connection.name }'..."
@@ -36,6 +40,7 @@ module.exports = class Robot
 
   initDevices = (devices) ->
     Logger.info "Initializing devices..."
+    return unless devices?
     devices = [].concat devices
     for device in devices
       Logger.info "Initializing device '#{ device.name }'..."
@@ -60,3 +65,6 @@ module.exports = class Robot
       Logger.info "Starting device '#{ device.name }'..."
       device.start()
       self[device.name] = device
+
+  requireDriver: (driverName, device) ->
+    console.log "load the driver"

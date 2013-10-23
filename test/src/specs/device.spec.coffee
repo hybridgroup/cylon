@@ -1,12 +1,14 @@
 'use strict';
 
 Device = source("device")
+Robot = source("robot")
 
 describe "devices", ->
-  device = new Device(name: "devisive", driver: 'driving', robot: 'me')
+  robot = new Robot(name: 'me')
+  device = new Device(name: "devisive", driver: 'driving', robot: robot)
 
   it "should belong to a robot", ->
-    device.robot.should.be.equal 'me'
+    device.robot.name.should.be.equal 'me'
 
   it "should have a name", ->
     device.name.should.be.equal 'devisive'

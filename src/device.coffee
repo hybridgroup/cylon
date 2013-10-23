@@ -28,4 +28,4 @@ module.exports = class Device
 
   requireDriver: (driverName) ->
     Logger.info "dynamic load driver"
-    #new require("cylon-#{driverName}")(device: self)
+    @robot.requireDriver(driverName, self)
