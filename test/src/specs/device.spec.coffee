@@ -11,5 +11,6 @@ describe "devices", ->
   it "should have a name", ->
     device.name.should.be.equal 'devisive'
 
-  it "should have a connection"
+  it "should use default connection if none specified"
+  it "should use connection if one is specified"
   it "should have an driver"
