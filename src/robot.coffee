@@ -79,12 +79,15 @@ module.exports = class Robot
 
     return @adaptors[adaptorName]
 
-  requireAdaptor: (adaptorName, connection) ->
-    self.requireAdaptor(adaptorName, connection)
+  requireAdaptor: (args...) ->
+    self.requireAdaptor(args...)
 
-  registerAdaptor: (moduleName, adaptorName) ->
+  @registerAdaptor: (moduleName, adaptorName) ->
     return if self.adaptors[adaptorName]?
     self.adaptors[adaptorName] = moduleName
+
+  registerAdaptor: (args...) ->
+    self.registerAdaptor(args...)
 
   requireDriver: (driverName, device) =>
     require("cylon-#{@drivers[driverName]}").register(this) unless @drivers[driverName]?
