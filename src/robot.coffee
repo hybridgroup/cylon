@@ -72,10 +72,10 @@ module.exports = class Robot
   @requireAdaptor = (adaptorName, connection) =>
     if @adaptors[adaptorName]?
       if typeof @adaptors[adaptorName] is 'string'
-        @adaptors[adaptorName] = require(@adaptors[adaptorName]).adaptor(name: adaptorName)
+        @adaptors[adaptorName] = require(@adaptors[adaptorName]).adaptor(name: adaptorName, connection: connection)
     else
       require("cylon-#{adaptorName}").register(this)
-      @adaptors[adaptorName] = require("cylon-#{adaptorName}").adaptor(name: adaptorName)
+      @adaptors[adaptorName] = require("cylon-#{adaptorName}").adaptor(name: adaptorName, connection: connection)
 
     return @adaptors[adaptorName]
 
