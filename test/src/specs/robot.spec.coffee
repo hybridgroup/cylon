@@ -5,7 +5,7 @@ source("logger")
 
 Logger.setup(false) # quiet logger for tests
 
-describe "robots", ->
+describe "Robot", ->
   testWork = ->
     Logger.info "hi"
 

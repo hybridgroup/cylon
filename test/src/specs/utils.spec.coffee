@@ -2,8 +2,8 @@
 
 utils = source("utils")
 
-describe "utils", ->
-  describe "Monkeypathes Number", ->
+describe "Utils", ->
+  describe "Monkeypatches Number", ->
     it "adds seconds() method", ->
       5.seconds().should.be.equal 5000
 

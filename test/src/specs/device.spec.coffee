@@ -3,7 +3,7 @@
 Device = source("device")
 Robot = source("robot")
 
-describe "devices", ->
+describe "Device", ->
   robot = new Robot(name: 'me')
   device = new Device(name: "devisive", driver: 'driving', robot: robot)
 

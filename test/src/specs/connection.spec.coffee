@@ -2,7 +2,7 @@
 
 Connection = source("connection")
 
-describe "connections", ->
+describe "Connection", ->
   connection = new Connection(name: "connective", adaptor: "adaptive", robot: 'me')
 
   it "should belong to a robot", ->

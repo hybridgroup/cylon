@@ -2,7 +2,7 @@
 
 Driver = source("driver")
 
-describe "drivers", ->
+describe "Driver", ->
   driver = new Driver(name: "driving")
 
   it "should have a name", ->

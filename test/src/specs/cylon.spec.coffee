@@ -2,7 +2,7 @@
 
 cylon = source("cylon")
 
-describe "cylons", ->
+describe "Cylon", ->
   it "standard async test", (done) ->
     bool = false
     bool.should.be.false

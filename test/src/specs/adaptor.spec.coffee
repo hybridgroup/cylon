@@ -2,7 +2,7 @@
 
 Adaptor = source("adaptor")
 
-describe "adaptors", ->
+describe "Adaptor", ->
   adaptor = new Adaptor(name: "adaptive")
 
   it "should have a name", ->

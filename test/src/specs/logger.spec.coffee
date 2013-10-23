@@ -2,7 +2,7 @@
 
 source('logger')
 
-describe 'logger', ->
+describe 'Logger', ->
   it "sets to NullLogger if false is provided", ->
     Logger.setup(false)
     Logger.toString().should.be.equal "NullLogger"
