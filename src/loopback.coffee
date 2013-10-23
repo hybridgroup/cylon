@@ -19,8 +19,8 @@ class Loopback
     @name = opts.name
 
   connect: ->
-    console.log  "Connecting to adaptor '#{@name}'..."
+    Logger.info "Connecting to adaptor '#{@name}'..."
     self
 
   disconnect: ->
-    console.log  "Disconnecting from adaptor '#{@name}'..."
+    Logger.info "Disconnecting from adaptor '#{@name}'..."
