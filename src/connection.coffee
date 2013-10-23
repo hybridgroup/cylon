@@ -8,9 +8,12 @@
 
 'use strict';
 
+require("./robot")
 Port = require("./port")
 
 module.exports = class Connection
+  self = this
+
   constructor: (opts = {}) ->
     @robot = opts.robot
     @name = opts.name
@@ -26,6 +29,5 @@ module.exports = class Connection
     @adaptor.disconnect
 
   requireAdaptor: (adaptorName) ->
-    self = this
     console.log "dynamic load adaptor"
-    @robot.requireAdaptor(adaptorName, self)
+    #@robot.requireAdaptor(adaptorName, self)

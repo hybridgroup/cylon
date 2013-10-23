@@ -12,6 +12,8 @@ exports.adaptor = (opts = {}) ->
   new Loopback(opts)
 
 module.exports = class Loopback
+  self = this
+  
   constructor: (opts) ->
     @name = opts.name
 

@@ -8,6 +8,8 @@
 
 'use strict';
 
+require('./cylon')
+
 module.exports = class Device
   self = this
 

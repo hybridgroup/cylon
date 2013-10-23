@@ -9,6 +9,8 @@
 'use strict';
 
 module.exports = class Driver
+  self = this
+  
   constructor: (opts) ->
     @name = opts.name
 
