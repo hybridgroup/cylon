@@ -8,7 +8,6 @@ Cylon.robot
     name: 'sphero', driver: 'sphero'
 
   work: (me) ->
-    #every 1.second(), -> Logger.info 'hi'
     every 1.second(), -> me.sphero.roll(60, Math.floor(Math.random() * 360), 1)
 
 .start()
