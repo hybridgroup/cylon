@@ -15,6 +15,22 @@ require('./logger')
 
 Logger.setup()
 
-exports.robot = (opts = {}) ->
-  opts.master = this
-  new Robot(opts)
+class Cylon
+  instance = null
+
+  @getInstance: (args...) ->
+    instance ?= new Master(args...)
+
+  class Master
+    robots = []
+
+    robot: (opts) =>
+      opts.master = this
+      robot = new Robot(opts)
+      robots.push robot
+      robot
+
+    start: ->
+      robot.start() for robot in robots
+
+module.exports = Cylon.getInstance()
