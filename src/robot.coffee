@@ -50,10 +50,10 @@ module.exports = class Robot
       device['robot'] = this
       @devices[device.name] = new Device(device)
 
-  start: ->
+  start: =>
     @startConnections()
     @startDevices()
-    @work.call(self, self)
+    @work.call(self, this)
 
   startConnections: =>
     Logger.info "Starting connections..."
