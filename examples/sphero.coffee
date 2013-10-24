@@ -23,6 +23,11 @@ Cylon.robot
 
     me.sphero.detectCollisions()
 
-    every 1.second(), -> me.sphero.roll(60, Math.floor(Math.random() * 360), 1)
+    color = 0x000050
+    every 1.second(), ->
+      me.sphero.roll(60, Math.floor(Math.random() * 360), 1)
+      me.sphero.setRGB(color, true)
+      color += 0x005000
+      color = 0x000050 if color > 0xFFFFFF
 
 .start()
