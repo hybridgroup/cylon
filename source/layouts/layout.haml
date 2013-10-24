@@ -7,22 +7,13 @@
     %meta{:content => current_page.data.author, :name => "author"}
     %title= current_page.data.title
     %script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"}
-    %link(rel="stylesheet" href="//fonts.googleapis.com/css?family=Russo+One|Inconsolata:400,700|Montserrat:700")
+    %link{href: "http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,500,700", rel: "stylesheet", type: "text/css"}/
     %link(rel="stylesheet" href="/stylesheets/style.css")
     :javascript
-      function heart() {
-        var $heart = $(".heart");
-        if($heart.is(":visible")) {
-          $heart.animate({
-            fontSize: $heart.css('fontSize') == '20px' ? '30px' : '20px'
-          }, 500, heart);
-        }
-      }
       $(document).ready(function() {
         $('header .subtitle').hover(function() {
           $('.easter', this).show();
           $('.main', this).hide();
-          heart();
         }, function () {
           $('.easter', this).hide();
           $('.main', this).show();
@@ -33,13 +24,8 @@
       .w
         %header.app-header{role: "banner"}
           .display
-            %h1.artoo-logo
-              %a{href: '/'} artoo
-            %span.subtitle
-              .main Ruby on Robots
-              .easter
-                .heart ♥
-                = link_to "Rubinius", "http://rubini.us/"
+            %h1.cylon-logo
+              %a{href: '/'} Cylon
 
           %span.menu
             = link_to "Docs", "", (menu_item("documentation"))
@@ -51,11 +37,11 @@
         .hero
           .container
             %h1.title
-              We believe that it's time to bring
+              It is time to have Robots and JavaScript
               %br
-              Ruby and Robots together.
+              working together.
             %h2.subtitle
-              Artoo makes robotics
+              Cylon makes robotics
               = link_to "Simple", "/documentation/getting-started"
               and
               = succeed '.' do
@@ -65,13 +51,13 @@
         .social
           .container
             .splitter
-              %iframe{:allowtransparency => "true", :frameborder => "0", :height => "20", :scrolling => "0", :src => "http://ghbtns.com/github-btn.html?user=hybridgroup&repo=artoo&type=watch&count=true", :width => "95"}
-              %iframe{:allowtransparency => "true", :frameborder => "0", :height => "20", :scrolling => "0", :src => "http://ghbtns.com/github-btn.html?user=hybridgroup&repo=artoo&type=fork&count=true", :width => "95"}
+              %iframe{:allowtransparency => "true", :frameborder => "0", :height => "20", :scrolling => "0", :src => "http://ghbtns.com/github-btn.html?user=hybridgroup&repo=cylon&type=watch&count=true", :width => "95"}
+              %iframe{:allowtransparency => "true", :frameborder => "0", :height => "20", :scrolling => "0", :src => "http://ghbtns.com/github-btn.html?user=hybridgroup&repo=cylon&type=fork&count=true", :width => "95"}
             .splitter
-              %a.twitter-share-button{"data-dnt" => "true", "data-text" => "Ruby on Robots!", "data-url" => "http://artoo.io", "data-via" => "artooio", :href => "https://twitter.com/share"} Tweet
+              %a.twitter-share-button{"data-dnt" => "true", "data-text" => "It is time to have Robots and JavaScript working together.", "data-url" => "http://cylonjs.com", "data-via" => "cylonjs", :href => "https://twitter.com/share"} Tweet
               :javascript
                 !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-              %a.twitter-follow-button{"data-dnt" => "true", "data-show-count" => "false", :href => "https://twitter.com/artooio"} Follow @artooio
+              %a.twitter-follow-button{"data-dnt" => "true", "data-show-count" => "false", :href => "https://twitter.com/cylonjs"} Follow @artooio
               :javascript
                 !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
       - unless current_page.data.page_title.nil?
