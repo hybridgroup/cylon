@@ -9,8 +9,9 @@
 'use strict';
 
 require('./cylon')
+EventEmitter = require('events').EventEmitter
 
-module.exports = class Device
+module.exports = class Device extends EventEmitter
   constructor: (opts = {}) ->
     @self = this
     @robot = opts.robot
@@ -33,6 +34,7 @@ module.exports = class Device
 
   requireDriver: (driverName) ->
     Logger.info "dynamic load driver"
+    @self.emit('driver_load')
     @robot.requireDriver(driverName, @self)
 
   addCommands: (object) ->
