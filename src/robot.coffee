@@ -67,7 +67,7 @@ module.exports = class Robot
     for n, device of @devices
       Logger.info "Starting device '#{ device.name }'..."
       device.start()
-      this[device.name] = device
+      self[device.name] = device
 
   @requireAdaptor = (adaptorName, connection) =>
     if @adaptors[adaptorName]?
@@ -89,17 +89,17 @@ module.exports = class Robot
   registerAdaptor: (args...) ->
     self.registerAdaptor(args...)
 
-  requireDriver: (driverName, device) =>
+  @requireDriver = (driverName, device) =>
     if @drivers[driverName]?
       if typeof @drivers[driverName] is 'string'
-        @drivers[driverName] = require(@drivers[driverName]).driver(driver: driver)
+        @drivers[driverName] = require(@drivers[driverName]).driver(device: device)
     else
       require("cylon-#{driverName}").register(this)
-      @drivers[driverName] = require("cylon-#{driverName}").driver(driver: driver)
+      @drivers[driverName] = require("cylon-#{driverName}").driver(device: device)
 
     return @drivers[driverName]
 
-  @requireDriver = (args...) ->
+  requireDriver: (args...) ->
     self.requireDriver(args...)
 
   @registerDriver: (moduleName, driverName) =>
