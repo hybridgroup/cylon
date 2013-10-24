@@ -1,4 +1,4 @@
-var Cylon = require('..').instance();
+var Cylon = require('..');
 
 // Initialize the robot
 var robot = Cylon.robot({

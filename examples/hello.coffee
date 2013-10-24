@@ -1,4 +1,4 @@
-Cylon = require('..').instance()
+Cylon = require('..')
 
 Cylon.robot
   work: ->
