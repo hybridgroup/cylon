@@ -1,4 +1,4 @@
-## Artoo Website
+## Cylon Website
 
 This site is build using [Middleman](http://middlemanapp.com/getting-started/)  
   
@@ -14,3 +14,4 @@ To run locally:
 For deploying the webpage, your must be in 'artoo.io' branch and run the following command:
 
       rake publish
+
