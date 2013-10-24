@@ -1,6 +1,8 @@
 # cylon [![Build Status](https://secure.travis-ci.org/hybridgroup/cylon.png?branch=master)](http://travis-ci.org/hybridgroup/cylon)
 
-A JavaScript framework for robotics and physical computing using node.js and nactor
+Cylon.js is a JavaScript framework for robotics and physical computing using node.js
+
+It provides a simple, yet powerful way to create solutions that incorporate multiple, different hardware devices at the same time.
 
 ## Getting Started
 
