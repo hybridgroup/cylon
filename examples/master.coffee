@@ -1,25 +1,23 @@
 Cylon = require '..'
 
-RobotInfo =
+bots = [
+  { port: '/dev/cu.Sphero-RGB', name: 'Huey' },
+  { port: '/dev/cu.Sphero-GRB', name: 'Dewey' },
+  { port: '/dev/cu.Sphero-BRG', name: 'Louie' }
+]
+
+SpheroRobot =
   connection:
     name: 'Sphero', adaptor: 'sphero'
 
-  work: -> every 2.seconds(), -> Logger.info "Required cylon-sphero adaptor!"
+  work: (self) ->
+    console.log "Robot #{self.name} is now working!"
 
-huey = Object.create(RobotInfo)
-huey.connection['port'] = '/dev/cu.Sphero-RGB'
-huey.name = "Huey"
+for bot in bots
+  robot = Object.create(SpheroRobot)
+  robot.connection.port = bot.port
+  robot.name = bot.name
 
-dewey = Object.create(RobotInfo)
-dewey.connection['port'] = '/dev/cu.Sphero-GRB'
-dewey.name = "Dewey"
-
-louie = Object.create(RobotInfo)
-louie.connection['port'] = '/dev/cu.Sphero-BRG'
-louie.name = "Louie"
-
-Cylon.robot(huey)
-Cylon.robot(dewey)
-Cylon.robot(louie)
+  Cylon.robot robot
 
 Cylon.start()
