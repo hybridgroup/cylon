@@ -16,3 +16,6 @@ module.exports = class Driver
 
   start: ->
     Logger.info "started"
+
+  commands: ->
+    ['smile', 'laugh', 'help']

@@ -18,6 +18,7 @@ module.exports = class Device
     @name = opts.name
     @connection = @determineConnection(opts.connection) or @defaultConnection
     @driver = @requireDriver(opts.driver)
+    @addCommands(@driver)
 
   start: ->
     Logger.info "started"
@@ -31,3 +32,9 @@ module.exports = class Device
   requireDriver: (driverName) ->
     Logger.info "dynamic load driver"
     @robot.requireDriver(driverName, self)
+
+  addCommands: (object) ->
+    @addProxy(object, method) for method in object.commands()
+
+  addProxy: (object, method) ->
+    this[method] = (args...) -> object[method](args...)
