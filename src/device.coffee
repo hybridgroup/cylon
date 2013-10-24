@@ -11,9 +11,8 @@
 require('./cylon')
 
 module.exports = class Device
-  self = this
-
   constructor: (opts = {}) ->
+    @self = this
     @robot = opts.robot
     @name = opts.name
     @connection = @determineConnection(opts.connection) or @defaultConnection()
@@ -34,10 +33,10 @@ module.exports = class Device
 
   requireDriver: (driverName) ->
     Logger.info "dynamic load driver"
-    @robot.requireDriver(driverName, this)
+    @robot.requireDriver(driverName, @self)
 
   addCommands: (object) ->
     @addProxy(object, method) for method in object.commands()
 
   addProxy: (object, method) ->
-    this[method] = (args...) -> object[method](args...)
+    @self[method] = (args...) -> object[method](args...)

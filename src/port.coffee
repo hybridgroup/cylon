@@ -9,9 +9,8 @@
 'use strict';
 
 module.exports = class Port
-  self = this
-  
   constructor: (data) ->
+    @self = this
     @isTcp = @isSerial = @isPortless = false
     @parse(data)
 

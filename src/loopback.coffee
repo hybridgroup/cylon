@@ -13,14 +13,13 @@ module.exports =
     new Loopback(opts)
 
 class Loopback
-  self = this
-
   constructor: (opts) ->
+    @self = this
     @name = opts.name
 
   connect: ->
     Logger.info "Connecting to adaptor '#{@name}'..."
-    self
+    @self
 
   disconnect: ->
     Logger.info "Disconnecting from adaptor '#{@name}'..."
