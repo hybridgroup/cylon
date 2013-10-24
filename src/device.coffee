@@ -9,8 +9,9 @@
 'use strict';
 
 require('./cylon')
+EventEmitter = require('events').EventEmitter
 
-module.exports = class Device
+module.exports = class Device extends EventEmitter
   constructor: (opts = {}) ->
     @self = this
     @robot = opts.robot

@@ -10,8 +10,9 @@
 
 require("./robot")
 Port = require("./port")
+EventEmitter = require('events').EventEmitter
 
-module.exports = class Connection
+module.exports = class Connection extends EventEmitter
 
   constructor: (opts = {}) ->
     @self = this
