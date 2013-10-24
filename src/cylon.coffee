@@ -15,10 +15,10 @@ require('./logger')
 
 Logger.setup()
 
-module.exports = class Cylon
+class Cylon
   instance = null
 
-  @instance: (args...) ->
+  @getInstance: (args...) ->
     instance ?= new Master(args...)
 
   class Master
@@ -32,3 +32,5 @@ module.exports = class Cylon
 
     start: ->
       robot.start() for robot in robots
+
+module.exports = Cylon.getInstance()
