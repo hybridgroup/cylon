@@ -1,6 +1,6 @@
 Cylon = require('..')
 
-cylon = Cylon.robot
+Cylon.robot
   connection:
     name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'
 
@@ -8,9 +8,15 @@ cylon = Cylon.robot
     name: 'sphero', driver: 'sphero'
 
   work: (me) ->
-    every 1.second(), -> me.sphero.roll(60, Math.floor(Math.random() * 360), 1)
 
-cylon.connections['sphero'].on('connected', ->
-  console.log('CONNECTED EVENT TRIGGERED!')
-)
-cylon.start()
+    me.sphero.on 'message', (data) ->
+      Logger.info 'message:'
+      Logger.info data
+
+    me.sphero.on 'notification', (data) ->
+      Logger.info 'notification:'
+      Logger.info data
+
+    me.sphero.configureCollisionDetection()
+
+.start()

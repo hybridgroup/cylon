@@ -24,7 +24,6 @@ module.exports = class Connection extends EventEmitter
 
   connect: ->
     Logger.info "Connecting to '#{@name}' on port '#{@port.toString()}'..."
-    @self.emit('connected')
     @adaptor.connect(@self)
 
   disconnect: ->

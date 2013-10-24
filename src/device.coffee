@@ -34,7 +34,6 @@ module.exports = class Device extends EventEmitter
 
   requireDriver: (driverName) ->
     Logger.info "dynamic load driver"
-    @self.emit('driver_load')
     @robot.requireDriver(driverName, @self)
 
   addCommands: (object) ->
