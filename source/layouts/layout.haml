@@ -28,11 +28,11 @@
               %a{href: '/'} Cylon
 
           %span.menu
-            = link_to "Docs", "", (menu_item("documentation"))
-            = link_to "Hardware", "", (menu_item("hardware"))
-            = link_to "Videos", "", (menu_item("videos"))
-            = link_to "Blog", "", (menu_item("blog"))
-            = link_to "Github", "https://github.com/hybridgroup/artoo/", class: "item"
+            = # link_to "Docs", "", (menu_item("documentation"))
+            = # link_to "Hardware", "", (menu_item("hardware"))
+            = # link_to "Videos", "", (menu_item("videos"))
+            = # link_to "Blog", "", (menu_item("blog"))
+            = # link_to "Github", "https://github.com/hybridgroup/cylon/", class: "item"
       - unless current_page.data.hero.nil?
         .hero
           .container
@@ -41,12 +41,7 @@
               %br
               working together.
             %h2.subtitle
-              Cylon makes robotics
-              = link_to "Simple", "/documentation/getting-started"
-              and
-              = succeed '.' do
-                = link_to "Extensible", "/documentation/platforms"
-            = link_to "Get Started", "/documentation/getting-started", class: "cta"
+              Coming Soon…
       - unless current_page.data.social.nil?
         .social
           .container
