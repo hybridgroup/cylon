@@ -35,6 +35,7 @@
       }
       this.startDevices = __bind(this.startDevices, this);
       this.startConnections = __bind(this.startConnections, this);
+      this.start = __bind(this.start, this);
       this.initDevices = __bind(this.initDevices, this);
       this.initConnections = __bind(this.initConnections, this);
       this.name = opts.name || this.constructor.randomName();
@@ -90,7 +91,7 @@
     Robot.prototype.start = function() {
       this.startConnections();
       this.startDevices();
-      return this.work.call(self, self);
+      return this.work.call(self, this);
     };
 
     Robot.prototype.startConnections = function() {
@@ -101,8 +102,7 @@
       for (n in _ref) {
         connection = _ref[n];
         Logger.info("Starting connection '" + connection.name + "'...");
-        connection.connect();
-        _results.push(this[connection.name] = connection);
+        _results.push(connection.connect());
       }
       return _results;
     };
@@ -116,7 +116,7 @@
         device = _ref[n];
         Logger.info("Starting device '" + device.name + "'...");
         device.start();
-        _results.push(self[device.name] = device);
+        _results.push(this[device.name] = device);
       }
       return _results;
     };

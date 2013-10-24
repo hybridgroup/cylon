@@ -60,14 +60,13 @@ module.exports = class Robot
     for n, connection of @connections
       Logger.info "Starting connection '#{ connection.name }'..."
       connection.connect()
-      this[connection.name] = connection
 
   startDevices: =>
     Logger.info "Starting devices..."
     for n, device of @devices
       Logger.info "Starting device '#{ device.name }'..."
       device.start()
-      self[device.name] = device
+      this[device.name] = device
 
   @requireAdaptor = (adaptorName, connection) =>
     if @adaptors[adaptorName]?
