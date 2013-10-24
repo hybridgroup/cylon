@@ -1,4 +1,4 @@
-var Cylon = require('..');
+var Cylon = require('..').instance();
 
 Cylon.robot({
   connection: { name: 'looped', adaptor: 'loopback'},
