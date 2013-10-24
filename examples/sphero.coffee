@@ -9,6 +9,10 @@ Cylon.robot
 
   work: (me) ->
 
+    me.sphero.on 'close', (data) ->
+      Logger.info 'THIS IS ME CLOSSING:'
+      Logger.info data
+
     me.sphero.on 'message', (data) ->
       Logger.info 'message:'
       Logger.info data
@@ -17,6 +21,8 @@ Cylon.robot
       Logger.info 'notification:'
       Logger.info data
 
-    me.sphero.configureCollisionDetection()
+    me.sphero.detectCollisions()
+
+    every 1.second(), -> me.sphero.roll(60, Math.floor(Math.random() * 360), 1)
 
 .start()
