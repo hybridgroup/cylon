@@ -16,7 +16,9 @@ module.exports = class Device
   constructor: (opts = {}) ->
     @robot = opts.robot
     @name = opts.name
-    @connection = @determineConnection(opts.connection) or @defaultConnection
+    @connection = @determineConnection(opts.connection) or @defaultConnection()
+    Logger.info 'hola'
+    Logger.info @connection
     @driver = @requireDriver(opts.driver)
     @addCommands(@driver)
 
@@ -27,11 +29,14 @@ module.exports = class Device
     @robot.connections[c] if c
 
   defaultConnection: ->
-    @robot.connections.first
+    first = 0
+    for k, v of @robot.connections
+      first or= v
+    first
 
   requireDriver: (driverName) ->
     Logger.info "dynamic load driver"
-    @robot.requireDriver(driverName, self)
+    @robot.requireDriver(driverName, this)
 
   addCommands: (object) ->
     @addProxy(object, method) for method in object.commands()
