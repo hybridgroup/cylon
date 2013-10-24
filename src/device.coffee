@@ -17,8 +17,6 @@ module.exports = class Device
     @robot = opts.robot
     @name = opts.name
     @connection = @determineConnection(opts.connection) or @defaultConnection()
-    Logger.info 'hola'
-    Logger.info @connection
     @driver = @requireDriver(opts.driver)
     @addCommands(@driver)
 
