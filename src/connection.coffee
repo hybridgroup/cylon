@@ -12,9 +12,9 @@ require("./robot")
 Port = require("./port")
 
 module.exports = class Connection
-  self = this
 
   constructor: (opts = {}) ->
+    @self = this
     @robot = opts.robot
     @name = opts.name
     @adaptor = @requireAdaptor(opts.adaptor) # or 'loopback')
@@ -22,12 +22,12 @@ module.exports = class Connection
 
   connect: ->
     Logger.info "Connecting to '#{@name}' on port '#{@port.toString()}'..."
-    @adaptor.connect(this)
+    @adaptor.connect(@self)
 
   disconnect: ->
     Logger.info "Disconnecting from '#{@name}' on port '#{@port.toString()}'..."
-    @adaptor.disconnect(this)
+    @adaptor.disconnect(@self)
 
   requireAdaptor: (adaptorName) ->
     Logger.info "dynamic load adaptor"
-    @robot.requireAdaptor(adaptorName, this)
+    @robot.requireAdaptor(adaptorName, @self)
