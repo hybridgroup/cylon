@@ -1,0 +1,121 @@
+---
+title: Artoo - Analog Sensor Driver
+author: The Hybrid Group
+page_title: Analog Sensor
+page_subtitle: Driver
+layout: page
+---
+.documentation
+  %section.intro
+    = image_tag "/images/analog-sensor.jpg", class: "display"
+    %p
+      Makes it possible to interact with analog inputs on your device and obtain values that represent the analog input send by the sensors.
+      The value received from an analog input read from the sensor goes from 0 to 1027.
+
+  %section.how_to
+    %h2 How to stablish a connection and setup the driver
+    %h3 For Arduino:
+    :markdown
+          :::ruby
+          require 'artoo'
+          connection :arduino, :adaptor => :firmata, :port => '127.0.0.1:8023'
+          device :sensor, driver: :analog_sensor, pin: 0, interval: 0.25, upper: 900, lower: 200
+
+    %h3 For Digispark:
+    :markdown
+          :::ruby
+          require 'artoo'
+          connection :digispark, :adaptor => :littlewire, :vendor => 0x1781, :product => 0x0c9f
+          device :sensor, driver: :analog_sensor, pin: 0, interval: 0.25, upper: 900, lower: 200
+
+  %section.public-methods
+    %h2 Public instance methods:
+
+    %h3 pin → integer_value
+    %p
+      Returns the pin number set up when creating the sensor.
+
+    %h3 upper → integer_value
+    %p
+      Returns the upper limit set up when creating the sensor.
+
+    %h3 lower → integer_value
+    %p
+      Returns the lower limit set up when creating the sensor.
+
+    %h3 analog_read(pin_number) →  integer_value (from 0 to 1027)
+    %p
+      Returns an integer value that represents the analog read from the sensor, the value goes from 0 to 1027.
+
+  %section.public-events
+    %h2 Public driver events:
+    %p
+      The limits that trigger the events are setup when creating the sensor (see above in the section titled "How to stablish a connection and driver" ),
+      there are :upper and :lower limits, as well as an :interval param that defines how often the sensor should be read;
+      when the specified amount of time passes the sensor is read, if one of the limits stablished is reached
+      the corresponging event will be triggered.
+
+    %h3 :upper
+    %p
+      Gets triggered if the value read by the sensor is greater or equal to :upper (value passed when setting up the sensor).
+
+    %h3 :lower
+    %p
+      Gets triggered if the value read by the sensor is less or equal to :lower (value passed when setting up the sensor)
+
+    %h3 How to use events and call them on your drivers
+    %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
+    :markdown
+          :::ruby
+          on sensor, :upper => proc { puts "UPPER LIMIT REACHED!" }
+          on sensor, :lower => proc { puts "LOWER LIMIT REACHED!" }
+  %section.how-to
+    %h2 How to use
+    %h3 Example using a photoresistor sensor to turn a LED on and off.
+    :markdown
+          :::ruby
+          require 'artoo'
+
+          connection :arduino, :adaptor => :firmata, :port => '127.0.0.1:8023'
+
+          # Analog inputs are based from 0 to 5 on the Arduino UNO, may vary on other arduino boards
+          device :sensor, driver: :analog_sensor, pin: 0, interval: 0.25, upper: 900, lower: 200
+          device :led, :driver => :led, :pin => 8
+
+          work do
+            puts
+            puts "Reading sensor in analog pin \#{ sensor.pin }"
+            puts "Reading intervals every => \#{ sensor.interval }"
+            puts "Initial sensor value => \#{ sensor.analog_read(0) }"
+            puts "Sensor upper trigger set at value => \#{ sensor.upper }"
+            puts "Sensor lower trigger set at value => \#{ sensor.lower }"
+
+            on sensor, :upper => proc {
+              puts "UPPER LIMIT REACHED!"
+              led.off
+            }
+
+            on sensor, :lower => proc {
+              puts "LOWER SENSOR LIMIT REACHED!"
+              led.on
+            }
+          end
+
+  %section.circuit
+    %h2 Circuit and Schematic
+    %p
+      Circuit for analog sensors is pretty much the same as the button circuit, you just need to substitute
+      the button for a photoresistor.
+      <br />
+      =link_to "http://arduino.cc/en/tutorial/button", "http://arduino.cc/en/tutorial/button"
+    %p
+      It should look like the circuit in this example.
+      <br />
+      =link_to "http://arduino.cc/en/Tutorial/SwitchCase", "http://arduino.cc/en/Tutorial/SwitchCase"
+
+  %section.compatibility.hardware
+    %h2 Works with:
+    =# TODO: Update platform list with all that work with this driver in artoo.
+    .devices
+      = partial "documentation/partials/arduino"
+      = partial "documentation/partials/digispark"

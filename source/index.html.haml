@@ -1,0 +1,46 @@
+---
+hero: true
+social: true
+catcher: true
+title: Artoo
+author: The Hybrid Group
+description: Artoo is a micro-framework for robotics. It provides a simple, but powerful DSL (domain-specific language) for robots and physical computing.
+layout: home
+---
+
+:markdown
+  ## About
+  Artoo is a micro-framework for robotics.
+
+  It provides a simple, but powerful DSL (domain-specific language) for robots and physical computing.
+
+  With Artoo, you can easily connect multiple, different hardware devices together into a single Ruby-powered robotic solution.
+
+:markdown
+  ## Meet The Code
+  Artoo’s simple code makes telling robots what to do incredibly simple and fun.
+
+  All you need to get started is the `artoo` gem
+
+      :::ruby
+      require 'artoo'
+
+   Then hook it up to your robot (in this case, a [Sphero](http://gosphero.com)):
+
+      :::ruby
+      connection :sphero, adaptor: :sphero, port: '4560'
+      device :sphero, driver: :sphero
+
+  And tell it what to do!
+
+      :::ruby
+      work do
+        every(3.seconds) do
+          puts "Rolling..."
+          sphero.roll 60, rand(360)
+        end
+      end
+
+%section.videos
+  %h2 Artoo in Action
+  %iframe{:src => "http://www.youtube.com/embed/ciSs9x_Ogls", :frameborder => "0", :allowfullscreen => "true"}

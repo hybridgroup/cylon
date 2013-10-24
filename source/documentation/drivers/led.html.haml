@@ -1,0 +1,86 @@
+---
+title: Artoo - LED Driver
+author: The Hybrid Group
+page_title: LED
+page_subtitle: Driver
+layout: page
+---
+.documentation
+  %section.intro
+    =image_tag "/images/LED.jpg", class: "display"
+    %p
+      Allows user to interact with LEDs through digital output and PWM (Pulse Width Modulation)
+
+  %section.how-to
+    %h2 How to stablish a connection and setup the driver
+    %h3 For Arduino:
+    :markdown
+          :::ruby
+          require 'artoo'
+          connection :arduino, :adaptor => :firmata, :port => '127.0.0.1:8023'
+          device :led, :driver => :led, :pin => 13
+
+    %h3 For Digispark:
+    :markdown
+          :::ruby
+          require 'artoo'
+          connection :digispark, :adaptor => :littlewire, :vendor => 0x1781, :product => 0x0c9f
+          device :led, :driver => :led, :pin => 13
+
+  %section.public-methods
+    %h2 Public instance methods:
+
+    %h3 on → true | nil
+    %p
+      Turns LED on.
+
+    %h3 off → true | nil
+    %p
+      Turns LED off.
+
+    %h3 on? → true | false
+    %p
+      Returns true if LED is on, otherwise returns false.
+
+    %h3 off? → true | false
+    %p
+      Returns true if LED is off, otherwise returns false.
+
+    %h3 toggle → true | nil
+    %p
+      Turns the LED on, or off, depending on if it is already off, or on, respectively.
+
+    %h3 brightness(brightness_int) → true | nil
+    %p
+      Sets brightness of the led to the specified brightness value passed to brightness(brightness_int) using PWM,
+      brightness can be any integer value between 0 and 255.
+
+  %section.how-to
+    %h2 How to use
+    %h3 Example using a button to turn a LED on and off.
+    :markdown
+          :::ruby
+          require 'artoo'
+
+          #connection :arduino, :adaptor => :firmata, :port => '/dev/tty*'
+          connection :arduino, :adaptor => :firmata, :port => '127.0.0.1:8023'
+          device :led, :driver => :led, :pin => 13
+
+          work do
+            every 1.second do
+              led.on? ? led.off : led.on
+            end
+          end
+
+  %section.circuit
+    %h2 Circuit and Schematic
+    =link_to "http://arduino.cc/en/Tutorial/Blink", "http://arduino.cc/en/Tutorial/Blink"
+
+  %section.compatability.hardware
+    %h2 Works with:
+    =# TODO: Update platform list with all that work with this driver in artoo.
+    .devices
+      = partial "documentation/partials/arduino"
+      = partial "documentation/partials/beaglebone"
+      = partial "documentation/partials/digispark"
+      = partial "documentation/partials/raspberry-pi"

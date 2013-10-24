@@ -1,0 +1,74 @@
+---
+title: Artoo - BlinkM Driver
+author: The Hybrid Group
+page_title: BlinkM
+page_subtitle: Driver
+layout: page
+---
+.documentation
+  %section.intro
+    =image_tag "/images/blinkm.jpg", class: "display"
+    %p
+      Allows user to control BlinkM RGB LED via i2c interface.
+
+  %section.how-to
+    %h2 How to establish a connection and setup the driver
+    %h3 For Arduino:
+    :markdown
+          :::ruby
+          require 'artoo'
+          connection :arduino, :adaptor => :firmata, :port => '/dev/ttyACM0'
+          device :blink_m, :driver => :blink_m, :connection => :arduino
+
+  %section.public-events
+    %h2 Public instance methods:
+    %h3 rgb(red=0, green=0, blue=0) → nil
+    %p
+      Sets the color of the BlinkM RGB LED to the specified combination of RGB color provided (red, green and blue values should be between 0 and 255).
+
+    %h3 fade(red=0, green=0, blue=0) → nil
+    %p
+      Fades the color of the BlinkM RGB LED to the specified combination of RGB color provided (red, green and blue values should be between 0 and 255).
+
+    %h3 firmware_version → String
+    %p
+      Returns an sring describing the I2C firmware version being used.
+
+    %h3 color → [red, green, blue] (integer)
+    %p
+      Returns an array containing the RGB values for the current color (all integer between 0 and 255).
+
+  %section.how-to
+    %h2 How to use
+    %h3 Example using a BlinkM.
+    :markdown
+          :::ruby
+          require 'artoo'
+
+          connection :arduino, :adaptor => :firmata, :port => '/dev/ttyACM0'
+          device :blink_m, :driver => :blink_m
+
+          work do
+            every 1.second do
+              unless @on
+                blink_m.rgb(0xff, 0xff, 0xff)
+                @on = true
+              else
+                blink_m.rgb(0, 0, 0)
+                @on = false
+              end
+            end
+          end
+
+  %section.circuit
+    %h2 Circuit and Schematic
+    %p
+      Coming soon...
+
+  %section.compatability.hardware
+    %h2 Works with:
+    .devices
+      = partial "documentation/partials/arduino"
+      = partial "documentation/partials/beaglebone"
+      = partial "documentation/partials/digispark"
+      = partial "documentation/partials/raspberry-pi"

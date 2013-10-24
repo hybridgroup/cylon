@@ -1,0 +1,81 @@
+---
+title: Artoo - Button Driver
+author: The Hybrid Group
+page_title: Button
+page_subtitle: Driver
+layout: page
+---
+.documentation
+  %section.intro
+    = image_tag "/images/button.jpg", class: "display"
+    %p
+      Simple interface that makes it possible to register clicks through physical input.
+
+  %section.how_to
+    %h2 How to stablish a connection and setup the driver 
+    %h3 For Arduino:
+    :markdown
+          :::ruby
+          require 'artoo'
+          connection :arduino, :adaptor => :firmata, :port => '127.0.0.1:8023'
+          device :button, :driver => :button, :pin => 2, :interval => 0.01
+
+    %h3 For Digispark:
+    :markdown
+          :::ruby
+          require 'artoo'
+          connection :digispark, :adaptor => :littlewire, :vendor => 0x1781, :product => 0x0c9f
+          device :button, :driver => :button, :pin => 2, :interval => 0.01
+
+  %section.public-methods
+    %h2 Public instance methods:
+
+    %h3 is_pressed? → true | false
+    %p
+      Returns true or false matching state of the button.
+
+  %section.public-events
+    %h2 Public driver events:
+    %h3 :push
+    %p
+      This event gets triggered when the button changes state from released to pushed.
+    %h3 :relase
+    %p
+      This event gets triggered when the button changes state from pushed to released.
+    %h3 How to use events and call them on your drivers
+    %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
+    :markdown
+          :::ruby
+          on button, :push    => proc { puts "button pressed!" }
+          on button, :release => proc { puts "button released!" }
+
+  %section.how-to
+    %h2 How to use
+    %h3 Example using a button to turn a LED on and off.
+    :markdown
+          :::ruby
+          require 'artoo'
+
+          connection :arduino, adaptor: :firmata, port: '127.0.0.1:8023'
+          device :led, driver: :led, pin: 13
+          device :button, driver: :button, pin: 2, interval: 0.01
+
+          work do
+            puts "Press the button connected on pin \#{ button.pin }..."
+
+            on button, :push    => proc { led.on }
+            on button, :release => proc { led.off }
+          end
+
+  %section.circuit
+    %h2 Circuit and Schematic
+    =link_to "http://arduino.cc/en/tutorial/button", "http://arduino.cc/en/tutorial/button"
+
+  %section.compatability.hardware
+    %h2 Works with:
+    =# TODO: Update platform list with all that work with this driver in artoo.
+    .devices
+      = partial "documentation/partials/arduino"
+      = partial "documentation/partials/beaglebone"
+      = partial "documentation/partials/digispark"
+      = partial "documentation/partials/raspberry-pi"

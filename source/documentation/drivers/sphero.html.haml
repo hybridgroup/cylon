@@ -1,0 +1,104 @@
+---
+title: Artoo - Sphero Driver
+author: The Hybrid Group
+page_title: Sphero
+page_subtitle: Driver
+layout: page
+---
+.documentation
+  %section.intro
+    =image_tag "/images/sphero.jpg", class: "display"
+    %p
+      Allows user to interact with the Sphero robotic sphero using Artoo.
+
+  %section.how-to
+    %h2 How to establish a connection and setup the driver
+    %p
+      That is pretty simple once the Sphero is ready (connected and listening), you just need three lines of code and you are set,
+      Artoo and the Sphero driver take care of the rest.
+    :markdown
+          :::ruby
+          require 'artoo'
+          connection :sphero, :adaptor => :sphero, :port => '127.0.0.1:8023'
+          device :sphero, :driver => :sphero
+
+  %section.public-methods
+    %h2 Public instance methods:
+
+    %h3 roll(speed, direction) → true | nil
+    %p
+      Starts the sphero rolling at the provided speed (value between 0 and 255) and direction (value between 0 and 360).
+
+    %h3 stop → true | nil
+    %p
+      Stops the sphero.
+
+    %h3 detect_collissions → true | nil
+    %p
+      REVISION PENDING: Sets the sphero to detect collisions and report them.
+
+    %h3 messages → [sphero_event]
+    %p
+      REVISION PENDING: Returns an array of sphero events, the messages reported by the sphero.
+
+    %h3 color(:color_symbol | [red, green, blue]) → [red_int, green_int, blue_int]
+    %p
+      REVISION PENDING: You can pass a color as a symbol or an array containing RGB colors from 0 to 255 ([255, 0, 0] == red),
+      if passed a symbol returns the array of RGB corresponding to the color, if passed an array of colors it returns the same array 
+      (used when setting colors to the sphero).
+
+    %h3 set_color([red, green, blue]) → true | nil
+    %p
+      REVISION PENDING: You can either use it in tandem with color to set the color of the sphero or just pass an array containing RGB colors
+      on the range 0 to 255 ([255, 0, 0] == red).
+
+  %section.public-events
+    %h2 Public driver events:
+    %p
+      Public events are triggered when something occurs to your sphero, when this occurs you can execute some code 
+      to respond accordingly, depending on the event triggered, you can access
+      the following public events when programming the Sphero.
+
+    %h3 :colission
+    %p
+      Gets triggered when the sphero hits something or falls from a step.
+
+    %h3 How to use events and call them on your drivers
+    %p
+      Pretty simple, when the connection and the driver have been setup (as explained above)
+      you can call events on the sphero driver as follows:
+    :markdown
+          :::ruby
+          # :contact is the name of a previously defined method containing the code to execute.
+          on sphero, :collision => :contact
+
+  %section.how-to
+    %h2 How to use
+    %h3 Example to roll the sphero in a random direction and change direction every 3 seconds.
+    :markdown
+          :::ruby
+          require 'artoo'
+
+          connection :sphero, :adaptor => :sphero, :port => '127.0.0.1:4567'
+          device :sphero, :driver => :sphero
+
+          work do
+            @rolling = false
+
+            every(3.seconds) do
+              puts "Rolling..."
+              unless @rolling
+                sphero.roll 90, rand(360)
+                @rolling = true
+              else
+                sphero.stop
+                @rolling = false
+              end
+            end
+          end
+
+  %section.compatability.hardware
+    %h2 Works with:
+    =# TODO: Update platform list with all that work with this driver in artoo.
+    .devices
+      = partial "documentation/partials/sphero"

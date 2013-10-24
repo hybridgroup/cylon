@@ -1,0 +1,177 @@
+---
+title: Artoo - Motor Driver
+author: The Hybrid Group
+page_title: Motor
+page_subtitle: Driver
+layout: page
+---
+.documentation
+  %section.intro
+    =image_tag "/images/motor.jpg", class: "display"
+    %p
+      Provides motor manipulation tools for artoo like on/off, speed modulation using PWM,
+      use of bidirectional motors using forward/backward pins.
+
+  %section.how-to
+    %h2 How to stablish a connection and setup the driver
+    %h3 For Arduino:
+    :markdown
+          :::ruby
+          require 'artoo'
+          connection :arduino, :adaptor => :firmata, :port => '127.0.0.1:8023'
+          device :motor, :driver => :motor, :speed_pin => 3 # Use a PWM pin
+
+    %h3 For Digispark:
+    :markdown
+          :::ruby
+          require 'artoo'
+          connection :digispark, :adaptor => :littlewire, :vendor => 0x1781, :product => 0x0c9f
+          device :motor, :driver => :motor, :speed_pin => 3 # Use a PWM pin
+
+  %section.public-methods
+    %h2 Public instance methods:
+
+    %h3 stop → true | nil
+    %p
+      Stops the motor.
+
+    %h3 start → true | nil
+    %p
+      Starts the motor.
+
+    %h3 on? → true | false
+    %p
+      Returns true if the motor is on, otherwise returns false.
+
+    %h3 off? → true | false
+    %p
+      Returns true if the motor is off, otherwise returns false.
+
+    %h3 toggle → true | nil
+    %p
+      Sets the state of the motor to the oposite of the current state, if motor is on then sets it to off.
+
+    %h3 speed(speed_value) → true | nil
+    %p
+      Sets the speed of the motor to the value provided in the speed param, speed value must be an integer between 0 and 255.
+
+    %h3 min → true | nil
+    %p
+      Stops the motor, sets the speed to 0.
+
+    %h3 max → true | nil
+    %p
+      Starts the motor at max speed, sets the speed to 255.
+
+    %h3 forward(speed) → true | nil
+    %p
+      Starts the motor in forward direction at the provided speed.
+
+    %h3 backward(speed) → true | nil
+    %p
+      Starts the motor in backward direction at the provided speed.
+
+    %h3 forward? → true | false
+    %p
+      Returns true if the motor is direction is set to forward, otherwise false.
+
+    %h3 backward? → true | false
+    %p
+      Returns true if the motor is direction is set to backward, otherwise false.
+
+    %h3 current_speed → speed
+    %p
+      Returns the current speed of the motor as an integer between 0 and 255.
+
+  %section.how-to
+    %h2 How to use
+    %h3 Example of a dc motor with speed changes using PWM.
+    :markdown
+          :::ruby
+          require 'artoo'
+
+          #Circuit's breadboard layout here: http://learn.adafruit.com/adafruit-arduino-lesson-13-dc-motors/breadboard-layout
+
+          #connection :arduino, :adaptor => :firmata, :port => '/dev/tty*'
+          connection :arduino, :adaptor => :firmata, :port => '127.0.0.1:8023'
+          device :board, :driver => :device_info
+          device :motor, :driver => :motor, :speed_pin => 3 # Use a PWM pin
+
+          work do
+            puts "Firmware name: \#{board.firmware_name}"
+            puts "Firmata version: \#{board.version}"
+            puts "Stopping motor..."
+            motor.min # same as 'motor.stop' or 'motor.speed(0)'
+            sleep 3
+            puts "Setting to maximum speed..."
+            motor.max # same as 'motor.start'
+            sleep 3
+
+            speed = 0
+            step = 50
+
+            every 3.seconds do
+              motor.speed(speed)
+              puts "Current speed: \#{motor.current_speed}"
+              speed += step
+              if [0, 250].include?(speed)
+                step = -step
+              end
+            end
+          end
+
+    %h2 Example of a dc motor with direction and speed change.
+    :markdown
+          :::ruby
+          require 'artoo'
+
+          #Circuit's breadboard layout for the L293D: http://www.electrojoystick.com/tutorial/?p=759
+          #For the L239DNE: http://bit.ly/14QdjD5
+
+          #connection :arduino, :adaptor => :firmata, :port => '/dev/tty*'
+          connection :arduino, :adaptor => :firmata, :port => '127.0.0.1:8023'
+          device :board, :driver => :device_info
+          device :motor, :driver => :motor, 
+                         :forward_pin  => 4, # Digital or PWM pin
+                         :backward_pin => 2, # Digital or PWM pin
+                         :speed_pin    => 9  # PWM pin only
+
+          work do
+            puts "Firmware name: \#{board.firmware_name}"
+            puts "Firmata version: \#{board.version}"
+            puts "Stopping motor..."
+            motor.stop
+            sleep 2
+
+            loop do
+              motor.forward # if no speed set, spins at max speed
+              puts "Going forward, Speed: \#{motor.current_speed}"
+              sleep 3
+              motor.forward 180
+              puts "Going forward, Speed: \#{motor.current_speed}"
+              sleep 3
+              puts "Stopping..."
+              motor.stop
+              sleep 2
+              motor.backward(150) # spins at speed 150
+              puts "Going backward, Speed: \#{motor.current_speed}"
+              sleep 3
+              motor.backward(255)
+              puts "Going backward, Speed: \#{motor.current_speed}"
+              sleep 3
+            end
+          end
+
+    %h2 Circuit and Schematic
+    %p
+      =link_to "http://learn.adafruit.com/adafruit-arduino-lesson-13-dc-motors/breadboard-layout", "http://learn.adafruit.com/adafruit-arduino-lesson-13-dc-motors/breadboard-layout"
+
+  %section.compatability.hardware
+    %h2 Works with:
+    =# TODO: Update platform list with all that work with this driver in artoo.
+    .devices
+      = partial "documentation/partials/arduino"
+      = partial "documentation/partials/beaglebone"
+      = partial "documentation/partials/digispark"
+      = partial "documentation/partials/raspberry-pi"
+

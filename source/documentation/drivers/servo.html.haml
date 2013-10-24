@@ -1,0 +1,94 @@
+---
+title: Artoo - Servo Driver
+author: The Hybrid Group
+page_title: Servo
+page_subtitle: Driver
+layout: page
+---
+.documentation
+  %section.intro
+    = image_tag "/images/servo.jpg", class: "display"
+    %p
+      Provides an interface for making servos easy to work and interact with from Artoo.
+
+  %section.how-to
+    %h2 How to stablish a connection and setup the driver
+    %h3 For Arduino:
+    :markdown
+          :::ruby
+          require 'artoo'
+          connection :arduino, :adaptor => :firmata, :port => '127.0.0.1:8023'
+          device :servo, :driver => :servo, :pin => 3 # pin must be a PWM pin
+
+    %h3 For Digispark:
+    :markdown
+          :::ruby
+          require 'artoo'
+          connection :digispark, :adaptor => :littlewire, :vendor => 0x1781, :product => 0x0c9f
+          device :servo, :driver => :servo, :pin => 3 # pin must be a PWM pin
+
+  %section.public-methods
+    %h2 Public instance methods:
+
+    %h3 move(angle) → true | nil
+    %p
+      Moves the servo to the specified angle, angle must be an integer value between 0 and 180.
+
+    %h3 min
+    %p
+      Moves the servo to the angle = 0 position.
+
+    %h3 max
+    %p
+      Moves the servo to the angle = 180 position.
+
+    %h3 center
+    %p
+      Moves the servo to the angle = 90 position.
+
+    %h3 current_angle → integer_value (0 - 180)
+    %p
+      Returns the current angle of the servo, an integer value between 0 and 180.
+
+  %section.how-to
+    %h2 How to use
+    %h3 Example moves a servo from angle 0 to 90 to 180.
+    :markdown
+          :::ruby
+          require 'artoo'
+
+          # Circuit and schematic here: http://arduino.cc/en/Tutorial/Sweep
+
+          #connection :arduino, :adaptor => :firmata, :port => '/dev/tty*'
+          connection :arduino, :adaptor => :firmata, :port => '127.0.0.1:8023'
+          device :board, :driver => :device_info
+          device :servo, :driver => :servo, :pin => 3 # pin must be a PWM pin
+
+          work do
+            puts "Firmware name: \#{board.firmware_name}"
+            puts "Firmata version: \#{board.version}"
+
+            servo.move(0) # reset the position of the sweep (same as servo.min)
+
+            every(2) do
+              case servo.current_angle
+              when 0 then servo.center
+              when 90 then servo.max
+              when 180 then servo.min
+              end
+            end
+          end
+
+  %section.circuit
+    %h2 Circuit and Schematic
+    %p
+      =link_to "http://arduino.cc/en/Tutorial/Sweep", "http://arduino.cc/en/Tutorial/Sweep"
+
+  %section.compatability.hardware
+    %h2 Works with:
+    =# TODO: Update platform list with all that work with this driver in artoo.
+    .devices
+      = partial "documentation/partials/arduino"
+      = partial "documentation/partials/digispark"
+
+

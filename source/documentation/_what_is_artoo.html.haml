@@ -1,0 +1,25 @@
+%h2 What is artoo?
+%p
+  Artoo is a micro-framework for robotics. It provides a simple, but powerful Domain-Specific Language (DSL) for robots and physical computing.
+
+%p
+  With Artoo, you can easily connect multiple, different hardware devices together at the same time into a single solution.
+  Artoo makes telling robots what to do incredibly simple and fun.
+
+%p
+  Ruby versions supported: Ruby 2.0, Ruby 1.9.3, JRuby 1.7.4, and Rubinius 2.0
+  Artoo is conceptualy influenced by Sinatra (
+  = link_to "Sinatra", "https://github.com/sinatra/sinatra"
+  ) as well as borrowing some code from it.
+  Artoo provides a robust actor-based messaging architecture, that can support fully multi-threaded
+  operation and high-concurrency, as long as it is supported by the Ruby version in which it is executing.
+
+%p
+  This means you will need to use JRuby or Rubinius for maximum concurrency.
+  To a large extent, this is due to being built on top of Celluloid (
+  = link_to "Celluloid", "https://github.com/celluloid/celluloid"
+  ), Celluloid::IO (
+  = link_to "Celluloid::IO", "https://github.com/celluloid/celluloid-io"
+  ), and Reel (
+  = link_to "Reel","https://github.com/celluloid/reel"
+  ).
