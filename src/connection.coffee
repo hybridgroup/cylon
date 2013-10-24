@@ -18,6 +18,7 @@ module.exports = class Connection
     @robot = opts.robot
     @name = opts.name
     @adaptor = @requireAdaptor(opts.adaptor) # or 'loopback')
+    @addCommands(@adaptor)
     @port = new Port(opts.port)
 
   connect: ->
@@ -31,3 +32,9 @@ module.exports = class Connection
   requireAdaptor: (adaptorName) ->
     Logger.info "dynamic load adaptor"
     @robot.requireAdaptor(adaptorName, @self)
+
+  addCommands: (object) ->
+    @addProxy(object, method) for method in object.commands()
+
+  addProxy: (object, method) ->
+    this[method] = (args...) -> object[method](args...)
