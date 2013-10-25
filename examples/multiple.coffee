@@ -8,8 +8,7 @@ bots = [
 
 class ChattyRobot
   connection:
-    name: 'loopback'
-    adaptor: 'loopback'
+    name: 'loopback', adaptor: 'loopback'
 
   work: (me) ->
     every 1.seconds(), ->
