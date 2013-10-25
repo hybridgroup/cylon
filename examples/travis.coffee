@@ -17,12 +17,11 @@ Cylon.robot
 
   work: (me) ->
     user = "hybridgroup"
-    name = "gitnesse"
+    name = "cylon"
 
-    me.sphero.setRGB BLUE, true
-
-    every 10.seconds(), ->
+    me.checkTravis = ->
       Logger.info "Checking repo #{user}/#{name}"
+      me.sphero.setRGB BLUE, true
 
       travis.repos {
         owner_name: user,
@@ -35,5 +34,10 @@ Cylon.robot
             else me.sphero.setRGB(BLUE, true)
         else
           me.sphero.setRGB BLUE, true
+
+    me.checkTravis()
+
+    every 10.seconds(), ->
+      me.checkTravis()
 
 .start()
