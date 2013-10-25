@@ -1,10 +1,12 @@
-# Cylon.js [![Build Status](https://secure.travis-ci.org/hybridgroup/cylon.png?branch=master)](http://travis-ci.org/hybridgroup/cylon) [![Code Climate](https://codeclimate.com/github/hybridgroup/cylon.png)](https://codeclimate.com/github/hybridgroup/cylon)
+# Cylon.js 
 
 Cylon.js (http://cylonjs.com) is a JavaScript framework for robotics and physical computing using node.js
 
 It provides a simple, yet powerful way to create solutions that incorporate multiple, different hardware devices at the same time.
 
 Want to use Ruby on robots? Check out our sister project Artoo (http://artoo.io)
+
+[![Build Status](https://secure.travis-ci.org/hybridgroup/cylon.png?branch=master)](http://travis-ci.org/hybridgroup/cylon)
 
 ## Getting Started
 
