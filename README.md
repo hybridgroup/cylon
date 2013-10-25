@@ -1,8 +1,10 @@
 # Cylon.js [![Build Status](https://secure.travis-ci.org/hybridgroup/cylon.png?branch=master)](http://travis-ci.org/hybridgroup/cylon) [![Code Climate](https://codeclimate.com/github/hybridgroup/cylon.png)](https://codeclimate.com/github/hybridgroup/cylon)
 
-Cylon.js is a JavaScript framework for robotics and physical computing using node.js
+Cylon.js (http://cylonjs.com) is a JavaScript framework for robotics and physical computing using node.js
 
 It provides a simple, yet powerful way to create solutions that incorporate multiple, different hardware devices at the same time.
+
+Want to use Ruby on robots? Check out our sister project Artoo (http://artoo.io)
 
 ## Getting Started
 
@@ -22,9 +24,9 @@ var robot = Cylon.robot({
   connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
   device: { name: 'led', driver: 'led', pin: 13 },
 
-  work: function() {
+  work: function(my) {
     // we do our thing here
-    every((1).second(), function() { led.toggle(); });
+    every((1).second(), function() { my.led.toggle(); });
   }
 });
 
@@ -48,9 +50,9 @@ robot = Cylon.robot
     driver: 'led'
     pin: 13
 
-  work: ->
+  work: (my) ->
     # we do our thing here
-    every 1.second, -> led.toggle
+    every 1.second, -> my.led.toggle
 
 robot.start
 ```
