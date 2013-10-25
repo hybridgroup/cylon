@@ -7,6 +7,10 @@ bots = [
 ]
 
 class ChattyRobot
+  connection:
+    name: 'loopback'
+    adaptor: 'loopback'
+
   work: (me) ->
     every 1.seconds(), ->
       Logger.info me.name

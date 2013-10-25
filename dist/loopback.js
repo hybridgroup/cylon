@@ -35,6 +35,10 @@
       return Logger.info("Disconnecting from adaptor '" + this.name + "'...");
     };
 
+    Loopback.prototype.commands = function() {
+      return ['ping'];
+    };
+
     return Loopback;
 
   })();

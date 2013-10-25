@@ -23,3 +23,6 @@ class Loopback
 
   disconnect: ->
     Logger.info "Disconnecting from adaptor '#{@name}'..."
+
+  commands: ->
+    ['ping']
