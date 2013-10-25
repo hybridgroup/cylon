@@ -8,13 +8,7 @@ Cylon.robot
     name: 'sphero', driver: 'sphero'
 
   work: (me) ->
-    me.nextColor = ->
-      @color ?= 0x000050
-      @color += 0x005000
-      @color = 0x000050 if @color > 0xFFFFFF
-      @color
-
     every 1.second(), ->
-      me.sphero.setRGB me.nextColor()
+      me.sphero.setRGB Math.floor(Math.random() * 100000)
 
 .start()

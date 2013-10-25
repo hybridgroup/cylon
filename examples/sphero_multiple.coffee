@@ -12,20 +12,16 @@ SpheroRobot =
   device:
     name: 'sphero', driver: 'sphero'
 
-  work: (self) ->
-    color = 0x000050
-    every 1.second(), ->
-      #me.sphero.roll(60, Math.floor(Math.random() * 360), 1)
-      Logger.info self.name
-      self.sphero.setRGB(color, true)
-      color += 0x005000
-      color = 0x000050 if color > 0xFFFFFF
+  work: (me) ->
+    every 1.seconds(), ->
+      Logger.info me.name
+      me.sphero.setRGB Math.floor(Math.random() * 100000)
+      me.sphero.roll 60, Math.floor(Math.random() * 360)
 
 for bot in bots
   robot = Object.create(SpheroRobot)
   robot.connection.port = bot.port
   robot.name = bot.name
-
   Cylon.robot robot
 
 Cylon.start()
