@@ -59,6 +59,9 @@ robot = Cylon.robot
 robot.start
 ```
 
+## Hardware Support
+_(Coming soon)_
+
 ## Documentation
 _(Coming soon)_
 
