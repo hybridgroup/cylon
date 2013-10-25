@@ -14,14 +14,15 @@ Device = require("./device")
 
 module.exports = class Robot
   self = this
-  @adaptors = {}
-  @drivers = {}
 
   constructor: (opts = {}) ->
+    @robot = this
     @name = opts.name or @constructor.randomName()
     @master = opts.master
     @connections = {}
     @devices = {}
+    @adaptors = {}
+    @drivers = {}
 
     @registerAdaptor "./loopback", "loopback"
 
@@ -53,7 +54,7 @@ module.exports = class Robot
   start: =>
     @startConnections()
     @startDevices()
-    @work.call(self, this)
+    @work.call(@robot, @robot)
 
   startConnections: =>
     Logger.info "Starting connections..."
@@ -65,45 +66,32 @@ module.exports = class Robot
     Logger.info "Starting devices..."
     for n, device of @devices
       Logger.info "Starting device '#{ device.name }'..."
-      device.start()
       this[device.name] = device
 
-  @requireAdaptor = (adaptorName, connection) =>
-    if @adaptors[adaptorName]?
-      if typeof @adaptors[adaptorName] is 'string'
-        @adaptors[adaptorName] = require(@adaptors[adaptorName]).adaptor(name: adaptorName, connection: connection)
+  requireAdaptor: (adaptorName, connection) ->
+    if @robot.adaptors[adaptorName]?
+      if typeof @robot.adaptors[adaptorName] is 'string'
+        @robot.adaptors[adaptorName] = require(@robot.adaptors[adaptorName]).adaptor(name: adaptorName, connection: connection)
     else
       require("cylon-#{adaptorName}").register(this)
-      @adaptors[adaptorName] = require("cylon-#{adaptorName}").adaptor(name: adaptorName, connection: connection)
+      @robot.adaptors[adaptorName] = require("cylon-#{adaptorName}").adaptor(name: adaptorName, connection: connection)
 
-    return @adaptors[adaptorName]
+    return @robot.adaptors[adaptorName]
 
-  requireAdaptor: (args...) ->
-    self.requireAdaptor(args...)
+  registerAdaptor: (moduleName, adaptorName) ->
+    return if @adaptors[adaptorName]?
+    @adaptors[adaptorName] = moduleName
 
-  @registerAdaptor: (moduleName, adaptorName) ->
-    return if self.adaptors[adaptorName]?
-    self.adaptors[adaptorName] = moduleName
-
-  registerAdaptor: (args...) ->
-    self.registerAdaptor(args...)
-
-  @requireDriver = (driverName, device) =>
-    if @drivers[driverName]?
-      if typeof @drivers[driverName] is 'string'
-        @drivers[driverName] = require(@drivers[driverName]).driver(device: device)
+  requireDriver: (driverName, device) ->
+    if @robot.drivers[driverName]?
+      if typeof @robot.drivers[driverName] is 'string'
+        @robot.drivers[driverName] = require(@robot.drivers[driverName]).driver(device: device)
     else
       require("cylon-#{driverName}").register(this)
-      @drivers[driverName] = require("cylon-#{driverName}").driver(device: device)
+      @robot.drivers[driverName] = require("cylon-#{driverName}").driver(device: device)
 
-    return @drivers[driverName]
+    return @robot.drivers[driverName]
 
-  requireDriver: (args...) ->
-    self.requireDriver(args...)
-
-  @registerDriver: (moduleName, driverName) =>
-    return if self.drivers[driverName]?
-    self.drivers[driverName] = moduleName
-
-  registerDriver: (args...) ->
-    self.registerDriver(args...)
+  registerDriver: (moduleName, driverName) =>
+    return if @drivers[driverName]?
+    @drivers[driverName] = moduleName
