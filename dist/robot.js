@@ -41,6 +41,7 @@
       this.adaptors = {};
       this.drivers = {};
       this.registerAdaptor("./loopback", "loopback");
+      this.registerDriver("./ping", "ping");
       this.initConnections(opts.connection || opts.connections);
       this.initDevices(opts.device || opts.devices);
       this.work = opts.work || function() {

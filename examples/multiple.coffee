@@ -10,9 +10,12 @@ class ChattyRobot
   connection:
     name: 'loopback', adaptor: 'loopback'
 
-  work: (me) ->
+  device:
+    name: 'ping', driver: 'ping'
+
+  work: (my) ->
     every 1.seconds(), ->
-      Logger.info me.name
+      Logger.info "#{my.name}: #{my.ping.ping()}"
 
 for bot in bots
   robot = new ChattyRobot

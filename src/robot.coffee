@@ -25,6 +25,7 @@ module.exports = class Robot
     @drivers = {}
 
     @registerAdaptor "./loopback", "loopback"
+    @registerDriver "./ping", "ping"
 
     @initConnections(opts.connection or opts.connections)
     @initDevices(opts.device or opts.devices)
