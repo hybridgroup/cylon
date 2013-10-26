@@ -17,19 +17,19 @@
       name: "irobot",
       work: testWork
     });
-    it("should have a name, if given", function() {
+    it("has a name, if given", function() {
       return robot.name.should.be.equal('irobot');
     });
-    it("should have a random name, if not given", function() {
+    it("has a random name, if not given", function() {
       var r;
       sinon.stub(Robot, 'randomName').returns('Electra');
       r = new Robot;
       return r.name.should.be.equal('Electra');
     });
-    it("should have work", function() {
+    it("has work", function() {
       return robot.work.should.be.equal(testWork);
     });
-    return it("should be able to start", function() {
+    return it("can start work", function() {
       var startConnections, startDevices, work;
       startConnections = sinon.spy(robot, 'startConnections');
       startDevices = sinon.spy(robot, 'startDevices');
