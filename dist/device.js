@@ -28,13 +28,19 @@
       this.self = this;
       this.robot = opts.robot;
       this.name = opts.name;
+      this.pin = opts.pin;
       this.connection = this.determineConnection(opts.connection) || this.defaultConnection();
       this.driver = this.requireDriver(opts.driver);
       this.addCommands(this.driver);
     }
 
     Device.prototype.start = function() {
-      Logger.info("Starting driver " + this.driver.name);
+      var msg;
+      msg = "Starting device '" + this.name + "'";
+      if (this.pin != null) {
+        msg += " on pin " + this.pin;
+      }
+      Logger.info(msg);
       return this.driver.start();
     };
 

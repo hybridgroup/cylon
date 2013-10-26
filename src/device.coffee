@@ -16,12 +16,15 @@ module.exports = class Device extends EventEmitter
     @self = this
     @robot = opts.robot
     @name = opts.name
+    @pin = opts.pin
     @connection = @determineConnection(opts.connection) or @defaultConnection()
     @driver = @requireDriver(opts.driver)
     @addCommands(@driver)
 
   start: ->
-    Logger.info "Starting driver #{ @driver.name }"
+    msg = "Starting device '#{ @name }'"
+    msg += " on pin #{@pin}" if @pin?
+    Logger.info msg
     @driver.start()
 
   determineConnection: (c) ->
