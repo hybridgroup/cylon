@@ -114,6 +114,7 @@
       for (n in _ref) {
         device = _ref[n];
         Logger.info("Starting device '" + device.name + "'...");
+        device.start();
         _results.push(this[device.name] = device);
       }
       return _results;

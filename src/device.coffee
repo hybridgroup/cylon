@@ -21,7 +21,8 @@ module.exports = class Device extends EventEmitter
     @addCommands(@driver)
 
   start: ->
-    Logger.info "started"
+    Logger.info "Starting driver #{ @driver.name }"
+    @driver.start()
 
   determineConnection: (c) ->
     @robot.connections[c] if c

@@ -34,7 +34,8 @@
     }
 
     Device.prototype.start = function() {
-      return Logger.info("started");
+      Logger.info("Starting driver " + this.driver.name);
+      return this.driver.start();
     };
 
     Device.prototype.determineConnection = function(c) {
