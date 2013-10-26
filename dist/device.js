@@ -62,7 +62,7 @@
     };
 
     Device.prototype.requireDriver = function(driverName) {
-      Logger.info("dynamic load driver");
+      Logger.debug("Loading driver '" + driverName + "'");
       return this.robot.requireDriver(driverName, this.self);
     };
 

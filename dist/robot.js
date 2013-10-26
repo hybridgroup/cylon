@@ -120,7 +120,7 @@
       _ref = this.devices;
       for (n in _ref) {
         device = _ref[n];
-        this[device.name] = device;
+        this.robot[device.name] = device;
         d[device.name] = function(callback) {
           Logger.info("Starting device '" + device.name + "'...");
           return device.start(callback);

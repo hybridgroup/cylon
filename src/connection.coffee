@@ -31,7 +31,7 @@ module.exports = class Connection extends EventEmitter
     @adaptor.disconnect()
 
   requireAdaptor: (adaptorName) ->
-    Logger.info "dynamic load adaptor"
+    Logger.debug "Loading adaptor '#{adaptorName}'"
     @robot.requireAdaptor(adaptorName, @self)
 
   addCommands: (object) ->

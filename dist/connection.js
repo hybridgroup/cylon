@@ -46,7 +46,7 @@
     };
 
     Connection.prototype.requireAdaptor = function(adaptorName) {
-      Logger.info("dynamic load adaptor");
+      Logger.debug("Loading adaptor '" + adaptorName + "'");
       return this.robot.requireAdaptor(adaptorName, this.self);
     };
 

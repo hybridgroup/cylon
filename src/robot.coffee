@@ -72,7 +72,7 @@ module.exports = class Robot
     Logger.info "Starting devices..."
     d = {}
     for n, device of @devices
-      this[device.name] = device
+      @robot[device.name] = device
       d[device.name] = (callback) ->
         Logger.info "Starting device '#{ device.name }'..."
         device.start(callback)
