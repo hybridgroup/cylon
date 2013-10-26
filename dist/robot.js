@@ -9,7 +9,7 @@
 
 (function() {
   'use strict';
-  var Connection, Device, Robot,
+  var Async, Connection, Device, Robot,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   require('./cylon');
@@ -17,6 +17,8 @@
   Connection = require("./connection");
 
   Device = require("./device");
+
+  Async = require("async");
 
   module.exports = Robot = (function() {
     var self;
@@ -88,36 +90,43 @@
     };
 
     Robot.prototype.start = function() {
-      this.startConnections();
-      this.startDevices();
-      return this.work.call(this.robot, this.robot);
+      var _this = this;
+      return this.startConnections(function() {
+        return _this.robot.startDevices(function() {
+          return _this.robot.work.call(_this.robot, _this.robot);
+        });
+      });
     };
 
-    Robot.prototype.startConnections = function() {
-      var connection, n, _ref, _results;
+    Robot.prototype.startConnections = function(cb) {
+      var c, connection, n, _ref;
       Logger.info("Starting connections...");
+      c = {};
       _ref = this.connections;
-      _results = [];
       for (n in _ref) {
         connection = _ref[n];
-        Logger.info("Starting connection '" + connection.name + "'...");
-        _results.push(connection.connect());
+        c[connection.name] = function(callback) {
+          Logger.info("Starting connection '" + connection.name + "'...");
+          return connection.connect(callback);
+        };
       }
-      return _results;
+      return Async.parallel(c, cb);
     };
 
-    Robot.prototype.startDevices = function() {
-      var device, n, _ref, _results;
+    Robot.prototype.startDevices = function(cb) {
+      var d, device, n, _ref;
       Logger.info("Starting devices...");
+      d = {};
       _ref = this.devices;
-      _results = [];
       for (n in _ref) {
         device = _ref[n];
-        Logger.info("Starting device '" + device.name + "'...");
-        device.start();
-        _results.push(this[device.name] = device);
+        this[device.name] = device;
+        d[device.name] = function(callback) {
+          Logger.info("Starting device '" + device.name + "'...");
+          return device.start(callback);
+        };
       }
-      return _results;
+      return Async.parallel(d, cb);
     };
 
     Robot.prototype.requireAdaptor = function(adaptorName, connection) {

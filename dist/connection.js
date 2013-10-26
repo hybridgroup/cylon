@@ -35,14 +35,14 @@
       this.port = new Port(opts.port);
     }
 
-    Connection.prototype.connect = function() {
+    Connection.prototype.connect = function(callback) {
       Logger.info("Connecting to '" + this.name + "' on port '" + (this.port.toString()) + "'...");
-      return this.adaptor.connect(this.self);
+      return this.adaptor.connect(callback);
     };
 
     Connection.prototype.disconnect = function() {
       Logger.info("Disconnecting from '" + this.name + "' on port '" + (this.port.toString()) + "'...");
-      return this.adaptor.disconnect(this.self);
+      return this.adaptor.disconnect();
     };
 
     Connection.prototype.requireAdaptor = function(adaptorName) {

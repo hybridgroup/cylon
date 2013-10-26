@@ -11,20 +11,22 @@ describe "Robot", ->
 
   robot = new Robot(name: "irobot", work: testWork)
 
-  it "should have a name, if given", ->
+  it "has a name, if given", ->
     robot.name.should.be.equal 'irobot'
 
-  it "should have a random name, if not given", ->
+  it "has a random name, if not given", ->
     sinon.stub(Robot, 'randomName').returns('Electra')
     r = new Robot
     r.name.should.be.equal 'Electra'
 
-  it "should have work", ->
+  it "has work", ->
     robot.work.should.be.equal testWork
 
-  it "should be able to start", ->
-    startConnections = sinon.stub(robot, 'startConnections')
-    startDevices = sinon.stub(robot, 'startDevices')
+  it "can start work", ->
+    startConnections = sinon.spy(robot, 'startConnections')
+    startDevices = sinon.spy(robot, 'startDevices')
+    work = sinon.stub(robot, 'work')
     robot.start()
     startConnections.should.have.been.called
     startDevices.should.have.been.called
+    work.should.have.been.called

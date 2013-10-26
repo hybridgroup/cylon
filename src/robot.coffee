@@ -11,6 +11,7 @@
 require('./cylon')
 Connection = require("./connection")
 Device = require("./device")
+Async = require("async")
 
 module.exports = class Robot
   self = this
@@ -53,22 +54,30 @@ module.exports = class Robot
       @devices[device.name] = new Device(device)
 
   start: =>
-    @startConnections()
-    @startDevices()
-    @work.call(@robot, @robot)
+    @startConnections =>
+      @robot.startDevices =>
+        @robot.work.call(@robot, @robot)
 
-  startConnections: =>
+  startConnections: (cb) =>
     Logger.info "Starting connections..."
+    c = {}
     for n, connection of @connections
-      Logger.info "Starting connection '#{ connection.name }'..."
-      connection.connect()
+      c[connection.name] = (callback) ->
+        Logger.info "Starting connection '#{ connection.name }'..."
+        connection.connect(callback)
 
-  startDevices: =>
+    Async.parallel c, cb
+
+  startDevices: (cb) =>
     Logger.info "Starting devices..."
+    d = {}
     for n, device of @devices
-      Logger.info "Starting device '#{ device.name }'..."
-      device.start()
       this[device.name] = device
+      d[device.name] = (callback) ->
+        Logger.info "Starting device '#{ device.name }'..."
+        device.start(callback)
+    
+    Async.parallel d, cb
 
   requireAdaptor: (adaptorName, connection) ->
     if @robot.adaptors[adaptorName]?

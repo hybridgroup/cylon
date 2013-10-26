@@ -34,14 +34,14 @@
       this.addCommands(this.driver);
     }
 
-    Device.prototype.start = function() {
+    Device.prototype.start = function(callback) {
       var msg;
       msg = "Starting device '" + this.name + "'";
       if (this.pin != null) {
         msg += " on pin " + this.pin;
       }
       Logger.info(msg);
-      return this.driver.start();
+      return this.driver.start(callback);
     };
 
     Device.prototype.determineConnection = function(c) {

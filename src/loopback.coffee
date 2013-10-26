@@ -18,9 +18,9 @@ Adaptor =
       @self = this
       @name = opts.name
 
-    connect: ->
+    connect: (callback) ->
       Logger.info "Connecting to adaptor '#{@name}'..."
-      @self
+      (callback)(null)
 
     disconnect: ->
       Logger.info "Disconnecting from adaptor '#{@name}'..."

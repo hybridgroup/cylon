@@ -31,9 +31,9 @@
         this.name = opts.name;
       }
 
-      Loopback.prototype.connect = function() {
+      Loopback.prototype.connect = function(callback) {
         Logger.info("Connecting to adaptor '" + this.name + "'...");
-        return this.self;
+        return callback(null);
       };
 
       Loopback.prototype.disconnect = function() {

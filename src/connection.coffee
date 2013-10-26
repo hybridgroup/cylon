@@ -22,13 +22,13 @@ module.exports = class Connection extends EventEmitter
     @addCommands(@adaptor)
     @port = new Port(opts.port)
 
-  connect: ->
+  connect: (callback) ->
     Logger.info "Connecting to '#{@name}' on port '#{@port.toString()}'..."
-    @adaptor.connect(@self)
+    @adaptor.connect(callback)
 
   disconnect: ->
     Logger.info "Disconnecting from '#{@name}' on port '#{@port.toString()}'..."
-    @adaptor.disconnect(@self)
+    @adaptor.disconnect()
 
   requireAdaptor: (adaptorName) ->
     Logger.info "dynamic load adaptor"
