@@ -67,6 +67,7 @@ module.exports = class Robot
     Logger.info "Starting devices..."
     for n, device of @devices
       Logger.info "Starting device '#{ device.name }'..."
+      device.start()
       this[device.name] = device
 
   requireAdaptor: (adaptorName, connection) ->
