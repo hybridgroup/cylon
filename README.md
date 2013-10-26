@@ -60,7 +60,12 @@ robot.start
 ```
 
 ## Hardware Support
-_(Coming soon)_
+Cylon.js has a extensible system for connecting to hardware devices. The following robotics and physical computing platforms are currently supported:
+
+  - [Arduino](http://www.arduino.cc/) <=> [Adaptor](https://github.com/hybridgroup/cylon-firmata)
+  - [Sphero](http://www.gosphero.com/) <=> [Adaptor](https://github.com/hybridgroup/cylon-sphero)
+
+More platforms are coming soon!
 
 ## Documentation
 _(Coming soon)_
