@@ -158,12 +158,14 @@
       if (this.robot.drivers[driverName] != null) {
         if (typeof this.robot.drivers[driverName] === 'string') {
           this.robot.drivers[driverName] = require(this.robot.drivers[driverName]).driver({
+            name: driverName,
             device: device
           });
         }
       } else {
         require("cylon-" + driverName).register(this);
         this.robot.drivers[driverName] = require("cylon-" + driverName).driver({
+          name: driverName,
           device: device
         });
       }
