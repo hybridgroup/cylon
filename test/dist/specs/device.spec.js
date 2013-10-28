@@ -30,30 +30,8 @@
     });
     it("should use default connection if none specified");
     it("should use connection if one is specified");
-    it("should require a driver", function() {
+    return it("should require a driver", function() {
       return requireDriver.should.be.called;
-    });
-    it('can alias methods with addProxy()', function() {
-      var proxyObject;
-      proxyObject = {
-        toString: function() {
-          return "[object ProxyObject]";
-        }
-      };
-      device.addProxy(proxyObject, 'toString');
-      assert(typeof device.toString === 'function');
-      return device.toString().should.be.equal("[object ProxyObject]");
-    });
-    return it('can alias methods with arguments with addProxy()', function() {
-      var proxyObject;
-      proxyObject = {
-        returnString: function(string) {
-          return string;
-        }
-      };
-      device.addProxy(proxyObject, 'returnString');
-      assert(typeof device.returnString === 'function');
-      return device.returnString("testString").should.be.equal("testString");
     });
   });
 
