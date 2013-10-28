@@ -30,6 +30,35 @@ global.every = (interval, action) ->
 global.after = (delay, action) ->
   setTimeout action, delay
 
+# Public: Proxies a list of methods from one oject to another. It will not
+# overwrite existing methods unless told to.
+#
+# methods - array of functions to proxy
+# target - object to proxy the functions to
+# base - (optional) object that proxied functions will be declared on. Defaults
+# to this
+# force - (optional) boolean - whether or not to force method assignment
+#
+# Returns base
+# Examples:
+#
+#   awesomeClass = {
+#     sayHello: function() { console.log("Hello World!"); }
+#   }
+#
+#   newClass = {}
+#
+#   proxyFunctionsToObject(["sayHello"], awesomeClass, newClass);
+#   newClass.sayHello();
+#   //=> Hello, World!
+global.proxyFunctionsToObject = (methods, target, base = this, force = false) ->
+  for method in methods
+    unless force
+      continue if typeof base[method] is 'function'
+    base[method] = (args...) -> target[method](args...)
+
+  return base
+
 Number::seconds = ->
   this * 1000
 
