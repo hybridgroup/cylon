@@ -68,16 +68,14 @@ module.exports = class Robot
 
     Async.parallel c, cb
 
-  startDevices: (cb) =>
+  startDevices: (callback) =>
     Logger.info "Starting devices..."
-    d = {}
+    deviceStarters = {}
     for n, device of @devices
-      @robot[device.name] = device
-      d[device.name] = (callback) ->
-        Logger.info "Starting device '#{ device.name }'..."
-        device.start(callback)
+      @robot[n] = device
+      deviceStarters[n] = device.start
     
-    Async.parallel d, cb
+    Async.parallel deviceStarters, callback
 
   requireAdaptor: (adaptorName, connection) ->
     if @robot.adaptors[adaptorName]?

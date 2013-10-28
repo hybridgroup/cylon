@@ -113,20 +113,17 @@
       return Async.parallel(c, cb);
     };
 
-    Robot.prototype.startDevices = function(cb) {
-      var d, device, n, _ref;
+    Robot.prototype.startDevices = function(callback) {
+      var device, deviceStarters, n, _ref;
       Logger.info("Starting devices...");
-      d = {};
+      deviceStarters = {};
       _ref = this.devices;
       for (n in _ref) {
         device = _ref[n];
-        this.robot[device.name] = device;
-        d[device.name] = function(callback) {
-          Logger.info("Starting device '" + device.name + "'...");
-          return device.start(callback);
-        };
+        this.robot[n] = device;
+        deviceStarters[n] = device.start;
       }
-      return Async.parallel(d, cb);
+      return Async.parallel(deviceStarters, callback);
     };
 
     Robot.prototype.requireAdaptor = function(adaptorName, connection) {

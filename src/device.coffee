@@ -21,7 +21,7 @@ module.exports = class Device extends EventEmitter
     @driver = @requireDriver(opts.driver)
     proxyFunctionsToObject @driver.commands(), @driver, this
 
-  start: (callback) ->
+  start: (callback) =>
     msg = "Starting device '#{ @name }'"
     msg += " on pin #{@pin}" if @pin?
     Logger.info msg
