@@ -12,7 +12,6 @@ Cylon.robot
     ]
 
   work: (my) ->
-    # we do our thing here
-    my.button.on 'pushed', -> my.led.toggle()
-    #my.button.on 'released', -> Logger.info 'ho'
+    my.button.on 'push', -> my.led.toggle()
+
 .start()
