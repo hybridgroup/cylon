@@ -11,8 +11,7 @@
   'use strict';
   var Device, EventEmitter,
     __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-    __slice = [].slice;
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   require('./cylon');
 
@@ -31,7 +30,7 @@
       this.pin = opts.pin;
       this.connection = this.determineConnection(opts.connection) || this.defaultConnection();
       this.driver = this.requireDriver(opts.driver);
-      this.addCommands(this.driver);
+      proxyFunctionsToObject(this.driver.commands(), this.driver, this);
     }
 
     Device.prototype.start = function(callback) {
@@ -64,25 +63,6 @@
     Device.prototype.requireDriver = function(driverName) {
       Logger.debug("Loading driver '" + driverName + "'");
       return this.robot.requireDriver(driverName, this.self);
-    };
-
-    Device.prototype.addCommands = function(object) {
-      var method, _i, _len, _ref, _results;
-      _ref = object.commands();
-      _results = [];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        method = _ref[_i];
-        _results.push(this.addProxy(object, method));
-      }
-      return _results;
-    };
-
-    Device.prototype.addProxy = function(object, method) {
-      return this.self[method] = function() {
-        var args;
-        args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-        return object[method].apply(object, args);
-      };
     };
 
     return Device;

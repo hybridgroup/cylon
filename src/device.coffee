@@ -19,7 +19,7 @@ module.exports = class Device extends EventEmitter
     @pin = opts.pin
     @connection = @determineConnection(opts.connection) or @defaultConnection()
     @driver = @requireDriver(opts.driver)
-    @addCommands(@driver)
+    proxyFunctionsToObject @driver.commands(), @driver, this
 
   start: (callback) ->
     msg = "Starting device '#{ @name }'"
@@ -39,9 +39,3 @@ module.exports = class Device extends EventEmitter
   requireDriver: (driverName) ->
     Logger.debug "Loading driver '#{driverName}'"
     @robot.requireDriver(driverName, @self)
-
-  addCommands: (object) ->
-    @addProxy(object, method) for method in object.commands()
-
-  addProxy: (object, method) ->
-    @self[method] = (args...) -> object[method](args...)

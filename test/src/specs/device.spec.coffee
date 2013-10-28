@@ -21,15 +21,3 @@ describe "Device", ->
 
   it "should require a driver", ->
     requireDriver.should.be.called
-
-  it 'can alias methods with addProxy()', ->
-    proxyObject = { toString: -> "[object ProxyObject]" }
-    device.addProxy(proxyObject, 'toString')
-    assert typeof device.toString is 'function'
-    device.toString().should.be.equal "[object ProxyObject]"
-
-  it 'can alias methods with arguments with addProxy()', ->
-    proxyObject = { returnString: (string) -> string }
-    device.addProxy(proxyObject, 'returnString')
-    assert typeof device.returnString is 'function'
-    device.returnString("testString").should.be.equal "testString"

@@ -19,8 +19,8 @@ module.exports = class Connection extends EventEmitter
     @robot = opts.robot
     @name = opts.name
     @adaptor = @requireAdaptor(opts.adaptor) # or 'loopback')
-    @addCommands(@adaptor)
     @port = new Port(opts.port)
+    proxyFunctionsToObject @adaptor.commands(), @adaptor, this
 
   connect: (callback) ->
     Logger.info "Connecting to '#{@name}' on port '#{@port.toString()}'..."
@@ -33,9 +33,3 @@ module.exports = class Connection extends EventEmitter
   requireAdaptor: (adaptorName) ->
     Logger.debug "Loading adaptor '#{adaptorName}'"
     @robot.requireAdaptor(adaptorName, @self)
-
-  addCommands: (object) ->
-    @addProxy(object, method) for method in object.commands()
-
-  addProxy: (object, method) ->
-    this[method] = (args...) -> object[method](args...)

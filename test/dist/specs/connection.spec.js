@@ -33,29 +33,7 @@
     });
     it("should be able to require an external adaptor module");
     it("should be able to connect");
-    it("should be able to disconnect");
-    it('can alias methods with addProxy()', function() {
-      var proxyObject;
-      proxyObject = {
-        toString: function() {
-          return "[object ProxyObject]";
-        }
-      };
-      connection.addProxy(proxyObject, 'toString');
-      assert(typeof connection.toString === 'function');
-      return connection.toString().should.be.equal("[object ProxyObject]");
-    });
-    return it('can alias methods with arguments with addProxy()', function() {
-      var proxyObject;
-      proxyObject = {
-        returnString: function(string) {
-          return string;
-        }
-      };
-      connection.addProxy(proxyObject, 'returnString');
-      assert(typeof connection.returnString === 'function');
-      return connection.returnString("testString").should.be.equal("testString");
-    });
+    return it("should be able to disconnect");
   });
 
 }).call(this);
