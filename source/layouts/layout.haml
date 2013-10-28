@@ -27,6 +27,8 @@
           .display
             %h1.cylon-logo
               %a{href: '/'} Cylon
+          .github-menu
+            = link_to "Github Repo " , "https://github.com/hybridgroup/cylon/", target: "blanck"
 
           %span.menu
             = # link_to "Docs", "", (menu_item("documentation"))
@@ -38,9 +40,10 @@
         .hero
           .container
             %h1.title
-              It is time to have Robots and JavaScript
-              %br
-              working together.
+              /It is time to have Robots and JavaScript
+              /%br
+              /working together.
+              JavaScript Robotics By Your Command.
             %h2.subtitle
               Coming Soon…
       - unless current_page.data.social.nil?
