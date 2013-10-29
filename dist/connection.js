@@ -20,7 +20,11 @@
   EventEmitter = require('events').EventEmitter;
 
   module.exports = Connection = (function(_super) {
+    var klass;
+
     __extends(Connection, _super);
+
+    klass = Connection;
 
     function Connection(opts) {
       if (opts == null) {
@@ -31,7 +35,7 @@
       this.name = opts.name;
       this.adaptor = this.requireAdaptor(opts.adaptor);
       this.port = new Port(opts.port);
-      proxyFunctionsToObject(this.adaptor.commands(), this.adaptor, this);
+      proxyFunctionsToObject(this.adaptor.commands(), this.adaptor, klass);
     }
 
     Connection.prototype.connect = function(callback) {

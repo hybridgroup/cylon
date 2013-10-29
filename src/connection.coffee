@@ -13,6 +13,7 @@ Port = require("./port")
 EventEmitter = require('events').EventEmitter
 
 module.exports = class Connection extends EventEmitter
+  klass = this
 
   constructor: (opts = {}) ->
     @self = this
@@ -20,7 +21,7 @@ module.exports = class Connection extends EventEmitter
     @name = opts.name
     @adaptor = @requireAdaptor(opts.adaptor) # or 'loopback')
     @port = new Port(opts.port)
-    proxyFunctionsToObject @adaptor.commands(), @adaptor, this
+    proxyFunctionsToObject @adaptor.commands(), @adaptor, klass
 
   connect: (callback) ->
     Logger.info "Connecting to '#{@name}' on port '#{@port.toString()}'..."

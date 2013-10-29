@@ -12,6 +12,8 @@ require('./cylon')
 EventEmitter = require('events').EventEmitter
 
 module.exports = class Device extends EventEmitter
+  klass = this
+
   constructor: (opts = {}) ->
     @self = this
     @robot = opts.robot
@@ -19,7 +21,7 @@ module.exports = class Device extends EventEmitter
     @pin = opts.pin
     @connection = @determineConnection(opts.connection) or @defaultConnection()
     @driver = @requireDriver(opts.driver)
-    proxyFunctionsToObject @driver.commands(), @driver, this
+    proxyFunctionsToObject @driver.commands(), @driver, klass
 
   start: (callback) =>
     msg = "Starting device '#{ @name }'"

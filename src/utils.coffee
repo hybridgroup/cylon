@@ -40,22 +40,12 @@ global.after = (delay, action) ->
 # force - (optional) boolean - whether or not to force method assignment
 #
 # Returns base
-# Examples:
-#
-#   awesomeClass = {
-#     sayHello: function() { console.log("Hello World!"); }
-#   }
-#
-#   newClass = {}
-#
-#   proxyFunctionsToObject(["sayHello"], awesomeClass, newClass);
-#   newClass.sayHello();
-#   //=> Hello, World!
 global.proxyFunctionsToObject = (methods, target, base = this, force = false) ->
   for method in methods
     unless force
-      continue if typeof base[method] is 'function'
-    base[method] = (args...) -> target[method](args...)
+      continue if typeof base::[method] is 'function'
+    do (method) ->
+      base::[method] = (args...) -> target[method](args...)
 
   return base
 
