@@ -9,6 +9,7 @@
 'use strict';
 
 require('./cylon')
+require('./basestar')
 Connection = require("./connection")
 Device = require("./device")
 Async = require("async")

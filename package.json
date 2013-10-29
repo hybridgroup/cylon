@@ -32,6 +32,7 @@
     "sinon": "~1.7.3"
   },
   "dependencies": {
-    "async": "~0.2.9"
+    "async": "~0.2.9",
+    "node-namespace": "~1.0.0"
   }
 }
