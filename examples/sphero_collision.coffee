@@ -8,26 +8,22 @@ Cylon.robot
     name: 'sphero', driver: 'sphero'
 
   work: (me) ->
+    color = 0x00FF00
+    bitFilter = 0xFFFF00
 
     me.sphero.on('connect', ->
       Logger.info('Setting up Collision Detection...')
       me.sphero.detectCollisions()
-      me.sphero.setRGB(0x00FF00)
+      me.sphero.setRGB(color)
     )
 
-    me.sphero.on 'message', (data) ->
-      me.sphero.setRGB(0x0000FF)
-      Logger.info 'message:'
-      Logger.info data
-
     me.sphero.on 'collision', (data) ->
-      me.sphero.setRGB(0xFF0000)
       Logger.info 'collision:'
-      Logger.info data
+      color = color ^ bitFilter
+      console.log("color: #{ color.toString(16) } ")
+      me.sphero.setRGB(color)
 
-    me.sphero.on 'notification', (data) ->
-      me.sphero.setRGB(0xFF0000)
-      Logger.info 'notification:'
-      Logger.info data
+    every 1.second, ->
+      me.sphero.roll 90, Math.floor(Math.random() * 360)
 
 .start()
