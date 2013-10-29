@@ -98,32 +98,29 @@
       });
     };
 
-    Robot.prototype.startConnections = function(cb) {
-      var c, connection, n, _ref;
+    Robot.prototype.startConnections = function(callback) {
+      var connection, n, starters, _ref;
       Logger.info("Starting connections...");
-      c = {};
+      starters = {};
       _ref = this.connections;
       for (n in _ref) {
         connection = _ref[n];
-        c[connection.name] = function(callback) {
-          Logger.info("Starting connection '" + connection.name + "'...");
-          return connection.connect(callback);
-        };
+        starters[n] = connection.connect;
       }
-      return Async.parallel(c, cb);
+      return Async.parallel(starters, callback);
     };
 
     Robot.prototype.startDevices = function(callback) {
-      var device, deviceStarters, n, _ref;
+      var device, n, starters, _ref;
       Logger.info("Starting devices...");
-      deviceStarters = {};
+      starters = {};
       _ref = this.devices;
       for (n in _ref) {
         device = _ref[n];
         this.robot[n] = device;
-        deviceStarters[n] = device.start;
+        starters[n] = device.start;
       }
-      return Async.parallel(deviceStarters, callback);
+      return Async.parallel(starters, callback);
     };
 
     Robot.prototype.requireAdaptor = function(adaptorName, connection) {

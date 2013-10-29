@@ -23,12 +23,16 @@ module.exports = class Connection extends EventEmitter
     @port = new Port(opts.port)
     proxyFunctionsToObject @adaptor.commands(), @adaptor, klass
 
-  connect: (callback) ->
-    Logger.info "Connecting to '#{@name}' on port '#{@port.toString()}'..."
+  connect: (callback) =>
+    msg = "Connecting to '#{@name}'"
+    msg += " on port '#{@port.toString()}'" if @port?
+    Logger.info msg
     @adaptor.connect(callback)
 
   disconnect: ->
-    Logger.info "Disconnecting from '#{@name}' on port '#{@port.toString()}'..."
+    msg = "Disconnecting from '#{@name}'"
+    msg += " on port '#{@port.toString()}'" if @port?
+    Logger.info msg
     @adaptor.disconnect()
 
   requireAdaptor: (adaptorName) ->

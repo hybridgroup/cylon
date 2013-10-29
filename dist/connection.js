@@ -10,6 +10,7 @@
 (function() {
   'use strict';
   var Connection, EventEmitter, Port,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -30,6 +31,7 @@
       if (opts == null) {
         opts = {};
       }
+      this.connect = __bind(this.connect, this);
       this.self = this;
       this.robot = opts.robot;
       this.name = opts.name;
@@ -39,12 +41,22 @@
     }
 
     Connection.prototype.connect = function(callback) {
-      Logger.info("Connecting to '" + this.name + "' on port '" + (this.port.toString()) + "'...");
+      var msg;
+      msg = "Connecting to '" + this.name + "'";
+      if (this.port != null) {
+        msg += " on port '" + (this.port.toString()) + "'";
+      }
+      Logger.info(msg);
       return this.adaptor.connect(callback);
     };
 
     Connection.prototype.disconnect = function() {
-      Logger.info("Disconnecting from '" + this.name + "' on port '" + (this.port.toString()) + "'...");
+      var msg;
+      msg = "Disconnecting from '" + this.name + "'";
+      if (this.port != null) {
+        msg += " on port '" + (this.port.toString()) + "'";
+      }
+      Logger.info(msg);
       return this.adaptor.disconnect();
     };
 
