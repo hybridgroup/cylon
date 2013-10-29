@@ -9,13 +9,14 @@
 'use strict';
 
 namespace = require 'node-namespace'
+EventEmitter = require('events').EventEmitter
 require './utils'
 
 # Basestar is the class used when writing external Cylon adaptors/drivers.
 #
 # It provides some useful methods and behaviour.
 namespace 'Cylon', ->
-  class @Basestar
+  class @Basestar extends EventEmitter
     constructor: (opts) ->
       @self = this
 
