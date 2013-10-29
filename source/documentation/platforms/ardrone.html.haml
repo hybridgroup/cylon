@@ -1,8 +1,8 @@
 ---
-title: Ardrone with Artroo
+title: Ardrone with Cylon.js
 author: The Hybrid Group
 page_title: Ardrone
-page_subtitle: "<a href='https://github.com/hybridgroup/artoo-ardrone' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/artoo-ardrone/issues'>Issues</a>"
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-ardrone' target='blanck' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-ardrone/issues' target='blanck'>Issues</a>"
 layout: page
 ---
 .documentation
@@ -20,30 +20,16 @@ layout: page
   %section.how-to
     %h2 How to install
     %p
-      Installing artoo with ardrone support is pretty easy using ruby gems.
-    :markdown
-          :::bash
-          gem install artoo-ardrone
+      Comming soon.
 
     %h2 How to use
     %p
-      This small program lets the ARDrone take-off, hover, and land.
+      Comming soon.
 
     :markdown
           :::ruby
 
-          require 'artoo'
-
-          connection :ardrone, :adaptor => :ardrone, :port => '192.168.0.43:5556'
-          device :drone, :driver => :ardrone, :connection => :ardrone
-
-          work do
-            drone.start
-            drone.take_off
-
-            after(25.seconds) { drone.hover.land }
-            after(30.seconds) { drone.stop }
-          end
+          Comming soon.
     %h2 How to connect
     %p
       The ARDrone is a WiFi device, so there is no additional work to establish a
@@ -53,27 +39,12 @@ layout: page
     %h2 Automatic Reset From Emergency Mode
 
     %p
-      When you first connect to the ARDrone by calling the `start` method, if it is in "emergency" mode, the ARDrone will not take off. Artoo can automatically reset it back "normal" mode, to be able to fly IF you pass in the navigation like this example:
+      When you first connect to the ARDrone by calling the `start` method, if it is in "emergency" mode, the ARDrone will not take off. Cylon can automatically reset it back "normal" mode, to be able to fly IF you pass in the navigation like this example:
 
     :markdown
           :::ruby
 
-          connection :ardrone, :adaptor => :ardrone
-          device :drone, :driver => :ardrone, :connection => :ardrone
-
-          connection :navigation, :adaptor => :ardrone_navigation
-          device :nav, :driver => :ardrone_navigation, :connection => :navigation
-
-          work do
-            on drone, :ready => :fly
-            drone.start(nav) # pass the nav object into the start method
-          end
-
-          def fly(*data)
-            drone.take_off
-            after(15.seconds) { drone.hover.land }
-            after(20.seconds) { drone.stop }
-          end
+          Comming soon.
   %section.drivers
     %h2 Drivers
     %p

@@ -1,8 +1,8 @@
 ---
-title: Arduino with Artroo
+title: Arduino with Cylon.js
 author: The Hybrid Group
 page_title: Arduino
-page_subtitle: "<a href='https://github.com/hybridgroup/artoo-arduino' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/artoo-arduino/issues'>Issues</a>"
+page_subtitle: "<a href='#' target='blanck' class='repository'>Repository</a> <a class+'issues' href='#' target='blanck'>Issues</a>"
 layout: page
 ---
 .documentation
@@ -22,97 +22,39 @@ layout: page
   %section.how_to
     %h2 How to install
     %p
-      Installing artoo with arduino support is pretty easy using ruby gems.
-    :markdown
-          :::bash
-          gem install artoo-arduino
+      Comming soon.
 
     %h2 How to use
     %p
-      This small program lets you push a button on the arduino board to turn a LED on or off.
-      In less than 10 lines of code using Artoo.
+      Comming soon.
     :markdown
           :::ruby
-          require 'artoo'
-
-          connection :arduino, adaptor: :firmata, port: '127.0.0.1:8023'
-          device :led, driver: :led, pin: 13
-          device :button, driver: :button, pin: 2, interval: 0.01
-
-          work do
-            puts "Press the button connected on pin \#{ button.pin }..."
-
-            on button, :push    => proc { led.on }
-            on button, :release => proc { led.off }
-          end
+          Comming soon.
 
     %h2 How to connect
     %h3 OSX
-    %p The main steps are:
-
-    %ul
-      %li
-        Connect to the Arduino via serial port/USB
-      %li
-        Use a socket to serial connection to map a TCP socket to the local unix port
-      %li
-        Connect to the device via Artoo
-      %li
-        First plug the Arduino into your computer via the USB/serial port. A dialog box will appear telling you that a new network interface has been detected. Click "Network Preferences...", and when it opens, simply click "Apply".
-
-    %p Once plugged in, use the artoo connect scan command to find out your connection info:
-    :markdown
-          :::bash
-          $ artoo connect scan
-    %p
-      Now you are ready to connect to the Arduino using a socket, such as in this example port 4567:
-
-    :markdown
-          :::bash
-          $ artoo connect serial ttyACM0
+    %p Comming soon.
 
     %h3 Ubuntu
 
-    %p The main steps are:
+    %p Comming soon.
 
-    %ul
-      %li
-        Connect to the Arduino via serial port/USB
-      %li
-        Use a socket to serial connection to map a TCP socket to the local unix port
-      %li
-        Connect to the device via Artoo
-      %li
-        First plug the Arduino into your computer via the USB/serial port.
-
-    %p Once plugged in, use the ls /dev/ttyACM* command to find out your connection info:
-
-    :markdown
-          :::bash
-          $ ls /dev/ttyACM*
-          /dev/ttyACM0
-
-    %p Now you are ready to connect to the Arduino using the socket, in this example port 4567:
-
-    :markdown
-          :::bash
-          $ artoo connect serial ttyACM0 4567
-
+   
   %section.drivers
     %h2 Drivers
     %p
       Thanks to
-      %b artoo
+      %b cylon.js
       and
-      %b ruby
+      %b node.js
       it is possible to interact with several I/O hardware devices and interfaces connected to the arduino
-      using a set of already defined and easy to use drivers, all of this thanks to the artoo architecture, in conjuction with artoo-arduino
+      using a set of already defined and easy to use drivers, all of this thanks to the artoo architecture, in conjuction with cylon-arduino
       adaptor (using the firmata communication protocol),
       which makes it even possible to swap the entire platform for something else like digispark, and keep using the same code you just wrote for
       arduino, this just by swapping a couple of lines in your program.
     %p
       Available drivers for the arduino platform are listed below, the drivers contain detailed documentation and examples of what kind
-      physical computing (using artoo and ruby) you could be doing:
+      physical computing (using cylon.js and node.js) you could be doing:
 
     .hardware
       .devices
