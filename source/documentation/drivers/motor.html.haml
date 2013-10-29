@@ -17,16 +17,11 @@ layout: page
     %h3 For Arduino:
     :markdown
           :::ruby
-          require 'artoo'
-          connection :arduino, :adaptor => :firmata, :port => '127.0.0.1:8023'
-          device :motor, :driver => :motor, :speed_pin => 3 # Use a PWM pin
+          comming soon
 
-    %h3 For Digispark:
-    :markdown
-          :::ruby
-          require 'artoo'
-          connection :digispark, :adaptor => :littlewire, :vendor => 0x1781, :product => 0x0c9f
-          device :motor, :driver => :motor, :speed_pin => 3 # Use a PWM pin
+    -#%h3 For Digispark:
+    -#:markdown
+          -#:::ruby
 
   %section.public-methods
     %h2 Public instance methods:
@@ -88,79 +83,12 @@ layout: page
     %h3 Example of a dc motor with speed changes using PWM.
     :markdown
           :::ruby
-          require 'artoo'
-
-          #Circuit's breadboard layout here: http://learn.adafruit.com/adafruit-arduino-lesson-13-dc-motors/breadboard-layout
-
-          #connection :arduino, :adaptor => :firmata, :port => '/dev/tty*'
-          connection :arduino, :adaptor => :firmata, :port => '127.0.0.1:8023'
-          device :board, :driver => :device_info
-          device :motor, :driver => :motor, :speed_pin => 3 # Use a PWM pin
-
-          work do
-            puts "Firmware name: \#{board.firmware_name}"
-            puts "Firmata version: \#{board.version}"
-            puts "Stopping motor..."
-            motor.min # same as 'motor.stop' or 'motor.speed(0)'
-            sleep 3
-            puts "Setting to maximum speed..."
-            motor.max # same as 'motor.start'
-            sleep 3
-
-            speed = 0
-            step = 50
-
-            every 3.seconds do
-              motor.speed(speed)
-              puts "Current speed: \#{motor.current_speed}"
-              speed += step
-              if [0, 250].include?(speed)
-                step = -step
-              end
-            end
-          end
+          comming soon
 
     %h2 Example of a dc motor with direction and speed change.
     :markdown
           :::ruby
-          require 'artoo'
-
-          #Circuit's breadboard layout for the L293D: http://www.electrojoystick.com/tutorial/?p=759
-          #For the L239DNE: http://bit.ly/14QdjD5
-
-          #connection :arduino, :adaptor => :firmata, :port => '/dev/tty*'
-          connection :arduino, :adaptor => :firmata, :port => '127.0.0.1:8023'
-          device :board, :driver => :device_info
-          device :motor, :driver => :motor, 
-                         :forward_pin  => 4, # Digital or PWM pin
-                         :backward_pin => 2, # Digital or PWM pin
-                         :speed_pin    => 9  # PWM pin only
-
-          work do
-            puts "Firmware name: \#{board.firmware_name}"
-            puts "Firmata version: \#{board.version}"
-            puts "Stopping motor..."
-            motor.stop
-            sleep 2
-
-            loop do
-              motor.forward # if no speed set, spins at max speed
-              puts "Going forward, Speed: \#{motor.current_speed}"
-              sleep 3
-              motor.forward 180
-              puts "Going forward, Speed: \#{motor.current_speed}"
-              sleep 3
-              puts "Stopping..."
-              motor.stop
-              sleep 2
-              motor.backward(150) # spins at speed 150
-              puts "Going backward, Speed: \#{motor.current_speed}"
-              sleep 3
-              motor.backward(255)
-              puts "Going backward, Speed: \#{motor.current_speed}"
-              sleep 3
-            end
-          end
+          comming soon
 
     %h2 Circuit and Schematic
     %p
@@ -171,7 +99,7 @@ layout: page
     =# TODO: Update platform list with all that work with this driver in artoo.
     .devices
       = partial "documentation/partials/arduino"
-      = partial "documentation/partials/beaglebone"
-      = partial "documentation/partials/digispark"
-      = partial "documentation/partials/raspberry-pi"
+      =# partial "documentation/partials/beaglebone"
+      =# partial "documentation/partials/digispark"
+      =# partial "documentation/partials/raspberry-pi"
 

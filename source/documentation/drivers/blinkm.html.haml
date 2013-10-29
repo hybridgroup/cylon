@@ -16,9 +16,7 @@ layout: page
     %h3 For Arduino:
     :markdown
           :::ruby
-          require 'artoo'
-          connection :arduino, :adaptor => :firmata, :port => '/dev/ttyACM0'
-          device :blink_m, :driver => :blink_m, :connection => :arduino
+          comming soon
 
   %section.public-events
     %h2 Public instance methods:
@@ -43,22 +41,7 @@ layout: page
     %h3 Example using a BlinkM.
     :markdown
           :::ruby
-          require 'artoo'
-
-          connection :arduino, :adaptor => :firmata, :port => '/dev/ttyACM0'
-          device :blink_m, :driver => :blink_m
-
-          work do
-            every 1.second do
-              unless @on
-                blink_m.rgb(0xff, 0xff, 0xff)
-                @on = true
-              else
-                blink_m.rgb(0, 0, 0)
-                @on = false
-              end
-            end
-          end
+          comming soon
 
   %section.circuit
     %h2 Circuit and Schematic
@@ -69,6 +52,6 @@ layout: page
     %h2 Works with:
     .devices
       = partial "documentation/partials/arduino"
-      = partial "documentation/partials/beaglebone"
-      = partial "documentation/partials/digispark"
-      = partial "documentation/partials/raspberry-pi"
+      =# partial "documentation/partials/beaglebone"
+      =# partial "documentation/partials/digispark"
+      =#s partial "documentation/partials/raspberry-pi"

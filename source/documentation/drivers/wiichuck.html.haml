@@ -16,9 +16,7 @@ layout: page
     %h3 For Arduino:
     :markdown
           :::ruby
-          require 'artoo'
-          connection :arduino, :adaptor => :firmata, :port => '/dev/ttyACM0'
-          device :wiichuck, :driver => :wiichuck, :connection :arduino
+          comming soon
 
   %section.public-methods
     %h2 Public driver events
@@ -38,34 +36,23 @@ layout: page
     %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
     :markdown
           :::ruby
-          on wiichuck, :c_button => proc { puts "c button pressed!" }
+          comming soon
 
   %section.how_to
     %h2 Example using a Nintendo Wii Nunchuck.
     :markdown
           :::ruby
-          require 'artoo'
-
-          connection :arduino, :adaptor => :firmata, :port => '127.0.0.1:8023'
-          device :wiichuck, :driver => :wiichuck, :connection => :arduino, :interval => 0.1
-
-          work do
-            on wiichuck, :c_button => proc { puts "c button pressed!" }
-            on wiichuck, :z_button => proc { puts "z button pressed!" }
-            on wiichuck, :joystick => proc { |*value|
-              puts "joystick x: " + value[1][:x] + ", y: " + value[1][:y]
-            }
-          end
+          comming soon
 
   %section.circuit
     %h2 Circuit and Schematic
     %p
-      Coming soon...
+      Coming soon
 
   %section.compatability.hardware
     %h2 Works with:
     .devices
       = partial "documentation/partials/arduino"
-      = partial "documentation/partials/beaglebone"
-      = partial "documentation/partials/digispark"
-      = partial "documentation/partials/raspberry-pi"
+      = #partial "documentation/partials/beaglebone"
+      = #partial "documentation/partials/digispark"
+      = #partial "documentation/partials/raspberry-pi"

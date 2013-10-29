@@ -18,9 +18,7 @@ layout: page
       Artoo and the Sphero driver take care of the rest.
     :markdown
           :::ruby
-          require 'artoo'
-          connection :sphero, :adaptor => :sphero, :port => '127.0.0.1:8023'
-          device :sphero, :driver => :sphero
+          comming soon
 
   %section.public-methods
     %h2 Public instance methods:
@@ -69,33 +67,14 @@ layout: page
       you can call events on the sphero driver as follows:
     :markdown
           :::ruby
-          # :contact is the name of a previously defined method containing the code to execute.
-          on sphero, :collision => :contact
+          comming soon
 
   %section.how-to
     %h2 How to use
     %h3 Example to roll the sphero in a random direction and change direction every 3 seconds.
     :markdown
           :::ruby
-          require 'artoo'
-
-          connection :sphero, :adaptor => :sphero, :port => '127.0.0.1:4567'
-          device :sphero, :driver => :sphero
-
-          work do
-            @rolling = false
-
-            every(3.seconds) do
-              puts "Rolling..."
-              unless @rolling
-                sphero.roll 90, rand(360)
-                @rolling = true
-              else
-                sphero.stop
-                @rolling = false
-              end
-            end
-          end
+          comming soon
 
   %section.compatability.hardware
     %h2 Works with:

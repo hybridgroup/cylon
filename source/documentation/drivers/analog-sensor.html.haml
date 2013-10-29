@@ -17,16 +17,11 @@ layout: page
     %h3 For Arduino:
     :markdown
           :::ruby
-          require 'artoo'
-          connection :arduino, :adaptor => :firmata, :port => '127.0.0.1:8023'
-          device :sensor, driver: :analog_sensor, pin: 0, interval: 0.25, upper: 900, lower: 200
+          comming soon
 
-    %h3 For Digispark:
-    :markdown
-          :::ruby
-          require 'artoo'
-          connection :digispark, :adaptor => :littlewire, :vendor => 0x1781, :product => 0x0c9f
-          device :sensor, driver: :analog_sensor, pin: 0, interval: 0.25, upper: 900, lower: 200
+    -#%h3 For Digispark:
+    -#:markdown
+          -#:::ruby
 
   %section.public-methods
     %h2 Public instance methods:
@@ -67,39 +62,13 @@ layout: page
     %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
     :markdown
           :::ruby
-          on sensor, :upper => proc { puts "UPPER LIMIT REACHED!" }
-          on sensor, :lower => proc { puts "LOWER LIMIT REACHED!" }
+          comming soon
   %section.how-to
     %h2 How to use
     %h3 Example using a photoresistor sensor to turn a LED on and off.
     :markdown
           :::ruby
-          require 'artoo'
-
-          connection :arduino, :adaptor => :firmata, :port => '127.0.0.1:8023'
-
-          # Analog inputs are based from 0 to 5 on the Arduino UNO, may vary on other arduino boards
-          device :sensor, driver: :analog_sensor, pin: 0, interval: 0.25, upper: 900, lower: 200
-          device :led, :driver => :led, :pin => 8
-
-          work do
-            puts
-            puts "Reading sensor in analog pin \#{ sensor.pin }"
-            puts "Reading intervals every => \#{ sensor.interval }"
-            puts "Initial sensor value => \#{ sensor.analog_read(0) }"
-            puts "Sensor upper trigger set at value => \#{ sensor.upper }"
-            puts "Sensor lower trigger set at value => \#{ sensor.lower }"
-
-            on sensor, :upper => proc {
-              puts "UPPER LIMIT REACHED!"
-              led.off
-            }
-
-            on sensor, :lower => proc {
-              puts "LOWER SENSOR LIMIT REACHED!"
-              led.on
-            }
-          end
+          comming soon
 
   %section.circuit
     %h2 Circuit and Schematic
@@ -118,4 +87,4 @@ layout: page
     =# TODO: Update platform list with all that work with this driver in artoo.
     .devices
       = partial "documentation/partials/arduino"
-      = partial "documentation/partials/digispark"
+      = #partial "documentation/partials/digispark"

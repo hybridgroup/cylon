@@ -16,16 +16,11 @@ layout: page
     %h3 For Arduino:
     :markdown
           :::ruby
-          require 'artoo'
-          connection :arduino, :adaptor => :firmata, :port => '127.0.0.1:8023'
-          device :button, :driver => :button, :pin => 2, :interval => 0.01
+          comming soon
 
-    %h3 For Digispark:
-    :markdown
-          :::ruby
-          require 'artoo'
-          connection :digispark, :adaptor => :littlewire, :vendor => 0x1781, :product => 0x0c9f
-          device :button, :driver => :button, :pin => 2, :interval => 0.01
+    -#%h3 For Digispark:
+    -#:markdown
+          -#:::ruby
 
   %section.public-methods
     %h2 Public instance methods:
@@ -46,26 +41,14 @@ layout: page
     %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
     :markdown
           :::ruby
-          on button, :push    => proc { puts "button pressed!" }
-          on button, :release => proc { puts "button released!" }
+          comming soon
 
   %section.how-to
     %h2 How to use
     %h3 Example using a button to turn a LED on and off.
     :markdown
           :::ruby
-          require 'artoo'
-
-          connection :arduino, adaptor: :firmata, port: '127.0.0.1:8023'
-          device :led, driver: :led, pin: 13
-          device :button, driver: :button, pin: 2, interval: 0.01
-
-          work do
-            puts "Press the button connected on pin \#{ button.pin }..."
-
-            on button, :push    => proc { led.on }
-            on button, :release => proc { led.off }
-          end
+          comming soon
 
   %section.circuit
     %h2 Circuit and Schematic
@@ -76,6 +59,6 @@ layout: page
     =# TODO: Update platform list with all that work with this driver in artoo.
     .devices
       = partial "documentation/partials/arduino"
-      = partial "documentation/partials/beaglebone"
-      = partial "documentation/partials/digispark"
-      = partial "documentation/partials/raspberry-pi"
+      = #partial "documentation/partials/beaglebone"
+      = #partial "documentation/partials/digispark"
+      = #partial "documentation/partials/raspberry-pi"

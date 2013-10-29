@@ -2,26 +2,26 @@
   %h2 General Purpose Input/Output (GPIO) Drivers
   Artoo's GPIO drivers work with several different platforms that support the required GPIO interfaces. For example, the Arduino and Digispark.
   .devices
-    = partial "../partials/analog-sensor"
+    = #partial "../partials/analog-sensor"
     = partial "../partials/button"
     = partial "../partials/led"
-    = partial "../partials/maxbotix"
-    = partial "../partials/motor"
-    = partial "../partials/servo"
+    =# partial "../partials/maxbotix"
+    =# partial "../partials/motor"
+    =# partial "../partials/servo"
 
-  %h2 i2c Drivers
-  Artoo's i2c drivers work with several different platforms that support the required interfaces. For example, the Arduino.
-  .devices
-    = partial "../partials/wiichuck"
-    = partial "../partials/wiiclassic"
-    = partial "../partials/blinkm"
-    = partial "../partials/hmc6352-compass"
+  -#%h2 i2c Drivers
+    -#Artoo's i2c drivers work with several different platforms that support the required interfaces. For example, the Arduino.
+  -#.devices
+    =# partial "../partials/wiichuck"
+    =# partial "../partials/wiiclassic"
+    = #partial "../partials/blinkm"
+    = #partial "../partials/hmc6352-compass"
 
   %h2 ARDrone Drivers
   .devices
     = partial "../partials/ardrone-flight"
     = partial "../partials/ardrone-navigation"
-    = partial "../partials/ardrone-video"
+    = #partial "../partials/ardrone-video"
 
   -#%h2 Leap Motion Driver
   -#.devices

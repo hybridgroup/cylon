@@ -18,9 +18,7 @@ layout: page
 
     :markdown
           :::ruby
-          require 'artoo'
-          connection :navigation, :adaptor => :ardrone_navigation, :port => '192.168.1.1:5554'
-          device :nav, :driver => :ardrone_navigation, :connection => :navigation
+          comming soon
 
   %section.public-methods
     %h2 Public driver events
@@ -144,35 +142,14 @@ layout: page
     %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
     :markdown
           :::ruby
-          on nav, :navdata => proc { |caller, navdata| puts "Sequence number: \#{ navdata.sequence_number }" }
-          on nav, :demo => proc { |caller, navdata, nav_option_demo| 
-            puts "Ardrone pitch: \#{ nav_option_demo.pitch }"
-            puts "Ardrone roll:  \#{ nav_option_demo.roll }"
-            puts "Ardrone yaw:   \#{ nav_option_demo.yaw }"
-          }
-          on nav, :vision_detect => proc { |caller, navdata, nav_option_vision_detect|
-            puts "Vision detect count: \#{ nav_option_vision_detect.detected_count }"
-            puts "Vision detect type: \#{ nav_option_vision_detect.type }"
-            puts "Vision detect name: \#{ nav_option_vision_detect.name }"
-          }
+          comming soon
 
   %section.how-to
     %h2 How to use
     %h3 Example of receiving navigation data from an ARDrone.
     :markdown
           :::ruby
-          require 'artoo'
-
-          connection :navigation, :adaptor => :ardrone_navigation, :port => '192.168.1.1:5554'
-          device :nav, :driver => :ardrone_navigation, :connection => :navigation
-
-          work do
-            on nav, :navdata => :nav_update
-          end
-
-          def nav_update(*data)
-            p data[1].inspect
-          end
+          comming soon
 
   %section.compatability.hardware
     %h2 Works with:

@@ -9,54 +9,15 @@ layout: page
 
 %section.intro
 
-  = partial "../what_is_artoo"
+  = partial "../what_is_cylon"
 
 %section.how-to
-  %h2 How to setup your ruby environment
+  %h2 How to setup your node environment
   %p
-    First thing you'll need to do, to be able to run artoo is install ruby. For first time users we recomend using ruby MRI 2.0 or above,
-    we also recomend using RVM to handle ruby installations (most of use it on a daily basis), you can install RVM and ruby using the following terminal commands.
-
-  %h3 How to install RVM
-  %p
-    First we need to install RVM, you can do it by following the instructions below or for more detailed instructions go to
-    %a{ href: "https://rvm.io/rvm/install" } https://rvm.io/rvm/install
-
-  :markdown
-        :::bash
-        \curl -L https://get.rvm.io | bash -s stable
+    Comming soon.
 
   %p
-    Once the installation is complete, close your terminal and open a new one, you can make sure your RVM is installed
-    correctly by running the following command "type rvm | head -n 1", you should see the "rvm is a function" output.
-
-  :markdown
-        :::bash
-        type rvm | head -n 1
-        rvm is a function
-
-  %h3 How to install ruby 2.0
-  %p
-    Using RVM it is pretty easy to install and manage different ruby versions, to install ruby 2.0.0
-
-  :markdown
-        :::bash
-        rvm install 2.0.0
-
-  %h3 How to install rubinius 2.0
-  %p
-    If you need to control multiple robots, microcontrollers or devices at the same time you should be using Rubinius 2.0-rc1
-    or higher. It is pretty easy to isntall using
-    %a{ href:"https://rvm.io/" } RVM.
-
-  :markdown
-        :::bash
-        rvm install rbx-2.0.0
-
-  = partial "../platforms"
-
-  %p
-    Artoo also has support for devices that can work across multiple hardware platforms.
+    Cylon.js also has support for devices that can work across multiple hardware platforms.
     %ul
       %li
         General Purpose Input/Output (GPIO) devices &lt;==&gt;
@@ -66,43 +27,22 @@ layout: page
         = link_to "Drivers", "/documentation/drivers/"
 
   %p
-    Do you have some hardware that is not yet supported by Artoo? We want to help you, help us, help them! Get in touch...
+    Do you have some hardware that is not yet supported by Cylon? We want to help you, help us, help them! Get in touch...
 
 %section.artoo-code
-  %h2 Code to control robots with Artoo
+  %h2 Code to control robots with Cylon.js
 
   %h3 Example: Arduino with LED and a button
 
   :markdown
         :::ruby
-        # ./my_robot.rb
-        require 'artoo'
-
-        # Circuit and schematic here: http://arduino.cc/en/tutorial/button
-        connection :arduino, :adaptor => :firmata, :port => '/dev/ttyACM0'
-        device :led, :driver => :led, :pin => 13
-        device :button, :driver => :button, :pin => 2
-
-        work do
-          on button, :push => proc {led.toggle}
-        end
+        comming soon
 
   %h3 Parrot ARDrone 2.0
 
   :markdown
         :::ruby
-        require 'artoo'
-
-        connection :ardrone, :adaptor => :ardrone
-        device :drone, :driver => :ardrone
-
-        work do
-          drone.start
-          drone.take_off
-
-          after(25.seconds) { drone.hover.land }
-          after(30.seconds) { drone.stop }
-        end
+        comming soon
 
 %section.installation
 
@@ -110,15 +50,14 @@ layout: page
 
   :markdown
         :::ruby
-        gem install artoo
+        comming soon
   %p
     Then install the gems required by the hardware you want to use. For
     example, if you wanted to use an XBox360 controller to fly your ARDrone:
 
   :markdown
         :::ruby
-        gem install artoo-joystick
-        gem install artoo-ardrone
+        comming soon
 
   %h3 Writing your robot code:
 
@@ -128,14 +67,14 @@ layout: page
 
   :markdown
         :::ruby
-        ruby myrobot.rb
+        comming soon
 
 %section.contributing
   %h2 Contributing
 
   %p 
-    You can help artoo grow by contributing your code, new drivers or platforms to the project, check the Github page
-    = link_to "artoo on github.","https://github.com/hybridgroup/artoo" 
+    You can help cylon grow by contributing your code, new drivers or platforms to the project, check the Github page
+    = link_to "cylon on github.","https://github.com/hybridgroup/cylon" 
 
   %ul
     %li Fork it

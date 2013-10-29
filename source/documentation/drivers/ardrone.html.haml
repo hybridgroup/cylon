@@ -17,9 +17,7 @@ layout: page
       Communication with the ARDrone's flight control interface takes place using a WiFi connection. The ARDrone is a WiFi access point, so it normally can be the only device you connect to, without some additional effort to reconfigure the drone itself to put it into infrastructure mode.
     :markdown
           :::ruby
-          require 'artoo'
-          connection :ardrone, :adaptor => :ardrone, :port => '192.168.1.1:5556'
-          device :drone, :driver => :ardrone, :connection => :ardrone
+          comming soon
 
   %section.public-methods
     %h2 Public instance methods:
@@ -148,41 +146,12 @@ layout: page
     %h3 Example of controlling an ARDrone.
     :markdown
           :::ruby
-          require 'artoo'
-
-          connection :ardrone, :adaptor => :ardrone, :port => '192.168.1.1:5556'
-          device :drone, :driver => :ardrone, :connection => :ardrone
-
-          work do
-            drone.start
-            drone.take_off
-
-            after(15.seconds) { drone.hover.land }
-            after(20.seconds) { drone.stop }
-          end
+          comming soon
 
     %h3 Example of ARDrone doing a flip.
     :markdown
           :::ruby
-          require 'artoo'
-
-          connection :ardrone, :adaptor => :ardrone
-          device :drone, :driver => :ardrone, :connection => :ardrone
-
-          connection :navigation, :adaptor => :ardrone_navigation, :port => '192.168.1.1:5554'
-          device :nav, :driver => :ardrone_navigation, :connection => :navigation
-
-          work do
-            on drone, :ready => :fly
-            drone.start(nav)
-          end
-
-          def fly(*data)
-            drone.take_off
-            after(10.seconds) { drone.animate(:flip_ahead, 1000) }
-            after(15.seconds) { drone.hover.land }
-            after(20.seconds) { drone.stop }
-          end
+          comming soon
 
   %section.compatability.hardware
     %h2 Works with:

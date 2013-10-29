@@ -16,16 +16,11 @@ layout: page
     %h3 For Arduino:
     :markdown
           :::ruby
-          require 'artoo'
-          connection :arduino, :adaptor => :firmata, :port => '127.0.0.1:8023'
-          device :servo, :driver => :servo, :pin => 3 # pin must be a PWM pin
+          comming soon
 
-    %h3 For Digispark:
-    :markdown
-          :::ruby
-          require 'artoo'
-          connection :digispark, :adaptor => :littlewire, :vendor => 0x1781, :product => 0x0c9f
-          device :servo, :driver => :servo, :pin => 3 # pin must be a PWM pin
+    -#%h3 For Digispark:
+    -#:markdown
+          -#:::ruby
 
   %section.public-methods
     %h2 Public instance methods:
@@ -55,29 +50,7 @@ layout: page
     %h3 Example moves a servo from angle 0 to 90 to 180.
     :markdown
           :::ruby
-          require 'artoo'
-
-          # Circuit and schematic here: http://arduino.cc/en/Tutorial/Sweep
-
-          #connection :arduino, :adaptor => :firmata, :port => '/dev/tty*'
-          connection :arduino, :adaptor => :firmata, :port => '127.0.0.1:8023'
-          device :board, :driver => :device_info
-          device :servo, :driver => :servo, :pin => 3 # pin must be a PWM pin
-
-          work do
-            puts "Firmware name: \#{board.firmware_name}"
-            puts "Firmata version: \#{board.version}"
-
-            servo.move(0) # reset the position of the sweep (same as servo.min)
-
-            every(2) do
-              case servo.current_angle
-              when 0 then servo.center
-              when 90 then servo.max
-              when 180 then servo.min
-              end
-            end
-          end
+          comming soon
 
   %section.circuit
     %h2 Circuit and Schematic
@@ -89,6 +62,6 @@ layout: page
     =# TODO: Update platform list with all that work with this driver in artoo.
     .devices
       = partial "documentation/partials/arduino"
-      = partial "documentation/partials/digispark"
+      = #partial "documentation/partials/digispark"
 
 

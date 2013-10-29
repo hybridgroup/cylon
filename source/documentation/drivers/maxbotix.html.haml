@@ -16,16 +16,11 @@ layout: page
     %h3 For Arduino:
     :markdown
           :::ruby
-          require 'artoo'
-          connection :arduino, :adaptor => :firmata, :port => '127.0.0.1:8023'
-          device :sonar, :driver => :maxbotix, :pin => 0, :interval => 0.5
+          comming soon
 
-    %h3 For Digispark:
-    :markdown
-          :::ruby
-          require 'artoo'
-          connection :digispark, :adaptor => :littlewire, :vendor => 0x1781, :product => 0x0c9f
-          device :sonar, :driver => :maxbotix, :pin => 0, :interval => 0.5
+    -#%h3 For Digispark:
+    -#:markdown
+          -#:::ruby
 
   %section.public-methods
     %h2 Public instance methods:
@@ -50,34 +45,15 @@ layout: page
     %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
     :markdown
           :::ruby
-          on sonar, :range => proc { puts "range \#{ sonar.range }!" }
+          comming soon
 
   %section.how-to
     %h2 How to use
     %h3 Example: Setups a maxbotix driver and range event, displays the range every :interval amount of time.
     :markdown
           :::ruby
+          comming soon
 
-          require 'artoo'
-
-          # Circuit and schematic here: http://www.electrojoystick.com/tutorial/?page_id=285
-
-          #connection :arduino, :adaptor => :firmata, :port => '/dev/ttyACM0'
-          connection :arduino, :adaptor => :firmata, :port => '127.0.0.1:4567'
-          device :sonar, :driver => :maxbotix, :pin => 0, :interval => 0.5
-          device :board, :driver => :device_info
-
-          work do
-            on sonar, :range => :sonar_reading
-
-            puts "Firmware name: \#{board.firmware_name}"
-            puts "Firmata version: \#{board.version}"
-            puts "starting sonar..."
-          end
-
-          def sonar_reading(*args)
-            puts args
-          end
 
   %section.circuit
     %h2 Circuit and Schematic
@@ -89,4 +65,4 @@ layout: page
     =# TODO: Update platform list with all that work with this driver in artoo.
     .devices
       = partial "documentation/partials/arduino"
-      = partial "documentation/partials/digispark"
+      =# partial "documentation/partials/digispark"

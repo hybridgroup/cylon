@@ -29,13 +29,12 @@
               %a{href: '/'} Cylon
 
           %span.menu
-            = link_to "Platforms", "", (menu_item("documentation/platforms"))
-            = #link_to "Docs", "", (menu_item("documentation"))
+            = link_to "Docs", "", (menu_item("documentation"))
             = # link_to "Hardware", "", (menu_item("hardware"))
             = # link_to "Videos", "", (menu_item("videos"))
             = # link_to "Blog", "", (menu_item("blog"))
             = # link_to "Github", "https://github.com/hybridgroup/cylon/", class: "item"
-            = link_to "Github Repo " , "https://github.com/hybridgroup/cylon/", target: "blanck", class: "github-menu"
+            = link_to "Github" , "https://github.com/hybridgroup/cylon/", target: "blanck", class: "github-menu"
       - unless current_page.data.hero.nil?
         .hero
           .container
