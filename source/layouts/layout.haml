@@ -27,8 +27,6 @@
           .display
             %h1.cylon-logo
               %a{href: '/'} Cylon
-          .github-menu
-            = link_to "Github Repo " , "https://github.com/hybridgroup/cylon/", target: "blanck"
 
           %span.menu
             = link_to "Platforms", "", (menu_item("documentation/platforms"))
@@ -37,6 +35,7 @@
             = # link_to "Videos", "", (menu_item("videos"))
             = # link_to "Blog", "", (menu_item("blog"))
             = # link_to "Github", "https://github.com/hybridgroup/cylon/", class: "item"
+            = link_to "Github Repo " , "https://github.com/hybridgroup/cylon/", target: "blanck", class: "github-menu"
       - unless current_page.data.hero.nil?
         .hero
           .container
