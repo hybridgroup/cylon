@@ -18,11 +18,10 @@ Cylon.robot
     )
 
     me.sphero.on 'collision', (data) ->
-      me.sphero.setRGB(color)
       Logger.info 'collision:'
-      console.log("color: #{ parseInt(color, 16) } ")
       color = color ^ bitFilter
-      me.sphero.roll 60, Math.floor(Math.random() * 360)
+      console.log("color: #{ color.toString(16) } ")
+      me.sphero.setRGB(color)
 
     every 1.second, ->
       me.sphero.roll 90, Math.floor(Math.random() * 360)

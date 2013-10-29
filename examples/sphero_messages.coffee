@@ -20,6 +20,11 @@ Cylon.robot
       Logger.info 'message:'
       Logger.info data
 
+    me.sphero.on 'collision', (data) ->
+      me.sphero.setRGB(0xFF0000)
+      Logger.info 'collision:'
+      Logger.info data
+
     me.sphero.on 'notification', (data) ->
       me.sphero.setRGB(0xFF0000)
       Logger.info 'notification:'
