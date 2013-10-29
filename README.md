@@ -12,10 +12,11 @@ Want to use Ruby on robots? Check out our sister project Artoo (http://artoo.io)
 
 Install the module with: `npm install cylon`
 
+Then install modules for whatever hardware support you want to use from your robot. For example, `npm install cylon-firmata` to use Cylon with an Arduino using the Firmata protocol.
+
 ## Examples
 
-**Note:** before running examples in the `examples/` dir, make sure to compile
-the source with `grunt coffee` first.
+**Note:** before running examples in the `examples/` dir from source, make sure to compile using `grunt coffee` first.
 
 ### Javascript:
 ```javascript
@@ -61,6 +62,10 @@ Cylon.js has a extensible system for connecting to hardware devices. The followi
   - [Arduino](http://www.arduino.cc/) <=> [Adaptor](https://github.com/hybridgroup/cylon-firmata)
   - [Sphero](http://www.gosphero.com/) <=> [Adaptor](https://github.com/hybridgroup/cylon-sphero)
 
+Support for common shared device drivers, is provded using the General Purpoer Input/Output (GPIO) module:
+
+  - [GPIO] <=> [Drivers](https://github.com/hybridgroup/cylon-gpio)
+
 More platforms are coming soon!
 
 ## Documentation
@@ -72,7 +77,7 @@ Add unit tests for any new or changed functionality. Lint and test your code
 using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+Version 0.1.0 - Initial release for ongoing development
 
 ## License
 Copyright (c) 2013 The Hybrid Group. Licensed under the Apache 2.0 license.
