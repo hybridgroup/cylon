@@ -12,7 +12,6 @@ Cylon.robot
     ]
 
   work: (my) ->
-    my.button.on 'push', -> Logger.info 'wow' #my.led.toggle()
-    every 1.second(), -> my.led.toggle()
+    my.button.on 'push', -> my.led.toggle()
 
 .start()
