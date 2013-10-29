@@ -35,9 +35,9 @@
         return ['ping'];
       };
 
-      Ping.prototype.start = function() {
+      Ping.prototype.start = function(callback) {
         Logger.info("Starting driver '" + this.name + "'...");
-        return this.self;
+        return callback(null);
       };
 
       Ping.prototype.ping = function() {

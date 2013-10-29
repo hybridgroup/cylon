@@ -13,9 +13,12 @@ class ChattyRobot
   device:
     name: 'ping', driver: 'ping'
 
+  hello: (my) ->
+    Logger.info "#{my.name}: #{my.ping.ping()}"
+
   work: (my) ->
     every 1.seconds(), ->
-      Logger.info "#{my.name}: #{my.ping.ping()}"
+      my.hello(my)  
 
 for bot in bots
   robot = new ChattyRobot

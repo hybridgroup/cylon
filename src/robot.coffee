@@ -14,7 +14,7 @@ Device = require("./device")
 Async = require("async")
 
 module.exports = class Robot
-  self = this
+  klass = this
 
   constructor: (opts = {}) ->
     @robot = this
@@ -31,6 +31,9 @@ module.exports = class Robot
     @initConnections(opts.connection or opts.connections)
     @initDevices(opts.device or opts.devices)
     @work = opts.work or -> (Logger.info "No work yet")
+    
+    for n, func of opts
+      @robot[n] = func unless n in ['connection', 'connections', 'device', 'devices', 'work']
 
   @randomName: ->
     "Robot #{ Math.floor(Math.random() * 100000) }"

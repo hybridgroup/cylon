@@ -21,11 +21,12 @@
   Async = require("async");
 
   module.exports = Robot = (function() {
-    var self;
+    var klass;
 
-    self = Robot;
+    klass = Robot;
 
     function Robot(opts) {
+      var func, n;
       if (opts == null) {
         opts = {};
       }
@@ -49,6 +50,12 @@
       this.work = opts.work || function() {
         return Logger.info("No work yet");
       };
+      for (n in opts) {
+        func = opts[n];
+        if (n !== 'connection' && n !== 'connections' && n !== 'device' && n !== 'devices' && n !== 'work') {
+          this.robot[n] = func;
+        }
+      }
     }
 
     Robot.randomName = function() {

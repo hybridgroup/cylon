@@ -21,9 +21,9 @@ Driver =
     commands: ->
       ['ping']
 
-    start: ->
+    start: (callback) ->
       Logger.info "Starting driver '#{@name}'..."
-      @self
+      (callback)(null)
 
     ping: ->
       "pong"
