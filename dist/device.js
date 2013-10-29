@@ -35,7 +35,7 @@
       this.name = opts.name;
       this.pin = opts.pin;
       this.connection = this.determineConnection(opts.connection) || this.defaultConnection();
-      this.driver = this.requireDriver(opts.driver);
+      this.driver = this.requireDriver(opts.driver, opts);
       proxyFunctionsToObject(this.driver.commands(), this.driver, klass);
     }
 
@@ -66,9 +66,12 @@
       return first;
     };
 
-    Device.prototype.requireDriver = function(driverName) {
+    Device.prototype.requireDriver = function(driverName, opts) {
+      if (opts == null) {
+        opts = {};
+      }
       Logger.debug("Loading driver '" + driverName + "'");
-      return this.robot.requireDriver(driverName, this.self);
+      return this.robot.requireDriver(driverName, this.self, opts);
     };
 
     return Device;
