@@ -60,13 +60,14 @@ robot.start()
 Cylon.js has a extensible system for connecting to hardware devices. The following robotics and physical computing platforms are currently supported:
 
   - [Arduino](http://www.arduino.cc/) <=> [Adaptor](https://github.com/hybridgroup/cylon-firmata)
+  - [Ardrone](http://ardrone2.parrot.com/) <=> [Adaptor](https://github.com/hybridgroup/cylon-ardrone)
   - [Sphero](http://www.gosphero.com/) <=> [Adaptor](https://github.com/hybridgroup/cylon-sphero)
 
 Support for common shared device drivers, is provded using the General Purpoer Input/Output (GPIO) module:
 
-  - [GPIO] <=> [Drivers](https://github.com/hybridgroup/cylon-gpio)
+  - [GPIO](https://en.wikipedia.org/wiki/General_Purpose_Input/Output) <=> [Drivers](https://github.com/hybridgroup/cylon-gpio)
 
-More platforms are coming soon!
+More platforms and drivers are coming soon!
 
 ## Documentation
 _(Coming soon)_
