@@ -33,6 +33,8 @@
   },
   "dependencies": {
     "async": "~0.2.9",
-    "node-namespace": "~1.0.0"
+    "node-namespace": "~1.0.0",
+    "restify": "~2.6.0",
+    "socket.io": "~0.9.16"
   }
 }
