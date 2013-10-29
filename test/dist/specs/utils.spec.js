@@ -14,40 +14,49 @@
       });
     });
     return describe("#proxyFunctionsToObject", function() {
-      var base;
-      base = {};
+      var TestClass, proxyObject;
+      proxyObject = {
+        asString: function() {
+          return "[object ProxyObject]";
+        },
+        toString: function() {
+          return "[object ProxyObject]";
+        },
+        returnString: function(string) {
+          return string;
+        }
+      };
+      TestClass = (function() {
+        var klass;
+
+        klass = TestClass;
+
+        function TestClass() {
+          var methods;
+          methods = ['asString', 'toString', 'returnString'];
+          proxyFunctionsToObject(methods, proxyObject, klass, true);
+        }
+
+        return TestClass;
+
+      })();
       it('can alias methods', function() {
-        var proxyObject;
-        proxyObject = {
-          asString: function() {
-            return "[object ProxyObject]";
-          }
-        };
-        proxyFunctionsToObject(['asString'], proxyObject, base);
-        assert(typeof base.asString === 'function');
-        return base.asString().should.be.equal("[object ProxyObject]");
+        var testclass;
+        testclass = new TestClass;
+        assert(typeof testclass.asString === 'function');
+        return testclass.asString().should.be.equal("[object ProxyObject]");
       });
       it('can alias existing methods if forced to', function() {
-        var proxyObject;
-        proxyObject = {
-          toString: function() {
-            return "[object ProxyObject]";
-          }
-        };
-        proxyFunctionsToObject(['toString'], proxyObject, base, true);
-        assert(typeof base.toString === 'function');
-        return base.toString().should.be.equal("[object ProxyObject]");
+        var testclass;
+        testclass = new TestClass;
+        assert(typeof testclass.toString === 'function');
+        return testclass.toString().should.be.equal("[object ProxyObject]");
       });
       return it('can alias methods with arguments', function() {
-        var proxyObject;
-        proxyObject = {
-          returnString: function(string) {
-            return string;
-          }
-        };
-        proxyFunctionsToObject(['returnString'], proxyObject, base);
-        assert(typeof base.returnString === 'function');
-        return base.returnString("testString").should.be.equal("testString");
+        var testclass;
+        testclass = new TestClass;
+        assert(typeof testclass.returnString === 'function');
+        return testclass.returnString("testString").should.be.equal("testString");
       });
     });
   });

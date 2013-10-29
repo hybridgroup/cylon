@@ -11,22 +11,30 @@ describe "Utils", ->
       1.second().should.be.equal 1000
 
   describe "#proxyFunctionsToObject", ->
-    base = {}
+    proxyObject = {
+      asString: -> "[object ProxyObject]"
+      toString: -> "[object ProxyObject]"
+      returnString: (string) -> string
+    }
+
+    class TestClass
+      klass = this
+
+      constructor: ->
+        methods = ['asString', 'toString', 'returnString']
+        proxyFunctionsToObject(methods, proxyObject, klass, true)
 
     it 'can alias methods', ->
-      proxyObject = { asString: -> "[object ProxyObject]" }
-      proxyFunctionsToObject(['asString'], proxyObject, base)
-      assert typeof base.asString is 'function'
-      base.asString().should.be.equal "[object ProxyObject]"
+      testclass = new TestClass
+      assert typeof testclass.asString is 'function'
+      testclass.asString().should.be.equal "[object ProxyObject]"
 
     it 'can alias existing methods if forced to', ->
-      proxyObject = { toString: -> "[object ProxyObject]" }
-      proxyFunctionsToObject(['toString'], proxyObject, base, true)
-      assert typeof base.toString is 'function'
-      base.toString().should.be.equal "[object ProxyObject]"
+      testclass = new TestClass
+      assert typeof testclass.toString is 'function'
+      testclass.toString().should.be.equal "[object ProxyObject]"
 
     it 'can alias methods with arguments', ->
-      proxyObject = { returnString: (string) -> string }
-      proxyFunctionsToObject(['returnString'], proxyObject, base)
-      assert typeof base.returnString is 'function'
-      base.returnString("testString").should.be.equal "testString"
+      testclass = new TestClass
+      assert typeof testclass.returnString is 'function'
+      testclass.returnString("testString").should.be.equal "testString"
