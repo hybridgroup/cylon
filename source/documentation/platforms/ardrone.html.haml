@@ -39,18 +39,15 @@ layout: page
           var Cylon = require('cylon');
 
           Cylon.robot({
-            connection: { name: 'ardrone', adaptor: 'ardrone' },
+            connection: { name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1' },
             device: {name: 'drone', driver: 'ardrone'},
 
             work: function(my) {
               my.drone.takeoff();
               after((10).seconds(), function() { 
-                my.drone.hover();
-              });
-              after((20).seconds(), function() { 
                 my.drone.land();
               });
-              after((25).seconds(), function() { 
+              after((15).seconds(), function() { 
                 my.drone.stop();
               });    
             }
@@ -64,7 +61,7 @@ layout: page
 
           Cylon.robot
             connection:
-              name: 'ardrone', adaptor: 'ardrone'
+              name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1'
 
             device:
               name: 'ardrone', driver: 'ardrone'
@@ -72,10 +69,8 @@ layout: page
             work: (my) ->
               my.drone.takeoff()
               after 10.seconds(), ->
-                my.drone.hover()
-              after 20.seconds(), ->
                 my.drone.land()
-              after 25.seconds(), ->
+              after 15.seconds(), ->
                 my.drone.stop()
 
           .start()
