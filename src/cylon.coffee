@@ -13,6 +13,8 @@ Robot = require("./robot")
 require('./utils')
 require('./logger')
 
+require('./api/api')
+
 Logger.setup()
 
 class Cylon
@@ -23,6 +25,10 @@ class Cylon
 
   class Master
     robots = []
+    api = null
+
+    constructor: ->
+      @self = this
 
     robot: (opts) =>
       opts.master = this
@@ -30,7 +36,13 @@ class Cylon
       robots.push robot
       robot
 
+    robots: -> robots
+
     start: ->
+      do @startAPI
       robot.start() for robot in robots
+
+    startAPI: ->
+      api ?= new Api.Server(master: @self)
 
 module.exports = Cylon.getInstance()

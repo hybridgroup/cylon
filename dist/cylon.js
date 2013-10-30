@@ -19,6 +19,8 @@
 
   require('./logger');
 
+  require('./api/api');
+
   Logger.setup();
 
   Cylon = (function() {
@@ -39,13 +41,16 @@
     };
 
     Master = (function() {
-      var robots;
+      var api, robots;
+
+      robots = [];
+
+      api = null;
 
       function Master() {
         this.robot = __bind(this.robot, this);
+        this.self = this;
       }
-
-      robots = [];
 
       Master.prototype.robot = function(opts) {
         var robot;
@@ -55,14 +60,25 @@
         return robot;
       };
 
+      Master.prototype.robots = function() {
+        return robots;
+      };
+
       Master.prototype.start = function() {
         var robot, _i, _len, _results;
+        this.startAPI();
         _results = [];
         for (_i = 0, _len = robots.length; _i < _len; _i++) {
           robot = robots[_i];
           _results.push(robot.start());
         }
         return _results;
+      };
+
+      Master.prototype.startAPI = function() {
+        return api != null ? api : api = new Api.Server({
+          master: this.self
+        });
       };
 
       return Master;
