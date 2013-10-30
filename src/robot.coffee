@@ -93,13 +93,13 @@ module.exports = class Robot
     return if @adaptors[adaptorName]?
     @adaptors[adaptorName] = moduleName
 
-  requireDriver: (driverName, device) ->
+  requireDriver: (driverName, device, opts = {}) ->
     if @robot.drivers[driverName]?
       if typeof @robot.drivers[driverName] is 'string'
-        @robot.drivers[driverName] = require(@robot.drivers[driverName]).driver(name: driverName, device: device)
+        @robot.drivers[driverName] = require(@robot.drivers[driverName]).driver(name: driverName, device: device, extraParams: opts)
     else
       require("cylon-#{driverName}").register(this)
-      @robot.drivers[driverName] = require("cylon-#{driverName}").driver(name: driverName, device: device)
+      @robot.drivers[driverName] = require("cylon-#{driverName}").driver(name: driverName, device: device, extraParams: opts)
 
     return @robot.drivers[driverName]
 
