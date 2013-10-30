@@ -157,19 +157,24 @@
       return this.adaptors[adaptorName] = moduleName;
     };
 
-    Robot.prototype.requireDriver = function(driverName, device) {
+    Robot.prototype.requireDriver = function(driverName, device, opts) {
+      if (opts == null) {
+        opts = {};
+      }
       if (this.robot.drivers[driverName] != null) {
         if (typeof this.robot.drivers[driverName] === 'string') {
           this.robot.drivers[driverName] = require(this.robot.drivers[driverName]).driver({
             name: driverName,
-            device: device
+            device: device,
+            extraParams: opts
           });
         }
       } else {
         require("cylon-" + driverName).register(this);
         this.robot.drivers[driverName] = require("cylon-" + driverName).driver({
           name: driverName,
-          device: device
+          device: device,
+          extraParams: opts
         });
       }
       return this.robot.drivers[driverName];

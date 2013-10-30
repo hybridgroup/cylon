@@ -67,10 +67,12 @@ Support for common shared device drivers, is provded using the General Purpoer I
 
   - [GPIO](https://en.wikipedia.org/wiki/General_Purpose_Input/Output) <=> [Drivers](https://github.com/hybridgroup/cylon-gpio)
 
-More platforms and drivers are coming soon!
+More platforms and drivers are coming soon...
 
 ## Documentation
-_(Coming soon)_
+We're busy adding documentation to our web site at http://cylonjs.com/ please check there as we continue to work on Cylon.js
+
+Thank you!
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style.
@@ -79,6 +81,8 @@ using [Grunt](http://gruntjs.com/).
 
 ## Release History
 Version 0.1.0 - Initial release for ongoing development
+
+Version 0.2.0 - Cylon.Basestar to help develop external adaptors/drivers
 
 ## License
 Copyright (c) 2013 The Hybrid Group. Licensed under the Apache 2.0 license.
