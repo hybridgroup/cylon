@@ -17,141 +17,84 @@ layout: page
       Communication with the ARDrone's flight control interface takes place using a WiFi connection. The ARDrone is a WiFi access point, so it normally can be the only device you connect to, without some additional effort to reconfigure the drone itself to put it into infrastructure mode.
     :markdown
           :::ruby
-          comming soon
+          coming soon
 
   %section.public-methods
-    %h2 Public instance methods:
+    %h2 Commands:
 
-    %h3 start → drone
+    %h3 takeoff
     %p
-      Starts up the drone.
+      -#Description text
 
-    %h3 stop → drone
+    %h3 land
     %p
-      Stops the drone.
+      -#Description text
 
-    %h3 hover → drone
+    %h3 stop
     %p
-      Causes the drone to hover at current altitude.
+      -#Description text
 
-    %h3 land → drone
+    %h3 up
     %p
-      Causes the drone to begin its landing sequence.
+      -#Description text
 
-    %h3 take_off → drone
+    %h3 down
     %p
-      Causes the drone to take off, if already started.
-
-    %h3 emergency → drone
+      -#Description text 
+       
+    %h3 left
     %p
-      Causes the drone to make an immediate emergency landing
+      -#Description text
 
-    %h3 front_camera → drone
+    %h3 right
     %p
-      Causes the drone to turn on the front-facing camera.
+      -#Description text 
 
-    %h3 bottom_camera → drone
+    %h3 front
     %p
-      Causes the drone to turn on the bottom-facing camera.
+      -#Description text 
 
-    %h3 up → drone
+    %h3 back
     %p
-      Causes the drone to increase altitude.
+      -#Description text
 
-    %h3 down → drone
+    %h3 clockwise
     %p
-      Causes the drone to decrease altitude.
+      -#Description text 
 
-    %h3 left → drone
+    %h3 counterClockwise
     %p
-      Causes the drone to bank to the left.
-
-    %h3 right → drone
+      -#Description text
+      
+    %h3 calibrate
     %p
-      Causes the drone to bank to the right.
-
-    %h3 forward → drone
+      -#Description text
+      
+    %h3 config
     %p
-      Causes the drone to bank forward.
-
-    %h3 backward → drone
+      -#Description text
+      
+    %h3 animate
     %p
-      Causes the drone to bank backward.
-
-    %h3 turn_left → drone
+      -#Description text
+      
+    %h3 animateLeds
     %p
-      Causes the drone to rotate to the left.
-
-    %h3 turn_right → drone
+      -#Description text
+      
+    %h3 disableEmergency
     %p
-      Causes the drone to rotate to the right.
+      -#Description text                  
 
-    %h3 reset_watchdog → drone
-    %p
-      Reset the watchdog in the drone.
+  -#%section.how-to
+    -#%h2 How to use
+    -#%h3 Example of controlling an ARDrone.
+    -#:markdown
+          -#:::ruby
 
-    %h3 led(color_animation, strength, duration) → drone
-    %p
-      Turn on the drone's built in LEDs with the color_animation passed, strength and duration; color_animation might be one of the following:
-    %ul
-      %li :blink_green_red
-      %li :blink_green
-      %li :blink_red
-      %li :blink_orange
-      %li :snake_green_red
-      %li :fire
-      %li :standard
-      %li :red
-      %li :green
-      %li :red_snake
-      %li :blank
-      %li :right_missile
-      %li :left_missile
-      %li :double_missile
-      %li :front_left_green_others_red
-      %li :front_right_green_others_red
-      %li :rear_right_green_others_red
-      %li :rear_left_green_others_red
-      %li :left_green_right_red
-      %li :left_red_right_green
-      %li :blink_standard
-
-    %h3 animate(animation, duration) → drone
-    %p
-      Animate the ardrone to do flips and turns depending on selection, available animation options are:
-    %ul
-      %li :phi_m30_deg
-      %li :phi_30_deg
-      %li :theta_m30_deg
-      %li :theta_30_deg
-      %li :theta_20_deg_yaw_200_deg
-      %li :theta_20_deg_yaw_m_200_deg
-      %li :turnaround
-      %li :turnaround_go_down
-      %li :yaw_shake
-      %li :yaw_dance
-      %li :phi_dance
-      %li :theta_dance
-      %li :vz_dance
-      %li :wave
-      %li :phi_theta_mixed
-      %li :double_phi_theta_mixed
-      %li :flip_ahead
-      %li :flip_behind
-      %li :flip_left
-      %li :flip_right
-
-  %section.how-to
-    %h2 How to use
-    %h3 Example of controlling an ARDrone.
-    :markdown
-          :::ruby
-          comming soon
-
-    %h3 Example of ARDrone doing a flip.
-    :markdown
-          :::ruby
-          comming soon
+    -#%h3 Example of ARDrone doing a flip.
+    -#:markdown
+          -#:::ruby
 
   %section.compatability.hardware
     %h2 Works with:

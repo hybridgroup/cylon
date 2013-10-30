@@ -17,58 +17,34 @@ layout: page
     %h3 For Arduino:
     :markdown
           :::ruby
-          comming soon
+          coming soon
 
     -#%h3 For Digispark:
     -#:markdown
           -#:::ruby
 
   %section.public-methods
-    %h2 Public instance methods:
+    %h2 Commands:
 
-    %h3 pin → integer_value
+    %h3 analogRead
     %p
-      Returns the pin number set up when creating the sensor.
-
-    %h3 upper → integer_value
-    %p
-      Returns the upper limit set up when creating the sensor.
-
-    %h3 lower → integer_value
-    %p
-      Returns the lower limit set up when creating the sensor.
-
-    %h3 analog_read(pin_number) →  integer_value (from 0 to 1027)
-    %p
-      Returns an integer value that represents the analog read from the sensor, the value goes from 0 to 1027.
+      -#Description text.
 
   %section.public-events
-    %h2 Public driver events:
+    %h2 Events:
     %p
-      The limits that trigger the events are setup when creating the sensor (see above in the section titled "How to stablish a connection and driver" ),
-      there are :upper and :lower limits, as well as an :interval param that defines how often the sensor should be read;
-      when the specified amount of time passes the sensor is read, if one of the limits stablished is reached
-      the corresponging event will be triggered.
+      Coming soon
 
-    %h3 :upper
-    %p
-      Gets triggered if the value read by the sensor is greater or equal to :upper (value passed when setting up the sensor).
+    -#%h3 How to use events and call them on your drivers
+    -#%p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
+    -#:markdown
+          -#:::ruby
 
-    %h3 :lower
-    %p
-      Gets triggered if the value read by the sensor is less or equal to :lower (value passed when setting up the sensor)
-
-    %h3 How to use events and call them on your drivers
-    %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
-    :markdown
-          :::ruby
-          comming soon
-  %section.how-to
-    %h2 How to use
-    %h3 Example using a photoresistor sensor to turn a LED on and off.
-    :markdown
-          :::ruby
-          comming soon
+  -#%section.how-to
+    -#%h2 How to use
+    -#%h3 Example using a photoresistor sensor to turn a LED on and off.
+    -#:markdown
+          -#:::ruby
 
   %section.circuit
     %h2 Circuit and Schematic

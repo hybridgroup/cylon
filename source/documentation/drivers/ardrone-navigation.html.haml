@@ -21,135 +21,22 @@ layout: page
           comming soon
 
   %section.public-methods
-    %h2 Public driver events
-    %h3 navdata
+    %h2 Events
+    %h3 
     %p
-      Gets triggered every time interval amount of time passes, returns and lets you access a NavData object containing the attributes described below:
-    %ul
-      %li
-        %b navdata.sequence_number
-        → String (returns the sequence number)
+      
+    
 
-      %li
-        %b navdata.vision_flag
-        → String (returns the sequence number)
+    -#%h3 How to use events and call them on your drivers
+    -#%p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
+    -#:markdown
+          -#:::ruby
 
-      %li
-        %b navdata.flying?
-        → Boolean (is the ardrone flying?)
-
-      %li
-        %b navdata.communication_lost?
-        → Boolean (is communication lost?)
-
-      %li
-        %b navdata.com_watchdog_problem?
-        → Boolean (is there a watchdog problem?)
-
-      %li
-        %b navdata.bootstrap?
-        → Boolean (boostrap navigation setup?)
-
-    %h3 demo
-    %p
-      Gets triggered every time interval amount of time passes, returns and lets you access a NavOptionDemo object containing navigation data as described below:
-    %ul
-      %li
-        %b nav_option_demo.control_state_name
-        → String (returns control state name)
-
-      %li
-        %b nav_option_demo.control_state
-        → Integer (returns control state)
-
-      %li
-        %b nav_option_demo.battery_level
-        → Integer
-
-      %li
-        %b nav_option_demo.pitch
-        → float (returns the current pitch)
-
-      %li
-        %b nav_option_demo.roll
-        → float (returns the current roll)
-
-      %li
-        %b nav_option_demo.yaw
-        → float (returns the current yaw)
-
-      %li
-        %b nav_option_demo.altitude
-        → float (returns the current altitude)
-
-      %li
-        %b nav_option_demo.vx
-        → float (returns the current velocity on X axis)
-
-      %li
-        %b nav_option_demo.vy
-        → float (returns the current velocity on Y axis)
-
-      %li
-        %b nav_option_demo.vz
-        → float (returns the current velocity on Z axis)
-
-    %h3 vision_detect
-    %p
-      Gets triggered every time interval amount of time passes, returns and lets you access a NavOptionVisionDetect object containing the following data:
-    %ul
-      %li
-        %b nav_option_vision_detect.detected_count
-        → Integer (Number of devices detected)
-
-      %li
-        %b nav_option_vision_detect.type
-        → String
-
-      %li
-        %b nav_option_vision_detect.name
-        → String
-
-      %li
-        %b nav_option_vision_detect.x
-        → integer
-
-      %li
-        %b nav_option_vision_detect.y
-        → integer
-
-      %li
-        %b nav_option_vision_detect.width
-        → integer
-
-      %li
-        %b nav_option_vision_detect.height
-        → integer
-
-      %li
-        %b nav_option_vision_detect.distance
-        → integer
-
-      %li
-        %b nav_option_vision_detect.orientation_angle
-        → float
-
-      %li
-        %b nav_option_vision_detect.camera_source
-        → integer
-
-    %h3 How to use events and call them on your drivers
-    %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
-    :markdown
-          :::ruby
-          comming soon
-
-  %section.how-to
-    %h2 How to use
-    %h3 Example of receiving navigation data from an ARDrone.
-    :markdown
-          :::ruby
-          comming soon
+  -#%section.how-to
+    -#%h2 How to use
+    -#%h3 Example of receiving navigation data from an ARDrone.
+    -#:markdown
+          -#:::ruby
 
   %section.compatability.hardware
     %h2 Works with:
