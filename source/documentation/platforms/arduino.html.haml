@@ -2,7 +2,7 @@
 title: Arduino with Cylon.js
 author: The Hybrid Group
 page_title: Arduino
-page_subtitle: "<a href='#' target='blanck' class='repository'>Repository</a> <a class+'issues' href='#' target='blanck'>Issues</a>"
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-firmata' target='blanck' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-firmata/issues' target='blanck'>Issues</a>"
 layout: page
 ---
 .documentation
@@ -19,25 +19,65 @@ layout: page
       = succeed "." do
         = link_to "here", "http://arduino.cc/", target: :blank
 
+    %p
+      Want to use Ruby on robots? Check out our sister project Artoo 
+      =link_to "(http://artoo.io)", "http://artoo.io", target: "blanck"
+
   %section.how_to
     %h2 How to install
     %p
-      Comming soon.
-
-    %h2 How to use
-    %p
-      Comming soon.
+      Installing cylon.js with arduino support is pretty easy.
     :markdown
           :::ruby
-          Comming soon.
+          npm install cylon-firmata
+    %h2 How to use
+    %p
+      This small program lets you push a button on the arduino board to turn a LED on or off. In less than 10 lines of code using Cylon.js.
+    %h3 Javascript  
+    :markdown
+          :::javascript
+          var Cylon = require('cylon');
+
+          // Initialize the robot
+          Cylon.robot({
+            connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+            devices: [{name: 'led', driver: 'led', pin: 13},
+                     {name: 'button', driver: 'button', pin: 2}],
+
+            work: function(my) {
+              my.button.on('push', function() {my.led.toggle()});
+            }
+          }).start();
+
+    %h3 CoffeeScript
+    :markdown
+          :::javascript
+          Cylon = require('cylon')
+
+          # Initialize the robot
+          Cylon.robot
+            connection:
+              name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
+
+            devices:
+              [
+                {name: 'led', driver: 'led', pin: 13},
+                {name: 'button', driver: 'button', pin: 2}
+              ]
+
+            work: (my) ->
+              my.button.on 'push', -> my.led.toggle()
+
+            .start()
+
 
     %h2 How to connect
     %h3 OSX
-    %p Comming soon.
+    %p Coming soon.
 
     %h3 Ubuntu
 
-    %p Comming soon.
+    %p Coming soon.
 
    
   %section.drivers
@@ -48,7 +88,7 @@ layout: page
       and
       %b node.js
       it is possible to interact with several I/O hardware devices and interfaces connected to the arduino
-      using a set of already defined and easy to use drivers, all of this thanks to the artoo architecture, in conjuction with cylon-arduino
+      using a set of already defined and easy to use drivers, all of this thanks to the cylon.js architecture, in conjuction with cylon-arduino
       adaptor (using the firmata communication protocol),
       which makes it even possible to swap the entire platform for something else like digispark, and keep using the same code you just wrote for
       arduino, this just by swapping a couple of lines in your program.
@@ -61,11 +101,11 @@ layout: page
         = partial "documentation/partials/analog-sensor"
         = partial "documentation/partials/button"
         = partial "documentation/partials/led"
-        = partial "documentation/partials/maxbotix"
-        = partial "documentation/partials/motor"
-        = partial "documentation/partials/servo"
-        = partial "documentation/partials/blinkm"
-        = partial "documentation/partials/hmc6352-compass"
-        = partial "documentation/partials/wiichuck"
-        = partial "documentation/partials/wiiclassic"
+        = #partial "documentation/partials/maxbotix"
+        = #partial "documentation/partials/motor"
+        = #partial "documentation/partials/servo"
+        = #partial "documentation/partials/blinkm"
+        = #partial "documentation/partials/hmc6352-compass"
+        = #partial "documentation/partials/wiichuck"
+        = #partial "documentation/partials/wiiclassic"
 

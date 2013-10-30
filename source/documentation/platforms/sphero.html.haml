@@ -21,28 +21,47 @@ layout: page
     %p
       You can do it by following this link
       = link_to "GoSphero.", "http://www.gosphero.com/"
+    %p
+      Want to use Ruby on robots? Check out our sister project Artoo 
+      =link_to "(http://artoo.io)", "http://artoo.io", target: "blanck"
+
   %section.how-to
     %h2 How to install
     %p
-      Comming soon.
+      Installing cylon.js with sphero support is pretty easy.
     :markdown
           :::bash
-          comming soon
+          npm install cylon-sphero
 
     %h2 How to use
-    %p Comming soon.
+    %p Example of a simple program that makes the Sphero roll.
+
+    %h3 Javascript
     :markdown
-          :::ruby
-           comming soon
+          :::javascript
+          var Cylon = require('cylon');
+
+          Cylon.robot({
+            connection: { name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0' },
+            device: {name: 'sphero', driver: 'sphero'},
+
+            work: function(my) {
+              every((1).second(), function() { 
+                my.sphero.roll(60, Math.floor(Math.random() * 360));
+              });
+            }
+          }).start();
+
+    %h3
 
     %h2 How to connect
     %h3 OSX
 
-    %p Comming soon.
+    %p Coming soon.
 
     %h3 Ubuntu
 
-    %p Comming soon.
+    %p Coming soon.
 
   %section.drivers
     %h2 Drivers

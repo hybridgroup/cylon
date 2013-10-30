@@ -16,20 +16,70 @@ layout: page
       For more info about the ARDrone platform click
       = succeed "." do
         = link_to "here", "http://ardrone2.parrot.com/", target: :blank
+    %p
+      Want to use Ruby on robots? Check out our sister project Artoo 
+      =link_to "(http://artoo.io)", "http://artoo.io", target: "blanck"
 
   %section.how-to
     %h2 How to install
     %p
-      Comming soon.
+      Installing cylon.js with ardrone support is pretty easy.
+    :markdown
+          :::ruby
+          npm install cylon-ardrone
 
     %h2 How to use
     %p
-      Comming soon.
+      This small program lets the ARDrone take-off, hover, and land.
+    
+    %h3 Javascript
+    
+    :markdown
+          :::javascript
+          var Cylon = require('cylon');
+
+          Cylon.robot({
+            connection: { name: 'ardrone', adaptor: 'ardrone' },
+            device: {name: 'drone', driver: 'ardrone'},
+
+            work: function(my) {
+              my.drone.takeoff();
+              after((10).seconds(), function() { 
+                my.drone.hover();
+              });
+              after((20).seconds(), function() { 
+                my.drone.land();
+              });
+              after((25).seconds(), function() { 
+                my.drone.stop();
+              });    
+            }
+          }).start();
+    
+    %h3 CoffeScript
 
     :markdown
-          :::ruby
+          :::javascript
+          Cylon = require('cylon')
 
-          Comming soon.
+          Cylon.robot
+            connection:
+              name: 'ardrone', adaptor: 'ardrone'
+
+            device:
+              name: 'ardrone', driver: 'ardrone'
+
+            work: (my) ->
+              my.drone.takeoff()
+              after 10.seconds(), ->
+                my.drone.hover()
+              after 20.seconds(), ->
+                my.drone.land()
+              after 25.seconds(), ->
+                my.drone.stop()
+
+          .start()
+
     %h2 How to connect
     %p
       The ARDrone is a WiFi device, so there is no additional work to establish a
@@ -44,11 +94,11 @@ layout: page
     :markdown
           :::ruby
 
-          Comming soon.
+          Coming soon.
   %section.drivers
     %h2 Drivers
     %p
-      Available drivers for the ARDrone platform are listed below. There are three drivers for the ARDrone: the ARDrone for flight control, the ARDroneNav for navigation data, and the ARDroneVideo for grabbing video data.
+      Available drivers for the ARDrone platform are listed below. There are three drivers for the ARDrone: the ARDrone for flight control and the ARDroneNav for navigation data.
 
     .hardware
       .devices
