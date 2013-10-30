@@ -81,6 +81,7 @@ using [Grunt](http://gruntjs.com/).
 
 ## Release History
 Version 0.1.0 - Initial release for ongoing development
+
 Version 0.2.0 - Cylon.Basestar to help develop external adaptors/drivers
 
 ## License
