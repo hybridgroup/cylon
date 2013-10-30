@@ -18,7 +18,14 @@ layout: page
       Artoo and the Sphero driver take care of the rest.
     :markdown
           :::ruby
-          comming soon
+          Cylon = require('..')
+
+          Cylon.robot
+            connection:
+              name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'
+
+            device:
+              name: 'sphero', driver: 'sphero'
 
   %section.public-methods
     %h2 Commands:

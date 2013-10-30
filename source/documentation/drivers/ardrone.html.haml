@@ -17,7 +17,14 @@ layout: page
       Communication with the ARDrone's flight control interface takes place using a WiFi connection. The ARDrone is a WiFi access point, so it normally can be the only device you connect to, without some additional effort to reconfigure the drone itself to put it into infrastructure mode.
     :markdown
           :::ruby
-          coming soon
+          Cylon = require('cylon')
+
+          Cylon.robot
+            connection:
+              name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1'
+
+            device:
+              name: 'ardrone', driver: 'ardrone'
 
   %section.public-methods
     %h2 Commands:

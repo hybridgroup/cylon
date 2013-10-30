@@ -12,11 +12,20 @@ layout: page
       Simple interface that makes it possible to register clicks through physical input.
 
   %section.how_to
-    %h2 How to stablish a connection and setup the driver 
+    %h2 How to establish a connection and setup the driver 
     %h3 For Arduino:
     :markdown
           :::ruby
-          coming soon
+          Cylon = require('..')
+
+          Cylon.robot
+            connection:
+              name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
+
+            devices:
+              [
+                {name: 'button', driver: 'button', pin: 2}
+              ]
 
     -#%h3 For Digispark:
     -#:markdown
