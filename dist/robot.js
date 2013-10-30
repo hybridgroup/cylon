@@ -10,7 +10,8 @@
 (function() {
   'use strict';
   var Async, Connection, Device, Robot,
-    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   require('./cylon');
 
@@ -28,7 +29,7 @@
     klass = Robot;
 
     function Robot(opts) {
-      var func, n;
+      var func, n, reserved;
       if (opts == null) {
         opts = {};
       }
@@ -54,7 +55,8 @@
       };
       for (n in opts) {
         func = opts[n];
-        if (n !== 'connection' && n !== 'connections' && n !== 'device' && n !== 'devices' && n !== 'work') {
+        reserved = ['connection', 'connections', 'device', 'devices', 'work'];
+        if (__indexOf.call(reserved, n) < 0) {
           this.robot[n] = func;
         }
       }
@@ -62,6 +64,33 @@
 
     Robot.randomName = function() {
       return "Robot " + (Math.floor(Math.random() * 100000));
+    };
+
+    Robot.prototype.data = function() {
+      var connection, device, n;
+      return {
+        name: this.name,
+        connections: (function() {
+          var _ref, _results;
+          _ref = this.connections;
+          _results = [];
+          for (n in _ref) {
+            connection = _ref[n];
+            _results.push(connection.data());
+          }
+          return _results;
+        }).call(this),
+        devices: (function() {
+          var _ref, _results;
+          _ref = this.devices;
+          _results = [];
+          for (n in _ref) {
+            device = _ref[n];
+            _results.push(device.data());
+          }
+          return _results;
+        }).call(this)
+      };
     };
 
     Robot.prototype.initConnections = function(connections) {

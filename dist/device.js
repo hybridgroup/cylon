@@ -49,6 +49,16 @@
       return this.driver.start(callback);
     };
 
+    Device.prototype.data = function() {
+      return {
+        name: this.name,
+        driver: this.driver.constructor.name || this.driver.name,
+        pin: this.pin != null ? this.pin.toString : null,
+        connection: this.connection.data(),
+        commands: this.driver.commands()
+      };
+    };
+
     Device.prototype.determineConnection = function(c) {
       if (c) {
         return this.robot.connections[c];

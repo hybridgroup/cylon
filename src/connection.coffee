@@ -16,12 +16,22 @@ module.exports = class Connection extends EventEmitter
   klass = this
 
   constructor: (opts = {}) ->
+    opts.id ?= Math.floor(Math.random() * 10000)
     @self = this
     @robot = opts.robot
     @name = opts.name
+    @connection_id = opts.id
     @adaptor = @requireAdaptor(opts.adaptor) # or 'loopback')
     @port = new Port(opts.port)
     proxyFunctionsToObject @adaptor.commands(), @adaptor, klass
+
+  data: ->
+    {
+      name: @name,
+      port: @port.toString()
+      adaptor: @adaptor.constructor.name || @adaptor.name
+      connection_id: @connection_id
+    }
 
   connect: (callback) =>
     msg = "Connecting to '#{@name}'"

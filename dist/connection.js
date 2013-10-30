@@ -32,13 +32,26 @@
         opts = {};
       }
       this.connect = __bind(this.connect, this);
+      if (opts.id == null) {
+        opts.id = Math.floor(Math.random() * 10000);
+      }
       this.self = this;
       this.robot = opts.robot;
       this.name = opts.name;
+      this.connection_id = opts.id;
       this.adaptor = this.requireAdaptor(opts.adaptor);
       this.port = new Port(opts.port);
       proxyFunctionsToObject(this.adaptor.commands(), this.adaptor, klass);
     }
+
+    Connection.prototype.data = function() {
+      return {
+        name: this.name,
+        port: this.port.toString(),
+        adaptor: this.adaptor.constructor.name || this.adaptor.name,
+        connection_id: this.connection_id
+      };
+    };
 
     Connection.prototype.connect = function(callback) {
       var msg;
