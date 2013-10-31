@@ -63,7 +63,7 @@ Cylon.js has a extensible system for connecting to hardware devices. The followi
   - [Ardrone](http://ardrone2.parrot.com/) <=> [Adaptor](https://github.com/hybridgroup/cylon-ardrone)
   - [Sphero](http://www.gosphero.com/) <=> [Adaptor](https://github.com/hybridgroup/cylon-sphero)
 
-Support for common shared device drivers, is provded using the General Purpoer Input/Output (GPIO) module:
+Support for common shared device drivers, is provded using the General Purpose Input/Output (GPIO) module:
 
   - [GPIO](https://en.wikipedia.org/wiki/General_Purpose_Input/Output) <=> [Drivers](https://github.com/hybridgroup/cylon-gpio)
 
