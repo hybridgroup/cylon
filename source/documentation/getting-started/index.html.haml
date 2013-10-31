@@ -111,11 +111,6 @@ layout: page
             my.button.on 'push', -> my.led.toggle()
 
         .start()
-
-  %h3 Parrot ARDrone 2.0
-  :markdown
-    To use this example, you must first run `npm install cylon-ardrone`
-
   %h4 Javascript
   :markdown
         :::javascript
@@ -132,23 +127,32 @@ layout: page
         });
 
 
+  %h3 Parrot ARDrone 2.0
+  :markdown
+    To use this example, you must first run `npm install cylon-ardrone`
+
   %h4 CoffeeScript 
   :markdown
         :::javascript
-        Cylon = require "cylon"
+        Cylon = require('..')
 
-        robot = Cylon.robot
+        Cylon.robot
           connection:
-            name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
+            name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1'
 
           device:
-            name: 'led', driver: 'led', pin: 13
+            name: 'drone', driver: 'ardrone'
 
           work: (my) ->
-            # we do our thing here
-            every 1.second(), -> my.led.toggle()
+            my.drone.takeoff()
 
-        robot.start() 
+            after 10.seconds(), ->
+              my.drone.land()
+
+            after 15.seconds(), ->
+              my.drone.stop()
+
+        .start()
 
   %section.cylon-running
   %h2 Cylon.js Robots
