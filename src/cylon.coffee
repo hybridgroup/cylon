@@ -38,9 +38,24 @@ class Cylon
 
     robots: -> robots
 
-    findRobot: (name) ->
-      for robot in robots
-        return robot if robot.name is name
+    findRobot: (name, callback) ->
+      robot = null
+      for bot in robots
+        robot = bot if bot.name is name
+
+      error = { error: "No Robot found with the name #{name}" } unless robot?
+
+      if callback then callback(error, robot) else robot
+
+    findRobotDevice: (robotid, deviceid, callback) ->
+      @findRobot robotid, (err, robot) ->
+        callback(err, robot) if err
+
+        device = robot.devices[deviceid] if robot.devices[deviceid]
+        unless device?
+          error = { error: "No device found with the name #{device}." }
+
+        if callback then callback(error, device) else device
 
     start: ->
       do @startAPI

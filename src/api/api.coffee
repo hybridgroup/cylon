@@ -37,24 +37,16 @@ namespace "Api", ->
       res.send (robot.data() for robot in master.robots())
 
     getRobotByName: (req, res, next) ->
-      robot = master.findRobot(req.params.robotid)
-      if robot
-        res.send robot.data()
-      else
-        res.send {error: "No robot with that name exists."}
+      master.findRobot req.params.robotid, (err, robot) ->
+        res.send if err then err else robot.data()
 
     getRobotDevices: (req, res, next) ->
-      robot = master.findRobot(req.params.robotid)
-      res.send robot.data().devices
+      master.findRobot req.params.robotid, (err, robot) ->
+        res.send if err then err else robot.data().devices
 
     getRobotDeviceByName: (req, res, next) ->
-      robotName = req.params.robotid
-      deviceName = req.params.deviceid
+      robotid = req.params.robotid
+      deviceid = req.params.deviceid
 
-      robot = master.findRobot robotName
-
-      if robot.devices[deviceName]
-        res.send robot.devices[deviceName].data()
-      else
-        res.send
-          error: "Robot #{robotName} does not have a device #{deviceName}"
+      master.findRobotDevice robotid, deviceid, (err, device) ->
+        res.send if err then err else device.data()

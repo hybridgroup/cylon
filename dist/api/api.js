@@ -58,35 +58,24 @@
       };
 
       Server.prototype.getRobotByName = function(req, res, next) {
-        var robot;
-        robot = master.findRobot(req.params.robotid);
-        if (robot) {
-          return res.send(robot.data());
-        } else {
-          return res.send({
-            error: "No robot with that name exists."
-          });
-        }
+        return master.findRobot(req.params.robotid, function(err, robot) {
+          return res.send(err ? err : robot.data());
+        });
       };
 
       Server.prototype.getRobotDevices = function(req, res, next) {
-        var robot;
-        robot = master.findRobot(req.params.robotid);
-        return res.send(robot.data().devices);
+        return master.findRobot(req.params.robotid, function(err, robot) {
+          return res.send(err ? err : robot.data().devices);
+        });
       };
 
       Server.prototype.getRobotDeviceByName = function(req, res, next) {
-        var deviceName, robot, robotName;
-        robotName = req.params.robotid;
-        deviceName = req.params.deviceid;
-        robot = master.findRobot(robotName);
-        if (robot.devices[deviceName]) {
-          return res.send(robot.devices[deviceName].data());
-        } else {
-          return res.send({
-            error: "Robot " + robotName + " does not have a device " + deviceName
-          });
-        }
+        var deviceid, robotid;
+        robotid = req.params.robotid;
+        deviceid = req.params.deviceid;
+        return master.findRobotDevice(robotid, deviceid, function(err, device) {
+          return res.send(err ? err : device.data());
+        });
       };
 
       return Server;
