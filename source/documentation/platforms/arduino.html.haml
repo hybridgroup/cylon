@@ -36,7 +36,6 @@ layout: page
           :::javascript
           var Cylon = require('cylon');
 
-          // Initialize the robot
           Cylon.robot({
             connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
             devices: [{name: 'led', driver: 'led', pin: 13},
@@ -52,7 +51,6 @@ layout: page
           :::javascript
           Cylon = require('cylon')
 
-          # Initialize the robot
           Cylon.robot
             connection:
               name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'

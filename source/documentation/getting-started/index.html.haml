@@ -57,7 +57,22 @@ layout: page
   %h3 Example: Arduino with LED and a button
   :markdown
     To use this example, you must first run `npm install cylon-firmata`
+  %h4 Javascript
+  :markdown
+        :::javascript
+       
 
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+          devices: [{name: 'led', driver: 'led', pin: 13},
+                    {name: 'button', driver: 'button', pin: 2}],
+
+          work: function(my) {
+            my.button.on('push', function() {my.led.toggle()});
+          }
+        }).start();
   %h4 CoffeeScript
   :markdown
         :::javascript
@@ -77,32 +92,37 @@ layout: page
             my.button.on 'push', -> my.led.toggle()
 
         .start()
-  %h4 Javascript
-  :markdown
-        :::javascript
-       
-
-        var Cylon = require('..');
-
-        Cylon.robot({
-          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
-          devices: [{name: 'led', driver: 'led', pin: 13},
-                    {name: 'button', driver: 'button', pin: 2}],
-
-          work: function(my) {
-            my.button.on('push', function() {my.led.toggle()});
-          }
-        }).start();
+  
 
 
   %h3 Parrot ARDrone 2.0
   :markdown
     To use this example, you must first run `npm install cylon-ardrone`
+  %h4 Javascript
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: {name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1'},
+          device: {name: 'drone', driver: 'ardrone'},
+          work: function(my) {
+            my.drone.takeoff();
+
+            after((10).seconds(), function() {
+              my.drone.land();
+            }
+
+            after((15).seconds(), function() {
+              my.drone.stop();
+            }
+          }
+        }).start();
 
   %h4 CoffeeScript 
   :markdown
         :::javascript
-        Cylon = require('..')
+        Cylon = require('cylon')
 
         Cylon.robot
           connection:
@@ -121,26 +141,7 @@ layout: page
               my.drone.stop()
 
         .start()
-  %h4 Javascript
-  :markdown
-        :::javascript
-        var Cylon = require('..');
-
-        Cylon.robot({
-          connection: {name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1'},
-          device: {name: 'drone', driver: 'ardrone'},
-          work: function(my) {
-            my.drone.takeoff();
-
-            after((10).seconds(), function() {
-              my.drone.land();
-            }
-
-            after((15).seconds(), function() {
-              my.drone.stop();
-            }
-          }
-        }).start();
+  
 
   %section.cylon-running
   %h2 Cylon.js Robots
