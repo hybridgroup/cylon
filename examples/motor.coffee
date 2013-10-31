@@ -14,7 +14,7 @@ Cylon.robot
     every 0.05.seconds(), ->
       speed += increment
       my.motor.speed(speed)
-      console.log("current speed => #{ my.motor.driver.currentSpeed }")
+      console.log("current speed => #{ my.motor.currentSpeed() }")
       increment = -increment if (speed is 0) or (speed is 255)
 
 .start()
