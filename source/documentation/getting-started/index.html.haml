@@ -1,5 +1,5 @@
 ---
-title: Cylon.js Platforms
+title: Cylon.js Getting Started
 author: The Hybrid Group
 description: Artoo Platforms
 page_title: Getting Started
@@ -14,7 +14,7 @@ layout: page
 %section.how-to
   %h2 How to setup your node environment
   %p
-    Comming soon.
+    Coming soon.
 
   %p
     Cylon.js also has support for devices that can work across multiple hardware platforms.
@@ -33,41 +33,112 @@ layout: page
   %h2 Code to control robots with Cylon.js
 
   %h3 Example: Arduino with LED and a button
-
+  %h4 CoffeeScript
   :markdown
-        :::ruby
-        comming soon
+        :::javascript
+        Cylon = require('..')
+
+        Cylon.robot
+          connection:
+            name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
+
+          devices:
+            [
+              {name: 'led', driver: 'led', pin: 13},
+              {name: 'button', driver: 'button', pin: 2}
+            ]
+
+          work: (my) ->
+            my.button.on 'push', -> my.led.toggle()
+
+        .start()
 
   %h3 Parrot ARDrone 2.0
+  %h4 CoffeeScript
 
   :markdown
-        :::ruby
-        comming soon
+        :::javascript
+        Cylon = require('..')
+
+        Cylon.robot
+          connection:
+            name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1'
+
+          device:
+            name: 'drone', driver: 'ardrone'
+
+          work: (my) ->
+            my.drone.takeoff()
+
+            after 10.seconds(), ->
+              my.drone.land()
+
+            after 15.seconds(), ->
+              my.drone.stop()
+
+        .start()
 
 %section.installation
 
   %h3 Installation
 
   :markdown
-        :::ruby
-        comming soon
+        :::javascript
+        npm install cylon
   %p
-    Then install the gems required by the hardware you want to use. For
-    example, if you wanted to use an XBox360 controller to fly your ARDrone:
+    Then install the modules required by the hardware you want to use. For
+    example, if you wanted to use multiple Spheros:
+  %h4 CoffeeScript  
 
   :markdown
-        :::ruby
-        comming soon
+        :::javascript
+        Cylon = require '..'
+
+        bots = [
+          { port: '/dev/rfcomm0', name: 'Thelma' },
+          { port: '/dev/rfcomm1', name: 'Louise' }
+        ]
+
+        SpheroRobot =
+          connection:
+            name: 'Sphero', adaptor: 'sphero'
+
+          device:
+            name: 'sphero', driver: 'sphero'
+
+          work: (me) ->
+            every 1.seconds(), ->
+              Logger.info me.name
+              me.sphero.setRGB Math.floor(Math.random() * 100000)
+              me.sphero.roll 60, Math.floor(Math.random() * 360)
+
+        for bot in bots
+          robot = Object.create(SpheroRobot)
+          robot.connection.port = bot.port
+          robot.name = bot.name
+          Cylon.robot robot
+
+        Cylon.start()
 
   %h3 Writing your robot code:
 
-  %p Now you are ready to write your own code. Take a look at the examples directory for a whole bunch of code you can use to help get started. We recommend using Test-Driven Robotics (TDR) with your preferred test frameworks.
+  %p 
+  Now you are ready to write your own code. Take a look at the 
+  = link_to "examples", "https://github.com/hybridgroup/cylon/tree/master/examples" 
+  directory for a whole bunch of code you can use to help get started. We recommend using Test-Driven Robotics (TDR) with your preferred test frameworks.
 
   %h3 Running your robot:
 
   :markdown
         :::ruby
-        comming soon
+        node robotfilename.js
+
+  %p or
+  
+  :markdown
+        :::ruby
+        coffee robotfilename.coffee
+
 
 %section.contributing
   %h2 Contributing

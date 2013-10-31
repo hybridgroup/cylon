@@ -3,17 +3,52 @@ hero: true
 social: true
 title: CylonJS
 author: The Hybrid Group
-description: Artoo is a micro-framework for robotics. It provides a simple, but powerful DSL (domain-specific language) for robots and physical computing.
+description: Cylon is a micro-framework for robotics. It provides a simple, but powerful DSL (domain-specific language) for robots and physical computing.
 layout: home
 ---
 
+-#:markdown
+  -### Can't wait?
+
+  -#We're currently working really hard to get everything ready for you to use, but it will take some time.
+
+  -#Want to be part of the revolution?
+
+  -#- Join us on IRC:   `#cylon @ irc.freenode.net`
+  -#- Join us on our [Trello Board](https://trello.com/b/l1aEuqMU/cylon).
+
 :markdown
-  ## Can't wait?
+  ## About
+  
+  Cylon.js is a JavaScript framework for robotics and physical computing using node.js.
 
-  We're currently working really hard to get everything ready for you to use, but it will take some time.
+  It provides a simple, yet powerful way to create solutions that incorporate multiple, different hardware devices at the same time.
 
-  Want to be part of the revolution?
+  Want to use Ruby on robots? Check out our sister project Artoo [(http://artoo.io)](http://artoo.io).
 
-  - Join us on IRC:   `#cylon @ irc.freenode.net`
-  - Join us on our [Trello Board](https://trello.com/b/l1aEuqMU/cylon).
+:markdown
+  ## Meet The Code
+  Cylon.js’s simple code makes telling robots what to do incredibly simple and fun.
 
+  All you need to get started is the `cylon` module
+
+      :::javascript
+      npm install cylon
+
+   Then hook it up to your robot (in this case, a [Sphero](http://gosphero.com)):
+
+      :::javascript
+      connection:
+        name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'
+
+      device:
+        name: 'sphero', driver: 'sphero'
+
+  And tell it what to do!
+
+      :::javascript
+      work: function(my) {
+        every((1).second(), function() { 
+          my.sphero.roll(60, Math.floor(Math.random() * 360));
+        });
+      }
