@@ -29,6 +29,7 @@ namespace "Api", ->
       @server.get "/robots/:robotid", @getRobotByName
       @server.get "/robots/:robotid/devices", @getDevices
       @server.get "/robots/:robotid/devices/:deviceid", @getDeviceByName
+      @server.get "/robots/:robotid/devices/:deviceid/commands", @getDeviceCommands
 
       @server.listen @port, @host, =>
         Logger.info "#{@server.name} is listening at #{@server.url}"
@@ -50,3 +51,10 @@ namespace "Api", ->
 
       master.findRobotDevice robotid, deviceid, (err, device) ->
         res.send if err then err else device.data()
+
+    getDeviceCommands: (req, res, next) ->
+      robotid = req.params.robotid
+      deviceid = req.params.deviceid
+
+      master.findRobotDevice robotid, deviceid, (err, device) ->
+        res.send if err then err else device.data().commands
