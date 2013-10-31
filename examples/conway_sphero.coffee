@@ -10,7 +10,7 @@ bots = [
 Green = 0x0000FF
 Red = 0xFF0000
 
-ConwayRobot =
+class ConwayRobot
   connection:
     name: 'Sphero', adaptor: 'sphero'
 
@@ -65,7 +65,7 @@ ConwayRobot =
 
       
 for bot in bots
-  robot = Object.create(ConwayRobot)
+  robot = new ConwayRobot
   robot.connection.port = bot.port
   robot.name = bot.name
   Cylon.robot robot
