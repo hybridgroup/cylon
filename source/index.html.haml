@@ -30,21 +30,27 @@ layout: home
       :::javascript
       npm install cylon-sphero
 
-  Then hook it up to your robot:
+  Now write your robot code. Require Cylon.js, and create a robot:
 
       :::javascript
-      connection:
-        name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'
+      var Cylon = require('cylon');
 
-      device:
-        name: 'sphero', driver: 'sphero'
+      // Initialize the robot
+      Cylon.robot({
 
-  And tell it what to do!
+  Then tell the robot code about your hardware to hook it up:
+
+      :::javascript
+      connection: {name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'},
+
+      device: {name: 'ball', driver: 'sphero'},
+
+  And tell it what work to do!
 
       :::javascript
       work: function(my) {
         every((1).second(), function() { 
-          my.sphero.roll(60, Math.floor(Math.random() * 360));
+          my.ball.roll(60, Math.floor(Math.random() * 360));
         });
       }
 

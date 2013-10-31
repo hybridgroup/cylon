@@ -19,16 +19,16 @@ layout: page
   Go to the Node.js downloads page at 
   = link_to "http://nodejs.org/download/", "http://nodejs.org/download/" 
   download the installer file and run it.
-  %h3 Windows
-  %p 
-  Go to the Node.js downloads page at 
-  = link_to "http://nodejs.org/download/", "http://nodejs.org/download/" 
-  download the installer file and run it.
   %h3 Ubuntu
   %p 
   Follow the installation instructions at 
   =link_to "https://github.com/joyent/node/wiki/Installation", "https://github.com/joyent/node/wiki/Installation" 
   to install the latest Node.js
+  %h3 Windows
+  %p 
+  Go to the Node.js downloads page at 
+  = link_to "http://nodejs.org/download/", "http://nodejs.org/download/" 
+  download the installer file and run it.
 
 %section.cylon-installation
   %h2 How to Install Cylon.js
@@ -37,13 +37,13 @@ layout: page
 
   %h3 OSX
   :markdown
-        :::ruby
+        :::javascript
         npm install cylon
         npm install cylon-firmata
 
   %h3 Ubuntu
   :markdown
-        :::ruby
+        :::javascript
         npm install cylon
         npm install cylon-firmata
 
@@ -51,8 +51,29 @@ layout: page
   %p
     Windows setup for cylon.
 
+  %section.cylon-running
+  %h2 Cylon.js Robots
+  %h3 Writing your robot code:
+
+  %p 
+  Now you are ready to write your own code. Take a look at the examples below, or go to the 
+  = link_to "examples", "https://github.com/hybridgroup/cylon/tree/master/examples" 
+  directory for a whole bunch of code you can use to help get started. We recommend using Test-Driven Robotics (TDR) with your preferred test frameworks.
+
+  %h3 Running your robot:
+
+  :markdown
+        :::javascript
+        node robotfilename.js
+
+  %p or
+  
+  :markdown
+        :::javascript
+        coffee robotfilename.coffee
+
 %section.cylon-code
-  %h2 Cylon.js code examples
+  %h2 Cylon.js Code Examples
 
   %h3 Example: Arduino with LED and a button
   :markdown
@@ -61,7 +82,6 @@ layout: page
   :markdown
         :::javascript
        
-
         var Cylon = require('cylon');
 
         Cylon.robot({
@@ -73,10 +93,11 @@ layout: page
             my.button.on('push', function() {my.led.toggle()});
           }
         }).start();
+
   %h4 CoffeeScript
   :markdown
         :::javascript
-        Cylon = require('cylon')
+        Cylon = require 'cylon'
 
         Cylon.robot
           connection:
@@ -92,8 +113,6 @@ layout: page
             my.button.on 'push', -> my.led.toggle()
 
         .start()
-  
-
 
   %h3 Parrot ARDrone 2.0
   :markdown
@@ -122,7 +141,7 @@ layout: page
   %h4 CoffeeScript 
   :markdown
         :::javascript
-        Cylon = require('cylon')
+        Cylon = require 'cylon'
 
         Cylon.robot
           connection:
@@ -141,28 +160,6 @@ layout: page
               my.drone.stop()
 
         .start()
-  
-
-  %section.cylon-running
-  %h2 Cylon.js Robots
-  %h3 Writing your robot code:
-
-  %p 
-  Now you are ready to write your own code. Take a look at the examples below, or go to the 
-  = link_to "examples", "https://github.com/hybridgroup/cylon/tree/master/examples" 
-  directory for a whole bunch of code you can use to help get started. We recommend using Test-Driven Robotics (TDR) with your preferred test frameworks.
-
-  %h3 Running your robot:
-
-  :markdown
-        :::ruby
-        node robotfilename.js
-
-  %p or
-  
-  :markdown
-        :::ruby
-        coffee robotfilename.coffee
 
 %section.contributing
   %h2 Contributing
