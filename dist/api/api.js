@@ -36,8 +36,8 @@
         this.io = socketio.listen(this.server);
         this.server.get("/robots", this.getRobots);
         this.server.get("/robots/:robotid", this.getRobotByName);
-        this.server.get("/robots/:robotid/devices", this.getRobotDevices);
-        this.server.get("/robots/:robotid/devices/:deviceid", this.getRobotDeviceByName);
+        this.server.get("/robots/:robotid/devices", this.getDevices);
+        this.server.get("/robots/:robotid/devices/:deviceid", this.getDeviceByName);
         this.server.listen(this.port, this.host, function() {
           return Logger.info("" + _this.server.name + " is listening at " + _this.server.url);
         });
@@ -63,13 +63,13 @@
         });
       };
 
-      Server.prototype.getRobotDevices = function(req, res, next) {
+      Server.prototype.getDevices = function(req, res, next) {
         return master.findRobot(req.params.robotid, function(err, robot) {
           return res.send(err ? err : robot.data().devices);
         });
       };
 
-      Server.prototype.getRobotDeviceByName = function(req, res, next) {
+      Server.prototype.getDeviceByName = function(req, res, next) {
         var deviceid, robotid;
         robotid = req.params.robotid;
         deviceid = req.params.deviceid;

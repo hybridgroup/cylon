@@ -27,8 +27,8 @@ namespace "Api", ->
 
       @server.get "/robots", @getRobots
       @server.get "/robots/:robotid", @getRobotByName
-      @server.get "/robots/:robotid/devices", @getRobotDevices
-      @server.get "/robots/:robotid/devices/:deviceid", @getRobotDeviceByName
+      @server.get "/robots/:robotid/devices", @getDevices
+      @server.get "/robots/:robotid/devices/:deviceid", @getDeviceByName
 
       @server.listen @port, @host, =>
         Logger.info "#{@server.name} is listening at #{@server.url}"
@@ -40,11 +40,11 @@ namespace "Api", ->
       master.findRobot req.params.robotid, (err, robot) ->
         res.send if err then err else robot.data()
 
-    getRobotDevices: (req, res, next) ->
+    getDevices: (req, res, next) ->
       master.findRobot req.params.robotid, (err, robot) ->
         res.send if err then err else robot.data().devices
 
-    getRobotDeviceByName: (req, res, next) ->
+    getDeviceByName: (req, res, next) ->
       robotid = req.params.robotid
       deviceid = req.params.deviceid
 
