@@ -13,7 +13,7 @@ layout: page
 
 
 %section.how-to
-  %h2 How to setup Node.js (required to use Cylon.js)
+  %h2 How to Install Node.js
   %h3 OSX
   %p 
   Go to the Node.js downloads page at 
@@ -29,41 +29,9 @@ layout: page
   Follow the installation instructions at 
   =link_to "https://github.com/joyent/node/wiki/Installation", "https://github.com/joyent/node/wiki/Installation" 
   to install the latest Node.js
-  
-  %h2 How to Install
-  %p Install the module with: 
-  :markdown
-        :::javascript
-        npm install cylon 
-  :markdown
-    Then install modules for whatever hardware support you want to use from your robot. For example, `npm install cylon-firmata` to use Cylon with an Arduino using the Firmata protocol.
-  
-  %h2 Hardware Support
-  %p
-    Cylon.js has a extensible system for connecting to hardware devices. The following robotics and physical computing platforms are currently supported:
-    %ul
-      %li
-        = link_to "Arduino", "http://www.arduino.cc/" 
-        &lt;==&gt;
-        = link_to "Adaptor", "https://github.com/hybridgroup/cylon-firmata"
-      %li
-        = link_to "Ardrone", "http://ardrone2.parrot.com/" 
-        &lt;==&gt;
-        = link_to "Adaptor", "https://github.com/hybridgroup/cylon-ardrone"
-      %li
-        = link_to "Sphero", "http://www.gosphero.com/" 
-        &lt;==&gt;
-        = link_to "Adaptor", "https://github.com/hybridgroup/cylon-sphero"
-  %p Support for common shared device drivers, is provded using the General Purpose Input/Output (GPIO) module:
-  %ul
-    %li
-      = link_to "GPIO", "https://en.wikipedia.org/wiki/General_Purpose_Input/Output" 
-      &lt;==&gt;
-      = link_to "Drivers", "https://github.com/hybridgroup/cylon-gpio"  
-  %p More platforms and drivers are coming soon...
 
 %section.cylon-installation
-  %h2 How to setup Cylon.js
+  %h2 How to Install Cylon.js
   :markdown
     In order to use Cylon.js, you must install the Cylon.js node modules needed to control your particular hardware setup. For example, to use Cylon.js with an Arduino, you will need to install the `cylon-firmata` module. Check out these examples:
 
@@ -82,8 +50,6 @@ layout: page
   %h3 Windows
   %p
     Windows setup for cylon.
-
-
 
 %section.cylon-code
   %h2 Cylon.js code examples
