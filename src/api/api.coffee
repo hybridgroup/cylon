@@ -25,10 +25,23 @@ namespace "Api", ->
       @server = restify.createServer(name: "Cylon API Server")
       @io = socketio.listen @server
 
-      @server.get "/", @getRobots
+      @server.get "/robots", @getRobots
+      @server.get "/robots/:robotid", @getRobotByName
+      @server.get "/robots/:robotid/devices", @getRobotDevices
 
       @server.listen @port, @host, =>
         Logger.info "#{@server.name} is listening at #{@server.url}"
 
     getRobots: (req, res, next) ->
       res.send (robot.data() for robot in master.robots())
+
+    getRobotByName: (req, res, next) ->
+      robot = master.findRobot(req.params.robotid)
+      if robot
+        res.send robot.data()
+      else
+        res.send {error: "No robot with that name exists."}
+
+    getRobotDevices: (req, res, next) ->
+      robot = master.findRobot(req.params.robotid)
+      res.send robot.data().devices

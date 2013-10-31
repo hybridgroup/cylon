@@ -38,6 +38,10 @@ class Cylon
 
     robots: -> robots
 
+    findRobot: (name) ->
+      for robot in robots
+        return robot if robot.name is name
+
     start: ->
       do @startAPI
       robot.start() for robot in robots

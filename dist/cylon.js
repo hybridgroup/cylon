@@ -64,6 +64,16 @@
         return robots;
       };
 
+      Master.prototype.findRobot = function(name) {
+        var robot, _i, _len;
+        for (_i = 0, _len = robots.length; _i < _len; _i++) {
+          robot = robots[_i];
+          if (robot.name === name) {
+            return robot;
+          }
+        }
+      };
+
       Master.prototype.start = function() {
         var robot, _i, _len, _results;
         this.startAPI();

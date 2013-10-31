@@ -34,7 +34,9 @@
           name: "Cylon API Server"
         });
         this.io = socketio.listen(this.server);
-        this.server.get("/", this.getRobots);
+        this.server.get("/robots", this.getRobots);
+        this.server.get("/robots/:robotid", this.getRobotByName);
+        this.server.get("/robots/:robotid/devices", this.getRobotDevices);
         this.server.listen(this.port, this.host, function() {
           return Logger.info("" + _this.server.name + " is listening at " + _this.server.url);
         });
@@ -52,6 +54,24 @@
           }
           return _results;
         })());
+      };
+
+      Server.prototype.getRobotByName = function(req, res, next) {
+        var robot;
+        robot = master.findRobot(req.params.robotid);
+        if (robot) {
+          return res.send(robot.data());
+        } else {
+          return res.send({
+            error: "No robot with that name exists."
+          });
+        }
+      };
+
+      Server.prototype.getRobotDevices = function(req, res, next) {
+        var robot;
+        robot = master.findRobot(req.params.robotid);
+        return res.send(robot.data().devices);
       };
 
       return Server;
