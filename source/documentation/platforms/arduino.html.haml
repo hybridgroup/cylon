@@ -19,9 +19,7 @@ layout: page
       = succeed "." do
         = link_to "here", "http://arduino.cc/", target: :blank
 
-    %p
-      Want to use Ruby on robots? Check out our sister project Artoo 
-      =link_to "(http://artoo.io)", "http://artoo.io", target: "blanck"
+    
 
   %section.how_to
     %h2 How to install
@@ -102,8 +100,8 @@ layout: page
         = partial "documentation/partials/button"
         = partial "documentation/partials/led"
         = #partial "documentation/partials/maxbotix"
-        = #partial "documentation/partials/motor"
-        = #partial "documentation/partials/servo"
+        = partial "documentation/partials/motor"
+        = partial "documentation/partials/servo"
         = #partial "documentation/partials/blinkm"
         = #partial "documentation/partials/hmc6352-compass"
         = #partial "documentation/partials/wiichuck"
