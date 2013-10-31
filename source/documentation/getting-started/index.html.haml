@@ -82,15 +82,17 @@ layout: page
         :::javascript
        
 
-        var robot = Cylon.robot({
+        var Cylon = require('..');
+
+        Cylon.robot({
           connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
-          device: { name: 'led', driver: 'led', pin: 13 },
+          devices: [{name: 'led', driver: 'led', pin: 13},
+                    {name: 'button', driver: 'button', pin: 2}],
 
           work: function(my) {
-            // we do our thing here
-            every((1).second(), function() { my.led.toggle(); });
+            my.button.on('push', function() {my.led.toggle()});
           }
-        });
+        }).start();
 
 
   %h3 Parrot ARDrone 2.0
