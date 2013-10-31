@@ -7,37 +7,30 @@ description: Cylon is a micro-framework for robotics. It provides a simple, but 
 layout: home
 ---
 
--#:markdown
-  -### Can't wait?
-
-  -#We're currently working really hard to get everything ready for you to use, but it will take some time.
-
-  -#Want to be part of the revolution?
-
-  -#- Join us on IRC:   `#cylon @ irc.freenode.net`
-  -#- Join us on our [Trello Board](https://trello.com/b/l1aEuqMU/cylon).
-
-     
-
 :markdown
   ## About
   
-  Cylon.js is a JavaScript framework for robotics and physical computing using node.js.
+  Cylon.js is a JavaScript framework for robotics and physical computing using Node.js.
 
   It provides a simple, yet powerful way to create solutions that incorporate multiple, different hardware devices at the same time.
 
   Want to use Ruby on robots? Check out our sister project Artoo [(http://artoo.io)](http://artoo.io).
 
-:markdown
   ## Meet The Code
-  Cylon.js’s simple code makes telling robots what to do incredibly simple and fun.
 
-  All you need to get started is the `cylon` module
+  Cylon.js’s makes commanding robots incredibly simple and fun.
+
+  All you need to get started is the `cylon` module:
 
       :::javascript
       npm install cylon
 
-   Then hook it up to your robot (in this case, a [Sphero](http://gosphero.com)):
+  ... and whichever `cylon` module is needed for your specific hardware (in this case, a [Sphero](http://gosphero.com)):
+
+      :::javascript
+      npm install cylon-sphero
+
+  Then hook it up to your robot:
 
       :::javascript
       connection:
@@ -54,3 +47,12 @@ layout: home
           my.sphero.roll(60, Math.floor(Math.random() * 360));
         });
       }
+
+  ## Getting Started
+
+  Ready to build JavaScript robots with Cylon.js? [Get Started!](/documentation/getting-started)
+
+  ## Want to be part of the evolution?
+
+  - Join us on IRC:   `#cylon @ irc.freenode.net`
+  - Join us on our [Trello Board](https://trello.com/b/l1aEuqMU/cylon).

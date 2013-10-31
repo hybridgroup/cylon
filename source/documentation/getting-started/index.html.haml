@@ -1,7 +1,7 @@
 ---
 title: Cylon.js Getting Started
 author: The Hybrid Group
-description: Artoo Platforms
+description: Cylon.js Getting Started
 page_title: Getting Started
 page_subtitle: A Guide by Humans, for Humans.
 layout: page
@@ -11,14 +11,20 @@ layout: page
 
   = partial "../what_is_cylon"
 
+
 %section.how-to
-  %h2 How to setup your Node.js environment
-  %h3 OSX and Windows
+  %h2 How to setup Node.js (required to use Cylon.js)
+  %h3 OSX
   %p 
   Go to the Node.js downloads page at 
   = link_to "http://nodejs.org/download/", "http://nodejs.org/download/" 
   download the installer file and run it.
-  %h3 Linux
+  %h3 Windows
+  %p 
+  Go to the Node.js downloads page at 
+  = link_to "http://nodejs.org/download/", "http://nodejs.org/download/" 
+  download the installer file and run it.
+  %h3 Ubuntu
   %p 
   Follow the installation instructions at 
   =link_to "https://github.com/joyent/node/wiki/Installation", "https://github.com/joyent/node/wiki/Installation" 
@@ -56,19 +62,64 @@ layout: page
       = link_to "Drivers", "https://github.com/hybridgroup/cylon-gpio"  
   %p More platforms and drivers are coming soon...
 
+%section.cylon-installation
+  %h2 How to setup Cylon.js
+  :markdown
+    In order to use Cylon.js, you must install the Cylon.js node modules needed to control your particular hardware setup. For example, to use Cylon.js with an Arduino, you will need to install the `cylon-firmata` module. Check out these examples:
+
+  %h3 OSX
+  :markdown
+        :::ruby
+        npm install cylon
+        npm install cylon-firmata
+
+  %h3 Ubuntu
+  :markdown
+        :::ruby
+        npm install cylon
+        npm install cylon-firmata
+
+  %h3 Windows
   %p
-    Do you have some hardware that is not yet supported by Cylon? We want to help you, help us, help them! Get in touch...
+    Windows setup for cylon.
 
-%section.artoo-code
-  %h2 Examples
 
-  :markdown 
-    **Note**: before running examples in the `examples/` dir from source, make sure to compile using `grunt coffee` first.
+
+%section.cylon-code
+  %h2 Cylon.js code examples
+
+  %h3 Example: Arduino with LED and a button
+  :markdown
+    To use this example, you must first run `npm install cylon-firmata`
+
+  %h4 CoffeeScript
+  :markdown
+        :::javascript
+        Cylon = require('cylon')
+
+        Cylon.robot
+          connection:
+            name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
+
+          devices:
+            [
+              {name: 'led', driver: 'led', pin: 13},
+              {name: 'button', driver: 'button', pin: 2}
+            ]
+
+          work: (my) ->
+            my.button.on 'push', -> my.led.toggle()
+
+        .start()
+
+  %h3 Parrot ARDrone 2.0
+  :markdown
+    To use this example, you must first run `npm install cylon-ardrone`
 
   %h4 Javascript
   :markdown
         :::javascript
-        var Cylon = require("cylon");
+       
 
         var robot = Cylon.robot({
           connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
@@ -80,7 +131,6 @@ layout: page
           }
         });
 
-        robot.start();
 
   %h4 CoffeeScript 
   :markdown
@@ -100,10 +150,12 @@ layout: page
 
         robot.start() 
 
+  %section.cylon-running
+  %h2 Cylon.js Robots
   %h3 Writing your robot code:
 
   %p 
-  Now you are ready to write your own code. Take a look at the 
+  Now you are ready to write your own code. Take a look at the examples below, or go to the 
   = link_to "examples", "https://github.com/hybridgroup/cylon/tree/master/examples" 
   directory for a whole bunch of code you can use to help get started. We recommend using Test-Driven Robotics (TDR) with your preferred test frameworks.
 
@@ -118,7 +170,6 @@ layout: page
   :markdown
         :::ruby
         coffee robotfilename.coffee
-
 
 %section.contributing
   %h2 Contributing
