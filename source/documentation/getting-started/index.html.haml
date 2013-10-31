@@ -12,113 +12,93 @@ layout: page
   = partial "../what_is_cylon"
 
 %section.how-to
-  %h2 How to setup your node environment
+  %h2 How to setup your Node.js environment
+  %h3 OSX and Windows
+  %p 
+  Go to the Node.js downloads page at 
+  = link_to "http://nodejs.org/download/", "http://nodejs.org/download/" 
+  download the installer file and run it.
+  %h3 Linux
+  %p 
+  Follow the installation instructions at 
+  =link_to "https://github.com/joyent/node/wiki/Installation", "https://github.com/joyent/node/wiki/Installation" 
+  to install the latest Node.js
+  
+  %h2 How to Install
+  %p Install the module with: 
+  :markdown
+        :::javascript
+        npm install cylon 
+  :markdown
+    Then install modules for whatever hardware support you want to use from your robot. For example, `npm install cylon-firmata` to use Cylon with an Arduino using the Firmata protocol.
+  
+  %h2 Hardware Support
   %p
-    Coming soon.
-
-  %p
-    Cylon.js also has support for devices that can work across multiple hardware platforms.
+    Cylon.js has a extensible system for connecting to hardware devices. The following robotics and physical computing platforms are currently supported:
     %ul
       %li
-        General Purpose Input/Output (GPIO) devices &lt;==&gt;
-        = link_to "Drivers", "/documentation/drivers/"
+        = link_to "Arduino", "http://www.arduino.cc/" 
+        &lt;==&gt;
+        = link_to "Adaptor", "https://github.com/hybridgroup/cylon-firmata"
       %li
-        i2c devices &lt;==&gt;
-        = link_to "Drivers", "/documentation/drivers/"
+        = link_to "Ardrone", "http://ardrone2.parrot.com/" 
+        &lt;==&gt;
+        = link_to "Adaptor", "https://github.com/hybridgroup/cylon-ardrone"
+      %li
+        = link_to "Sphero", "http://www.gosphero.com/" 
+        &lt;==&gt;
+        = link_to "Adaptor", "https://github.com/hybridgroup/cylon-sphero"
+  %p Support for common shared device drivers, is provded using the General Purpose Input/Output (GPIO) module:
+  %ul
+    %li
+      = link_to "GPIO", "https://en.wikipedia.org/wiki/General_Purpose_Input/Output" 
+      &lt;==&gt;
+      = link_to "Drivers", "https://github.com/hybridgroup/cylon-gpio"  
+  %p More platforms and drivers are coming soon...
 
   %p
     Do you have some hardware that is not yet supported by Cylon? We want to help you, help us, help them! Get in touch...
 
 %section.artoo-code
-  %h2 Code to control robots with Cylon.js
+  %h2 Examples
 
-  %h3 Example: Arduino with LED and a button
-  %h4 CoffeeScript
+  :markdown 
+    **Note**: before running examples in the `examples/` dir from source, make sure to compile using `grunt coffee` first.
+
+  %h4 Javascript
   :markdown
         :::javascript
-        Cylon = require('..')
+        var Cylon = require("cylon");
 
-        Cylon.robot
+        var robot = Cylon.robot({
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+          device: { name: 'led', driver: 'led', pin: 13 },
+
+          work: function(my) {
+            // we do our thing here
+            every((1).second(), function() { my.led.toggle(); });
+          }
+        });
+
+        robot.start();
+
+  %h4 CoffeeScript 
+  :markdown
+        :::javascript
+        Cylon = require "cylon"
+
+        robot = Cylon.robot
           connection:
             name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
 
-          devices:
-            [
-              {name: 'led', driver: 'led', pin: 13},
-              {name: 'button', driver: 'button', pin: 2}
-            ]
+          device:
+            name: 'led', driver: 'led', pin: 13
 
           work: (my) ->
-            my.button.on 'push', -> my.led.toggle()
+            # we do our thing here
+            every 1.second(), -> my.led.toggle()
 
-        .start()
-
-  %h3 Parrot ARDrone 2.0
-  %h4 CoffeeScript
-
-  :markdown
-        :::javascript
-        Cylon = require('..')
-
-        Cylon.robot
-          connection:
-            name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1'
-
-          device:
-            name: 'drone', driver: 'ardrone'
-
-          work: (my) ->
-            my.drone.takeoff()
-
-            after 10.seconds(), ->
-              my.drone.land()
-
-            after 15.seconds(), ->
-              my.drone.stop()
-
-        .start()
-
-%section.installation
-
-  %h3 Installation
-
-  :markdown
-        :::javascript
-        npm install cylon
-  %p
-    Then install the modules required by the hardware you want to use. For
-    example, if you wanted to use multiple Spheros:
-  %h4 CoffeeScript  
-
-  :markdown
-        :::javascript
-        Cylon = require '..'
-
-        bots = [
-          { port: '/dev/rfcomm0', name: 'Thelma' },
-          { port: '/dev/rfcomm1', name: 'Louise' }
-        ]
-
-        SpheroRobot =
-          connection:
-            name: 'Sphero', adaptor: 'sphero'
-
-          device:
-            name: 'sphero', driver: 'sphero'
-
-          work: (me) ->
-            every 1.seconds(), ->
-              Logger.info me.name
-              me.sphero.setRGB Math.floor(Math.random() * 100000)
-              me.sphero.roll 60, Math.floor(Math.random() * 360)
-
-        for bot in bots
-          robot = Object.create(SpheroRobot)
-          robot.connection.port = bot.port
-          robot.name = bot.name
-          Cylon.robot robot
-
-        Cylon.start()
+        robot.start() 
 
   %h3 Writing your robot code:
 
