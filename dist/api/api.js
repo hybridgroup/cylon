@@ -37,6 +37,7 @@
         this.server.get("/robots", this.getRobots);
         this.server.get("/robots/:robotid", this.getRobotByName);
         this.server.get("/robots/:robotid/devices", this.getRobotDevices);
+        this.server.get("/robots/:robotid/devices/:deviceid", this.getRobotDeviceByName);
         this.server.listen(this.port, this.host, function() {
           return Logger.info("" + _this.server.name + " is listening at " + _this.server.url);
         });
@@ -72,6 +73,20 @@
         var robot;
         robot = master.findRobot(req.params.robotid);
         return res.send(robot.data().devices);
+      };
+
+      Server.prototype.getRobotDeviceByName = function(req, res, next) {
+        var deviceName, robot, robotName;
+        robotName = req.params.robotid;
+        deviceName = req.params.deviceid;
+        robot = master.findRobot(robotName);
+        if (robot.devices[deviceName]) {
+          return res.send(robot.devices[deviceName].data());
+        } else {
+          return res.send({
+            error: "Robot " + robotName + " does not have a device " + deviceName
+          });
+        }
       };
 
       return Server;

@@ -28,6 +28,7 @@ namespace "Api", ->
       @server.get "/robots", @getRobots
       @server.get "/robots/:robotid", @getRobotByName
       @server.get "/robots/:robotid/devices", @getRobotDevices
+      @server.get "/robots/:robotid/devices/:deviceid", @getRobotDeviceByName
 
       @server.listen @port, @host, =>
         Logger.info "#{@server.name} is listening at #{@server.url}"
@@ -45,3 +46,15 @@ namespace "Api", ->
     getRobotDevices: (req, res, next) ->
       robot = master.findRobot(req.params.robotid)
       res.send robot.data().devices
+
+    getRobotDeviceByName: (req, res, next) ->
+      robotName = req.params.robotid
+      deviceName = req.params.deviceid
+
+      robot = master.findRobot robotName
+
+      if robot.devices[deviceName]
+        res.send robot.devices[deviceName].data()
+      else
+        res.send
+          error: "Robot #{robotName} does not have a device #{deviceName}"
