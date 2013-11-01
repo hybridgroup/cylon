@@ -37,7 +37,7 @@
         });
         this.routes(this.server);
         this.server.listen(this.port, this.host, function() {
-          return Logger.info("" + _this.server.name + " is listening at " + _this.server.url);
+          return Logger.info("" + _this.server.name + " is listening at " + _this.host + ":" + _this.port);
         });
       }
 

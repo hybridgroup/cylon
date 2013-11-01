@@ -32,7 +32,7 @@ namespace "Api", ->
       @routes @server
 
       @server.listen @port, @host, =>
-        Logger.info "#{@server.name} is listening at #{@server.url}"
+        Logger.info "#{@server.name} is listening at #{@host}:#{@port}"
 
     routes: (server) ->
       server.get "/robots", @getRobots
