@@ -57,6 +57,16 @@ class Cylon
 
         if callback then callback(error, device) else device
 
+    findRobotConnection: (robotid, connid, callback) ->
+      @findRobot robotid, (err, robot) ->
+        callback(err, robot) if err
+
+        connection = robot.connections[connid] if robot.connections[connid]
+        unless connection?
+          error = { error: "No connection found with the name #{connection}." }
+
+        if callback then callback(error, connection) else connection
+
     start: ->
       do @startAPI
       robot.start() for robot in robots

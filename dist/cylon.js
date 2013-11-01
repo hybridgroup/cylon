@@ -107,6 +107,28 @@
         });
       };
 
+      Master.prototype.findRobotConnection = function(robotid, connid, callback) {
+        return this.findRobot(robotid, function(err, robot) {
+          var connection, error;
+          if (err) {
+            callback(err, robot);
+          }
+          if (robot.connections[connid]) {
+            connection = robot.connections[connid];
+          }
+          if (connection == null) {
+            error = {
+              error: "No connection found with the name " + connection + "."
+            };
+          }
+          if (callback) {
+            return callback(error, connection);
+          } else {
+            return connection;
+          }
+        });
+      };
+
       Master.prototype.start = function() {
         var robot, _i, _len, _results;
         this.startAPI();

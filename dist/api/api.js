@@ -43,6 +43,8 @@
         this.server.get("/robots/:robotid/devices/:deviceid", this.getDeviceByName);
         this.server.get("/robots/:robotid/devices/:deviceid/commands", this.getDeviceCommands);
         this.server.post("/robots/:robotid/devices/:deviceid/commands/:commandid", this.runDeviceCommand);
+        this.server.get("/robots/:robotid/connections", this.getConnections);
+        this.server.get("/robots/:robotid/connections/:connectionid", this.getConnectionByName);
         this.server.listen(this.port, this.host, function() {
           return Logger.info("" + _this.server.name + " is listening at " + _this.server.url);
         });
@@ -114,6 +116,21 @@
           return res.send({
             result: result
           });
+        });
+      };
+
+      Server.prototype.getConnections = function(req, res, next) {
+        return master.findRobot(req.params.robotid, function(err, robot) {
+          return res.send(err ? err : robot.data().connections);
+        });
+      };
+
+      Server.prototype.getConnectionByName = function(req, res, next) {
+        var connectionid, robotid;
+        robotid = req.params.robotid;
+        connectionid = req.params.connectionid;
+        return master.findRobotConnection(robotid, connectionid, function(err, connection) {
+          return res.send(err ? err : connection.data());
         });
       };
 

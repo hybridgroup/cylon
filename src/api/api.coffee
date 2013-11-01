@@ -33,6 +33,8 @@ namespace "Api", ->
       @server.get "/robots/:robotid/devices/:deviceid", @getDeviceByName
       @server.get "/robots/:robotid/devices/:deviceid/commands", @getDeviceCommands
       @server.post "/robots/:robotid/devices/:deviceid/commands/:commandid", @runDeviceCommand
+      @server.get "/robots/:robotid/connections", @getConnections
+      @server.get "/robots/:robotid/connections/:connectionid", @getConnectionByName
 
       @server.listen @port, @host, =>
         Logger.info "#{@server.name} is listening at #{@server.url}"
@@ -75,3 +77,14 @@ namespace "Api", ->
         if err then return res.send err
         result = device[commandid](params...)
         res.send result: result
+
+    getConnections: (req, res, next) ->
+      master.findRobot req.params.robotid, (err, robot) ->
+        res.send if err then err else robot.data().connections
+
+    getConnectionByName: (req, res, next) ->
+      robotid = req.params.robotid
+      connectionid = req.params.connectionid
+
+      master.findRobotConnection robotid, connectionid, (err, connection) ->
+        res.send if err then err else connection.data()
