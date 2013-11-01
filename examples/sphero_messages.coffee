@@ -9,11 +9,16 @@ Cylon.robot
 
   work: (me) ->
 
-    me.sphero.on('connect', ->
+
+    me.sphero.on 'connect', ->
       Logger.info('Setting up Collision Detection...')
       me.sphero.detectCollisions()
       me.sphero.setRGB(0x00FF00)
-    )
+
+    me.sphero.on 'update', (data) ->
+      Logger.info("Update event eventName -> #{ data } ")
+      Logger.info("Update event args -> ")
+      Logger.info(data)
 
     me.sphero.on 'message', (data) ->
       me.sphero.setRGB(0x0000FF)
