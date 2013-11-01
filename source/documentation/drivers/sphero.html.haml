@@ -32,7 +32,7 @@ layout: page
   
     %function-name abortMacro
     %function-params ()
-    %function-return  → [ID,command number]
+    %function-return  → (ID,command number)
     %function-description 
     %br/ 
     %funtion-name  abortOrbBasicProgram
@@ -42,22 +42,22 @@ layout: page
     %br/ 
     %funtion-name appendMacroChunck
     %function-params ()
-    %function-return  → 
+    %function-return  → Simple Response
     %function-description  
     %br/ 
     %funtion-name appendOrbBasicFragment
     %function-params ()
-    %function-return  → 
+    %function-return  → Simple Response
     %function-description  
     %br/ 
     %funtion-name configureCollisionDetection
-    %function-params ()
-    %function-return  → 
+    %function-params (Meth,(Xt, Yt),(Xspd, Yspd),Dead)
+    %function-return  → Simple Response
     %function-description  
     %br/ 
     %funtion-name configureLocator
-    %function-params ()
-    %function-return  → 
+    %function-params (flag,(x,y),(Yaw,Tare))
+    %function-return  → Simple Response
     %function-description  
     %br/ 
     %funtion-name detectCollisions 
