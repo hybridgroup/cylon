@@ -32,212 +32,257 @@ layout: page
   
     %function-name abortMacro
     %function-params ()
-    %function-return  → (ID,command number)
+    %function-return  → (ID code , command number)
     %function-description 
-    %br/ 
+    %br/
+    %br/  
     %funtion-name  abortOrbBasicProgram
     %function-params ()
     %function-return  → Simple Response
     %function-description 
-    %br/ 
+    %br/
+    %br/  
     %funtion-name appendMacroChunck
-    %function-params ()
+    %function-params (MACRO Chunk)
     %function-return  → Simple Response
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name appendOrbBasicFragment
-    %function-params ()
+    %function-params (Area, Program Code)
     %function-return  → Simple Response
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name configureCollisionDetection
     %function-params (Meth,(Xt, Yt),(Xspd, Yspd),Dead)
     %function-return  → Simple Response
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name configureLocator
-    %function-params (flag,(x,y),(Yaw,Tare))
+    %function-params (flag, x, y, Yaw Tare)
     %function-return  → Simple Response
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name detectCollisions 
     %function-params ()
-    %function-return  → 
+    %function-return  → Simple Response
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name eraseOrbBasicStorage
-    %function-params ()
-    %function-return  → 
+    %function-params (Area)
+    %function-return  → Simple Response
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name executeOrbBasicProgram
-    %function-params ()
-    %function-return  → 
+    %function-params (Area, Start Line, Start Line)
+    %function-return  → Simple Response
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name getApplicationConfigurationBlock
     %function-params ()
-    %function-return  → 
+    %function-return  → Simple Response
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name getConfigurationBlock
-    %function-params ()
-    %function-return  → 
+    %function-params (ID)
+    %function-return  → Simple Response
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name getDeviceMode
     %function-params ()
-    %function-return  → 
+    %function-return  → (Mode), options: 00h (Normal mode) | 01h (User Hack mode)
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name getMacroStatus
     %function-params ()
-    %function-return  → 
+    %function-return  → (ID code , cmd number, cmd number)
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name getPermanentOptionFlags
     %function-params ()
-    %function-return  → 
+    %function-return  → (FLAGS), options: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 6-31
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name getRGB
     %function-params ()
-    %function-return  → 
+    %function-return  → (red,green,blue) | (color)
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name getTemporaryOptionFlags
     %function-params ()
-    %function-return  → 
+    %function-return  → (FLAGS), options: 0 | 1-31
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name reInitializeMacroExecutive
     %function-params ()
-    %function-return  → 
+    %function-return  → Simple Response
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name readLocator
     %function-params ()
-    %function-return  → 
+    %function-return  → (XPOS, YPOS, XVEL, YVEL, SOG)
     %function-description  
+    %br/
+    %br/  
+    %funtion-name roll
+    %function-params (speed, heading, state)
+    %function-return  → Simple Response
     %br/ 
-    %funtion-name roll(speed, heading, state)
-    %function-params ()
-    %function-return  → 
-    %function-description  
+    %function-description  This commands Sphero to roll along the provided vector. Both a speed and a heading are required; the latter is considered relative to the last calibrated direction.
+    %br/ 
     %br/ 
     %funtion-name runMacro
-    %function-params ()
-    %function-return  → 
+    %function-params (SEQ, DLEN, ID)
+    %function-return  → Simple Response
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name saveMacro
-    %function-params ()
-    %function-return  → 
+    %function-params (data)
+    %function-return  → Simple Response
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name saveTemporaryMacro
-    %function-params ()
-    %function-return  → 
+    %function-params (data)
+    %function-return  → Simple Response
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name selfLevel
-    %function-params ()
-    %function-return  → 
+    %function-params (Options, Angle Limit, Timeout, True Time), options: ((0 | 1 | 2 |3 ), (0 | 1 to 90), (0 | 1 to 255), (0 | 1 to 255)
+    %function-return  → Simple Response
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name setAccelerometerRange
-    %function-params ()
-    %function-return  → 
+    %function-params (Range Idx), options: 0 | 1 | 2 | 3
+    %function-return  → Simple Response
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name setApplicationConfigurationBlock
     %function-params ()
-    %function-return  → 
+    %function-return  → Simple Response
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name setBackLED
-    %function-params ()
-    %function-return  → 
+    %function-params (BRIGHT)
+    %function-return  → Simple Response
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name setBoostWithTime
-    %function-params ()
-    %function-return  → 
+    %function-params (STATE)
+    %function-return  → Simple Response
     %function-description  
+    %br/
+    %br/  
+    %funtion-name setColor
+    %function-params (color)
+    %function-return  → Simple Response
     %br/ 
-    %funtion-name setColor(color, persist)
-    %function-params ()
-    %function-return  → 
-    %function-description  
-    %br/ 
+    %function-description This allows you to set the color of the sphero, just pass an array containing RGB hex or a string with one of the color names of the list. 
+    %br/
+    %br/  
     %funtion-name setConfigurationBlock
-    %function-params ()
-    %function-return  → 
+    %function-params (value)
+    %function-return  → Simple Response
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name setDataStreaming
-    %function-params ()
-    %function-return  → 
+    %function-params (N, M, MASK, PCNT, MASK2)
+    %function-return  → Simple Response
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name setDeviceMode
-    %function-params ()
-    %function-return  → 
+    %function-params (MODE)
+    %function-return  → Simple Response
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name setHeading
-    %function-params ()
-    %function-return  → 
+    %function-params (HEADING)
+    %function-return  → Simple Response
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name setMacroParameter
-    %function-params ()
-    %function-return  → 
+    %function-params (Param, Val1, Val2)
+    %function-return  → Simple Response
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name setMotionTimeout
-    %function-params ()
-    %function-return  → 
+    %function-params (TIME)
+    %function-return  → Simple Response
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name setPermanentOptionFlags
-    %function-params ()
-    %function-return  → 
+    %function-params (FLAGS)
+    %function-return  → Simple Response
     %function-description  
+    %br/
+    %br/  
+    %funtion-name setRGB 
+    %function-params (color, persist)
+    %function-return  → Simple Response
     %br/ 
-    %funtion-name setRGB(color, persist) → [color, persist]
-    %function-params ()
-    %function-return  → 
-    %function-description  
-    %br/ 
+    %function-description This allows you to set the RGB LED color, just pass an array containing RGB hex or a string with one of the color names of the list.  
+    %br/
+    %br/  
     %funtion-name setRawMotorValues
-    %function-params ()
-    %function-return  → 
+    %function-params (L-MODE, L-POWER, R-MODE, R-POWER)
+    %function-return  → Simple Response
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name setRotationRate
-    %function-params ()
-    %function-return  → 
+    %function-params (RATE)
+    %function-return  → Simple Response
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name setStabalisation
-    %function-params ()
-    %function-return  → 
+    %function-params (bool)
+    %function-return  → Simple Response
     %function-description  
-    %br/ 
+    %br/
+    %br/  
     %funtion-name setTemporaryOptionFlags
-    %function-params ()
-    %function-return  → 
+    %function-params (FLAGS)
+    %function-return  → Simple Response
     %function-description  
-    %br/ 
-    %funtion-name stop → true | nil
+    %br/
+    %br/  
+    %funtion-name stop 
     %function-params ()
-    %function-return  → 
-    %function-description 
+    %function-return  → Simple Response
     %br/ 
+    %function-description Stops the sphero.
+    %br/
+    %br/  
     %funtion-name submitValueToInputStatement
-    %function-params ()
-    %function-return  → 
+    %function-params (VAL)
+    %function-return  → Simple Response
     %function-description  
 
 
