@@ -6,8 +6,7 @@
  * Licensed under the Apache 2.0 license.
 ###
 
-restify = require 'restify'
-socketio = require 'socket.io'
+express = require('express.io')
 namespace = require 'node-namespace'
 
 namespace "Api", ->
@@ -22,49 +21,59 @@ namespace "Api", ->
 
       master = opts.master
 
-      @server = restify.createServer(name: "Cylon API Server")
-      @io = socketio.listen @server
+      @server = express().http().io()
+      @server.set 'name', 'Cylon API Server'
+      @server.use(express.bodyParser())
 
-      @server.use restify.bodyParser(mapParams: false)
+      @server.get "/*", (req, res, next) ->
+        res.set 'Content-Type', 'application/json'
+        do next
 
-      @server.get "/robots", @getRobots
-      @server.get "/robots/:robotid", @getRobotByName
-      @server.get "/robots/:robotid/devices", @getDevices
-      @server.get "/robots/:robotid/devices/:deviceid", @getDeviceByName
-      @server.get "/robots/:robotid/devices/:deviceid/commands", @getDeviceCommands
-      @server.post "/robots/:robotid/devices/:deviceid/commands/:commandid", @runDeviceCommand
-      @server.get "/robots/:robotid/connections", @getConnections
-      @server.get "/robots/:robotid/connections/:connectionid", @getConnectionByName
+      @routes @server
 
       @server.listen @port, @host, =>
         Logger.info "#{@server.name} is listening at #{@server.url}"
 
-    getRobots: (req, res, next) ->
-      res.send (robot.data() for robot in master.robots())
+    routes: (server) ->
+      server.get "/robots", @getRobots
+      server.get "/robots/:robotid", @getRobotByName
+      server.get "/robots/:robotid/devices", @getDevices
+      server.get "/robots/:robotid/devices/:deviceid", @getDeviceByName
+      server.get "/robots/:robotid/devices/:deviceid/commands", @getDeviceCommands
+      server.post "/robots/:robotid/devices/:deviceid/commands/:commandid", @runDeviceCommand
+      server.get "/robots/:robotid/connections", @getConnections
+      server.get "/robots/:robotid/connections/:connectionid", @getConnectionByName
 
-    getRobotByName: (req, res, next) ->
+      server.get "/robots/:robotid/devices/:deviceid/events", (req, res) ->
+        req.io.route 'events'
+      server.io.route 'events', @ioSetupDeviceEventClient
+
+    getRobots: (req, res) ->
+      res.json (robot.data() for robot in master.robots())
+
+    getRobotByName: (req, res) ->
       master.findRobot req.params.robotid, (err, robot) ->
-        res.send if err then err else robot.data()
+        res.json if err then err else robot.data()
 
-    getDevices: (req, res, next) ->
+    getDevices: (req, res) ->
       master.findRobot req.params.robotid, (err, robot) ->
-        res.send if err then err else robot.data().devices
+        res.json if err then err else robot.data().devices
 
-    getDeviceByName: (req, res, next) ->
+    getDeviceByName: (req, res) ->
       robotid = req.params.robotid
       deviceid = req.params.deviceid
 
       master.findRobotDevice robotid, deviceid, (err, device) ->
-        res.send if err then err else device.data()
+        res.json if err then err else device.data()
 
-    getDeviceCommands: (req, res, next) ->
+    getDeviceCommands: (req, res) ->
       robotid = req.params.robotid
       deviceid = req.params.deviceid
 
       master.findRobotDevice robotid, deviceid, (err, device) ->
-        res.send if err then err else device.data().commands
+        res.json if err then err else device.data().commands
 
-    runDeviceCommand: (req, res, next) ->
+    runDeviceCommand: (req, res) ->
       robotid = req.params.robotid
       deviceid = req.params.deviceid
       commandid = req.params.commandid
@@ -74,17 +83,25 @@ namespace "Api", ->
         params.push(value) for key, value of req.body
 
       master.findRobotDevice robotid, deviceid, (err, device) ->
-        if err then return res.send err
+        if err then return res.json err
         result = device[commandid](params...)
-        res.send result: result
+        res.json result: result
 
-    getConnections: (req, res, next) ->
+    getConnections: (req, res) ->
       master.findRobot req.params.robotid, (err, robot) ->
-        res.send if err then err else robot.data().connections
+        res.json if err then err else robot.data().connections
 
-    getConnectionByName: (req, res, next) ->
+    getConnectionByName: (req, res) ->
       robotid = req.params.robotid
       connectionid = req.params.connectionid
 
       master.findRobotConnection robotid, connectionid, (err, connection) ->
-        res.send if err then err else connection.data()
+        res.json if err then err else connection.data()
+
+    ioSetupDeviceEventClient: (req) ->
+      robotid = req.params.robotid
+      deviceid = req.params.deviceid
+
+      master.findRobotDevice robotid, deviceid, (err, device) ->
+        res.io.respond(err) if err
+        device.on 'update', (data) -> res.io.respond { data: data }

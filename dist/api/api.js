@@ -8,11 +8,9 @@
 
 
 (function() {
-  var namespace, restify, socketio;
+  var express, namespace;
 
-  restify = require('restify');
-
-  socketio = require('socket.io');
+  express = require('express.io');
 
   namespace = require('node-namespace');
 
@@ -30,29 +28,37 @@
         this.host = opts.host || "127.0.0.1";
         this.port = opts.port || "3000";
         master = opts.master;
-        this.server = restify.createServer({
-          name: "Cylon API Server"
+        this.server = express().http().io();
+        this.server.set('name', 'Cylon API Server');
+        this.server.use(express.bodyParser());
+        this.server.get("/*", function(req, res, next) {
+          res.set('Content-Type', 'application/json');
+          return next();
         });
-        this.io = socketio.listen(this.server);
-        this.server.use(restify.bodyParser({
-          mapParams: false
-        }));
-        this.server.get("/robots", this.getRobots);
-        this.server.get("/robots/:robotid", this.getRobotByName);
-        this.server.get("/robots/:robotid/devices", this.getDevices);
-        this.server.get("/robots/:robotid/devices/:deviceid", this.getDeviceByName);
-        this.server.get("/robots/:robotid/devices/:deviceid/commands", this.getDeviceCommands);
-        this.server.post("/robots/:robotid/devices/:deviceid/commands/:commandid", this.runDeviceCommand);
-        this.server.get("/robots/:robotid/connections", this.getConnections);
-        this.server.get("/robots/:robotid/connections/:connectionid", this.getConnectionByName);
+        this.routes(this.server);
         this.server.listen(this.port, this.host, function() {
           return Logger.info("" + _this.server.name + " is listening at " + _this.server.url);
         });
       }
 
-      Server.prototype.getRobots = function(req, res, next) {
+      Server.prototype.routes = function(server) {
+        server.get("/robots", this.getRobots);
+        server.get("/robots/:robotid", this.getRobotByName);
+        server.get("/robots/:robotid/devices", this.getDevices);
+        server.get("/robots/:robotid/devices/:deviceid", this.getDeviceByName);
+        server.get("/robots/:robotid/devices/:deviceid/commands", this.getDeviceCommands);
+        server.post("/robots/:robotid/devices/:deviceid/commands/:commandid", this.runDeviceCommand);
+        server.get("/robots/:robotid/connections", this.getConnections);
+        server.get("/robots/:robotid/connections/:connectionid", this.getConnectionByName);
+        server.get("/robots/:robotid/devices/:deviceid/events", function(req, res) {
+          return req.io.route('events');
+        });
+        return server.io.route('events', this.ioSetupDeviceEventClient);
+      };
+
+      Server.prototype.getRobots = function(req, res) {
         var robot;
-        return res.send((function() {
+        return res.json((function() {
           var _i, _len, _ref, _results;
           _ref = master.robots();
           _results = [];
@@ -64,37 +70,37 @@
         })());
       };
 
-      Server.prototype.getRobotByName = function(req, res, next) {
+      Server.prototype.getRobotByName = function(req, res) {
         return master.findRobot(req.params.robotid, function(err, robot) {
-          return res.send(err ? err : robot.data());
+          return res.json(err ? err : robot.data());
         });
       };
 
-      Server.prototype.getDevices = function(req, res, next) {
+      Server.prototype.getDevices = function(req, res) {
         return master.findRobot(req.params.robotid, function(err, robot) {
-          return res.send(err ? err : robot.data().devices);
+          return res.json(err ? err : robot.data().devices);
         });
       };
 
-      Server.prototype.getDeviceByName = function(req, res, next) {
+      Server.prototype.getDeviceByName = function(req, res) {
         var deviceid, robotid;
         robotid = req.params.robotid;
         deviceid = req.params.deviceid;
         return master.findRobotDevice(robotid, deviceid, function(err, device) {
-          return res.send(err ? err : device.data());
+          return res.json(err ? err : device.data());
         });
       };
 
-      Server.prototype.getDeviceCommands = function(req, res, next) {
+      Server.prototype.getDeviceCommands = function(req, res) {
         var deviceid, robotid;
         robotid = req.params.robotid;
         deviceid = req.params.deviceid;
         return master.findRobotDevice(robotid, deviceid, function(err, device) {
-          return res.send(err ? err : device.data().commands);
+          return res.json(err ? err : device.data().commands);
         });
       };
 
-      Server.prototype.runDeviceCommand = function(req, res, next) {
+      Server.prototype.runDeviceCommand = function(req, res) {
         var commandid, deviceid, key, params, robotid, value, _ref;
         robotid = req.params.robotid;
         deviceid = req.params.deviceid;
@@ -110,27 +116,43 @@
         return master.findRobotDevice(robotid, deviceid, function(err, device) {
           var result;
           if (err) {
-            return res.send(err);
+            return res.json(err);
           }
           result = device[commandid].apply(device, params);
-          return res.send({
+          return res.json({
             result: result
           });
         });
       };
 
-      Server.prototype.getConnections = function(req, res, next) {
+      Server.prototype.getConnections = function(req, res) {
         return master.findRobot(req.params.robotid, function(err, robot) {
-          return res.send(err ? err : robot.data().connections);
+          return res.json(err ? err : robot.data().connections);
         });
       };
 
-      Server.prototype.getConnectionByName = function(req, res, next) {
+      Server.prototype.getConnectionByName = function(req, res) {
         var connectionid, robotid;
         robotid = req.params.robotid;
         connectionid = req.params.connectionid;
         return master.findRobotConnection(robotid, connectionid, function(err, connection) {
-          return res.send(err ? err : connection.data());
+          return res.json(err ? err : connection.data());
+        });
+      };
+
+      Server.prototype.ioSetupDeviceEventClient = function(req) {
+        var deviceid, robotid;
+        robotid = req.params.robotid;
+        deviceid = req.params.deviceid;
+        return master.findRobotDevice(robotid, deviceid, function(err, device) {
+          if (err) {
+            res.io.respond(err);
+          }
+          return device.on('update', function(data) {
+            return res.io.respond({
+              data: data
+            });
+          });
         });
       };
 
