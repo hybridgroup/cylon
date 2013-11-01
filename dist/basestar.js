@@ -35,50 +35,37 @@
         return proxyFunctionsToObject(methods, target, klass, force);
       };
 
-      Basestar.prototype.proxyEvent = function(eventName, onSource, emitSource, updEvt) {
-        var _this = this;
-        if (updEvt == null) {
-          updEvt = false;
-        }
-        return onSource.on(eventName, function() {
+      Basestar.prototype.defineEvent = function(opts) {
+        var sendUpdate, targetEventName,
+          _this = this;
+        targetEventName = opts.targetEventName || opts.eventName;
+        sendUpdate = opts.sendUpdate || false;
+        return opts.source.on(opts.eventName, function() {
           var args;
           args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-          emitSource.emit(eventName, args);
-          if (updEvt) {
-            return emitSource.emit('update', eventName, args);
+          opts.target.emit(targetEventName, args);
+          if (sendUpdate) {
+            return opts.target.emit('update', targetEventName, args);
           }
         });
       };
 
-      Basestar.prototype.proxyAdaptorEvent = function(params) {
-        return this.proxyEvent(params.on, this.connector, this.connection, params.emitUpdate);
-      };
-
-      Basestar.prototype.proxyDriverEvent = function(params) {
-        return this.proxyEvent(params.on, this.connection, this.device, params.emitUpdate);
-      };
-
-      Basestar.prototype.createEvent = function(onEvent, onSource, emitEvent, emitSource, updEvt) {
-        var _this = this;
-        if (updEvt == null) {
-          updEvt = false;
+      Basestar.prototype.defineAdaptorEvent = function(opts) {
+        opts['source'] = this.connector;
+        opts['target'] = this.connection;
+        if (opts['sendUpdate'] == null) {
+          opts['sendUpdate'] = false;
         }
-        return onSource.on(onEvent, function() {
-          var args;
-          args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-          emitSource.emit(emitEvent, args);
-          if (updEvt) {
-            return emitSource.emit('update', emitEvent, args);
-          }
-        });
+        return this.defineEvent(opts);
       };
 
-      Basestar.prototype.createAdaptorEvent = function(params) {
-        return this.createEvent(params.on, this.connector, params.emit, this.connection, params.emitUpdate);
-      };
-
-      Basestar.prototype.createDriverEvent = function(params) {
-        return this.createEvent(params.on, this.connection, params.emit, this.device, params.emitUpdate);
+      Basestar.prototype.defineDriverEvent = function(opts) {
+        opts['source'] = this.connection;
+        opts['target'] = this.device;
+        if (opts['sendUpdate'] == null) {
+          opts['sendUpdate'] = true;
+        }
+        return this.defineEvent(opts);
       };
 
       return Basestar;

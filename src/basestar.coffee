@@ -20,29 +20,31 @@ namespace 'Cylon', ->
     constructor: (opts) ->
       @self = this
 
+    # proxies calls from all methods in klass to target
     proxyMethods: (methods, target, klass, force = false) ->
       proxyFunctionsToObject(methods, target, klass, force)
 
-    proxyEvent: (eventName, onSource, emitSource, updEvt = false) ->
-      onSource.on(eventName, (args...) =>
-        emitSource.emit(eventName, args)
-        emitSource.emit('update', eventName, args) if updEvt
-      )
+    # creates an event handler that proxies events from source object to target
+    defineEvent: (opts) ->
+     targetEventName = opts.targetEventName or opts.eventName
+     sendUpdate = opts.sendUpdate or false
+     opts.source.on opts.eventName, (args...) =>
+       opts.target.emit(targetEventName, args)
+       opts.target.emit('update', targetEventName, args) if sendUpdate
 
-    proxyAdaptorEvent: (params) ->
-      @proxyEvent(params.on, @connector, @connection, params.emitUpdate)
+    # creates an event handler that proxies events from an adaptor object's 'connector'
+    # (object reference to whatever module is actually talking to the hardware)
+    # to the adaptor's associated connection
+    defineAdaptorEvent: (opts) ->
+      opts['source'] = @connector
+      opts['target'] = @connection
+      opts['sendUpdate'] ?= false
+      @defineEvent(opts)
 
-    proxyDriverEvent: (params) ->
-      @proxyEvent(params.on, @connection, @device, params.emitUpdate)
-
-    createEvent: (onEvent, onSource, emitEvent, emitSource, updEvt = false ) ->
-      onSource.on(onEvent, (args...) =>
-        emitSource.emit(emitEvent, args)
-        emitSource.emit('update', emitEvent, args) if updEvt
-      )
-
-    createAdaptorEvent: (params) ->
-      @createEvent(params.on, @connector, params.emit, @connection, params.emitUpdate)
-
-    createDriverEvent: (params) ->
-      @createEvent(params.on, @connection, params.emit, @device, params.emitUpdate)
+    # creates an event handler that proxies events from a driver object's 'connection'
+    # to the driver's associated device
+    defineDriverEvent: (opts) ->
+      opts['source'] = @connection
+      opts['target'] = @device
+      opts['sendUpdate'] ?= true
+      @defineEvent(opts)
