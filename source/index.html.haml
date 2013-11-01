@@ -3,7 +3,7 @@ hero: true
 social: true
 title: CylonJS
 author: The Hybrid Group
-description: Cylon is a micro-framework for robotics. It provides a simple, but powerful DSL (domain-specific language) for robots and physical computing.
+description: Cylon.js is a JavaScript framework for robotics and physical computing using Node.js. It provides a simple, but powerful DSL (domain-specific language) for robots and physical computing.
 layout: home
 ---
 
@@ -36,27 +36,34 @@ layout: home
       var Cylon = require('cylon');
 
       // Initialize the robot
-      Cylon.robot({
+      var robot = Cylon.robot({
 
   Then tell the robot code about your hardware to hook it up:
 
       :::javascript
-      connection: {name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'},
+        connection: {name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'},
 
-      device: {name: 'ball', driver: 'sphero'},
+        device: {name: 'ball', driver: 'sphero'},
 
-  And tell it what work to do!
+  And tell it what work to do. This code tells the Sphero that every second, it should roll around in a random direction:
 
       :::javascript
-      work: function(my) {
-        every((1).second(), function() { 
-          my.ball.roll(60, Math.floor(Math.random() * 360));
-        });
-      }
+        work: function(my) {
+          every((1).second(), function() { 
+            my.ball.roll(60, Math.floor(Math.random() * 360));
+          });
+        }
+      });
+
+  Last, tell the robot to start. That's it!
+
+      :::javascript
+      
+      robot.start();
 
   ## Getting Started
 
-  Ready to build JavaScript robots with Cylon.js? [Get Started!](/documentation/getting-started)
+  Ready to build JavaScript robots with Cylon.js? [Get Started Here!](/documentation/getting-started)
 
 %h2 Hardware Support
 %p
@@ -65,25 +72,25 @@ layout: home
     %li
       = link_to "Arduino", "http://www.arduino.cc/" 
       &lt;==&gt;
-      = link_to "Cylon.js For Firmata Adaptor", "https://github.com/hybridgroup/cylon-firmata"
+      = link_to "Cylon.js for Firmata (Adaptor)", "https://github.com/hybridgroup/cylon-firmata"
     %li
       = link_to "Ardrone", "http://ardrone2.parrot.com/" 
       &lt;==&gt;
-      = link_to "Cylon.js for ARDrone Adaptor/Drivers", "https://github.com/hybridgroup/cylon-ardrone"
+      = link_to "Cylon.js for ARDrone (Adaptor/Drivers)", "https://github.com/hybridgroup/cylon-ardrone"
     %li
       = link_to "Sphero", "http://www.gosphero.com/" 
       &lt;==&gt;
-      = link_to "Cylon.js For Sphero Adaptor/Driver", "https://github.com/hybridgroup/cylon-sphero"
+      = link_to "Cylon.js for Sphero (Adaptor/Driver)", "https://github.com/hybridgroup/cylon-sphero"
 %p Support for common shared device drivers, is provded using the General Purpose Input/Output (GPIO) module:
 %ul
   %li
     = link_to "GPIO", "https://en.wikipedia.org/wiki/General_Purpose_Input/Output" 
     &lt;==&gt;
-    = link_to "Cylon.js For GPIO Drivers", "https://github.com/hybridgroup/cylon-gpio"  
+    = link_to "Cylon.js for GPIO (Drivers)", "https://github.com/hybridgroup/cylon-gpio"  
 %p More platforms and drivers are coming soon...
 
 :markdown
-  ## Want to be part of the evolution?
+  ## Be Part Of The Robot Evolution
 
   - Code on Github:   [https://github.com/hybridgroup/cylon](https://github.com/hybridgroup/cylon)
   - Join us on IRC:   `#cylon @ irc.freenode.net`
