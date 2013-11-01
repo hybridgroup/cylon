@@ -34,11 +34,15 @@
           name: "Cylon API Server"
         });
         this.io = socketio.listen(this.server);
+        this.server.use(restify.bodyParser({
+          mapParams: false
+        }));
         this.server.get("/robots", this.getRobots);
         this.server.get("/robots/:robotid", this.getRobotByName);
         this.server.get("/robots/:robotid/devices", this.getDevices);
         this.server.get("/robots/:robotid/devices/:deviceid", this.getDeviceByName);
         this.server.get("/robots/:robotid/devices/:deviceid/commands", this.getDeviceCommands);
+        this.server.post("/robots/:robotid/devices/:deviceid/commands/:commandid", this.runDeviceCommand);
         this.server.listen(this.port, this.host, function() {
           return Logger.info("" + _this.server.name + " is listening at " + _this.server.url);
         });
@@ -85,6 +89,31 @@
         deviceid = req.params.deviceid;
         return master.findRobotDevice(robotid, deviceid, function(err, device) {
           return res.send(err ? err : device.data().commands);
+        });
+      };
+
+      Server.prototype.runDeviceCommand = function(req, res, next) {
+        var commandid, deviceid, key, params, robotid, value, _ref;
+        robotid = req.params.robotid;
+        deviceid = req.params.deviceid;
+        commandid = req.params.commandid;
+        params = [];
+        if (typeof req.body === 'object') {
+          _ref = req.body;
+          for (key in _ref) {
+            value = _ref[key];
+            params.push(value);
+          }
+        }
+        return master.findRobotDevice(robotid, deviceid, function(err, device) {
+          var result;
+          if (err) {
+            return res.send(err);
+          }
+          result = device[commandid].apply(device, params);
+          return res.send({
+            result: result
+          });
         });
       };
 

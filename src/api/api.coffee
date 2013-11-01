@@ -25,6 +25,8 @@ namespace "Api", ->
       @server = restify.createServer(name: "Cylon API Server")
       @io = socketio.listen @server
 
+      @server.use restify.bodyParser(mapParams: false)
+
       @server.get "/robots", @getRobots
       @server.get "/robots/:robotid", @getRobotByName
       @server.get "/robots/:robotid/devices", @getDevices
@@ -61,3 +63,15 @@ namespace "Api", ->
         res.send if err then err else device.data().commands
 
     runDeviceCommand: (req, res, next) ->
+      robotid = req.params.robotid
+      deviceid = req.params.deviceid
+      commandid = req.params.commandid
+
+      params = []
+      if typeof req.body is 'object'
+        params.push(value) for key, value of req.body
+
+      master.findRobotDevice robotid, deviceid, (err, device) ->
+        if err then return res.send err
+        result = device[commandid](params...)
+        res.send result: result
