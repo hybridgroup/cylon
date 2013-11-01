@@ -32,34 +32,31 @@ layout: page
 
   %section.public-methods
     %h2 Commands:
-
-    %h3 turnOn
-    %p Starts the motor.
     
-    %h3 turnOff
-    %p Stops the motor.
-    
-    %h3 toggle
-    %p Sets the state of the motor to the oposite of the current state, if motor is on then sets it to off.
-
-    %h3 speed(speed_value)
-    %p ets the speed of the motor to the value provided in the speed param, speed value must be an integer between 0 and 255.
-
-    %h3 currentSpeed
-    %p Returns the current speed of the motor as an integer between 0 and 255.
+    %dl.methods 
+      %dt turnOn
+      %dd Starts the motor.
+      %dt turnOff
+      %dd Stops the motor.
+      %dt toggle
+      %dd Sets the state of the motor to the oposite of the current state, if motor is on then sets it to off.
+      %dt speed(speed_value)
+      %dd Sets the speed of the motor to the value provided in the speed param, speed value must be an integer between 0 and 255.
+      %dt currentSpeed
+      %dd Returns the current speed of the motor as an integer between 0 and 255.
 
     %h2 Events
-    %ul 
-      %li
-        %h3 start
-        %p Sent when the device has been started and is ready to use.
 
+    %dl.methods 
+      %dt start
+      %dd Sent when the device has been started and is ready to use.
+ 
   %section.how-to
     %h2 How to use
     %h3 Example of a dc motor with speed changes using PWM.
     :markdown
           :::javascript
-            Cylon = require('..')
+            Cylon = require('cylon')
 
             Cylon.robot
               connection:

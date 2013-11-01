@@ -32,24 +32,21 @@ layout: page
 
   %section.public-methods
     %h2 Commands:
+    
+    %dl.methods 
+      %dt turnOn
+      %dd Turns LED on.
+      %dt turnOff
+      %dd Turns LED off.
+      %dt toggle
+      %dd Turns the LED on, or off, depending on if it is already off, or on, respectively.
 
-    %h3 turnOn
-    %p
-      Turns LED on.
-
-    %h3 turnOff
-    %p
-      Turns LED off.
-
-    %h3 toggle
-    %p
-      Turns the LED on, or off, depending on if it is already off, or on, respectively.
 
     %h2 Events
-    %ul 
-      %li 
-        %h3 start
-        %p Sent when the device has been started and is ready to use.  
+
+    %dl.methods 
+      %dt start
+      %dd Sent when the device has been started and is ready to use.  
 
   -#%section.how-to
     -#%h2 How to use

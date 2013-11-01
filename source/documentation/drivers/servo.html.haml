@@ -31,18 +31,19 @@ layout: page
 
   %section.public-methods
     %h2 Commands:
-
-    %h3 angle
-    %p Moves the servo to the specified angle, angle must be an integer value between 0 and 180.
-
-    %h3 currentAngle
-    %p Returns the current angle of the servo, an integer value between 0 and 180.  
+    
+    %dl.methods 
+      %dt angle
+      %dd Moves the servo to the specified angle, angle must be an integer value between 0 and 180.
+      %dt currentAngle → integer_value (0 - 180)
+      %dd Returns the current angle of the servo, an integer value between 0 and 180.
 
     %h2 Events
-    %ul 
-      %li 
-        %h3 start
-        %p Sent when the device has been started and is ready to use.
+
+    %dl.methods 
+      %dt start
+      %dd Sent when the device has been started and is ready to use.
+    
 
   %section.how-to
     %h2 How to use

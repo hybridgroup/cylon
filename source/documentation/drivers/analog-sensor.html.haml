@@ -34,32 +34,29 @@ layout: page
 
   %section.public-methods
     %h2 Commands:
-
-    %h3 analogRead
-    %p
-      coming soon
+    %dl.methods 
+      %dt analogRead(pin_number) → integer_value
+      %dd Returns an integer value that represents the analog read from the sensor.
+    
 
   %section.public-events
     %h2 Events:
-    %ul 
-      %li 
-        %h3 update
-      %small 
+
+    %dl.methods
+      %dt update
+      %dd
         This event will contain one of the following events.
         %br/  
         You can also subscribe to one of the specific events, if that is the information you are interested in.
-      %li
-        %h3  analogRead
-        %p coming soon
-      %li
-        %h3  upperLimit
-        %p coming soon
-      %li
-        %h3  lowerLimit
-        %p coming soon
-      %li 
-        %h3 start
-        %p Sent when the device has been started and is ready to use.
+      %dt analogRead
+      %dd 
+      %dt upperLimit
+      %dd Gets triggered if the value read by the sensor is greater or equal to upperLimit (value passed when setting up the sensor).
+      %dt lowerLimit
+      %dd Gets triggered if the value read by the sensor is less or equal to lowerLimit (value passed when setting up the sensor).
+      %dt start
+      %dd Sent when the device has been started and is ready to use.
+
 
     -#%h3 How to use events and call them on your drivers
     -#%p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:

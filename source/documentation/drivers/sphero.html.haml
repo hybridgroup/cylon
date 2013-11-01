@@ -29,261 +29,133 @@ layout: page
 
   %section.public-methods
     %h2 Commands:
-  
-    %function-name abortMacro
-    %function-params ()
-    %function-return  → (ID code , command number)
-    %function-description 
-    %br/
-    %br/  
-    %funtion-name  abortOrbBasicProgram
-    %function-params ()
-    %function-return  → Simple Response
-    %function-description 
-    %br/
-    %br/  
-    %funtion-name appendMacroChunck
-    %function-params (MACRO Chunk)
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name appendOrbBasicFragment
-    %function-params (Area, Program Code)
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name configureCollisionDetection
-    %function-params (Meth,(Xt, Yt),(Xspd, Yspd),Dead)
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name configureLocator
-    %function-params (flag, x, y, Yaw Tare)
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name detectCollisions 
-    %function-params ()
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name eraseOrbBasicStorage
-    %function-params (Area)
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name executeOrbBasicProgram
-    %function-params (Area, Start Line, Start Line)
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name getApplicationConfigurationBlock
-    %function-params ()
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name getConfigurationBlock
-    %function-params (ID)
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name getDeviceMode
-    %function-params ()
-    %function-return  → (Mode), options: 00h (Normal mode) | 01h (User Hack mode)
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name getMacroStatus
-    %function-params ()
-    %function-return  → (ID code , cmd number, cmd number)
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name getPermanentOptionFlags
-    %function-params ()
-    %function-return  → (FLAGS), options: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 6-31
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name getRGB
-    %function-params ()
-    %function-return  → (red,green,blue) | (color)
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name getTemporaryOptionFlags
-    %function-params ()
-    %function-return  → (FLAGS), options: 0 | 1-31
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name reInitializeMacroExecutive
-    %function-params ()
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name readLocator
-    %function-params ()
-    %function-return  → (XPOS, YPOS, XVEL, YVEL, SOG)
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name roll
-    %function-params (speed, heading, state)
-    %function-return  → Simple Response
-    %br/ 
-    %function-description  This commands Sphero to roll along the provided vector. Both a speed and a heading are required; the latter is considered relative to the last calibrated direction.
-    %br/ 
-    %br/ 
-    %funtion-name runMacro
-    %function-params (SEQ, DLEN, ID)
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name saveMacro
-    %function-params (data)
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name saveTemporaryMacro
-    %function-params (data)
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name selfLevel
-    %function-params (Options, Angle Limit, Timeout, True Time), options: ((0 | 1 | 2 |3 ), (0 | 1 to 90), (0 | 1 to 255), (0 | 1 to 255)
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name setAccelerometerRange
-    %function-params (Range Idx), options: 0 | 1 | 2 | 3
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name setApplicationConfigurationBlock
-    %function-params ()
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name setBackLED
-    %function-params (BRIGHT)
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name setBoostWithTime
-    %function-params (STATE)
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name setColor
-    %function-params (color)
-    %function-return  → Simple Response
-    %br/ 
-    %function-description This allows you to set the color of the sphero, just pass an array containing RGB hex or a string with one of the color names of the list. 
-    %br/
-    %br/  
-    %funtion-name setConfigurationBlock
-    %function-params (value)
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name setDataStreaming
-    %function-params (N, M, MASK, PCNT, MASK2)
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name setDeviceMode
-    %function-params (MODE)
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name setHeading
-    %function-params (HEADING)
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name setMacroParameter
-    %function-params (Param, Val1, Val2)
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name setMotionTimeout
-    %function-params (TIME)
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name setPermanentOptionFlags
-    %function-params (FLAGS)
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name setRGB 
-    %function-params (color, persist)
-    %function-return  → Simple Response
-    %br/ 
-    %function-description This allows you to set the RGB LED color, just pass an array containing RGB hex or a string with one of the color names of the list.  
-    %br/
-    %br/  
-    %funtion-name setRawMotorValues
-    %function-params (L-MODE, L-POWER, R-MODE, R-POWER)
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name setRotationRate
-    %function-params (RATE)
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name setStabalisation
-    %function-params (bool)
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name setTemporaryOptionFlags
-    %function-params (FLAGS)
-    %function-return  → Simple Response
-    %function-description  
-    %br/
-    %br/  
-    %funtion-name stop 
-    %function-params ()
-    %function-return  → Simple Response
-    %br/ 
-    %function-description Stops the sphero.
-    %br/
-    %br/  
-    %funtion-name submitValueToInputStatement
-    %function-params (VAL)
-    %function-return  → Simple Response
-    %function-description  
+    
+    %dl.methods
+      %dt abortMacro() → (ID code , command number)
+      %dd 
+
+      %dt abortOrbBasicProgram() → Simple Response
+      %dd
+
+      %dt appendMacroChunck(MACRO Chunk) → Simple Response
+      %dd 
+
+      %dt appendOrbBasicFragment(Area, Program Code) → Simple Response
+      %dd  
+
+      %dt configureCollisionDetection(Meth,(Xt, Yt),(Xspd, Yspd),Dead) → Simple Response
+      %dd Sets the sphero to detect collisions and report them.
+
+      %dt configureLocator(flag, x, y, Yaw Tare) → Simple Response
+      %dd 
+
+      %dt detectCollisions() → Simple Response
+      %dd 
+
+      %dt eraseOrbBasicStorage(Area) → Simple Response
+      %dd 
+
+      %dt executeOrbBasicProgram(Area, Start Line, Start Line) → Simple Response
+      %dd 
+
+      %dt getApplicationConfigurationBlock() → Simple Response
+      %dd 
+
+      %dt getConfigurationBlock(ID) → Simple Response
+      %dd 
+
+      %dt getDeviceMode() → (Mode), options: 00h (Normal mode) | 01h (User Hack mode)
+      %dd 
+
+      %dt getMacroStatus() → (ID code , cmd number, cmd number)
+      %dd 
+
+      %dt getPermanentOptionFlags() → (FLAGS), options: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 6-31
+      %dd 
+
+      %dt getRGB() → (red,green,blue) | (color)
+      %dd 
+
+      %dt getTemporaryOptionFlags() → (FLAGS), options: 0 | 1-31
+      %dd 
+
+      %dt reInitializeMacroExecutive() → Simple Response
+      %dd 
+
+      %dt readLocator() → (XPOS, YPOS, XVEL, YVEL, SOG)
+      %dd 
+
+      %dt roll(speed, heading, state) → Simple Response
+      %dd This commands Sphero to roll along the provided vector. Both a speed and a heading are required; the latter is considered relative to the last calibrated direction.
+
+      %dt runMacro(SEQ, DLEN, ID) → Simple Response
+      %dd 
+
+      %dt saveMacro(data) → Simple Response
+      %dd 
+
+      %dt saveTemporaryMacro(data) → Simple Response
+      %dd 
+
+      %dt selfLevel(Options, Angle Limit, Timeout, True Time), options: ((0 | 1 | 2 |3 ), (0 | 1 to 90), (0 | 1 to 255), (0 | 1 to 255) → Simple Response
+      %dd 
+
+      %dt setAccelerometerRange(Range Idx), options: 0 | 1 | 2 | 3 → Simple Response
+      %dd 
+
+      %dt setApplicationConfigurationBlock() → Simple Response
+      %dd 
+
+      %dt setBackLED(BRIGHT) → Simple Response
+      %dd 
+
+      %dt setBoostWithTime(STATE) → Simple Response
+      %dd 
+
+      %dt setColor(color) → Simple Response
+      %dd This allows you to set the color of the sphero, just pass an array containing RGB hex or a string with one of the color names of the list.
+
+      %dt setConfigurationBlock(value) → Simple Response
+      %dd 
+
+      %dt setDataStreaming(N, M, MASK, PCNT, MASK2) → Simple Response
+      %dd 
+
+      %dt setDeviceMode(MODE) → Simple Response
+      %dd 
+
+      %dt setHeading(HEADING) → Simple Response
+      %dd
+
+      %dt setMacroParameter(Param, Val1, Val2) → Simple Response
+      %dd 
+
+      %dt setMotionTimeout(TIME) → Simple Response
+      %dd 
+
+      %dt setPermanentOptionFlags(FLAGS) → Simple Response
+      %dd 
+
+      %dt setRGB(color, persist) → Simple Response
+      %dd This allows you to set the RGB LED color, just pass an array containing RGB hex or a string with one of the color names of the list.  
+
+      %dt setRawMotorValues(L-MODE, L-POWER, R-MODE, R-POWER) → Simple Response
+      %dd 
+
+      %dt setRotationRate(RATE) → Simple Response
+      %dd 
+
+      %dt setStabalisation(bool) → Simple Response
+      %dd 
+
+      %dt setTemporaryOptionFlags(FLAGS) → Simple Response
+      %dd 
+
+      %dt stop() → Simple Response
+      %dd Stops the sphero.
+
+      %dt submitValueToInputStatement(VAL) → Simple Response
+      %dd 
 
 
 
@@ -327,7 +199,289 @@ layout: page
           -#:::ruby
 
   %section 
-    %h2 Sphero Colors  
+    %h2 Sphero Colors 
+
+    %dl.methods 
+      %dt aliceblue            
+      %dd 0xF0F8FF
+      %dt antiquewhite         
+      %dd 0xFAEBD7
+      %dt aqua                 
+      %dd 0x00FFFF
+      %dt aquamarine           
+      %dd 0x7FFFD4
+      %dt azure                 
+      %dd 0xF0FFFF
+      %dt beige                 
+      %dd 0xF5F5DC
+      %dt bisque                
+      %dd 0xFFE4C4
+      %dt black                 
+      %dd 0x000000
+      %dt blanchedalmond        
+      %dd 0xFFEBCD
+      %dt blue                 
+      %dd 0x0000FF
+      %dt blueviolet            
+      %dd 0x8A2BE2
+      %dt brown                 
+      %dd 0xA52A2A
+      %dt burlywood             
+      %dd 0xDEB887
+      %dt cadetblue             
+      %dd 0x5F9EA0
+      %dt chartreuse            
+      %dd 0x7FFF00
+      %dt chocolate             
+      %dd 0xD2691E
+      %dt coral                 
+      %dd 0xFF7F50
+      %dt cornflowerblue        
+      %dd 0x6495ED
+      %dt cornsilk              
+      %dd 0xFFF8DC
+      %dt crimson               
+      %dd 0xDC143C
+      %dt cyan                  
+      %dd 0x00FFFF
+      %dt darkblue              
+      %dd 0x00008B
+      %dt darkcyan              
+      %dd 0x008B8B
+      %dt darkgoldenrod         
+      %dd 0xB8860B
+      %dt darkgray              
+      %dd 0xA9A9A9
+      %dt darkgreen             
+      %dd 0x006400
+      %dt darkkhaki             
+      %dd 0xBDB76B
+      %dt darkmagenta           
+      %dd 0x8B008B
+      %dt darkolivegreen        
+      %dd 0x556B2F
+      %dt darkorange            
+      %dd 0xFF8C00
+      %dt darkorchid            
+      %dd 0x9932CC
+      %dt darkred               
+      %dd 0x8B0000
+      %dt darksalmon            
+      %dd 0xE9967A
+      %dt darkseagreen          
+      %dd 0x8FBC8F
+      %dt darkslateblue         
+      %dd 0x483D8B
+      %dt darkslategray         
+      %dd 0x2F4F4F
+      %dt darkturquoise         
+      %dd 0x00CED1
+      %dt darkviolet            
+      %dd 0x9400D3
+      %dt deeppink              
+      %dd 0xFF1493
+      %dt deepskyblue           
+      %dd 0x00BFFF
+      %dt dimgray               
+      %dd 0x696969
+      %dt dodgerblue            
+      %dd 0x1E90FF
+      %dt firebrick:             
+      %dd 0xB22222
+      %dt floralwhite           
+      %dd 0xFFFAF0
+      %dt forestgreen           
+      %dd 0x228B22
+      %dt fuchsia               
+      %dd 0xFF00FF
+      %dt gainsboro             
+      %dd 0xDCDCDC
+      %dt ghostwhite            
+      %dd 0xF8F8FF
+      %dt gold                  
+      %dd 0xFFD700
+      %dt goldenrod             
+      %dd 0xDAA520
+      %dt gray                  
+      %dd 0x808080
+      %dt green                 
+      %dd 0x008000
+      %dt greenyellow           
+      %dd 0xADFF2F
+      %dt honeydew              
+      %dd 0xF0FFF0
+      %dt hotpink               
+      %dd 0xFF69B4
+      %dt indianred             
+      %dd 0xCD5C5C
+      %dt indigo                
+      %dd 0x4B0082
+      %dt ivory                 
+      %dd 0xFFFFF0
+      %dt khaki                 
+      %dd 0xF0E68C
+      %dt lavender              
+      %dd 0xE6E6FA
+      %dt lavenderblush         
+      %dd 0xFFF0F5
+      %dt lawngreen             
+      %dd 0x7CFC00
+      %dt lemonchiffon          
+      %dd 0xFFFACD
+      %dt lightblue             
+      %dd 0xADD8E6
+      %dt lightcoral            
+      %dd 0xF08080
+      %dt lightcyan             
+      %dd 0xE0FFFF
+      %dt lightgoldenrodyellow  
+      %dd 0xFAFAD2
+      %dt lightgreen            
+      %dd 0x90EE90
+      %dt lightgrey             
+      %dd 0xD3D3D3
+      %dt lightpink             
+      %dd 0xFFB6C1
+      %dt lightsalmon           
+      %dd 0xFFA07A
+      %dt lightseagreen         
+      %dd 0x20B2AA
+      %dt lightskyblue          
+      %dd 0x87CEFA
+      %dt lightslategray        
+      %dd 0x778899
+      %dt lightsteelblue        
+      %dd 0xB0C4DE
+      %dt lightyellow           
+      %dd 0xFFFFE0
+      %dt lime                  
+      %dd 0x00FF00
+      %dt limegreen             
+      %dd 0x32CD32
+      %dt linen                 
+      %dd 0xFAF0E6
+      %dt magenta               
+      %dd 0xFF00FF
+      %dt maroon                
+      %dd 0x800000
+      %dt mediumaquamarine      
+      %dd 0x66CDAA
+      %dt mediumblue            
+      %dd 0x0000CD
+      %dt mediumorchid          
+      %dd 0xBA55D3
+      %dt mediumpurple          
+      %dd 0x9370DB
+      %dt mediumseagreen        
+      %dd 0x3CB371
+      %dt mediumslateblue       
+      %dd 0x7B68EE
+      %dt mediumspringgreen     
+      %dd 0x00FA9A
+      %dt mediumturquoise       
+      %dd 0x48D1CC
+      %dt mediumvioletred       
+      %dd 0xC71585
+      %dt midnightblue          
+      %dd 0x191970
+      %dt mintcream             
+      %dd 0xF5FFFA
+      %dt mistyrose             
+      %dd 0xFFE4E1
+      %dt moccasin              
+      %dd 0xFFE4B5
+      %dt navajowhite           
+      %dd 0xFFDEAD
+      %dt navy                  
+      %dd 0x000080
+      %dt oldlace               
+      %dd 0xFDF5E6
+      %dt olive                 
+      %dd 0x808000
+      %dt olivedrab             
+      %dd 0x6B8E23
+      %dt orange                
+      %dd 0xFFA500
+      %dt orangered             
+      %dd 0xFF4500
+      %dt orchid                
+      %dd 0xDA70D6
+      %dt palegoldenrod         
+      %dd 0xEEE8AA
+      %dt palegreen             
+      %dd 0x98FB98
+      %dt paleturquoise         
+      %dd 0xAFEEEE
+      %dt palevioletred         
+      %dd 0xDB7093
+      %dt papayawhip            
+      %dd 0xFFEFD5
+      %dt peachpuff             
+      %dd 0xFFDAB9
+      %dt peru                  
+      %dd 0xCD853F
+      %dt pink                  
+      %dd 0xFFC0CB
+      %dt plum                  
+      %dd 0xDDA0DD
+      %dt powderblue            
+      %dd 0xB0E0E6
+      %dt purple                
+      %dd 0x800080
+      %dt red                   
+      %dd 0xFF0000
+      %dt rosybrown             
+      %dd 0xBC8F8F
+      %dt royalblue             
+      %dd 0x4169E1
+      %dt saddlebrown           
+      %dd 0x8B4513
+      %dt salmon                
+      %dd 0xFA8072
+      %dt sandybrown            
+      %dd 0xF4A460
+      %dt seagreen              
+      %dd 0x2E8B57
+      %dt seashell              
+      %dd 0xFFF5EE
+      %dt sienna                
+      %dd 0xA0522D
+      %dt silver                
+      %dd 0xC0C0C0
+      %dt skyblue:               
+      %dd 0x87CEEB
+      %dt slateblue             
+      %dd 0x6A5ACD
+      %dt slategray             
+      %dd 0x708090
+      %dt snow                  
+      %dd 0xFFFAFA
+      %dt springgreen           
+      %dd 0x00FF7F
+      %dt steelblue             
+      %dd 0x4682B4
+      %dt tan                   
+      %dd 0xD2B48C
+      %dt teal                  
+      %dd 0x008080
+      %dt thistle               
+      %dd 0xD8BFD8
+      %dt tomato                
+      %dd 0xFF6347
+      %dt turquoise             
+      %dd 0x40E0D0
+      %dt violet                
+      %dd 0xEE82EE
+      %dt wheat                 
+      %dd 0xF5DEB3
+      %dt white                 
+      %dd 0xFFFFFF
+      %dt whitesmoke            
+      %dd 0xF5F5F5
+      %dt yellow                
+      %dd 0xFFFF00
+      %dt yellowgreen           
+      %dd 0x9ACD32 
 
   %section.compatability.hardware
     %h2 Works with:
