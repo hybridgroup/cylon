@@ -29,20 +29,218 @@ layout: page
 
   %section.public-methods
     %h2 Commands:
+  
+    %function-name abortMacro
+    %function-params ()
+    %function-return  → [ID,command number]
+    %function-description 
+    %br/ 
+    %funtion-name  abortOrbBasicProgram
+    %function-params ()
+    %function-return  → Simple Response
+    %function-description 
+    %br/ 
+    %funtion-name appendMacroChunck
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name appendOrbBasicFragment
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name configureCollisionDetection
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name configureLocator
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name detectCollisions 
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name eraseOrbBasicStorage
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name executeOrbBasicProgram
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name getApplicationConfigurationBlock
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name getConfigurationBlock
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name getDeviceMode
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name getMacroStatus
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name getPermanentOptionFlags
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name getRGB
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name getTemporaryOptionFlags
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name reInitializeMacroExecutive
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name readLocator
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name roll(speed, heading, state)
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name runMacro
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name saveMacro
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name saveTemporaryMacro
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name selfLevel
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name setAccelerometerRange
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name setApplicationConfigurationBlock
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name setBackLED
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name setBoostWithTime
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name setColor(color, persist)
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name setConfigurationBlock
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name setDataStreaming
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name setDeviceMode
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name setHeading
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name setMacroParameter
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name setMotionTimeout
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name setPermanentOptionFlags
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name setRGB(color, persist) → [color, persist]
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name setRawMotorValues
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name setRotationRate
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name setStabalisation
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name setTemporaryOptionFlags
+    %function-params ()
+    %function-return  → 
+    %function-description  
+    %br/ 
+    %funtion-name stop → true | nil
+    %function-params ()
+    %function-return  → 
+    %function-description 
+    %br/ 
+    %funtion-name submitValueToInputStatement
+    %function-params ()
+    %function-return  → 
+    %function-description  
 
-    %h3 roll(speed, direction)
-    %p
-      Starts the sphero rolling at the provided speed (value between 0 and 255) and direction (value between 0 and 360).
-    
-    %h3 setRGB(color, persist)
-    %p
-      Coming soon
 
-    %h3 detectCollisions
-    %p REVISION PENDING: Sets the sphero to detect collisions and report them.
-
-    %h3 stop
-    %p Stops the sphero.
 
   %section.public-events
     %h2 Events:
@@ -57,14 +255,14 @@ layout: page
         %h3 collision
         %p Gets triggered when the sphero hits something or falls from a step.
       %li
-        %h3 messages
-        %p coming soon
+        %h3 messages(data)
+        %p 
       %li 
-        %h3 notifications
-        %p coming soon
+        %h3 notifications(data)
+        %p 
       %li 
         %h3 connect
-        %p coming soon
+        %p Opens the connection to Sphero.
 
       %li 
         %h3 start
@@ -82,6 +280,9 @@ layout: page
     -#%h3 Example to roll the sphero in a random direction and change direction every 3 seconds.
     -#:markdown
           -#:::ruby
+
+  %section 
+    %h2 Sphero Colors  
 
   %section.compatability.hardware
     %h2 Works with:
