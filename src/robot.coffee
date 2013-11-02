@@ -32,12 +32,20 @@ module.exports = class Robot
     @initConnections(opts.connection or opts.connections)
     @initDevices(opts.device or opts.devices)
     @work = opts.work or -> (Logger.info "No work yet")
-    
+
     for n, func of opts
-      @robot[n] = func unless n in ['connection', 'connections', 'device', 'devices', 'work']
+      reserved = ['connection', 'connections', 'device', 'devices', 'work']
+      @robot[n] = func unless n in reserved
 
   @randomName: ->
     "Robot #{ Math.floor(Math.random() * 100000) }"
+
+  data: ->
+    {
+      name: @name
+      connections: (connection.data() for n, connection of @connections)
+      devices: (device.data() for n, device of @devices)
+    }
 
   initConnections: (connections) =>
     Logger.info "Initializing connections..."
@@ -76,7 +84,7 @@ module.exports = class Robot
     for n, device of @devices
       @robot[n] = device
       starters[n] = device.start
-    
+
     Async.parallel starters, callback
 
   requireAdaptor: (adaptorName, connection) ->

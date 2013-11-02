@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "async": "~0.2.9",
-    "node-namespace": "~1.0.0"
+    "node-namespace": "~1.0.0",
+    "express.io": "~1.1.13"
   }
 }

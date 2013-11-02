@@ -19,6 +19,8 @@
 
   require('./logger');
 
+  require('./api/api');
+
   Logger.setup();
 
   Cylon = (function() {
@@ -39,13 +41,16 @@
     };
 
     Master = (function() {
-      var robots;
+      var api, robots;
+
+      robots = [];
+
+      api = null;
 
       function Master() {
         this.robot = __bind(this.robot, this);
+        this.self = this;
       }
-
-      robots = [];
 
       Master.prototype.robot = function(opts) {
         var robot;
@@ -55,14 +60,90 @@
         return robot;
       };
 
+      Master.prototype.robots = function() {
+        return robots;
+      };
+
+      Master.prototype.findRobot = function(name, callback) {
+        var bot, error, robot, _i, _len;
+        robot = null;
+        for (_i = 0, _len = robots.length; _i < _len; _i++) {
+          bot = robots[_i];
+          if (bot.name === name) {
+            robot = bot;
+          }
+        }
+        if (robot == null) {
+          error = {
+            error: "No Robot found with the name " + name
+          };
+        }
+        if (callback) {
+          return callback(error, robot);
+        } else {
+          return robot;
+        }
+      };
+
+      Master.prototype.findRobotDevice = function(robotid, deviceid, callback) {
+        return this.findRobot(robotid, function(err, robot) {
+          var device, error;
+          if (err) {
+            callback(err, robot);
+          }
+          if (robot.devices[deviceid]) {
+            device = robot.devices[deviceid];
+          }
+          if (device == null) {
+            error = {
+              error: "No device found with the name " + device + "."
+            };
+          }
+          if (callback) {
+            return callback(error, device);
+          } else {
+            return device;
+          }
+        });
+      };
+
+      Master.prototype.findRobotConnection = function(robotid, connid, callback) {
+        return this.findRobot(robotid, function(err, robot) {
+          var connection, error;
+          if (err) {
+            callback(err, robot);
+          }
+          if (robot.connections[connid]) {
+            connection = robot.connections[connid];
+          }
+          if (connection == null) {
+            error = {
+              error: "No connection found with the name " + connection + "."
+            };
+          }
+          if (callback) {
+            return callback(error, connection);
+          } else {
+            return connection;
+          }
+        });
+      };
+
       Master.prototype.start = function() {
         var robot, _i, _len, _results;
+        this.startAPI();
         _results = [];
         for (_i = 0, _len = robots.length; _i < _len; _i++) {
           robot = robots[_i];
           _results.push(robot.start());
         }
         return _results;
+      };
+
+      Master.prototype.startAPI = function() {
+        return api != null ? api : api = new Api.Server({
+          master: this.self
+        });
       };
 
       return Master;

@@ -13,6 +13,8 @@ Robot = require("./robot")
 require('./utils')
 require('./logger')
 
+require('./api/api')
+
 Logger.setup()
 
 class Cylon
@@ -23,6 +25,10 @@ class Cylon
 
   class Master
     robots = []
+    api = null
+
+    constructor: ->
+      @self = this
 
     robot: (opts) =>
       opts.master = this
@@ -30,7 +36,42 @@ class Cylon
       robots.push robot
       robot
 
+    robots: -> robots
+
+    findRobot: (name, callback) ->
+      robot = null
+      for bot in robots
+        robot = bot if bot.name is name
+
+      error = { error: "No Robot found with the name #{name}" } unless robot?
+
+      if callback then callback(error, robot) else robot
+
+    findRobotDevice: (robotid, deviceid, callback) ->
+      @findRobot robotid, (err, robot) ->
+        callback(err, robot) if err
+
+        device = robot.devices[deviceid] if robot.devices[deviceid]
+        unless device?
+          error = { error: "No device found with the name #{device}." }
+
+        if callback then callback(error, device) else device
+
+    findRobotConnection: (robotid, connid, callback) ->
+      @findRobot robotid, (err, robot) ->
+        callback(err, robot) if err
+
+        connection = robot.connections[connid] if robot.connections[connid]
+        unless connection?
+          error = { error: "No connection found with the name #{connection}." }
+
+        if callback then callback(error, connection) else connection
+
     start: ->
+      do @startAPI
       robot.start() for robot in robots
+
+    startAPI: ->
+      api ?= new Api.Server(master: @self)
 
 module.exports = Cylon.getInstance()

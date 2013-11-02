@@ -29,6 +29,15 @@ module.exports = class Device extends EventEmitter
     Logger.info msg
     @driver.start(callback)
 
+  data: ->
+    {
+      name: @name
+      driver: @driver.constructor.name || @driver.name
+      pin: if @pin? then @pin.toString else null
+      connection: @connection.data()
+      commands: @driver.commands()
+    }
+
   determineConnection: (c) ->
     @robot.connections[c] if c
 
