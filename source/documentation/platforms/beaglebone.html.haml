@@ -2,7 +2,7 @@
 title: BeagleBone with Artroo
 author: The Hybrid Group
 page_title: BeagleBone
-page_subtitle: "<a href='https://github.com/hybridgroup/artoo-beaglebone' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/artoo-beaglebone/issues'>Issues</a>"
+page_subtitle: "<a href='https://github.com/hybridgroup/Cylon.js-beaglebone' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/Cylon.js-beaglebone/issues'>Issues</a>"
 layout: page
 ---
 .documentation
@@ -16,24 +16,24 @@ layout: page
       = succeed "." do
         = link_to "here", "http://beagleboard.org/Products/BeagleBone", target: :blank
     %p
-      We have created a bootable image of Arch Linux that contains the needed drivers to use the Beaglebone Black with Artoo. You can download it from
+      We have created a bootable image of Arch Linux that contains the needed drivers to use the Beaglebone Black with Cylon.js. You can download it from
       = succeed "." do
-        = link_to "here", "https://s3.amazonaws.com/artoo-images/beaglebone/artoo-arch-armv7-1380751200.tar.xz", target: :blank
+        = link_to "here", "https://s3.amazonaws.com/Cylon.js-images/beaglebone/Cylon.js-arch-armv7-1380751200.tar.xz", target: :blank
 
   %section.how-to
     %h2 How to install
     %p
-      Installing artoo for beaglebone is pretty easy using ruby gems.
+      Installing Cylon.js for beaglebone is pretty easy using ruby gems.
     :markdown
           :::bash
-          gem install artoo-beaglebone
+          gem install Cylon.js-beaglebone
 
     %h2 How to use
     %p
       This small program causes an LED to blink.
     :markdown
           :::ruby
-          require 'artoo'
+          require 'Cylon.js'
 
           connection :beaglebone, :adaptor => :beaglebone
           device :led, :driver => :led, :pin => :P9_12
@@ -46,7 +46,7 @@ layout: page
 
   %section.drivers
     %h2 Drivers
-    %p All Artoo digital GPIO and i2c drivers listed below should work with the BeagleBone:
+    %p All Cylon.js digital GPIO and i2c drivers listed below should work with the BeagleBone:
 
     .hardware
       .devices

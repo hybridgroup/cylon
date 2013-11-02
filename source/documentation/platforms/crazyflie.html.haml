@@ -1,8 +1,8 @@
 ---
-title: Crazyflie with Artoo
+title: Crazyflie with Cylon.js
 author: The Hybrid Group
 page_title: Crazyflie
-page_subtitle: "<a href='https://github.com/hybridgroup/artoo-crazyflie' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/artoo-crazyflie/issues'>Issues</a>"
+page_subtitle: "<a href='https://github.com/hybridgroup/Cylon.js-crazyflie' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/Cylon.js-crazyflie/issues'>Issues</a>"
 layout: page
 ---
 .documentation
@@ -10,7 +10,7 @@ layout: page
     = image_tag "/images/crazyflie.jpg", class: "display"
 
     %p
-      You can use Artoo with the Crazyflie micro-quadcopter.
+      You can use Cylon.js with the Crazyflie micro-quadcopter.
 
     %p
       For more info about Crazyflie click
@@ -20,17 +20,17 @@ layout: page
   %section.how_to
     %h2 How to install
     %p
-      Installing artoo with arduino support is pretty easy using ruby gems.
+      Installing Cylon.js with arduino support is pretty easy using ruby gems.
     :markdown
           :::bash
-          gem install artoo-crazyflie
+          gem install Cylon.js-crazyflie
 
     %h2 How to use
     %p
       This small program causes the Crazyflie to 'hop' up in the air for 1 second.
     :markdown
           :::ruby
-          require 'artoo'
+          require 'Cylon.js'
 
           connection :crazyflie, :adaptor => :crazyflie
           device :drone, :driver => :crazyflie, :connection => :crazyflie, :interval => 0.1
@@ -60,7 +60,7 @@ layout: page
       and then use the Crazyflie PC tools to update the Crazyflie firmware.
 
     %p
-      Once you have updated the Crazyflie firmware, you will NEED to use the following syntax in your Artoo code to use it:
+      Once you have updated the Crazyflie firmware, you will NEED to use the following syntax in your Cylon.js code to use it:
 
     :markdown
           :::ruby

@@ -1,8 +1,8 @@
 ---
-title: Roomba with Artoo
+title: Roomba with Cylon.js
 author: The Hybrid Group
 page_title: Roomba
-page_subtitle: "<a href='https://github.com/hybridgroup/artoo-roomba' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/artoo-roomba/issues'>Issues</a>"
+page_subtitle: "<a href='https://github.com/hybridgroup/Cylon.js-roomba' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/Cylon.js-roomba/issues'>Issues</a>"
 layout: page
 ---
 .documentation
@@ -20,16 +20,16 @@ layout: page
   %section.how-to
     %h2 How to install
     %p
-      Installing artoo with roomba support is pretty easy using ruby gems.
+      Installing Cylon.js with roomba support is pretty easy using ruby gems.
     :markdown
           :::bash
-          gem install artoo-roomba
+          gem install Cylon.js-roomba
     %h2 How to use
     %p
       This small program controls a Roomba.
     :markdown
           :::ruby
-          require 'artoo'
+          require 'Cylon.js'
 
           connection :roomba, :adaptor => :roomba, :port => '/dev/ttyUSB0'
           device :roomba, :driver => :roomba, :connection => :roomba

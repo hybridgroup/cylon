@@ -1,5 +1,5 @@
 ---
-title: Artoo - Crazyflie Driver
+title: Cylon.js - Crazyflie Driver
 author: The Hybrid Group
 page_title: Crazyflie
 page_subtitle: Driver
@@ -17,7 +17,7 @@ layout: page
       Communication with the Crazyflie's flight control interface takes place using a 2.4GHz radio connection. The Crazyflie is controlled from your computer using a Crazyradio, which is a custom USB 2.4GHz radio device. 
     :markdown
           :::ruby
-          require 'artoo'
+          require 'Cylon.js'
           connection :crazyflie, :adaptor => :crazyflie
           device :drone, :driver => :crazyflie, :connection => :crazyflie, :interval => 0.1
 
@@ -84,7 +84,7 @@ layout: page
     %h3 Example of controlling a Crazyflie.
     :markdown
           :::ruby
-          require 'artoo'
+          require 'Cylon.js'
 
           connection :crazyflie, :adaptor => :crazyflie
           device :drone, :driver => :crazyflie, :connection => :crazyflie, :interval => 0.1

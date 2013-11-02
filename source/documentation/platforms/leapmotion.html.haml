@@ -2,7 +2,7 @@
 title: Leapmotion with Artroo
 author: The Hybrid Group
 page_title: Leapmotion
-page_subtitle: "<a href='https://github.com/hybridgroup/artoo-leapmotion' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/artoo-leapmotion/issues'>Issues</a>"
+page_subtitle: "<a href='https://github.com/hybridgroup/Cylon.js-leapmotion' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/Cylon.js-leapmotion/issues'>Issues</a>"
 layout: page
 ---
 .documentation
@@ -20,17 +20,17 @@ layout: page
   %section.how-to
     %h2 How to install
     %p
-      Installing artoo with leapmotion support is pretty easy using ruby gems.
+      Installing Cylon.js with leapmotion support is pretty easy using ruby gems.
     :markdown
           :::bash
-          gem install artoo-leapmotion --pre
+          gem install Cylon.js-leapmotion --pre
 
     %h2 How to use
     %p
       This small program uses a Leap Motion to detect the user's hand position
     :markdown
           :::ruby
-          require 'artoo'
+          require 'Cylon.js'
 
           connection :leapmotion, :adaptor => :leapmotion, :port => '127.0.0.1:6437'
           device :leapmotion, :driver => :leapmotion
@@ -67,7 +67,7 @@ layout: page
     %ul
       %li Run Leap Motion.app
       %li Connect your Computer and Leap Motion Controller.
-      %li Connect to the device via Artoo.
+      %li Connect to the device via Cylon.js.
 
     %h3 Ubuntu
     %p
@@ -78,7 +78,7 @@ layout: page
     %ul
       %li Run the leapd daemon.
       %li Connect your computer and the Leap Motion controller
-      %li Connect to the device via Artoo
+      %li Connect to the device via Cylon.js
 
   %section.drivers
     %h2 Drivers

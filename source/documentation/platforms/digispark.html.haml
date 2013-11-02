@@ -1,8 +1,8 @@
 ---
-title: Digispark with Artoo
+title: Digispark with Cylon.js
 author: The Hybrid Group
 page_title: Digispark
-page_subtitle: "<a href='https://github.com/hybridgroup/artoo-digispark' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/artoo-digispark/issues'>Issues</a>"
+page_subtitle: "<a href='https://github.com/hybridgroup/Cylon.js-digispark' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/Cylon.js-digispark/issues'>Issues</a>"
 layout: page
 ---
 .documentation
@@ -23,16 +23,16 @@ layout: page
   %section.how-to
     %h2 How to install
     %p
-      Installing artoo with digispark support is pretty easy using ruby gems.
+      Installing Cylon.js with digispark support is pretty easy using ruby gems.
     :markdown
           :::bash
-          gem install artoo-digispark
+          gem install Cylon.js-digispark
     %h2 How to use
     %p
       This small program lets you toggle an LED on and off.
     :markdown
           :::ruby
-          require 'artoo'
+          require 'Cylon.js'
 
           connection :digispark, :adaptor => :littlewire, :vendor => 0x1781, :product => 0x0c9f
           device :board, :driver => :device_info
@@ -53,7 +53,7 @@ layout: page
       %a{ href:"http://www.kickstarter.com/projects/digistump/digispark-the-tiny-arduino-enabled-usb-dev-board"} http://www.kickstarter.com/projects/digistump/digispark-the-tiny-arduino-enabled-usb-dev-board
       ) ATTiny-based USB development board already has the Little Wire (
       %a{ href:"http://littlewire.cc/"} http://littlewire.cc/
-      ) protocol firmware installed, you can connect right away with Artoo.
+      ) protocol firmware installed, you can connect right away with Cylon.js.
 
     %p
       Otherwise, for instructions on how to install Little Wire on a Digispark check out 
@@ -64,7 +64,7 @@ layout: page
       The main steps are:
     %ul
       %li Plug in the Digispark to the USB port
-      %li Connect to the device via Artoo
+      %li Connect to the device via Cylon.js
     %p First plug the Digispark into your computer via the USB port. Then... (directions go here)
 
     %h3 Ubuntu
@@ -73,9 +73,9 @@ layout: page
     %ul
       %li Add a udev rule to allow access to the Digispark device
       %li Plug in the Digispark to the USB port
-      %li Connect to the device via Artoo
+      %li Connect to the device via Cylon.js
     %p
-      First, you must add a udev rule, so that Artoo can communicate with the USB device. Ubuntu and
+      First, you must add a udev rule, so that Cylon.js can communicate with the USB device. Ubuntu and
       other modern Linux distibutions use udev to manage device files when USB devices are added and
       removed. By default, udev will create a device with read-only permission which will not allow to
       you download code. You must place the udev rules below into a file named /etc/udev/rules.d/49-micronucleus.rules.
@@ -107,29 +107,29 @@ layout: page
 
     %p Now plug the Digispark into your computer via the USB port.
 
-    %p Once plugged in, use the artoo connect scan command with the -t usb option to verify your connection info:
+    %p Once plugged in, use the Cylon.js connect scan command with the -t usb option to verify your connection info:
 
     :markdown
           :::bash
-          $ artoo connect scan -t usb
+          $ Cylon.js connect scan -t usb
     %p
-      Now use the ID info returned to find the product and vendor ID's for the connection info Digispark in your Artoo code.
+      Now use the ID info returned to find the product and vendor ID's for the connection info Digispark in your Cylon.js code.
   %section.drivers
     %h2 Drivers
     %p
       Thanks to
-      %b artoo
+      %b Cylon.js
       and
       %b ruby
       it is possible to interact with several I/O hardware devices and interfaces connected to the digispark
-      using a set of already defined and easy to use drivers, all of this thanks to the artoo architecture,
-      in conjuction with artoo-digispark adaptor (using the littlewire communication protocol),
+      using a set of already defined and easy to use drivers, all of this thanks to the Cylon.js architecture,
+      in conjuction with Cylon.js-digispark adaptor (using the littlewire communication protocol),
       which makes it even possible to swap the entire platform for something else like arduino,
       and keep using the same code you just wrote for digispark, this just by swapping a couple
       of lines in your program.
     %p
       Available drivers for the digispark platform are listed below, the drivers contain detailed documentation and examples of what kind
-      physical computing (using artoo and ruby) you could be doing:
+      physical computing (using Cylon.js and ruby) you could be doing:
 
     .hardware
       .devices

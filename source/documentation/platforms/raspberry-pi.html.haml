@@ -2,7 +2,7 @@
 title: Raspberry Pi with Artroo
 author: The Hybrid Group
 page_title: Raspberry Pi
-page_subtitle: "<a href='https://github.com/hybridgroup/artoo-raspi' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/artoo-raspi/issues'>Issues</a>"
+page_subtitle: "<a href='https://github.com/hybridgroup/Cylon.js-raspi' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/Cylon.js-raspi/issues'>Issues</a>"
 layout: page
 ---
 .documentation
@@ -21,17 +21,17 @@ layout: page
     %h2 How to install
     %p If you do not have ruby installed, you'll need to do that first.
     %p
-      Then install the artoo-raspi gem:
+      Then install the Cylon.js-raspi gem:
     :markdown
           :::bash
-          sudo gem install artoo-raspi
+          sudo gem install Cylon.js-raspi
 
     %h2 How to use
     %p
       This small program causes an LED to blink.
     :markdown
           :::ruby
-          require 'artoo'
+          require 'Cylon.js'
 
           connection :raspi, :adaptor => :raspi
           device :led, :driver => :led, :pin => 11
@@ -81,7 +81,7 @@ layout: page
 
   %section.drivers
     %h2 Drivers
-    %p All Artoo digital and PWM GPIO, and i2c drivers listed below should work with the Raspberry Pi:
+    %p All Cylon.js digital and PWM GPIO, and i2c drivers listed below should work with the Raspberry Pi:
 
     .hardware
       .devices

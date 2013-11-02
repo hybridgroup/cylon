@@ -1,5 +1,5 @@
 ---
-title: Artoo - Roomba Driver
+title: Cylon.js - Roomba Driver
 author: The Hybrid Group
 page_title: Roomba
 page_subtitle: Driver
@@ -9,13 +9,13 @@ layout: page
   %section.intro
     =image_tag "/images/roomba.jpg", class: "display"
     %p
-      Allows user to control a Roomba iRobot Create using Artoo.
+      Allows user to control a Roomba iRobot Create using Cylon.js.
 
   %section.how-to
     %h2 How to establish a connection and setup the driver
     :markdown
           :::ruby
-          require 'artoo'
+          require 'Cylon.js'
           connection :roomba, :adaptor => :roomba, :port => '/dev/ttyUSB0'
           device :roomba, :driver => :roomba, :connection => :roomba
 
@@ -90,7 +90,7 @@ layout: page
     %h3 Example controlling a Roomba.
     :markdown
           :::ruby
-          require 'artoo'
+          require 'Cylon.js'
 
           connection :roomba, :adaptor => :roomba, :port => '/dev/ttyUSB0'
           device :roomba, :driver => :roomba, :connection => :roomba

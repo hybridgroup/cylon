@@ -1,19 +1,19 @@
 ---
 layout: page
-title: Artoo Examples
+title: Cylon.js Examples
 page_title: Examples
 author: The Hybrid Group
-description: Artoo code snippets for your convinience.
+description: Cylon.js code snippets for your convinience.
 ---
 
 :markdown
 
-  #### Arduino : [artoo-arduino](https://github.com/hybridgroup/artoo-arduino)
+  #### Arduino : [Cylon.js-arduino](https://github.com/hybridgroup/Cylon.js-arduino)
 
-  For complete setup, follow the [Arduino - Making an led blink with Artoo Tutorial](https://github.com/hybridgroup/artoo/wiki/1.3.1.-Arduino-Making-A-Led-Blink-With-Artoo) in our wiki.
+  For complete setup, follow the [Arduino - Making an led blink with Cylon.js Tutorial](https://github.com/hybridgroup/Cylon.js/wiki/1.3.1.-Arduino-Making-A-Led-Blink-With-Cylon.js) in our wiki.
 
       :::ruby
-      require 'artoo'
+      require 'Cylon.js'
 
       connection :arduino, adaptor: :firmata, port: '/dev/ttyACM0'
       device :led, driver: :led, pin: 13
@@ -23,9 +23,9 @@ description: Artoo code snippets for your convinience.
         on button, push: proc {led.toggle}
       end
 
-  #### AR.Drone 2.0 : [artoo-ardrone](https://github.com/hybridgroup/artoo-ardrone)
+  #### AR.Drone 2.0 : [Cylon.js-ardrone](https://github.com/hybridgroup/Cylon.js-ardrone)
       :::ruby
-      require 'artoo'
+      require 'Cylon.js'
 
       connection :ardrone, adaptor: :ardrone
       device :drone, driver: :ardrone
@@ -38,9 +38,9 @@ description: Artoo code snippets for your convinience.
         after(30.seconds) { drone.stop }
       end
 
-  #### Roomba : [artoo-roomba](https://github.com/hybridgroup/artoo-roomba)
+  #### Roomba : [Cylon.js-roomba](https://github.com/hybridgroup/Cylon.js-roomba)
       :::ruby
-      require 'artoo'
+      require 'Cylon.js'
 
       connection :roomba, :adaptor => :roomba, :port => '/dev/ttyUSB0'
       device :roomba, :driver => :roomba, :connection => :roomba
@@ -53,16 +53,16 @@ description: Artoo code snippets for your convinience.
         roomba.nudge_left
       end
 
-  #### Sphero : [artoo-sphero](https://github.com/hybridgroup/artoo-sphero)
+  #### Sphero : [Cylon.js-sphero](https://github.com/hybridgroup/Cylon.js-sphero)
 
-  For complete setup, follow [Sphero Tutorial](https://github.com/hybridgroup/artoo/wiki/1.3.2.-Sphero) in our wiki.
+  For complete setup, follow [Sphero Tutorial](https://github.com/hybridgroup/Cylon.js/wiki/1.3.2.-Sphero) in our wiki.
 
       :::ruby
-      require 'artoo/robot'
+      require 'Cylon.js/robot'
 
       SPHEROS = ["4567", "4568", "4569", "4570", "4571"]
 
-      class SpheroRobot < Artoo::Robot
+      class SpheroRobot < Cylon.js::Robot
         connection :sphero, adaptor: :sphero
         device :sphero, driver: :sphero
 
@@ -79,10 +79,10 @@ description: Artoo code snippets for your convinience.
 
       SpheroRobot.work!(robots)
 
-  #### Leapmotion : [artoo-leapmotion](https://github.com/hybridgroup/artoo-leapmotion)
+  #### Leapmotion : [Cylon.js-leapmotion](https://github.com/hybridgroup/Cylon.js-leapmotion)
 
       :::ruby
-      require 'artoo'
+      require 'Cylon.js'
 
       connection :leapmotion, :adaptor => :leapmotion, :port => '127.0.0.1:6437'
       device :leapmotion, :driver => :leapmotion
@@ -105,25 +105,25 @@ description: Artoo code snippets for your convinience.
           puts args
         end
 
-  #### Pebble : [artoo-pebble](https://github.com/hybridgroup/artoo-pebble)
+  #### Pebble : [Cylon.js-pebble](https://github.com/hybridgroup/Cylon.js-pebble)
 
       :::ruby
-      require 'artoo'
+      require 'Cylon.js'
 
       connection :pebble, :adaptor => :pebble, :port => "/dev/rfcomm0", :id => "378B"
       device :watch, :driver => :pebble
 
       work do
-        watch.set_nowplaying_metadata("Artoo", "Hello", Time.now.to_s)
+        watch.set_nowplaying_metadata("Cylon.js", "Hello", Time.now.to_s)
         every(5.seconds) do
-          watch.set_nowplaying_metadata("Artoo", "Update...", Time.now.to_s)
+          watch.set_nowplaying_metadata("Cylon.js", "Update...", Time.now.to_s)
         end
       end
 
-  #### Raspberry Pi : [artoo-raspi](https://github.com/hybridgroup/artoo-raspi)
+  #### Raspberry Pi : [Cylon.js-raspi](https://github.com/hybridgroup/Cylon.js-raspi)
 
       :::ruby
-      require 'artoo'
+      require 'Cylon.js'
 
       connection :raspi, :adaptor => :raspi
       device :led, :driver => :led, :pin => 17
@@ -134,4 +134,4 @@ description: Artoo code snippets for your convinience.
         end
       end
 
-  You can find many more examples on [GitHub](https://github.com/hybridgroup/artoo/tree/master/examples).
+  You can find many more examples on [GitHub](https://github.com/hybridgroup/Cylon.js/tree/master/examples).

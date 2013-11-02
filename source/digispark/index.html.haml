@@ -1,7 +1,7 @@
 ---
-title: Artoo - Digispark - Guetting started
+title: Cylon.js - Digispark - Guetting started
 author: The Hybrid Group
-description: Guetting started page for artoo-digispark
+description: Guetting started page for Cylon.js-digispark
 page_title: Getting Started - Digispark
 page_subtitle: A Guide by Humans, for Humans.
 layout: page
@@ -32,65 +32,65 @@ layout: page
     = link_to "here", "http://digistump.com/category/1", target: :blank
 
 %section.setup
-  %h2 Setting up Digispark to work with artoo
+  %h2 Setting up Digispark to work with Cylon.js
   %h3 Getting the Digispark hardware ready
   %p
-    Before we start tinkering with artoo, programs and manipulating our own robots, we must get our hands dirty
+    Before we start tinkering with Cylon.js, programs and manipulating our own robots, we must get our hands dirty
     and build our Digispark kit.
 
   %h4 Assembling your Digispark microcontroller
   %p
-    =# TODO: Add process on how to assemble the digispark starter kit so user can use it with artoo
+    =# TODO: Add process on how to assemble the digispark starter kit so user can use it with Cylon.js
     =# describe ans explain soldering process.
     %b TODO
 
   %h3 Installing Littlewire communication protocol in the Digispark
   %p
-    First thing to do is to setup your Digispark microcontroller for communication with Artoo. Artoo communicates
+    First thing to do is to setup your Digispark microcontroller for communication with Cylon.js. Cylon.js communicates
     with the Digispark using the Littlewire communication protocol (
     = link_to "http://littlewire.cc/", "http://littlewire.cc/"
     ), so we have to make sure this protocol has been installed to the Digispark firmware, if this is the case, you
-    can start working with Artoo right away.
+    can start working with Cylon.js right away.
   %p
     Nevertheless if the Digispark does not have the littlewire protocol installed yet, you can install it easily,
-    by first installing the artoo-digispark gem, and then running the command 'artoo install digispark'. The 
+    by first installing the Cylon.js-digispark gem, and then running the command 'Cylon.js install digispark'. The 
     program will prompt you to plug in the Digispark, and then once you do, it will install the firmware automatically.
 
   %h3 Connecting digispark to your computer
   %p
-    Now that we have the littlewire communication protocol installed in the Digispark we can use it with Artoo.
-    When you plug it, you should be able to use it with Artoo.
+    Now that we have the littlewire communication protocol installed in the Digispark we can use it with Cylon.js.
+    When you plug it, you should be able to use it with Cylon.js.
 
   %h4 When using OSX
   %p
-    =# TODO: Add info on how to connect digispark to USB to start using it with Artoo (get vendor and product).
+    =# TODO: Add info on how to connect digispark to USB to start using it with Cylon.js (get vendor and product).
     %b TODO
 
   %h4 When using Ubuntu
   %p
-    =# TODO: Add info on how to connect digispark to USB to start using it with Artoo (get vendor and product).
+    =# TODO: Add info on how to connect digispark to USB to start using it with Cylon.js (get vendor and product).
     %b TODO
 
   %h4 When using Windows
   %p
-    =# TODO: Add info on how to connect digispark to USB to start using it with Artoo (get vendor and product).
+    =# TODO: Add info on how to connect digispark to USB to start using it with Cylon.js (get vendor and product).
     %b TODO
 %section.installation
 
-  %h2 Installing artoo and artoo-digispark gems
+  %h2 Installing Cylon.js and Cylon.js-digispark gems
 
   %p
-    Installation is pretty simple, just install the artoo-digispark gem and you are set.
+    Installation is pretty simple, just install the Cylon.js-digispark gem and you are set.
 
   :markdown
         :::ruby
-        gem install artoo-digispark
+        gem install Cylon.js-digispark
 
   %h3 Writing your robot code:
 
   %p
     Now you are ready to write your own code. Take a look at the examples directory in the
-    = link_to "artoo-digispark", "https://github.com/hybridgroup/artoo-digispark/tree/master/examples"
+    = link_to "Cylon.js-digispark", "https://github.com/hybridgroup/Cylon.js-digispark/tree/master/examples"
     github repository (or clone the repository to your computer),
     for a whole bunch of code you can use to help get started.
     We recommend using Test-Driven Robotics (TDR) with your preferred test frameworks.
@@ -101,14 +101,14 @@ layout: page
         :::ruby
         ruby ./examples/blink.rb
 
-%section.artoo-code
+%section.Cylon.js-code
   %h2 What the code looks like
 
   %h3 Example: Digispark with LED and a button, using the Littlewire protocol.
 
   :markdown
         :::ruby
-        require 'artoo'
+        require 'Cylon.js'
 
         # Uses Digispark USB board (http://digistump.com/products/1) 
         # with Little Wire protocol (http://littlewire.cc)
@@ -129,8 +129,8 @@ layout: page
 %section.other-resources
   %h2 Additional resources
   %p
-    We are building robust artoo docs for each platform, you can check more details about digispark,
-    artoo support, available drivers and code examples in the following links.
+    We are building robust Cylon.js docs for each platform, you can check more details about digispark,
+    Cylon.js support, available drivers and code examples in the following links.
     %ul
       %li
         = link_to "Digispark platform docs", "../documentation/platforms/digispark"
@@ -148,8 +148,8 @@ layout: page
   %h2 Contributing
 
   %p
-    You can help artoo grow by contributing your code, new drivers or platforms to the project, check the Github page
-    = link_to "artoo on github.","https://github.com/hybridgroup/artoo" 
+    You can help Cylon.js grow by contributing your code, new drivers or platforms to the project, check the Github page
+    = link_to "Cylon.js on github.","https://github.com/hybridgroup/Cylon.js" 
 
   %ul
     %li Fork it

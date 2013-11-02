@@ -1,8 +1,8 @@
 ---
-title: Joysticks with Artoo
+title: Joysticks with Cylon.js
 author: The Hybrid Group
 page_title: Joysticks
-page_subtitle: "<a href='https://github.com/hybridgroup/artoo-joystick' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/artoo-joystick/issues'>Issues</a>"
+page_subtitle: "<a href='https://github.com/hybridgroup/Cylon.js-joystick' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/Cylon.js-joystick/issues'>Issues</a>"
 layout: page
 ---
 .documentation
@@ -10,7 +10,7 @@ layout: page
     = image_tag "/images/joystick.jpg", class: "display"
 
     %p
-      You can use Artoo with a PS3 game controller, an XBox360 game controller, or any other USB joystick or game controller that is compatible with Simple DirectMedia Layer (SDL).
+      You can use Cylon.js with a PS3 game controller, an XBox360 game controller, or any other USB joystick or game controller that is compatible with Simple DirectMedia Layer (SDL).
 
     %p
       For more info about Simple DirectMedia Layer (SDL) go to
@@ -20,17 +20,17 @@ layout: page
   %section.how-to
     %h2 How to install
     %p
-      Installing artoo with arduino support is pretty easy using ruby gems.
+      Installing Cylon.js with arduino support is pretty easy using ruby gems.
     :markdown
           :::bash
-          gem install artoo-joystick
+          gem install Cylon.js-joystick
 
     %h2 How to use
     %p
       This small program receives joystick and button press events from an XBox 360 game controller.
     :markdown
           :::ruby
-          require 'artoo'
+          require 'Cylon.js'
 
           connection :joystick, :adaptor => :joystick
           device :joystick, :driver => :xbox360, :connection => :joystick, :interval => 0.1
