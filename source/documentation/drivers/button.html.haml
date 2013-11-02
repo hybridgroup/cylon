@@ -15,17 +15,29 @@ layout: page
     %h2 How to establish a connection and setup the driver 
     %h3 For Arduino:
     :markdown
-          :::ruby
-          Cylon = require('cylon')
+          :::javascript
+
+          var Cylon = require('cylon');
+
+          Cylon.robot({
+            connection: {name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'},
+
+            device: {name: 'button', driver: 'button', pin: 2},
+
+            ...
+
+    :markdown
+          :::javascript
+          Cylon = require 'cylon'
 
           Cylon.robot
             connection:
               name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
 
-            devices:
-              [
-                {name: 'button', driver: 'button', pin: 2}
-              ]
+            device:
+              name: 'button', driver: 'button', pin: 2
+
+            ...
 
     -#%h3 For Digispark:
     -#:markdown
@@ -62,11 +74,41 @@ layout: page
     -#:markdown
           -#:::ruby
 
-  -#%section.how-to
-    -#%h2 How to use
-    -#%h3 Example using a button to turn a LED on and off.
-    -#:markdown
-          -#:::ruby
+  %section.how-to
+    %h2 How to use
+    %h3 Example detecting when a button has been pushed
+    :markdown
+          :::javascript
+
+          var Cylon = require('cylon');
+
+          Cylon.robot({
+            connection: {name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'},
+
+            device: {name: 'button', driver: 'button', pin: 2},
+
+            work: function(my) {
+              my.button.on('push', function() {
+                Logger.info("Button pushed!");
+              });
+            }
+          }).start();
+
+    :markdown
+          :::javascript
+          Cylon = require 'cylon'
+
+          Cylon.robot
+            connection:
+              name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
+
+            device:
+              name: 'button', driver: 'button', pin: 2
+
+            work: (my) ->
+              my.button.on 'push', -> Logger.info "Button pushed!"
+
+          .start()
 
   %section.circuit
     %h2 Circuit and Schematic

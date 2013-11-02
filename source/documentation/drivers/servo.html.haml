@@ -15,8 +15,19 @@ layout: page
     %h2 How to establish a connection and setup the driver
     %h3 For Arduino:
     :markdown
-          :::ruby
-          Cylon = require('cylon')
+          :::javascript
+          var Cylon = require('cylon');
+
+          Cylon.robot({
+            connection: {name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'},
+
+            device: {name: 'servo', driver: 'servo', pin: 3},
+
+          ...
+
+    :markdown
+          :::javascript
+          Cylon = require 'cylon'
 
           Cylon.robot
             connection:
@@ -24,6 +35,8 @@ layout: page
 
             device:
               name: 'servo', driver: 'servo', pin: 3
+
+          ...
 
     -#%h3 For Digispark:
     -#:markdown
@@ -47,10 +60,32 @@ layout: page
 
   %section.how-to
     %h2 How to use
-    %h3 Example moves a servo from angle 0 to 90 to 180.
+    %h3 Example moves a servo from angle 45 to 90 to 135.
     :markdown
-          :::ruby
-          Cylon = require('..')
+          :::javascript
+          var Cylon = require('cylon');
+
+          Cylon.robot({
+            connection: {name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'},
+
+            device: {name: 'servo', driver: 'servo', pin: 3},
+
+            work: function(my) {
+              var angle = 45 ;
+              my.servo.angle(angle);
+              every((1).second(), function() {
+                angle = angle + 45 ;
+                if (angle > 135) {
+                  angle = 45
+                }
+                my.servo.angle(angle);
+              });
+            }
+          }).start();
+
+    :markdown
+          :::javascript
+          Cylon = require 'cylon'
 
           Cylon.robot
             connection:
@@ -60,13 +95,12 @@ layout: page
               name: 'servo', driver: 'servo', pin: 3
 
             work: (my) ->
-              angle = 0
-              increment = 90
-              every 1.seconds(), ->
-                angle += increment
-                my.servo.angle(angle)
-                console.log("Current Angle => \#{ my.servo.currentAngle() }")
-                increment = -increment if (angle is 0) or (angle is 180)
+              angle = 45
+              my.servo.angle angle
+              every 1.second(), ->
+                angle += 45
+                angle = 45 if angle > 135
+                my.servo.angle angle
 
           .start()
 
