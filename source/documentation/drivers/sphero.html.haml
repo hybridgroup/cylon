@@ -161,29 +161,24 @@ layout: page
 
   %section.public-events
     %h2 Events:
-    %ul 
-      %li 
-        %h3 update
-        %small 
-          This event will contain one of the following events.
-          %br/  
-          You can also subscribe to one of the specific events, if that is the information you are interested in.
-      %li
-        %h3 collision
-        %p Gets triggered when the sphero hits something or falls from a step.
-      %li
-        %h3 messages(data)
-        %p 
-      %li 
-        %h3 notifications(data)
-        %p 
-      %li 
-        %h3 connect
-        %p Opens the connection to Sphero.
 
-      %li 
-        %h3 start
-        %p Sent when the device has been started and is ready to use.  
+    %dl.methods 
+      %dt update
+      %dd 
+        This event will contain one of the following events.
+        %br/  
+        You can also subscribe to one of the specific events, if that is the information you are interested in.
+      %dt collision
+      %dd Gets triggered when the sphero hits something or falls from a step.
+      %dt messages(data)
+      %dd 
+      %dt notifications(data)
+      %dd 
+      %dt connect
+      %dd Opens the connection to Sphero.
+      %dt start
+      %dd Sent when the device has been started and is ready to use.
+  
 
     -#%h3 How to use events and call them on your drivers
     -#%p
@@ -272,6 +267,7 @@ layout: page
       %dd 0x8FBC8F
       %dt darkslateblue         
       %dd 0x483D8B
+    %dl.colors   
       %dt darkslategray         
       %dd 0x2F4F4F
       %dt darkturquoise         
@@ -296,7 +292,6 @@ layout: page
       %dd 0xFF00FF
       %dt gainsboro             
       %dd 0xDCDCDC
-    %dl.colors   
       %dt ghostwhite            
       %dd 0xF8F8FF     
       %dt gold                  
@@ -343,6 +338,7 @@ layout: page
       %dd 0xD3D3D3
       %dt lightpink             
       %dd 0xFFB6C1
+    %dl.colors   
       %dt lightsalmon           
       %dd 0xFFA07A
       %dt lightseagreen         
@@ -390,8 +386,7 @@ layout: page
       %dt mistyrose             
       %dd 0xFFE4E1
       %dt moccasin              
-      %dd 0xFFE4B5
-    %dl.colors   
+      %dd 0xFFE4B5 
       %dt navajowhite           
       %dd 0xFFDEAD    
       %dt navy                  
@@ -414,6 +409,7 @@ layout: page
       %dd 0x98FB98
       %dt paleturquoise         
       %dd 0xAFEEEE
+    %dl.colors   
       %dt palevioletred         
       %dd 0xDB7093
       %dt papayawhip            
