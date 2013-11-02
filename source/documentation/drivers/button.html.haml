@@ -13,7 +13,7 @@ layout: page
 
   %section.how_to
     %h2 How to establish a connection and setup the driver 
-    %h3 For Arduino:
+    %h3 JavaScript
     :markdown
           :::javascript
 
@@ -23,9 +23,9 @@ layout: page
             connection: {name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'},
 
             device: {name: 'button', driver: 'button', pin: 2},
-
             ...
 
+    %h3 CoffeeScript
     :markdown
           :::javascript
           Cylon = require 'cylon'
@@ -36,7 +36,6 @@ layout: page
 
             device:
               name: 'button', driver: 'button', pin: 2
-
             ...
 
     -#%h3 For Digispark:
@@ -76,7 +75,10 @@ layout: page
 
   %section.how-to
     %h2 How to use
-    %h3 Example detecting when a button has been pushed
+    %p 
+      This example detects when a button has been pushed.
+
+    %h3 JavaScript    
     :markdown
           :::javascript
 
@@ -94,6 +96,7 @@ layout: page
             }
           }).start();
 
+    %h3 CoffeeScript
     :markdown
           :::javascript
           Cylon = require 'cylon'

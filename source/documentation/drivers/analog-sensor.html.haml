@@ -14,7 +14,7 @@ layout: page
 
   %section.how_to
     %h2 How to establish a connection and setup the driver
-    %h3 For Arduino:
+    %h3 JavaScript
     :markdown
           :::javascript
           var Cylon = require('cylon');
@@ -23,9 +23,9 @@ layout: page
             connection: {name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'},
 
             device: {name: 'sensor', driver: 'analogSensor', pin: 0, lowerLimit: 100, upperLimit: 900},
-
             ...
 
+    %h3 CoffeeScript
     :markdown
           :::javascript
           Cylon = require 'cylon'
@@ -36,7 +36,6 @@ layout: page
 
             device:
               name: 'sensor', driver: 'analogSensor', pin: 0, lowerLimit: 100, upperLimit: 900
-
             ...
 
     -#%h3 For Digispark:
@@ -76,7 +75,9 @@ layout: page
 
   %section.how-to
     %h2 How to use
-    %h3 Example detecing lower and upper limits on a photoresistor sensor
+    %p 
+      This example detects lower and upper limits on a photoresistor sensor.
+    %h3 JavaScript
     :markdown
           :::javascript
           var Cylon = require('cylon');
@@ -96,6 +97,7 @@ layout: page
             }
           }).start();
 
+    %h3 CoffeeScript
     :markdown
           :::javascript
           Cylon = require 'cylon'

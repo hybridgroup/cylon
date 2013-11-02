@@ -14,7 +14,7 @@ layout: page
 
   %section.how-to
     %h2 How to establish a connection and setup the driver
-    %h3 For Arduino:
+    %h3 JavaScript
     :markdown
           :::javascript
 
@@ -24,9 +24,9 @@ layout: page
             connection: {name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'},
 
             device: {name: 'motor', driver: 'motor', pin: 3},
-
             ...
 
+    %h3 CoffeeScript
     :markdown
           :::ruby
           Cylon = require 'cylon'
@@ -37,7 +37,6 @@ layout: page
 
             device:
               name: 'motor', driver: 'motor', pin: 3
-
             ...
 
     -#%h3 For Digispark:
@@ -67,7 +66,10 @@ layout: page
  
   %section.how-to
     %h2 How to use
-    %h3 Example of a dc motor with speed changes using PWM.
+    %p
+      This example turns on a DC motor using PWM.
+
+    %h3 JavaScript
     :markdown
           :::javascript
 
@@ -87,6 +89,7 @@ layout: page
             }
           }).start();
 
+    %h3 CoffeeScript
     :markdown
           :::javascript
           Cylon = require 'cylon'
