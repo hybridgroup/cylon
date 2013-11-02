@@ -84,5 +84,7 @@ Version 0.1.0 - Initial release for ongoing development
 
 Version 0.2.0 - Cylon.Basestar to help develop external adaptors/drivers
 
+Version 0.3.0 - Improved Cylon.Basestar, and added API
+
 ## License
 Copyright (c) 2013 The Hybrid Group. Licensed under the Apache 2.0 license.
