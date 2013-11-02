@@ -16,16 +16,30 @@ layout: page
     %p
       That is pretty simple once the Sphero is ready (connected and listening), you just need three lines of code and you are set,
       Cylon.js and the Sphero driver take care of the rest.
-    :markdown
-          :::ruby
-          Cylon = require('cylon')
 
-          Cylon.robot
-            connection:
-              name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'
+      %h3 JavaScript
+      :markdown
+            :::javascript
+            var Cylon = require('cylon');
 
-            device:
-              name: 'sphero', driver: 'sphero'
+            Cylon.robot({
+              connection: {name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'},
+
+              device: {name: 'sphero', driver: 'sphero'},
+            ...
+
+      %h3 CoffeeScript
+      :markdown
+            :::javascript
+            Cylon = require 'cylon'
+
+            Cylon.robot
+              connection:
+                name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'
+
+              device:
+                name: 'sphero', driver: 'sphero'
+              ...
 
   %section.public-methods
     %h2 Commands:
@@ -187,12 +201,48 @@ layout: page
     -#:markdown
           -#:::ruby
 
-  -#%section.how-to
-    -#%h2 How to use
-    -#%h3 Example to roll the sphero in a random direction and change direction every 3 seconds.
-    -#:markdown
-          -#:::ruby
+  %section.how-to
+    %h2 How to use
+    %p 
+      This example rolls the sphero in a random direction and change direction every second.
 
+      %h3 JavaScript
+      :markdown
+            :::javascript
+
+            var Cylon = require('cylon');
+
+            Cylon.robot({
+              connection: {name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'},
+
+              device: {name: 'sphero', driver: 'sphero'},
+
+              work: function(me) {
+                every((1).second(), function() {
+                  me.sphero.roll 60, Math.floor(Math.random() * 360)
+                });
+              }
+            }).start();
+
+      %h3 CoffeeScript
+      :markdown
+            :::javascript
+
+            Cylon = require('..')
+
+            Cylon.robot
+              connection:
+                name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'
+
+              device:
+                name: 'sphero', driver: 'sphero'
+
+              work: (me) ->
+                every 1.second(), ->
+                  me.sphero.roll 60, Math.floor(Math.random() * 360)
+
+            .start()
+  
   %section 
     %h2 Sphero Colors 
 

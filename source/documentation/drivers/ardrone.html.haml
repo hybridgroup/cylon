@@ -15,9 +15,22 @@ layout: page
     %h2 How to establish a connection and setup the driver
     %p
       Communication with the ARDrone's flight control interface takes place using a WiFi connection. The ARDrone is a WiFi access point, so it normally can be the only device you connect to, without some additional effort to reconfigure the drone itself to put it into infrastructure mode.
+    
+    %h3 JavaScript
     :markdown
-          :::ruby
-          Cylon = require('cylon')
+          :::javascript
+          var Cylon = require('cylon');
+
+          Cylon.robot({
+            connection: {name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1'},
+
+            device: {name: 'ardrone', driver: 'ardrone'},
+          ...
+
+    %h3 CoffeeScript
+    :markdown
+          :::javascript
+          Cylon = require 'cylon'
 
           Cylon.robot
             connection:
@@ -25,6 +38,7 @@ layout: page
 
             device:
               name: 'ardrone', driver: 'ardrone'
+          ...
 
   %section.public-methods
     %h2 Commands:
@@ -70,15 +84,54 @@ layout: page
       %dd Sent when the device has been started and is ready to use.  
                      
 
-  -#%section.how-to
-    -#%h2 How to use
-    -#%h3 Example of controlling an ARDrone.
-    -#:markdown
-          -#:::ruby
+  %section.how-to
+    %h2 How to use
+    %p 
+      This example controls an ARDrone to take off, and then land.
 
-    -#%h3 Example of ARDrone doing a flip.
-    -#:markdown
-          -#:::ruby
+    %h3 JavaScript
+    :markdown
+          :::javascript
+          var Cylon = require('cylon');
+
+          Cylon.robot({
+            connection: {name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1'},
+            device: {name: 'drone', driver: 'ardrone'},
+            work: function(my) {
+              my.drone.takeoff();
+
+              after((10).seconds(), function() {
+                my.drone.land();
+              }
+
+              after((15).seconds(), function() {
+                my.drone.stop();
+              }
+            }
+          }).start();
+
+    %h3 CoffeeScript
+    :markdown
+          :::javascript
+          Cylon = require 'cylon'
+
+          Cylon.robot
+            connection:
+              name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1'
+
+            device:
+              name: 'drone', driver: 'ardrone'
+
+            work: (my) ->
+              my.drone.takeoff()
+
+              after 10.seconds(), ->
+                my.drone.land()
+
+              after 15.seconds(), ->
+                my.drone.stop()
+
+          .start()
 
   %section.compatability.hardware
     %h2 Works with:
