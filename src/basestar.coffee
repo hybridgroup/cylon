@@ -8,23 +8,44 @@
 
 'use strict';
 
-namespace = require 'node-namespace'
-EventEmitter = require('events').EventEmitter
 require './utils'
 
-# Basestar is the class used when writing external Cylon adaptors/drivers.
+namespace = require 'node-namespace'
+
+EventEmitter = require('events').EventEmitter
+
+# Basestar is a base class to be used when writing external Cylon adaptors and
+# drivers. It provides some useful base methods and functionality
 #
-# It provides some useful methods and behaviour.
+# It also extends EventEmitter, so child classes are capable of emitting events
+# for other parts of the system to handle.
 namespace 'Cylon', ->
   class @Basestar extends EventEmitter
     constructor: (opts) ->
       @self = this
 
-    # proxies calls from all methods in klass to target
+    # Public: Proxies calls from all methods in the class to a target class
+    #
+    # methods - array of methods to proxy
+    # target - class/object to proxy methods to
+    # klass - class to proxy methods from
+    # force - whether or not to overwrite existing method definitions
+    #
+    # Returns the klass where the methods have been proxied
     proxyMethods: (methods, target, klass, force = false) ->
       proxyFunctionsToObject(methods, target, klass, force)
 
-    # creates an event handler that proxies events from source object to target
+    # Public: Defines an event handler that proxies events from a source object
+    # to a target object
+    #
+    # opts - object containing options:
+    #   - targetEventName or eventName - event that should be emitted from the
+    #                                    target
+    #   - target - object to proxy event to
+    #   - source - object to proxy event from
+    #   - update - whether or not to send an 'update' event
+    #
+    # Returns the source
     defineEvent: (opts) ->
      targetEventName = opts.targetEventName or opts.eventName
      sendUpdate = opts.sendUpdate or false
@@ -32,17 +53,28 @@ namespace 'Cylon', ->
        opts.target.emit(targetEventName, args)
        opts.target.emit('update', targetEventName, args) if sendUpdate
 
-    # creates an event handler that proxies events from an adaptor object's 'connector'
-    # (object reference to whatever module is actually talking to the hardware)
-    # to the adaptor's associated connection
+      source
+
+    # Public: Creates an event handler that proxies events from an adaptor's
+    # 'connector' (reference to whatever module is actually talking to the hw)
+    # to the adaptor's associated connection.
+    #
+    # opts - hash of opts to be passed to defineEvent()
+    #
+    # Returns @connector
     defineAdaptorEvent: (opts) ->
       opts['source'] = @connector
       opts['target'] = @connection
       opts['sendUpdate'] ?= false
       @defineEvent(opts)
 
-    # creates an event handler that proxies events from a driver object's 'connection'
-    # to the driver's associated device
+    # Public: Creates an event handler that proxies events from an device's
+    # 'connector' (reference to whatever module is actually talking to the hw)
+    # to the device's associated connection.
+    #
+    # opts - hash of opts to be passed to defineEvent()
+    #
+    # Returns @connection
     defineDriverEvent: (opts) ->
       opts['source'] = @connection
       opts['target'] = @device
