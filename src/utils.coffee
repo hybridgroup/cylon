@@ -49,8 +49,32 @@ global.proxyFunctionsToObject = (methods, target, base = this, force = false) ->
 
   return base
 
+# Public: Monkey-patches Number to have Rails-like #seconds() function. Warning,
+# due to the way the Javascript parser works, applying functions on numbers is
+# kind of weird. See examples for details.
+#
+# Returns an integer representing time in milliseconds
+# Examples:
+#   # Thanks to Javascript's parser, this will generate a syntax error
+#
+#   2.seconds()
+#   #=> SyntaxError: Unexpected token ILLEGAL
+#
+#   # So instead, use something like the following:
+#
+#   10..seconds()
+#   #=> 10000
+#
+#   (5).seconds()
+#   #=> 5000
 Number::seconds = ->
   this * 1000
 
+# Public: Alias for Number::seconds, see comments for that method
+#
+# Returns an integer representing time in milliseconds
+# Examples:
+#   1.second()
+#   #=> 1000
 Number::second = ->
   @seconds(this)
