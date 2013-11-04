@@ -47,15 +47,15 @@ layout: page
     %h2 Commands:
     
     %dl.methods 
-      %dt turnOn
+      %dt turnOn → true | nil
       %dd Starts the motor.
-      %dt turnOff
+      %dt turnOff → true | nil
       %dd Stops the motor.
-      %dt toggle
+      %dt toggle → true | nil
       %dd Sets the state of the motor to the oposite of the current state, if motor is on then sets it to off.
-      %dt speed(speed_value)
+      %dt speed(speed_value) → true | nil
       %dd Sets the speed of the motor to the value provided in the speed param, speed value must be an integer between 0 and 255.
-      %dt currentSpeed
+      %dt currentSpeed → speed
       %dd Returns the current speed of the motor as an integer between 0 and 255.
 
     %h2 Events

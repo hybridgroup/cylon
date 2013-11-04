@@ -44,28 +44,55 @@ layout: page
     %h2 Commands:
 
     %dl.methods 
-      %dt takeoff
-      %dd Causes the drone to take off, if already started.
-      %dt land
-      %dd Causes the drone to begin its landing sequence.
+      %dt takeoff(callback)
+      %dd 
+        :markdown
+          Sets the internal `fly` state to `true`, `callback` is invoked after the drone reports that it is hovering.
+      %dt land(callback)
+      %dd 
+        :markdown
+          Sets the internal `fly` state to `false`, `callback` is invoked after the drone reports it has landed.
       %dt stop
-      %dd Stops the drone.
-      %dt up
-      %dd Causes the drone to increase altitude.
-      %dt down
-      %dd Causes the drone to decrease altitude.
-      %dt left
-      %dd  Causes the drone to bank to the left.
-      %dt right
-      %dd Causes the drone to bank to the right.
-      %dt front
       %dd 
-      %dt back
+        :markdown
+          Sets all drone movement commands to `0`, making it effectively hover in place.
+      %dt up(speed) 
       %dd 
+        Makes the drone gain altitude. 
+        :markdown
+          `speed` can be a value from `0` to `1`.
+      %dt down(speed) 
+      %dd 
+        Makes the drone reduce altitude. 
+        :markdown
+          `speed` can be a value from `0` to `1`.
+      %dt left(speed) 
+      %dd  
+        Causes the drone to bank to the left, controls the roll, which is a horizontal movement using the camera as a reference point. 
+        :markdown
+          `speed` can be a value from `0` to `1`.
+      %dt right(speed) 
+      %dd 
+        Causes the drone to bank to the right, controls the roll, which is a horizontal movement using the camera as a reference point. 
+        :markdown
+          `speed`can be a value from `0` to `1`.
+      %dt front(speed) 
+      %dd 
+        Causes the drone to bank to the front, controls the pitch, which a horizontal movement using the camera as a reference point. 
+        :markdown
+          `speed` can be a value from `0` to `1`.
+      %dt back(speed) 
+      %dd 
+        Causes the drone to bank to the back, controls the pitch, which a horizontal movement using the camera as a reference point. 
+        :markdown
+          `speed` can be a value from `0` to `1`.
       %dt clockwise
       %dd 
+        Causes the drone to spin.
+        :markdown
+          `speed` can be a value from `0` to `1`.
       %dt counterClockwise
-      %dd 
+      %dd Causes the drone to spin. speed can be a value from 0 to 1.
       %dt calibrate
       %dd 
       %dt config

@@ -13,35 +13,85 @@ layout: page
 
   %section.how-to
     %h2 How to establish a connection and setup the driver
-    %h3 For Arduino:
+    %h3 JavaScript
     :markdown
-          :::ruby
-          comming soon
+          :::javascript
+          var Cylon = require('cylon');
 
+          Cylon.robot({
+            connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+            device: {name: 'led', driver: 'led', pin: 13},
+
+            ..
+
+    %h3 CoffeeScript
+    :markdown
+          :::javascript
+          Cylon = require('cylon')
+
+          Cylon.robot
+            connection:
+              name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
+
+            device:
+              name: 'led', driver: 'led', pin: 13
+            ..
   %section.public-events
-    %h2 Public instance methods:
-    %h3 rgb(red=0, green=0, blue=0) → nil
-    %p
-      Sets the color of the BlinkM RGB LED to the specified combination of RGB color provided (red, green and blue values should be between 0 and 255).
+    %h2 Commands:
+    
+    %dl.methods 
+      %dt off
+      %dd Turns BlinkM off.
+      %dt rgb → nil
+      %dd Sets the color of the BlinkM RGB LED to the specified combination of RGB color provided (red, green and blue values should be between 0 and 255).
+      %dt fade → nil
+      %dd Fades the color of the BlinkM RGB LED to the specified combination of RGB color provided (red, green and blue values should be between 0 and 255).
+      %dt color → [red, green, blue] (integer)
+      %dd Returns an array containing the RGB values for the current color (all integer between 0 and 255).
+      %dt version → String
+      %dd Returns an sring describing the I2C firmware version being used.
 
-    %h3 fade(red=0, green=0, blue=0) → nil
-    %p
-      Fades the color of the BlinkM RGB LED to the specified combination of RGB color provided (red, green and blue values should be between 0 and 255).
+    %h2 Events
 
-    %h3 firmware_version → String
-    %p
-      Returns an sring describing the I2C firmware version being used.
+    %dl.methods 
+      %dt start
+      %dd Sent when the device has been started and is ready to use.  
 
-    %h3 color → [red, green, blue] (integer)
-    %p
-      Returns an array containing the RGB values for the current color (all integer between 0 and 255).
 
   %section.how-to
     %h2 How to use
-    %h3 Example using a BlinkM.
+    %p Example using a BlinkM.
+    %h3 JavaScript
     :markdown
-          :::ruby
-          comming soon
+          :::javascript
+          var Cylon = require('cylon');
+
+          Cylon.robot({
+            connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+            device: {name: 'led', driver: 'led', pin: 13},
+
+            work: function(my) {
+              every((1).seconds(), function() {my.led.toggle()});
+            }
+          }).start();
+
+    %h3 CoffeeScript
+    :markdown
+          :::javascript
+          Cylon = require('cylon')
+
+          Cylon.robot
+            connection:
+              name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
+
+            device:
+              name: 'led', driver: 'led', pin: 13
+
+            work: (my) ->
+              # we do our thing here
+              every 1.second(), -> my.led.toggle()
+
+          .start()
 
   %section.circuit
     %h2 Circuit and Schematic
