@@ -1,14 +1,14 @@
 'use strict';
 
-Device = source("device")
+source("device")
+source("robot")
 Driver = source("driver")
-Robot = source("robot")
 
 describe "Device", ->
-  robot = new Robot(name: 'me')
+  robot = new Cylon.Robot(name: 'me')
   driver = new Driver(name: 'driving')
   requireDriver = sinon.stub(robot, 'requireDriver').returns(driver)
-  device = new Device(name: "devisive", driver: 'driving', robot: robot)
+  device = new Cylon.Device(name: "devisive", driver: 'driving', robot: robot)
 
   it "should belong to a robot", ->
     device.robot.name.should.be.equal 'me'

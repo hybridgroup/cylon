@@ -8,79 +8,83 @@
 
 'use strict';
 
-require('./cylon')
+require './cylon'
+namespace = require 'node-namespace'
 EventEmitter = require('events').EventEmitter
 
 # The Artoo::Device class represents the interface to
 # a specific individual hardware devices. Examples would be a digital
 # thermometer connected to an Arduino, or a Sphero's accelerometer.
-module.exports = class Device extends EventEmitter
+namespace 'Cylon', ->
+  class @Device extends EventEmitter
 
-  # Public: Creates a new Device
-  #
-  # opts - object containing Device params
-  #   name - string name of the device
-  #   pin - string pin of the device
-  #   robot - parent Robot to the device
-  #   connection - connection to the device
-  #   driver - string name of the module the device driver logic lives in
-  #
-  # Returns a new Device
-  constructor: (opts = {}) ->
-    @self = this
-    @robot = opts.robot
-    @name = opts.name
-    @pin = opts.pin
-    @connection = @determineConnection(opts.connection) or @defaultConnection()
-    @driver = @requireDriver(opts)
-    proxyFunctionsToObject @driver.commands(), @driver, Device
+    # Public: Creates a new Device
+    #
+    # opts - object containing Device params
+    #   name - string name of the device
+    #   pin - string pin of the device
+    #   robot - parent Robot to the device
+    #   connection - connection to the device
+    #   driver - string name of the module the device driver logic lives in
+    #
+    # Returns a new Device
+    constructor: (opts = {}) ->
+      @self = this
+      @robot = opts.robot
+      @name = opts.name
+      @pin = opts.pin
+      @connection = @determineConnection(opts.connection) or @defaultConnection()
+      @driver = @requireDriver(opts)
+      proxyFunctionsToObject @driver.commands(), @driver, Device
 
-  # Public: Starts the device driver
-  #
-  # callback - callback function to be executed by the driver start
-  #
-  # Returns result of supplied callback
-  start: (callback) =>
-    msg = "Starting device '#{ @name }'"
-    msg += " on pin #{@pin}" if @pin?
-    Logger.info msg
-    @driver.start(callback)
+    # Public: Starts the device driver
+    #
+    # callback - callback function to be executed by the driver start
+    #
+    # Returns result of supplied callback
+    start: (callback) =>
+      msg = "Starting device '#{ @name }'"
+      msg += " on pin #{@pin}" if @pin?
+      Logger.info msg
+      @driver.start(callback)
 
-  # Public: Exports basic data for the Connection
-  #
-  # Returns an Object containing Connection data
-  data: ->
-    {
-      name: @name
-      driver: @driver.constructor.name || @driver.name
-      pin: if @pin? then @pin.toString else null
-      connection: @connection.data()
-      commands: @driver.commands()
-    }
+    # Public: Exports basic data for the Connection
+    #
+    # Returns an Object containing Connection data
+    data: ->
+      {
+        name: @name
+        driver: @driver.constructor.name || @driver.name
+        pin: if @pin? then @pin.toString else null
+        connection: @connection.data()
+        commands: @driver.commands()
+      }
 
-  # Public: Retrieves the connections from the parent Robot instances
-  #
-  # c - name of the connection to fetch
-  #
-  # Returns a Connection instance
-  determineConnection: (c) ->
-    @robot.connections[c] if c
+    # Public: Retrieves the connections from the parent Robot instances
+    #
+    # c - name of the connection to fetch
+    #
+    # Returns a Connection instance
+    determineConnection: (c) ->
+      @robot.connections[c] if c
 
-  # Public: Returns a default Connection to use
-  #
-  # Returns a Connection instance
-  defaultConnection: ->
-    first = 0
-    for k, v of @robot.connections
-      first or= v
-    first
+    # Public: Returns a default Connection to use
+    #
+    # Returns a Connection instance
+    defaultConnection: ->
+      first = 0
+      for k, v of @robot.connections
+        first or= v
+      first
 
-  # Public: sets up driver with @robot
-  #
-  # opts - object containing options when requiring driver
-  #   driver - name of the module to require()
-  #
-  # Returns the set-up driver
-  requireDriver: (opts = {}) ->
-    Logger.debug "Loading driver '#{ opts.driver }'"
-    @robot.requireDriver(opts.driver, @self, opts)
+    # Public: sets up driver with @robot
+    #
+    # opts - object containing options when requiring driver
+    #   driver - name of the module to require()
+    #
+    # Returns the set-up driver
+    requireDriver: (opts = {}) ->
+      Logger.debug "Loading driver '#{ opts.driver }'"
+      @robot.requireDriver(opts.driver, @self, opts)
+
+module.exports = Cylon.Device

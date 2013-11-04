@@ -1,8 +1,6 @@
 (function() {
   'use strict';
-  var Robot;
-
-  Robot = source("robot");
+  source("robot");
 
   source("logger");
 
@@ -16,7 +14,7 @@
     whateverFunc = function() {
       return Logger.info("whatever!");
     };
-    robot = new Robot({
+    robot = new Cylon.Robot({
       name: "irobot",
       work: testWork,
       whatever: whateverFunc
@@ -26,8 +24,8 @@
     });
     it("has a random name, if not given", function() {
       var r;
-      sinon.stub(Robot, 'randomName').returns('Electra');
-      r = new Robot;
+      sinon.stub(Cylon.Robot, 'randomName').returns('Electra');
+      r = new Cylon.Robot;
       return r.name.should.be.equal('Electra');
     });
     it("has work", function() {
