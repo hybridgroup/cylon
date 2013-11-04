@@ -1,25 +1,25 @@
 'use strict';
 
-Robot = source("robot")
+source("robot")
 source("logger")
 
 Logger.setup(false) # quiet logger for tests
 
 describe "Robot", ->
-  testWork = ->
-    Logger.info "hi"
-  
-  whateverFunc = ->
-    Logger.info "whatever!"
+  testWork = -> Logger.info "hi"
+  whateverFunc = -> Logger.info "whatever!"
 
-  robot = new Robot(name: "irobot", work: testWork, whatever: whateverFunc)
+  robot = new Cylon.Robot
+    name: "irobot"
+    work: testWork
+    whatever: whateverFunc
 
   it "has a name, if given", ->
     robot.name.should.be.equal 'irobot'
 
   it "has a random name, if not given", ->
-    sinon.stub(Robot, 'randomName').returns('Electra')
-    r = new Robot
+    sinon.stub(Cylon.Robot, 'randomName').returns('Electra')
+    r = new Cylon.Robot
     r.name.should.be.equal 'Electra'
 
   it "has work", ->
