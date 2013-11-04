@@ -92,17 +92,47 @@ layout: page
         :markdown
           `speed` can be a value from `0` to `1`.
       %dt counterClockwise
-      %dd Causes the drone to spin. speed can be a value from 0 to 1.
-      %dt calibrate
+      %dd
+        Causes the drone to spin. 
+        :markdown
+          `speed` can be a value from `0` to `1`.
+      %dt calibrate(device_num)
+      %dd Asks the drone to calibrate a device.
+      %dt config(key, value, callback)
       %dd 
-      %dt config
+        Sends a config command to the drone.
+      %dt animate(animation, duration)
       %dd 
-      %dt animate
+        :markdown
+          Performs a pre-programmed flight sequence for a given `duration` (in ms). 
+          `animation` can be one of the following:
+
+        :markdown
+              :::javascript
+              ['phiM30Deg', 'phi30Deg', 'thetaM30Deg', 'theta30Deg', 'theta20degYaw200deg',
+              'theta20degYawM200deg', 'turnaround', 'turnaroundGodown', 'yawShake',
+              'yawDance', 'phiDance', 'thetaDance', 'vzDance', 'wave', 'phiThetaMixed',
+              'doublePhiThetaMixed', 'flipAhead', 'flipBehind', 'flipLeft', 'flipRight']
+
+      %dt animateLeds(animation, hz, duration)
       %dd 
-      %dt animateLeds
-      %dd 
+        :markdown
+          Performs a pre-programmed led sequence at given `hz` frequency and `duration` (in sec!). `animation` can be one of the following:
+
+        :markdown
+              :::javascript
+              ['blinkGreenRed', 'blinkGreen', 'blinkRed', 'blinkOrange', 'snakeGreenRed',
+              'fire', 'standard', 'red', 'green', 'redSnake', 'blank', 'rightMissile',
+              'leftMissile', 'doubleMissile', 'frontLeftGreenOthersRed',
+              'frontRightGreenOthersRed', 'rearRightGreenOthersRed',
+              'rearLeftGreenOthersRed', 'leftGreenRightRed', 'leftRedRightGreen',
+              'blinkStandard']  
+
+
       %dt disableEmergency
       %dd 
+        :markdown
+          Causes the emergency REF bit to be set to 1 until `navdata.droneState.emergencyLanding is 0`. This recovers a drone that has flipped over and is showing red lights to be flyable again and show green lights. It is also done implicitly when creating a new high level client.
 
     %h2 Events
 
