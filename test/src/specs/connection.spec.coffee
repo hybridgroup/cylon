@@ -1,6 +1,6 @@
 'use strict';
 
-Connection = source("connection")
+source("connection")
 Adaptor = source("adaptor")
 Robot = source("robot")
 
@@ -8,7 +8,10 @@ describe "Connection", ->
   robot = new Robot(name: 'me')
   adaptor = new Adaptor(name: 'loopback')
   requireAdaptor = sinon.stub(robot, 'requireAdaptor').returns(adaptor)
-  connection = new Connection(name: "connective", adaptor: "loopback", robot: robot)
+  connection = new Cylon.Connection
+    name: "connective"
+    adaptor: "loopback"
+    robot: robot
 
   it "should belong to a robot", ->
     connection.robot.name.should.be.equal 'me'
