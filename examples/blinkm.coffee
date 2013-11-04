@@ -11,7 +11,9 @@ Cylon.robot
   work: (my) ->
     # we do our thing here
     my.blinkm.on 'start', ->
-      Logger.info 'started...'
+      my.blinkm.version (version) ->
+        Logger.info "Started BlinkM version #{version}"
+
       my.blinkm.off()
       lit = false
       every 1.second(), ->
