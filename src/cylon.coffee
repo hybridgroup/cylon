@@ -12,8 +12,7 @@ Robot = require("./robot")
 
 require('./utils')
 require('./logger')
-
-require('./api/api')
+require('./api')
 
 Logger.setup()
 

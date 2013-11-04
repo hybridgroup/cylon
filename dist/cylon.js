@@ -19,7 +19,7 @@
 
   require('./logger');
 
-  require('./api/api');
+  require('./api');
 
   Logger.setup();
 
