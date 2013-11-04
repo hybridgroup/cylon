@@ -13,6 +13,8 @@ layout: page
 
   %section.how-to
     %h2 How to establish a connection and setup the driver
+    :markdown
+      Install the module with `npm install cylon-i2c`
     %h3 JavaScript
     :markdown
           :::javascript
@@ -21,8 +23,7 @@ layout: page
           Cylon.robot({
             connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
             device: {name: 'led', driver: 'led', pin: 13},
-
-            ..
+            ...
 
     %h3 CoffeeScript
     :markdown
@@ -35,7 +36,7 @@ layout: page
 
             device:
               name: 'led', driver: 'led', pin: 13
-            ..
+            ...
   %section.public-events
     %h2 Commands:
     
