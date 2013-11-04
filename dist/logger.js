@@ -92,6 +92,10 @@
   NullLogger = (function() {
     function NullLogger() {}
 
+    NullLogger.prototype.toString = function() {
+      return "NullLogger";
+    };
+
     NullLogger.prototype.debug = function() {};
 
     NullLogger.prototype.info = function() {};
@@ -101,10 +105,6 @@
     NullLogger.prototype.error = function() {};
 
     NullLogger.prototype.fatal = function() {};
-
-    NullLogger.prototype.toString = function() {
-      return "NullLogger";
-    };
 
     return NullLogger;
 

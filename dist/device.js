@@ -19,11 +19,7 @@
   EventEmitter = require('events').EventEmitter;
 
   module.exports = Device = (function(_super) {
-    var klass;
-
     __extends(Device, _super);
-
-    klass = Device;
 
     function Device(opts) {
       if (opts == null) {
@@ -36,7 +32,7 @@
       this.pin = opts.pin;
       this.connection = this.determineConnection(opts.connection) || this.defaultConnection();
       this.driver = this.requireDriver(opts);
-      proxyFunctionsToObject(this.driver.commands(), this.driver, klass);
+      proxyFunctionsToObject(this.driver.commands(), this.driver, Device);
     }
 
     Device.prototype.start = function(callback) {

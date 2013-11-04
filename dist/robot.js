@@ -94,20 +94,19 @@
     };
 
     Robot.prototype.initConnections = function(connections) {
-      var connection, _i, _len, _results;
+      var connection, _i, _len;
       Logger.info("Initializing connections...");
       if (connections == null) {
         return;
       }
       connections = [].concat(connections);
-      _results = [];
       for (_i = 0, _len = connections.length; _i < _len; _i++) {
         connection = connections[_i];
         Logger.info("Initializing connection '" + connection.name + "'...");
         connection['robot'] = this;
-        _results.push(this.connections[connection.name] = new Connection(connection));
+        this.connections[connection.name] = new Connection(connection);
       }
-      return _results;
+      return this.connections;
     };
 
     Robot.prototype.initDevices = function(devices) {

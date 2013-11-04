@@ -14,11 +14,11 @@
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     __slice = [].slice;
 
+  require('./utils');
+
   namespace = require('node-namespace');
 
   EventEmitter = require('events').EventEmitter;
-
-  require('./utils');
 
   namespace('Cylon', function() {
     return this.Basestar = (function(_super) {
@@ -40,7 +40,7 @@
           _this = this;
         targetEventName = opts.targetEventName || opts.eventName;
         sendUpdate = opts.sendUpdate || false;
-        return opts.source.on(opts.eventName, function() {
+        opts.source.on(opts.eventName, function() {
           var args;
           args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
           opts.target.emit(targetEventName, args);
@@ -48,6 +48,7 @@
             return opts.target.emit('update', targetEventName, args);
           }
         });
+        return source;
       };
 
       Basestar.prototype.defineAdaptorEvent = function(opts) {
