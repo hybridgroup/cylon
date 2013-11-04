@@ -8,12 +8,24 @@
 
 'use strict';
 
+# The Port class represents a port and/or host to be used to connect to
+# a specific hardware device
 module.exports = class Port
+  # Public: Creates a new Port based on a passed String representation
+  #
+  # data - string representation of the Port
+  #
+  # Returns a new Port
   constructor: (data) ->
     @self = this
     @isTcp = @isSerial = @isPortless = false
     @parse(data)
 
+  # Public: Parses the Port's data to determine what kind of port it is
+  #
+  # data - string representation of the port to parse
+  #
+  # Returns nothing.
   parse: (data) ->
     if data is undefined
       @port = undefined
@@ -37,6 +49,10 @@ module.exports = class Port
       @host = undefined
       @isSerial = true
 
+  # Public: Returns a string representation of the port that can be used to
+  # connect to it.
+  #
+  # Returns a string
   toString: ->
     if @isPortless
       "none"
