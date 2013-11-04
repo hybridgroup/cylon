@@ -24,9 +24,18 @@ namespace 'Cylon.IO', ->
     constructor: (opts) ->
       @self = this
       @pinNum = opts.pin
-      @pinFile = ''
+      @status = 0
+
+      # Creates the GPIO file to read/write from
+      FS.writeFile("#{ GPIO_PATH }/export", "#{ @pinNum }")
+
       @_setMode(opts.mode)
 
+    digitalWrite: (value) ->
+      setMode('w') unless @mode == 'w'
+      status = if (value == 1) then 'high' else 'low'
+
+    # Sets the mode for the GPIO pin by writing the correct values to the pin reference files
     _setMode: (mode) ->
       @mode = mode
       if @mode == 'w'
@@ -36,13 +45,10 @@ namespace 'Cylon.IO', ->
           else
             console.log("EROR OCCURED: while opening #{ GPIO_PATH }/gpio#{ @pinNum }/direction")
         )
-        @pinFile = FS.open("#{ GPIO_PATH }/gpio#{ @pinNum }/value", "w")
-      elsif mode =='r'
+      else if mode =='r'
         FS.open("#{ GPIO_PATH }/gpio#{ @pinNum }/direction", "w", (err, fd) ->
           unless (err)
             FS.write(fd, GPIO_DIRECTION_READ)
           else
             console.log("EROR OCCURED: while opening #{ GPIO_PATH }/gpio#{ @pinNum }/direction")
         )
-        @pinFile = FS.open("#{ GPIO_PATH }/gpio#{ @pinNum }/value", "r")
-      end
