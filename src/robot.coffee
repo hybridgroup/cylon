@@ -14,9 +14,34 @@ Connection = require("./connection")
 Device = require("./device")
 Async = require("async")
 
+# A Robot is the primary interface for interacting with a collection of physical
+# computing capabilities.
 module.exports = class Robot
   klass = this
 
+  # Public: Creates a new Robot
+  #
+  # opts - object containing Robot options
+  #   name - optional, string name of the robot
+  #   master - Cylon.Master class that orchestrates robots
+  #   connection/connections - object connections to connect to
+  #   device/devices - object devices to connect to
+  #   work - work to be performed when the Robot is started
+  #
+  # Returns a new Robot
+  # Example (CoffeeScript):
+  #    Cylon.robot
+  #      name: "Spherobot!"
+  #
+  #      connection:
+  #        name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'
+  #
+  #      device:
+  #        name: 'sphero', driver: 'sphero'
+  #
+  #      work: (me) ->
+  #        every 1.second(), ->
+  #          me.sphero.roll 60, Math.floor(Math.random() * 360)
   constructor: (opts = {}) ->
     @robot = this
     @name = opts.name or @constructor.randomName()
@@ -37,9 +62,15 @@ module.exports = class Robot
       reserved = ['connection', 'connections', 'device', 'devices', 'work']
       @robot[n] = func unless n in reserved
 
+  # Public: Generates a random name for a Robot.
+  #
+  # Returns a string name
   @randomName: ->
     "Robot #{ Math.floor(Math.random() * 100000) }"
 
+  # Public: Exports basic data for the Robot
+  #
+  # Returns an Object containing Robot data
   data: ->
     {
       name: @name
@@ -47,6 +78,11 @@ module.exports = class Robot
       devices: (device.data() for n, device of @devices)
     }
 
+  # Public: Initializes all connections for the robot
+  #
+  # connections - connections to initialize
+  #
+  # Returns initialized connections
   initConnections: (connections) =>
     Logger.info "Initializing connections..."
     return unless connections?
@@ -56,6 +92,13 @@ module.exports = class Robot
       connection['robot'] = this
       @connections[connection.name] = new Connection(connection)
 
+    @connections
+
+  # Public: Initializes all devices for the robot
+  #
+  # devices - devices to initialize
+  #
+  # Returns initialized devices
   initDevices: (devices) =>
     Logger.info "Initializing devices..."
     return unless devices?
@@ -65,11 +108,21 @@ module.exports = class Robot
       device['robot'] = this
       @devices[device.name] = new Device(device)
 
+  # Public: Starts the Robot working.
+  #
+  # Starts the connections, devices, and work.
+  #
+  # Returns the result of the work
   start: =>
     @startConnections =>
       @robot.startDevices =>
         @robot.work.call(@robot, @robot)
 
+  # Public: Starts the Robot's connections and triggers a callback
+  #
+  # callback - callback function to be triggered
+  #
+  # Returns nothing
   startConnections: (callback) =>
     Logger.info "Starting connections..."
     starters = {}
@@ -78,6 +131,11 @@ module.exports = class Robot
 
     Async.parallel starters, callback
 
+  # Public: Starts the Robot's devices and triggers a callback
+  #
+  # callback - callback function to be triggered
+  #
+  # Returns nothing
   startDevices: (callback) =>
     Logger.info "Starting devices..."
     starters = {}
@@ -87,6 +145,12 @@ module.exports = class Robot
 
     Async.parallel starters, callback
 
+  # Public: Requires a hardware adaptor and adds it to @robot.adaptors
+  #
+  # adaptorName - module name of adaptor to require
+  # connection - the Connection that requested the adaptor be required
+  #
+  # Returns the set-up adaptor
   requireAdaptor: (adaptorName, connection) ->
     if @robot.adaptors[adaptorName]?
       if typeof @robot.adaptors[adaptorName] is 'string'
@@ -97,10 +161,22 @@ module.exports = class Robot
 
     return @robot.adaptors[adaptorName]
 
+  # Public: Registers an Adaptor with the Robot
+  #
+  # moduleName - name of the Node module to require
+  # adaptorName - name of the adaptor to register the moduleName under
+  #
+  # Returns the registered module name
   registerAdaptor: (moduleName, adaptorName) ->
     return if @adaptors[adaptorName]?
     @adaptors[adaptorName] = moduleName
 
+  # Public: Requires a hardware driver and adds it to @robot.drivers
+  #
+  # driverName - module name of driver to require
+  # connection - the Connection that requested the driver be required
+  #
+  # Returns the set-up driver
   requireDriver: (driverName, device, opts = {}) ->
     if @robot.drivers[driverName]?
       if typeof @robot.drivers[driverName] is 'string'
@@ -111,6 +187,12 @@ module.exports = class Robot
 
     return @robot.drivers[driverName]
 
+  # Public: Registers an Driver with the Robot
+  #
+  # moduleName - name of the Node module to require
+  # driverName - name of the driver to register the moduleName under
+  #
+  # Returns the registered module name
   registerDriver: (moduleName, driverName) =>
     return if @drivers[driverName]?
     @drivers[driverName] = moduleName
