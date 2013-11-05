@@ -1,0 +1,77 @@
+---
+title: Cylon.js - Examples for CoffeeScript
+author: The Hybrid Group
+page_title: CoffeeScript example
+page_subtitle: example
+layout: docco
+---
+#container
+  #background
+  %ul#jump_to
+    %li
+      %a.large{href: "javascript:void(0);"} Jump To …
+      %a.small{href: "javascript:void(0);"} +
+      #jump_wrapper
+        #jump_page
+          %a.source{href: "/docco/docsCoffee/blink"} Example for blink.coffee
+          %a.source{href: "/docco/docsCoffee/drone"} Example for drone.coffee
+          %a.source{href: "/docco/docsCoffee/travis"} Example for travis.coffee
+          
+  %ul.sections
+    %li#title
+      .annotation
+        %h1 drone.coffee
+    %li#section-1
+      .annotation
+        .pilwrap
+          %a.pilcrow{href: "#section-1"} ¶
+      .content
+        .highlight
+          %pre
+            Cylon =
+            = succeed "(" do
+              %span.built_in require
+            = succeed ")" do
+              %span.string '..'
+            = succeed ":" do
+              %span.attribute connection
+            = succeed ":" do
+              %span.attribute name
+            = succeed "," do
+              %span.string 'ardrone'
+            = succeed ":" do
+              %span.attribute adaptor
+            = succeed "," do
+              %span.string 'ardrone'
+            = succeed ":" do
+              %span.attribute port
+            %span.string '192.168.1.1'
+            = succeed ":" do
+              %span.attribute device
+            = succeed ":" do
+              %span.attribute name
+            = succeed "," do
+              %span.string 'drone'
+            = succeed ":" do
+              %span.attribute driver
+            %span.string 'ardrone'
+            = succeed ":" do
+              %span.attribute work
+            %span.function
+              %span.params (my)
+              \->
+            my.drone.takeoff()
+            
+            after
+            = succeed "seconds()," do
+              %span.number 10.
+            %span.function ->
+            my.drone.land()
+            
+            after
+            = succeed "seconds()," do
+              %span.number 15.
+            %span.function ->
+            my.drone.stop()
+            
+            \.start()
