@@ -33,14 +33,23 @@ namespace 'Cylon.IO', ->
     open: (mode) ->
       # Creates the GPIO file to read/write from
       FS.writeFile("#{ GPIO_PATH }/export", "#{ @pinNum }", (err) =>
-        unless(err)
-          @self.emit('create')
-          @self._setMode(opts.mode)
-        else
+        if(err)
           console.log('Error while creating pin files ...')
           @self.emit('error', 'Error while creating pin files')
+        else
+          @self.emit('open')
+          @self._setMode(mode)
       )
 
+
+    close: ->
+      FS.writeFile("#{ GPIO_PATH }/unexport", "#{ @pinNum }", (err) =>
+        if(err)
+          console.log('Error while closing pin files ...')
+          @self.emit('error', 'Error while closing pin files')
+        else
+          @self.emit('close')
+      )
 
     digitalWrite: (value) ->
       @self._setMode('w') unless @mode == 'w'
@@ -75,25 +84,23 @@ namespace 'Cylon.IO', ->
       @mode = mode
       if @mode == 'w'
         FS.writeFile("#{ GPIO_PATH }/gpio#{ @pinNum }/direction", GPIO_DIRECTION_WRITE, (err) =>
-          unless (err)
-            console.log('Pin mode(direction) setup...')
+          if (err)
+            console.log('Error occurred while settingup pin mode(direction)...')
+            @self.emit('error', "Setting up pin direction failed")
+          else
             @pinFile = "#{ GPIO_PATH }/gpio#{ @pinNum }/value"
             @ready = true
             @self.emit('open', mode)
-          else
-            console.log('Error occurred while settingup pin mode(direction)...')
-            @self.emit('error', "Setting up pin direction failed")
         )
       else if mode =='r'
         FS.writeFile("#{ GPIO_PATH }/gpio#{ @pinNum }/direction", GPIO_DIRECTION_READ, (err) =>
-          unless (err)
-            console.log('Pin mode(direction) setup...')
+          if (err)
+            console.log('Error occurred while settingup pin mode(direction)...')
+            @self.emit('error', "Setting up pin direction failed")
+          else
             @pinFile = "#{ GPIO_PATH }/gpio#{ @pinNum }/value"
             @ready = true
             @self.emit('open', mode)
-          else
-            console.log('Error occurred while settingup pin mode(direction)...')
-            @self.emit('error', "Setting up pin direction failed")
         )
 
     toggle: ->
@@ -101,6 +108,3 @@ namespace 'Cylon.IO', ->
         @self.digitalWrite(1)
       else
         @self.digitalWrite(0)
-
-module.exports = Cylon.IO.DigitalPin
-

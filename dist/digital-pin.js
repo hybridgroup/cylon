@@ -45,12 +45,24 @@
       DigitalPin.prototype.open = function(mode) {
         var _this = this;
         return FS.writeFile("" + GPIO_PATH + "/export", "" + this.pinNum, function(err) {
-          if (!err) {
-            _this.self.emit('create');
-            return _this.self._setMode(opts.mode);
-          } else {
+          if (err) {
             console.log('Error while creating pin files ...');
             return _this.self.emit('error', 'Error while creating pin files');
+          } else {
+            _this.self.emit('open');
+            return _this.self._setMode(mode);
+          }
+        });
+      };
+
+      DigitalPin.prototype.close = function() {
+        var _this = this;
+        return FS.writeFile("" + GPIO_PATH + "/unexport", "" + this.pinNum, function(err) {
+          if (err) {
+            console.log('Error while closing pin files ...');
+            return _this.self.emit('error', 'Error while closing pin files');
+          } else {
+            return _this.self.emit('close');
           }
         });
       };
@@ -96,26 +108,24 @@
         this.mode = mode;
         if (this.mode === 'w') {
           return FS.writeFile("" + GPIO_PATH + "/gpio" + this.pinNum + "/direction", GPIO_DIRECTION_WRITE, function(err) {
-            if (!err) {
-              console.log('Pin mode(direction) setup...');
+            if (err) {
+              console.log('Error occurred while settingup pin mode(direction)...');
+              return _this.self.emit('error', "Setting up pin direction failed");
+            } else {
               _this.pinFile = "" + GPIO_PATH + "/gpio" + _this.pinNum + "/value";
               _this.ready = true;
               return _this.self.emit('open', mode);
-            } else {
-              console.log('Error occurred while settingup pin mode(direction)...');
-              return _this.self.emit('error', "Setting up pin direction failed");
             }
           });
         } else if (mode === 'r') {
           return FS.writeFile("" + GPIO_PATH + "/gpio" + this.pinNum + "/direction", GPIO_DIRECTION_READ, function(err) {
-            if (!err) {
-              console.log('Pin mode(direction) setup...');
+            if (err) {
+              console.log('Error occurred while settingup pin mode(direction)...');
+              return _this.self.emit('error', "Setting up pin direction failed");
+            } else {
               _this.pinFile = "" + GPIO_PATH + "/gpio" + _this.pinNum + "/value";
               _this.ready = true;
               return _this.self.emit('open', mode);
-            } else {
-              console.log('Error occurred while settingup pin mode(direction)...');
-              return _this.self.emit('error', "Setting up pin direction failed");
             }
           });
         }
@@ -133,7 +143,5 @@
 
     })(EventEmitter);
   });
-
-  module.exports = Cylon.IO.DigitalPin;
 
 }).call(this);
