@@ -53,7 +53,7 @@ namespace 'Cylon', ->
        opts.target.emit(targetEventName, args)
        opts.target.emit('update', targetEventName, args) if sendUpdate
 
-      source
+     opts.source
 
     # Public: Creates an event handler that proxies events from an adaptor's
     # 'connector' (reference to whatever module is actually talking to the hw)

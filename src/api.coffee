@@ -29,79 +29,63 @@ namespace "Api", ->
         res.set 'Content-Type', 'application/json'
         do next
 
-      @routes @server
+      do @configureRoutes
 
       @server.listen @port, @host, =>
         Logger.info "#{@server.name} is listening at #{@host}:#{@port}"
 
-    routes: (server) ->
-      server.get "/robots", @getRobots
-      server.get "/robots/:robotid", @getRobotByName
-      server.get "/robots/:robotid/devices", @getDevices
-      server.get "/robots/:robotid/devices/:deviceid", @getDeviceByName
-      server.get "/robots/:robotid/devices/:deviceid/commands", @getDeviceCommands
-      server.post "/robots/:robotid/devices/:deviceid/commands/:commandid", @runDeviceCommand
-      server.get "/robots/:robotid/connections", @getConnections
-      server.get "/robots/:robotid/connections/:connectionid", @getConnectionByName
+    configureRoutes: ->
+      @server.get "/robots", (req, res) ->
+        res.json (robot.data() for robot in master.robots())
 
-      server.get "/robots/:robotid/devices/:deviceid/events", (req, res) ->
+      @server.get "/robots/:robotid", (req, res) ->
+        master.findRobot req.params.robotid, (err, robot) ->
+          res.json if err then err else robot.data()
+
+      @server.get "/robots/:robotid/devices", (req, res) ->
+        master.findRobot req.params.robotid, (err, robot) ->
+          res.json if err then err else robot.data().devices
+
+      @server.get "/robots/:robotid/devices/:deviceid", (req, res) ->
+        [robotid, deviceid] = [req.params.robotid, req.params.deviceid]
+        master.findRobotDevice robotid, deviceid, (err, device) ->
+          res.json if err then err else device.data()
+
+      @server.get "/robots/:robotid/devices/:deviceid/commands", (req, res) ->
+        [robotid, deviceid] = [req.params.robotid, req.params.deviceid]
+        master.findRobotDevice robotid, deviceid, (err, device) ->
+          res.json if err then err else device.data().commands
+
+      @server.post "/robots/:robot/devices/:device/commands/:command", (req, res) ->
+        params = [req.params.robot, req.params.device, req.params.command]
+        [robotid, deviceid, commandid] = params
+
+        params = []
+        if typeof req.body is 'object'
+          params.push(value) for key, value of req.body
+
+        master.findRobotDevice robotid, deviceid, (err, device) ->
+          if err then return res.json err
+          result = device[commandid](params...)
+          res.json result: result
+
+      @server.get "/robots/:robotid/connections", (req, res) ->
+        master.findRobot req.params.robotid, (err, robot) ->
+          res.json if err then err else robot.data().connections
+
+      @server.get "/robots/:robot/connections/:connection", (req, res) ->
+        [robotid, connectionid] = [req.params.robot, req.params.connection]
+
+        master.findRobotConnection robotid, connectionid, (err, connection) ->
+          res.json if err then err else connection.data()
+
+      @server.get "/robots/:robotid/devices/:deviceid/events", (req, res) ->
         req.io.route 'events'
-      server.io.route 'events', @ioSetupDeviceEventClient
 
-    getRobots: (req, res) ->
-      res.json (robot.data() for robot in master.robots())
+      @server.io.route 'events', (req) ->
+        [robotid, deviceid] = [req.params.robotid, req.params.deviceid]
 
-    getRobotByName: (req, res) ->
-      master.findRobot req.params.robotid, (err, robot) ->
-        res.json if err then err else robot.data()
-
-    getDevices: (req, res) ->
-      master.findRobot req.params.robotid, (err, robot) ->
-        res.json if err then err else robot.data().devices
-
-    getDeviceByName: (req, res) ->
-      robotid = req.params.robotid
-      deviceid = req.params.deviceid
-
-      master.findRobotDevice robotid, deviceid, (err, device) ->
-        res.json if err then err else device.data()
-
-    getDeviceCommands: (req, res) ->
-      robotid = req.params.robotid
-      deviceid = req.params.deviceid
-
-      master.findRobotDevice robotid, deviceid, (err, device) ->
-        res.json if err then err else device.data().commands
-
-    runDeviceCommand: (req, res) ->
-      robotid = req.params.robotid
-      deviceid = req.params.deviceid
-      commandid = req.params.commandid
-
-      params = []
-      if typeof req.body is 'object'
-        params.push(value) for key, value of req.body
-
-      master.findRobotDevice robotid, deviceid, (err, device) ->
-        if err then return res.json err
-        result = device[commandid](params...)
-        res.json result: result
-
-    getConnections: (req, res) ->
-      master.findRobot req.params.robotid, (err, robot) ->
-        res.json if err then err else robot.data().connections
-
-    getConnectionByName: (req, res) ->
-      robotid = req.params.robotid
-      connectionid = req.params.connectionid
-
-      master.findRobotConnection robotid, connectionid, (err, connection) ->
-        res.json if err then err else connection.data()
-
-    ioSetupDeviceEventClient: (req) ->
-      robotid = req.params.robotid
-      deviceid = req.params.deviceid
-
-      master.findRobotDevice robotid, deviceid, (err, device) ->
-        res.io.respond(err) if err
-        device.on 'update', (data) -> res.io.respond { data: data }
+        master.findRobotDevice robotid, deviceid, (err, device) ->
+          req.io.respond(err) if err
+          device.on 'update', (data) ->
+            req.io.emit 'update', { data: data }
