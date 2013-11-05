@@ -34,7 +34,6 @@ namespace 'Cylon.IO', ->
       # Creates the GPIO file to read/write from
       FS.writeFile("#{ GPIO_PATH }/export", "#{ @pinNum }", (err) =>
         if(err)
-          console.log('Error while creating pin files ...')
           @self.emit('error', 'Error while creating pin files')
         else
           @self.emit('open')
@@ -45,7 +44,6 @@ namespace 'Cylon.IO', ->
     close: ->
       FS.writeFile("#{ GPIO_PATH }/unexport", "#{ @pinNum }", (err) =>
         if(err)
-          console.log('Error while closing pin files ...')
           @self.emit('error', 'Error while closing pin files')
         else
           @self.emit('close')
@@ -57,10 +55,8 @@ namespace 'Cylon.IO', ->
 
       FS.writeFile(@pinFile, value, (err) =>
         if (err)
-          console.log('ERROR occurred while writing to the Pin File')
           @self.emit('error', "Error occurred while writing value #{ value } to pin #{ @pinNum }")
         else
-          console.log('Pin File written successfully')
           @self.emit('digitalWrite', value)
       )
 
@@ -70,7 +66,6 @@ namespace 'Cylon.IO', ->
 
       FS.readFile(@pinFile, (err, data) =>
         if err
-          console.log('ERROR occurred while reading from the Pin')
           @self.emit('error', "Error occurred while reading from pin #{ @pinNum }")
         else
           readData = data
@@ -85,7 +80,6 @@ namespace 'Cylon.IO', ->
       if @mode == 'w'
         FS.writeFile("#{ GPIO_PATH }/gpio#{ @pinNum }/direction", GPIO_DIRECTION_WRITE, (err) =>
           if (err)
-            console.log('Error occurred while settingup pin mode(direction)...')
             @self.emit('error', "Setting up pin direction failed")
           else
             @pinFile = "#{ GPIO_PATH }/gpio#{ @pinNum }/value"
@@ -95,7 +89,6 @@ namespace 'Cylon.IO', ->
       else if mode =='r'
         FS.writeFile("#{ GPIO_PATH }/gpio#{ @pinNum }/direction", GPIO_DIRECTION_READ, (err) =>
           if (err)
-            console.log('Error occurred while settingup pin mode(direction)...')
             @self.emit('error', "Setting up pin direction failed")
           else
             @pinFile = "#{ GPIO_PATH }/gpio#{ @pinNum }/value"

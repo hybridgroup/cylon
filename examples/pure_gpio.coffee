@@ -12,8 +12,7 @@ pin4.on('digitalWrite', (value) ->
 
 pin4.on('connect', (data) ->
   console.log("Pin mode has been setup!")
-  pin4.digitalWrite(1)
+  pin4.setHigh()
 )
 
-pin4.open()
-
+pin4.connect()

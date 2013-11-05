@@ -46,7 +46,6 @@
         var _this = this;
         return FS.writeFile("" + GPIO_PATH + "/export", "" + this.pinNum, function(err) {
           if (err) {
-            console.log('Error while creating pin files ...');
             return _this.self.emit('error', 'Error while creating pin files');
           } else {
             _this.self.emit('open');
@@ -59,7 +58,6 @@
         var _this = this;
         return FS.writeFile("" + GPIO_PATH + "/unexport", "" + this.pinNum, function(err) {
           if (err) {
-            console.log('Error while closing pin files ...');
             return _this.self.emit('error', 'Error while closing pin files');
           } else {
             return _this.self.emit('close');
@@ -75,10 +73,8 @@
         this.status = value === 1 ? 'high' : 'low';
         return FS.writeFile(this.pinFile, value, function(err) {
           if (err) {
-            console.log('ERROR occurred while writing to the Pin File');
             return _this.self.emit('error', "Error occurred while writing value " + value + " to pin " + _this.pinNum);
           } else {
-            console.log('Pin File written successfully');
             return _this.self.emit('digitalWrite', value);
           }
         });
@@ -93,7 +89,6 @@
         readData = null;
         FS.readFile(this.pinFile, function(err, data) {
           if (err) {
-            console.log('ERROR occurred while reading from the Pin');
             return _this.self.emit('error', "Error occurred while reading from pin " + _this.pinNum);
           } else {
             readData = data;
@@ -109,7 +104,6 @@
         if (this.mode === 'w') {
           return FS.writeFile("" + GPIO_PATH + "/gpio" + this.pinNum + "/direction", GPIO_DIRECTION_WRITE, function(err) {
             if (err) {
-              console.log('Error occurred while settingup pin mode(direction)...');
               return _this.self.emit('error', "Setting up pin direction failed");
             } else {
               _this.pinFile = "" + GPIO_PATH + "/gpio" + _this.pinNum + "/value";
@@ -120,7 +114,6 @@
         } else if (mode === 'r') {
           return FS.writeFile("" + GPIO_PATH + "/gpio" + this.pinNum + "/direction", GPIO_DIRECTION_READ, function(err) {
             if (err) {
-              console.log('Error occurred while settingup pin mode(direction)...');
               return _this.self.emit('error', "Setting up pin direction failed");
             } else {
               _this.pinFile = "" + GPIO_PATH + "/gpio" + _this.pinNum + "/value";
