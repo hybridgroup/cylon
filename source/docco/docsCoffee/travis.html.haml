@@ -1,0 +1,74 @@
+---
+title: Cylon.js - Examples for CoffeeScript
+author: The Hybrid Group
+page_title: CoffeeScript example
+page_subtitle: example
+layout: docco
+---
+#container
+  #background
+  %ul#jump_to
+    %li
+      %a.large{href: "javascript:void(0);"} Jump To …
+      %a.small{href: "javascript:void(0);"} +
+      #jump_wrapper
+        #jump_page
+          %a.source{href: "/docco/docsCoffee/blink"} Example for blink.coffee
+          %a.source{href: "/docco/docsCoffee/drone"} Example for drone.coffee
+          %a.source{href: "/docco/docsCoffee/travis"} Example for travis.coffee
+
+  %ul.sections
+    %li#title
+      .annotation
+        %h1 travis.coffee
+    %li#section-1
+      .annotation
+        .pilwrap
+          %a.pilcrow{href: "#section-1"} ¶
+      .content
+        .highlight
+          :markdown
+                :::javascript
+                Cylon = require '..'
+                Travis = require 'travis-ci'
+
+                travis = new Travis
+                  version: '2.0.0'
+
+                BLUE = 0x0000ff
+                GREEN = 0x00ff00
+                RED = 0xff0000
+
+                Cylon.robot
+                  connection:
+                    name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'
+
+                  device:
+                    name: 'sphero', driver: 'sphero'
+
+                  work: (me) ->
+                    user = "hybridgroup"
+                    name = "cylon"
+
+                    me.checkTravis = ->
+                      Logger.info "Checking repo \#{user}/\#{name}"
+                      me.sphero.setRGB BLUE, true
+
+                      travis.repos {
+                        owner_name: user,
+                        name: name
+                      }, (err, res) ->
+                        if res.repo
+                          switch res.repo.last_build_state
+                            when 'passed' then me.sphero.setRGB(GREEN, true)
+                            when 'failed' then me.sphero.setRGB(RED, true)
+                            else me.sphero.setRGB(BLUE, true)
+                        else
+                          me.sphero.setRGB BLUE, true
+
+                    me.checkTravis()
+
+                    every 10.seconds(), ->
+                      me.checkTravis()
+
+                .start()

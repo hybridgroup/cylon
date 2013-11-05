@@ -1,0 +1,62 @@
+---
+title: Cylon.js - Examples for CoffeeScript
+author: The Hybrid Group
+page_title: CoffeeScript example
+page_subtitle: example
+layout: docco
+---
+#container
+  #background
+  %ul#jump_to
+    %li
+      %a.large{href: "javascript:void(0);"} Jump To …
+      %a.small{href: "javascript:void(0);"} +
+      #jump_wrapper
+        #jump_page
+          %a.source{href: "/docco/docsCoffee/blink"} Example for blink.coffee
+          %a.source{href: "/docco/docsCoffee/drone"} Example for drone.coffee
+          %a.source{href: "/docco/docsCoffee/travis"} Example for travis.coffee
+
+  %ul.sections
+    %li#title
+      .annotation
+        %h1 blink.coffee
+    %li#section-1
+      .annotation
+        .pilwrap
+          %a.pilcrow{href: "#section-1"} ¶
+      .content
+        .highlight
+          :markdown
+                :::javascript
+                Cylon = require('..')
+    %li#section-2
+      .annotation
+        .pilwrap
+          %a.pilcrow{href: "#section-2"} ¶
+        %p Initialize the robot
+      .content
+        .highlight
+          :markdown
+                :::javascript
+                Cylon.robot
+                connection:
+                  name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
+
+                device:
+                  name: 'led', driver: 'led', pin: 13
+
+                work: (my) ->
+    %li#section-3
+      .annotation
+        .pilwrap
+          %a.pilcrow{href: "#section-3"} ¶
+        %p we do our thing here
+      .content
+        .highlight
+          :markdown
+                :::javascript
+                  every 1.second(), -> my.led.toggle()
+
+                .start()
+          

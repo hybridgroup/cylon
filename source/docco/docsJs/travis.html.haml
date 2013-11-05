@@ -1,0 +1,78 @@
+---
+title: Cylon.js - Examples for Javascript
+author: The Hybrid Group
+page_title: Javascript example
+page_subtitle: example
+layout: docco
+---
+
+#container
+  #background
+  %ul#jump_to
+    %li
+      %a.large{href: "javascript:void(0);"} Jump To …
+      %a.small{href: "javascript:void(0);"} +
+      #jump_wrapper
+        #jump_page
+          %a.source{href: "/docco/docsJs/blink"} Example for blink.js
+          %a.source{href: "/docco/docsJs/drone"} Example for drone.js
+          %a.source{href: "/docco/docsJs/travis"} Example for travis.js
+          
+  %ul.sections
+    %li#title
+      .annotation
+        %h1 travis.js
+    %li#section-1
+      .annotation
+        .pilwrap
+          %a.pilcrow{href: "#section-1"} ¶
+      .content
+        .highlight
+          :markdown
+                :::javascript
+                var Cylon = require('..')
+                var Travis = require('travis-ci')
+
+                var travis = new Travis({version: '2.0.0'});
+
+                var BLUE = 0x0000ff
+                var GREEN = 0x00ff00
+                var RED = 0xff0000
+
+                Cylon.robot({
+                  connection: {name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'},
+                  device: {name: 'sphero', driver: 'sphero'},
+
+                  work: function(me) {
+                    var user = "hybridgroup"
+                    var name = "cylon"
+
+                    me.checkTravis = function() {
+                      Logger.info("Checking repo "+user+"/"+name);
+                      me.sphero.setRGB(BLUE, true);
+
+                      travis.repos(
+                        { owner_name: user, name: name }, 
+                        function(err, res) {
+                          if (res.repo != undefined) {
+                          if (res.repo.last_build_state == 'passed') {
+                            me.sphero.setRGB(GREEN, true);
+                          } else if (res.repo.last_build_state == 'failed') {
+                            me.sphero.setRGB(RED, true);
+                          } else {
+                            me.sphero.setRGB(BLUE, true);
+                          }
+                          } else {
+                            me.sphero.setRGB BLUE, true
+                          }
+                        });
+                    }
+
+                    me.checkTravis();
+
+                    every((10).seconds(), function() {
+                      me.checkTravis();
+                    });
+                  }
+                }).start();
+                          
