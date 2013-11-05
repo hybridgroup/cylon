@@ -122,10 +122,10 @@
           _ref = [req.params.robotid, req.params.deviceid], robotid = _ref[0], deviceid = _ref[1];
           return master.findRobotDevice(robotid, deviceid, function(err, device) {
             if (err) {
-              res.io.respond(err);
+              req.io.respond(err);
             }
             return device.on('update', function(data) {
-              return res.io.respond({
+              return req.io.emit('update', {
                 data: data
               });
             });

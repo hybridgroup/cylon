@@ -86,5 +86,6 @@ namespace "Api", ->
         [robotid, deviceid] = [req.params.robotid, req.params.deviceid]
 
         master.findRobotDevice robotid, deviceid, (err, device) ->
-          res.io.respond(err) if err
-          device.on 'update', (data) -> res.io.respond { data: data }
+          req.io.respond(err) if err
+          device.on 'update', (data) ->
+            req.io.emit 'update', { data: data }
