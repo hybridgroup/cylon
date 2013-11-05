@@ -29,15 +29,17 @@ namespace 'Cylon.IO', ->
       @pinNum = opts.pin
       @status = 'low'
       @ready = false
+      @mode = opts.mode
 
-    connect: (mode) ->
+    connect: (mode = null) ->
+      @mode ?= mode
       # Creates the GPIO file to read/write from
       FS.writeFile("#{ GPIO_PATH }/export", "#{ @pinNum }", (err) =>
         if(err)
           @self.emit('error', 'Error while creating pin files')
         else
+          @self._setMode(@mode)
           @self.emit('open')
-          @self._setMode(mode)
       )
 
 
@@ -76,7 +78,6 @@ namespace 'Cylon.IO', ->
 
     # Sets the mode for the GPIO pin by writing the correct values to the pin reference files
     _setMode: (mode) ->
-      @mode = mode
       if @mode == 'w'
         FS.writeFile("#{ GPIO_PATH }/gpio#{ @pinNum }/direction", GPIO_DIRECTION_WRITE, (err) =>
           if (err)

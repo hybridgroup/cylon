@@ -40,16 +40,23 @@
         this.pinNum = opts.pin;
         this.status = 'low';
         this.ready = false;
+        this.mode = opts.mode;
       }
 
       DigitalPin.prototype.connect = function(mode) {
         var _this = this;
+        if (mode == null) {
+          mode = null;
+        }
+        if (this.mode == null) {
+          this.mode = mode;
+        }
         return FS.writeFile("" + GPIO_PATH + "/export", "" + this.pinNum, function(err) {
           if (err) {
             return _this.self.emit('error', 'Error while creating pin files');
           } else {
-            _this.self.emit('open');
-            return _this.self._setMode(mode);
+            _this.self._setMode(_this.mode);
+            return _this.self.emit('open');
           }
         });
       };
@@ -100,7 +107,6 @@
 
       DigitalPin.prototype._setMode = function(mode) {
         var _this = this;
-        this.mode = mode;
         if (this.mode === 'w') {
           return FS.writeFile("" + GPIO_PATH + "/gpio" + this.pinNum + "/direction", GPIO_DIRECTION_WRITE, function(err) {
             if (err) {
