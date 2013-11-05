@@ -8,13 +8,12 @@
 
 'use strict';
 
-
 FS = require('fs')
 EventEmitter = require('events').EventEmitter
 
 namespace = require 'node-namespace'
 
-# IO is class that lays foundation to DigitalPin and I2C in Raspi and beaglebone.
+# DigitalPin class to interface with linux GPIO in raspi and beaglebone
 #
 namespace 'Cylon.IO', ->
   class @DigitalPin extends EventEmitter
@@ -26,7 +25,6 @@ namespace 'Cylon.IO', ->
     LOW = 0
 
     constructor: (opts) ->
-      @self = this
       @pinNum = opts.pin
       @status = 'low'
       @ready = false
@@ -35,11 +33,11 @@ namespace 'Cylon.IO', ->
       # Creates the GPIO file to read/write from
       FS.writeFile("#{ GPIO_PATH }/export", "#{ @pinNum }", (err) ->
         unless(err)
-          @self.emit('create')
+          @emit('create')
           @_setMode(opts.mode)
         else
           console.log('Error while creating pin files ...')
-          @self.emit('error', 'Error while creating pin files')
+          @emit('error', 'Error while creating pin files')
       )
 
 
@@ -97,20 +95,8 @@ namespace 'Cylon.IO', ->
             @emit('error', "Setting up pin direction failed")
         )
 
-    on: ->
-      @digitalWrite(1)
-
-    off: ->
-      @digitalWrite(0)
-
     toggle: ->
       if @status == 'low'
         @digitalWrite(1)
       else
         @digitalWrite(0)
-
-    isOn:
-      (@status == 'high')
-
-    isOff:
-      !@isOn     

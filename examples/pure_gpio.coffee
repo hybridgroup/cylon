@@ -1,4 +1,4 @@
-require('../src/digital-pin')
+require('../dist/digital-pin')
 
 pin4 = new Cylon.IO.DigitalPin(pin: 4)
 

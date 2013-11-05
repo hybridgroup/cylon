@@ -36,7 +36,6 @@
       LOW = 0;
 
       function DigitalPin(opts) {
-        this.self = this;
         this.pinNum = opts.pin;
         this.status = 'low';
         this.ready = false;
@@ -45,11 +44,11 @@
       DigitalPin.prototype.open = function(mode) {
         return FS.writeFile("" + GPIO_PATH + "/export", "" + this.pinNum, function(err) {
           if (!err) {
-            this.self.emit('create');
+            this.emit('create');
             return this._setMode(opts.mode);
           } else {
             console.log('Error while creating pin files ...');
-            return this.self.emit('error', 'Error while creating pin files');
+            return this.emit('error', 'Error while creating pin files');
           }
         });
       };
@@ -117,14 +116,6 @@
         }
       };
 
-      DigitalPin.prototype.on = function() {
-        return this.digitalWrite(1);
-      };
-
-      DigitalPin.prototype.off = function() {
-        return this.digitalWrite(0);
-      };
-
       DigitalPin.prototype.toggle = function() {
         if (this.status === 'low') {
           return this.digitalWrite(1);
@@ -132,10 +123,6 @@
           return this.digitalWrite(0);
         }
       };
-
-      DigitalPin.prototype.isOn = DigitalPin.status === 'high';
-
-      DigitalPin.prototype.isOff = !DigitalPin.isOn;
 
       return DigitalPin;
 
