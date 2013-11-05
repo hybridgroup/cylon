@@ -31,11 +31,9 @@ layout: docco
           %a.pilcrow{:href => "#section-1"} &#182;
       .content
         .highlight
-          %pre
-            %span.keyword var
-            Cylon = require(
-            %span.string '..'
-            );
+          :markdown
+              :::javascript
+              var Cylon = require('cylon');
 
     %li#section-2
       .annotation
