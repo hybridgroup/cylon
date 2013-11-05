@@ -36,81 +36,86 @@
       LOW = 0;
 
       function DigitalPin(opts) {
+        this.self = this;
         this.pinNum = opts.pin;
         this.status = 'low';
         this.ready = false;
       }
 
       DigitalPin.prototype.open = function(mode) {
+        var _this = this;
         return FS.writeFile("" + GPIO_PATH + "/export", "" + this.pinNum, function(err) {
           if (!err) {
-            this.emit('create');
-            return this._setMode(opts.mode);
+            _this.self.emit('create');
+            return _this.self._setMode(opts.mode);
           } else {
             console.log('Error while creating pin files ...');
-            return this.emit('error', 'Error while creating pin files');
+            return _this.self.emit('error', 'Error while creating pin files');
           }
         });
       };
 
       DigitalPin.prototype.digitalWrite = function(value) {
+        var _this = this;
         if (this.mode !== 'w') {
-          this._setMode('w');
+          this.self._setMode('w');
         }
         this.status = value === 1 ? 'high' : 'low';
         return FS.writeFile(this.pinFile, value, function(err) {
           if (err) {
             console.log('ERROR occurred while writing to the Pin File');
-            return this.emit('error', "Error occurred while writing value " + value + " to pin " + this.pinNum);
+            return _this.self.emit('error', "Error occurred while writing value " + value + " to pin " + _this.pinNum);
           } else {
             console.log('Pin File written successfully');
-            return this.emit('digitalWrite', value);
+            return _this.self.emit('digitalWrite', value);
           }
         });
       };
 
       DigitalPin.prototype.digitalRead = function() {
-        var readData;
+        var readData,
+          _this = this;
         if (this.mode !== 'r') {
-          this._setMode('r');
+          this.self._setMode('r');
         }
         readData = null;
         FS.readFile(this.pinFile, function(err, data) {
           if (err) {
             console.log('ERROR occurred while reading from the Pin');
-            return this.emit('error', "Error occurred while reading from pin " + this.pinNum);
+            return _this.self.emit('error', "Error occurred while reading from pin " + _this.pinNum);
           } else {
             readData = data;
-            return this.emit('read', data);
+            return _this.self.emit('read', data);
           }
         });
         return readData;
       };
 
       DigitalPin.prototype._setMode = function(mode) {
+        var _this = this;
         this.mode = mode;
         if (this.mode === 'w') {
           return FS.writeFile("" + GPIO_PATH + "/gpio" + this.pinNum + "/direction", GPIO_DIRECTION_WRITE, function(err) {
             if (!err) {
               console.log('Pin mode(direction) setup...');
-              this.pinFile = "" + GPIO_PATH + "/gpio" + this.pinNum + "/value";
-              this.ready = true;
-              return this.emit('open', mode);
+              _this.pinFile = "" + GPIO_PATH + "/gpio" + _this.pinNum + "/value";
+              _this.ready = true;
+              return _this.self.emit('open', mode);
             } else {
               console.log('Error occurred while settingup pin mode(direction)...');
-              return this.emit('error', "Setting up pin direction failed");
+              return _this.self.emit('error', "Setting up pin direction failed");
             }
           });
         } else if (mode === 'r') {
           return FS.writeFile("" + GPIO_PATH + "/gpio" + this.pinNum + "/direction", GPIO_DIRECTION_READ, function(err) {
             if (!err) {
               console.log('Pin mode(direction) setup...');
-              this.pinFile = "" + GPIO_PATH + "/gpio" + this.pinNum + "/value";
-              this.ready = true;
-              return this.emit('open', mode);
+              _this.pinFile = "" + GPIO_PATH + "/gpio" + _this.pinNum + "/value";
+              _this.ready = true;
+              return _this.self.emit('open', mode);
             } else {
               console.log('Error occurred while settingup pin mode(direction)...');
-              return this.emit('error', "Setting up pin direction failed");
+              return _this.self.emit('error', "Setting up pin direction failed");
             }
           });
         }
@@ -118,9 +123,9 @@
 
       DigitalPin.prototype.toggle = function() {
         if (this.status === 'low') {
-          return this.digitalWrite(1);
+          return this.self.digitalWrite(1);
         } else {
-          return this.digitalWrite(0);
+          return this.self.digitalWrite(0);
         }
       };
 
@@ -128,5 +133,7 @@
 
     })(EventEmitter);
   });
+
+  module.exports = Cylon.IO.DigitalPin;
 
 }).call(this);

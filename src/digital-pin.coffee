@@ -25,46 +25,47 @@ namespace 'Cylon.IO', ->
     LOW = 0
 
     constructor: (opts) ->
+      @self = this
       @pinNum = opts.pin
       @status = 'low'
       @ready = false
 
     open: (mode) ->
       # Creates the GPIO file to read/write from
-      FS.writeFile("#{ GPIO_PATH }/export", "#{ @pinNum }", (err) ->
+      FS.writeFile("#{ GPIO_PATH }/export", "#{ @pinNum }", (err) =>
         unless(err)
-          @emit('create')
-          @_setMode(opts.mode)
+          @self.emit('create')
+          @self._setMode(opts.mode)
         else
           console.log('Error while creating pin files ...')
-          @emit('error', 'Error while creating pin files')
+          @self.emit('error', 'Error while creating pin files')
       )
 
 
     digitalWrite: (value) ->
-      @_setMode('w') unless @mode == 'w'
+      @self._setMode('w') unless @mode == 'w'
       @status = if (value == 1) then 'high' else 'low'
 
-      FS.writeFile(@pinFile, value, (err) ->
+      FS.writeFile(@pinFile, value, (err) =>
         if (err)
           console.log('ERROR occurred while writing to the Pin File')
-          @emit('error', "Error occurred while writing value #{ value } to pin #{ @pinNum }")
+          @self.emit('error', "Error occurred while writing value #{ value } to pin #{ @pinNum }")
         else
           console.log('Pin File written successfully')
-          @emit('digitalWrite', value)
+          @self.emit('digitalWrite', value)
       )
 
     digitalRead: ->
-      @_setMode('r') unless @mode == 'r'
+      @self._setMode('r') unless @mode == 'r'
       readData = null
 
-      FS.readFile(@pinFile, (err, data) ->
+      FS.readFile(@pinFile, (err, data) =>
         if err
           console.log('ERROR occurred while reading from the Pin')
-          @emit('error', "Error occurred while reading from pin #{ @pinNum }")
+          @self.emit('error', "Error occurred while reading from pin #{ @pinNum }")
         else
           readData = data
-          @emit('read', data)
+          @self.emit('read', data)
       )
 
       readData
@@ -73,30 +74,33 @@ namespace 'Cylon.IO', ->
     _setMode: (mode) ->
       @mode = mode
       if @mode == 'w'
-        FS.writeFile("#{ GPIO_PATH }/gpio#{ @pinNum }/direction", GPIO_DIRECTION_WRITE, (err) ->
+        FS.writeFile("#{ GPIO_PATH }/gpio#{ @pinNum }/direction", GPIO_DIRECTION_WRITE, (err) =>
           unless (err)
             console.log('Pin mode(direction) setup...')
             @pinFile = "#{ GPIO_PATH }/gpio#{ @pinNum }/value"
             @ready = true
-            @emit('open', mode)
+            @self.emit('open', mode)
           else
             console.log('Error occurred while settingup pin mode(direction)...')
-            @emit('error', "Setting up pin direction failed")
+            @self.emit('error', "Setting up pin direction failed")
         )
       else if mode =='r'
-        FS.writeFile("#{ GPIO_PATH }/gpio#{ @pinNum }/direction", GPIO_DIRECTION_READ, (err) ->
+        FS.writeFile("#{ GPIO_PATH }/gpio#{ @pinNum }/direction", GPIO_DIRECTION_READ, (err) =>
           unless (err)
             console.log('Pin mode(direction) setup...')
             @pinFile = "#{ GPIO_PATH }/gpio#{ @pinNum }/value"
             @ready = true
-            @emit('open', mode)
+            @self.emit('open', mode)
           else
             console.log('Error occurred while settingup pin mode(direction)...')
-            @emit('error', "Setting up pin direction failed")
+            @self.emit('error', "Setting up pin direction failed")
         )
 
     toggle: ->
       if @status == 'low'
-        @digitalWrite(1)
+        @self.digitalWrite(1)
       else
-        @digitalWrite(0)
+        @self.digitalWrite(0)
+
+module.exports = Cylon.IO.DigitalPin
+
