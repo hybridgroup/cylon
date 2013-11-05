@@ -40,7 +40,7 @@
       DigitalPin.prototype.digitalWrite = function(value) {
         var status;
         if (this.mode !== 'w') {
-          setMode('w');
+          this._setMode('w');
         }
         return status = value === 1 ? 'high' : 'low';
       };

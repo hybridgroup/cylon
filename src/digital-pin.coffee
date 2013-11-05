@@ -15,6 +15,7 @@ namespace = require 'node-namespace'
 #
 namespace 'Cylon.IO', ->
   class @DigitalPin
+
     GPIO_PATH = "/sys/class/gpio"
     GPIO_DIRECTION_READ = "in"
     GPIO_DIRECTION_WRITE = "out"
@@ -32,7 +33,7 @@ namespace 'Cylon.IO', ->
       @_setMode(opts.mode)
 
     digitalWrite: (value) ->
-      setMode('w') unless @mode == 'w'
+      @_setMode('w') unless @mode == 'w'
       status = if (value == 1) then 'high' else 'low'
 
     # Sets the mode for the GPIO pin by writing the correct values to the pin reference files
