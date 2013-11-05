@@ -107,7 +107,7 @@
 
       DigitalPin.prototype._setMode = function(mode) {
         var _this = this;
-        if (this.mode === 'w') {
+        if (mode === 'w') {
           return FS.writeFile("" + GPIO_PATH + "/gpio" + this.pinNum + "/direction", GPIO_DIRECTION_WRITE, function(err) {
             if (err) {
               return _this.self.emit('error', "Setting up pin direction failed");

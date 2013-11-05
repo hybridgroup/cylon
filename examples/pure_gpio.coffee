@@ -1,6 +1,6 @@
 require('../dist/digital-pin')
 
-pin4 = new Cylon.IO.DigitalPin(pin: 4)
+pin4 = new Cylon.IO.DigitalPin(pin: 4, mode: 'w')
 
 pin4.on('open', (data) ->
   console.log("Pin files have been created")

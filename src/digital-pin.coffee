@@ -78,7 +78,7 @@ namespace 'Cylon.IO', ->
 
     # Sets the mode for the GPIO pin by writing the correct values to the pin reference files
     _setMode: (mode) ->
-      if @mode == 'w'
+      if mode == 'w'
         FS.writeFile("#{ GPIO_PATH }/gpio#{ @pinNum }/direction", GPIO_DIRECTION_WRITE, (err) =>
           if (err)
             @self.emit('error', "Setting up pin direction failed")
