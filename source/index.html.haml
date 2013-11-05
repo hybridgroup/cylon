@@ -70,23 +70,30 @@ layout: home
   Cylon.js has a extensible system for connecting to hardware devices. The following robotics and physical computing platforms are currently supported:
   %ul
     %li
-      = link_to "Arduino", "http://www.arduino.cc/" 
+      = link_to "Arduino", "http://www.arduino.cc/", target:"blank" 
       &lt;==&gt;
-      = link_to "Cylon.js for Firmata (Adaptor)", "https://github.com/hybridgroup/cylon-firmata"
+      = link_to "Cylon.js for Firmata (Adaptor)", "https://github.com/hybridgroup/cylon-firmata", target:"blank" 
     %li
-      = link_to "Ardrone", "http://ardrone2.parrot.com/" 
+      = link_to "Ardrone", "http://ardrone2.parrot.com/", target:"blank"  
       &lt;==&gt;
-      = link_to "Cylon.js for ARDrone (Adaptor/Drivers)", "https://github.com/hybridgroup/cylon-ardrone"
+      = link_to "Cylon.js for ARDrone (Adaptor/Drivers)", "https://github.com/hybridgroup/cylon-ardrone", target:"blank" 
     %li
-      = link_to "Sphero", "http://www.gosphero.com/" 
+      = link_to "Sphero", "http://www.gosphero.com/", target:"blank"  
       &lt;==&gt;
-      = link_to "Cylon.js for Sphero (Adaptor/Driver)", "https://github.com/hybridgroup/cylon-sphero"
+      = link_to "Cylon.js for Sphero (Adaptor/Driver)", "https://github.com/hybridgroup/cylon-sphero", target:"blank" 
 %p Support for common shared device drivers, is provded using the General Purpose Input/Output (GPIO) module:
 %ul
   %li
     = link_to "GPIO", "https://en.wikipedia.org/wiki/General_Purpose_Input/Output" 
     &lt;==&gt;
     = link_to "Cylon.js for GPIO (Drivers)", "https://github.com/hybridgroup/cylon-gpio"  
+
+%p Support for devices that use Inter-Integrated Circuit (I2C) have a shared set of drivers provded using the cylon-i2c module:
+%ul 
+  %li  
+    = link_to "I2C", "https://en.wikipedia.org/wiki/I%C2%B2C" 
+    &lt;==&gt;
+    = link_to "Cylon.js for I2C (Drivers)", "https://github.com/hybridgroup/cylon-i2c"    
 %p More platforms and drivers are coming soon...
 
 :markdown
