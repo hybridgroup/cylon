@@ -35,7 +35,7 @@
           res.set('Content-Type', 'application/json');
           return next();
         });
-        this.configureRoutes;
+        this.configureRoutes();
         this.server.listen(this.port, this.host, function() {
           return Logger.info("" + _this.server.name + " is listening at " + _this.host + ":" + _this.port);
         });
@@ -110,8 +110,9 @@
         this.server.get("/robots/:robot/connections/:connection", function(req, res) {
           var connectionid, robotid, _ref;
           _ref = [req.params.robot, req.params.connection], robotid = _ref[0], connectionid = _ref[1];
-          master.findRobotConnection(robotid, connectionid, function(err, connection) {});
-          return res.json(err ? err : connection.data());
+          return master.findRobotConnection(robotid, connectionid, function(err, connection) {
+            return res.json(err ? err : connection.data());
+          });
         });
         this.server.get("/robots/:robotid/devices/:deviceid/events", function(req, res) {
           return req.io.route('events');

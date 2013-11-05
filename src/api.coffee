@@ -29,7 +29,7 @@ namespace "Api", ->
         res.set 'Content-Type', 'application/json'
         do next
 
-      @configureRoutes
+      do @configureRoutes
 
       @server.listen @port, @host, =>
         Logger.info "#{@server.name} is listening at #{@host}:#{@port}"
@@ -77,7 +77,7 @@ namespace "Api", ->
         [robotid, connectionid] = [req.params.robot, req.params.connection]
 
         master.findRobotConnection robotid, connectionid, (err, connection) ->
-        res.json if err then err else connection.data()
+          res.json if err then err else connection.data()
 
       @server.get "/robots/:robotid/devices/:deviceid/events", (req, res) ->
         req.io.route 'events'
