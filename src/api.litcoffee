@@ -5,13 +5,18 @@ with the currently running robots.
 
 First of all, let's make sure we're running in ECMAScript 5's [strict mode][].
 
+[strict mode]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode
+
     'use strict';
+
 
 ## Dependencies
 
 Our server needs to primarily respond to HTTP requests with JSON responses, but
 also needs to handle a WebSocket connection to listen for events. To accomodate
 both of these requirements, we're going to use [express.io][].
+
+[express.io]: http://express-io.org
 
     express = require 'express.io'
 
@@ -20,8 +25,13 @@ both of these requirements, we're going to use [express.io][].
 types of connections, and also use Express-style routing to resolve to
 a Socket.IO connection.
 
+[socket.io]: http://socket.io
+[express]: http://expressjs.com
+
 To keep in line with the rest of Cylon, we'll also be namespacing our API server
 with the [node-namespace][] module.
+
+[node-namespace]: https://github.com/kaero/node-namespace
 
     namespace = require 'node-namespace'
 
@@ -90,11 +100,136 @@ Next up, we run a function to define all our routes (you'll see it in a minute)
 
 And finally, we start our server, announcing so via the Logger.
 
-      @server.listen @port, @host, =>
-        Logger.info "#{@server.name} is listening at #{@host}:#{@port}"
+          @server.listen @port, @host, =>
+            Logger.info "#{@server.name} is listening at #{@host}:#{@port}"
 
-[strict mode]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode
-[express.io]: http://express-io.org
-[express]: http://expressjs.com
-[socket.io]: http://socket.io
-[jnode-namespace]: https://github.com/kaero/node-namespace
+## Routes
+
+We'll use the previously referenced `@configureRoutes` function to define our
+server's routes.
+
+        configureRoutes: ->
+
+### GET /robots
+
+Our first route returns all the Robots the master class knows about in JSON
+format.
+
+          @server.get "/robots", (req, res) ->
+            res.json (robot.data() for robot in master.robots())
+
+### GET /robots/:robotname
+
+Given a robot's name, returns JSON information about the requested Robot:
+
+          @server.get "/robots/:robotname", (req, res) ->
+            master.findRobot req.params.robotname, (err, robot) ->
+              res.json if err then err else robot.data()
+
+### GET /robots/:robotname/devices
+
+Given a robot's name, returns JSON information about the devices belonging to
+the requested Robot:
+
+          @server.get "/robots/:robotname/devices", (req, res) ->
+            master.findRobot req.params.robotname, (err, robot) ->
+              res.json if err then err else robot.data().devices
+
+### GET /robots/:robotname/devices/:devicename
+
+Given the names of a device and the robot it belongs to, returns data on the
+specified device.
+
+          @server.get "/robots/:robotname/devices/:devicename", (req, res) ->
+            params = [req.params.robotname, req.params.devicename]
+            [robotname, devicename] = params
+
+            master.findRobotDevice robotname, devicename, (err, device) ->
+              res.json if err then err else device.data()
+
+### GET /robots/:robotname/devices/:devicename/commands
+
+Given the names of a device and the robot it belongs to, returns all commands
+available for the specified device.
+
+          @server.get "/robots/:robotname/devices/:devicename/commands", (req, res) ->
+            params = [req.params.robotname, req.params.devicename]
+            [robotname, devicename] = params
+
+            master.findRobotDevice robotname, devicename, (err, device) ->
+              res.json if err then err else device.data().commands
+
+### POST /robots/:robotname/devices/:devicename/commands/:commandname
+
+Given a robot name, device name, and command name, executes a robot's command
+and returns the result.
+
+          @server.post "/robots/:robot/devices/:device/commands/:commandname", (req, res) ->
+
+            params = [
+              req.params.robotname,
+              req.params.devicename,
+              req.params.commandname
+            ]
+
+            [robotname, devicename, commandname] = params
+
+This parses params from the request body into values that can be used while
+calling the command, if params have been supplied.
+
+            params = []
+            if typeof req.body is 'object'
+              params.push(value) for key, value of req.body
+
+Runs the command on the Robot's device, passing in params as provided.
+
+            master.findRobotDevice robotname, devicename, (err, device) ->
+              if err then return res.json err
+              result = device[commandname](params...)
+              res.json result: result
+
+### GET /robots/:robotname/connections
+
+Given a robot's name, returns JSON information about the connections belonging
+to the requested Robot:
+
+          @server.get "/robots/:robotname/connections", (req, res) ->
+            master.findRobot req.params.robotname, (err, robot) ->
+              res.json if err then err else robot.data().connections
+
+### GET /robots/:robotname/connections/:connectionname
+
+Given a robot's name, returns JSON information about the connections belonging
+to the requested Robot:
+
+          @server.get "/robots/:robot/connections/:connection", (req, res) ->
+            params = [req.params.robot, req.params.connection]
+            [robotname, connectionname] = params
+
+            master.findRobotConnection robotname, connectionname, (err, connection) ->
+              res.json if err then err else connection.data()
+
+### GET /robots/:robotname/devices/:devicename/events
+
+Routes to a Socket.IO route to handle WebSockets connections requesting updates
+on device events.
+
+          @server.get "/robots/:robotname/devices/:devicename/events", (req, res) ->
+            req.io.route 'events'
+
+### WS_GET /events
+
+A Socket.IO route to handle updating clients whenever a device sends
+an 'update' event.
+
+Listens for the 'update' event on a particular Robot's device, and whenever the
+device sends the 'update' event, passes the data along to the client.
+
+          @server.io.route 'events', (req) ->
+            params = [req.params.robotname, req.params.devicename]
+            [robotname, devicename] = params
+
+            master.findRobotDevice robotname, devicename, (err, device) ->
+              req.io.respond(err) if err
+              device.on 'update', (data) ->
+                req.io.emit 'update', { data: data }
