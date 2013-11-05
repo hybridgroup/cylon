@@ -42,7 +42,7 @@
         this.ready = false;
       }
 
-      DigitalPin.prototype.open = function(mode) {
+      DigitalPin.prototype.connect = function(mode) {
         var _this = this;
         return FS.writeFile("" + GPIO_PATH + "/export", "" + this.pinNum, function(err) {
           if (err) {
@@ -114,7 +114,7 @@
             } else {
               _this.pinFile = "" + GPIO_PATH + "/gpio" + _this.pinNum + "/value";
               _this.ready = true;
-              return _this.self.emit('open', mode);
+              return _this.self.emit('connect', mode);
             }
           });
         } else if (mode === 'r') {
@@ -125,17 +125,25 @@
             } else {
               _this.pinFile = "" + GPIO_PATH + "/gpio" + _this.pinNum + "/value";
               _this.ready = true;
-              return _this.self.emit('open', mode);
+              return _this.self.emit('connect', mode);
             }
           });
         }
       };
 
+      DigitalPin.prototype.setHigh = function() {
+        return this.self.digitalWrite(1);
+      };
+
+      DigitalPin.prototype.setLow = function() {
+        return this.self.digitalWrite(0);
+      };
+
       DigitalPin.prototype.toggle = function() {
         if (this.status === 'low') {
-          return this.self.digitalWrite(1);
+          return this.self.setHigh();
         } else {
-          return this.self.digitalWrite(0);
+          return this.self.setLow();
         }
       };
 

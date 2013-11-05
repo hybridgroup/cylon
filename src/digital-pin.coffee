@@ -30,7 +30,7 @@ namespace 'Cylon.IO', ->
       @status = 'low'
       @ready = false
 
-    open: (mode) ->
+    connect: (mode) ->
       # Creates the GPIO file to read/write from
       FS.writeFile("#{ GPIO_PATH }/export", "#{ @pinNum }", (err) =>
         if(err)
@@ -90,7 +90,7 @@ namespace 'Cylon.IO', ->
           else
             @pinFile = "#{ GPIO_PATH }/gpio#{ @pinNum }/value"
             @ready = true
-            @self.emit('open', mode)
+            @self.emit('connect', mode)
         )
       else if mode =='r'
         FS.writeFile("#{ GPIO_PATH }/gpio#{ @pinNum }/direction", GPIO_DIRECTION_READ, (err) =>
@@ -100,11 +100,17 @@ namespace 'Cylon.IO', ->
           else
             @pinFile = "#{ GPIO_PATH }/gpio#{ @pinNum }/value"
             @ready = true
-            @self.emit('open', mode)
+            @self.emit('connect', mode)
         )
+
+    setHigh: ->
+      @self.digitalWrite(1)
+
+    setLow: ->
+      @self.digitalWrite(0)
 
     toggle: ->
       if @status == 'low'
-        @self.digitalWrite(1)
+        @self.setHigh()
       else
-        @self.digitalWrite(0)
+        @self.setLow()
