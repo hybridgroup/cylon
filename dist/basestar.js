@@ -48,7 +48,7 @@
             return opts.target.emit('update', targetEventName, args);
           }
         });
-        return source;
+        return opts.source;
       };
 
       Basestar.prototype.defineAdaptorEvent = function(opts) {
