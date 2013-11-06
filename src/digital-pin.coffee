@@ -71,6 +71,8 @@ namespace 'Cylon.IO', ->
           @self.emit('error', "Error occurred while reading from pin #{ @pinNum }")
         else
           readData = data
+          console.log("Digital read VALUE ===>")
+          console.log(data)
           @self.emit('digitalRead', data)
       )
 

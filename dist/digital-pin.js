@@ -99,6 +99,8 @@
             return _this.self.emit('error', "Error occurred while reading from pin " + _this.pinNum);
           } else {
             readData = data;
+            console.log("Digital read VALUE ===>");
+            console.log(data);
             return _this.self.emit('digitalRead', data);
           }
         });
