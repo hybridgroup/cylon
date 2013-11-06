@@ -18,11 +18,10 @@ describe "Utils", ->
     }
 
     class TestClass
-      klass = this
-
       constructor: ->
+        @myself = this
         methods = ['asString', 'toString', 'returnString']
-        proxyFunctionsToObject(methods, proxyObject, klass, true)
+        proxyFunctionsToObject(methods, proxyObject, @myself, true)
 
     it 'can alias methods', ->
       testclass = new TestClass

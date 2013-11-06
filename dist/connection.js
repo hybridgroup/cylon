@@ -40,7 +40,7 @@
         this.connection_id = opts.id;
         this.adaptor = this.requireAdaptor(opts.adaptor);
         this.port = new Port(opts.port);
-        proxyFunctionsToObject(this.adaptor.commands(), this.adaptor, Connection);
+        proxyFunctionsToObject(this.adaptor.commands(), this.adaptor, this.self);
       }
 
       Connection.prototype.data = function() {

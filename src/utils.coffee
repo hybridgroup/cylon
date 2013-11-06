@@ -43,9 +43,9 @@ global.after = (delay, action) ->
 global.proxyFunctionsToObject = (methods, target, base = this, force = false) ->
   for method in methods
     unless force
-      continue if typeof base::[method] is 'function'
+      continue if typeof base[method] is 'function'
     do (method) ->
-      base::[method] = (args...) -> target[method](args...)
+      base[method] = (args...) -> target[method](args...)
 
   return base
 
