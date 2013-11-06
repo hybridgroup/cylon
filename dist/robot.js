@@ -17,6 +17,8 @@
 
   require('./basestar');
 
+  require('./DigitalPin');
+
   namespace = require('node-namespace');
 
   Connection = require("./connection");

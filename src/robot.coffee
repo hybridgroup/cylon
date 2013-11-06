@@ -10,6 +10,7 @@
 
 require './cylon'
 require './basestar'
+require './DigitalPin'
 
 namespace = require 'node-namespace'
 
