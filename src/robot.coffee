@@ -10,6 +10,7 @@
 
 require './cylon'
 require './basestar'
+require './digital-pin'
 
 namespace = require 'node-namespace'
 
@@ -148,6 +149,18 @@ namespace 'Cylon', ->
         starters[n] = device.start
 
       Async.parallel starters, callback
+
+    # Public: Stops the Robot working.
+    #
+    # Stops the devices, disconnects the connections.
+    #
+    # Returns nothing
+    stop: =>
+      for n, device of @devices
+        device.stop()
+
+      for n, connection of @connections
+        connection.disconnect()
 
     # Public: Requires a hardware adaptor and adds it to @robot.adaptors
     #

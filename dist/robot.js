@@ -17,6 +17,8 @@
 
   require('./basestar');
 
+  require('./digital-pin');
+
   namespace = require('node-namespace');
 
   Connection = require("./connection");
@@ -37,6 +39,7 @@
           opts = {};
         }
         this.registerDriver = __bind(this.registerDriver, this);
+        this.stop = __bind(this.stop, this);
         this.startDevices = __bind(this.startDevices, this);
         this.startConnections = __bind(this.startConnections, this);
         this.start = __bind(this.start, this);
@@ -161,6 +164,22 @@
           starters[n] = device.start;
         }
         return Async.parallel(starters, callback);
+      };
+
+      Robot.prototype.stop = function() {
+        var connection, device, n, _ref, _ref1, _results;
+        _ref = this.devices;
+        for (n in _ref) {
+          device = _ref[n];
+          device.stop();
+        }
+        _ref1 = this.connections;
+        _results = [];
+        for (n in _ref1) {
+          connection = _ref1[n];
+          _results.push(connection.disconnect());
+        }
+        return _results;
       };
 
       Robot.prototype.requireAdaptor = function(adaptorName, connection) {

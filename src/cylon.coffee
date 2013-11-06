@@ -14,6 +14,8 @@ require('./utils')
 require('./logger')
 require('./api')
 
+readLine = require "readline"
+
 Logger.setup()
 
 # Cylon is the global namespace for the project, and also in charge of
@@ -39,6 +41,17 @@ class Cylon
     # Returns a Master instance
     constructor: ->
       @self = this
+      if process.platform is "win32"
+        rl = readLine.createInterface
+          input: process.stdin
+          output: process.stdout
+
+        rl.on "SIGINT", ->
+          process.emit "SIGINT"
+
+      process.on "SIGINT", ->
+        Cylon.getInstance().stop()
+        process.exit()
 
     # Public: Creates a new Robot
     #
@@ -118,6 +131,15 @@ class Cylon
     start: ->
       do @startAPI
       robot.start() for robot in robots
+
+
+    # Public: Stops the API and the robots
+    #
+    # Returns nothing
+    stop: ->
+      #do @stopAPI
+      robot.stop() for robot in robots
+
 
     # Creates a new instance of the Cylon API server, or returns the
     # already-existing one.

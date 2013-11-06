@@ -48,6 +48,13 @@ namespace 'Cylon', ->
       Logger.info msg
       @driver.start(callback)
 
+    # Public: Stops the device driver
+    #
+    # Returns result of supplied callback
+    stop: =>
+      Logger.info "Stopping device '#{ @name }'"
+      @driver.stop()
+
     # Public: Exports basic data for the Connection
     #
     # Returns an Object containing Connection data
