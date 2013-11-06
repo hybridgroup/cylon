@@ -65,8 +65,10 @@
         var _this = this;
         return FS.writeFile("" + GPIO_PATH + "/unexport", "" + this.pinNum, function(err) {
           if (err) {
+            console.log("EROR WHILE WRITING TO UNEXPORT FILE!!!");
             return _this.self.emit('error', 'Error while closing pin files');
           } else {
+            console.log("PIN SHOULD BE UNEXPORTED");
             return _this.self.emit('close');
           }
         });

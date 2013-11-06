@@ -46,8 +46,10 @@ namespace 'Cylon.IO', ->
     close: ->
       FS.writeFile("#{ GPIO_PATH }/unexport", "#{ @pinNum }", (err) =>
         if(err)
+          console.log("EROR WHILE WRITING TO UNEXPORT FILE!!!")
           @self.emit('error', 'Error while closing pin files')
         else
+          console.log("PIN SHOULD BE UNEXPORTED")
           @self.emit('close')
       )
 
