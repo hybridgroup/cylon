@@ -57,7 +57,7 @@ constructor.
 
 ## Constructor
 
-The server constructor constructor accepts an arguments object, `opts`. This
+The server constructor accepts an arguments object, `opts`. This
 defines options to be used when creating the server, as follows:
 
 - **master** - required, reference to Cylon.Master instance that's creating the
