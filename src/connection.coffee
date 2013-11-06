@@ -38,7 +38,7 @@ namespace 'Cylon', ->
       @connection_id = opts.id
       @adaptor = @requireAdaptor(opts.adaptor) # or 'loopback')
       @port = new Port(opts.port)
-      proxyFunctionsToObject @adaptor.commands(), @adaptor, Connection
+      proxyFunctionsToObject @adaptor.commands(), @adaptor, @self
 
     # Public: Exports basic data for the Connection
     #

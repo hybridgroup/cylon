@@ -35,7 +35,7 @@ namespace 'Cylon', ->
       @pin = opts.pin
       @connection = @determineConnection(opts.connection) or @defaultConnection()
       @driver = @requireDriver(opts)
-      proxyFunctionsToObject @driver.commands(), @driver, Device
+      proxyFunctionsToObject @driver.commands(), @driver, @self
 
     # Public: Starts the device driver
     #
