@@ -7,11 +7,11 @@ Cylon.robot
 
   devices:
     [
-      {name: 'led', driver: 'led', pin: 13},
-      {name: 'button', driver: 'button', pin: 2}
+      {name: 'led', driver: 'led', pin: 11},
+      {name: 'button', driver: 'button', pin: 7}
     ]
 
   work: (my) ->
-    my.button.on 'push', console.log("Reading pin...")
+    my.button.on 'push', my.led.toggle()
 
 .start()

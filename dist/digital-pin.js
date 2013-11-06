@@ -88,27 +88,22 @@
       };
 
       DigitalPin.prototype.digitalRead = function(interval) {
-        var readData;
+        var readData,
+          _this = this;
         if (this.mode !== 'r') {
           this.self._setMode('r');
         }
         readData = null;
-        return setInterval(this._readFileCallback, interval);
-      };
-
-      DigitalPin.prototype._readFileCallback = function() {
-        var _this = this;
-        return FS.readFile(this.pinFile, function(err, data) {
-          var readData;
-          if (err) {
-            return _this.self.emit('error', "Error occurred while reading from pin " + _this.pinNum);
-          } else {
-            readData = data;
-            console.log("Digital read VALUE ===>");
-            console.log(data.toString());
-            return _this.self.emit('digitalRead', data);
-          }
-        });
+        return setInterval(function() {
+          return FS.readFile(_this.pinFile, function(err, data) {
+            if (err) {
+              return _this.self.emit('error', "Error occurred while reading from pin " + _this.pinNum);
+            } else {
+              readData = data;
+              return _this.self.emit('digitalRead', data);
+            }
+          });
+        }, interval);
       };
 
       DigitalPin.prototype._setMode = function(mode, emitConnect) {
