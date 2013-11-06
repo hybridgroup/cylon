@@ -12,9 +12,9 @@ already here:
     Cylon = require '..'
 
 Since both of our Spheros are going to have faily similar behaviour, we can
-define a base object to hold their attributes:
+define a class to hold their attributes:
 
-    SpheroRobot =
+    class SpheroRobot
 
 We'll define the Sphero's connection sans port, which we'll add later.
 
@@ -50,7 +50,7 @@ Now that the pieces are in place, we can start making our robots.
 
 We'll make a new instance of `SpheroRobot`, and modify it.
 
-      robot = Object.create SpheroRobot
+      robot = new SpheroRobot
 
 Now we'll tell the robot what it's name is, and what it's connection port should
 be:
