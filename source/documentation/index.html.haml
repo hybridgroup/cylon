@@ -20,12 +20,13 @@ layout: page
       -#.link= link_to "Generated Documentation", "http://rubydoc.info/gems/Cylon.js/frames"
       -#.description YARD Generated Documentation.
     %li
-      .link= link_to "Examples for Blink", "/documentation/examples/blink"
-      .description Some examples for Blink.
-    %li
-      .link= link_to "Examples for Ardrone", "/documentation/examples/ardrone"
-      .description Some examples for Ardrone.
-    %li
-      .link= link_to "Examples for Travis with Sphero", "/documentation/examples/travis"
-      .description Some examples for Travis.    
-      
+      .link Examples for Javascript/CoffeeScript
+      %small= link_to "- Examples for Blink", "/documentation/examples/blink"
+      %br/ 
+      %small= link_to "- Examples for Ardrone", "/documentation/examples/ardrone"
+      %br/ 
+      %small= link_to "- Examples for Travis with Sphero", "/documentation/examples/travis"
+
+    %li 
+      .link= link_to "Guide for Programmers: API for my written robot. ", "/api" 
+      .description The Cylon API Server provides an interface to communicate with master class and retrieve information about the robots being controlled.
