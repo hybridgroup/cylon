@@ -62,21 +62,22 @@ namespace 'Cylon.IO', ->
           @self.emit('digitalWrite', value)
       )
 
-    digitalRead: ->
+    digitalRead: (interval) ->
       @self._setMode('r') unless @mode == 'r'
       readData = null
 
+      setInterval(@_readFileCallback, interval)
+
+    _readFileCallback: ->
       FS.readFile(@pinFile, (err, data) =>
         if err
           @self.emit('error', "Error occurred while reading from pin #{ @pinNum }")
         else
           readData = data
           console.log("Digital read VALUE ===>")
-          console.log(data)
+          console.log(data.toString())
           @self.emit('digitalRead', data)
       )
-
-      readData
 
     # Sets the mode for the GPIO pin by writing the correct values to the pin reference files
     _setMode: (mode, emitConnect = false) ->

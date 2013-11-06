@@ -87,24 +87,28 @@
         });
       };
 
-      DigitalPin.prototype.digitalRead = function() {
-        var readData,
-          _this = this;
+      DigitalPin.prototype.digitalRead = function(interval) {
+        var readData;
         if (this.mode !== 'r') {
           this.self._setMode('r');
         }
         readData = null;
-        FS.readFile(this.pinFile, function(err, data) {
+        return setInterval(this._readFileCallback, interval);
+      };
+
+      DigitalPin.prototype._readFileCallback = function() {
+        var _this = this;
+        return FS.readFile(this.pinFile, function(err, data) {
+          var readData;
           if (err) {
             return _this.self.emit('error', "Error occurred while reading from pin " + _this.pinNum);
           } else {
             readData = data;
             console.log("Digital read VALUE ===>");
-            console.log(data);
+            console.log(data.toString());
             return _this.self.emit('digitalRead', data);
           }
         });
-        return readData;
       };
 
       DigitalPin.prototype._setMode = function(mode, emitConnect) {
