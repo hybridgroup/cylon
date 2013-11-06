@@ -17,7 +17,7 @@
 
   require('./basestar');
 
-  require('./DigitalPin');
+  require('./digital-pin');
 
   namespace = require('node-namespace');
 
