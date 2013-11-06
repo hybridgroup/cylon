@@ -38,7 +38,7 @@ namespace 'Cylon.IO', ->
         if(err)
           @self.emit('error', 'Error while creating pin files')
         else
-          @self._setMode(@mode)
+          @self._setMode(@mode, true)
           @self.emit('open')
       )
 
@@ -71,13 +71,13 @@ namespace 'Cylon.IO', ->
           @self.emit('error', "Error occurred while reading from pin #{ @pinNum }")
         else
           readData = data
-          @self.emit('read', data)
+          @self.emit('digitalRead', data)
       )
 
       readData
 
     # Sets the mode for the GPIO pin by writing the correct values to the pin reference files
-    _setMode: (mode) ->
+    _setMode: (mode, emitConnect = false) ->
       if mode == 'w'
         FS.writeFile("#{ GPIO_PATH }/gpio#{ @pinNum }/direction", GPIO_DIRECTION_WRITE, (err) =>
           if (err)
@@ -85,7 +85,7 @@ namespace 'Cylon.IO', ->
           else
             @pinFile = "#{ GPIO_PATH }/gpio#{ @pinNum }/value"
             @ready = true
-            @self.emit('connect', mode)
+            @self.emit('connect', mode) if emitConnect
         )
       else if mode =='r'
         FS.writeFile("#{ GPIO_PATH }/gpio#{ @pinNum }/direction", GPIO_DIRECTION_READ, (err) =>
@@ -94,7 +94,7 @@ namespace 'Cylon.IO', ->
           else
             @pinFile = "#{ GPIO_PATH }/gpio#{ @pinNum }/value"
             @ready = true
-            @self.emit('connect', mode)
+            @self.emit('connect', mode) if emitConnect
         )
 
     setHigh: ->

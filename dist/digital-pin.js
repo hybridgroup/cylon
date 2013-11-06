@@ -55,7 +55,7 @@
           if (err) {
             return _this.self.emit('error', 'Error while creating pin files');
           } else {
-            _this.self._setMode(_this.mode);
+            _this.self._setMode(_this.mode, true);
             return _this.self.emit('open');
           }
         });
@@ -99,14 +99,17 @@
             return _this.self.emit('error', "Error occurred while reading from pin " + _this.pinNum);
           } else {
             readData = data;
-            return _this.self.emit('read', data);
+            return _this.self.emit('digitalRead', data);
           }
         });
         return readData;
       };
 
-      DigitalPin.prototype._setMode = function(mode) {
+      DigitalPin.prototype._setMode = function(mode, emitConnect) {
         var _this = this;
+        if (emitConnect == null) {
+          emitConnect = false;
+        }
         if (mode === 'w') {
           return FS.writeFile("" + GPIO_PATH + "/gpio" + this.pinNum + "/direction", GPIO_DIRECTION_WRITE, function(err) {
             if (err) {
@@ -114,7 +117,9 @@
             } else {
               _this.pinFile = "" + GPIO_PATH + "/gpio" + _this.pinNum + "/value";
               _this.ready = true;
-              return _this.self.emit('connect', mode);
+              if (emitConnect) {
+                return _this.self.emit('connect', mode);
+              }
             }
           });
         } else if (mode === 'r') {
@@ -124,7 +129,9 @@
             } else {
               _this.pinFile = "" + GPIO_PATH + "/gpio" + _this.pinNum + "/value";
               _this.ready = true;
-              return _this.self.emit('connect', mode);
+              if (emitConnect) {
+                return _this.self.emit('connect', mode);
+              }
             }
           });
         }
