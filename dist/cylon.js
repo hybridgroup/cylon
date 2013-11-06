@@ -9,7 +9,7 @@
 
 (function() {
   'use strict';
-  var Cylon, Robot,
+  var Cylon, Robot, readLine,
     __slice = [].slice,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
@@ -20,6 +20,8 @@
   require('./logger');
 
   require('./api');
+
+  readLine = require("readline");
 
   Logger.setup();
 
@@ -49,7 +51,21 @@
 
       function Master() {
         this.robot = __bind(this.robot, this);
+        var rl;
         this.self = this;
+        if (process.platform === "win32") {
+          rl = readLine.createInterface({
+            input: process.stdin,
+            output: process.stdout
+          });
+          rl.on("SIGINT", function() {
+            return process.emit("SIGINT");
+          });
+        }
+        process.on("SIGINT", function() {
+          Cylon.getInstance().stop();
+          return process.exit();
+        });
       }
 
       Master.prototype.robot = function(opts) {
@@ -136,6 +152,16 @@
         for (_i = 0, _len = robots.length; _i < _len; _i++) {
           robot = robots[_i];
           _results.push(robot.start());
+        }
+        return _results;
+      };
+
+      Master.prototype.stop = function() {
+        var robot, _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = robots.length; _i < _len; _i++) {
+          robot = robots[_i];
+          _results.push(robot.stop());
         }
         return _results;
       };

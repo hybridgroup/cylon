@@ -149,6 +149,18 @@ namespace 'Cylon', ->
 
       Async.parallel starters, callback
 
+    # Public: Stops the Robot working.
+    #
+    # Stops the devices, disconnects the connections.
+    #
+    # Returns nothing
+    stop: =>
+      for n, device of @devices
+        device.stop()
+
+      for n, connection of @connections
+        connection.disconnect()
+
     # Public: Requires a hardware adaptor and adds it to @robot.adaptors
     #
     # adaptorName - module name of adaptor to require

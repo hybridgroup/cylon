@@ -28,6 +28,7 @@
         if (opts == null) {
           opts = {};
         }
+        this.stop = __bind(this.stop, this);
         this.start = __bind(this.start, this);
         this.self = this;
         this.robot = opts.robot;
@@ -46,6 +47,11 @@
         }
         Logger.info(msg);
         return this.driver.start(callback);
+      };
+
+      Device.prototype.stop = function() {
+        Logger.info("Stopping device '" + this.name + "'");
+        return this.driver.stop();
       };
 
       Device.prototype.data = function() {
