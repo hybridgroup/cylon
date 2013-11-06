@@ -24,16 +24,16 @@ namespace 'Cylon', ->
     constructor: (opts) ->
       @self = this
 
-    # Public: Proxies calls from all methods in the class to a target class
+    # Public: Proxies calls from all methods in the object to a target object
     #
     # methods - array of methods to proxy
-    # target - class/object to proxy methods to
-    # klass - class to proxy methods from
+    # target - object to proxy methods to
+    # source - object to proxy methods from
     # force - whether or not to overwrite existing method definitions
     #
     # Returns the klass where the methods have been proxied
-    proxyMethods: (methods, target, klass, force = false) ->
-      proxyFunctionsToObject(methods, target, klass, force)
+    proxyMethods: (methods, target, source, force = false) ->
+      proxyFunctionsToObject(methods, target, source, force)
 
     # Public: Defines an event handler that proxies events from a source object
     # to a target object

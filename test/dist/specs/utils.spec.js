@@ -27,14 +27,11 @@
         }
       };
       TestClass = (function() {
-        var klass;
-
-        klass = TestClass;
-
         function TestClass() {
           var methods;
+          this.myself = this;
           methods = ['asString', 'toString', 'returnString'];
-          proxyFunctionsToObject(methods, proxyObject, klass, true);
+          proxyFunctionsToObject(methods, proxyObject, this.myself, true);
         }
 
         return TestClass;

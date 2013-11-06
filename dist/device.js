@@ -35,7 +35,7 @@
         this.pin = opts.pin;
         this.connection = this.determineConnection(opts.connection) || this.defaultConnection();
         this.driver = this.requireDriver(opts);
-        proxyFunctionsToObject(this.driver.commands(), this.driver, Device);
+        proxyFunctionsToObject(this.driver.commands(), this.driver, this.self);
       }
 
       Device.prototype.start = function(callback) {

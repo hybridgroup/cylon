@@ -27,7 +27,7 @@
       force = false;
     }
     _fn = function(method) {
-      return base.prototype[method] = function() {
+      return base[method] = function() {
         var args;
         args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
         return target[method].apply(target, args);
@@ -36,7 +36,7 @@
     for (_i = 0, _len = methods.length; _i < _len; _i++) {
       method = methods[_i];
       if (!force) {
-        if (typeof base.prototype[method] === 'function') {
+        if (typeof base[method] === 'function') {
           continue;
         }
       }

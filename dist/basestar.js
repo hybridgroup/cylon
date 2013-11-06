@@ -28,11 +28,11 @@
         this.self = this;
       }
 
-      Basestar.prototype.proxyMethods = function(methods, target, klass, force) {
+      Basestar.prototype.proxyMethods = function(methods, target, source, force) {
         if (force == null) {
           force = false;
         }
-        return proxyFunctionsToObject(methods, target, klass, force);
+        return proxyFunctionsToObject(methods, target, source, force);
       };
 
       Basestar.prototype.defineEvent = function(opts) {
