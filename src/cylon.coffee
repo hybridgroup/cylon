@@ -35,6 +35,7 @@ class Cylon
   class Master
     robots = []
     api = null
+    api_config = { host: '127.0.0.1', port: '3000' }
 
     # Public: Creates a new Master
     #
@@ -75,6 +76,18 @@ class Cylon
     #
     # Returns an array of all Robot instances
     robots: -> robots
+
+    # Public: Configures the API host and port based on passed options
+    #
+    # opts - object containing API options
+    #   host - host address API should serve from
+    #   port - port API should listen for requests on
+    #
+    # Returns the API configuration
+    api: (opts) ->
+      api_config.host = opts.host || "127.0.0.1"
+      api_config.port = opts.port || "3000"
+      api_config
 
     # Public: Finds a particular robot by name
     #
@@ -146,6 +159,7 @@ class Cylon
     #
     # Returns an Api.Server instance
     startAPI: ->
-      api ?= new Api.Server(master: @self)
+      api_config.master = @self
+      api ?= new Api.Server(api_config)
 
 module.exports = Cylon.getInstance()

@@ -43,11 +43,16 @@
     };
 
     Master = (function() {
-      var api, robots;
+      var api, api_config, robots;
 
       robots = [];
 
       api = null;
+
+      api_config = {
+        host: '127.0.0.1',
+        port: '3000'
+      };
 
       function Master() {
         this.robot = __bind(this.robot, this);
@@ -78,6 +83,12 @@
 
       Master.prototype.robots = function() {
         return robots;
+      };
+
+      Master.prototype.api = function(opts) {
+        api_config.host = opts.host || "127.0.0.1";
+        api_config.port = opts.port || "3000";
+        return api_config;
       };
 
       Master.prototype.findRobot = function(name, callback) {
@@ -167,9 +178,8 @@
       };
 
       Master.prototype.startAPI = function() {
-        return api != null ? api : api = new Api.Server({
-          master: this.self
-        });
+        api_config.master = this.self;
+        return api != null ? api : api = new Api.Server(api_config);
       };
 
       return Master;
