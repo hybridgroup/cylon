@@ -1,8 +1,8 @@
 {
   "name": "cylon",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "main": "dist/cylon.js",
-  "description": "A JavaScript robotics framework using node.js",
+  "description": "A JavaScript robotics framework using Node.js",
   "homepage": "http://cylonjs.com",
   "bugs": "https://github.com/hybridgroup/cylon/issues",
   "author": {
