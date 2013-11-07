@@ -9,11 +9,64 @@ layout: page
 :markdown
 	## How To Connect
 
-	Put info here on how to access a running Cylon.js API server...
+	Now you are ready to write your own code you can access a running Cylon.js API server.
+
+	### Running your robot:
+	
+	To test your code you can type this on your console:
+
+	#### Javascript
+
+	    :::javascript
+	      node robotfilename.js
+
+	#### CoffeeScript      
+
+	    :::javascript
+	      coffee robotfilename.coffee
+	
+	For example, on this code:
+
+	#### Javascript
+	    :::javascript
+	    var Cylon = require('..');
+
+		Cylon.robot({
+		  connection: { name: 'looped', adaptor: 'loopback'},
+
+		  work: function() {
+		    every((1).second(), function() { Logger.info("Hello, human!"); });
+		    after((10).seconds(), function() { Logger.info("Impressive."); });
+		  }
+		}).start();
+
+	#### CoffeeScript 
+
+	    :::javascript
+	    Cylon = require('cylon')
+
+		Cylon.robot
+		  work: ->
+		    every 1.second(), ->
+		      Logger.info("Hello, human!")
+
+		    after 10.seconds(), ->
+		      Logger.info "Impressive."
+
+		.start()
+
+	`.start(); - .start()` automatically, starts the server.
 
 	## How To Configure
+	
+	The Cylon.js API server, allows a configuration for your robots.
 
-	Put info here on how to configure the Cylon.js API server for your robots (IP address etc)
+	You can set it up like this:
+
+	    :::javascript
+		  Cylon.api(host: '0.0.0.0', port: '80')
+		
+	Now you can run the server on the curl : `http://0.0.0.0:80`.
 
 	## Routes
 
@@ -22,7 +75,7 @@ layout: page
 	Our first route returns all the Robots the master class knows about in JSON
 	format.
       	
-	
+	   
 	    [
 	      {
 	        "name": "SpheroBot",
