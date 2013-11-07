@@ -5,7 +5,7 @@ bots = [
   { port: '/dev/rfcomm1', name: 'Louise' }
 ]
 
-SpheroRobot =
+class SpheroRobot
   connection:
     name: 'Sphero', adaptor: 'sphero'
 
@@ -19,7 +19,7 @@ SpheroRobot =
       me.sphero.roll 60, Math.floor(Math.random() * 360)
 
 for bot in bots
-  robot = Object.create(SpheroRobot)
+  robot = new SpheroRobot
   robot.connection.port = bot.port
   robot.name = bot.name
   Cylon.robot robot
