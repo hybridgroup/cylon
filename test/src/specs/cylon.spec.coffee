@@ -27,3 +27,32 @@ describe "Cylon", ->
       robots = Cylon.robots()
       assert robots instanceof Array
       assert robot instanceof Robot for robot in robots
+
+  describe "#findRobot", ->
+    describe "synchronous", ->
+      describe "with a valid robot name", ->
+        it "returns the robot", ->
+          robot = Cylon.findRobot("caprica six")
+          assert robot instanceof Robot
+          robot.name.should.be.equal "caprica six"
+
+      describe "with an invalid robot name", ->
+        it "returns null", ->
+          robot = Cylon.findRobot("Tom Servo")
+          assert robot is null
+
+    describe "async", ->
+      describe "with a valid robot name", ->
+        it "passes the robot and an empty error to the callback", ->
+          Cylon.findRobot "caprica six", (error, robot) ->
+            assert error is undefined
+            assert robot instanceof Robot
+            robot.name.should.be.equal "caprica six"
+
+      describe "with an invalid robot name", ->
+        it "passes no robot and an error message to the callback", ->
+          Cylon.findRobot "Tom Servo", (error, robot) ->
+            assert robot is null
+            assert typeof error is 'object'
+            error.error.should.be.eql "No Robot found with the name Tom Servo"
+

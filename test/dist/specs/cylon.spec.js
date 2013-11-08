@@ -37,7 +37,7 @@
         });
       });
     });
-    return describe("#robots", function() {
+    describe("#robots", function() {
       return it("returns an array of all robots", function() {
         var robot, robots, _i, _len, _results;
         robots = Cylon.robots();
@@ -48,6 +48,45 @@
           _results.push(assert(robot instanceof Robot));
         }
         return _results;
+      });
+    });
+    return describe("#findRobot", function() {
+      describe("synchronous", function() {
+        describe("with a valid robot name", function() {
+          return it("returns the robot", function() {
+            var robot;
+            robot = Cylon.findRobot("caprica six");
+            assert(robot instanceof Robot);
+            return robot.name.should.be.equal("caprica six");
+          });
+        });
+        return describe("with an invalid robot name", function() {
+          return it("returns null", function() {
+            var robot;
+            robot = Cylon.findRobot("Tom Servo");
+            return assert(robot === null);
+          });
+        });
+      });
+      return describe("async", function() {
+        describe("with a valid robot name", function() {
+          return it("passes the robot and an empty error to the callback", function() {
+            return Cylon.findRobot("caprica six", function(error, robot) {
+              assert(error === void 0);
+              assert(robot instanceof Robot);
+              return robot.name.should.be.equal("caprica six");
+            });
+          });
+        });
+        return describe("with an invalid robot name", function() {
+          return it("passes no robot and an error message to the callback", function() {
+            return Cylon.findRobot("Tom Servo", function(error, robot) {
+              assert(robot === null);
+              assert(typeof error === 'object');
+              return error.error.should.be.eql("No Robot found with the name Tom Servo");
+            });
+          });
+        });
       });
     });
   });
