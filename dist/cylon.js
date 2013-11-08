@@ -85,6 +85,9 @@
       };
 
       Master.prototype.api = function(opts) {
+        if (opts == null) {
+          opts = {};
+        }
         api_config.host = opts.host || "127.0.0.1";
         api_config.port = opts.port || "3000";
         return api_config;

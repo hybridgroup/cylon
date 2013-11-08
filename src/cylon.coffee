@@ -86,7 +86,7 @@ class Cylon
     #   port - port API should listen for requests on
     #
     # Returns the API configuration
-    api: (opts) ->
+    api: (opts = {}) ->
       api_config.host = opts.host || "127.0.0.1"
       api_config.port = opts.port || "3000"
       api_config
