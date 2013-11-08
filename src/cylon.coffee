@@ -8,8 +8,6 @@
 
 'use strict';
 
-Robot = require("./robot")
-
 require('./utils')
 require('./logger')
 require('./api')
@@ -67,6 +65,10 @@ class Cylon
     #     work: (me) ->
     #       me.led.toggle()
     robot: (opts) =>
+      # This require doesn't reload code, but needs to be here (for now) because
+      # specs fail without it, as for some reason Robot is getting redefined
+      # somewhere to an empty object
+      Robot = require("./robot")
       opts.master = this
       robot = new Robot(opts)
       robots.push robot

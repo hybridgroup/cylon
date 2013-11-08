@@ -9,11 +9,9 @@
 
 (function() {
   'use strict';
-  var Cylon, Robot, readLine,
+  var Cylon, readLine,
     __slice = [].slice,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
-
-  Robot = require("./robot");
 
   require('./utils');
 
@@ -74,7 +72,8 @@
       }
 
       Master.prototype.robot = function(opts) {
-        var robot;
+        var Robot, robot;
+        Robot = require("./robot");
         opts.master = this;
         robot = new Robot(opts);
         robots.push(robot);
