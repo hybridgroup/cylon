@@ -1,9 +1,11 @@
 (function() {
   'use strict';
-  var Cylon,
+  var Cylon, Robot,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   Cylon = source("cylon");
+
+  Robot = source('robot');
 
   describe("Cylon", function() {
     it("should create a robot", function() {
@@ -14,7 +16,7 @@
       });
       return robot.name.should.be.eql('caprica six');
     });
-    return describe('#api', function() {
+    describe('#api', function() {
       describe('without arguments', function() {
         return it("returns the current API configuration", function() {
           var api_config;
@@ -24,14 +26,28 @@
         });
       });
       return describe('with a host and port', function() {
-        var api_config;
-        it('sets the API configuration to what was specified');
-        api_config = Cylon.api({
-          host: '0.0.0.0',
-          port: '8888'
+        return it('sets the API configuration to what was specified', function() {
+          var api_config;
+          api_config = Cylon.api({
+            host: '0.0.0.0',
+            port: '8888'
+          });
+          api_config.host.should.be.eql("0.0.0.0");
+          return api_config.port.should.be.eql("8888");
         });
-        api_config.host.should.be.eql("0.0.0.0");
-        return api_config.port.should.be.eql("8888");
+      });
+    });
+    return describe("#robots", function() {
+      return it("returns an array of all robots", function() {
+        var robot, robots, _i, _len, _results;
+        robots = Cylon.robots();
+        assert(robots instanceof Array);
+        _results = [];
+        for (_i = 0, _len = robots.length; _i < _len; _i++) {
+          robot = robots[_i];
+          _results.push(assert(robot instanceof Robot));
+        }
+        return _results;
       });
     });
   });
