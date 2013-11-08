@@ -14,6 +14,8 @@ Install the module with: `npm install cylon`
 
 Then install modules for whatever hardware support you want to use from your robot. For example, `npm install cylon-firmata` to use Cylon with an Arduino using the Firmata protocol.
 
+Make sure to upload the "Standard Firmata" sketch or an equivalent firmata sketch to your Arduino first. Without that code running on the Arduino, firmata can't communicate with Cylon. You can find the example sketch in Examples -> Firmata -> StandardFirmata.
+
 ## Examples
 
 **Note:** before running examples in the `examples/` dir from source, make sure to compile using `grunt coffee` first.
