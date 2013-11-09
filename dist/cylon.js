@@ -143,12 +143,13 @@
           if (err) {
             callback(err, robot);
           }
+          connection = null;
           if (robot.connections[connid]) {
             connection = robot.connections[connid];
           }
           if (connection == null) {
             error = {
-              error: "No connection found with the name " + connection + "."
+              error: "No connection found with the name " + connid + "."
             };
           }
           if (callback) {

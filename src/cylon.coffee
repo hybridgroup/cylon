@@ -135,9 +135,10 @@ class Cylon
       @findRobot robotid, (err, robot) ->
         callback(err, robot) if err
 
+        connection = null
         connection = robot.connections[connid] if robot.connections[connid]
         unless connection?
-          error = { error: "No connection found with the name #{connection}." }
+          error = { error: "No connection found with the name #{connid}." }
 
         if callback then callback(error, connection) else connection
 

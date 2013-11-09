@@ -91,3 +91,37 @@ describe "Cylon", ->
             assert device is null
             assert typeof err is 'object'
             err.error.should.be.eql "No device found with the name madethisup."
+
+  describe "#findRobotConnection", ->
+    ultron = Cylon.robot({
+      name: "Ultron",
+      connection: { name: 'loopback', adaptor: 'loopback' }
+    })
+
+    describe "synchronous", ->
+      describe "with a valid robot and connection name", ->
+        it "returns the connection", ->
+          connection = Cylon.findRobotConnection("Ultron", "loopback")
+          assert connection instanceof Connection
+          connection.name.should.be.equal "loopback"
+
+      describe "with an invalid connection name", ->
+        it "returns null", ->
+          connection = Cylon.findRobotConnection("Ultron", "madethisup")
+          assert connection is null
+
+    describe "async", ->
+      describe "with a valid robot and connection name", ->
+        it "passes the connection and an empty error to the callback", ->
+          Cylon.findRobotConnection "Ultron", "loopback", (error, conn) ->
+            assert error is undefined
+            assert conn instanceof Connection
+            conn.name.should.be.equal "loopback"
+
+      describe "with an invalid connection name", ->
+        it "passes no connection and an error message to the callback", ->
+          Cylon.findRobotConnection "Ultron", "madethisup", (err, conn) ->
+            assert conn is null
+            assert typeof err is 'object'
+            message = "No connection found with the name madethisup."
+            err.error.should.be.eql message

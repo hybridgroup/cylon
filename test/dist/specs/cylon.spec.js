@@ -95,7 +95,7 @@
         });
       });
     });
-    return describe("#findRobotDevice", function() {
+    describe("#findRobotDevice", function() {
       var crow;
       crow = Cylon.robot({
         name: "Crow",
@@ -137,6 +137,55 @@
               assert(device === null);
               assert(typeof err === 'object');
               return err.error.should.be.eql("No device found with the name madethisup.");
+            });
+          });
+        });
+      });
+    });
+    return describe("#findRobotConnection", function() {
+      var ultron;
+      ultron = Cylon.robot({
+        name: "Ultron",
+        connection: {
+          name: 'loopback',
+          adaptor: 'loopback'
+        }
+      });
+      describe("synchronous", function() {
+        describe("with a valid robot and connection name", function() {
+          return it("returns the connection", function() {
+            var connection;
+            connection = Cylon.findRobotConnection("Ultron", "loopback");
+            assert(connection instanceof Connection);
+            return connection.name.should.be.equal("loopback");
+          });
+        });
+        return describe("with an invalid connection name", function() {
+          return it("returns null", function() {
+            var connection;
+            connection = Cylon.findRobotConnection("Ultron", "madethisup");
+            return assert(connection === null);
+          });
+        });
+      });
+      return describe("async", function() {
+        describe("with a valid robot and connection name", function() {
+          return it("passes the connection and an empty error to the callback", function() {
+            return Cylon.findRobotConnection("Ultron", "loopback", function(error, conn) {
+              assert(error === void 0);
+              assert(conn instanceof Connection);
+              return conn.name.should.be.equal("loopback");
+            });
+          });
+        });
+        return describe("with an invalid connection name", function() {
+          return it("passes no connection and an error message to the callback", function() {
+            return Cylon.findRobotConnection("Ultron", "madethisup", function(err, conn) {
+              var message;
+              assert(conn === null);
+              assert(typeof err === 'object');
+              message = "No connection found with the name madethisup.";
+              return err.error.should.be.eql(message);
             });
           });
         });
