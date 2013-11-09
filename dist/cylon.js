@@ -120,12 +120,13 @@
           if (err) {
             callback(err, robot);
           }
+          device = null;
           if (robot.devices[deviceid]) {
             device = robot.devices[deviceid];
           }
           if (device == null) {
             error = {
-              error: "No device found with the name " + device + "."
+              error: "No device found with the name " + deviceid + "."
             };
           }
           if (callback) {

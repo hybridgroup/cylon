@@ -117,9 +117,10 @@ class Cylon
       @findRobot robotid, (err, robot) ->
         callback(err, robot) if err
 
+        device = null
         device = robot.devices[deviceid] if robot.devices[deviceid]
         unless device?
-          error = { error: "No device found with the name #{device}." }
+          error = { error: "No device found with the name #{deviceid}." }
 
         if callback then callback(error, device) else device
 

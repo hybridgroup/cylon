@@ -2,6 +2,9 @@
 
 Cylon = source("cylon")
 Robot = source('robot')
+Device = source('device')
+Driver = source('driver')
+Connection = source('connection')
 
 describe "Cylon", ->
   it "should create a robot", ->
@@ -56,3 +59,35 @@ describe "Cylon", ->
             assert typeof error is 'object'
             error.error.should.be.eql "No Robot found with the name Tom Servo"
 
+  describe "#findRobotDevice", ->
+    crow = Cylon.robot({
+      name: "Crow"
+      device: { name: 'testDevice', driver: 'ping' }
+    })
+
+    describe "synchronous", ->
+      describe "with a valid robot and device name", ->
+        it "returns the device", ->
+          device = Cylon.findRobotDevice("Crow", "testDevice")
+          assert device instanceof Device
+          device.name.should.be.equal "testDevice"
+
+      describe "with an invalid device name", ->
+        it "returns null", ->
+          device = Cylon.findRobotDevice("Crow", "madethisup")
+          assert device is null
+
+    describe "async", ->
+      describe "with a valid robot and device name", ->
+        it "passes the device and an empty error to the callback", ->
+          Cylon.findRobotDevice "Crow", "testDevice", (error, device) ->
+            assert error is undefined
+            assert device instanceof Device
+            device.name.should.be.equal "testDevice"
+
+      describe "with an invalid device name", ->
+        it "passes no device and an error message to the callback", ->
+          Cylon.findRobotDevice "Crow", "madethisup", (err, device) ->
+            assert device is null
+            assert typeof err is 'object'
+            err.error.should.be.eql "No device found with the name madethisup."

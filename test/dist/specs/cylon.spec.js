@@ -1,11 +1,17 @@
 (function() {
   'use strict';
-  var Cylon, Robot,
+  var Connection, Cylon, Device, Driver, Robot,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   Cylon = source("cylon");
 
   Robot = source('robot');
+
+  Device = source('device');
+
+  Driver = source('driver');
+
+  Connection = source('connection');
 
   describe("Cylon", function() {
     it("should create a robot", function() {
@@ -50,7 +56,7 @@
         return _results;
       });
     });
-    return describe("#findRobot", function() {
+    describe("#findRobot", function() {
       describe("synchronous", function() {
         describe("with a valid robot name", function() {
           return it("returns the robot", function() {
@@ -84,6 +90,53 @@
               assert(robot === null);
               assert(typeof error === 'object');
               return error.error.should.be.eql("No Robot found with the name Tom Servo");
+            });
+          });
+        });
+      });
+    });
+    return describe("#findRobotDevice", function() {
+      var crow;
+      crow = Cylon.robot({
+        name: "Crow",
+        device: {
+          name: 'testDevice',
+          driver: 'ping'
+        }
+      });
+      describe("synchronous", function() {
+        describe("with a valid robot and device name", function() {
+          return it("returns the device", function() {
+            var device;
+            device = Cylon.findRobotDevice("Crow", "testDevice");
+            assert(device instanceof Device);
+            return device.name.should.be.equal("testDevice");
+          });
+        });
+        return describe("with an invalid device name", function() {
+          return it("returns null", function() {
+            var device;
+            device = Cylon.findRobotDevice("Crow", "madethisup");
+            return assert(device === null);
+          });
+        });
+      });
+      return describe("async", function() {
+        describe("with a valid robot and device name", function() {
+          return it("passes the device and an empty error to the callback", function() {
+            return Cylon.findRobotDevice("Crow", "testDevice", function(error, device) {
+              assert(error === void 0);
+              assert(device instanceof Device);
+              return device.name.should.be.equal("testDevice");
+            });
+          });
+        });
+        return describe("with an invalid device name", function() {
+          return it("passes no device and an error message to the callback", function() {
+            return Cylon.findRobotDevice("Crow", "madethisup", function(err, device) {
+              assert(device === null);
+              assert(typeof err === 'object');
+              return err.error.should.be.eql("No device found with the name madethisup.");
             });
           });
         });
