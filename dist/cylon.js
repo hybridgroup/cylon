@@ -9,7 +9,7 @@
 
 (function() {
   'use strict';
-  var Cylon, readLine,
+  var Cylon,
     __slice = [].slice,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
@@ -18,8 +18,6 @@
   require('./logger');
 
   require('./api');
-
-  readLine = require("readline");
 
   Logger.setup();
 
@@ -54,9 +52,10 @@
 
       function Master() {
         this.robot = __bind(this.robot, this);
-        var rl;
+        var readLine, rl;
         this.self = this;
         if (process.platform === "win32") {
+          readLine = require("readline");
           rl = readLine.createInterface({
             input: process.stdin,
             output: process.stdout

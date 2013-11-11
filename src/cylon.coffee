@@ -12,8 +12,6 @@ require('./utils')
 require('./logger')
 require('./api')
 
-readLine = require "readline"
-
 Logger.setup()
 
 # Cylon is the global namespace for the project, and also in charge of
@@ -41,6 +39,7 @@ class Cylon
     constructor: ->
       @self = this
       if process.platform is "win32"
+        readLine = require "readline"
         rl = readLine.createInterface
           input: process.stdin
           output: process.stdout
