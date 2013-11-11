@@ -85,7 +85,7 @@
           return this.self.emit('error', 'Error while closing pin files');
         } else {
           console.log("PIN SHOULD BE UNEXPORTED");
-          return this.self.emit('close');
+          return this.self.emit('close', this.pinNum);
         }
       };
 

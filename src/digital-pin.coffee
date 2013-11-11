@@ -63,7 +63,7 @@ namespace 'Cylon.IO', ->
         @self.emit('error', 'Error while closing pin files')
       else
         console.log("PIN SHOULD BE UNEXPORTED")
-        @self.emit('close')
+        @self.emit('close', @pinNum)
 
     digitalWrite: (value) ->
       @self._setMode('w') unless @mode == 'w'
