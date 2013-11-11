@@ -58,7 +58,7 @@ namespace 'Cylon.IO', ->
       )
 
     _closeCallback: (err) ->
-       if(err)
+      if(err)
         console.log("EROR WHILE WRITING TO UNEXPORT FILE!!!")
         @self.emit('error', 'Error while closing pin files')
       else
