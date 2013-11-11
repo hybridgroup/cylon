@@ -1,10 +1,10 @@
 'use strict';
 
-Cylon = source("cylon")
-Robot = source('robot')
-Device = source('device')
-Driver = source('driver')
-Connection = source('connection')
+Cylon = source "cylon"
+Robot = source 'robot'
+Device = source 'device'
+Driver = source 'test/driver'
+Connection = source 'connection'
 
 describe "Cylon", ->
   it "should create a robot", ->

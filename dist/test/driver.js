@@ -9,24 +9,30 @@
 
 (function() {
   'use strict';
-  var Driver;
+  var namespace;
 
-  module.exports = Driver = (function() {
-    function Driver(opts) {
-      this.self = this;
-      this.name = opts.name;
-    }
+  namespace = require('node-namespace');
 
-    Driver.prototype.start = function() {
-      return Logger.info("started");
-    };
+  namespace('Cylon', function() {
+    return this.Driver = (function() {
+      function Driver(opts) {
+        this.self = this;
+        this.name = opts.name;
+      }
 
-    Driver.prototype.commands = function() {
-      return ['smile', 'laugh', 'help'];
-    };
+      Driver.prototype.start = function() {
+        return Logger.info("started");
+      };
 
-    return Driver;
+      Driver.prototype.commands = function() {
+        return ['smile', 'laugh', 'help'];
+      };
 
-  })();
+      return Driver;
+
+    })();
+  });
+
+  module.exports = Cylon.Driver;
 
 }).call(this);

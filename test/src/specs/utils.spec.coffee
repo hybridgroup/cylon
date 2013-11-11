@@ -1,6 +1,6 @@
 'use strict';
 
-utils = source("utils")
+source "utils"
 
 describe "Utils", ->
   describe "Monkeypatches Number", ->

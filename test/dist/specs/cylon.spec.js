@@ -9,7 +9,7 @@
 
   Device = source('device');
 
-  Driver = source('driver');
+  Driver = source('test/driver');
 
   Connection = source('connection');
 

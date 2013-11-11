@@ -1,19 +1,17 @@
 (function() {
   'use strict';
-  var Adaptor, Robot;
-
   source("connection");
 
-  Adaptor = source("test/adaptor");
+  source("test/adaptor");
 
-  Robot = source("robot");
+  source("robot");
 
   describe("Connection", function() {
     var adaptor, connection, requireAdaptor, robot;
-    robot = new Robot({
+    robot = new Cylon.Robot({
       name: 'me'
     });
-    adaptor = new Adaptor({
+    adaptor = new Cylon.Adaptor({
       name: 'loopback'
     });
     requireAdaptor = sinon.stub(robot, 'requireAdaptor').returns(adaptor);

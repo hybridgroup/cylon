@@ -8,14 +8,19 @@
 
 'use strict';
 
+namespace = require 'node-namespace'
+
 # A test class, used to create dummy Drivers
-module.exports = class Driver
-  constructor: (opts) ->
-    @self = this
-    @name = opts.name
+namespace 'Cylon', ->
+  class @Driver
+    constructor: (opts) ->
+      @self = this
+      @name = opts.name
 
-  start: ->
-    Logger.info "started"
+    start: ->
+      Logger.info "started"
 
-  commands: ->
-    ['smile', 'laugh', 'help']
+    commands: ->
+      ['smile', 'laugh', 'help']
+
+module.exports = Cylon.Driver

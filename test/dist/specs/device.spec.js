@@ -1,19 +1,17 @@
 (function() {
   'use strict';
-  var Driver;
-
   source("device");
 
   source("robot");
 
-  Driver = source("test/driver");
+  source("test/driver");
 
   describe("Device", function() {
     var device, driver, requireDriver, robot;
     robot = new Cylon.Robot({
       name: 'me'
     });
-    driver = new Driver({
+    driver = new Cylon.Driver({
       name: 'driving'
     });
     requireDriver = sinon.stub(robot, 'requireDriver').returns(driver);

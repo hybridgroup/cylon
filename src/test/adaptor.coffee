@@ -8,9 +8,14 @@
 
 'use strict';
 
-module.exports = class Adaptor
-  constructor: (opts) ->
-    @name = opts.name
+namespace = require 'node-namespace'
 
-  commands: ->
-    ['smile', 'laugh', 'help']
+namespace 'Cylon', ->
+  class @Adaptor
+    constructor: (opts) ->
+      @name = opts.name
+
+    commands: ->
+      ['smile', 'laugh', 'help']
+
+module.exports = Cylon.Adaptor

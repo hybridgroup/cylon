@@ -1,12 +1,10 @@
 (function() {
   'use strict';
-  var Adaptor;
-
-  Adaptor = source("test/adaptor");
+  source("test/adaptor");
 
   describe("Adaptor", function() {
     var adaptor;
-    adaptor = new Adaptor({
+    adaptor = new Cylon.Adaptor({
       name: "adaptive"
     });
     it("should have a name", function() {

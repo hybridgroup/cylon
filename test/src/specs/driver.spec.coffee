@@ -1,9 +1,9 @@
 'use strict';
 
-Driver = source("test/driver")
+source "test/driver"
 
 describe "Driver", ->
-  driver = new Driver(name: "driving")
+  driver = new Cylon.Driver(name: "driving")
 
   it "should have a name", ->
     driver.name.should.be.equal 'driving'

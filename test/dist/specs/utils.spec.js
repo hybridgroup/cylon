@@ -1,8 +1,6 @@
 (function() {
   'use strict';
-  var utils;
-
-  utils = source("utils");
+  source("utils");
 
   describe("Utils", function() {
     describe("Monkeypatches Number", function() {

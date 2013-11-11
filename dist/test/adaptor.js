@@ -9,19 +9,25 @@
 
 (function() {
   'use strict';
-  var Adaptor;
+  var namespace;
 
-  module.exports = Adaptor = (function() {
-    function Adaptor(opts) {
-      this.name = opts.name;
-    }
+  namespace = require('node-namespace');
 
-    Adaptor.prototype.commands = function() {
-      return ['smile', 'laugh', 'help'];
-    };
+  namespace('Cylon', function() {
+    return this.Adaptor = (function() {
+      function Adaptor(opts) {
+        this.name = opts.name;
+      }
 
-    return Adaptor;
+      Adaptor.prototype.commands = function() {
+        return ['smile', 'laugh', 'help'];
+      };
 
-  })();
+      return Adaptor;
+
+    })();
+  });
+
+  module.exports = Cylon.Adaptor;
 
 }).call(this);

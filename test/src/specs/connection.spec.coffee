@@ -1,12 +1,12 @@
 'use strict';
 
-source("connection")
-Adaptor = source("test/adaptor")
-Robot = source("robot")
+source "connection"
+source "test/adaptor"
+source "robot"
 
 describe "Connection", ->
-  robot = new Robot(name: 'me')
-  adaptor = new Adaptor(name: 'loopback')
+  robot = new Cylon.Robot(name: 'me')
+  adaptor = new Cylon.Adaptor(name: 'loopback')
   requireAdaptor = sinon.stub(robot, 'requireAdaptor').returns(adaptor)
   connection = new Cylon.Connection
     name: "connective"
