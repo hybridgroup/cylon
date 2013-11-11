@@ -14,8 +14,8 @@ require './digital-pin'
 
 namespace = require 'node-namespace'
 
-Connection = require "./connection"
-Device = require "./device"
+require "./connection"
+require "./device"
 Async = require "async"
 
 # A Robot is the primary interface for interacting with a collection of physical
@@ -111,7 +111,7 @@ namespace 'Cylon', ->
       for device in devices
         Logger.info "Initializing device '#{ device.name }'..."
         device['robot'] = this
-        @devices[device.name] = new Device(device)
+        @devices[device.name] = new Cylon.Device(device)
 
     # Public: Starts the Robot working.
     #

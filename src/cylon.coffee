@@ -8,9 +8,9 @@
 
 'use strict';
 
-require('./utils')
-require('./logger')
-require('./api')
+require './utils'
+require './logger'
+require './api'
 
 Logger.setup()
 

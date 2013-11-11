@@ -6,7 +6,7 @@
  * Licensed under the Apache 2.0 license.
 ###
 
-express = require('express.io')
+express = require 'express.io'
 namespace = require 'node-namespace'
 
 namespace "Api", ->
