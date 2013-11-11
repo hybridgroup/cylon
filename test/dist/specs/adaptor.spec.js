@@ -2,7 +2,7 @@
   'use strict';
   var Adaptor;
 
-  Adaptor = source("adaptor");
+  Adaptor = source("test/adaptor");
 
   describe("Adaptor", function() {
     var adaptor;

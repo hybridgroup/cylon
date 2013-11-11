@@ -1,7 +1,7 @@
 'use strict';
 
 source("connection")
-Adaptor = source("adaptor")
+Adaptor = source("test/adaptor")
 Robot = source("robot")
 
 describe "Connection", ->

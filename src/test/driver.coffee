@@ -8,6 +8,7 @@
 
 'use strict';
 
+# A test class, used to create dummy Drivers
 module.exports = class Driver
   constructor: (opts) ->
     @self = this

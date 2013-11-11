@@ -1,6 +1,6 @@
 'use strict';
 
-Adaptor = source("adaptor")
+Adaptor = source("test/adaptor")
 
 describe "Adaptor", ->
   adaptor = new Adaptor(name: "adaptive")

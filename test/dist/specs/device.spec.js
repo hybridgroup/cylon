@@ -6,7 +6,7 @@
 
   source("robot");
 
-  Driver = source("driver");
+  Driver = source("test/driver");
 
   describe("Device", function() {
     var device, driver, requireDriver, robot;

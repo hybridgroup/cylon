@@ -1,6 +1,6 @@
 'use strict';
 
-Driver = source("driver")
+Driver = source("test/driver")
 
 describe "Driver", ->
   driver = new Driver(name: "driving")

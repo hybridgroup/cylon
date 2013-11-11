@@ -2,7 +2,7 @@
 
 source("device")
 source("robot")
-Driver = source("driver")
+Driver = source("test/driver")
 
 describe "Device", ->
   robot = new Cylon.Robot(name: 'me')

@@ -2,7 +2,7 @@
   'use strict';
   var Driver;
 
-  Driver = source("driver");
+  Driver = source("test/driver");
 
   describe("Driver", function() {
     var driver;
