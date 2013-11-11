@@ -110,7 +110,7 @@
           connection = connections[_i];
           Logger.info("Initializing connection '" + connection.name + "'...");
           connection['robot'] = this;
-          this.connections[connection.name] = new Connection(connection);
+          this.connections[connection.name] = new Cylon.Connection(connection);
         }
         return this.connections;
       };

@@ -8,8 +8,6 @@
 
 'use strict';
 
-Robot = require("./robot")
-
 require('./utils')
 require('./logger')
 require('./api')
@@ -67,6 +65,10 @@ class Cylon
     #     work: (me) ->
     #       me.led.toggle()
     robot: (opts) =>
+      # This require doesn't reload code, but needs to be here (for now) because
+      # specs fail without it, as for some reason Robot is getting redefined
+      # somewhere to an empty object
+      Robot = require("./robot")
       opts.master = this
       robot = new Robot(opts)
       robots.push robot
@@ -84,7 +86,7 @@ class Cylon
     #   port - port API should listen for requests on
     #
     # Returns the API configuration
-    api: (opts) ->
+    api: (opts = {}) ->
       api_config.host = opts.host || "127.0.0.1"
       api_config.port = opts.port || "3000"
       api_config
@@ -115,9 +117,10 @@ class Cylon
       @findRobot robotid, (err, robot) ->
         callback(err, robot) if err
 
+        device = null
         device = robot.devices[deviceid] if robot.devices[deviceid]
         unless device?
-          error = { error: "No device found with the name #{device}." }
+          error = { error: "No device found with the name #{deviceid}." }
 
         if callback then callback(error, device) else device
 
@@ -132,9 +135,10 @@ class Cylon
       @findRobot robotid, (err, robot) ->
         callback(err, robot) if err
 
+        connection = null
         connection = robot.connections[connid] if robot.connections[connid]
         unless connection?
-          error = { error: "No connection found with the name #{connection}." }
+          error = { error: "No connection found with the name #{connid}." }
 
         if callback then callback(error, connection) else connection
 

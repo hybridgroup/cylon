@@ -95,7 +95,7 @@ namespace 'Cylon', ->
       for connection in connections
         Logger.info "Initializing connection '#{ connection.name }'..."
         connection['robot'] = this
-        @connections[connection.name] = new Connection(connection)
+        @connections[connection.name] = new Cylon.Connection(connection)
 
       @connections
 

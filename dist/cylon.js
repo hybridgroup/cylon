@@ -9,11 +9,9 @@
 
 (function() {
   'use strict';
-  var Cylon, Robot, readLine,
+  var Cylon, readLine,
     __slice = [].slice,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
-
-  Robot = require("./robot");
 
   require('./utils');
 
@@ -74,7 +72,8 @@
       }
 
       Master.prototype.robot = function(opts) {
-        var robot;
+        var Robot, robot;
+        Robot = require("./robot");
         opts.master = this;
         robot = new Robot(opts);
         robots.push(robot);
@@ -86,6 +85,9 @@
       };
 
       Master.prototype.api = function(opts) {
+        if (opts == null) {
+          opts = {};
+        }
         api_config.host = opts.host || "127.0.0.1";
         api_config.port = opts.port || "3000";
         return api_config;
@@ -118,12 +120,13 @@
           if (err) {
             callback(err, robot);
           }
+          device = null;
           if (robot.devices[deviceid]) {
             device = robot.devices[deviceid];
           }
           if (device == null) {
             error = {
-              error: "No device found with the name " + device + "."
+              error: "No device found with the name " + deviceid + "."
             };
           }
           if (callback) {
@@ -140,12 +143,13 @@
           if (err) {
             callback(err, robot);
           }
+          connection = null;
           if (robot.connections[connid]) {
             connection = robot.connections[connid];
           }
           if (connection == null) {
             error = {
-              error: "No connection found with the name " + connection + "."
+              error: "No connection found with the name " + connid + "."
             };
           }
           if (callback) {
