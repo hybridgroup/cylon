@@ -36,7 +36,6 @@
       LOW = 0;
 
       function DigitalPin(opts) {
-        this.self = this;
         this.pinNum = opts.pin;
         this.status = 'low';
         this.ready = false;
@@ -75,14 +74,14 @@
       DigitalPin.prototype.digitalWrite = function(value) {
         var _this = this;
         if (this.mode !== 'w') {
-          this.self._setMode('w');
+          this._setMode('w');
         }
         this.status = value === 1 ? 'high' : 'low';
         return FS.writeFile(this._valuePath(), value, function(err) {
           if (err) {
-            return _this.self.emit('error', "Error occurred while writing value " + value + " to pin " + _this.pinNum);
+            return _this.emit('error', "Error occurred while writing value " + value + " to pin " + _this.pinNum);
           } else {
-            return _this.self.emit('digitalWrite', value);
+            return _this.emit('digitalWrite', value);
           }
         });
       };
@@ -91,34 +90,34 @@
         var readData,
           _this = this;
         if (this.mode !== 'r') {
-          this.self._setMode('r');
+          this._setMode('r');
         }
         readData = null;
         return setInterval(function() {
           return FS.readFile(_this._valuePath(), function(err, data) {
             if (err) {
-              return _this.self.emit('error', "Error occurred while reading from pin " + _this.pinNum);
+              return _this.emit('error', "Error occurred while reading from pin " + _this.pinNum);
             } else {
               readData = data;
-              return _this.self.emit('digitalRead', data);
+              return _this.emit('digitalRead', data);
             }
           });
         }, interval);
       };
 
       DigitalPin.prototype.setHigh = function() {
-        return this.self.digitalWrite(1);
+        return this.digitalWrite(1);
       };
 
       DigitalPin.prototype.setLow = function() {
-        return this.self.digitalWrite(0);
+        return this.digitalWrite(0);
       };
 
       DigitalPin.prototype.toggle = function() {
         if (this.status === 'low') {
-          return this.self.setHigh();
+          return this.setHigh();
         } else {
-          return this.self.setLow();
+          return this.setLow();
         }
       };
 
@@ -126,7 +125,7 @@
         var _this = this;
         return FS.writeFile(this._exportPath(), "" + this.pinNum, function(err) {
           if (err) {
-            return _this.self.emit('error', 'Error while creating pin files');
+            return _this.emit('error', 'Error while creating pin files');
           } else {
             return _this._openPin();
           }
@@ -134,15 +133,15 @@
       };
 
       DigitalPin.prototype._openPin = function() {
-        this.self._setMode(this.mode, true);
-        return this.self.emit('open');
+        this._setMode(this.mode, true);
+        return this.emit('open');
       };
 
       DigitalPin.prototype._closeCallback = function(err) {
         if (err) {
-          return this.self.emit('error', 'Error while closing pin files');
+          return this.emit('error', 'Error while closing pin files');
         } else {
-          return this.self.emit('close', this.pinNum);
+          return this.emit('close', this.pinNum);
         }
       };
 
@@ -151,6 +150,7 @@
         if (emitConnect == null) {
           emitConnect = false;
         }
+        this.mode = mode;
         if (mode === 'w') {
           return FS.writeFile(this._directionPath(), GPIO_DIRECTION_WRITE, function(err) {
             return _this._setModeCallback(err, emitConnect);
@@ -164,11 +164,11 @@
 
       DigitalPin.prototype._setModeCallback = function(err, emitConnect) {
         if (err) {
-          return this.self.emit('error', "Setting up pin direction failed");
+          return this.emit('error', "Setting up pin direction failed");
         } else {
           this.ready = true;
           if (emitConnect) {
-            return this.self.emit('connect', mode);
+            return this.emit('connect', this.mode);
           }
         }
       };
