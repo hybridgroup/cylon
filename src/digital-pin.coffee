@@ -36,19 +36,10 @@ namespace 'Cylon.IO', ->
       # Check if the pin acceess file is already in the GPIO folder
       FS.exists(@_pinPath(), (exists) =>
         if exists
-          @self._setMode(@mode, true)
-          @self.emit('open')
+          @_openPin()
         else
-          # Creates the GPIO file to read/write from
-          FS.writeFile(@_exportPath(), "#{ @pinNum }", (err) =>
-            if(err)
-              @self.emit('error', 'Error while creating pin files')
-            else
-              @self._setMode(@mode, true)
-              @self.emit('open')
-          )
+          @_createGPIOPin()
       )
-
 
     close: ->
       FS.writeFile(@unexportPath(), "#{ @pinNum }", (err) =>
@@ -58,12 +49,6 @@ namespace 'Cylon.IO', ->
     closeSync: ->
       FS.writeFileSync(@unexportPath(), "#{ @pinNum }")
       @_closeCallback(false)
-
-    _closeCallback: (err) ->
-      if(err)
-        @self.emit('error', 'Error while closing pin files')
-      else
-        @self.emit('close', @pinNum)
 
     digitalWrite: (value) ->
       @self._setMode('w') unless @mode == 'w'
@@ -76,6 +61,9 @@ namespace 'Cylon.IO', ->
           @self.emit('digitalWrite', value)
       )
 
+    # Reads the pin input every interval amount of time:
+    # params:
+    #   interval: amount in miliseconds
     digitalRead: (interval) ->
       @self._setMode('r') unless @mode == 'r'
       readData = null
@@ -90,24 +78,50 @@ namespace 'Cylon.IO', ->
         )
       , interval)
 
+    setHigh: ->
+      @self.digitalWrite(1)
+
+    setLow: ->
+      @self.digitalWrite(0)
+
+    toggle: ->
+      if @status == 'low'
+        @self.setHigh()
+      else
+        @self.setLow()
+
+    # Creates the GPIO file to read/write from
+    _createGPIOPin: () ->
+      FS.writeFile(@_exportPath(), "#{ @pinNum }", (err) =>
+        if(err)
+          @self.emit('error', 'Error while creating pin files')
+        else
+          @_openPin()
+      )
+
+    _openPin: () ->
+      @self._setMode(@mode, true)
+      @self.emit('open')
+
+    _closeCallback: (err) ->
+      if(err)
+        @self.emit('error', 'Error while closing pin files')
+      else
+        @self.emit('close', @pinNum)
+
     # Sets the mode for the GPIO pin by writing the correct values to the pin reference files
     _setMode: (mode, emitConnect = false) ->
       if mode == 'w'
-        FS.writeFile(@_directionPath(), GPIO_DIRECTION_WRITE, (err) =>
-          if (err)
-            @self.emit('error', "Setting up pin direction failed")
-          else
-            @ready = true
-            @self.emit('connect', mode) if emitConnect
-        )
+        FS.writeFile(@_directionPath(), GPIO_DIRECTION_WRITE, (err) => @_setModeCallback() )
       else if mode =='r'
-        FS.writeFile(@_directionPath(), GPIO_DIRECTION_READ, (err) =>
-          if (err)
-            @self.emit('error', "Setting up pin direction failed")
-          else
-            @ready = true
-            @self.emit('connect', mode) if emitConnect
-        )
+        FS.writeFile(@_directionPath(), GPIO_DIRECTION_READ, (err) => @_setModeCallback() )
+
+    _setModeCallback: () ->
+      if (err)
+        @self.emit('error', "Setting up pin direction failed")
+      else
+        @ready = true
+        @self.emit('connect', mode) if emitConnect
 
     _directionPath: () ->
       "#{ @_pinPath() }/direction"
@@ -124,14 +138,3 @@ namespace 'Cylon.IO', ->
     _unexportPath: () ->
        "#{ GPIO_PATH }/unexport"
 
-    setHigh: ->
-      @self.digitalWrite(1)
-
-    setLow: ->
-      @self.digitalWrite(0)
-
-    toggle: ->
-      if @status == 'low'
-        @self.setHigh()
-      else
-        @self.setLow()
