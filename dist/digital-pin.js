@@ -76,7 +76,7 @@
       };
 
       DigitalPin.prototype.closeSync = function() {
-        FS.writeFileSync("" + GPIO_PATH + "/unexport", "" + this.pinNum);
+        FS.writeFileSync(this.unexportPath(), "" + this.pinNum);
         return this._closeCallback(false);
       };
 

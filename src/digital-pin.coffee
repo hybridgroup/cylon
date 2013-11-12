@@ -56,7 +56,7 @@ namespace 'Cylon.IO', ->
       )
 
     closeSync: ->
-      FS.writeFileSync("#{ GPIO_PATH }/unexport", "#{ @pinNum }")
+      FS.writeFileSync(@unexportPath(), "#{ @pinNum }")
       @_closeCallback(false)
 
     _closeCallback: (err) ->
