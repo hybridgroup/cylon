@@ -35,7 +35,10 @@ namespace 'Cylon.IO', ->
       @mode ?= mode
       # Check if the pin acceess file is already in the GPIO folder
       FS.exists(@_pinPath(), (exists) =>
-        unless exists
+        if exists
+          @self._setMode(@mode, true)
+          @self.emit('open')
+        else
           # Creates the GPIO file to read/write from
           FS.writeFile(@_exportPath(), "#{ @pinNum }", (err) =>
             if(err)

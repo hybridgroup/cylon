@@ -52,7 +52,10 @@
           this.mode = mode;
         }
         return FS.exists(this._pinPath(), function(exists) {
-          if (!exists) {
+          if (exists) {
+            _this.self._setMode(_this.mode, true);
+            return _this.self.emit('open');
+          } else {
             return FS.writeFile(_this._exportPath(), "" + _this.pinNum, function(err) {
               if (err) {
                 return _this.self.emit('error', 'Error while creating pin files');
