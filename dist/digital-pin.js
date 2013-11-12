@@ -61,13 +61,13 @@
 
       DigitalPin.prototype.close = function() {
         var _this = this;
-        return FS.writeFile(this.unexportPath(), "" + this.pinNum, function(err) {
+        return FS.writeFile(this._unexportPath(), "" + this.pinNum, function(err) {
           return _this._closeCallback();
         });
       };
 
       DigitalPin.prototype.closeSync = function() {
-        FS.writeFileSync(this.unexportPath(), "" + this.pinNum);
+        FS.writeFileSync(this._unexportPath(), "" + this.pinNum);
         return this._closeCallback(false);
       };
 

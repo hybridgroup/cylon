@@ -41,12 +41,12 @@ namespace 'Cylon.IO', ->
       )
 
     close: ->
-      FS.writeFile(@unexportPath(), "#{ @pinNum }", (err) =>
+      FS.writeFile(@_unexportPath(), "#{ @pinNum }", (err) =>
         @_closeCallback()
       )
 
     closeSync: ->
-      FS.writeFileSync(@unexportPath(), "#{ @pinNum }")
+      FS.writeFileSync(@_unexportPath(), "#{ @pinNum }")
       @_closeCallback(false)
 
     digitalWrite: (value) ->
