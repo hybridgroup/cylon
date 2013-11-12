@@ -111,10 +111,10 @@ namespace 'Cylon.IO', ->
       @valueFile = @_valuePath()
 
     _directionPath: () ->
-      "#{ @pinPath }/direction"
+      "#{ @_pinPath() }/direction"
 
     _valuePath: () ->
-      "#{ @pinPath }/value"
+      "#{ @_pinPath() }/value"
 
     _pinPath: () ->
       "#{ GPIO_PATH }/gpio#{ @pinNum }"

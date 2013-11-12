@@ -155,11 +155,11 @@
       };
 
       DigitalPin.prototype._directionPath = function() {
-        return "" + this.pinPath + "/direction";
+        return "" + (this._pinPath()) + "/direction";
       };
 
       DigitalPin.prototype._valuePath = function() {
-        return "" + this.pinPath + "/value";
+        return "" + (this._pinPath()) + "/value";
       };
 
       DigitalPin.prototype._pinPath = function() {
