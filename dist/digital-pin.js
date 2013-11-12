@@ -153,16 +153,16 @@
         }
         if (mode === 'w') {
           return FS.writeFile(this._directionPath(), GPIO_DIRECTION_WRITE, function(err) {
-            return _this._setModeCallback(err);
+            return _this._setModeCallback(err, emitConnect);
           });
         } else if (mode === 'r') {
           return FS.writeFile(this._directionPath(), GPIO_DIRECTION_READ, function(err) {
-            return _this._setModeCallback(err);
+            return _this._setModeCallback(err, emitConnect);
           });
         }
       };
 
-      DigitalPin.prototype._setModeCallback = function(err) {
+      DigitalPin.prototype._setModeCallback = function(err, emitConnect) {
         if (err) {
           return this.self.emit('error', "Setting up pin direction failed");
         } else {
