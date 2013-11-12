@@ -53,23 +53,20 @@ namespace 'Cylon.IO', ->
       )
 
     closeSync: ->
-      FS.writeFileSync("#{ GPIO_PATH }/unexport", "#{ @pinNum }", (err) =>
-        @_closeCallback()
-      )
+      FS.writeFileSync("#{ GPIO_PATH }/unexport", "#{ @pinNum }")
+      @_closeCallback(false)
 
     _closeCallback: (err) ->
       if(err)
-        console.log("EROR WHILE WRITING TO UNEXPORT FILE!!!")
         @self.emit('error', 'Error while closing pin files')
       else
-        console.log("PIN SHOULD BE UNEXPORTED")
         @self.emit('close', @pinNum)
 
     digitalWrite: (value) ->
       @self._setMode('w') unless @mode == 'w'
       @status = if (value == 1) then 'high' else 'low'
 
-      FS.writeFile(@valueFile, value, (err) =>
+      FS.writeFile(@_valuePath(), value, (err) =>
         if (err)
           @self.emit('error', "Error occurred while writing value #{ value } to pin #{ @pinNum }")
         else
@@ -81,7 +78,7 @@ namespace 'Cylon.IO', ->
       readData = null
 
       setInterval(() =>
-        FS.readFile(@valueFile, (err, data) =>
+        FS.readFile(@_valuePath(), (err, data) =>
           if err
             @self.emit('error', "Error occurred while reading from pin #{ @pinNum }")
           else
@@ -108,7 +105,6 @@ namespace 'Cylon.IO', ->
             @ready = true
             @self.emit('connect', mode) if emitConnect
         )
-      @valueFile = @_valuePath()
 
     _directionPath: () ->
       "#{ @_pinPath() }/direction"

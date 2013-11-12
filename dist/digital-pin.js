@@ -73,18 +73,14 @@
       };
 
       DigitalPin.prototype.closeSync = function() {
-        var _this = this;
-        return FS.writeFileSync("" + GPIO_PATH + "/unexport", "" + this.pinNum, function(err) {
-          return _this._closeCallback();
-        });
+        FS.writeFileSync("" + GPIO_PATH + "/unexport", "" + this.pinNum);
+        return this._closeCallback(false);
       };
 
       DigitalPin.prototype._closeCallback = function(err) {
         if (err) {
-          console.log("EROR WHILE WRITING TO UNEXPORT FILE!!!");
           return this.self.emit('error', 'Error while closing pin files');
         } else {
-          console.log("PIN SHOULD BE UNEXPORTED");
           return this.self.emit('close', this.pinNum);
         }
       };
@@ -95,7 +91,7 @@
           this.self._setMode('w');
         }
         this.status = value === 1 ? 'high' : 'low';
-        return FS.writeFile(this.valueFile, value, function(err) {
+        return FS.writeFile(this._valuePath(), value, function(err) {
           if (err) {
             return _this.self.emit('error', "Error occurred while writing value " + value + " to pin " + _this.pinNum);
           } else {
@@ -112,7 +108,7 @@
         }
         readData = null;
         return setInterval(function() {
-          return FS.readFile(_this.valueFile, function(err, data) {
+          return FS.readFile(_this._valuePath(), function(err, data) {
             if (err) {
               return _this.self.emit('error', "Error occurred while reading from pin " + _this.pinNum);
             } else {
@@ -129,7 +125,7 @@
           emitConnect = false;
         }
         if (mode === 'w') {
-          FS.writeFile(this._directionPath(), GPIO_DIRECTION_WRITE, function(err) {
+          return FS.writeFile(this._directionPath(), GPIO_DIRECTION_WRITE, function(err) {
             if (err) {
               return _this.self.emit('error', "Setting up pin direction failed");
             } else {
@@ -140,7 +136,7 @@
             }
           });
         } else if (mode === 'r') {
-          FS.writeFile(this._directionPath(), GPIO_DIRECTION_READ, function(err) {
+          return FS.writeFile(this._directionPath(), GPIO_DIRECTION_READ, function(err) {
             if (err) {
               return _this.self.emit('error', "Setting up pin direction failed");
             } else {
@@ -151,7 +147,6 @@
             }
           });
         }
-        return this.valueFile = this._valuePath();
       };
 
       DigitalPin.prototype._directionPath = function() {
