@@ -36,7 +36,6 @@
       LOW = 0;
 
       function DigitalPin(opts) {
-        this.self = this;
         this.pinNum = opts.pin;
         this.status = 'low';
         this.ready = false;
@@ -53,52 +52,36 @@
         }
         return FS.exists(this._pinPath(), function(exists) {
           if (exists) {
-            _this.self._setMode(_this.mode, true);
-            return _this.self.emit('open');
+            return _this._openPin();
           } else {
-            return FS.writeFile(_this._exportPath(), "" + _this.pinNum, function(err) {
-              if (err) {
-                return _this.self.emit('error', 'Error while creating pin files');
-              } else {
-                _this.self._setMode(_this.mode, true);
-                return _this.self.emit('open');
-              }
-            });
+            return _this._createGPIOPin();
           }
         });
       };
 
       DigitalPin.prototype.close = function() {
         var _this = this;
-        return FS.writeFile(this.unexportPath(), "" + this.pinNum, function(err) {
+        return FS.writeFile(this._unexportPath(), "" + this.pinNum, function(err) {
           return _this._closeCallback();
         });
       };
 
       DigitalPin.prototype.closeSync = function() {
-        FS.writeFileSync(this.unexportPath(), "" + this.pinNum);
+        FS.writeFileSync(this._unexportPath(), "" + this.pinNum);
         return this._closeCallback(false);
-      };
-
-      DigitalPin.prototype._closeCallback = function(err) {
-        if (err) {
-          return this.self.emit('error', 'Error while closing pin files');
-        } else {
-          return this.self.emit('close', this.pinNum);
-        }
       };
 
       DigitalPin.prototype.digitalWrite = function(value) {
         var _this = this;
         if (this.mode !== 'w') {
-          this.self._setMode('w');
+          this._setMode('w');
         }
         this.status = value === 1 ? 'high' : 'low';
         return FS.writeFile(this._valuePath(), value, function(err) {
           if (err) {
-            return _this.self.emit('error', "Error occurred while writing value " + value + " to pin " + _this.pinNum);
+            return _this.emit('error', "Error occurred while writing value " + value + " to pin " + _this.pinNum);
           } else {
-            return _this.self.emit('digitalWrite', value);
+            return _this.emit('digitalWrite', value);
           }
         });
       };
@@ -107,19 +90,59 @@
         var readData,
           _this = this;
         if (this.mode !== 'r') {
-          this.self._setMode('r');
+          this._setMode('r');
         }
         readData = null;
         return setInterval(function() {
           return FS.readFile(_this._valuePath(), function(err, data) {
             if (err) {
-              return _this.self.emit('error', "Error occurred while reading from pin " + _this.pinNum);
+              return _this.emit('error', "Error occurred while reading from pin " + _this.pinNum);
             } else {
               readData = data;
-              return _this.self.emit('digitalRead', data);
+              return _this.emit('digitalRead', data);
             }
           });
         }, interval);
+      };
+
+      DigitalPin.prototype.setHigh = function() {
+        return this.digitalWrite(1);
+      };
+
+      DigitalPin.prototype.setLow = function() {
+        return this.digitalWrite(0);
+      };
+
+      DigitalPin.prototype.toggle = function() {
+        if (this.status === 'low') {
+          return this.setHigh();
+        } else {
+          return this.setLow();
+        }
+      };
+
+      DigitalPin.prototype._createGPIOPin = function() {
+        var _this = this;
+        return FS.writeFile(this._exportPath(), "" + this.pinNum, function(err) {
+          if (err) {
+            return _this.emit('error', 'Error while creating pin files');
+          } else {
+            return _this._openPin();
+          }
+        });
+      };
+
+      DigitalPin.prototype._openPin = function() {
+        this._setMode(this.mode, true);
+        return this.emit('open');
+      };
+
+      DigitalPin.prototype._closeCallback = function(err) {
+        if (err) {
+          return this.emit('error', 'Error while closing pin files');
+        } else {
+          return this.emit('close', this.pinNum);
+        }
       };
 
       DigitalPin.prototype._setMode = function(mode, emitConnect) {
@@ -127,28 +150,26 @@
         if (emitConnect == null) {
           emitConnect = false;
         }
+        this.mode = mode;
         if (mode === 'w') {
           return FS.writeFile(this._directionPath(), GPIO_DIRECTION_WRITE, function(err) {
-            if (err) {
-              return _this.self.emit('error', "Setting up pin direction failed");
-            } else {
-              _this.ready = true;
-              if (emitConnect) {
-                return _this.self.emit('connect', mode);
-              }
-            }
+            return _this._setModeCallback(err, emitConnect);
           });
         } else if (mode === 'r') {
           return FS.writeFile(this._directionPath(), GPIO_DIRECTION_READ, function(err) {
-            if (err) {
-              return _this.self.emit('error', "Setting up pin direction failed");
-            } else {
-              _this.ready = true;
-              if (emitConnect) {
-                return _this.self.emit('connect', mode);
-              }
-            }
+            return _this._setModeCallback(err, emitConnect);
           });
+        }
+      };
+
+      DigitalPin.prototype._setModeCallback = function(err, emitConnect) {
+        if (err) {
+          return this.emit('error', "Setting up pin direction failed");
+        } else {
+          this.ready = true;
+          if (emitConnect) {
+            return this.emit('connect', this.mode);
+          }
         }
       };
 
@@ -170,22 +191,6 @@
 
       DigitalPin.prototype._unexportPath = function() {
         return "" + GPIO_PATH + "/unexport";
-      };
-
-      DigitalPin.prototype.setHigh = function() {
-        return this.self.digitalWrite(1);
-      };
-
-      DigitalPin.prototype.setLow = function() {
-        return this.self.digitalWrite(0);
-      };
-
-      DigitalPin.prototype.toggle = function() {
-        if (this.status === 'low') {
-          return this.self.setHigh();
-        } else {
-          return this.self.setLow();
-        }
       };
 
       return DigitalPin;
