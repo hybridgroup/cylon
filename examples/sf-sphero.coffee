@@ -1,4 +1,4 @@
-require '../dist/sf-client'
+require './sf-client'
 Cylon = require('..')
 
 class SalesForceRobot

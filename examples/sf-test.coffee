@@ -1,4 +1,4 @@
-require('../dist/sf-client')
+require('./sf-client')
 
 sfuser = "edgarsilva@hybridgroup.com"
 sfpass = "password1232YOQR0HQMpQ5f74msKqaPuCD6"
