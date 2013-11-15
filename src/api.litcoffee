@@ -9,7 +9,6 @@ First of all, let's make sure we're running in ECMAScript 5's [strict mode][].
 
     'use strict';
 
-
 ## Dependencies
 
 Our server needs to primarily respond to HTTP requests with JSON responses, but
@@ -159,12 +158,12 @@ available for the specified device.
             master.findRobotDevice robotname, devicename, (err, device) ->
               res.json if err then err else device.data().commands
 
-### POST /robots/:robotname/devices/:devicename/commands/:commandname
+### ALL /robots/:robotname/devices/:devicename/commands/:commandname
 
 Given a robot name, device name, and command name, executes a robot's command
 and returns the result.
 
-          @server.post "/robots/:robot/devices/:device/commands/:commandname", (req, res) ->
+          @server.all "/robots/:robot/devices/:device/commands/:commandname", (req, res) ->
 
             params = [
               req.params.robotname,

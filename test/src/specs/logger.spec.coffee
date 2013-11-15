@@ -1,6 +1,6 @@
 'use strict';
 
-source('logger')
+source 'logger'
 
 describe 'Logger', ->
   it "sets to NullLogger if false is provided", ->

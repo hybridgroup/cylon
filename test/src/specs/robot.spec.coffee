@@ -1,7 +1,7 @@
 'use strict';
 
-source("robot")
-source("logger")
+source "robot"
+source "logger"
 
 Logger.setup(false) # quiet logger for tests
 

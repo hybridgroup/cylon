@@ -1,8 +1,6 @@
 (function() {
   'use strict';
-  var utils;
-
-  utils = source("utils");
+  source("utils");
 
   describe("Utils", function() {
     describe("Monkeypatches Number", function() {
@@ -14,24 +12,31 @@
       });
     });
     return describe("#proxyFunctionsToObject", function() {
-      var TestClass, proxyObject;
-      proxyObject = {
-        asString: function() {
-          return "[object ProxyObject]";
-        },
-        toString: function() {
-          return "[object ProxyObject]";
-        },
-        returnString: function(string) {
+      var ProxyClass, TestClass, methods;
+      methods = ['asString', 'toString', 'returnString'];
+      ProxyClass = (function() {
+        function ProxyClass() {}
+
+        ProxyClass.prototype.asString = function() {
+          return "[object ProxyClass]";
+        };
+
+        ProxyClass.prototype.toString = function() {
+          return "[object ProxyClass]";
+        };
+
+        ProxyClass.prototype.returnString = function(string) {
           return string;
-        }
-      };
+        };
+
+        return ProxyClass;
+
+      })();
       TestClass = (function() {
         function TestClass() {
-          var methods;
-          this.myself = this;
-          methods = ['asString', 'toString', 'returnString'];
-          proxyFunctionsToObject(methods, proxyObject, this.myself, true);
+          this.self = this;
+          this.testInstance = new ProxyClass;
+          proxyFunctionsToObject(methods, this.testInstance, this.self, true);
         }
 
         return TestClass;
@@ -41,13 +46,13 @@
         var testclass;
         testclass = new TestClass;
         assert(typeof testclass.asString === 'function');
-        return testclass.asString().should.be.equal("[object ProxyObject]");
+        return testclass.asString().should.be.equal("[object ProxyClass]");
       });
       it('can alias existing methods if forced to', function() {
         var testclass;
         testclass = new TestClass;
         assert(typeof testclass.toString === 'function');
-        return testclass.toString().should.be.equal("[object ProxyObject]");
+        return testclass.toString().should.be.equal("[object ProxyClass]");
       });
       return it('can alias methods with arguments', function() {
         var testclass;

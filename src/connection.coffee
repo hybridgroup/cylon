@@ -9,10 +9,9 @@
 'use strict';
 
 require "./robot"
+require "./port"
 
 namespace = require 'node-namespace'
-
-Port = require "./port"
 EventEmitter = require('events').EventEmitter
 
 # The Connection class represents the interface to
@@ -37,7 +36,7 @@ namespace 'Cylon', ->
       @name = opts.name
       @connection_id = opts.id
       @adaptor = @requireAdaptor(opts.adaptor) # or 'loopback')
-      @port = new Port(opts.port)
+      @port = new Cylon.Port(opts.port)
       proxyFunctionsToObject @adaptor.commands(), @adaptor, @self
 
     # Public: Exports basic data for the Connection

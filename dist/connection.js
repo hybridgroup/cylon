@@ -9,16 +9,16 @@
 
 (function() {
   'use strict';
-  var EventEmitter, Port, namespace,
+  var EventEmitter, namespace,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   require("./robot");
 
-  namespace = require('node-namespace');
+  require("./port");
 
-  Port = require("./port");
+  namespace = require('node-namespace');
 
   EventEmitter = require('events').EventEmitter;
 
@@ -39,7 +39,7 @@
         this.name = opts.name;
         this.connection_id = opts.id;
         this.adaptor = this.requireAdaptor(opts.adaptor);
-        this.port = new Port(opts.port);
+        this.port = new Cylon.Port(opts.port);
         proxyFunctionsToObject(this.adaptor.commands(), this.adaptor, this.self);
       }
 

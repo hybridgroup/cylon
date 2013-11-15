@@ -1,6 +1,6 @@
 'use strict';
 
-utils = source("utils")
+source "utils"
 
 describe "Utils", ->
   describe "Monkeypatches Number", ->
@@ -11,27 +11,30 @@ describe "Utils", ->
       1.second().should.be.equal 1000
 
   describe "#proxyFunctionsToObject", ->
-    proxyObject = {
-      asString: -> "[object ProxyObject]"
-      toString: -> "[object ProxyObject]"
+    methods = ['asString', 'toString', 'returnString']
+
+    class ProxyClass
+      constructor: -> # noop
+
+      asString: -> "[object ProxyClass]"
+      toString: -> "[object ProxyClass]"
       returnString: (string) -> string
-    }
 
     class TestClass
       constructor: ->
-        @myself = this
-        methods = ['asString', 'toString', 'returnString']
-        proxyFunctionsToObject(methods, proxyObject, @myself, true)
+        @self = this
+        @testInstance = new ProxyClass
+        proxyFunctionsToObject methods, @testInstance, @self, true
 
     it 'can alias methods', ->
       testclass = new TestClass
       assert typeof testclass.asString is 'function'
-      testclass.asString().should.be.equal "[object ProxyObject]"
+      testclass.asString().should.be.equal "[object ProxyClass]"
 
     it 'can alias existing methods if forced to', ->
       testclass = new TestClass
       assert typeof testclass.toString is 'function'
-      testclass.toString().should.be.equal "[object ProxyObject]"
+      testclass.toString().should.be.equal "[object ProxyClass]"
 
     it 'can alias methods with arguments', ->
       testclass = new TestClass

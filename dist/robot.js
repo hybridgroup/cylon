@@ -9,7 +9,7 @@
 
 (function() {
   'use strict';
-  var Async, Connection, Device, namespace,
+  var Async, namespace,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
@@ -21,9 +21,9 @@
 
   namespace = require('node-namespace');
 
-  Connection = require("./connection");
+  require("./connection");
 
-  Device = require("./device");
+  require("./device");
 
   Async = require("async");
 
@@ -110,7 +110,7 @@
           connection = connections[_i];
           Logger.info("Initializing connection '" + connection.name + "'...");
           connection['robot'] = this;
-          this.connections[connection.name] = new Connection(connection);
+          this.connections[connection.name] = new Cylon.Connection(connection);
         }
         return this.connections;
       };
@@ -127,7 +127,7 @@
           device = devices[_i];
           Logger.info("Initializing device '" + device.name + "'...");
           device['robot'] = this;
-          _results.push(this.devices[device.name] = new Device(device));
+          _results.push(this.devices[device.name] = new Cylon.Device(device));
         }
         return _results;
       };

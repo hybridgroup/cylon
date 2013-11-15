@@ -73,7 +73,7 @@
             return res.json(err ? err : device.data().commands);
           });
         });
-        this.server.post("/robots/:robot/devices/:device/commands/:commandname", function(req, res) {
+        this.server.all("/robots/:robot/devices/:device/commands/:commandname", function(req, res) {
           var commandname, devicename, key, params, robotname, value, _ref;
           params = [req.params.robotname, req.params.devicename, req.params.commandname];
           robotname = params[0], devicename = params[1], commandname = params[2];

@@ -1,12 +1,10 @@
 (function() {
   'use strict';
-  var Driver;
-
-  Driver = source("driver");
+  source("test/driver");
 
   describe("Driver", function() {
     var driver;
-    driver = new Driver({
+    driver = new Cylon.Driver({
       name: "driving"
     });
     return it("should have a name", function() {

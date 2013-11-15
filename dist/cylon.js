@@ -9,19 +9,15 @@
 
 (function() {
   'use strict';
-  var Cylon, Robot, readLine,
+  var Cylon,
     __slice = [].slice,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
-
-  Robot = require("./robot");
 
   require('./utils');
 
   require('./logger');
 
   require('./api');
-
-  readLine = require("readline");
 
   Logger.setup();
 
@@ -43,17 +39,23 @@
     };
 
     Master = (function() {
-      var api, robots;
+      var api, api_config, robots;
 
       robots = [];
 
       api = null;
 
+      api_config = {
+        host: '127.0.0.1',
+        port: '3000'
+      };
+
       function Master() {
         this.robot = __bind(this.robot, this);
-        var rl;
+        var readLine, rl;
         this.self = this;
         if (process.platform === "win32") {
+          readLine = require("readline");
           rl = readLine.createInterface({
             input: process.stdin,
             output: process.stdout
@@ -69,7 +71,8 @@
       }
 
       Master.prototype.robot = function(opts) {
-        var robot;
+        var Robot, robot;
+        Robot = require("./robot");
         opts.master = this;
         robot = new Robot(opts);
         robots.push(robot);
@@ -78,6 +81,15 @@
 
       Master.prototype.robots = function() {
         return robots;
+      };
+
+      Master.prototype.api = function(opts) {
+        if (opts == null) {
+          opts = {};
+        }
+        api_config.host = opts.host || "127.0.0.1";
+        api_config.port = opts.port || "3000";
+        return api_config;
       };
 
       Master.prototype.findRobot = function(name, callback) {
@@ -107,12 +119,13 @@
           if (err) {
             callback(err, robot);
           }
+          device = null;
           if (robot.devices[deviceid]) {
             device = robot.devices[deviceid];
           }
           if (device == null) {
             error = {
-              error: "No device found with the name " + device + "."
+              error: "No device found with the name " + deviceid + "."
             };
           }
           if (callback) {
@@ -129,12 +142,13 @@
           if (err) {
             callback(err, robot);
           }
+          connection = null;
           if (robot.connections[connid]) {
             connection = robot.connections[connid];
           }
           if (connection == null) {
             error = {
-              error: "No connection found with the name " + connection + "."
+              error: "No connection found with the name " + connid + "."
             };
           }
           if (callback) {
@@ -167,9 +181,8 @@
       };
 
       Master.prototype.startAPI = function() {
-        return api != null ? api : api = new Api.Server({
-          master: this.self
-        });
+        api_config.master = this.self;
+        return api != null ? api : api = new Api.Server(api_config);
       };
 
       return Master;

@@ -1,12 +1,12 @@
 'use strict';
 
-source("device")
-source("robot")
-Driver = source("driver")
+source "device"
+source "robot"
+source "test/driver"
 
 describe "Device", ->
   robot = new Cylon.Robot(name: 'me')
-  driver = new Driver(name: 'driving')
+  driver = new Cylon.Driver(name: 'driving')
   requireDriver = sinon.stub(robot, 'requireDriver').returns(driver)
   device = new Cylon.Device(name: "devisive", driver: 'driving', robot: robot)
 
