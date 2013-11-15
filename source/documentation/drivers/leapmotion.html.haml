@@ -13,53 +13,124 @@ layout: page
 
   %section.how-to
     %h2 How to establish a connection and setup the driver
+    %h3 JavaScript
     :markdown
-          :::ruby
-          require 'Cylon.js'
-          connection :leapmotion, :adaptor => :leapmotion, :port => '127.0.0.1:6437'
-          device :leapmotion, :connection => :leapmotion, :driver => :leapmotion
+          :::javascript
+          var Cylon = require('cylon');
+
+          Cylon.robot({
+            connection: {
+              name: 'leapmotion',
+              adaptor: 'leapmotion',
+              port: '127.0.0.1:6437'
+            },
+
+            device: {
+              name: 'leapmotion',
+              driver: 'leapmotion'
+            }
+           ... 
+    %h3 CoffeeScript
+    :markdown
+          :::javascript
+          Cylon = require 'cylon'
+
+          Cylon.robot
+            connection: { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' }
+            device: { name: 'leapmotion', driver: 'leapmotion' }
+          ...
 
   %section.public-methods
-    %h2 Public driver events
-    %h3 hand
-    %p
-      Gets triggered when doing a hand motion, makes hand input available.
+    %h2 Events
 
-    %h3 gesture
-    %p
-      Gets triggered when doing a gesture motion, makes hand input available.
+    %dl.methods 
+      %dt hand
+      %dd Gets triggered when doing a hand motion, makes hand input available.
+      %dt gesture
+      %dd Gets triggered when doing a gesture motion, makes hand input available.
+      %dt pointable
+      %dd Gets triggered when doing a pointable motion, makes hand input available.
+      %dt frame
+      %dd Gets triggered with every motion detected, makes frame input available.
+      %dt start
+      %dd Sent when the device has been started and is ready to use.  
 
-    %h3 pointable
-    %p
-      Gets triggered when doing a pointable motion, makes hand input available.
-
-    %h3 frame
-    %p
-      Gets triggered with every motion detected, makes frame input available.
-
-    %h3 How to use events and call them on your drivers
-    %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
-    :markdown
-          :::ruby
-          on leapmotion, :hand => proc { |sender, hand| puts hand.inspect }
+    -#%h3 How to use events and call them on your drivers
+    -#%p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
+    -#:markdown
+          -#:::ruby
+          -#coming soon ..
 
   %section.how-to
     %h2 How to use
-    %h3 Example receiving hand motion events from a Leap Motion.
+    -#%p Example receiving hand motion events from a Leap Motion.
+    %h3 JavaScript
     :markdown
-          :::ruby
-          require 'Cylon.js'
+          :::javascript
+          var Cylon = require('cylon');
 
-          connection :leapmotion, :adaptor => :leapmotion, :port => '127.0.0.1:6437'
-          device :leapmotion, :connection => :leapmotion, :driver => :leapmotion
- 
-          work do
-            on leapmotion, :hand => :wave
-          end
+          Cylon.robot({
+            connection: {
+              name: 'leapmotion',
+              adaptor: 'leapmotion',
+              port: '127.0.0.1:6437'
+            },
 
-          def wave(sender, hand)
-            puts hand.inspect
-          end
+            device: {
+              name: 'leapmotion',
+              driver: 'leapmotion'
+            },
+
+            work: function(my) {
+              my.leapmotion.on('connect', function() {
+                Logger.info("Connected");
+              });
+
+              my.leapmotion.on('start', function() {
+                Logger.info("Started");
+              });
+
+              my.leapmotion.on('frame', function(frame) {
+                Logger.info(frame.toString());
+              });
+
+              my.leapmotion.on('hand', function(hand) {
+                Logger.info(hand.toString());
+              });
+
+              my.leapmotion.on('pointable', function(pointable) {
+                Logger.info(pointable.toString());
+              });
+
+              my.leapmotion.on('gesture', function(gesture) {
+                Logger.info(gesture.toString());
+              });
+            }
+          }).start();
+
+    %h3 CoffeeScript
+    :markdown
+          :::javascript
+          Cylon = require 'cylon'
+
+          Cylon.robot
+            connection: { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' }
+            device: { name: 'leapmotion', driver: 'leapmotion' }
+
+            work: (my) ->
+              my.leapmotion.on 'connect', ->
+                Logger.info "Connected"
+
+              my.leapmotion.on 'start', ->
+                Logger.info "Started"
+
+              events = ["frame", "hand", "pointable", "gesture"]
+
+              for event in events
+                my.leapmotion.on event, (payload) ->
+                  Logger.info payload.toString()
+
+          .start()
 
   %section.compatability.hardware
     %h2 Works with:

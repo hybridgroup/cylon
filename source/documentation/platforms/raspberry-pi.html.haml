@@ -1,8 +1,8 @@
 ---
-title: Raspberry Pi with Artroo
+title: Raspberry Pi with Cylon.js
 author: The Hybrid Group
 page_title: Raspberry Pi
-page_subtitle: "<a href='https://github.com/hybridgroup/Cylon.js-raspi' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/Cylon.js-raspi/issues'>Issues</a>"
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-raspi' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-raspi/issues'>Issues</a>"
 layout: page
 ---
 .documentation
@@ -19,38 +19,25 @@ layout: page
 
   %section.how-to
     %h2 How to install
-    %p If you do not have ruby installed, you'll need to do that first.
+    
     %p
-      Then install the Cylon.js-raspi gem:
+      Installing cylon.js with raspberri-pi support is pretty easy.
     :markdown
           :::bash
-          sudo gem install Cylon.js-raspi
+          npm install cylon-raspi
 
     %h2 How to use
     %p
       This small program causes an LED to blink.
     :markdown
           :::ruby
-          require 'Cylon.js'
-
-          connection :raspi, :adaptor => :raspi
-          device :led, :driver => :led, :pin => 11
-
-          work do
-            every 1.second do
-              led.toggle
-            end
-          end
-    %p To run the examples, requires sudo access on the Raspberry Pi:
-
-    :markdown
-          :::bash
-          sudo ruby examples/raspi_led.rb
+          coming soon ..
+    
 
     %h2 How to connect
     %h3 Connecting to Raspberry Pi GPIO
     %p
-      This gem only works on a real Raspberry Pi. Do not bother trying on any other kind of
+      This module only works on a real Raspberry Pi. Do not bother trying on any other kind of
       computer it will not work. Also note you will need to connect actual circuits to the Raspberry Pi's
       GPIO pins.
 
@@ -90,6 +77,6 @@ layout: page
         = partial "documentation/partials/servo"
         = partial "documentation/partials/motor"
         = partial "documentation/partials/blinkm"
-        = partial "documentation/partials/hmc6352-compass"
-        = partial "documentation/partials/wiichuck"
-        = partial "documentation/partials/wiiclassic"
+        = #partial "documentation/partials/hmc6352-compass"
+        = #partial "documentation/partials/wiichuck"
+        = #partial "documentation/partials/wiiclassic"

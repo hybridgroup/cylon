@@ -1,8 +1,8 @@
 ---
-title: Leapmotion with Artroo
+title: Leapmotion with Cylon.js
 author: The Hybrid Group
 page_title: Leapmotion
-page_subtitle: "<a href='https://github.com/hybridgroup/Cylon.js-leapmotion' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/Cylon.js-leapmotion/issues'>Issues</a>"
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-leapmotion' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-leapmotion/issues'>Issues</a>"
 layout: page
 ---
 .documentation
@@ -20,42 +20,50 @@ layout: page
   %section.how-to
     %h2 How to install
     %p
-      Installing Cylon.js with leapmotion support is pretty easy using ruby gems.
+      Installing Cylon.js with leapmotion support is pretty easy.
     :markdown
           :::bash
-          gem install Cylon.js-leapmotion --pre
+          npm install cylon-leapmotion
 
     %h2 How to use
-    %p
-      This small program uses a Leap Motion to detect the user's hand position
+    %p This small program uses a Leap Motion to detect the user's hand position
+    %h3 JavaScript
     :markdown
-          :::ruby
-          require 'Cylon.js'
+          :::javascript
+          Cylon = require('cylon');
 
-          connection :leapmotion, :adaptor => :leapmotion, :port => '127.0.0.1:6437'
-          device :leapmotion, :driver => :leapmotion
+          Cylon.robot({
+            connection: {
+              name: 'leapmotion',
+              adaptor: 'leapmotion',
+              port: '127.0.0.1:6437'
+            },
+            device: {
+              name: 'leapmotion',
+              driver: 'leapmotion'
+            },
+            work: function(my) {
+              return my.leapmotion.on('hand', function(hand) {
+                return Logger.info("" + hand.palmX + "," + hand.palmY + "," + hand.palmZ);
+              });
+            }
+          }).start();
 
-          work do
-            on leapmotion, :open => :on_open
-            on leapmotion, :frame => :on_frame
-            on leapmotion, :close => :on_close
-          end
+    %h3 CoffeeScript
+    :markdown
+          :::javascript
+          Cylon = require 'cylon'
 
-          def on_open(*args)
-            puts args
-          end
+          Cylon.robot
+            connection: { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' }
+            device: { name: 'leapmotion', driver: 'leapmotion' }
 
-          def on_frame(*args)
-            frame = args[1]
-            puts frame
-            puts frame.hands
-            puts frame.gestures
-            puts frame.pointables
-          end
+            work: (my) ->
+              my.leapmotion.on 'hand', (hand) ->
+                Logger.info "\#{hand.palmX},\#{hand.palmY},\#{hand.palmZ}"
 
-          def on_close(*args)
-            puts args
-          end
+          .start()
+
     %h2 How to connect
     %h3 OSX
     %p
