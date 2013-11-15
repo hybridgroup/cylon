@@ -56,7 +56,7 @@ namespace "Api", ->
         master.findRobotDevice robotid, deviceid, (err, device) ->
           res.json if err then err else device.data().commands
 
-      @server.post "/robots/:robot/devices/:device/commands/:command", (req, res) ->
+      @server.all "/robots/:robot/devices/:device/commands/:command", (req, res) ->
         params = [req.params.robot, req.params.device, req.params.command]
         [robotid, deviceid, commandid] = params
 

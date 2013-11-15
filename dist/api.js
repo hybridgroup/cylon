@@ -79,7 +79,7 @@
             return res.json(err ? err : device.data().commands);
           });
         });
-        this.server.post("/robots/:robot/devices/:device/commands/:command", function(req, res) {
+        this.server.all("/robots/:robot/devices/:device/commands/:command", function(req, res) {
           var commandid, deviceid, key, params, robotid, value, _ref;
           params = [req.params.robot, req.params.device, req.params.command];
           robotid = params[0], deviceid = params[1], commandid = params[2];
