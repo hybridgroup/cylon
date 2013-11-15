@@ -166,8 +166,8 @@ and returns the result.
           @server.all "/robots/:robot/devices/:device/commands/:commandname", (req, res) ->
 
             params = [
-              req.params.robotname,
-              req.params.devicename,
+              req.params.robot,
+              req.params.device,
               req.params.commandname
             ]
 

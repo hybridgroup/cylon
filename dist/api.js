@@ -75,7 +75,7 @@
         });
         this.server.all("/robots/:robot/devices/:device/commands/:commandname", function(req, res) {
           var commandname, devicename, key, params, robotname, value, _ref;
-          params = [req.params.robotname, req.params.devicename, req.params.commandname];
+          params = [req.params.robot, req.params.device, req.params.commandname];
           robotname = params[0], devicename = params[1], commandname = params[2];
           params = [];
           if (typeof req.body === 'object') {
