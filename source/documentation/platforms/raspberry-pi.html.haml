@@ -29,9 +29,44 @@ layout: page
     %h2 How to use
     %p
       This small program causes an LED to blink.
+    %h3 JavaScript
     :markdown
-          :::ruby
-          coming soon ..
+          :::javascript
+          Cylon = require('..');
+
+          Cylon.robot({
+            connection: {
+              name: 'raspi',
+              adaptor: 'raspi'
+            },
+            device: {
+              name: 'led',
+              driver: 'led',
+              pin: 11
+            },
+            work: function(my) {
+              return every(1..second(), function() {
+                return my.led.toggle();
+              });
+            }
+          }).start();
+
+    %h3 CoffeeScript
+    :markdown
+          :::javascript
+          Cylon = require('cylon')
+
+          Cylon.robot
+            connection:
+              name: 'raspi', adaptor: 'raspi'
+
+            device:
+              name: 'led', driver: 'led', pin: 11
+
+            work: (my) ->
+              every 1.second(), -> my.led.toggle()
+
+          .start()
     
 
     %h2 How to connect
