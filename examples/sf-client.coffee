@@ -1,7 +1,6 @@
 'use strict';
 
 nforce = require('nforce')
-http = require('http')
 faye = require('faye')
 
 namespace = require('node-namespace')
@@ -18,7 +17,6 @@ namespace 'SF', ->
 
     _processOutboundMessages: () ->
       # Do work here
-      console.log(msg) for msg in @outboundMessages
 
     _handleStreamingAPI: (outboundCB) ->
       client = new faye.Client(@oauth.instance_url + '/cometd/28.0')
@@ -35,8 +33,6 @@ namespace 'SF', ->
           process.exit(code=0)
         else
           console.log("authenticated")
-          console.log("oauth")
-          console.log(_oauth)
           @oauth = _oauth
           @_handleStreamingAPI(outboundCB)
           @_processOutboundMessages()
@@ -46,6 +42,8 @@ namespace 'SF', ->
       #jsonBody = JSON.parse(msg)
       #jsonString = JSON.stringify(msg)
       jsonString = msg
+      console.log("SpheroController post msg:")
+      console.log(msg)
       @org.apexRest({uri:'SpheroController', method: 'POST', body: jsonString}, @oauth, (err,resp) =>
         if(err)
           console.log(err)

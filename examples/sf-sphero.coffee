@@ -1,7 +1,12 @@
 require '../examples/sf-client'
 Cylon = require('..')
 
-Cylon.robot
+bots = [
+  { port: '/dev/rfcomm0', name: 'sphy-rgr' },
+  { port: '/dev/rfcomm1', name: 'sphy-bpy' }
+]
+
+class SpheroRobot
   connection:
     name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'
 
@@ -34,18 +39,26 @@ Cylon.robot
     )
 
     me.sphero.on 'collision', (data) ->
-      Logger.info 'collision:'
+      #Logger.info 'collision:'
       me.sphero.setRGB(0xFF0000, me)
       me.sphero.stop()
-      console.log("Collision Data:")
-      console.log(data[0][0])
-      toSend = "{ \"identifier\" :\"#{ me.name }\", \"msg\": \"#{ 'hello' }\" }"
+      #console.log("Collision Data:")
+      #console.log(data[0][0])
+      toSend = "{ \"identifier\" :\"#{ me.name }\", \"msg\": \"#{ 'Collision detected' }\" }"
       me.sf.push(toSend)
 
     me.sf.authenticate((msg) =>
-      Logger.info 'SF Outbound Msg:'
+      #Logger.info 'SF Outbound Msg:'
+      Logger.info "Sphero: #{ msg.sobject.Sphero_Name__c }, Msg Content: #{ msg.sobject.Content__c }, SM_Id: #{ msg.sobject.Id }"
       me.sphero.setRGB(0x00FF00)
       me.sphero.roll 90, Math.floor(Math.random() * 360)
     )
 
-.start()
+for bot in bots
+  robot = new SpheroRobot
+  robot.connection.port = bot.port
+  robot.name = bot.name
+  console.log("Name: #{ robot.name }")
+  Cylon.robot robot
+
+Cylon.start()
