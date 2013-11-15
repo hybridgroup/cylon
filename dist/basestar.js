@@ -41,11 +41,11 @@
         targetEventName = opts.targetEventName || opts.eventName;
         sendUpdate = opts.sendUpdate || false;
         opts.source.on(opts.eventName, function() {
-          var args;
+          var args, _ref, _ref1;
           args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-          opts.target.emit(targetEventName, args);
+          (_ref = opts.target).emit.apply(_ref, [targetEventName].concat(__slice.call(args)));
           if (sendUpdate) {
-            return opts.target.emit('update', targetEventName, args);
+            return (_ref1 = opts.target).emit.apply(_ref1, ['update', targetEventName].concat(__slice.call(args)));
           }
         });
         return opts.source;
