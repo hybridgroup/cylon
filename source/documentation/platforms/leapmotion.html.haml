@@ -25,11 +25,44 @@ layout: page
           :::bash
           npm install cylon-leapmotion
 
-    -#%h2 How to use
-    -#%p This small program uses a Leap Motion to detect the user's hand position
-    -#:markdown
-          -#:::javascript
-          -#coming soon...
+    %h2 How to use
+    %p This small program uses a Leap Motion to detect the user's hand position
+    %h3 JavaScript
+    :markdown
+          :::javascript
+          Cylon = require('cylon');
+
+          Cylon.robot({
+            connection: {
+              name: 'leapmotion',
+              adaptor: 'leapmotion',
+              port: '127.0.0.1:6437'
+            },
+            device: {
+              name: 'leapmotion',
+              driver: 'leapmotion'
+            },
+            work: function(my) {
+              return my.leapmotion.on('hand', function(hand) {
+                return Logger.info("" + hand.palmX + "," + hand.palmY + "," + hand.palmZ);
+              });
+            }
+          }).start();
+
+    %h3 CoffeeScript
+    :markdown
+          :::javascript
+          Cylon = require 'cylon'
+
+          Cylon.robot
+            connection: { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' }
+            device: { name: 'leapmotion', driver: 'leapmotion' }
+
+            work: (my) ->
+              my.leapmotion.on 'hand', (hand) ->
+                Logger.info "\#{hand.palmX},\#{hand.palmY},\#{hand.palmZ}"
+
+          .start()
 
     %h2 How to connect
     %h3 OSX
