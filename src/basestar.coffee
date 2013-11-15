@@ -50,8 +50,8 @@ namespace 'Cylon', ->
      targetEventName = opts.targetEventName or opts.eventName
      sendUpdate = opts.sendUpdate or false
      opts.source.on opts.eventName, (args...) =>
-       opts.target.emit(targetEventName, args)
-       opts.target.emit('update', targetEventName, args) if sendUpdate
+       opts.target.emit(targetEventName, args...)
+       opts.target.emit('update', targetEventName, args...) if sendUpdate
 
      opts.source
 
