@@ -6,7 +6,7 @@ faye = require('faye')
 
 namespace = require('node-namespace')
 
-namespace 'Cylon.SF', ->
+namespace 'SF', ->
   class @SFClient
     constructor: (opts) ->
       @client = null
