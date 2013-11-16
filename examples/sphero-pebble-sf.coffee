@@ -1,13 +1,25 @@
 Cylon = require('..')
 
+Cylon.api host: '0.0.0.0', port: '8080'
+
 bots = [
-  { port: '/dev/rfcomm0', name: 'sphy-rgr' },
-  { port: '/dev/rfcomm1', name: 'sphy-bpy' }
-  { name: 'salesforce' }
+  { port: '/dev/rfcomm0', name: 'sphero-roy' },
+  { port: '/dev/rfcomm1', name: 'sphero-gpg' }
+  { port: '', name: 'salesforce' },
+  { port: '', name: 'pebble' }
 ]
 
-class SalesforceRobot
+class PebbleRobot
+  connection:
+    name: 'pebble', adaptor: 'pebble'
+  device:
+    name: 'pebble', driver: 'pebble'
+  work: (me) ->
+    me.pebble.on('connect', ->
+      console.log('connected!')
+    )
 
+class SalesforceRobot
   connection:
     name: 'sfcon',
     adaptor: 'force',
@@ -31,6 +43,9 @@ class SalesforceRobot
         me.master.findRobot(spheroName, (err, spheroBot) ->
           spheroBot.devices.sphero.setRGB(0x00FF00)
           spheroBot.devices.sphero.roll 90, Math.floor(Math.random() * 360)
+        )
+        me.master.findRobot('pebble', (error, robot) ->
+          robot.devices.pebble.message_queue().push(spheroName)
         )
       )
     )
@@ -60,7 +75,13 @@ class SpheroRobot
       )
 
 for bot in bots
-  robot = if ( bot.name == 'salesforce' ) then new SalesforceRobot else new SpheroRobot
+  switch bot.name
+    when 'salesforce'
+      robot = new SalesforceRobot
+    when 'pebble'
+      robot = new PebbleRobot
+    else
+      robot = new SpheroRobot
   robot.connection.port = bot.port
   robot.name = bot.name
   console.log("Name: #{ robot.name }")
