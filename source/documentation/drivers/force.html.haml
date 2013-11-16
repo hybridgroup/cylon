@@ -9,16 +9,19 @@ layout: page
   %section.intro
     = image_tag "/images/force.jpg", class: "display"
     %p
+    -#here we need some description of the driver  *************
       Makes it possible to interact with force.com.
 
   %section.how_to
     %h2 How to establish a connection and setup the driver
     %h3 JavaScript
+    -#here we need the connection and device in JS(coming soon ..)  *************
     :markdown
           :::javascript
           coming soon ...
 
     %h3 CoffeeScript
+    -#here we need the connection and device in Coffee(coming soon ..)  *************
     :markdown
           :::javascript
           coming soon ...
@@ -28,6 +31,9 @@ layout: page
   %section.public-methods
     %h2 Commands:
     %dl.methods 
+    -#here we need the list of the commands, %dt for the title %dd for the description  *************
+      -#%dt Title
+      -#%dd description
       %dt TODO
       %dd TODO
     
@@ -36,35 +42,38 @@ layout: page
     %h2 Events:
 
     %dl.methods
+    -#same thing, here we need the list of the events, %dt for the title %dd for the description  *************
+      -#%dt Title
+      -#%dd description
       %dt start
       %dd Sent when the device has been started and is ready to use.
-
-
-    -#%h3 How to use events and call them on your drivers
-    -#%p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
-    -#:markdown
-          -#:::ruby
 
   %section.how-to
     %h2 How to use
     %p 
+    -#here we need an example of the cylon-force platform  *************
+      -#description
       This example ...
     %h3 JavaScript
+    -# here the code in JS (coming soon)  *************
     :markdown
           :::javascript
           coming soon ...
 
     %h3 CoffeeScript
+    -# here the code in Coffee (coming soon)  *************
     :markdown
           :::javascript
           coming soon ...
 
   %section.circuit
     %h2 Circuit and Schematic
+    -# here the schemantic (coming soon)  *************
     %p coming soon ...
 
   %section.compatibility.hardware
     %h2 Works with:
     =# TODO: Update platform list with all that work with this driver in Cylon.js.
+    -# all ok here :)  *************
     .devices
       = partial "documentation/partials/force"
