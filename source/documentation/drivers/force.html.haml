@@ -18,14 +18,32 @@ layout: page
     -#here we need the connection and device in JS(coming soon ..)  *************
     :markdown
           :::javascript
-          coming soon ...
+          Cylon = require('cylon');
+
+          Cylon.robot({
+            connection: {
+              name: 'sfcon',
+              adaptor: 'force'
+            },
+            device: {
+              name: 'salesforce',
+              driver: 'force'
+            }
+            ...
 
     %h3 CoffeeScript
     -#here we need the connection and device in Coffee(coming soon ..)  *************
     :markdown
           :::javascript
-          coming soon ...
+            Cylon = require('cylon')
 
+            Cylon.robot
+              connection:
+                name: 'sfcon', adaptor: 'force'
+
+              device:
+                name: 'salesforce', driver: 'force'
+             ...
     
 
   %section.public-methods
