@@ -168,13 +168,13 @@ namespace 'Cylon', ->
     # connection - the Connection that requested the adaptor be required
     #
     # Returns the set-up adaptor
-    requireAdaptor: (adaptorName, connection) ->
+    requireAdaptor: (adaptorName, connection, opts = {}) ->
       if @robot.adaptors[adaptorName]?
         if typeof @robot.adaptors[adaptorName] is 'string'
-          @robot.adaptors[adaptorName] = require(@robot.adaptors[adaptorName]).adaptor(name: adaptorName, connection: connection)
+          @robot.adaptors[adaptorName] = require(@robot.adaptors[adaptorName]).adaptor(name: adaptorName, connection: connection, extraParams: opts)
       else
         require("cylon-#{adaptorName}").register(this)
-        @robot.adaptors[adaptorName] = require("cylon-#{adaptorName}").adaptor(name: adaptorName, connection: connection)
+        @robot.adaptors[adaptorName] = require("cylon-#{adaptorName}").adaptor(name: adaptorName, connection: connection, extraParams: opts)
 
       return @robot.adaptors[adaptorName]
 
