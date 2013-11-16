@@ -1,14 +1,14 @@
 Cylon = require('..')
-
+ 
 Cylon.api host: '0.0.0.0', port: '8080'
-
+ 
 bots = [
-  { port: '/dev/rfcomm0', name: 'sphero-roy' },
-  { port: '/dev/rfcomm1', name: 'sphero-gpg' }
+  { port: '/dev/rfcomm0', name: 'ROY' },
+  { port: '/dev/rfcomm1', name: 'GPG' }
   { port: '', name: 'salesforce' },
   { port: '', name: 'pebble' }
 ]
-
+ 
 class PebbleRobot
   connection:
     name: 'pebble', adaptor: 'pebble'
@@ -18,7 +18,7 @@ class PebbleRobot
     me.pebble.on('connect', ->
       console.log('connected!')
     )
-
+ 
 class SalesforceRobot
   connection:
     name: 'sfcon',
@@ -30,33 +30,41 @@ class SalesforceRobot
       clientSecret: '6079348238616906521',
       redirectUri: 'http://localhost:3000/oauth/_callback'
     }
-
+ 
   device:
     name: 'salesforce', driver: 'force'
+ 
+  spheroReport:{}
 
   work: (me) ->
-
     me.salesforce.on('start', () ->
       me.salesforce.subscribe('/topic/SpheroMsgOutbound', (data) ->
         spheroName = data.sobject.Sphero_Name__c
-        Logger.info "Sphero: #{ spheroName }, data Content: #{ data.sobject.Content__c }, SM_Id: #{ data.sobject.Id }"
+        counter = data.sobject.Content__c
+        Logger.info "Sphero: #{ spheroName }, data Content: #{ counter }, SM_Id: #{ data.sobject.Id }"
         me.master.findRobot(spheroName, (err, spheroBot) ->
           spheroBot.devices.sphero.setRGB(0x00FF00)
           spheroBot.devices.sphero.roll 90, Math.floor(Math.random() * 360)
         )
-        me.master.findRobot('pebble', (error, robot) ->
-          robot.devices.pebble.message_queue().push(spheroName)
+        me.spheroReport[spheroName] = counter
+        toPebble = ""
+        for key, val of me.spheroReport
+          toPebble += "#{key}: #{val}\n"
+        me.master.findRobot('pebble', (error, pebbleBot) ->
+          pebbleBot.devices.pebble.message_queue().push(toPebble)
         )
       )
     )
-
+ 
 class SpheroRobot
+  total_collisions: 0
   connection:
-    name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'
-
+    name: 'sphero', adaptor: 'sphero'
+ 
   device:
     name: 'sphero', driver: 'sphero'
 
+ 
   work: (me) ->
 
     me.sphero.on 'connect', ->
@@ -65,15 +73,15 @@ class SpheroRobot
       me.sphero.stop()
       me.sphero.setRGB(0x00FF00)
       me.sphero.roll 90, Math.floor(Math.random() * 360)
-
+ 
     me.sphero.on 'collision', (data) ->
       me.sphero.setRGB(0xFF0000, me)
       me.sphero.stop()
-      toSend = "{ \"identifier\" :\"#{ me.name }\", \"msg\": \"#{ 'Collision detected' }\" }"
+      toSend = "{ \"identifier\" :\"#{ me.name }\", \"msg\": \"#{ me.total_collisions++ }\" }"
       me.master.findRobot('salesforce', (err, sf) ->
         sf.devices.salesforce.push('SpheroController', 'POST', toSend)
       )
-
+ 
 for bot in bots
   switch bot.name
     when 'salesforce'
