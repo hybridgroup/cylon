@@ -2,18 +2,16 @@ Cylon = require('..')
  
 Cylon.api host: '0.0.0.0', port: '8080'
  
-bots = [
-  { port: '/dev/rfcomm0', name: 'ROY' },
-  { port: '/dev/rfcomm1', name: 'GPG' }
-  { port: '', name: 'salesforce' },
-  { port: '', name: 'pebble' }
-]
- 
 class PebbleRobot
   connection:
     name: 'pebble', adaptor: 'pebble'
+
   device:
     name: 'pebble', driver: 'pebble'
+
+  message: (robot, msg) =>
+    robot.message_queue().push(msg)
+
   work: (me) ->
     me.pebble.on('connect', ->
       console.log('connected!')
@@ -23,14 +21,14 @@ class SalesforceRobot
   connection:
     name: 'sfcon',
     adaptor: 'force',
-    sfuser: "edgarsilva@hybridgroup.com",
-    sfpass: "password1232YOQR0HQMpQ5f74msKqaPuCD6",
+    sfuser: process.env.SF_USERNAME,
+    sfpass: process.env.SF_SECURITY_TOKEN,
     orgCreds: {
-      clientId: '3MVG9A2kN3Bn17huqBLyrtmQ9Cgwc.FjKA4769ApTRhNNjgKEetcGv23W97cJQ3ER3VXxzyREIaD0Bp1Or8ou',
-      clientSecret: '6079348238616906521',
+      clientId: process.env.SF_CLIENT_ID,
+      clientSecret: process.env.SF_CLIENT_SECRET,
       redirectUri: 'http://localhost:3000/oauth/_callback'
     }
- 
+
   device:
     name: 'salesforce', driver: 'force'
  
@@ -43,15 +41,14 @@ class SalesforceRobot
         counter = data.sobject.Content__c
         Logger.info "Sphero: #{ spheroName }, data Content: #{ counter }, SM_Id: #{ data.sobject.Id }"
         me.master.findRobot(spheroName, (err, spheroBot) ->
-          spheroBot.devices.sphero.setRGB(0x00FF00)
-          spheroBot.devices.sphero.roll 90, Math.floor(Math.random() * 360)
+          spheroBot.react(spheroBot.devices.sphero)
         )
         me.spheroReport[spheroName] = counter
         toPebble = ""
         for key, val of me.spheroReport
-          toPebble += "#{key}: #{val}\n"
+          toPebble += "#{key}: $#{val}\n"
         me.master.findRobot('pebble', (error, pebbleBot) ->
-          pebbleBot.devices.pebble.message_queue().push(toPebble)
+          pebbleBot.message(pebbleBot.devices.pebble, toPebble)
         )
       )
     )
@@ -64,6 +61,9 @@ class SpheroRobot
   device:
     name: 'sphero', driver: 'sphero'
 
+  react: (robot) =>
+    robot.setRGB(0x00FF00)
+    robot.roll 90, Math.floor(Math.random() * 360)
  
   work: (me) ->
 
@@ -81,18 +81,23 @@ class SpheroRobot
       me.master.findRobot('salesforce', (err, sf) ->
         sf.devices.salesforce.push('SpheroController', 'POST', toSend)
       )
+
+sfRobot = new SalesforceRobot()
+sfRobot.name = "salesforce"
+Cylon.robot sfRobot
+pebRobot = new PebbleRobot()
+pebRobot.name = "pebble"
+Cylon.robot pebRobot
+
+bots = [
+  { port: '/dev/rfcomm0', name: 'ROY' },
+  { port: '/dev/rfcomm1', name: 'GPG'}
+]
  
 for bot in bots
-  switch bot.name
-    when 'salesforce'
-      robot = new SalesforceRobot
-    when 'pebble'
-      robot = new PebbleRobot
-    else
-      robot = new SpheroRobot
+  robot = new SpheroRobot
   robot.connection.port = bot.port
   robot.name = bot.name
-  console.log("Name: #{ robot.name }")
   Cylon.robot robot
 
 Cylon.start()
