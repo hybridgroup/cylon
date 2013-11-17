@@ -1,7 +1,7 @@
 Cylon = require('..')
- 
+
 Cylon.api host: '0.0.0.0', port: '8080'
- 
+
 class PebbleRobot
   connection:
     name: 'pebble', adaptor: 'pebble'
@@ -16,7 +16,7 @@ class PebbleRobot
     me.pebble.on('connect', ->
       console.log('connected!')
     )
- 
+
 class SalesforceRobot
   connection:
     name: 'sfcon',
@@ -31,7 +31,7 @@ class SalesforceRobot
 
   device:
     name: 'salesforce', driver: 'force'
- 
+
   spheroReport:{}
 
   work: (me) ->
@@ -52,19 +52,19 @@ class SalesforceRobot
         )
       )
     )
- 
+
 class SpheroRobot
   total_collisions: 0
   connection:
     name: 'sphero', adaptor: 'sphero'
- 
+
   device:
     name: 'sphero', driver: 'sphero'
 
   react: (robot) =>
     robot.setRGB(0x00FF00)
     robot.roll 90, Math.floor(Math.random() * 360)
- 
+
   work: (me) ->
 
     me.sphero.on 'connect', ->
@@ -73,7 +73,7 @@ class SpheroRobot
       me.sphero.stop()
       me.sphero.setRGB(0x00FF00)
       me.sphero.roll 90, Math.floor(Math.random() * 360)
- 
+
     me.sphero.on 'collision', (data) ->
       me.sphero.setRGB(0xFF0000, me)
       me.sphero.stop()
@@ -93,7 +93,7 @@ bots = [
   { port: '/dev/rfcomm0', name: 'ROY' },
   { port: '/dev/rfcomm1', name: 'GPG'}
 ]
- 
+
 for bot in bots
   robot = new SpheroRobot
   robot.connection.port = bot.port
