@@ -182,19 +182,24 @@
         return _results;
       };
 
-      Robot.prototype.requireAdaptor = function(adaptorName, connection) {
+      Robot.prototype.requireAdaptor = function(adaptorName, connection, opts) {
+        if (opts == null) {
+          opts = {};
+        }
         if (this.robot.adaptors[adaptorName] != null) {
           if (typeof this.robot.adaptors[adaptorName] === 'string') {
             this.robot.adaptors[adaptorName] = require(this.robot.adaptors[adaptorName]).adaptor({
               name: adaptorName,
-              connection: connection
+              connection: connection,
+              extraParams: opts
             });
           }
         } else {
           require("cylon-" + adaptorName).register(this);
           this.robot.adaptors[adaptorName] = require("cylon-" + adaptorName).adaptor({
             name: adaptorName,
-            connection: connection
+            connection: connection,
+            extraParams: opts
           });
         }
         return this.robot.adaptors[adaptorName];

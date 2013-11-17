@@ -38,7 +38,7 @@
         this.robot = opts.robot;
         this.name = opts.name;
         this.connection_id = opts.id;
-        this.adaptor = this.requireAdaptor(opts.adaptor);
+        this.adaptor = this.requireAdaptor(opts);
         this.port = new Cylon.Port(opts.port);
         proxyFunctionsToObject(this.adaptor.commands(), this.adaptor, this.self);
       }
@@ -72,9 +72,9 @@
         return this.adaptor.disconnect();
       };
 
-      Connection.prototype.requireAdaptor = function(adaptorName) {
-        Logger.debug("Loading adaptor '" + adaptorName + "'");
-        return this.robot.requireAdaptor(adaptorName, this.self);
+      Connection.prototype.requireAdaptor = function(opts) {
+        Logger.debug("Loading adaptor '" + opts.adaptor + "'");
+        return this.robot.requireAdaptor(opts.adaptor, this.self, opts);
       };
 
       return Connection;
