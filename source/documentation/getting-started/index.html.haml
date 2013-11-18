@@ -30,26 +30,24 @@ layout: page
   = link_to "http://nodejs.org/download/", "http://nodejs.org/download/", target:"blank"  
   download the installer file and run it.
 
+  %h2 How to Install CoffeeScript (Optional)
+  %p 
+    If you want to program Cylon.js using CoffeeScript, it is easy to install using NPM, the Node Package Manager:
+  :markdown
+        :::javascript
+        npm install -g coffee-script
+  %p 
+    You might need to install under the 'root' user by running the above install command using `sudo`.
+
 %section.cylon-installation
   %h2 How to Install Cylon.js
-  :markdown
-    In order to use Cylon.js, you must install the Cylon.js node modules needed to control your particular hardware setup. For example, to use Cylon.js with an Arduino, you will need to install the `cylon-firmata` module. Check out these examples:
-
-  %h3 OSX
-  :markdown
-        :::javascript
-        npm install cylon
-        npm install cylon-firmata
-
-  %h3 Ubuntu
-  :markdown
-        :::javascript
-        npm install cylon
-        npm install cylon-firmata
-
-  %h3 Windows
   %p
-    Windows setup for cylon.
+    In order to use Cylon.js, you must install the Cylon.js node modules needed to control your particular hardware setup. For example, to use Cylon.js with an Arduino, you will need to install the `cylon-firmata` module. Check out this example:
+
+  :markdown
+        :::javascript
+        npm install cylon
+        npm install cylon-firmata
 
   %section.cylon-running
   %h2 Cylon.js Robots
@@ -75,10 +73,36 @@ layout: page
 %section.cylon-code
   %h2 Cylon.js Code Examples
 
+  %h3 Example: Hello
+  %h4 JavaScript
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'looped', adaptor: 'loopback'},
+
+          work: function() {
+            every((1).second(), function() { Logger.info("Hello, human!"); });
+          }
+        }).start();
+
+  %h4 CoffeeScript
+  :markdown
+        :::javascript
+        Cylon = require 'cylon'
+
+        Cylon.robot
+          work: ->
+            every 1.second(), ->
+              Logger.info("Hello, human!")
+
+        .start()
+
   %h3 Example: Arduino with LED and a button
   :markdown
     To use this example, you must first run `npm install cylon-firmata`
-  %h4 Javascript
+  %h4 JavaScript
   :markdown
         :::javascript
        
@@ -117,7 +141,7 @@ layout: page
   %h3 Parrot ARDrone 2.0
   :markdown
     To use this example, you must first run `npm install cylon-ardrone`
-  %h4 Javascript
+  %h4 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon');
