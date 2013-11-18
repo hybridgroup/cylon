@@ -1,13 +1,6 @@
 Cylon = require('..')
 
-bots = [
-  { port: '/dev/rfcomm0', name: 'sphy-rgr' },
-  { port: '/dev/rfcomm1', name: 'sphy-bpy' }
-  { name: 'salesforce' }
-]
-
 class SalesforceRobot
-
   connection:
     name: 'sfcon',
     adaptor: 'force',
@@ -23,27 +16,31 @@ class SalesforceRobot
     name: 'salesforce', driver: 'force'
 
   work: (me) ->
-
     me.salesforce.on('start', () ->
       me.salesforce.subscribe('/topic/SpheroMsgOutbound', (data) ->
         spheroName = data.sobject.Sphero_Name__c
-        Logger.info "Sphero: #{ spheroName }, data Content: #{ data.sobject.Content__c }, SM_Id: #{ data.sobject.Id }"
+        bucks = data.sobject.Bucks__c
+        Logger.info "Sphero: #{ spheroName }, data Bucks: #{ bucks }, SM_Id: #{ data.sobject.Id }"
         me.master.findRobot(spheroName, (err, spheroBot) ->
-          spheroBot.devices.sphero.setRGB(0x00FF00)
-          spheroBot.devices.sphero.roll 90, Math.floor(Math.random() * 360)
+          spheroBot.react(spheroBot.devices.sphero)
         )
       )
     )
 
 class SpheroRobot
+  totalBucks: 0
+
   connection:
-    name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'
+    name: 'sphero', adaptor: 'sphero'
 
   device:
     name: 'sphero', driver: 'sphero'
 
-  work: (me) ->
+  react: (robot) =>
+    robot.setRGB(0x00FF00)
+    robot.roll 90, Math.floor(Math.random() * 360)
 
+  work: (me) ->
     me.sphero.on 'connect', ->
       Logger.info('Setting up Collision Detection...')
       me.sphero.detectCollisions()
@@ -52,18 +49,20 @@ class SpheroRobot
       me.sphero.roll 90, Math.floor(Math.random() * 360)
 
     me.sphero.on 'collision', (data) ->
-      me.sphero.setRGB(0xFF0000, me)
+      me.sphero.setRGB(0x0000FF, me)
       me.sphero.stop()
-      toSend = "{ \"identifier\" :\"#{ me.name }\", \"msg\": \"#{ 'Collision detected' }\" }"
+      toSend = "{ \"spheroName\" :\"#{ me.name }\", \"bucks\": \"#{ me.totalBucks++ }\" }"
       me.master.findRobot('salesforce', (err, sf) ->
         sf.devices.salesforce.push('SpheroController', 'POST', toSend)
       )
 
-for bot in bots
-  robot = if ( bot.name == 'salesforce' ) then new SalesforceRobot else new SpheroRobot
-  robot.connection.port = bot.port
-  robot.name = bot.name
-  console.log("Name: #{ robot.name }")
-  Cylon.robot robot
+sfRobot = new SalesforceRobot()
+sfRobot.name = "salesforce"
+Cylon.robot sfRobot
+
+spheroRobot = new SpheroRobot()
+spheroRobot.name = 'ROY'
+spheroRobot.port = '/dev/rfcomm0'
+Cylon.robot spheroRobot
 
 Cylon.start()

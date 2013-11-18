@@ -38,12 +38,12 @@ class SalesforceRobot
     me.salesforce.on('start', () ->
       me.salesforce.subscribe('/topic/SpheroMsgOutbound', (data) ->
         spheroName = data.sobject.Sphero_Name__c
-        counter = data.sobject.Content__c
-        Logger.info "Sphero: #{ spheroName }, data Content: #{ counter }, SM_Id: #{ data.sobject.Id }"
+        bucks = data.sobject.Bucks__c
+        Logger.info "Sphero: #{ spheroName }, data Bucks: #{ bucks }, SM_Id: #{ data.sobject.Id }"
         me.master.findRobot(spheroName, (err, spheroBot) ->
           spheroBot.react(spheroBot.devices.sphero)
         )
-        me.spheroReport[spheroName] = counter
+        me.spheroReport[spheroName] = bucks
         toPebble = ""
         for key, val of me.spheroReport
           toPebble += "#{key}: $#{val}\n"
@@ -54,7 +54,9 @@ class SalesforceRobot
     )
 
 class SpheroRobot
-  total_collisions: 0
+  totalBucks: 1
+  payingPower: true
+
   connection:
     name: 'sphero', adaptor: 'sphero'
 
@@ -64,6 +66,18 @@ class SpheroRobot
   react: (robot) =>
     robot.setRGB(0x00FF00)
     robot.roll 90, Math.floor(Math.random() * 360)
+    @payingPower = true
+
+  bankrupt: () ->
+    every 3.seconds(), () ->
+      me.totalBucks-- if payingPower and me.totalBucks > 0
+      if me.totalBucks == 0
+        me.sphero.setRGB(0xFF0000, me)
+        me.sphero.stop()
+
+  changeDirection: () ->
+    every 1.seconds(), () ->
+      me.sphero.roll 90, Math.floor(Math.random() * 360) if @payingPower
 
   work: (me) ->
 
@@ -73,11 +87,14 @@ class SpheroRobot
       me.sphero.stop()
       me.sphero.setRGB(0x00FF00)
       me.sphero.roll 90, Math.floor(Math.random() * 360)
+      me.bankrupt()
+      me.changeDirection()
 
     me.sphero.on 'collision', (data) ->
-      me.sphero.setRGB(0xFF0000, me)
+      me.sphero.setRGB(0x0000FF, me)
       me.sphero.stop()
-      toSend = "{ \"identifier\" :\"#{ me.name }\", \"msg\": \"#{ me.total_collisions++ }\" }"
+      me.payingPower = false
+      toSend = "{ \"spheroName\" :\"#{ me.name }\", \"bucks\": \"#{ me.totalBucks++ }\" }"
       me.master.findRobot('salesforce', (err, sf) ->
         sf.devices.salesforce.push('SpheroController', 'POST', toSend)
       )
