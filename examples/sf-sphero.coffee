@@ -28,8 +28,7 @@ class SalesforceRobot
     )
 
 class SpheroRobot
-  totalBucks: 1
-  payingPower: true
+  totalBucks: 0
 
   connection:
     name: 'sphero', adaptor: 'sphero'
@@ -40,15 +39,8 @@ class SpheroRobot
   react: (robot) =>
     robot.setRGB(0x00FF00)
     robot.roll 90, Math.floor(Math.random() * 360)
-    @payingPower = true
 
   work: (me) ->
-    every 1.seconds(), () ->
-      me.totalBucks-- if payingPower and me.totalBucks > 0
-      if me.totalBucks == 0
-        me.sphero.setRGB(0x0000FF, me)
-        me.sphero.stop()
-
     me.sphero.on 'connect', ->
       Logger.info('Setting up Collision Detection...')
       me.sphero.detectCollisions()
@@ -59,7 +51,6 @@ class SpheroRobot
     me.sphero.on 'collision', (data) ->
       me.sphero.setRGB(0x0000FF, me)
       me.sphero.stop()
-      me.payingPower = false
       toSend = "{ \"spheroName\" :\"#{ me.name }\", \"bucks\": \"#{ me.totalBucks++ }\" }"
       me.master.findRobot('salesforce', (err, sf) ->
         sf.devices.salesforce.push('SpheroController', 'POST', toSend)
@@ -69,15 +60,9 @@ sfRobot = new SalesforceRobot()
 sfRobot.name = "salesforce"
 Cylon.robot sfRobot
 
-bots = [
-  { port: '/dev/rfcomm0', name: 'ROY' },
-  { port: '/dev/rfcomm1', name: 'GPG'}
-]
-
-for bot in bots
-  robot = new SpheroRobot
-  robot.connection.port = bot.port
-  robot.name = bot.name
-  Cylon.robot robot
+spheroRobot = new SpheroRobot()
+spheroRobot.name = 'ROY'
+spheroRobot.port = '/dev/rfcomm0'
+Cylon.robot spheroRobot
 
 Cylon.start()
