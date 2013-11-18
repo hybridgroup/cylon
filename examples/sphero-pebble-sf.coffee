@@ -75,7 +75,7 @@ class SpheroRobot
         me.sphero.setRGB(0xFF0000, me)
         me.sphero.stop()
 
-  changeDirection: ()
+  changeDirection: () ->
     every 1.seconds(), () ->
       me.sphero.roll 90, Math.floor(Math.random() * 360) if @payingPower
 
