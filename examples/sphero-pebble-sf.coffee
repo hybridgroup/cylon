@@ -1,22 +1,22 @@
 Cylon = require('..')
-
+ 
 Cylon.api host: '0.0.0.0', port: '8080'
-
+ 
 class PebbleRobot
   connection:
     name: 'pebble', adaptor: 'pebble'
-
+ 
   device:
     name: 'pebble', driver: 'pebble'
-
+ 
   message: (robot, msg) =>
     robot.message_queue().push(msg)
-
+ 
   work: (me) ->
     me.pebble.on('connect', ->
-      console.log('connected!')
+      Logger.info 'connected!'
     )
-
+ 
 class SalesforceRobot
   connection:
     name: 'sfcon',
@@ -28,12 +28,12 @@ class SalesforceRobot
       clientSecret: process.env.SF_CLIENT_SECRET,
       redirectUri: 'http://localhost:3000/oauth/_callback'
     }
-
+ 
   device:
     name: 'salesforce', driver: 'force'
-
+ 
   spheroReport:{}
-
+ 
   work: (me) ->
     me.salesforce.on('start', () ->
       me.salesforce.subscribe('/topic/SpheroMsgOutbound', (data) ->
@@ -52,35 +52,36 @@ class SalesforceRobot
         )
       )
     )
-
+ 
 class SpheroRobot
   totalBucks: 1
   payingPower: true
-
+ 
   connection:
     name: 'sphero', adaptor: 'sphero'
-
+ 
   device:
     name: 'sphero', driver: 'sphero'
-
-  react: (robot) =>
-    robot.setRGB(0x00FF00)
-    robot.roll 90, Math.floor(Math.random() * 360)
-    @payingPower = true
-
+ 
+  react: (device) ->
+    device.setRGB(0x00FF00)
+    device.roll 90, Math.floor(Math.random() * 360)
+    this.payingPower = true
+ 
   bankrupt: () ->
-    every 3.seconds(), () ->
-      me.totalBucks-- if payingPower and me.totalBucks > 0
-      if me.totalBucks == 0
-        me.sphero.setRGB(0xFF0000, me)
-        me.sphero.stop()
-
+    every 3.seconds(), () =>
+      if this.payingPower and this.totalBucks > 0
+        this.totalBucks += -1
+        if @totalBucks == 0
+          this.sphero.setRGB(0xFF000)
+          this.sphero.stop()
+ 
   changeDirection: () ->
-    every 1.seconds(), () ->
-      me.sphero.roll 90, Math.floor(Math.random() * 360) if @payingPower
-
+    every 1.seconds(), () =>
+      this.sphero.roll 90, Math.floor(Math.random() * 360) if @payingPower
+ 
   work: (me) ->
-
+ 
     me.sphero.on 'connect', ->
       Logger.info('Setting up Collision Detection...')
       me.sphero.detectCollisions()
@@ -89,32 +90,33 @@ class SpheroRobot
       me.sphero.roll 90, Math.floor(Math.random() * 360)
       me.bankrupt()
       me.changeDirection()
-
+ 
     me.sphero.on 'collision', (data) ->
-      me.sphero.setRGB(0x0000FF, me)
+      me.sphero.setRGB(0x0000FF)
       me.sphero.stop()
       me.payingPower = false
       toSend = "{ \"spheroName\" :\"#{ me.name }\", \"bucks\": \"#{ me.totalBucks++ }\" }"
       me.master.findRobot('salesforce', (err, sf) ->
         sf.devices.salesforce.push('SpheroController', 'POST', toSend)
       )
-
+ 
 sfRobot = new SalesforceRobot()
 sfRobot.name = "salesforce"
 Cylon.robot sfRobot
 pebRobot = new PebbleRobot()
 pebRobot.name = "pebble"
 Cylon.robot pebRobot
-
+ 
 bots = [
-  { port: '/dev/rfcomm0', name: 'ROY' },
-  { port: '/dev/rfcomm1', name: 'GPG'}
+  { port: '/dev/tty.Sphero-ROY-AMP-SPP', name: 'ROY' },
+  { port: '/dev/tty.Sphero-GBO-AMP-SPP', name: 'GBO'},
+  { port: '/dev/tty.Sphero-RRY-AMP-SPP', name: 'RRY'}
 ]
-
+ 
 for bot in bots
   robot = new SpheroRobot
   robot.connection.port = bot.port
   robot.name = bot.name
   Cylon.robot robot
-
+ 
 Cylon.start()

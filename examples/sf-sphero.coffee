@@ -62,7 +62,7 @@ Cylon.robot sfRobot
 
 spheroRobot = new SpheroRobot()
 spheroRobot.name = 'ROY'
-spheroRobot.port = '/dev/rfcomm0'
+spheroRobot.connection.port = '/dev/rfcomm0'
 Cylon.robot spheroRobot
 
 Cylon.start()
