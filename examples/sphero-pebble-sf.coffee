@@ -68,12 +68,18 @@ class SpheroRobot
     robot.roll 90, Math.floor(Math.random() * 360)
     @payingPower = true
 
-  work: (me) ->
-    every 1.seconds(), () ->
+  bankrupt: () ->
+    every 3.seconds(), () ->
       me.totalBucks-- if payingPower and me.totalBucks > 0
       if me.totalBucks == 0
-        me.sphero.setRGB(0x0000FF, me)
+        me.sphero.setRGB(0xFF0000, me)
         me.sphero.stop()
+
+  changeDirection: ()
+    every 1.seconds(), () ->
+      me.sphero.roll 90, Math.floor(Math.random() * 360) if @payingPower
+
+  work: (me) ->
 
     me.sphero.on 'connect', ->
       Logger.info('Setting up Collision Detection...')
@@ -81,6 +87,8 @@ class SpheroRobot
       me.sphero.stop()
       me.sphero.setRGB(0x00FF00)
       me.sphero.roll 90, Math.floor(Math.random() * 360)
+      me.bankrupt()
+      me.changeDirection()
 
     me.sphero.on 'collision', (data) ->
       me.sphero.setRGB(0x0000FF, me)
