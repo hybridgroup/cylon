@@ -54,7 +54,7 @@ class SalesforceRobot
     )
 
 class SpheroRobot
-  totalBucks: 0
+  totalBucks: 1
   payingPower: true
 
   connection:
@@ -69,8 +69,11 @@ class SpheroRobot
     @payingPower = true
 
   work: (me) ->
-    every 1.seconds, () ->
+    every 1.seconds(), () ->
       me.totalBucks-- if payingPower and me.totalBucks > 0
+      if me.totalBucks == 0
+        me.sphero.setRGB(0x0000FF, me)
+        me.sphero.stop()
 
     me.sphero.on 'connect', ->
       Logger.info('Setting up Collision Detection...')
@@ -80,7 +83,7 @@ class SpheroRobot
       me.sphero.roll 90, Math.floor(Math.random() * 360)
 
     me.sphero.on 'collision', (data) ->
-      me.sphero.setRGB(0xFF0000, me)
+      me.sphero.setRGB(0x0000FF, me)
       me.sphero.stop()
       me.payingPower = false
       toSend = "{ \"spheroName\" :\"#{ me.name }\", \"bucks\": \"#{ me.totalBucks++ }\" }"

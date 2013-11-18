@@ -27,7 +27,7 @@ class SalesforceRobot
     me.salesforce.on('start', () ->
       me.salesforce.subscribe('/topic/SpheroMsgOutbound', (data) ->
         spheroName = data.sobject.Sphero_Name__c
-        Logger.info "Sphero: #{ spheroName }, data Content: #{ data.sobject.Content__c }, SM_Id: #{ data.sobject.Id }"
+        Logger.info "Sphero: #{ spheroName }, data Content: #{ data.sobject.Bucks__c }, SM_Id: #{ data.sobject.Id }"
         me.master.findRobot(spheroName, (err, spheroBot) ->
           spheroBot.devices.sphero.setRGB(0x00FF00)
           spheroBot.devices.sphero.roll 90, Math.floor(Math.random() * 360)
@@ -54,7 +54,7 @@ class SpheroRobot
     me.sphero.on 'collision', (data) ->
       me.sphero.setRGB(0xFF0000, me)
       me.sphero.stop()
-      toSend = "{ \"identifier\" :\"#{ me.name }\", \"msg\": \"#{ 'Collision detected' }\" }"
+      toSend = "{ \"spheroName\" :\"#{ me.name }\", \"bucks\": \"#{ 'Collision detected' }\" }"
       me.master.findRobot('salesforce', (err, sf) ->
         sf.devices.salesforce.push('SpheroController', 'POST', toSend)
       )

@@ -19,11 +19,13 @@ Cylon.robot
 
     me.salesforce.on('start', () ->
       me.salesforce.subscribe('/topic/SpheroMsgOutbound', (data) ->
-        Logger.info "Sphero: #{ data.sobject.Sphero_Name__c }, data Content: #{ data.sobject.Content__c }, SM_Id: #{ data.sobject.Id }"
+        Logger.info "Sphero: #{ data.sobject.Sphero_Name__c }, Bucks: #{ data.sobject.Bucks__c }, SM_Id: #{ data.sobject.Id }"
       )
     )
 
+    i = 0
+    every 2.seconds()
     # push(apexPath, method, body)
-    toSend = "{ \"identifier\" :\"#{ me.name }\", \"msg\": \"#{ 'Salesforce Bot #2' }\" }"
-    me.salesforce.push('SpheroController', 'POST', toSend)
+      toSend = "{ \"spheroName\" :\"#{ me.name }\", \"bucks\": \"#{ i }\" }"
+      me.salesforce.push('SpheroController', 'POST', toSend)
 .start()
