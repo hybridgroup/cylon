@@ -24,8 +24,9 @@ Cylon.robot
     )
 
     i = 0
-    every 2.seconds()
-    # push(apexPath, method, body)
+    every 2.seconds(), () ->
+      # push(apexPath, method, body)
       toSend = "{ \"spheroName\" :\"#{ me.name }\", \"bucks\": \"#{ i }\" }"
       me.salesforce.push('SpheroController', 'POST', toSend)
+
 .start()
