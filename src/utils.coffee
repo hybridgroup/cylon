@@ -14,7 +14,7 @@
 #
 # Returns an interval
 # Examples:
-#   every(10.seconds(), -> console.log("hello world (and again in 5 seconds)!"))
+#   every 5.seconds(), -> console.log("hello world (and again in 5 seconds)!")
 global.every = (interval, action) ->
   setInterval action, interval
 
@@ -26,7 +26,7 @@ global.every = (interval, action) ->
 #
 # Returns an interval
 # Examples:
-#   after(10.seconds(), -> console.log("hello world from ten seconds ago!"))
+#   after 10.seconds(), -> console.log("hello world from ten seconds ago!")
 global.after = (delay, action) ->
   setTimeout action, delay
 
@@ -47,7 +47,7 @@ global.proxyFunctionsToObject = (methods, target, base = this, force = false) ->
     do (method) ->
       base[method] = (args...) -> target[method](args...)
 
-  return base
+  base
 
 # Public: Monkey-patches Number to have Rails-like #seconds() function. Warning,
 # due to the way the Javascript parser works, applying functions on numbers is
