@@ -38,17 +38,12 @@ layout: page
               name: 'sensor', driver: 'analogSensor', pin: 0, lowerLimit: 100, upperLimit: 900
             ...
 
-    -#%h3 For Digispark:
-    -#:markdown
-          -#:::ruby
-
   %section.public-methods
     %h2 Commands:
     %dl.methods 
       %dt analogRead(pin_number) → integer_value
       %dd Returns an integer value that represents the analog read from the sensor.
     
-
   %section.public-events
     %h2 Events:
 
@@ -66,12 +61,6 @@ layout: page
       %dd Gets triggered if the value read by the sensor is less or equal to lowerLimit (value passed when setting up the sensor).
       %dt start
       %dd Sent when the device has been started and is ready to use.
-
-
-    -#%h3 How to use events and call them on your drivers
-    -#%p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
-    -#:markdown
-          -#:::ruby
 
   %section.how-to
     %h2 How to use
