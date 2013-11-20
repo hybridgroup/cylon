@@ -9,8 +9,7 @@ layout: page
   %section.intro
     = image_tag "/images/pebble.jpg", class: "display"
 
-    %p
-      The Pebble is a smart watch, that connects via bluetooth.
+    %p The Pebble is a smart watch, that connects via bluetooth.
 
     %p
       For more info about the Pebble platform click
@@ -19,28 +18,15 @@ layout: page
 
   %section.how-to
     %h2 How to install
-    %p
-      Installing Cylon.js with pebble support is pretty easy using ruby gems.
+    %p Installing Cylon.js with pebble support is pretty easy using ruby gems.
     :markdown
           :::bash
           gem install Cylon.js-pebble
     %h2 How to use
-    %p
-      This small program receives button press events from a Pebble smart watch.
+    %p This small program receives button press events from a Pebble smart watch.
     :markdown
-          :::ruby
-          require 'Cylon.js'
-
-          connection :pebble, :adaptor => :pebble, :port => "/dev/rfcomm0", :id => "378B"
-          device :watch, :driver => :pebble
-
-          work do
-            on watch, :media_control => :button_push
-          end
-
-          def button_push(caller, data)
-            puts data.button unless data.nil?
-          end
+          :::javascript
+          ...
     %h2 How to connect
     %p This software requires version 1.12.0 of the Pebble watch firmware.
 
@@ -95,8 +81,7 @@ layout: page
 
   %section.drivers
     %h2 Drivers
-    %p
-      There is only one driver for the Pebble platform, as listed below.
+    %p There is only one driver for the Pebble platform, as listed below.
 
     .hardware
       .devices

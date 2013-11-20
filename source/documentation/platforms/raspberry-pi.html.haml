@@ -16,19 +16,15 @@ layout: page
       = succeed "." do
         = link_to "http://www.raspberrypi.org/", "http://www.raspberrypi.org/", target: :blank
 
-
   %section.how-to
     %h2 How to install
-    
-    %p
-      Installing cylon.js with raspberri-pi support is pretty easy.
+    %p Installing cylon.js with raspberri-pi support is pretty easy.
     :markdown
           :::bash
           npm install cylon-raspi
 
     %h2 How to use
-    %p
-      This small program causes an LED to blink.
+    %p This small program causes an LED to blink.
     %h3 JavaScript
     :markdown
           :::javascript
@@ -71,10 +67,7 @@ layout: page
 
     %h2 How to connect
     %h3 Connecting to Raspberry Pi GPIO
-    %p
-      This module only works on a real Raspberry Pi. Do not bother trying on any other kind of
-      computer it will not work. Also note you will need to connect actual circuits to the Raspberry Pi's
-      GPIO pins.
+    %p This module only works on a real Raspberry Pi. Do not bother trying on any other kind of computer it will not work. Also note you will need to connect actual circuits to the Raspberry Pi's GPIO pins.
 
     %h3 Enabling the Raspberry Pi i2c on raspbian
     %p You must add these two entries in your /etc/modules
@@ -95,11 +88,9 @@ layout: page
 
     %h3 Enabling PWM output on GPIO pins.
 
-    %p
-      You need to install and have pi-blaster running in the raspberry-pi, you can follow
-      the instructions for pi-blaster install on our repo here:
+    %p You need to install and have pi-blaster running in the raspberry-pi, you can follow the instructions for pi-blaster install on our repo here:
 
-    %a{ href:"https://github.com/hybridgroup/pi-blaster" } https://github.com/hybridgroup/pi-blaster
+    =link_to "https://github.com/hybridgroup/pi-blaster" , "https://github.com/hybridgroup/pi-blaster"
 
   %section.drivers
     %h2 Drivers
