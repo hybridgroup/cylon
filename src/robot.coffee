@@ -171,10 +171,22 @@ namespace 'Cylon', ->
     requireAdaptor: (adaptorName, connection, opts = {}) ->
       if @robot.adaptors[adaptorName]?
         if typeof @robot.adaptors[adaptorName] is 'string'
-          @robot.adaptors[adaptorName] = require(@robot.adaptors[adaptorName]).adaptor(name: adaptorName, connection: connection, extraParams: opts)
+          @robot.adaptors[adaptorName] = require(
+              @robot.adaptors[adaptorName]
+            ).adaptor(
+              name: adaptorName,
+              connection: connection,
+              extraParams: opts
+            )
       else
         require("cylon-#{adaptorName}").register(this)
-        @robot.adaptors[adaptorName] = require("cylon-#{adaptorName}").adaptor(name: adaptorName, connection: connection, extraParams: opts)
+        @robot.adaptors[adaptorName] = require(
+            "cylon-#{adaptorName}"
+          ).adaptor(
+            name: adaptorName,
+            connection: connection,
+            extraParams: opts
+          )
 
       return @robot.adaptors[adaptorName]
 
@@ -197,10 +209,22 @@ namespace 'Cylon', ->
     requireDriver: (driverName, device, opts = {}) ->
       if @robot.drivers[driverName]?
         if typeof @robot.drivers[driverName] is 'string'
-          @robot.drivers[driverName] = require(@robot.drivers[driverName]).driver(name: driverName, device: device, extraParams: opts)
+          @robot.drivers[driverName] = require(
+              @robot.drivers[driverName]
+            ).driver(
+              name: driverName,
+              device: device,
+              extraParams: opts
+            )
       else
         require("cylon-#{driverName}").register(this)
-        @robot.drivers[driverName] = require("cylon-#{driverName}").driver(name: driverName, device: device, extraParams: opts)
+        @robot.drivers[driverName] = require(
+            "cylon-#{driverName}"
+          ).driver(
+            name: driverName,
+            device: device,
+            extraParams: opts
+          )
 
       return @robot.drivers[driverName]
 

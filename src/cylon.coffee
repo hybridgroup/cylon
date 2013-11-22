@@ -148,14 +148,11 @@ class Cylon
       do @startAPI
       robot.start() for robot in robots
 
-
     # Public: Stops the API and the robots
     #
     # Returns nothing
     stop: ->
-      #do @stopAPI
       robot.stop() for robot in robots
-
 
     # Creates a new instance of the Cylon API server, or returns the
     # already-existing one.

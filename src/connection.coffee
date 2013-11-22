@@ -35,8 +35,8 @@ namespace 'Cylon', ->
       @robot = opts.robot
       @name = opts.name
       @connection_id = opts.id
-      @adaptor = @requireAdaptor(opts) # or 'loopback')
-      @port = new Cylon.Port(opts.port)
+      @adaptor = @requireAdaptor opts
+      @port = new Cylon.Port opts.port
       proxyFunctionsToObject @adaptor.commands(), @adaptor, @self
 
     # Public: Exports basic data for the Connection
