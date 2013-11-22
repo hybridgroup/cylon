@@ -6,7 +6,7 @@
  * Licensed under the Apache 2.0 license.
 ###
 
-'use strict';
+'use strict'
 
 module.exports =
   adaptor: (args...) ->

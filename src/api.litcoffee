@@ -7,7 +7,7 @@ First of all, let's make sure we're running in ECMAScript 5's [strict mode][].
 
 [strict mode]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode
 
-    'use strict';
+    'use strict'
 
 ## Dependencies
 
