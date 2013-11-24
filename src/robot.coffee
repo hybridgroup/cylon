@@ -177,9 +177,8 @@ namespace 'Cylon', ->
     # Public: Requires a hardware adaptor and adds it to @robot.adaptors
     #
     # adaptorName - module name of adaptor to require
-    # connection - the Connection that requested the adaptor be required
     #
-    # Returns the set-up adaptor
+    # Returns the module for the adaptor
     requireAdaptor: (adaptorName) =>
       unless @robot.adaptors[adaptorName]?
         @robot.registerAdaptor "cylon-#{adaptorName}", adaptorName
@@ -200,6 +199,7 @@ namespace 'Cylon', ->
     #
     # driverName - driver name
     # device - the Device that requested the driver be initialized
+    # opts - object containing options when initializing driver
     #
     # Returns the new driver
     initDriver: (driverName, device, opts = {}) ->

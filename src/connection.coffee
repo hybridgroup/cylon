@@ -50,7 +50,7 @@ namespace 'Cylon', ->
         connection_id: @connection_id
       }
 
-    # Public: Creates the adaptor connection
+    # Public: Connect the adaptor's connection
     #
     # callback - callback function to run when the adaptor is connected
     #
@@ -61,7 +61,7 @@ namespace 'Cylon', ->
       Logger.info msg
       @adaptor.connect(callback)
 
-    # Public: Closes the adaptor connection
+    # Public: Disconnect the adaptor's connection
     #
     # Returns nothing
     disconnect: ->
@@ -72,7 +72,8 @@ namespace 'Cylon', ->
 
     # Public: sets up adaptor with @robot
     #
-    # adaptorName - module name of adaptor to require
+    # opts - options for adaptor being initialized
+    #   adaptor - name of the adaptor
     #
     # Returns the set-up adaptor
     initAdaptor: (opts) ->
