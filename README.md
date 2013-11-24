@@ -20,6 +20,8 @@ Then install modules for whatever hardware support you want to use from your rob
 
     npm install cylon-firmata
 
+Make sure to upload the "Standard Firmata" sketch or an equivalent firmata sketch to your Arduino first. Without that code running on the Arduino, firmata can't communicate with Cylon. You can find the example sketch in Examples > Firmata > StandardFirmata.
+
 ## Examples
 
 The example below connects to an Arduino that has the Firmata sketch installed, and that is connected on the port `/dev/ttyACM0`. Every second, it turns the LED either on, or off. You need to install Firmata on your Arduino, and to change the `port` parameter to match the port that your system is actually using.
@@ -31,6 +33,7 @@ var Cylon = require("cylon");
 
 // Initialize the robot
 var robot = Cylon.robot({
+  // Change the port to the correct port for your Arduino.
   connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
   device: { name: 'led', driver: 'led', pin: 13 },
 
