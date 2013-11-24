@@ -7,14 +7,14 @@
   source("robot");
 
   describe("Connection", function() {
-    var adaptor, connection, requireAdaptor, robot;
+    var adaptor, connection, initAdaptor, robot;
     robot = new Cylon.Robot({
       name: 'me'
     });
     adaptor = new Cylon.Adaptor({
       name: 'loopback'
     });
-    requireAdaptor = sinon.stub(robot, 'requireAdaptor').returns(adaptor);
+    initAdaptor = sinon.stub(robot, 'initAdaptor').returns(adaptor);
     connection = new Cylon.Connection({
       name: "connective",
       adaptor: "loopback",

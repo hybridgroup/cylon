@@ -35,7 +35,7 @@ namespace 'Cylon', ->
       @robot = opts.robot
       @name = opts.name
       @connection_id = opts.id
-      @adaptor = @requireAdaptor opts
+      @adaptor = @initAdaptor opts
       @port = new Cylon.Port opts.port
       proxyFunctionsToObject @adaptor.commands(), @adaptor, @self
 
@@ -75,8 +75,8 @@ namespace 'Cylon', ->
     # adaptorName - module name of adaptor to require
     #
     # Returns the set-up adaptor
-    requireAdaptor: (opts) ->
+    initAdaptor: (opts) ->
       Logger.debug "Loading adaptor '#{opts.adaptor}'"
-      @robot.requireAdaptor(opts.adaptor, @self, opts)
+      @robot.initAdaptor(opts.adaptor, @self, opts)
 
 module.exports = Cylon.Connection

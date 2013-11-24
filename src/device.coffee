@@ -34,7 +34,7 @@ namespace 'Cylon', ->
       @name = opts.name
       @pin = opts.pin
       @connection = @determineConnection(opts.connection) or @defaultConnection()
-      @driver = @requireDriver(opts)
+      @driver = @initDriver(opts)
       proxyFunctionsToObject @driver.commands(), @driver, @self
 
     # Public: Starts the device driver
@@ -86,12 +86,12 @@ namespace 'Cylon', ->
 
     # Public: sets up driver with @robot
     #
-    # opts - object containing options when requiring driver
-    #   driver - name of the module to require()
+    # opts - object containing options when initializing driver
+    #   driver - name of the driver to intt()
     #
     # Returns the set-up driver
-    requireDriver: (opts = {}) ->
+    initDriver: (opts = {}) ->
       Logger.debug "Loading driver '#{ opts.driver }'"
-      @robot.requireDriver(opts.driver, @self, opts)
+      @robot.initDriver(opts.driver, @self, opts)
 
 module.exports = Cylon.Device

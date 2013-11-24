@@ -7,7 +7,7 @@ source "robot"
 describe "Connection", ->
   robot = new Cylon.Robot(name: 'me')
   adaptor = new Cylon.Adaptor(name: 'loopback')
-  requireAdaptor = sinon.stub(robot, 'requireAdaptor').returns(adaptor)
+  initAdaptor = sinon.stub(robot, 'initAdaptor').returns(adaptor)
   connection = new Cylon.Connection
     name: "connective"
     adaptor: "loopback"
