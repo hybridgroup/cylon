@@ -12,7 +12,7 @@ Want to use Ruby on robots? Check out our sister project Artoo
 Want to use the Go programming language to power your robots? Check out our
 sister project Gobot (http://gobot.io).
 
-[![NPM](https://nodei.co/npm/cylon.png?compact=true)](https://nodei.co/npm/cylon/) [![Build Status](https://secure.travis-ci.org/hybridgroup/cylon.png?branch=master)](http://travis-ci.org/hybridgroup/cylon)
+[![Build Status](https://secure.travis-ci.org/hybridgroup/cylon.png?branch=master)](http://travis-ci.org/hybridgroup/cylon)
 
 ## Getting Started
 
@@ -110,13 +110,17 @@ using [Grunt](http://gruntjs.com/).
 
 ## Release History
 
-Version 0.1.0 - Initial release for ongoing development
+[![NPM](https://nodei.co/npm/cylon.png?compact=true)](https://nodei.co/npm/cylon/) 
 
-Version 0.2.0 - Cylon.Basestar to help develop external adaptors/drivers
+Version 0.5.0 - Improve API, add GPIO support for reuse in adaptors 
+
+Version 0.4.0 - Refactor proxy in Cylon.Basestar, improve API
 
 Version 0.3.0 - Improved Cylon.Basestar, and added API
 
-Version 0.4.0 - Refactor proxy in Cylon.Basestar, improve API
+Version 0.2.0 - Cylon.Basestar to help develop external adaptors/drivers
+
+Version 0.1.0 - Initial release for ongoing development
 
 ## License
 
