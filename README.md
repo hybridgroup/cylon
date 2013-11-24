@@ -52,7 +52,7 @@ robot.start();
 
 ### CoffeeScript:
 
-```coffee-script
+```javascript
 Cylon = require "cylon"
 
 # Initialize the robot
