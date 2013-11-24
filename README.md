@@ -1,16 +1,12 @@
 # Cylon.js
 
-Cylon.js (http://cylonjs.com) is a JavaScript framework for robotics and
-physical computing using Node.js.
+Cylon.js (http://cylonjs.com) is a JavaScript framework for robotics and physical computing using Node.js.
 
-It provides a simple, yet powerful way to create solutions that incorporate
-multiple, different hardware devices at the same time.
+It provides a simple, yet powerful way to create solutions that incorporate multiple, different hardware devices at the same time.
 
-Want to use Ruby on robots? Check out our sister project Artoo
-(http://artoo.io).
+Want to use Ruby on robots? Check out our sister project Artoo (http://artoo.io).
 
-Want to use the Go programming language to power your robots? Check out our
-sister project Gobot (http://gobot.io).
+Want to use the Go programming language to power your robots? Check out our sister project Gobot (http://gobot.io).
 
 [![Build Status](https://secure.travis-ci.org/hybridgroup/cylon.png?branch=master)](http://travis-ci.org/hybridgroup/cylon)
 
@@ -20,17 +16,15 @@ All you need to get started is the `cylon` module:
 
     npm install cylon
 
-Then install modules for whatever hardware support you want to use from your
-robot (in this case, an Arduino using the Firmata protocol):
+Then install modules for whatever hardware support you want to use from your robot (in this case, an Arduino using the Firmata protocol):
 
     npm install cylon-firmata
 
 ## Examples
 
-**Note:** before running examples in the `examples/` dir from source, make sure
-to compile using `grunt coffee` first.
+The example below connects to an Arduino that has the Firmata sketch installed, and that is connected on the port `/dev/ttyACM0`. Every second, it turns the LED either on, or off. You need to install Firmata on your Arduino, and to change the `port` parameter to match the port that your system is actually using.
 
-### Javascript:
+### JavaScript:
 
 ```javascript
 var Cylon = require("cylon");
@@ -70,11 +64,11 @@ robot = Cylon.robot
 robot.start()
 ```
 
+**Note:** before running any examples in the `examples/` dir from source, make sure to compile using `grunt coffee` first.
+
 ## Hardware Support
 
-Cylon.js has a extensible system for connecting to hardware devices. The
-following robotics, physical computing, or software platforms are currently
-supported:
+Cylon.js has a extensible system for connecting to hardware devices. The following robotics, physical computing, or software platforms are currently supported:
 
 - [Ardrone](http://ardrone2.parrot.com/) <==> [Adaptor/Drivers](https://github.com/hybridgroup/cylon-ardrone)
 - [Arduino](http://www.arduino.cc/) <==> [Adaptor](https://github.com/hybridgroup/cylon-firmata)
@@ -97,16 +91,13 @@ More platforms and drivers are coming soon...
 
 ## Documentation
 
-We're busy adding documentation to our web site at http://cylonjs.com/ please
-check there as we continue to work on Cylon.js
+We're busy adding documentation to our web site at http://cylonjs.com/ please check there as we continue to work on Cylon.js
 
 Thank you!
 
 ## Contributing
 
-In lieu of a formal styleguide, take care to maintain the existing coding style.
-Add unit tests for any new or changed functionality. Lint and test your code
-using [Grunt](http://gruntjs.com/).
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
 
