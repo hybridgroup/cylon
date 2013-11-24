@@ -16,15 +16,17 @@ All you need to get started is the `cylon` module:
 
     npm install cylon
 
-Then install modules for whatever hardware support you want to use from your robot (in this case, an Arduino using the Firmata protocol):
+Then install modules for whatever hardware support you want to use from your robot. For the example below, an Arduino using the Firmata protocol:
 
     npm install cylon-firmata
 
-Make sure to upload the "Standard Firmata" sketch or an equivalent firmata sketch to your Arduino first. Without that code running on the Arduino, firmata can't communicate with Cylon. You can find the example sketch in Examples > Firmata > StandardFirmata.
-
 ## Examples
 
-The example below connects to an Arduino that has the Firmata sketch installed, and that is connected on the port `/dev/ttyACM0`. Every second, it turns the LED either on, or off. You need to install Firmata on your Arduino, and to change the `port` parameter to match the port that your system is actually using.
+The example below connects to an Arduino, and every second turns the LED either on, or off. 
+
+The example requires that the Arduino has the Firmata sketch installed, and that it is connected on the port `/dev/ttyACM0`. You need to install Firmata on your Arduino, and to change the `port` parameter to match the port that your system is actually using.
+
+Make sure to upload the "Standard Firmata" sketch or an equivalent Firmata sketch to your Arduino first. Without that code running on the Arduino, Firmata can't communicate with Cylon. You can find the example sketch in your Arduino software under "Examples > Firmata > StandardFirmata".
 
 ### JavaScript:
 
