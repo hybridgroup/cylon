@@ -1,0 +1,149 @@
+---
+title: Force with Cylon.js
+author: The Hybrid Group
+page_title: Force
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-force' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-force/issues'>Issues</a>"
+layout: page
+---
+
+.documentation
+  %section.intro
+    = image_tag "/images/force.jpg", class: "display"
+
+    %p 
+    -# I put this description but if you need to change it, no problem ;)  *************
+    This module provides an adaptor and drivers for Force.com .It uses the nforce module 
+    =link_to "(https://github.com/kevinohara80/nforce)" , "https://github.com/kevinohara80/nforce" 
+    created by @kevinohara80 thank you!
+
+    %p
+      For more info about the Force platform go to
+      = succeed "." do
+        = link_to "http://www.force.com/", "http://www.salesforce.com/platform/overview/", target: :blank
+
+
+  %section.how-to
+    %h2 How to install
+    
+    %p
+      Installing cylon.js with Force support is pretty easy.
+    :markdown
+          :::bash
+          npm install cylon-force
+
+    %h2 How to use
+    %p
+    -# here the description of the example *************
+      This example uses the sphero and the cylonjs-force
+    %h3 JavaScript
+    -# here the code of the example in JS(coming soon..)*************
+    :markdown
+          :::javascript
+          Cylon = require('cylon');
+
+          Cylon.robot({
+            connection: {
+              name: 'sfcon',
+              adaptor: 'force',
+              sfuser: process.env.SF_USERNAME,
+              sfpass: process.env.SF_SECURITY_TOKEN,
+              orgCreds: {
+                clientId: process.env.SF_CLIENT_ID,
+                clientSecret: process.env.SF_CLIENT_SECRET,
+                redirectUri: 'http://localhost:3000/oauth/_callback'
+              }
+            },
+            device: {
+              name: 'salesforce',
+              driver: 'force'
+            },
+            work: function(me) {
+              var toSend;
+              me.salesforce.on('start', function() {
+                return me.salesforce.subscribe('/topic/SpheroMsgOutbound', function(data) {
+                  return Logger.info("Sphero: " + data.sobject.Sphero_Name__c + ", data Content: " + data.sobject.Content__c + ", SM_Id: " + data.sobject.Id);
+                });
+              });
+              toSend = "{ \"identifier\" :\"" + me.name + "\", \"msg\": \"" + 'Salesforce Bot #2' + "\" }";
+              return me.salesforce.push('SpheroController', 'POST', toSend);
+            }
+          }).start();
+
+    %h3 CoffeeScript
+    -# here the code of the example in Coffee(coming soon..)*************
+
+    :markdown
+          :::javascript
+
+          Cylon = require('cylon')
+
+          Cylon.robot
+            connection:
+              name: 'sfcon',
+              adaptor: 'force',
+              sfuser: process.env.SF_USERNAME,
+              sfpass: process.env.SF_SECURITY_TOKEN,
+              orgCreds: {
+                clientId: process.env.SF_CLIENT_ID,
+                clientSecret: process.env.SF_CLIENT_SECRET,
+                redirectUri: 'http://localhost:3000/oauth/_callback'
+              }
+
+            device:
+              name: 'salesforce', driver: 'force'
+
+            work: (me) ->
+
+              me.salesforce.on('start', () ->
+                me.salesforce.subscribe('/topic/SpheroMsgOutbound', (data) ->
+                  Logger.info "Sphero: \#{ data.sobject.Sphero_Name__c }, data Content: \#{ data.sobject.Content__c }, SM_Id: \#{ data.sobject.Id }"
+                )
+              )
+
+              toSend = "{ \"identifier\" :\"\#{ me.name }\", \"msg\": \"\#{ 'Salesforce Bot #2' }\" }"
+              me.salesforce.push('SpheroController', 'POST', toSend)
+          .start()
+
+
+
+    %h2 Configure Salesforce
+    %ul
+      %li 
+        Start with a standard developer org  
+        =link_to "-- http://developer.force.com/join", "http://developer.force.com/join"
+      %li 
+        Install the package for the simple Streaming API demo here :
+        =link_to "https://github.com/ReidCarlberg/LAB-Streaming-API-Demo", "https://github.com/ReidCarlberg/LAB-Streaming-API-Demo" 
+        (Link in the read me.)
+      %li 
+        Configure a new connected app in your developer org. 
+        :markdown
+          `Setup (top) > Create (side) > Apps > Connected Apps (scroll down) > New`
+      %li 
+        Check
+        :markdown
+           `"Enable Oauth Settings"`
+      %li Add all permissions
+      %li 
+        Use 
+        :markdown
+          `http://localhost:3000/oauth/_callback` 
+        as your callback URL
+      %li 
+        You'll be using the Oauth2 web server flow 
+        = link_to "https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_web_server_flow.htm&language=en", "https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_web_server_flow.htm&language=en"
+      %li You need your personal security code. Setup > My Personal Information > Reset My Security Code
+      %li Use your password in the connection info PASSWORDsecurityCode (concatenated, no space)
+      %li 
+        For bi-directional communication, the Salesforce package has the Device, Device Reading and Device Message objects :
+        = link_to "https://login.salesforce.com/packaging/installPackage.apexp?p0=04tE00000001XSP", "https://login.salesforce.com/packaging/installPackage.apexp?p0=04tE00000001XSP" 
+		
+	
+
+  %section.drivers
+    %h2 Drivers
+    %p All Cylon.js drivers listed below should work with the Force:
+
+    .hardware
+      .devices
+        = partial "documentation/partials/force_driver"
