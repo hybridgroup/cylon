@@ -1,6 +1,6 @@
 # Cylon.js
 
-[![Build Status](https://secure.travis-ci.org/hybridgroup/cylon.png?branch=master)](http://travis-ci.org/hybridgroup/cylon) [![NPM](https://nodei.co/npm/cylon.png?compact=true)](https://nodei.co/npm/cylon/)
+[![NPM](https://nodei.co/npm/cylon.png?compact=true)](https://nodei.co/npm/cylon/)[![Build Status](https://secure.travis-ci.org/hybridgroup/cylon.png?branch=master)](http://travis-ci.org/hybridgroup/cylon)
 
 Cylon.js (http://cylonjs.com) is a JavaScript framework for robotics and
 physical computing using Node.js.
