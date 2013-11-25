@@ -106,37 +106,72 @@ layout: page
 
 
 
-    %h2 Configure Salesforce
-    %ul
+    %h2 Salesforce Setup
+    %h3 Getting Started
+    %ul 
       %li 
-        Start with a standard developer org  
-        =link_to "-- http://developer.force.com/join", "http://developer.force.com/join"
+        First you'll need an account on DeveloperForce. If you don't already have one, you can create one at: 
+        = link_to "http://developer.force.com/join", "http://developer.force.com/join", target: :blank
+      %br/ 
       %li 
-        Install the package for the simple Streaming API demo here :
-        =link_to "https://github.com/ReidCarlberg/LAB-Streaming-API-Demo", "https://github.com/ReidCarlberg/LAB-Streaming-API-Demo" 
-        (Link in the read me.)
+        Next, you need to configure a new connected app in your developer profile in order to retrieve all the keys, tokens, urls nedded to
+        connect your app with SalesForce. In order to do this:
+        %ul 
+          %br/ 
+          %li Go to -> Setup (top) > Create (side) > Apps > Connected Apps (scroll down ) > New Check "Enable Oauth Settings".
+          %li Next, add all permissions. Use "http://localhost:3000/oauth/_callback" as your callback URL. You'll be using the Oauth2 web server flow, so you need your personal security code. If you don't have one, go to your Profile and click reset security token and Salesforce should email it to you.
+          %li Setup > My Personal Information > Reset My Security Code, you'll need your password + security token to be able to login (PASSWORDsecurityCode (concatenated, no space)).
+      %br/ 
       %li 
-        Configure a new connected app in your developer org. 
-        :markdown
-          `Setup (top) > Create (side) > Apps > Connected Apps (scroll down) > New`
+        Now we need to setup an object with a couple of custom fields for streaming communication. In this example we'll create a new object and call it 'Sphero_Message': We also add two custom fields to this object: 'Sphero_Name' and 'Bucks'.
+        %ul 
+          %br/
+          %li Go to Setup -> Create -> Object -> New and name it Sphero_Message
+          %li Create custom attributes "Sphero_Name" and "Bucks" both text type.
+          %li 
+            We've created a Salesforce package that installs the Sphero_Message Object and the apexRest class for you to speed things up. Install it
+            =link_to "here", "https://login.salesforce.com/packaging/installPackage.apexp?p0=04ti00000004IoN"
+      %br/
       %li 
-        Check
-        :markdown
-           `"Enable Oauth Settings"`
-      %li Add all permissions
+        Setup apexRest code so we can create new objects using RESTfull implementation:
+        %ul 
+          %br/
+          %li Go click in My Profile -> Developer Console, when the developer console opens up go to:
+          %li Click File -> New -> Apex Class and the following code to that:
+          %li 
+            We've created a Salesforce package that installs the Sphero_Message Object and the apexRest class for you to speed things up. Install it 
+            =link_to "here", "https://login.salesforce.com/?ec=302&startURL=%2Fpackaging%2FinstallPackage.apexp%3Fp0%3D04ti00000004IoN"
+          :markdown
+                :::bash
+                @RestResource(urlMapping='/SpheroController/*')
+                global with sharing class SpheroController {
+                  @HttpPost
+                    global static void create(String spheroName, String bucks) {
+                      SpheroController.handleSpheroMessage(spheroName, bucks)
+                    }
+
+                  public static void handleSpheroMessage(String spheroName, String bucks) {
+                    Sphero_Message__c sm = new Sphero_Message__c();
+                    sm.Sphero_Name__c = spheroName;
+                    sm.Bucks__c = bucks;
+                    insert sm;
+                  }
+                }
       %li 
-        Use 
-        :markdown
-          `http://localhost:3000/oauth/_callback` 
-        as your callback URL
-      %li 
-        You'll be using the Oauth2 web server flow 
-        = link_to "https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_web_server_flow.htm&language=en", "https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_web_server_flow.htm&language=en"
-      %li You need your personal security code. Setup > My Personal Information > Reset My Security Code
-      %li Use your password in the connection info PASSWORDsecurityCode (concatenated, no space)
-      %li 
-        For bi-directional communication, the Salesforce package has the Device, Device Reading and Device Message objects :
-        = link_to "https://login.salesforce.com/packaging/installPackage.apexp?p0=04tE00000001XSP", "https://login.salesforce.com/packaging/installPackage.apexp?p0=04tE00000001XSP" 
+        To be able to stream we need to setup a PushTopic to connect to.
+        %ul 
+          %br/ 
+          %li Go to developer console click on Debug -> Open Execute Anonymus Code or (Ctrl +E)
+          %li Add code to create the new pushTopic with the query you want to execute and the events you want it to report.
+          :markdown
+                :::bash
+                PushTopic pt = new PushTopic();
+                pt.apiversion = 28.0;
+                pt.name = 'SpheroMsgOutbound'; pt.description = 'All new Sphero Message records';
+                pt.query = 'SELECT Id, Name, Sphero_Name__c, Bucks__c FROM Sphero_Message__c';
+                insert pt;
+                System.debug('Created new PushTopic: '+ pt.Id);
+      %li At this point everything in salesforce should be ready and we should be able to connect, authenticate, push/create records through apexRest and stream information using the pushTopic.
 		
 	
 
