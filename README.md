@@ -108,6 +108,8 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 [![NPM](https://nodei.co/npm/cylon.png?compact=true)](https://nodei.co/npm/cylon/) 
 
+Version 0.6.0 - API exposes robot commands, fixes issues in driver/adaptor init
+
 Version 0.5.0 - Improve API, add GPIO support for reuse in adaptors 
 
 Version 0.4.0 - Refactor proxy in Cylon.Basestar, improve API
