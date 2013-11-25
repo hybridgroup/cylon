@@ -55,6 +55,7 @@ namespace 'Cylon', ->
       @devices = {}
       @adaptors = {}
       @drivers = {}
+      @commands = []
 
       @registerAdaptor "./loopback", "loopback"
       @registerDriver "./ping", "ping"
@@ -81,6 +82,7 @@ namespace 'Cylon', ->
         name: @name
         connections: (connection.data() for n, connection of @connections)
         devices: (device.data() for n, device of @devices)
+        commands: @commands
       }
 
     # Public: Initializes all connections for the robot

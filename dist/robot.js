@@ -52,6 +52,7 @@
         this.devices = {};
         this.adaptors = {};
         this.drivers = {};
+        this.commands = [];
         this.registerAdaptor("./loopback", "loopback");
         this.registerDriver("./ping", "ping");
         this.initConnections(opts.connection || opts.connections);
@@ -95,7 +96,8 @@
               _results.push(device.data());
             }
             return _results;
-          }).call(this)
+          }).call(this),
+          commands: this.commands
         };
       };
 
