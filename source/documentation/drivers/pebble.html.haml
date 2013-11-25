@@ -13,37 +13,122 @@ layout: page
 
   %section.how-to
     %h2 How to establish a connection and setup the driver
+    %h3 JavaScript
     :markdown
-          :::ruby
-          require 'Cylon.js'
-          connection :pebble, :adaptor => :pebble, :port => "/dev/rfcomm0", :id => "378B"
-          device :watch, :driver => :pebble
+          :::javascript
+          Cylon = require('cylon');
 
+          Cylon.api({
+            host: '0.0.0.0',
+            port: '8080'
+          });
+
+          robot = {
+            connection: {
+              name: 'pebble',
+              adaptor: 'pebble'
+            },
+            device: {
+              name: 'pebble',
+              driver: 'pebble'
+            },
+    %h3 CoffeeScript
+    :markdown
+          :::javascript
+          Cylon = require('cylon')
+
+          Cylon.api host: '0.0.0.0', port: '8080'
+
+          robot = 
+            connection:
+              name: 'pebble', adaptor: 'pebble'
+
+            device:
+              name: 'pebble', driver: 'pebble'
+          ...
   %section.public-methods
-    %h2 Public instance methods
-    %p
-      We're working on the documentation for the events for the Pebble smart watch. Thanks for your patience.
-    %h2 Public driver events
-    %p
-      We're working on the documentation for the events for the Pebble smart watch. Thanks for your patience.
+    %h2 Commands
+    %dl.methods 
+      %dt message
+      %dd 
+      %dt message_queue
+      %dd 
+      %dt last_message
+      %dd 
+
+    %h2 Events
+    %dl.methods 
+      %dt Stop
+      %dd Stop the driver.
+      %dt start
+      %dd Sent when the device has been started and is ready to use.
 
   %section.how-to
     %h2 How to use
-    %h3 Example receiving button events from a Pebble smart watch.
+    %h3 Example receiving message queue from a Pebble smart watch.
+    %h3 JavaScript
     :markdown
-          :::ruby
-          require 'Cylon.js'
+          :::javascript
+          Cylon = require('cylon');
 
-          connection :pebble, :adaptor => :pebble, :port => "/dev/rfcomm0", :id => "378B"
-          device :watch, :driver => :pebble
+          Cylon.api({
+            host: '0.0.0.0',
+            port: '8080'
+          });
 
-          work do
-            on watch, :media_control => :button_push
-          end
+          robot = {
+            connection: {
+              name: 'pebble',
+              adaptor: 'pebble'
+            },
+            device: {
+              name: 'pebble',
+              driver: 'pebble'
+            },
+            work: function(self) {
+              var c;
+              c = 0;
+              return every(1..second(), function() {
+                c++;
+                self.pebble.message_queue().push(c);
+                return console.log(self.pebble.last_message());
+              });
+            }
+          };
 
-          def button_push(caller, data)
-            puts data.button unless data.nil?
-          end
+          bot = Object.create(robot);
+
+          bot.name = 'pebble';
+
+          Cylon.robot(Object.create(bot));
+
+          Cylon.start();
+
+    %h3 CoffeeScript
+    :markdown
+          :::javascript
+          Cylon = require('cylon')
+
+          Cylon.api host: '0.0.0.0', port: '8080'
+
+          robot = 
+            connection:
+              name: 'pebble', adaptor: 'pebble'
+
+            device:
+              name: 'pebble', driver: 'pebble'
+
+            work: (self) ->
+              c = 0
+              every 1.second(), -> 
+                c++
+                self.pebble.message_queue().push(c)
+                console.log(self.pebble.last_message())
+
+          bot = Object.create(robot)
+          bot.name = 'pebble'
+          Cylon.robot Object.create(bot)
+          Cylon.start()
 
   %section.compatability.hardware
     %h2 Works with:
