@@ -39,6 +39,20 @@ namespace 'Api', ->
         master.findRobot req.params.robotname, (err, robot) ->
           res.json if err then err else robot.data()
 
+      @server.get "/robots/:robotname/commands", (req, res) ->
+        master.findRobot req.params.robotname, (err, robot) ->
+          res.json if err then err else robot.data().commands
+
+      @server.all "/robots/:robotname/commands/:commandname", (req, res) ->
+        params = []
+        if typeof req.body is 'object'
+          params.push(value) for key, value of req.body
+
+        master.findRobot req.params.robotname, (err, robot) ->
+          if err then return res.json err
+          result = robot[req.params.commandname](params...)
+          res.json result: result
+
       @server.get "/robots/:robotname/devices", (req, res) ->
         master.findRobot req.params.robotname, (err, robot) ->
           res.json if err then err else robot.data().devices
