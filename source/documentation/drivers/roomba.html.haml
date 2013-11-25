@@ -14,94 +14,51 @@ layout: page
   %section.how-to
     %h2 How to establish a connection and setup the driver
     :markdown
-          :::ruby
-          require 'Cylon.js'
-          connection :roomba, :adaptor => :roomba, :port => '/dev/ttyUSB0'
-          device :roomba, :driver => :roomba, :connection => :roomba
+          :::javascript
+          ...
 
   %section.public-methods
-    %h2 Public instance methods
-    %h3 start
-    %p
-      Puts roomba in start mode.
-
-    %h3 safe_mode
-    %p
-      Puts roomba in safe mode.
-
-    %h3 full_mode
-    %p
-      Puts roomba in full mode.
-
-    %h3 forward(seconds, speed=slow) → nil
-    %p
-      Moves roomba forward for &lt;seconds&gt; amount of time at &lt;speed&gt; (speed(int) between 0 and 500).
-
-    %h3 fast_forward(seconds) → nil
-    %p
-      Moves roomba forward for &lt;seconds&gt; amount of time at max speed.
-
-    %h3 stop
-    %p
-      Stops the roomba.
-
-    %h3 backwards(seconds) → nil
-    %p
-      Moves roomba backwards for &lt;seconds&gt; amount of time at default speed.
-
-    %h3 nudge_left
-    %p
-      Turns roomba a little bit to the left.
-
-    %h3 nudge_right
-    %p
-      Turns roomba a little bit to the right.
-
-    %h3 turn_left(seconds=1) → nil
-    %p
-      Turns roomba to the left the specefied amount of seconds.
-
-    %h3 turn_right(seconds=1) → nil
-    %p
-      Turns roomba to the right the specefied amount of seconds.
-
-    %h3 turn_around
-    %p
-      Turns roomba 180 degrees.
-
-    %h3 drive(speed, direction, seconds = 0)  → nil
-    %p
-      Drives the roomba at speed (from 0 to 500) and direction (straight=32768, clockwise=65535, counterclockwise=1) for the specefied amount of time (seconds).
-
-    %h3 play(song_number)  → nil
-    %p
-      Plays the song specified by song_numer.
-
-    %h3 song(notes[Collection], song_number[Integer])  → nil
-    %p
-      Stores a song in the roomba.
-
-    %h3 beep
-    %p
-      Makes roomba beep.
+    %h2 Commands
+    %dl.methods 
+      %dt start
+      %dd Puts roomba in start mode.
+      %dt safe_mode
+      %dd Puts roomba in safe mode.
+      %dt full_mode
+      %dd Puts roomba in full mode.
+      %dt forward(seconds, speed=slow) → nil
+      %dd Moves roomba forward for &lt;seconds&gt; amount of time at &lt;speed&gt; (speed(int) between 0 and 500).
+      %dt fast_forward(seconds) → nil
+      %dd Moves roomba forward for &lt;seconds&gt; amount of time at max speed.
+      %dt stop
+      %dd Stops the roomba.
+      %dt backwards(seconds) → nil
+      %dd Moves roomba backwards for &lt;seconds&gt; amount of time at default speed.
+      %dt nudge_left
+      %dd Turns roomba a little bit to the left.
+      %dt nudge_right
+      %dd Turns roomba a little bit to the right.
+      %dt turn_left(seconds=1) → nil
+      %dd Turns roomba to the left the specefied amount of seconds.
+      %dt turn_right(seconds=1) → nil
+      %dd Turns roomba to the right the specefied amount of seconds.
+      %dt turn_around
+      %dd Turns roomba 180 degrees.
+      %dt drive(speed, direction, seconds = 0)  → nil
+      %dd Drives the roomba at speed (from 0 to 500) and direction (straight=32768, clockwise=65535, counterclockwise=1) for the specefied amount of time (seconds).
+      %dt play(song_number)  → nil
+      %dd Plays the song specified by song_numer.
+      %dt song(notes[Collection], song_number[Integer])  → nil
+      %dd Stores a song in the roomba.
+      %dt beep
+      %dd Makes roomba beep.
 
   %section.how-to
     %h2 How to use
     %h3 Example controlling a Roomba.
     :markdown
-          :::ruby
-          require 'Cylon.js'
-
-          connection :roomba, :adaptor => :roomba, :port => '/dev/ttyUSB0'
-          device :roomba, :driver => :roomba, :connection => :roomba
-
-          work do
-            roomba.safe_mode
-            roomba.nudge_left
-            roomba.nudge_right
-            roomba.nudge_right
-            roomba.nudge_left
-          end
+          :::javascript
+          ...
 
   %section.compatability.hardware
     %h2 Works with:

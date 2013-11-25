@@ -22,78 +22,50 @@ layout: page
           device :drone, :driver => :crazyflie, :connection => :crazyflie, :interval => 0.1
 
   %section.public-methods
-    %h2 Public instance methods:
-    %h3 start
-    %p
-      Starts the crazyfly's motors and controls.
+    %h2 Commands:
 
-    %h3 stop
-    %p
-      Stops the crazyfly's motors.
-
-    %h3 hover
-    %p
-      Makes the crazyflie hover in a position.
-
-    %h3 land
-    %p
-      Initiates a landing sequence.
-
-    %h3 take_off
-    %p
-      Initiates take off sequence.
-
-    %h3 up
-    %p
-      Orders crazy flie to go up.
-
-    %h3 down
-    %p
-      Orders crazy flie to go down.
-
-    %h3 left(deg)
-    %p
-      Orders crazyflie to go left the amount specified by deg (roll left).
-
-    %h3 right(deg)
-    %p
-      Orders crazyflie to go right the amount specified by deg (roll right).
-
-    %h3 forward(deg)
-    %p
-      Orders crazyflie to go forward the amount specified by deg (pitch forward).
-
-    %h3 backward(deg)
-    %p
-      Orders crazyflie to go backward the amount specified by deg (pitch backward).
-
-    %h3 turn_left(deg)
-    %p
-      Orders crazyflie to turn left the amount specified by deg (yaw left).
-
-    %h3 turn_right(deg)
-    %p
-      Orders crazyflie to turn right the amount specified by deg (yaw right).
-
-    %h3 power(deg)
-    %p
-      Sets thrust power to deg.
+    %dl.methods
+      %dt start
+      %dd Starts the crazyfly's motors and controls.
+      %dt stop
+      %dd Stops the crazyfly's motors.
+      %dt hover
+      %dd Makes the crazyflie hover in a position.
+      %dt land
+      %dd Initiates a landing sequence.
+      %dt take_off
+      %dd Initiates take off sequence.
+      %dt up
+      %dd Orders crazy flie to go up.
+      %dt down
+      %dd Orders crazy flie to go down.
+      %dt left(deg)
+      %dd Orders crazyflie to go left the amount specified by deg (roll left).
+      %dt right(deg)
+      %dd Orders crazyflie to go right the amount specified by deg (roll right).
+      %dt forward(deg)
+      %dd Orders crazyflie to go forward the amount specified by deg (pitch forward).
+      %dt backward(deg)
+      %dd Orders crazyflie to go backward the amount specified by deg (pitch backward).
+      %dt turn_left(deg)
+      %dd Orders crazyflie to turn left the amount specified by deg (yaw left).
+      %dt turn_right(deg)
+      %dd Orders crazyflie to turn right the amount specified by deg (yaw right).
+      %dt power(deg)
+      %dd Sets thrust power to deg.
+    
+    %h2 Events:
+    %dl.methods 
+      %dt start
+      %dd Sent when the device has been started and is ready to use. 
 
   %section.how-to
     %h2 How to use
     %h3 Example of controlling a Crazyflie.
     :markdown
-          :::ruby
+          :::javascript
           require 'Cylon.js'
-
-          connection :crazyflie, :adaptor => :crazyflie
-          device :drone, :driver => :crazyflie, :connection => :crazyflie, :interval => 0.1
-
-          work do
-            drone.forward(0)
-            drone.set_thrust_on
-            after(1.seconds) {drone.stop}
-          end
+          ...
 
   %section.compatability.hardware
     %h2 Works with:
