@@ -7,14 +7,14 @@
   source("test/driver");
 
   describe("Device", function() {
-    var device, driver, requireDriver, robot;
+    var device, driver, initDriver, robot;
     robot = new Cylon.Robot({
       name: 'me'
     });
     driver = new Cylon.Driver({
       name: 'driving'
     });
-    requireDriver = sinon.stub(robot, 'requireDriver').returns(driver);
+    initDriver = sinon.stub(robot, 'initDriver').returns(driver);
     device = new Cylon.Device({
       name: "devisive",
       driver: 'driving',
@@ -28,8 +28,8 @@
     });
     it("should use default connection if none specified");
     it("should use connection if one is specified");
-    return it("should require a driver", function() {
-      return requireDriver.should.be.called;
+    return it("should init a driver", function() {
+      return initDriver.should.be.called;
     });
   });
 

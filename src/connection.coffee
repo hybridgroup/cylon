@@ -35,7 +35,7 @@ namespace 'Cylon', ->
       @robot = opts.robot
       @name = opts.name
       @connection_id = opts.id
-      @adaptor = @requireAdaptor opts
+      @adaptor = @initAdaptor opts
       @port = new Cylon.Port opts.port
       proxyFunctionsToObject @adaptor.commands(), @adaptor, @self
 
@@ -50,7 +50,7 @@ namespace 'Cylon', ->
         connection_id: @connection_id
       }
 
-    # Public: Creates the adaptor connection
+    # Public: Connect the adaptor's connection
     #
     # callback - callback function to run when the adaptor is connected
     #
@@ -61,7 +61,7 @@ namespace 'Cylon', ->
       Logger.info msg
       @adaptor.connect(callback)
 
-    # Public: Closes the adaptor connection
+    # Public: Disconnect the adaptor's connection
     #
     # Returns nothing
     disconnect: ->
@@ -72,11 +72,12 @@ namespace 'Cylon', ->
 
     # Public: sets up adaptor with @robot
     #
-    # adaptorName - module name of adaptor to require
+    # opts - options for adaptor being initialized
+    #   adaptor - name of the adaptor
     #
     # Returns the set-up adaptor
-    requireAdaptor: (opts) ->
+    initAdaptor: (opts) ->
       Logger.debug "Loading adaptor '#{opts.adaptor}'"
-      @robot.requireAdaptor(opts.adaptor, @self, opts)
+      @robot.initAdaptor(opts.adaptor, @self, opts)
 
 module.exports = Cylon.Connection
