@@ -40,7 +40,7 @@ namespace 'Cylon.IO', ->
 
     close: ->
       FS.writeFile(@_unexportPath(), "#{ @pinNum }", (err) =>
-        @_closeCallback()
+        @_closeCallback(err)
       )
 
     closeSync: ->
@@ -108,11 +108,11 @@ namespace 'Cylon.IO', ->
       @mode = mode
       if mode is 'w'
         FS.writeFile(@_directionPath(), GPIO_DIRECTION_WRITE, (err) =>
-          @_setModeCallback err, emitConnect
+          @_setModeCallback(err, emitConnect)
         )
       else if mode is 'r'
         FS.writeFile(@_directionPath(), GPIO_DIRECTION_READ, (err) =>
-          @_setModeCallback err, emitConnect
+          @_setModeCallback(err, emitConnect)
         )
 
     _setModeCallback: (err, emitConnect) ->

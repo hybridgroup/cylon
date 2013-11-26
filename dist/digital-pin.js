@@ -62,7 +62,7 @@
       DigitalPin.prototype.close = function() {
         var _this = this;
         return FS.writeFile(this._unexportPath(), "" + this.pinNum, function(err) {
-          return _this._closeCallback();
+          return _this._closeCallback(err);
         });
       };
 
