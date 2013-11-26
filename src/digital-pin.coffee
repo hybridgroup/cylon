@@ -45,7 +45,7 @@ namespace 'Cylon.IO', ->
 
     closeSync: ->
       FS.writeFileSync(@_unexportPath(), "#{ @pinNum }")
-      @_closeCallback false
+      @_closeCallback(false)
 
     digitalWrite: (value) ->
       @_setMode('w') unless @mode is 'w'
