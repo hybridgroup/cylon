@@ -1,4 +1,4 @@
-Cylon = require '..'
+Cylon = require '../..'
 Travis = require 'travis-ci'
 
 travis = new Travis

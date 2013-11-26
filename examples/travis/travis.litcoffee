@@ -11,7 +11,7 @@ Before you run this, make sure you install the following dependencies:
 First of all, let's load up Cylon. We're going to load the version directly from
 the repo, since we're here already:
 
-    Cylon = require '..'
+    Cylon = require '../..'
 
 Next, we'll set up Travis. We're going to be using the very useful [travis-ci][]
 module.

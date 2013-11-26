@@ -9,7 +9,7 @@ install cylon-sphero`)
 First, load up Cylon. Since we're in the Cylon repo, we can use the version
 already here:
 
-    Cylon = require '..'
+    Cylon = require '../..'
 
 Since both of our Spheros are going to have faily similar behaviour, we can
 define a class to hold their attributes:
