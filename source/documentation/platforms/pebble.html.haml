@@ -36,33 +36,44 @@ layout: page
             port: '8080'
           });
 
-          robot = {
-            connection: {
+          PebbleRobot = (function() {
+
+            function PebbleRobot() {}
+
+            PebbleRobot.prototype.connection = {
               name: 'pebble',
               adaptor: 'pebble'
-            },
-            device: {
+            };
+
+            PebbleRobot.prototype.device = {
               name: 'pebble',
               driver: 'pebble'
-            },
-            work: function(self) {
+            };
+
+            PebbleRobot.prototype.work = function(self) {
               var c;
-              c = 0;
+              c = 100;
               return every(1..second(), function() {
+                var str;
                 c++;
-                self.pebble.message_queue().push(c);
+                str = "c: " + c;
+                self.pebble.message_queue().push(str);
                 return console.log(self.pebble.last_message());
               });
-            }
-          };
+            };
 
-          bot = Object.create(robot);
+            return PebbleRobot;
+
+          })();
+
+          bot = new PebbleRobot();
 
           bot.name = 'pebble';
 
-          Cylon.robot(Object.create(bot));
+          Cylon.robot(bot);
 
           Cylon.start();
+
     %h3 CoffeeScript
     :markdown
           :::javascript
@@ -70,7 +81,7 @@ layout: page
 
           Cylon.api host: '0.0.0.0', port: '8080'
 
-          robot = 
+          class PebbleRobot
             connection:
               name: 'pebble', adaptor: 'pebble'
 
@@ -78,15 +89,17 @@ layout: page
               name: 'pebble', driver: 'pebble'
 
             work: (self) ->
-              c = 0
-              every 1.second(), -> 
+              c = 100
+              every 1.second(), ->
                 c++
-                self.pebble.message_queue().push(c)
+                str = "c: \#{c}"
+                self.pebble.message_queue().push(str)
                 console.log(self.pebble.last_message())
 
-          bot = Object.create(robot)
+          bot = new PebbleRobot()
           bot.name = 'pebble'
-          Cylon.robot Object.create(bot)
+          Cylon.robot bot
+
           Cylon.start()
 
     %h2 How to connect
