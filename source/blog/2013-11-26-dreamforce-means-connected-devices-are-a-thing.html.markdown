@@ -6,7 +6,7 @@ tags: robots
 author: Ron Evans
 ---
 
-As mentioned in our last blog post, we had a team demonstrating Cylon.js at the <a href="http://www.salesforce.com/dreamforce/DF13/" target="blank">Dreamforce</a> conference in San Francisco last week. At over 130,000 people registered, it is one of the largest tech conferences in the world! We had received a special invitation to be part of the first <a href="http://blogs.developerforce.com/developer-relations/2013/10/every-internet-of-things-thing-at-dreamforce-2013.html" target="blank">Connected Device Lab</a> which was a unique location within the conference dedicated to important companies in the emerging "Internet of Things".
+As mentioned in our last blog post, we had a team demonstrating <a href="http://cylonjs.com/" target="blank">Cylon.js</a> at the <a href="http://www.salesforce.com/dreamforce/DF13/" target="blank">Dreamforce</a> conference in San Francisco last week. At over 130,000 people registered, it is one of the largest tech conferences in the world! We had received a special invitation to be part of the first <a href="http://blogs.developerforce.com/developer-relations/2013/10/every-internet-of-things-thing-at-dreamforce-2013.html" target="blank">Connected Device Lab</a> which was a unique location within the conference dedicated to important companies in the emerging "Internet of Things".
 
 The first day of the conference, we "unleashed" <a href="https://github.com/hybridgroup/cylon-force" target="blank">cylon-force</a>, an open-source adaptor that lets you connect a Cylon.js program to a Salesforce connected application. While many companies are still talking about the future, our hardworking team of humans and robots is already building the platform.
 
