@@ -61,6 +61,32 @@
             return res.json(err ? err : robot.data());
           });
         });
+        this.server.get("/robots/:robotname/commands", function(req, res) {
+          return master.findRobot(req.params.robotname, function(err, robot) {
+            return res.json(err ? err : robot.data().commands);
+          });
+        });
+        this.server.all("/robots/:robotname/commands/:commandname", function(req, res) {
+          var key, params, value, _ref;
+          params = [];
+          if (typeof req.body === 'object') {
+            _ref = req.body;
+            for (key in _ref) {
+              value = _ref[key];
+              params.push(value);
+            }
+          }
+          return master.findRobot(req.params.robotname, function(err, robot) {
+            var result;
+            if (err) {
+              return res.json(err);
+            }
+            result = robot[req.params.commandname].apply(robot, params);
+            return res.json({
+              result: result
+            });
+          });
+        });
         this.server.get("/robots/:robotname/devices", function(req, res) {
           return master.findRobot(req.params.robotname, function(err, robot) {
             return res.json(err ? err : robot.data().devices);

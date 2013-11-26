@@ -7,7 +7,7 @@ source "test/driver"
 describe "Device", ->
   robot = new Cylon.Robot(name: 'me')
   driver = new Cylon.Driver(name: 'driving')
-  requireDriver = sinon.stub(robot, 'requireDriver').returns(driver)
+  initDriver = sinon.stub(robot, 'initDriver').returns(driver)
   device = new Cylon.Device(name: "devisive", driver: 'driving', robot: robot)
 
   it "should belong to a robot", ->
@@ -19,5 +19,5 @@ describe "Device", ->
   it "should use default connection if none specified"
   it "should use connection if one is specified"
 
-  it "should require a driver", ->
-    requireDriver.should.be.called
+  it "should init a driver", ->
+    initDriver.should.be.called

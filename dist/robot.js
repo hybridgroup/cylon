@@ -39,6 +39,9 @@
           opts = {};
         }
         this.registerDriver = __bind(this.registerDriver, this);
+        this.requireDriver = __bind(this.requireDriver, this);
+        this.registerAdaptor = __bind(this.registerAdaptor, this);
+        this.requireAdaptor = __bind(this.requireAdaptor, this);
         this.stop = __bind(this.stop, this);
         this.startDevices = __bind(this.startDevices, this);
         this.startConnections = __bind(this.startConnections, this);
@@ -52,6 +55,7 @@
         this.devices = {};
         this.adaptors = {};
         this.drivers = {};
+        this.commands = [];
         this.registerAdaptor("./loopback", "loopback");
         this.registerDriver("./ping", "ping");
         this.initConnections(opts.connection || opts.connections);
@@ -95,7 +99,8 @@
               _results.push(device.data());
             }
             return _results;
-          }).call(this)
+          }).call(this),
+          commands: this.commands
         };
       };
 
@@ -182,64 +187,54 @@
         return _results;
       };
 
-      Robot.prototype.requireAdaptor = function(adaptorName, connection, opts) {
+      Robot.prototype.initAdaptor = function(adaptorName, connection, opts) {
         if (opts == null) {
           opts = {};
         }
-        if (this.robot.adaptors[adaptorName] != null) {
-          if (typeof this.robot.adaptors[adaptorName] === 'string') {
-            this.robot.adaptors[adaptorName] = require(this.robot.adaptors[adaptorName]).adaptor({
-              name: adaptorName,
-              connection: connection,
-              extraParams: opts
-            });
-          }
-        } else {
-          require("cylon-" + adaptorName).register(this);
-          this.robot.adaptors[adaptorName] = require("cylon-" + adaptorName).adaptor({
-            name: adaptorName,
-            connection: connection,
-            extraParams: opts
-          });
+        return this.robot.requireAdaptor(adaptorName).adaptor({
+          name: adaptorName,
+          connection: connection,
+          extraParams: opts
+        });
+      };
+
+      Robot.prototype.requireAdaptor = function(adaptorName) {
+        if (this.robot.adaptors[adaptorName] == null) {
+          this.robot.registerAdaptor("cylon-" + adaptorName, adaptorName);
+          this.robot.adaptors[adaptorName].register(this);
         }
         return this.robot.adaptors[adaptorName];
       };
 
       Robot.prototype.registerAdaptor = function(moduleName, adaptorName) {
-        if (this.adaptors[adaptorName] != null) {
-          return;
+        if (this.adaptors[adaptorName] == null) {
+          return this.adaptors[adaptorName] = require(moduleName);
         }
-        return this.adaptors[adaptorName] = moduleName;
       };
 
-      Robot.prototype.requireDriver = function(driverName, device, opts) {
+      Robot.prototype.initDriver = function(driverName, device, opts) {
         if (opts == null) {
           opts = {};
         }
-        if (this.robot.drivers[driverName] != null) {
-          if (typeof this.robot.drivers[driverName] === 'string') {
-            this.robot.drivers[driverName] = require(this.robot.drivers[driverName]).driver({
-              name: driverName,
-              device: device,
-              extraParams: opts
-            });
-          }
-        } else {
-          require("cylon-" + driverName).register(this);
-          this.robot.drivers[driverName] = require("cylon-" + driverName).driver({
-            name: driverName,
-            device: device,
-            extraParams: opts
-          });
+        return this.robot.requireDriver(driverName).driver({
+          name: driverName,
+          device: device,
+          extraParams: opts
+        });
+      };
+
+      Robot.prototype.requireDriver = function(driverName) {
+        if (this.robot.drivers[driverName] == null) {
+          this.robot.registerDriver("cylon-" + driverName, driverName);
+          this.robot.drivers[driverName].register(this);
         }
         return this.robot.drivers[driverName];
       };
 
       Robot.prototype.registerDriver = function(moduleName, driverName) {
-        if (this.drivers[driverName] != null) {
-          return;
+        if (this.drivers[driverName] == null) {
+          return this.drivers[driverName] = require(moduleName);
         }
-        return this.drivers[driverName] = moduleName;
       };
 
       return Robot;

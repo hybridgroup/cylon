@@ -55,6 +55,7 @@ namespace 'Cylon', ->
       @devices = {}
       @adaptors = {}
       @drivers = {}
+      @commands = []
 
       @registerAdaptor "./loopback", "loopback"
       @registerDriver "./ping", "ping"
@@ -81,6 +82,7 @@ namespace 'Cylon', ->
         name: @name
         connections: (connection.data() for n, connection of @connections)
         devices: (device.data() for n, device of @devices)
+        commands: @commands
       }
 
     # Public: Initializes all connections for the robot
@@ -162,31 +164,27 @@ namespace 'Cylon', ->
       for n, connection of @connections
         connection.disconnect()
 
-    # Public: Requires a hardware adaptor and adds it to @robot.adaptors
+    # Public: Initialize an adaptor and adds it to @robot.adaptors
     #
     # adaptorName - module name of adaptor to require
     # connection - the Connection that requested the adaptor be required
     #
-    # Returns the set-up adaptor
-    requireAdaptor: (adaptorName, connection, opts = {}) ->
-      if @robot.adaptors[adaptorName]?
-        if typeof @robot.adaptors[adaptorName] is 'string'
-          @robot.adaptors[adaptorName] = require(
-              @robot.adaptors[adaptorName]
-            ).adaptor(
-              name: adaptorName,
-              connection: connection,
-              extraParams: opts
-            )
-      else
-        require("cylon-#{adaptorName}").register(this)
-        @robot.adaptors[adaptorName] = require(
-            "cylon-#{adaptorName}"
-          ).adaptor(
-            name: adaptorName,
-            connection: connection,
-            extraParams: opts
-          )
+    # Returns the adaptor
+    initAdaptor: (adaptorName, connection, opts = {}) ->
+      @robot.requireAdaptor(adaptorName).adaptor
+        name: adaptorName,
+        connection: connection,
+        extraParams: opts
+  
+    # Public: Requires a hardware adaptor and adds it to @robot.adaptors
+    #
+    # adaptorName - module name of adaptor to require
+    #
+    # Returns the module for the adaptor
+    requireAdaptor: (adaptorName) =>
+      unless @robot.adaptors[adaptorName]?
+        @robot.registerAdaptor "cylon-#{adaptorName}", adaptorName
+        @robot.adaptors[adaptorName].register this
 
       return @robot.adaptors[adaptorName]
 
@@ -196,35 +194,31 @@ namespace 'Cylon', ->
     # adaptorName - name of the adaptor to register the moduleName under
     #
     # Returns the registered module name
-    registerAdaptor: (moduleName, adaptorName) ->
-      return if @adaptors[adaptorName]?
-      @adaptors[adaptorName] = moduleName
+    registerAdaptor: (moduleName, adaptorName) =>
+      @adaptors[adaptorName] = require(moduleName) unless @adaptors[adaptorName]?
 
-    # Public: Requires a hardware driver and adds it to @robot.drivers
+    # Public: Init a hardware driver
+    #
+    # driverName - driver name
+    # device - the Device that requested the driver be initialized
+    # opts - object containing options when initializing driver
+    #
+    # Returns the new driver
+    initDriver: (driverName, device, opts = {}) ->
+      @robot.requireDriver(driverName).driver
+        name: driverName,
+        device: device,
+        extraParams: opts
+
+    # Public: Requires module for a driver and adds it to @robot.drivers
     #
     # driverName - module name of driver to require
-    # connection - the Connection that requested the driver be required
     #
-    # Returns the set-up driver
-    requireDriver: (driverName, device, opts = {}) ->
-      if @robot.drivers[driverName]?
-        if typeof @robot.drivers[driverName] is 'string'
-          @robot.drivers[driverName] = require(
-              @robot.drivers[driverName]
-            ).driver(
-              name: driverName,
-              device: device,
-              extraParams: opts
-            )
-      else
-        require("cylon-#{driverName}").register(this)
-        @robot.drivers[driverName] = require(
-            "cylon-#{driverName}"
-          ).driver(
-            name: driverName,
-            device: device,
-            extraParams: opts
-          )
+    # Returns the module for driver
+    requireDriver: (driverName) =>
+      unless @robot.drivers[driverName]?
+        @robot.registerDriver "cylon-#{driverName}", driverName
+        @robot.drivers[driverName].register this
 
       return @robot.drivers[driverName]
 
@@ -235,7 +229,6 @@ namespace 'Cylon', ->
     #
     # Returns the registered module name
     registerDriver: (moduleName, driverName) =>
-      return if @drivers[driverName]?
-      @drivers[driverName] = moduleName
+      @drivers[driverName] = require(moduleName) unless @drivers[driverName]?
 
 module.exports = Cylon.Robot
