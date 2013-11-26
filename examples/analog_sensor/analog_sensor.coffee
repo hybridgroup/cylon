@@ -7,11 +7,11 @@ Cylon.robot
     port: '/dev/ttyACM0'
 
   device:
-      name: 'sensor'
-      driver: 'analogSensor'
-      pin: 0
-      upperLimit: 900
-      lowerLimit: 100
+    name: 'sensor'
+    driver: 'analogSensor'
+    pin: 0
+    upperLimit: 900
+    lowerLimit: 100
 
   work: (my) ->
     my.sensor.on 'upperLimit', (val) ->
