@@ -23,13 +23,13 @@ Cylon.robot({
         { owner_name: user, name: name }, 
         function(err, res) {
           if (res.repo != undefined) {
-          if (res.repo.last_build_state == 'passed') {
-            me.sphero.setRGB(GREEN, true);
-          } else if (res.repo.last_build_state == 'failed') {
-            me.sphero.setRGB(RED, true);
-          } else {
-            me.sphero.setRGB(BLUE, true);
-          }
+            if (res.repo.last_build_state == 'passed') {
+              me.sphero.setRGB(GREEN, true);
+            } else if (res.repo.last_build_state == 'failed') {
+              me.sphero.setRGB(RED, true);
+            } else {
+              me.sphero.setRGB(BLUE, true);
+            }
           } else {
             me.sphero.setRGB BLUE, true
           }
