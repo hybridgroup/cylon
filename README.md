@@ -77,7 +77,9 @@ Cylon.js has a extensible system for connecting to hardware devices. The followi
 
 - [Ardrone](http://ardrone2.parrot.com/) <==> [Adaptor/Drivers](https://github.com/hybridgroup/cylon-ardrone)
 - [Arduino](http://www.arduino.cc/) <==> [Adaptor](https://github.com/hybridgroup/cylon-firmata)
+- [Crazyflie](http://www.bitcraze.se/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-crazyflie)
 - [Leap Motion](https://www.leapmotion.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-leapmotion)
+- [Pebble](http://www.getpebble.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-pebble)
 - [Raspberry Pi](http://www.raspberrypi.org/) <==> [Adaptor](https://github.com/hybridgroup/cylon-raspi)
 - [Salesforce](http://www.force.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-force)
 - [Sphero](http://www.gosphero.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-sphero)
@@ -86,11 +88,19 @@ Support for many devices that use General Purpose Input/Output (GPIO) have
 a shared set of drivers provded using the cylon-gpio module:
 
   - [GPIO](https://en.wikipedia.org/wiki/General_Purpose_Input/Output) <=> [Drivers](https://github.com/hybridgroup/cylon-gpio)
+    - Analog Sensor
+    - Button
+    - LED
+    - Motor
+    - Maxbotix Ultrasonic Range Finder
+    - Servo
 
 Support for devices that use Inter-Integrated Circuit (I2C) have a shared set of
 drivers provded using the cylon-i2c module:
 
   - [I2C](https://en.wikipedia.org/wiki/I%C2%B2C) <=> [Drivers](https://github.com/hybridgroup/cylon-i2c)
+    - BlinkM
+    - HMC6352 Digital Compass
 
 More platforms and drivers are coming soon...
 
