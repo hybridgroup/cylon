@@ -36,7 +36,7 @@ var ConwayRobot = (function() {
 
   ConwayRobot.prototype.death = function() {
     this.alive = false;
-    this.sphero.setRGB(Green);
+    this.sphero.setRGB(Red);
     return this.sphero.stop();
   };
 

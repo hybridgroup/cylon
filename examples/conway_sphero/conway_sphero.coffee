@@ -29,7 +29,7 @@ class ConwayRobot
 
   death: ->
     @alive = false
-    @sphero.setRGB Green
+    @sphero.setRGB Red
     @sphero.stop()
 
   enoughContacts: ->
