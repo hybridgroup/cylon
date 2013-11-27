@@ -24,13 +24,17 @@
     = partial "../partials/ardrone-navigation"
     = #partial "../partials/ardrone-video"
 
-  -#%h2 Leap Motion Driver
-  -#.devices
-    =# partial "../partials/leapmotion-driver"
+  %h2 Crazyflie Driver
+  .devices
+    = partial "../partials/crazyflie-flight"
+  
+  %h2 Leap Motion Driver
+  .devices
+    = partial "../partials/leapmotion-driver"
 
-  -#%h2 Pebble Driver
-  -#.devices
-    = #partial "../partials/pebble-driver"
+  %h2 Pebble Driver
+  .devices
+    = partial "../partials/pebble-driver"
 
   -#%h2 Roomba Driver
   -#.devices

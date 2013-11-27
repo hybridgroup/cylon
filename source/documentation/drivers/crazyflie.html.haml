@@ -7,7 +7,7 @@ layout: page
 ---
 .documentation
   %section.intro
-    =image_tag "/images/crazyflie.jpg", class: "display"
+    =image_tag "/images/crazyflie-flight.jpg", class: "display"
     %p
       Allows user to send flight control commands to a Crazyflie micro-quadcopter. Flight control commands are those used to tell the Crazyflie to take off, land, and or any number of other autonomous flight manuvers.
 
@@ -15,57 +15,96 @@ layout: page
     %h2 How to establish a connection and setup the driver
     %p
       Communication with the Crazyflie's flight control interface takes place using a 2.4GHz radio connection. The Crazyflie is controlled from your computer using a Crazyradio, which is a custom USB 2.4GHz radio device. 
+    %h3 JavaScript
     :markdown
-          :::ruby
-          require 'Cylon.js'
-          connection :crazyflie, :adaptor => :crazyflie
-          device :drone, :driver => :crazyflie, :connection => :crazyflie, :interval => 0.1
+          :::javascript
+          var Cylon = require('cylon');
+
+          Cylon.robot({
+            connection: { name: 'crazyflie', adaptor: 'crazyflie' },
+            device: {name: 'drone', driver: 'crazyflie'},
+          ...
+
+    %h3 CoffeeScript
+    :markdown
+          :::javascript
+          Cylon = require 'cylon'
+
+          Cylon.robot
+            connection:
+              name: 'crazyflie', adaptor: 'crazyflie'
+
+            device:
+              name: 'drone', driver: 'crazyflie'
+          ...
 
   %section.public-methods
     %h2 Commands:
 
     %dl.methods
-      %dt start
-      %dd Starts the crazyfly's motors and controls.
-      %dt stop
-      %dd Stops the crazyfly's motors.
-      %dt hover
-      %dd Makes the crazyflie hover in a position.
       %dt land
       %dd Initiates a landing sequence.
-      %dt take_off
+      %dt takeoff
       %dd Initiates take off sequence.
-      %dt up
-      %dd Orders crazy flie to go up.
-      %dt down
-      %dd Orders crazy flie to go down.
-      %dt left(deg)
-      %dd Orders crazyflie to go left the amount specified by deg (roll left).
-      %dt right(deg)
-      %dd Orders crazyflie to go right the amount specified by deg (roll right).
-      %dt forward(deg)
-      %dd Orders crazyflie to go forward the amount specified by deg (pitch forward).
-      %dt backward(deg)
-      %dd Orders crazyflie to go backward the amount specified by deg (pitch backward).
-      %dt turn_left(deg)
-      %dd Orders crazyflie to turn left the amount specified by deg (yaw left).
-      %dt turn_right(deg)
-      %dd Orders crazyflie to turn right the amount specified by deg (yaw right).
-      %dt power(deg)
-      %dd Sets thrust power to deg.
+      %dt setPitch
+      %dd 
+      %dt setYaw
+      %dd 
+      %dt setThrust
+      %dd 
+      %dt shutdown
+      %dd Shutdown the device.
     
     %h2 Events:
     %dl.methods 
       %dt start
       %dd Sent when the device has been started and is ready to use. 
+      %dt stop
+      %dd Sent when the device has been stopped. 
 
   %section.how-to
     %h2 How to use
-    %h3 Example of controlling a Crazyflie.
+    %h3 Examples
+    %p This small program causes the Crazyflie to takeoff for 10 seconds.
+    %h3 JavaScript
     :markdown
           :::javascript
-          require 'Cylon.js'
-          ...
+          var Cylon = require('cylon');
+
+          Cylon.robot({
+            connection: { name: 'crazyflie', adaptor: 'crazyflie' },
+            device: {name: 'drone', driver: 'crazyflie'},
+
+            work: function(my) {
+              my.drone.takeoff();
+              after((10).seconds(), function() { 
+                my.drone.land();
+              });
+              after((15).seconds(), function() { 
+                my.drone.stop();
+              });    
+            }
+          }).start();
+    %h3 CoffeeScript
+    :markdown
+          :::javascript
+          Cylon = require 'cylon'
+
+          Cylon.robot
+            connection:
+              name: 'crazyflie', adaptor: 'crazyflie'
+
+            device:
+              name: 'drone', driver: 'crazyflie'
+
+            work: (my) ->
+              my.drone.takeoff()
+              after 10.seconds(), ->
+                my.drone.land()
+              after 15.seconds(), ->
+                my.drone.stop()
+
+          .start()
 
   %section.compatability.hardware
     %h2 Works with:

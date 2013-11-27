@@ -21,13 +21,49 @@ layout: page
     %p Installing Cylon.js with arduino support is pretty easy using ruby gems.
     :markdown
           :::bash
-          npm install Cylon.js-crazyflie
+          npm install cylon-crazyflie
 
     %h2 How to use
-    %p This small program causes the Crazyflie to 'hop' up in the air for 1 second.
+    %p This small program causes the Crazyflie to takeoff for 10 seconds.
+    %h3 JavaScript
     :markdown
           :::javascript
-          ...
+          var Cylon = require('cylon');
+
+          Cylon.robot({
+            connection: { name: 'crazyflie', adaptor: 'crazyflie' },
+            device: {name: 'drone', driver: 'crazyflie'},
+
+            work: function(my) {
+              my.drone.takeoff();
+              after((10).seconds(), function() { 
+                my.drone.land();
+              });
+              after((15).seconds(), function() { 
+                my.drone.stop();
+              });    
+            }
+          }).start();
+    %h3 CoffeeScript
+    :markdown
+          :::javascript
+          Cylon = require 'cylon'
+
+          Cylon.robot
+            connection:
+              name: 'crazyflie', adaptor: 'crazyflie'
+
+            device:
+              name: 'drone', driver: 'crazyflie'
+
+            work: (my) ->
+              my.drone.takeoff()
+              after 10.seconds(), ->
+                my.drone.land()
+              after 15.seconds(), ->
+                my.drone.stop()
+
+          .start()
 
     %h2 How to connect
     %p
@@ -38,22 +74,22 @@ layout: page
       %br
       %a{ href: "http://stackoverflow.com/questions/17204253/crazyflie-usb-3-0-incompability"} http://stackoverflow.com/questions/17204253/crazyflie-usb-3-0-incompability
 
-    %h2 How to hover
-    %p
-      To use Crazyflie with the hover command, requires installing the 
-      =link_to "https://bitbucket.org/omwdunkley/crazyflie-firmware" ,"https://bitbucket.org/omwdunkley/crazyflie-firmware"
-      fork of the Crazyflie firmware. The easiest way to currently do this, is to 
-      install the Crazyflie PC Client, download the 'hover' branch BIN file from here 
-      =link_to "https://bitbucket.org/omwdunkley/crazyflie-firmware/downloads/cflie.bin","https://bitbucket.org/omwdunkley/crazyflie-firmware/downloads/cflie.bin"
-      and then use the Crazyflie PC tools to update the Crazyflie firmware.
+    -#%h2 How to hover
+    -#%p
+      -#To use Crazyflie with the hover command, requires installing the 
+      -#=link_to "https://bitbucket.org/omwdunkley/crazyflie-firmware" ,"https://bitbucket.org/omwdunkley/crazyflie-firmware"
+      -#fork of the Crazyflie firmware. The easiest way to currently do this, is to 
+      -#install the Crazyflie PC Client, download the 'hover' branch BIN file from here 
+      -#=link_to "https://bitbucket.org/omwdunkley/crazyflie-firmware/downloads/cflie.bin","https://bitbucket.org/omwdunkley/crazyflie-firmware/downloads/cflie.bin"
+      -#and then use the Crazyflie PC tools to update the Crazyflie firmware.
 
-    %p Once you have updated the Crazyflie firmware, you will NEED to use the following syntax in your Cylon.js code to use it:
+    -#%p Once you have updated the Crazyflie firmware, you will NEED to use the following syntax in your Cylon.js code to use it:
 
-    :markdown
-          :::javascript
-          ...
+    -#:markdown
+          -#:::javascript
+          -#...
 
-    %p If you do not add :supports_hover => true to your connection code to the Crazyflie, it will go crazy out of control as you as you try to connect to it. You have been warned... 
+    -#%p If you do not add :supports_hover => true to your connection code to the Crazyflie, it will go crazy out of control as you as you try to connect to it. You have been warned... 
 
   %section.drivers
     %h2 Drivers
