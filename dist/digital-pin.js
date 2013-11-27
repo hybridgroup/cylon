@@ -99,9 +99,7 @@
             if (err) {
               return _this.emit('error', "Error occurred while reading from pin " + _this.pinNum);
             } else {
-              readData = data;
-              console.log("ReadData =======>");
-              console.log(data);
+              readData = data.toString();
               return _this.emit('digitalRead', data);
             }
           });
