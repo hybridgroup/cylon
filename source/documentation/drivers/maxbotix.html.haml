@@ -13,7 +13,11 @@ layout: page
 
   %section.how-to
     %h2 How to stablish a connection and setup the driver
-    %h3 For Arduino:
+    %h3 JavaScript
+    :markdown
+          :::javascript
+          comming soon
+    %h3 CoffeeScript
     :markdown
           :::javascript
           comming soon
@@ -21,10 +25,12 @@ layout: page
   %section.public-methods
     %h2 Commands:
     %dl.methods 
-      %dt range → distance_in_inches(float)
+      %dt analogValue
+      %dd 
+      %dt range
       %dd Returns the distance measured by the sonar in inches.
-      %dt range_cm → distance_in_cm(float)
-      %dd  Returns the distance measured by the sonar in cm.
+      %dt rangeCm
+      %dd Returns the distance measured by the sonar in cm.
 
   %section.public-events
     %h2 Events:
@@ -32,8 +38,10 @@ layout: page
       The events will be triggered when the amount of time specified by the param :interval, when setting up the driver, passes.
 
     %dl.methods 
-      %dt range
-      %dd  Gets triggered after :interval amount of time passes, everytime the range will be read and the event triggered.
+      %dt start
+      %dd Sent when the device has been started and is ready to use. 
+      %dt stop
+      %dd Sent when the device has been stopped.
 
     %h3 How to use events and call them on your drivers
     %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
@@ -42,8 +50,7 @@ layout: page
           comming soon
 
   %section.how-to
-    %h2 How to use
-    %h3 Example: Setups a maxbotix driver and range event, displays the range every :interval amount of time.
+    %h2 Examples
     :markdown
           :::javascript
           comming soon
@@ -59,3 +66,4 @@ layout: page
     .devices
       = partial "documentation/partials/arduino"
       =# partial "documentation/partials/digispark"
+
