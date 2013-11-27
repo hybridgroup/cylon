@@ -6,15 +6,14 @@ bots = [
   { port: '/dev/cu.Sphero-BRG', name: 'Louie' }
 ]
 
-SpheroRobot =
-  connection:
-    name: 'Sphero', adaptor: 'sphero'
+class SpheroRobot
+  connection: { name: 'Sphero', adaptor: 'sphero' }
 
   work: (my) ->
     Logger.info "Robot #{my.name} is now working!"
 
 for bot in bots
-  robot = Object.create(SpheroRobot)
+  robot = new SpheroRobot
   robot.connection.port = bot.port
   robot.name = bot.name
 

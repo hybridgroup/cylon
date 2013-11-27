@@ -24,16 +24,15 @@ a base robot and change it's attributes as needed.
       { port: '/dev/cu.Sphero-BRG', name: 'Louie' }
     ]
 
-Now we can define our cleverly-named `SpheroRobot` object. This will be the base
-object for all three of the robots.
+Now we can define our cleverly-named `SpheroRobot` class. This will be the base
+class for all three of the robots.
 
-    SpheroRobot =
+    class SpheroRobot
 
 Every robot needs to connect to a Sphero. We're doing this using the
 `cylon-sphero` adaptor.
 
-      connection:
-        name: 'Sphero', adaptor: 'sphero'
+      connection: { name: 'Sphero', adaptor: 'sphero' }
 
 We'll just give our robots some basic work so we can tell they're actually
 working:
@@ -43,12 +42,12 @@ working:
 
 And that's all we need for that.
 
-Next up, we'll create Cylon robots by making a duplicate of the `SpheroRobot`
-object, and modifying the attributes that are unique to each robot. After the
+Next up, we'll create Cylon robots by making an instance of the `SpheroRobot`
+class, and modifying the attributes that are unique to each robot. After the
 customized robot is ready, we'll feed it into Cylon.
 
     for bot in bots
-      robot = Object.create(SpheroRobot)
+      robot = new SpheroRobot
       robot.connection.port = bot.port
       robot.name = bot.name
 
