@@ -58,6 +58,8 @@ namespace 'Cylon.IO', ->
           @emit('digitalWrite', value)
       )
 
+      value
+
     # Reads the pin input every interval amount of time:
     # params:
     #   interval: amount in miliseconds
@@ -71,9 +73,13 @@ namespace 'Cylon.IO', ->
             @emit('error', "Error occurred while reading from pin #{ @pinNum }")
           else
             readData = data
+            console.log("ReadData =======>")
+            console.log(data)
             @emit('digitalRead', data)
         )
       , interval)
+
+      true
 
     setHigh: ->
       @digitalWrite 1
