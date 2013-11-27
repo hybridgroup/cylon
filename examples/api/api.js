@@ -12,11 +12,11 @@ var SpheroRobot = {
 
   device: { name: 'sphero', driver: 'sphero' },
 
-  work: function(me) {
+  work: function(my) {
     every((1).seconds(), function() {
-      Logger.info(me.name);
-      me.sphero.setRGB(Math.floor(Math.random() * 100000));
-      return me.sphero.roll(60, Math.floor(Math.random() * 360));
+      Logger.info(my.name);
+      my.sphero.setRandomColor();
+      my.sphero.roll(60, Math.floor(Math.random() * 360));
     });
   }
 };

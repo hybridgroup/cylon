@@ -12,11 +12,11 @@ SpheroRobot =
 
   device: { name: 'sphero', driver: 'sphero' }
 
-  work: (me) ->
+  work: (my) ->
     every 1.seconds(), ->
-      Logger.info me.name
-      me.sphero.setRGB Math.floor(Math.random() * 100000)
-      me.sphero.roll 60, Math.floor(Math.random() * 360)
+      Logger.info my.name
+      my.sphero.setRGB Math.floor(Math.random() * 100000)
+      my.sphero.roll 60, Math.floor(Math.random() * 360)
 
 for bot in bots
   robot = Object.create SpheroRobot
