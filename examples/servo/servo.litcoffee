@@ -27,19 +27,19 @@ We'll start defining the work for our robot next:
 We'll define variables to hold our servo's angle, and the rate at which that
 angle will change:
 
-        angle = 0
-        increment = 5
+        angle = 30
+        increment = 40
 
 Every second, we'll increment the `angle`, set the servo to run at that angle,
 and log the angle we're running at to the console. We'll also make sure to
 change the increment if the angle is at the upper/lower bounds of the values
 supported:
 
-        every 0.05.seconds(), ->
+        every 1.seconds(), ->
           angle += increment
           my.servo.angle(angle)
           Logger.info "Current angle: #{my.servo.currentAngle() }"
-          increment = -increment if (angle is 0) or (angle is 180)
+          increment = -increment if (angle is 30) or (angle is 150)
 
 And with all that done, we can now start our robot:
 

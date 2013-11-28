@@ -5,8 +5,8 @@ Cylon.robot({
   device: { name: 'servo', driver: 'servo', pin: 3 },
 
   work: function(my) {
-    var angle = 0;
-    var increment = 90;
+    var angle = 30;
+    var increment = 40;
 
     every(1..seconds(), function() {
       angle += increment;
@@ -14,7 +14,7 @@ Cylon.robot({
 
       Logger.info("Current Angle: " + (my.servo.currentAngle()));
 
-      if ((angle === 0) || (angle === 180)) { increment = -increment; }
+      if ((angle === 30) || (angle === 150)) { increment = -increment; }
     });
   }
 }).start();

@@ -5,8 +5,8 @@ Cylon.robot
   device: { name: 'servo', driver: 'servo', pin: 3 }
 
   work: (my) ->
-    angle = 0
-    increment = 90
+    angle = 30
+    increment = 40
 
     every 1.seconds(), ->
       angle += increment
@@ -14,6 +14,6 @@ Cylon.robot
 
       Logger.info "Current Angle: #{my.servo.currentAngle()}"
 
-      increment = -increment if (angle is 0) or (angle is 180)
+      increment = -increment if (angle is 30) or (angle is 150)
 
 .start()
