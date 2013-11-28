@@ -3,12 +3,14 @@ Cylon = require('..')
 # Initialize the robot
 Cylon.robot
   connection:
-    name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
+    name: 'raspi', adaptor: 'raspi', port: '/dev/ttyACM0'
 
   device:
-    name: 'servo', driver: 'servo', pin: 3
+    name: 'servo', driver: 'servo', pin: 11
 
   work: (my) ->
+    # we do our thing here
+    work: (my) ->
     angle = 30
     increment = 40
     every 1.seconds(), ->

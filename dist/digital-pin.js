@@ -77,13 +77,14 @@
           this._setMode('w');
         }
         this.status = value === 1 ? 'high' : 'low';
-        return FS.writeFile(this._valuePath(), value, function(err) {
+        FS.writeFile(this._valuePath(), value, function(err) {
           if (err) {
             return _this.emit('error', "Error occurred while writing value " + value + " to pin " + _this.pinNum);
           } else {
             return _this.emit('digitalWrite', value);
           }
         });
+        return value;
       };
 
       DigitalPin.prototype.digitalRead = function(interval) {
@@ -93,16 +94,17 @@
           this._setMode('r');
         }
         readData = null;
-        return setInterval(function() {
+        setInterval(function() {
           return FS.readFile(_this._valuePath(), function(err, data) {
             if (err) {
               return _this.emit('error', "Error occurred while reading from pin " + _this.pinNum);
             } else {
-              readData = data;
-              return _this.emit('digitalRead', data);
+              readData = parseInt(data.toString());
+              return _this.emit('digitalRead', readData);
             }
           });
         }, interval);
+        return true;
       };
 
       DigitalPin.prototype.setHigh = function() {

@@ -58,6 +58,8 @@ namespace 'Cylon.IO', ->
           @emit('digitalWrite', value)
       )
 
+      value
+
     # Reads the pin input every interval amount of time:
     # params:
     #   interval: amount in miliseconds
@@ -70,10 +72,12 @@ namespace 'Cylon.IO', ->
           if err
             @emit('error', "Error occurred while reading from pin #{ @pinNum }")
           else
-            readData = data
-            @emit('digitalRead', data)
+            readData = parseInt(data.toString())
+            @emit('digitalRead', readData)
         )
       , interval)
+
+      true
 
     setHigh: ->
       @digitalWrite 1
