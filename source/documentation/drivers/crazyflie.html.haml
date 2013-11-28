@@ -46,21 +46,27 @@ layout: page
       %dd Initiates a landing sequence.
       %dt takeoff
       %dd Initiates take off sequence.
+      %dt hover
+      %dd Makes the crazyflie hover in a position.
       %dt setPitch
-      %dd 
+      %dd Orders crazyflie to go forward or backward by the amount specified by deg.
       %dt setYaw
-      %dd 
+      %dd Orders crazyflie to turn left or right by the amount specified by deg.
       %dt setThrust
-      %dd 
+      %dd Orders crazyflie to accelerate. 
       %dt shutdown
       %dd Shutdown the device.
+      %dt setParam(param, value)
+      %dd Set the parameters for crazyflie.
     
     %h2 Events:
     %dl.methods 
       %dt start
       %dd Sent when the device has been started and is ready to use. 
       %dt stop
-      %dd Sent when the device has been stopped. 
+      %dd Sent when the device has been stopped.
+      %dt setParam(param, value)
+      %dd Set the parameters for crazyflie. 
 
   %section.how-to
     %h2 How to use
