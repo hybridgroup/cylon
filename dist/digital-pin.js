@@ -99,8 +99,8 @@
             if (err) {
               return _this.emit('error', "Error occurred while reading from pin " + _this.pinNum);
             } else {
-              readData = data.toString();
-              return _this.emit('digitalRead', data);
+              readData = parseInt(data.toString());
+              return _this.emit('digitalRead', readData);
             }
           });
         }, interval);

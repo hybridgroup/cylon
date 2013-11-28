@@ -72,8 +72,8 @@ namespace 'Cylon.IO', ->
           if err
             @emit('error', "Error occurred while reading from pin #{ @pinNum }")
           else
-            readData = data.toString()
-            @emit('digitalRead', data)
+            readData = parseInt(data.toString())
+            @emit('digitalRead', readData)
         )
       , interval)
 
