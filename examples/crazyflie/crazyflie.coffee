@@ -1,4 +1,4 @@
-Cylon = require '..'
+Cylon = require '../..'
 
 Cylon.robot
   connection:
@@ -8,12 +8,9 @@ Cylon.robot
     name: 'drone', driver: 'crazyflie'
 
   work: (my) ->
-    #my.drone.setParam('flightmode.althold', true)
     my.drone.on 'start', ->
       my.drone.takeoff()
-      after 10.seconds(), ->
-        my.drone.land()
-      after 15.seconds(), ->
-        my.drone.stop()
+      after 10.seconds(), -> my.drone.land()
+      after 15.seconds(), -> my.drone.stop()
 
 .start()
