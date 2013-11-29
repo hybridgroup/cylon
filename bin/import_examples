@@ -1,0 +1,93 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+
+REPO_URL = "https://github.com/hybridgroup/cylon.git"
+REPO_DIR = File.expand_path "./.cylon"
+
+SITE_DIR = File.expand_path "./source"
+
+INDENTED_CODE_REGEX = / # Match a MARKDOWN CODE section.
+  (\r?\n)              # $1: CODE must be preceded by blank line
+  (                    # $2: CODE contents
+    (?:                # Group for multiple lines of code.
+      (?:\r?\n)+       # Each line preceded by a newline,
+      (?:[ ]{4}|\t).*  # and begins with four spaces or tab.
+    )+                 # One or more CODE lines
+    \r?\n              # CODE folowed by blank line.
+  )                    # End $2: CODE contents
+  (?=\r?\n)?           # CODE folowed by blank line.
+  /x
+
+@example_files = []
+
+def clone_repo
+  puts "Cloning remote copy of Cylon."
+  FileUtils.rm_rf(REPO_DIR) if File.directory?(REPO_DIR)
+  Dir.mkdir(REPO_DIR)
+  `git clone #{REPO_URL} #{REPO_DIR} &> /dev/null`
+end
+
+def extract_example_files
+  puts "Extracting example files from clone of Cylon repo."
+  Dir[REPO_DIR + "/examples/**/*.litcoffee"].each do |file|
+    @example_files << {
+      :filename => file,
+      :name => file.match(/\/([A-Za-z_-]+)\.litcoffee$/)[1],
+      :content => File.read(file)
+    }
+  end
+end
+
+def create_pages
+  @example_files.each do |example|
+    puts "Creating page for example '#{example[:name]}'"
+    body = example[:content]
+
+    # mark all indented blocks as coffeescript
+    body.gsub! INDENTED_CODE_REGEX do |code|
+      code.gsub! /\A\n+/, "\n\n    :::coffeescript\n"
+      code
+    end
+
+    # indent by two spaces
+    body.gsub! /^(.+)/, '  \1'
+
+    page_content = <<-EOS
+---
+layout: page
+title: Cylon.JS Example - #{example[:name]}
+page_title: Example: #{example[:name]}
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "You can find more examples <a href='https://github.com/hybridgroup/cylon/tree/master/examples/#{example[:name]}' target='blank' class='repository'>here.</a>
+---
+
+:markdown
+#{body}
+EOS
+
+    filename = SITE_DIR + "/documentation/examples/#{example[:name]}.html.haml"
+    File.write filename, page_content
+  end
+end
+
+def remove_existing_pages
+  puts "Removing existing example pages."
+  `rm -rf #{SITE_DIR}/documentation/examples/*.html.haml`
+end
+
+def remove_local_repo
+  puts "Removing local copy of Cylon repo."
+  FileUtils.rm_rf REPO_DIR
+end
+
+def main
+  clone_repo
+  extract_example_files
+  remove_existing_pages
+  create_pages
+  remove_local_repo
+end
+
+main
