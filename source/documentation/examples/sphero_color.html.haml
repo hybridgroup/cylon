@@ -1,0 +1,46 @@
+---
+layout: page
+title: Cylon.JS Example - sphero_color
+page_title: Example: sphero_color
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "You can find more examples <a href='https://github.com/hybridgroup/cylon/tree/master/examples/sphero_color' target='blank' class='repository'>here.</a>
+---
+
+:markdown
+  # Sphero Color
+
+  This Cylon example will connect to a Sphero, and change it's color randomly
+  every second. Before we start, ensure you've got the `cylon-sphero` module
+  installed.
+
+  To get started, let's import the Cylon module:
+
+      :::coffeescript
+      Cylon = require '../..'
+
+  Now we can start defining our robot.
+
+      :::coffeescript
+      Cylon.robot
+
+  Our robot will have, as with other Sphero examples, one connection and one
+  device, both to the same Sphero.
+
+      :::coffeescript
+        connection: { name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0' }
+        device: { name: 'sphero', driver: 'sphero' }
+
+  The work our robot will be performing is fairly, straightforward, it will just
+  be changing it's color to a random new color every second.
+
+      :::coffeescript
+        work: (my) ->
+          every 1.second(), ->
+            my.sphero.setRGB Math.floor(Math.random() * 100000)
+
+  And with the pieces in place, we can start our robot!
+
+      :::coffeescript
+      .start()
+

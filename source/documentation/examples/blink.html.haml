@@ -1,44 +1,48 @@
 ---
-title: Blink with Cylon.js
-author: The Hybrid Group
-page_title: Blink
-page_subtitle: "You can find the examples on this two repositories here:<br><a href='https://github.com/hybridgroup/cylon/blob/master/examples/blink.js' target='blanck' class='repository'>javascript</a><a href='https://github.com/hybridgroup/cylon/blob/master/examples/blink.coffee' target='blanck' class='repository'>coffeescript</a>"
 layout: page
+title: Cylon.JS Example - blink
+page_title: Example: blink
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "You can find more examples <a href='https://github.com/hybridgroup/cylon/tree/master/examples/blink' target='blank' class='repository'>here.</a>
 ---
-.documentation
-  %section.intro
-    %h2 Examples
-    %h3 Javascript
-    :markdown
-          :::javascript
-          var Cylon = require('..');
 
-          // Initialize the robot
-          Cylon.robot({
-            connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
-            device: {name: 'led', driver: 'led', pin: 13},
+:markdown
+  # Blink
 
-            work: function(my) {
-              every((1).seconds(), function() {my.led.toggle()});
-            }
-          }).start();
+  For this very basic Cylon example, we're just going to hook up to an Arduino and
+  blink an LED on it with a one-second interval.
 
-    %h3 CoffeeScript
-    :markdown
-          :::javascript
-          Cylon = require('..')
+  To get started, let's load up Cylon:
 
-          # Initialize the robot
-          Cylon.robot
-            connection:
-              name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
+      :::coffeescript
+      Cylon = require '../..'
 
-            device:
-              name: 'led', driver: 'led', pin: 13
+  With Cylon loaded, we can now define our basic robot.
 
-            work: (my) ->
-              # we do our thing here
-              every 1.second(), -> my.led.toggle()
+      :::coffeescript
+      Cylon.robot
 
-          .start()      
-	          
+  Our robot has one connection, to an Arduino using the `cylon-firmata` adaptor:
+
+      :::coffeescript
+        connection: { name: "arduino", adaptor: "firmata", port: "/dev/ttyACM0" }
+
+  Our robot also only has one device (or at least only one we're concerned about),
+  an LED on pin 13.
+
+      :::coffeescript
+        device: { name: 'led', driver: 'led', pin: 13 }
+
+  Next, we'll define the robot's work, which will be toggling the LED every
+  second:
+
+      :::coffeescript
+        work: (my) ->
+          every 1.second(), -> my.led.toggle()
+
+  And that's all the parts of our robot. All that's left is to start it.
+
+      :::coffeescript
+      .start()
+
