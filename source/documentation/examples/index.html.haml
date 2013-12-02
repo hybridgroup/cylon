@@ -7,59 +7,117 @@ description: Examples of using Cylon.JS with different hardware configurations
 page_subtitle: How you can get started.
 ---
 
-.documentation
-  %ul.index
-    %li
-      .link= link_to "Analog Sensor", '/documentation/examples/analog_sensor'
-    %li
-      .link= link_to "API", '/documentation/examples/api'
-    %li
-      .link= link_to "Blink", '/documentation/examples/blink'
-    %li
-      .link= link_to "BlinkM", '/documentation/examples/blinkm'
-    %li
-      .link= link_to "Button", '/documentation/examples/button'
-    %li
-      .link= link_to "Conway's Game Of Life - With Spheros", '/documentation/examples/conway_sphero'
-    %li
-      .link= link_to "Crazyflie", '/documentation/examples/crazyflie'
-    %li
-      .link= link_to "Drone", '/documentation/examples/drone'
-    %li
-      .link= link_to "Drone Navigation", '/documentation/examples/drone_nav'
-    %li
-      .link= link_to "Hello", '/documentation/examples/hello'
-    %li
-      .link= link_to "LED Brightness", '/documentation/examples/led_brightness'
-    %li
-      .link= link_to "Master", '/documentation/examples/master'
-    %li
-      .link= link_to "Motor", '/documentation/examples/motor'
-    %li
-      .link= link_to "Pure GPIO", '/documentation/examples/pure_gpio'
-    %li
-      .link= link_to "Pure Spheron", '/documentation/examples/pure_spheron'
-    %li
-      .link= link_to "Raspberry Pi - Blink", '/documentation/examples/raspi_blink'
-    %li
-      .link= link_to "Raspberry Pi - Button", '/documentation/examples/raspi_button'
-    %li
-      .link= link_to "Raspberry Pi - LED Brightness", '/documentation/examples/raspi_led_brightness'
-    %li
-      .link= link_to "Raspberry Pi - Servo", '/documentation/examples/raspi_servo'
-    %li
-      .link= link_to "Robot Commands", '/documentation/examples/robot_commands'
-    %li
-      .link= link_to "Servo", '/documentation/examples/servo'
-    %li
-      .link= link_to "Sphero", '/documentation/examples/sphero'
-    %li
-      .link= link_to "Sphero Collisions", '/documentation/examples/sphero_collision'
-    %li
-      .link= link_to "Sphero Color", '/documentation/examples/sphero_color'
-    %li
-      .link= link_to "Sphero Messages", '/documentation/examples/sphero_messages'
-    %li
-      .link= link_to "Multiple Spheros", '/documentation/examples/sphero_multiple'
-    %li
-      .link= link_to "Cylon and Travis", '/documentation/examples/travis'
+.documentation.examples
+  %table
+    %thead
+      %th Example
+      %th.links{:colspan => '2'} Links
+    %tbody
+      %tr
+        %td Analog Sensor
+        %td.links= link_to 'Javascript', '/documentation/examples/js/analog_sensor'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/analog_sensor'
+      %tr
+        %td API
+        %td.links= link_to 'Javascript', '/documentation/examples/js/api'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/api'
+      %tr
+        %td Blink
+        %td.links= link_to 'Javascript', '/documentation/examples/js/blink'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/blink'
+      %tr
+        %td BlinkM
+        %td.links= link_to 'Javascript', '/documentation/examples/js/blinkm'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/blinkm'
+      %tr
+        %td Button
+        %td.links= link_to 'Javascript', '/documentation/examples/js/button'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/button'
+      %tr
+        %td Conway's Game Of Life - With Spheros
+        %td.links= link_to 'Javascript', '/documentation/examples/js/conway_sphero'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/conway_sphero'
+      %tr
+        %td Crazyflie
+        %td.links= link_to 'Javascript', '/documentation/examples/js/crazyflie'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/crazyflie'
+      %tr
+        %td Drone
+        %td.links= link_to 'Javascript', '/documentation/examples/js/drone'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/drone'
+      %tr
+        %td Drone Navigation
+        %td.links= link_to 'Javascript', '/documentation/examples/js/drone_nav'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/drone_nav'
+      %tr
+        %td Hello
+        %td.links= link_to 'Javascript', '/documentation/examples/js/hello'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/hello'
+      %tr
+        %td LED Brightness
+        %td.links= link_to 'Javascript', '/documentation/examples/js/led_brightness'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/led_brightness'
+      %tr
+        %td Master
+        %td.links= link_to 'Javascript', '/documentation/examples/js/master'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/master'
+      %tr
+        %td Motor
+        %td.links= link_to 'Javascript', '/documentation/examples/js/motor'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/motor'
+      %tr
+        %td Pure GPIO
+        %td.links= link_to 'Javascript', '/documentation/examples/js/pure_gpio'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/pure_gpio'
+      %tr
+        %td Pure Spheron
+        %td.links= link_to 'Javascript', '/documentation/examples/js/pure_spheron'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/pure_spheron'
+      %tr
+        %td Raspberry Pi - Blink
+        %td.links= link_to 'Javascript', '/documentation/examples/js/raspi_blink'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/raspi_blink'
+      %tr
+        %td Raspberry Pi - Button
+        %td.links= link_to 'Javascript', '/documentation/examples/js/raspi_button'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/raspi_button'
+      %tr
+        %td Raspberry Pi - LED Brightness
+        %td.links= link_to 'Javascript', '/documentation/examples/js/raspi_led_brightness'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/raspi_led_brightness'
+      %tr
+        %td Raspberry Pi - Servo
+        %td.links= link_to 'Javascript', '/documentation/examples/js/raspi_servo'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/raspi_servo'
+      %tr
+        %td Robot Commands
+        %td.links= link_to 'Javascript', '/documentation/examples/js/robot_commands'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/robot_commands'
+      %tr
+        %td Servo
+        %td.links= link_to 'Javascript', '/documentation/examples/js/servo'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/servo'
+      %tr
+        %td Sphero
+        %td.links= link_to 'Javascript', '/documentation/examples/js/sphero'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/sphero'
+      %tr
+        %td Sphero Collisions
+        %td.links= link_to 'Javascript', '/documentation/examples/js/sphero_collision'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/sphero_collision'
+      %tr
+        %td Sphero Color
+        %td.links= link_to 'Javascript', '/documentation/examples/js/sphero_color'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/sphero_color'
+      %tr
+        %td Sphero Messages
+        %td.links= link_to 'Javascript', '/documentation/examples/js/sphero_messages'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/sphero_messages'
+      %tr
+        %td Multiple Spheros
+        %td.links= link_to 'Javascript', '/documentation/examples/js/sphero_multiple'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/sphero_multiple'
+      %tr
+        %td Cylon and Travis
+        %td.links= link_to 'Javascript', '/documentation/examples/js/travis'
+        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/travis'

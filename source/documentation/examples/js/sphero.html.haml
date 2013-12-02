@@ -1,0 +1,25 @@
+---
+layout: page
+title: Cylon.JS Example - Sphero
+page_title: "Example: Sphero"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "You can find more versions of this example <a href='https://github.com/hybridgroup/cylon/tree/master/examples/sphero' target='blank' class='repository'>here.</a>"
+---
+
+.example
+  :markdown
+        :::javascript
+        var Cylon = require('../..');
+
+        Cylon.robot({
+          connection: { name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0' },
+          device: { name: 'sphero', driver: 'sphero' },
+
+          work: function(me) {
+            every((1).second(), function() {
+              me.sphero.roll(60, Math.floor(Math.random() * 360));
+            });
+          }
+        }).start();
+
