@@ -108,6 +108,8 @@ More platforms and drivers are coming soon...
 
 We're busy adding documentation to our web site at http://cylonjs.com/ please check there as we continue to work on Cylon.js
 
+If you want to help us with some documentation on the site, you can go to [cylonjs.com branch](https://github.com/hybridgroup/cylon/tree/cylonjs.com) and then, follow the instructions.
+
 Thank you!
 
 ## Contributing
