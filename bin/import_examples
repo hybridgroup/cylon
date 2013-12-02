@@ -57,6 +57,9 @@ def create_litcoffee_pages
     # escape interpolation as to not confuse HAML
     body.gsub! /(#\{)/, '\\\1'
 
+    # change import path for cylon
+    body.gsub! /\.\.\/\.\./, 'cylon'
+
     # indent by two spaces
     body.gsub! /^(.+)/, '  \1'
 
@@ -84,6 +87,9 @@ def create_js_pages
   @example_files.each do |example|
     puts "  - #{example[:title]}"
     body = example[:js_content]
+
+    # change import path for cylon
+    body.gsub! /\.\.\/\.\./, 'cylon'
 
     # indent by eight spaces
     body.gsub! /^(.+)/, '        \1'
