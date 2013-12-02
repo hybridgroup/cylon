@@ -1,0 +1,51 @@
+---
+layout: page
+title: Cylon.JS Example - Pure GPIO
+page_title: "Example: Pure GPIO"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "You can find more versions of this example <a href='https://github.com/hybridgroup/cylon/tree/master/examples/pure_gpio' target='blank' class='repository'>here.</a>"
+---
+
+:markdown
+  # Pure GPIO
+
+  Here we'll demonstrate an example of controlling a digital pin using a pure GPIO
+  interface.
+
+  First, we need to require the `digital-pin` class inside of Cylon:
+
+      :::coffeescript
+      require '../../dist/digital-pin'
+
+  Then we'll instantiate a new instance of it, with write permissions and using
+  pin 4.
+
+      :::coffeescript
+      pin4 = new Cylon.IO.DigitalPin(pin: 4, mode: 'w')
+
+  Once the pin's been opened, we'll write to the console to indicate so:
+
+      :::coffeescript
+      pin4.on 'open', (data) ->
+        console.log "Pin files have been created"
+
+  And on the 'digitalWrite' event for the pin, we'll log the value that's been
+  written:
+
+      :::coffeescript
+      pin4.on 'digitalWrite', (value) ->
+        console.log "Value written to pin: \1value}"
+
+  When the pin's been connected, we'll set it to high (1)
+
+      :::coffeescript
+      pin4.on 'connect', (data) ->
+        console.log "Pin mode has been setup!"
+        pin4.setHigh()
+
+  And with all our events defined, we'll connect the pin:
+
+      :::coffeescript
+      pin4.connect()
+

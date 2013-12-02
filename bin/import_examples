@@ -1,0 +1,170 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+
+REPO_URL = "https://github.com/hybridgroup/cylon.git"
+REPO_DIR = File.expand_path "./.cylon"
+
+SITE_DIR = File.expand_path "./source"
+
+INDENTED_CODE_REGEX = / # Match a MARKDOWN CODE section.
+  (\r?\n)              # $1: CODE must be preceded by blank line
+  (                    # $2: CODE contents
+    (?:                # Group for multiple lines of code.
+      (?:\r?\n)+       # Each line preceded by a newline,
+      (?:[ ]{4}|\t).*  # and begins with four spaces or tab.
+    )+                 # One or more CODE lines
+    \r?\n              # CODE folowed by blank line.
+  )                    # End $2: CODE contents
+  (?=\r?\n)?           # CODE folowed by blank line.
+  /x
+
+@example_files = []
+
+def clone_repo
+  puts "Cloning remote copy of Cylon."
+  FileUtils.rm_rf(REPO_DIR) if File.directory?(REPO_DIR)
+  Dir.mkdir(REPO_DIR)
+  `git clone #{REPO_URL} #{REPO_DIR} &> /dev/null`
+end
+
+def extract_example_files
+  puts "Extracting example files from clone of Cylon repo."
+  Dir[REPO_DIR + "/examples/**/*.litcoffee"].each do |file|
+    content = File.read file
+    js_content = File.read file.gsub(/litcoffee$/, 'js')
+    @example_files << {
+      :name => file.match(/\/([A-Za-z_-]+)\.litcoffee$/)[1],
+      :content => content,
+      :title => content.match(/\A#\s+(.+)$/)[1],
+      :js_content => js_content
+    }
+  end
+end
+
+def create_litcoffee_pages
+  puts "Creating pages from literate coffeescript examples:"
+  @example_files.each do |example|
+    puts "  - #{example[:title]}"
+    body = example[:content]
+
+    # mark all indented blocks as coffeescript
+    body.gsub! INDENTED_CODE_REGEX do |code|
+      code.gsub! /\A\n+/, "\n\n    :::coffeescript\n"
+      code
+    end
+
+    # escape interpolation as to not confuse HAML
+    body.gsub! /(#\{)/, '\\\1'
+
+    # indent by two spaces
+    body.gsub! /^(.+)/, '  \1'
+
+    page_content = <<-EOS
+---
+layout: page
+title: Cylon.JS Example - #{example[:title]}
+page_title: "Example: #{example[:title]}"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "You can find more versions of this example <a href='https://github.com/hybridgroup/cylon/tree/master/examples/#{example[:name]}' target='blank' class='repository'>here.</a>"
+---
+
+:markdown
+#{body}
+EOS
+
+    filename = SITE_DIR + "/documentation/examples/coffee/#{example[:name]}.html.haml"
+    File.write filename, page_content
+  end
+end
+
+def create_js_pages
+  puts "Creating pages from js examples:"
+  @example_files.each do |example|
+    puts "  - #{example[:title]}"
+    body = example[:js_content]
+
+    # indent by eight spaces
+    body.gsub! /^(.+)/, '        \1'
+
+    page_content = <<-EOS
+---
+layout: page
+title: Cylon.JS Example - #{example[:title]}
+page_title: "Example: #{example[:title]}"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "You can find more versions of this example <a href='https://github.com/hybridgroup/cylon/tree/master/examples/#{example[:name]}' target='blank' class='repository'>here.</a>"
+---
+
+.example
+  :markdown
+        :::javascript
+#{body}
+EOS
+
+    filename = SITE_DIR + "/documentation/examples/js/#{example[:name]}.html.haml"
+    File.write filename, page_content
+  end
+end
+
+def create_index
+  puts "Creating index page."
+
+  filename = SITE_DIR + "/documentation/examples/index.html.haml"
+
+  page_content = <<-EOS
+---
+layout: page
+title: Examples
+page_title: Examples
+author: The Hybrid Group
+description: Examples of using Cylon.JS with different hardware configurations
+page_subtitle: How you can get started.
+---
+
+.documentation.examples
+  %table
+    %thead
+      %th Example
+      %th.links{:colspan => '2'} Links
+    %tbody
+  EOS
+
+  @example_files.each do |example|
+    string = "      %tr\n"
+    string << "        %td #{example[:title]}\n"
+    string << "        %td.links= link_to 'Javascript', '/documentation/examples/js/#{example[:name]}'\n"
+    string << "        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/#{example[:name]}'\n"
+    page_content << string
+  end
+
+  File.write filename, page_content
+end
+
+def remove_existing_pages
+  puts "Removing existing example pages."
+  `rm -rf #{SITE_DIR}/documentation/examples/js/*.html.haml`
+  `rm -rf #{SITE_DIR}/documentation/examples/coffee/*.html.haml`
+  `rm -rf #{SITE_DIR}/documentation/examples/index.html.haml`
+end
+
+def remove_local_repo
+  puts "Removing local copy of Cylon repo."
+  FileUtils.rm_rf REPO_DIR
+end
+
+def main
+  clone_repo
+  extract_example_files
+  remove_existing_pages
+  create_litcoffee_pages
+  create_js_pages
+  create_index
+  remove_local_repo
+
+  puts "Done."
+end
+
+main
