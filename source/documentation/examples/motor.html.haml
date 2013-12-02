@@ -1,10 +1,10 @@
 ---
 layout: page
-title: Cylon.JS Example - motor
-page_title: Example: motor
+title: Cylon.JS Example - Motor
+page_title: "Example: Motor"
 author: The Hybrid Group
 description: A Cylon.JS code example
-page_subtitle: "You can find more examples <a href='https://github.com/hybridgroup/cylon/tree/master/examples/motor' target='blank' class='repository'>here.</a>
+page_subtitle: "You can find more versions of this example <a href='https://github.com/hybridgroup/cylon/tree/master/examples/motor' target='blank' class='repository'>here.</a>"
 ---
 
 :markdown
@@ -54,7 +54,7 @@ page_subtitle: "You can find more examples <a href='https://github.com/hybridgro
           every 0.05.seconds(), ->
             speed += increment
             my.motor.speed(speed)
-            Logger.info "Current Speed: #{my.motor.currentSpeed() }"
+            Logger.info "Current Speed: \1my.motor.currentSpeed() }"
             increment = -increment if (speed is 0) or (speed is 255)
 
   And with all that done, we can now start our robot:

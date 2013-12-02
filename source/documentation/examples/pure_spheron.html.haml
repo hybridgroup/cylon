@@ -1,10 +1,10 @@
 ---
 layout: page
-title: Cylon.JS Example - pure_spheron
-page_title: Example: pure_spheron
+title: Cylon.JS Example - Pure Spheron
+page_title: "Example: Pure Spheron"
 author: The Hybrid Group
 description: A Cylon.JS code example
-page_subtitle: "You can find more examples <a href='https://github.com/hybridgroup/cylon/tree/master/examples/pure_spheron' target='blank' class='repository'>here.</a>
+page_subtitle: "You can find more versions of this example <a href='https://github.com/hybridgroup/cylon/tree/master/examples/pure_spheron' target='blank' class='repository'>here.</a>"
 ---
 
 :markdown
@@ -53,10 +53,10 @@ page_subtitle: "You can find more examples <a href='https://github.com/hybridgro
 
       :::coffeescript
       sphero.on 'notification', (packet) ->
-        console.log "Packet contents: #{packet}"
+        console.log "Packet contents: \1packet}"
 
       sphero.on 'message', (packet) ->
-        console.log "Packet contents: #{packet}"
+        console.log "Packet contents: \1packet}"
 
   And that wraps up our event listeners. All that's left to do is open
   a connection to the Sphero:

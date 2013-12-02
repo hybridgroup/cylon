@@ -1,10 +1,10 @@
 ---
 layout: page
-title: Cylon.JS Example - conway_sphero
-page_title: Example: conway_sphero
+title: Cylon.JS Example - Conway's Game Of Life - With Spheros
+page_title: "Example: Conway's Game Of Life - With Spheros"
 author: The Hybrid Group
 description: A Cylon.JS code example
-page_subtitle: "You can find more examples <a href='https://github.com/hybridgroup/cylon/tree/master/examples/conway_sphero' target='blank' class='repository'>here.</a>
+page_subtitle: "You can find more versions of this example <a href='https://github.com/hybridgroup/cylon/tree/master/examples/conway_sphero' target='blank' class='repository'>here.</a>"
 ---
 
 :markdown
@@ -122,7 +122,7 @@ page_subtitle: "You can find more examples <a href='https://github.com/hybridgro
         birthday: ->
           @age += 1
 
-          Logger.info "Happy birthday, #{@name}. You are #{@age} and had #{@contacts} contacts."
+          Logger.info "Happy birthday, \1@name}. You are \1@age} and had \1@contacts} contacts."
 
           if @enoughContacts()
             @rebirth() if not @alive?

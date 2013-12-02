@@ -1,10 +1,10 @@
 ---
 layout: page
-title: Cylon.JS Example - analog_sensor
-page_title: Example: analog_sensor
+title: Cylon.JS Example - Analog Sensor
+page_title: "Example: Analog Sensor"
 author: The Hybrid Group
 description: A Cylon.JS code example
-page_subtitle: "You can find more examples <a href='https://github.com/hybridgroup/cylon/tree/master/examples/analog_sensor' target='blank' class='repository'>here.</a>
+page_subtitle: "You can find more versions of this example <a href='https://github.com/hybridgroup/cylon/tree/master/examples/analog_sensor' target='blank' class='repository'>here.</a>"
 ---
 
 :markdown
@@ -51,10 +51,10 @@ page_subtitle: "You can find more examples <a href='https://github.com/hybridgro
       :::coffeescript
         work: (my) ->
           my.sensor.on 'upperLimit', (val) ->
-            Logger.info "Upper limit reached: #{val}"
+            Logger.info "Upper limit reached: \1val}"
 
           my.sensor.on 'lowerLimit', (val) ->
-            Logger.info "Lower limit reached: #{val}"
+            Logger.info "Lower limit reached: \1val}"
 
   Now that our robot knows what work to do, and the work it will be doing that
   hardware with, we can start it:
