@@ -145,6 +145,26 @@ layout: page
 	        }
 	      ]
 	    }
+	
+	### GET /robots/:robotname/commands
+	
+	Given a robot's name, returns JSON information about the commands belonging to
+	the requested Robot:
+
+	    [
+	      "detectCollisions",
+	      "roll",
+	      "setColor",
+	      "setRGB",
+	      "stop"
+	    ]
+
+	### POST /robots/:robotname/commands/:commandname
+
+	Given a robot name, commands, and command name, executes a robot's command
+	and returns the result.
+
+	    // example pending
 
 	### GET /robots/:robotname/devices
 
