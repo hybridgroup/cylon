@@ -19,6 +19,9 @@
       "type": "Apache 2.0"
     }
   ],
+  "bin": {
+    "cylon": "./bin/cylon"
+  },
   "devDependencies": {
     "matchdep": "~0.1.1",
     "grunt-contrib-jshint": "~0.6.0",
@@ -34,6 +37,11 @@
   "dependencies": {
     "async": "~0.2.9",
     "node-namespace": "~1.0.0",
-    "express.io": "~1.1.13"
+    "express.io": "~1.1.13",
+
+    "wrench": "~1.5.4",
+    "glob": "~3.2.7",
+    "ejs": "~0.8.5",
+    "commander": "~2.1.0"
   }
 }

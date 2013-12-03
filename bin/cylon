@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+
+var program = require('commander'),
+    pkg = require('../package.json');
+
+program
+  .version(pkg.version)
+  .usage('[command] [options]');
+
+program
+  .command("generate <name>")
+  .description("Generates a new adaptor")
+  .action(function(name) { require('../src/generators/adaptor')(name) });
+
+program.parse(process.argv);
+
+// print help if no arguments were provided
+if(!program.args.length) { program.help(); }
