@@ -7,28 +7,33 @@ description: Cylon.js is a JavaScript framework for robotics and physical comput
 layout: home
 ---
 
-:markdown
-  ## About
+%h2 About
   
-  Cylon.js is a JavaScript framework for robotics and physical computing using Node.js.
+%p Cylon.js is a JavaScript framework for robotics and physical computing using Node.js.
 
-  It provides a simple, yet powerful way to create solutions that incorporate multiple, different hardware devices at the same time.
+%p It provides a simple, yet powerful way to create solutions that incorporate multiple, different hardware devices at the same time.
 
-  Want to use Ruby on robots? Check out our sister project Artoo [(http://artoo.io)](http://artoo.io).
+%p 
+  Want to use Ruby on robots? Check out our sister project Artoo
+  =link_to "(http://artoo.io)", "http://artoo.io", target: :blank
 
-  Want to use the Go programming language to power your robots? Check out our sister project Gobot [(http://gobot.io)](http://gobot.io).
+%p 
+  Want to use the Go programming language to power your robots? Check out our sister project Gobot 
+  =link_to "(http://gobot.io)", "http://gobot.io", target: :blank
 
-  ## Meet The Code
+%h2 Meet The Code
 
-  Cylon.js’s makes commanding robots incredibly simple and fun.
+%p Cylon.js’s makes commanding robots incredibly simple and fun.
 
-  All you need to get started is the `cylon` module:
+%p All you need to get started is the `cylon` module:
 
+:markdown
       :::javascript
       npm install cylon
 
-  Then install modules for whatever hardware support you want to use from your robot. For the example below, an Arduino using the Firmata protocol:
+%p Then install modules for whatever hardware support you want to use from your robot. For the example below, an Arduino using the Firmata protocol:
 
+:markdown
       :::javascript
       npm install cylon-firmata
 
@@ -144,9 +149,10 @@ layout: home
       %li HMC6352 Digital Compass 
 %p More platforms and drivers are coming soon...
 
-:markdown
-  ## Be Part Of The Robot Evolution
+%h2 CLI
 
+%h2  Be Part Of The Robot Evolution
+:markdown
   - Code on Github:   [https://github.com/hybridgroup/cylon](https://github.com/hybridgroup/cylon)
   - Join us on IRC:   `#cylon @ irc.freenode.net`
   - Join us on our [Trello Board](https://trello.com/b/l1aEuqMU/cylon).
