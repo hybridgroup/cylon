@@ -29,7 +29,9 @@
     "sinon-chai": "~2.4.0",
     "chai": "~1.7.2",
     "mocha": "~1.12.1",
-    "sinon": "~1.7.3"
+    "sinon": "~1.7.3",
+    "wrench": "~1.5.4",
+    "commander": "~2.1.0"
   },
   "dependencies": {
     "async": "~0.2.9",

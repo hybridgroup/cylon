@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+
+var program = require('commander'),
+    cylon = require('../package.json');
+
+program.version(cylon.version);
+
+program
+  .command("generate <name>")
+  .description("Generates a new adaptor")
+  .action(function(name) { require('../src/generators/adaptor')(name) });
+
+program.parse(process.argv);
