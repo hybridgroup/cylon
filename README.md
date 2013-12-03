@@ -109,16 +109,16 @@ More platforms and drivers are coming soon...
 Cylon has a Command Line Interface (CLI) so you can access important features
 right from the command line.
 
-      Usage: cylon [command] [options]
+    Usage: cylon [command] [options]
 
-      Commands:
+    Commands:
 
-        generate <name>        Generates a new adaptor
+      generate <name>        Generates a new adaptor
 
-      Options:
+    Options:
 
-        -h, --help     output usage information
-        -V, --version  output the version number
+      -h, --help     output usage information
+      -V, --version  output the version number
 
 ### Generator
 
