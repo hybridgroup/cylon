@@ -16,7 +16,7 @@
   },
   "licenses": [
     {
-      "type": "Apache 2.0"
+      "type": "your license type here"
     }
   ],
   "devDependencies": {
