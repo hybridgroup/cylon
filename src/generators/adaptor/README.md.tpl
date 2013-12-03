@@ -15,7 +15,7 @@ https://github.com/hybridgroup/cylon
 
 ## Installing
 
-    npm install cylon-<%= adaptorName %>
+    npm install <%= adaptorName %>
 
 ## Using
 
