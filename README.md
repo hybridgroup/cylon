@@ -104,6 +104,45 @@ drivers provded using the cylon-i2c module:
 
 More platforms and drivers are coming soon...
 
+## CLI
+
+Cylon has a Command Line Interface (CLI) so you can access important features
+right from the command line.
+
+      Usage: cylon [command] [options]
+
+      Commands:
+
+        generate <name>        Generates a new adaptor
+
+      Options:
+
+        -h, --help     output usage information
+        -V, --version  output the version number
+
+### Generator
+
+Want to integrate a hardware device we don't have Cylon support for yet? There's
+a generator for that!
+
+You can easily generate a new skeleton Cylon adaptor to
+help you get started. Simply run the `cylon generate` command, and the
+generator will create a new directory with all of the files in place for your
+new adaptor module.
+
+    $ cylon generate awesome_device
+    Creating cylon-awesome_device adaptor.
+    Compiling templates.
+
+    $ ls ./cylon-awesome_device
+    Gruntfile.js
+    LICENSE
+    README.md
+    dist/
+    package.json
+    src/
+    test/
+
 ## Documentation
 
 We're busy adding documentation to our web site at http://cylonjs.com/ please check there as we continue to work on Cylon.js
