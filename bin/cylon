@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
 var program = require('commander'),
-    cylon = require('../package.json');
+    pkg = require('../package.json');
 
-program.version(cylon.version);
+program
+  .version(pkg.version)
+  .usage('[command] [options]');
 
 program
   .command("generate <name>")
@@ -11,3 +13,6 @@ program
   .action(function(name) { require('../src/generators/adaptor')(name) });
 
 program.parse(process.argv);
+
+// print help if no arguments were provided
+if(!program.args.length) { program.help(); }
