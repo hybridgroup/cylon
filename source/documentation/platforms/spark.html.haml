@@ -1,0 +1,77 @@
+---
+title: Spark with Cylon.js
+author: The Hybrid Group
+page_title: Spark
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-spark' target='blanck' class='repository'>Repository</a> <a class='issues' href='https://github.com/hybridgroup/cylon-spark/issues' target='blanck'>Issues</a>"
+layout: page
+---
+
+.documentation
+  %section.intro
+    = image_tag "/images/spark.jpg", class: "display"
+
+    %p The Core contains a Wi-Fi module paired with a powerful microcontroller that acts as the "connected brain" for your product. Once it's connected to your Wi-Fi network, it automatically connects with the Spark Cloud and holds open a connection so it can be accessed at any time.
+
+    %p
+      For more info about the spark platform click
+      = succeed "." do
+        = link_to "here", "https://www.spark.io/", target: :blank
+
+  %section.how_to
+    %h2 How to install
+    %p Installing Cylon.js with Spark support is pretty easy.
+    :markdown
+          :::ruby
+          npm install cylon-spark
+    %h2 How to use
+    %p This small program lets you turn on or off a LED for every 1 sec.
+    %h3 Javascript  
+    :markdown
+          :::javascript
+          var Cylon = require('cylon');
+
+          Cylon.robot({
+            connection: { name: 'spark', adaptor: 'spark', accessToken: 'XYZPDQ123' },
+            device: {name: 'led', driver: 'led', pin: 'D0'}
+
+            work: function(my) {
+              every((1).second(), function() {my.led.toggle()});
+            }
+          }).start();
+
+    %h3 CoffeeScript
+    :markdown
+          :::javascript
+          Cylon = require('cylon')
+
+          Cylon.robot
+            connection:
+              name: 'spark', adaptor: 'spark', accessToken: 'XYZPDQ123'
+
+            device:
+              name: 'led', driver: 'led', pin: 'D0'
+
+            work: (my) ->
+              every 1.second(), -> my.led.toggle()
+
+          .start()
+
+
+  %section.drivers
+    %h2 Drivers
+    
+    %p Available drivers for the spark platform are listed below, the drivers contain detailed documentation and examples of what kind physical computing (using cylon.js and node.js) you could be doing:
+
+    .hardware
+      .devices
+        = partial "documentation/partials/analog-sensor"
+        = partial "documentation/partials/button"
+        = partial "documentation/partials/led"
+        = partial "documentation/partials/maxbotix"
+        = partial "documentation/partials/motor"
+        = partial "documentation/partials/servo"
+        = #partial "documentation/partials/blinkm"
+        = #partial "documentation/partials/hmc6352-compass"
+        = #partial "documentation/partials/wiichuck"
+        = #partial "documentation/partials/wiiclassic"
+
