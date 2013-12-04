@@ -78,13 +78,15 @@ layout: page
 
   %section.drivers
     %h2 Drivers
-    %p All Cylon.js digital GPIO and i2c drivers listed below should work with the BeagleBone:
+    %p All Cylon.js digital and PWM GPIO drivers listed below should work with the BeagleBone:
 
     .hardware
       .devices
         = partial "documentation/partials/button"
         = partial "documentation/partials/led"
-        = partial "documentation/partials/blinkm"
-        = partial "documentation/partials/hmc6352-compass"
+        = partial "documentation/partials/motor"
+        = partial "documentation/partials/servo"        
+        = #partial "documentation/partials/blinkm"
+        = #partial "documentation/partials/hmc6352-compass"
         = #partial "documentation/partials/wiichuck"
         = #partial "documentation/partials/wiiclassic"
