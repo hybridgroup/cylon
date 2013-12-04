@@ -21,15 +21,15 @@
 
   namespace('Cylon.IO', function() {
     return this.DigitalPin = (function(_super) {
-      var GPIO_DIRECTION_READ, GPIO_DIRECTION_WRITE, GPIO_PATH, HIGH, LOW;
+      var GPIO_PATH, GPIO_READ, GPIO_WRITE, HIGH, LOW;
 
       __extends(DigitalPin, _super);
 
       GPIO_PATH = "/sys/class/gpio";
 
-      GPIO_DIRECTION_READ = "in";
+      GPIO_READ = "in";
 
-      GPIO_DIRECTION_WRITE = "out";
+      GPIO_WRITE = "out";
 
       HIGH = 1;
 
@@ -154,11 +154,11 @@
         }
         this.mode = mode;
         if (mode === 'w') {
-          return FS.writeFile(this._directionPath(), GPIO_DIRECTION_WRITE, function(err) {
+          return FS.writeFile(this._directionPath(), GPIO_WRITE, function(err) {
             return _this._setModeCallback(err, emitConnect);
           });
         } else if (mode === 'r') {
-          return FS.writeFile(this._directionPath(), GPIO_DIRECTION_READ, function(err) {
+          return FS.writeFile(this._directionPath(), GPIO_READ, function(err) {
             return _this._setModeCallback(err, emitConnect);
           });
         }

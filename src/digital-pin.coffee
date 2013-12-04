@@ -19,8 +19,8 @@ namespace 'Cylon.IO', ->
   class @DigitalPin extends EventEmitter
 
     GPIO_PATH = "/sys/class/gpio"
-    GPIO_DIRECTION_READ = "in"
-    GPIO_DIRECTION_WRITE = "out"
+    GPIO_READ = "in"
+    GPIO_WRITE = "out"
     HIGH = 1
     LOW = 0
 
@@ -111,11 +111,11 @@ namespace 'Cylon.IO', ->
     _setMode: (mode, emitConnect = false) ->
       @mode = mode
       if mode is 'w'
-        FS.writeFile(@_directionPath(), GPIO_DIRECTION_WRITE, (err) =>
+        FS.writeFile(@_directionPath(), GPIO_WRITE, (err) =>
           @_setModeCallback(err, emitConnect)
         )
       else if mode is 'r'
-        FS.writeFile(@_directionPath(), GPIO_DIRECTION_READ, (err) =>
+        FS.writeFile(@_directionPath(), GPIO_READ, (err) =>
           @_setModeCallback(err, emitConnect)
         )
 
