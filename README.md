@@ -2,7 +2,7 @@
 
 http://cylonjs.com
 
-Cylon.js (http://cylonjs.com) is a JavaScript framework for robotics and physical computing using Node.js.
+Cylon.js is a JavaScript framework for robotics and physical computing using Node.js.
 
 It provides a simple, yet powerful way to create solutions that incorporate multiple, different hardware devices at the same time.
 
