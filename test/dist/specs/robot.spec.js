@@ -41,9 +41,14 @@
       startDevices.should.have.been.called;
       return work.should.have.been.called;
     });
-    return it("has additional functions attached to the robot", function() {
+    it("has additional functions attached to the robot", function() {
       Logger.info(robot);
       return robot.whatever.should.be.equal(whateverFunc);
+    });
+    return describe('#toString', function() {
+      return it('returns basic information about the robot', function() {
+        return robot.toString().should.be.equal("[Robot name='irobot']");
+      });
     });
   });
 

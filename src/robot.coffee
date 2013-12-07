@@ -175,7 +175,7 @@ namespace 'Cylon', ->
         name: adaptorName,
         connection: connection,
         extraParams: opts
-  
+
     # Public: Requires a hardware adaptor and adds it to @robot.adaptors
     #
     # adaptorName - module name of adaptor to require
@@ -230,5 +230,11 @@ namespace 'Cylon', ->
     # Returns the registered module name
     registerDriver: (moduleName, driverName) =>
       @drivers[driverName] = require(moduleName) unless @drivers[driverName]?
+
+    # Public: Returns basic info about the robot as a String
+    #
+    # Returns a String
+    toString: =>
+      "[Robot name='#{@name}']"
 
 module.exports = Cylon.Robot

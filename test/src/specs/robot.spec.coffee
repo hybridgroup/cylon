@@ -37,3 +37,7 @@ describe "Robot", ->
   it "has additional functions attached to the robot", ->
     Logger.info robot
     robot.whatever.should.be.equal whateverFunc
+
+  describe '#toString', ->
+    it 'returns basic information about the robot', ->
+      robot.toString().should.be.equal "[Robot name='irobot']"

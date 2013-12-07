@@ -38,6 +38,7 @@
         if (opts == null) {
           opts = {};
         }
+        this.toString = __bind(this.toString, this);
         this.registerDriver = __bind(this.registerDriver, this);
         this.requireDriver = __bind(this.requireDriver, this);
         this.registerAdaptor = __bind(this.registerAdaptor, this);
@@ -235,6 +236,10 @@
         if (this.drivers[driverName] == null) {
           return this.drivers[driverName] = require(moduleName);
         }
+      };
+
+      Robot.prototype.toString = function() {
+        return "[Robot name='" + this.name + "']";
       };
 
       return Robot;
