@@ -1,6 +1,8 @@
-# Cylon.js
+[![Cylon.js](https://raw.github.com/hybridgroup/cylon/gh-pages/images/logo.png)](http://cylonjs.com)
 
-Cylon.js (http://cylonjs.com) is a JavaScript framework for robotics and physical computing using Node.js.
+http://cylonjs.com
+
+Cylon.js is a JavaScript framework for robotics and physical computing using Node.js.
 
 It provides a simple, yet powerful way to create solutions that incorporate multiple, different hardware devices at the same time.
 
@@ -10,17 +12,11 @@ Want to use the Go programming language to power your robots? Check out our sist
 
 [![Build Status](https://secure.travis-ci.org/hybridgroup/cylon.png?branch=master)](http://travis-ci.org/hybridgroup/cylon)
 
-## Getting Started
+## Examples:
 
-All you need to get started is the `cylon` module:
+### Basic
 
-    npm install cylon
-
-Then install modules for whatever hardware support you want to use from your robot. For the example below, an Arduino using the Firmata protocol:
-
-    npm install cylon-firmata
-
-## Examples
+#### Arduino with an LED, using the Firmata protocol.
 
 The example below connects to an Arduino, and every second turns the LED either on, or off. 
 
@@ -28,7 +24,7 @@ The example requires that the Arduino has the Firmata sketch installed, and that
 
 Make sure to upload the "Standard Firmata" sketch or an equivalent Firmata sketch to your Arduino first. Without that code running on the Arduino, Firmata can't communicate with Cylon. You can find the example sketch in your Arduino software under "Examples > Firmata > StandardFirmata".
 
-### JavaScript:
+##### JavaScript:
 
 ```javascript
 var Cylon = require("cylon");
@@ -49,9 +45,9 @@ var robot = Cylon.robot({
 robot.start();
 ```
 
-### CoffeeScript:
+##### CoffeeScript:
 
-```
+```javascript
 Cylon = require "cylon"
 
 # Initialize the robot
@@ -67,6 +63,40 @@ robot = Cylon.robot
     every 1.second(), -> my.led.toggle()
 
 robot.start()
+```
+#### Parrot ARDrone 2.0
+
+##### JavaScript:
+
+```javascript
+var Cylon = require('../..');
+
+Cylon.robot({
+  connection: { name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1' },
+  device: { name: 'drone', driver: 'ardrone' },
+
+  work: function(my) {
+    my.drone.takeoff();
+    after(10..seconds(), function() { my.drone.land(); });
+    after(15..seconds(), function() { my.drone.stop(); });
+  }
+}).start();
+```
+##### CoffeeScript:
+
+```javascript
+Cylon = require '../..'
+
+Cylon.robot
+  connection: { name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1' }
+  device: { name: 'drone', driver: 'ardrone' }
+
+  work: (my) ->
+    my.drone.takeoff()
+    after 10.seconds(), -> my.drone.land()
+    after 15.seconds(), -> my.drone.stop()
+
+.start()
 ```
 
 **Note:** before running any examples in the `examples/` dir from source, make sure to compile using `grunt coffee` first.
@@ -105,6 +135,18 @@ drivers provded using the cylon-i2c module:
     - HMC6352 Digital Compass
 
 More platforms and drivers are coming soon...
+
+## Getting Started
+
+### Installation
+
+All you need to get started is the `cylon` module:
+
+    npm install cylon
+
+Then install modules for whatever hardware support you want to use from your robot. For the example below, an Arduino using the Firmata protocol:
+
+    npm install cylon-firmata
 
 ## CLI
 
