@@ -1,0 +1,88 @@
+---
+title: Tessel with Cylon.js
+author: The Hybrid Group
+page_title: Tessel
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-tessel' target='blanck' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-tessel/issues' target='blanck'>Issues</a>"
+layout: page
+---
+.documentation
+  %section.intro
+    = image_tag "/images/tessel.jpg", class: "display"
+
+    %p Tessel runs JavaScript—no server necessary. Just like web or mobile development, use your own IDE and libraries to program physical applications.
+
+    :markdown 
+      Tessel supports packages from `npm` to leverage the growing Node.js community and capabilities. That's HTTP, Twitter, web server, color, and async support right out of the box. Uploading new code is as easy as `tessel push`!
+
+    %p
+      For more info about the Tessel platform click
+      = succeed "." do
+        = link_to "here", "http://tessel.io/", target: :blank
+
+  %section.how-to
+    %h2 How to install
+    %p Installing cylon.js with Tessel support is pretty easy.
+    :markdown
+          :::javascript
+          npm install cylon-tessel
+
+    %h2 How to use
+    %p This small program lets you toggle an LED on and off.
+    
+    %h3 Javascript
+    
+    :markdown
+          :::javascript
+          var Cylon = require('cylon');
+
+          Cylon.robot({
+            connection: { name: 'tessel', adaptor: 'tessel'},
+            device: {name: 'led', driver: 'led', pin: 1},
+
+            work: function(my) {
+              every((1).seconds(), function() {my.led.toggle()});
+            }
+          }).start();
+              
+    %h3 CoffeeScript
+
+    :markdown
+          :::javascript
+          Cylon = require("cylon")
+          
+          Cylon.robot(
+            connection:
+              name: "tessel"
+              adaptor: "tessel"
+
+            device:
+              name: "led"
+              driver: "led"
+              pin: 1
+
+            work: (my) ->
+              every (1).seconds(), ->
+                my.led.toggle()
+
+          ).start()
+
+    -#%h2 How to connect
+    -#%p The ARDrone is a WiFi device, so there is no additional work to establish a connection to a single drone. However, in order to connect to multiple drones, you need to perform some configuration steps on each drone via SSH.
+
+    
+  %section.drivers
+    %h2 Drivers
+    %p Available drivers for the Tessel platform are listed below. 
+
+    .hardware
+      .devices
+        = #partial "documentation/partials/analog-sensor"
+        = #partial "documentation/partials/button"
+        = partial "documentation/partials/led"
+        = #partial "documentation/partials/maxbotix"
+        = #partial "documentation/partials/motor"
+        = #partial "documentation/partials/servo"
+        = #partial "documentation/partials/blinkm"
+        = #partial "documentation/partials/hmc6352-compass"
+        = #partial "documentation/partials/wiichuck"
+        = #partial "documentation/partials/wiiclassic"
