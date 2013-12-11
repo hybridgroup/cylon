@@ -76,9 +76,9 @@ layout: page
         Causes the drone to bank to the right, controls the roll, which is a horizontal movement using the camera as a reference point. 
         :markdown
           `speed`can be a value from `0` to `1`.
-      %dt front(speed) 
+      %dt front(speed) | forward(speed)
       %dd 
-        Causes the drone to bank to the front, controls the pitch, which a horizontal movement using the camera as a reference point. 
+        Causes the drone to bank forward, controls the pitch, which a horizontal movement using the camera as a reference point. 
         :markdown
           `speed` can be a value from `0` to `1`.
       %dt back(speed) 
@@ -113,6 +113,31 @@ layout: page
               'theta20degYawM200deg', 'turnaround', 'turnaroundGodown', 'yawShake',
               'yawDance', 'phiDance', 'thetaDance', 'vzDance', 'wave', 'phiThetaMixed',
               'doublePhiThetaMixed', 'flipAhead', 'flipBehind', 'flipLeft', 'flipRight']
+
+      %dt frontFlip
+      %dd 
+        :markdown
+          Tells the drone to do a front-flip. Alias of `animate('flipAhead', 150)`.
+
+      %dt backFlip
+      %dd 
+        :markdown
+          Tells the drone to do a back-flip. Alias of `animate('flipBehind', 150)`.
+
+      %dt leftFlip
+      %dd 
+        :markdown
+          Tells the drone to do a left-flip. Alias of `animate('flipLeft', 150)`.
+
+      %dt rightFlip
+      %dd 
+        :markdown
+          Tells the drone to do a right-flip. Alias of `animate('flipRight', 150)`.
+
+      %dt wave
+      %dd 
+        :markdown
+          Tells the drone to do a wave. Alias of `animate('wave', 750)`.
 
       %dt animateLeds(animation, hz, duration)
       %dd 
