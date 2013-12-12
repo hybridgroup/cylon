@@ -22,10 +22,10 @@ The conference had a dedicated hardware hacking room, with stations setup for so
 
 <iframe width="100%" height="300px" src="//www.youtube.com/embed/xNyxqfTGXOo" frameborder="0" allowfullscreen></iframe>
 
-Next to the hardware hacking room was the drone hacking room with 50 <a href="http://ardrone2.parrot.com/" target="blank">ARDrones</a> ready for flight. Many people came thru and tried their code on programmatic flips, as well as even more impressive aeriel stunts. Not all landings were smooth, but no humans were hurt in the process.
+Next to the hardware hacking room was the drone hacking room with 50 <a href="http://ardrone2.parrot.com/" target="blank">ARDrones</a> ready for flight. Many people came thru and tried their code on programmatic flips, as well as even more impressive aerial stunts. Not all landings were smooth, but no humans were hurt in the process.
 
 We also had 30 <a href="http://www.gosphero.com/" target="blank">Sphero robots</a> thanks to our friends at Orbotix, plus some Crazyflie Nanodrones, a Roomba, and a few other specialized devices. Everything that Team Cylon.js had brought was available for people to "check out" library-style to use on their science fair robotics projects. Quite a few people "rolled" thru, and one of the winners did some really cool things with 2 Spheros and a Leap Motion.
 
-Another of the science faire winners was 12-year-old genius <a href="https://twitter.com/MakerSylvia" target="blank">@MakerSylvia</a> and her team. This video shows her flying an ARDrone controlled by a Leap Motion, and then using a Spark to release somethig while in mid-flight. And she was even sporting one of our Cylon.js t-shirts too. We're so proud! Here is a <a href="http://instagram.com/p/hoqO_dho-u/#" target="blank">brief video</a> showing her demo.
+Another of the science faire winners was 12-year-old genius <a href="https://twitter.com/MakerSylvia" target="blank">@MakerSylvia</a> and her team. This video shows her flying an ARDrone controlled by a Leap Motion, and then using a Spark to release something while in mid-flight. And she was even sporting one of our Cylon.js t-shirts too. We're so proud! Here is a <a href="http://instagram.com/p/hoqO_dho-u/#" target="blank">brief video</a> showing her demo.
 
 Thank you so very much to everyone who took part in RobotsConf. It was incredibly fun and inspiring, and we cannot wait for the next one!
