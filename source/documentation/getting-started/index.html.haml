@@ -9,7 +9,7 @@ layout: page
 
 %section.intro
 
-  = partial "../what_is_cylon"
+  = partial "../what_is"
 
 
 %section.how-to
@@ -39,7 +39,7 @@ layout: page
   %p 
     You might need to install under the 'root' user by running the above install command using `sudo`.
 
-%section.cylon-installation
+%section.installation
   %h2 How to Install Cylon.js
   %p
     In order to use Cylon.js, you must install the Cylon.js node modules needed to control your particular hardware setup. For example, to use Cylon.js with an Arduino, you will need to install the `cylon-firmata` module. Check out this example:
@@ -49,7 +49,7 @@ layout: page
         npm install cylon
         npm install cylon-firmata
 
-  %section.cylon-running
+  %section.running
   %h2 Cylon.js Robots
   %h3 Writing your robot code:
 
@@ -70,7 +70,7 @@ layout: page
         :::javascript
         coffee robotfilename.coffee
 
-%section.cylon-code
+%section.app-code
   %h2 Cylon.js Code Examples
 
   %h3 Example: Hello
