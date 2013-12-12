@@ -1,12 +1,12 @@
 ---
 title: RobotsConf Was Remarkable
 page_title: Blog
-date: 2013-12-10
+date: 2013-12-12
 tags: robots
 author: Ron Evans
 ---
 
-Team <a href="http://cylonjs.com/" target="blank">Cylon.js</a> just got back from the first ever <a href="http://www.robotsconf.com/" target="blank">RobotsConf</a> last week. The brainchild of the influential Chris Williams aka <a href="https://twitter.com/voodootikigod" target="blank">@VoodooTikiGod</a> of <a href="http://www.jsconf.com/" target="blank">JSConf</a> renown, RobotsConf was planned to be the first conference to bring open source software developers in and have them leave as new hardware makers.
+Team <a href="http://cylonjs.com/" target="blank">Cylon.js</a> got back a few days ago from the first ever <a href="http://www.robotsconf.com/" target="blank">RobotsConf</a> last week. The brainchild of the influential Chris Williams aka <a href="https://twitter.com/voodootikigod" target="blank">@VoodooTikiGod</a> of <a href="http://www.jsconf.com/" target="blank">JSConf</a> renown, RobotsConf was planned to be the first conference to bring open source software developers in and have them leave as new hardware makers.
 
 Unlike a "normal" conference, the format for RobotsConf was to have just a few sessions to inspire creativity and provide some background on the first day, and then devote the rest of the conference to actually making things. Teams of language/subject matter experts (such as ourselves) had been invited to come and help everyone implement whatever it was they wanted to over the the 2 days of the conference. At the end, there would then be a "science faire" where everyone would get to show off their creations, and the "experts" would then judge the "winners". Very fun!
 
