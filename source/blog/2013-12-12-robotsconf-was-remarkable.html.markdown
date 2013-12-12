@@ -20,7 +20,7 @@ Lastly, the kits packed in an Arduino Uno and a bunch of sundry wires, cables, b
 
 The conference had a dedicated hardware hacking room, with stations setup for soldering, robotics, 3-D printing, laser cutting, wearable computing and more. Not to mention gigantic piles of components, breakout boards, sensors, legos, and googly-eyes that were available for people to use on the projects they were building at the conference. This stop motion video of the first day captures a lot of the tremendous energy and enthusiam that everyone had at the conference.
 
-<iframe width="420" height="315" src="//www.youtube.com/embed/xNyxqfTGXOo" frameborder="0" allowfullscreen></iframe>
+<iframe width="100%" height="300px" src="//www.youtube.com/embed/xNyxqfTGXOo" frameborder="0" allowfullscreen></iframe>
 
 Next to the hardware hacking room was the drone hacking room with 50 ARDrones ready for flight. We also had 20 Sphero, plus some Crazyflie Nanodrones, a Roomba, and a few other specialized devices. Everything we had brought was available for "checking out" library style. Many people came thru and tried their code on programmatic flips, as well as even more impressive aeriel stunts. Not all landings were smooth, but no humans were hurt in the process.
 
