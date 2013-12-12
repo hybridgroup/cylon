@@ -7,3 +7,5 @@ gem "rack-codehighlighter"
 gem "coderay"
 gem 'rake'
 gem "therubyracer"
+gem 'bourbon'
+gem "middleman-neat"

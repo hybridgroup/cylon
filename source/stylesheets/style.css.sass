@@ -1,6 +1,9 @@
 @import 'mixins'
 @import 'barebones'
 @import 'coderay'
+@import 'bourbon'
+@import "neat"
+
 
 // Config
 
@@ -28,12 +31,23 @@ $cta-text-hover-color   : $hero-link-hover-color
 $blog-title-color       : #EE274A
 $blog-date-top-color    : #B39F89
 
+$doc-description-color:  #808080
+
+$social-catcher-background-color: #FDFCF5
+
 $header-size   : 66px
 $logo-size     : 226px
 
 $small-screen  : 479px
 $medium-screen : 767px
 $big-screen    : 964px
+
+//URL SRC
+$body-background-src: '../images/bg-cylon.png'
+$header-logo-src: '/images/logo.png'
+
+//Page Font
+$page-title-font: "Montserrat", sans-serif
 
 // Partials
 @import 'shared/base'
@@ -57,3 +71,4 @@ $big-screen    : 964px
 // Custom
 .app-logo a
   @extend .hidden-text
+  margin-top: 10px
