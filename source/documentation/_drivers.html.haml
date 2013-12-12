@@ -6,7 +6,7 @@
     = partial "../partials/analog-sensor"
     = partial "../partials/button"
     = partial "../partials/led"
-    =# partial "../partials/maxbotix"
+    = partial "../partials/maxbotix"
     = partial "../partials/motor"
     = partial "../partials/servo"
 
@@ -16,7 +16,7 @@
     =# partial "../partials/wiichuck"
     =# partial "../partials/wiiclassic"
     = partial "../partials/blinkm"
-    = #partial "../partials/hmc6352-compass"
+    = partial "../partials/hmc6352-compass"
 
   %h2 ARDrone Drivers
   .devices
@@ -24,13 +24,17 @@
     = partial "../partials/ardrone-navigation"
     = #partial "../partials/ardrone-video"
 
-  -#%h2 Leap Motion Driver
-  -#.devices
-    =# partial "../partials/leapmotion-driver"
+  %h2 Crazyflie Driver
+  .devices
+    = partial "../partials/crazyflie-flight"
+  
+  %h2 Leap Motion Driver
+  .devices
+    = partial "../partials/leapmotion-driver"
 
-  -#%h2 Pebble Driver
-  -#.devices
-    = #partial "../partials/pebble-driver"
+  %h2 Pebble Driver
+  .devices
+    = partial "../partials/pebble-driver"
 
   -#%h2 Roomba Driver
   -#.devices

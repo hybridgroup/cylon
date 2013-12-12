@@ -15,70 +15,48 @@ layout: page
     %h2 How to establish a connection and setup the driver
     %h3 For Arduino:
     :markdown
-          :::ruby
+          :::javascript
           comming soon
 
-    -#%h3 For Digispark:
-    -#:markdown
-          -#:::ruby
-
   %section.public-methods
-    %h2 Public driver events:
-    %h3 a_button
-    %p
-      Get's triggered every interval amount of time if the a button is pressed.
+    %h2 Events:
+    %dl.methods 
+      %dt a_button
+      %dd Get's triggered every interval amount of time if the a button is pressed.
+      %dt b_button
+      %dd Get's triggered every interval amount of time if the b button is pressed.
+      %dt x_button
+      %dd Get's triggered every interval amount of time if the x button is pressed.
+      %dt y_button
+      %dd Get's triggered every interval amount of time if the y button is pressed.
+      %dt home_button
+      %dd Get's triggered every interval amount of time if the home button is pressed.
+      %dt select_button
+      %dd Get's triggered every interval amount of time if the select button (-) is pressed.
+      %dt start_button
+      %dd Get's triggered every interval amount of time if the start button (+) is pressed.
+      %dt right_trigger
+      %dd Get's triggered every interval amount of time if the right trigger button is pressed, makes right trigger value available.
+      %dt left_trigger
+      %dd Get's triggered every interval amount of time if the left trigger button is pressed, makes left trigger value available.
+      %dt left_joystick
+      %dd Get's triggered every "interval" amount of time if a left joystick event occured, you can access values x, y.
+      %dt right_joystick
+      %dd Get's triggered every "interval" amount of time if a right joystick event occured, you can access values x, y.
 
-    %h3 b_button
-    %p
-      Get's triggered every interval amount of time if the b button is pressed.
 
-    %h3 x_button
-    %p
-      Get's triggered every interval amount of time if the x button is pressed.
-
-    %h3 y_button
-    %p
-      Get's triggered every interval amount of time if the y button is pressed.
-
-    %h3 home_button
-    %p
-      Get's triggered every interval amount of time if the home button is pressed.
-
-    %h3 select_button
-    %p
-      Get's triggered every interval amount of time if the select button (-) is pressed.
-
-    %h3 start_button
-    %p
-      Get's triggered every interval amount of time if the start button (+) is pressed.
-
-    %h3 right_trigger
-    %p
-      Get's triggered every interval amount of time if the right trigger button is pressed, makes right trigger value available.
-
-    %h3 left_trigger
-    %p
-      Get's triggered every interval amount of time if the left trigger button is pressed, makes left trigger value available.
-
-    %h3 left_joystick
-    %p
-      Get's triggered every "interval" amount of time if a left joystick event occured, you can access values x, y.
-
-    %h3 right_joystick
-    %p
-      Get's triggered every "interval" amount of time if a right joystick event occured, you can access values x, y.
 
     %h3 How to use events and call them on your drivers
     %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
     :markdown
-          :::ruby
+          :::javascript
           comming soon
 
   %section.how-to
     %h2 How to use
     %h3 Example using a Nintendo Wii Classic Controller comming soon.
     :markdown
-          :::ruby
+          :::javascript
           comming soon
 
   %section.circuit

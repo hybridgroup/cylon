@@ -8,8 +8,7 @@ layout: page
 .documentation
   %section.intro
     = image_tag "/images/servo.jpg", class: "display"
-    %p
-      Provides an interface for making servos easy to work and interact with from Cylon.js.
+    %p Provides an interface for making servos easy to work and interact with from Cylon.js.
 
   %section.how-to
     %h2 How to establish a connection and setup the driver
@@ -37,10 +36,6 @@ layout: page
               name: 'servo', driver: 'servo', pin: 3
           ...
 
-    -#%h3 For Digispark:
-    -#:markdown
-          -#:::ruby
-
   %section.public-methods
     %h2 Commands:
     
@@ -49,6 +44,12 @@ layout: page
       %dd Moves the servo to the specified angle, angle must be an integer value between 0 and 180.
       %dt currentAngle → integer_value (0 - 180)
       %dd Returns the current angle of the servo, an integer value between 0 and 180.
+      %dt clockwise
+      %dd Turns the servo to clockwise, if the driver is continuos.
+      %dt counterClockwise
+      %dd Turns the servo to counter clockwise, if the driver is continuos.
+      %dt stop
+      %dd Stops the driver.
 
     %h2 Events
 
@@ -56,7 +57,6 @@ layout: page
       %dt start
       %dd Sent when the device has been started and is ready to use.
     
-
   %section.how-to
     %h2 How to use
     %p
@@ -107,7 +107,6 @@ layout: page
 
           .start()
 
-
   %section.circuit
     %h2 Circuit and Schematic
     %p
@@ -120,5 +119,6 @@ layout: page
       = partial "documentation/partials/arduino"
       = #partial "documentation/partials/digispark"
       = partial "documentation/partials/raspberry-pi"
+      = partial "documentation/partials/spark"
 
 

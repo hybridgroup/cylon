@@ -7,65 +7,86 @@ description: Cylon.js is a JavaScript framework for robotics and physical comput
 layout: home
 ---
 
-:markdown
-  ## About
+%h2 About
   
-  Cylon.js is a JavaScript framework for robotics and physical computing using Node.js.
+%p Cylon.js is a JavaScript framework for robotics and physical computing using Node.js.
 
-  It provides a simple, yet powerful way to create solutions that incorporate multiple, different hardware devices at the same time.
+%p It provides a simple, yet powerful way to create solutions that incorporate multiple, different hardware devices at the same time.
 
-  Want to use Ruby on robots? Check out our sister project Artoo [(http://artoo.io)](http://artoo.io).
+%p 
+  Want to use Ruby on robots? Check out our sister project Artoo
+  =link_to "(http://artoo.io)", "http://artoo.io", target: :blank
 
-  Want to use the Go programming language to power your robots? Check out our sister project Gobot [(http://gobot.io)](http://gobot.io).
+%p 
+  Want to use the Go programming language to power your robots? Check out our sister project Gobot 
+  =link_to "(http://gobot.io)", "http://gobot.io", target: :blank
 
-  ## Meet The Code
+%h2 Meet The Code
 
-  Cylon.js’s makes commanding robots incredibly simple and fun.
+%p Cylon.js’s makes commanding robots incredibly simple and fun.
 
-  All you need to get started is the `cylon` module:
+%p All you need to get started is the `cylon` module:
 
+:markdown
       :::javascript
       npm install cylon
 
-  ... and whichever `cylon` module is needed for your specific hardware (in this case, a [Sphero](http://gosphero.com)):
+%p Then install modules for whatever hardware support you want to use from your robot. For the example below, an Arduino using the Firmata protocol:
 
+:markdown
       :::javascript
-      npm install cylon-sphero
+      npm install cylon-firmata
 
-  Now write your robot code. Require Cylon.js, and create a robot:
-
+%h2 Examples
+%p The example below connects to an Arduino, and every second turns the LED either on, or off.
+:markdown
+  The example requires that the Arduino has the Firmata sketch installed, and that it is connected on the port `/dev/ttyACM0`. You need to install Firmata on your Arduino, and to change the `port` parameter to match the port that your system is actually using.
+%p Make sure to upload the "Standard Firmata" sketch or an equivalent Firmata sketch to your Arduino first. Without that code running on the Arduino, Firmata can't communicate with Cylon. You can find the example sketch in your Arduino software under "Examples > Firmata > StandardFirmata".
+%h3 JavaScript:
+:markdown
       :::javascript
-      var Cylon = require('cylon');
+      var Cylon = require("cylon");
 
       // Initialize the robot
       var robot = Cylon.robot({
+        // Change the port to the correct port for your Arduino.
+        connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+        device: { name: 'led', driver: 'led', pin: 13 },
 
-  Then tell the robot code about your hardware to hook it up:
-
-      :::javascript
-        connection: {name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'},
-
-        device: {name: 'ball', driver: 'sphero'},
-
-  And tell it what work to do. This code tells the Sphero that every second, it should roll around in a random direction:
-
-      :::javascript
         work: function(my) {
-          every((1).second(), function() { 
-            my.ball.roll(60, Math.floor(Math.random() * 360));
-          });
+          // we do our thing here
+          every((1).second(), function() { my.led.toggle(); });
         }
       });
 
-  Last, tell the robot to start. That's it!
-
-      :::javascript
-      
+      // start working
       robot.start();
+%h3 CoffeeScript:
+:markdown
+      :::javascript
+      Cylon = require "cylon"
 
-  ## Getting Started
+      # Initialize the robot
+      robot = Cylon.robot
+        connection:
+          name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
 
-  Ready to build JavaScript robots with Cylon.js? [Get Started Here!](/documentation/getting-started)
+        device:
+          name: 'led', driver: 'led', pin: 13
+
+        work: (my) ->
+          # we do our thing here
+          every 1.second(), -> my.led.toggle()
+
+      robot.start()
+  
+  Note: before running any examples in the `examples/` dir from source, make sure to compile using `grunt coffee` first.
+
+%h2 Getting Started
+
+%p 
+  Ready to build JavaScript robots with Cylon.js? 
+  = link_to "Get Started Here!", "/documentation/getting-started"
 
 %h2 Hardware Support
 %p
@@ -74,45 +95,96 @@ layout: home
     %li
       = link_to "Ardrone", "http://ardrone2.parrot.com/", target:"_blank"  
       &lt;==&gt;
-      = link_to "Cylon.js for ARDrone (Adaptor/Drivers)", "https://github.com/hybridgroup/cylon-ardrone", target:"_blank" 
+      = link_to "Adaptor/Drivers", "https://github.com/hybridgroup/cylon-ardrone", target:"_blank" 
     %li
       = link_to "Arduino", "http://www.arduino.cc/", target:"_blank" 
       &lt;==&gt;
-      = link_to "Cylon.js for Firmata (Adaptor)", "https://github.com/hybridgroup/cylon-firmata", target:"_blank" 
+      = link_to "Adaptor", "https://github.com/hybridgroup/cylon-firmata", target:"_blank" 
+    %li
+      = link_to "Crazyflie", "http://www.bitcraze.se/", target:"_blank" 
+      &lt;==&gt;
+      = link_to "Adaptor/Driver", "https://github.com/hybridgroup/cylon-crazyflie" 
     %li
       = link_to "Leap Motion", "http://www.leapmotion.com/", target:"_blank" 
       &lt;==&gt;
-      = link_to "Cylon.js for Leap Motion (Adaptor/Driver)", "https://github.com/hybridgroup/cylon-leapmotion", target:"_blank" 
+      = link_to "Adaptor/Driver", "https://github.com/hybridgroup/cylon-leapmotion", target:"_blank" 
+    %li
+      = link_to "Pebble", "https://getpebble.com/", target:"_blank" 
+      &lt;==&gt;
+      = link_to "Adaptor/Driver", "https://github.com/hybridgroup/cylon-pebble", target:"_blank" 
     %li
       = link_to "Raspberry Pi", "http://www.raspberrypi.org/", target:"_blank" 
       &lt;==&gt;
-      = link_to "Cylon.js for Raspberry Pi (Adaptor)", "https://github.com/hybridgroup/cylon-raspi", target:"_blank" 
+      = link_to "Adaptor", "https://github.com/hybridgroup/cylon-raspi", target:"_blank" 
     %li
       = link_to "Salesforce", "http://www.force.com/", target:"_blank" 
       &lt;==&gt;
-      = link_to "Cylon.js for Salesforce (Adaptor/Driver)", "https://github.com/hybridgroup/cylon-force", target:"_blank" 
+      = link_to "Adaptor/Driver", "https://github.com/hybridgroup/cylon-force", target:"_blank" 
     %li
       = link_to "Sphero", "http://www.gosphero.com/", target:"_blank"  
       &lt;==&gt;
-      = link_to "Cylon.js for Sphero (Adaptor/Driver)", "https://github.com/hybridgroup/cylon-sphero", target:"_blank" 
-%p Support for common shared device drivers, is provded using the General Purpose Input/Output (GPIO) module:
+      = link_to "Adaptor/Driver", "https://github.com/hybridgroup/cylon-sphero", target:"_blank" 
+%p Support for many devices that use General Purpose Input/Output (GPIO) have a shared set of drivers provded using the cylon-gpio module:
 %ul
   %li
     = link_to "GPIO", "https://en.wikipedia.org/wiki/General_Purpose_Input/Output" , target:"_blank" 
     &lt;==&gt;
-    = link_to "Cylon.js for GPIO (Drivers)", "https://github.com/hybridgroup/cylon-gpio" , target:"_blank"  
+    = link_to "Drivers", "https://github.com/hybridgroup/cylon-gpio" , target:"_blank"
+    %ul 
+      %li Analog Sensor
+      %li Button
+      %li LED
+      %li Motor
+      %li Maxbotix Ultrasonic Range Finder
+      %li Servo 
 
 %p Support for devices that use Inter-Integrated Circuit (I2C) have a shared set of drivers provded using the cylon-i2c module:
 %ul 
   %li  
     = link_to "I2C", "https://en.wikipedia.org/wiki/I%C2%B2C", target:"_blank" 
     &lt;==&gt;
-    = link_to "Cylon.js for I2C (Drivers)", "https://github.com/hybridgroup/cylon-i2c", target:"_blank"     
+    = link_to "Drivers", "https://github.com/hybridgroup/cylon-i2c", target:"_blank"  
+    %ul 
+      %li BlinkM
+      %li HMC6352 Digital Compass 
 %p More platforms and drivers are coming soon...
 
+%h2 CLI
+%p Cylon has a Command Line Interface (CLI) so you can access important features right from the command line.
 :markdown
-  ## Be Part Of The Robot Evolution
+      :::bash
+      Usage: cylon [command] [options]
 
+      Commands:
+
+        generate <name>        Generates a new adaptor
+
+      Options:
+
+        -h, --help     output usage information
+        -V, --version  output the version number
+
+%h2 Generator
+
+%p Want to integrate a hardware device we don't have Cylon support for yet? There's a generator for that!
+%p You can easily generate a new skeleton Cylon adaptor to help you get started. Simply run the cylon generate command, and the generator will create a new directory with all of the files in place for your new adaptor module.
+:markdown
+      :::bash
+      $ cylon generate awesome_device
+      Creating cylon-awesome_device adaptor.
+      Compiling templates.
+
+      $ ls ./cylon-awesome_device
+      Gruntfile.js
+      LICENSE
+      README.md
+      dist/
+      package.json
+      src/
+      test/
+
+%h2  Be Part Of The Robot Evolution
+:markdown
   - Code on Github:   [https://github.com/hybridgroup/cylon](https://github.com/hybridgroup/cylon)
   - Join us on IRC:   `#cylon @ irc.freenode.net`
   - Join us on our [Trello Board](https://trello.com/b/l1aEuqMU/cylon).

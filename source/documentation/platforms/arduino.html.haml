@@ -9,28 +9,21 @@ layout: page
   %section.intro
     = image_tag "/images/arduino.jpg", class: "display"
 
-    %p
-      Arduino is an open-source electronics prototyping platform based on flexible,
-      easy-to-use hardware and software. It's intended for artists, designers, hobbyists and
-      anyone interested in creating interactive objects or environments.
+    %p Arduino is an open-source electronics prototyping platform based on flexible, easy-to-use hardware and software. It's intended for artists, designers, hobbyists and anyone interested in creating interactive objects or environments.
 
     %p
       For more info about the arduino platform click
       = succeed "." do
         = link_to "here", "http://arduino.cc/", target: :blank
 
-    
-
   %section.how_to
     %h2 How to install
-    %p
-      Installing Cylon.js with Arduino support is pretty easy.
+    %p Installing Cylon.js with Arduino support is pretty easy.
     :markdown
           :::ruby
           npm install cylon-firmata
     %h2 How to use
-    %p
-      This small program lets you push a button on the arduino board to turn a LED on or off. In less than 10 lines of code using Cylon.js.
+    %p This small program lets you push a button on the arduino board to turn a LED on or off. In less than 10 lines of code using Cylon.js.
     %h3 Javascript  
     :markdown
           :::javascript
@@ -66,7 +59,6 @@ layout: page
 
             .start()
 
-
     %h2 How to connect
     %h3 OSX
     %p Coming soon.
@@ -75,7 +67,6 @@ layout: page
 
     %p Coming soon.
 
-   
   %section.drivers
     %h2 Drivers
     %p
@@ -88,20 +79,18 @@ layout: page
       adaptor (using the firmata communication protocol),
       which makes it even possible to swap the entire platform for something else like digispark, and keep using the same code you just wrote for
       arduino, this just by swapping a couple of lines in your program.
-    %p
-      Available drivers for the arduino platform are listed below, the drivers contain detailed documentation and examples of what kind
-      physical computing (using cylon.js and node.js) you could be doing:
+    %p Available drivers for the arduino platform are listed below, the drivers contain detailed documentation and examples of what kind physical computing (using cylon.js and node.js) you could be doing:
 
     .hardware
       .devices
         = partial "documentation/partials/analog-sensor"
         = partial "documentation/partials/button"
         = partial "documentation/partials/led"
-        = #partial "documentation/partials/maxbotix"
+        = partial "documentation/partials/maxbotix"
         = partial "documentation/partials/motor"
         = partial "documentation/partials/servo"
         = partial "documentation/partials/blinkm"
-        = #partial "documentation/partials/hmc6352-compass"
+        = partial "documentation/partials/hmc6352-compass"
         = #partial "documentation/partials/wiichuck"
         = #partial "documentation/partials/wiiclassic"
 

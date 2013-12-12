@@ -1,0 +1,27 @@
+---
+layout: page
+title: Cylon.JS Example - Raspberry Pi - Button
+page_title: "Example: Raspberry Pi - Button"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "You can find more versions of this example <a href='https://github.com/hybridgroup/cylon/tree/master/examples/raspi_button' target='blank' class='repository'>here.</a>"
+---
+
+.example
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'raspi', adaptor: 'raspi' },
+
+          devices: [
+            { name: 'led', driver: 'led', pin: 11 },
+            { name: 'button', driver: 'button', pin: 7 }
+          ],
+
+          work: function(my) {
+            my.button.on('push', function() { my.led.toggle(); });
+          }
+        }).start();
+

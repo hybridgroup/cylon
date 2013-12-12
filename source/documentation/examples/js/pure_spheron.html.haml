@@ -1,0 +1,47 @@
+---
+layout: page
+title: Cylon.JS Example - Pure Spheron
+page_title: "Example: Pure Spheron"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "You can find more versions of this example <a href='https://github.com/hybridgroup/cylon/tree/master/examples/pure_spheron' target='blank' class='repository'>here.</a>"
+---
+
+.example
+  :markdown
+        :::javascript
+        var spheron = require('spheron');
+
+        var sphero = spheron.sphero();
+        var spheroPort = '/dev/rfcomm0';
+
+        var COLORS = spheron.toolbelt.COLORS;
+
+        sphero.on('open', function() {
+          console.log('EVENT OPEN!');
+          sphero.configureCollisionDetection(0x01, 0x20, 0x20, 0x20, 0x20, 0x50);
+          sphero.setRGB(COLORS.GREEN, false);
+        });
+
+        sphero.on('close', function() {
+          console.log('EVENT CLOSE!');
+        });
+
+        sphero.on('end', function() {
+          console.log('EVENT END!');
+        });
+
+        sphero.on('error', function() {
+          console.log('EVENT ERROR!');
+        });
+
+        sphero.on('notification', function(packet) {
+          console.log("Packet contents: " + packet);
+        });
+
+        sphero.on('message', function(packet) {
+          console.log("Packet contents: " + packet);
+        });
+
+        sphero.open(spheroPort);
+

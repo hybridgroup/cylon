@@ -28,7 +28,7 @@ layout: page
 
     %h3 CoffeeScript
     :markdown
-          :::ruby
+          :::javascript
           Cylon = require 'cylon'
 
           Cylon.robot
@@ -38,10 +38,6 @@ layout: page
             device:
               name: 'motor', driver: 'motor', pin: 3
             ...
-
-    -#%h3 For Digispark:
-    -#:markdown
-          -#:::ruby
 
   %section.public-methods
     %h2 Commands:
@@ -109,10 +105,6 @@ layout: page
 
           .start()
 
-    -#%h2 Example of a dc motor with direction and speed change.
-    -#:markdown
-          -#:::ruby
-
     %h2 Circuit and Schematic
     %p
       =link_to "http://learn.adafruit.com/adafruit-arduino-lesson-13-dc-motors/breadboard-layout", "http://learn.adafruit.com/adafruit-arduino-lesson-13-dc-motors/breadboard-layout", target:"_blank" 
@@ -125,4 +117,5 @@ layout: page
       =# partial "documentation/partials/beaglebone"
       =# partial "documentation/partials/digispark"
       = partial "documentation/partials/raspberry-pi"
+      = partial "documentation/partials/spark"
 

@@ -13,34 +13,40 @@ layout: page
 
   %section.how-to
     %h2 How to establish a connection and setup the driver
-    %h3 For Arduino:
+    %h3 JavaScript
     :markdown
-          :::ruby
+          :::javascript
+          comming soon
+    %h3 CoffeeScript
+    :markdown
+          :::javascript
           comming soon
 
   %section.public-methods
-    %h2 Public instance methods:
-    %h3 heading → float
-    %p
-      Returns the heading data for the compass.
+    %h2 Commands:
+    %dl.methods 
+      %dt heading → float
+      %dd Returns the heading data for the compass.
 
   %section.public-events
-    %h2 Public driver events:
-    %h3 heading
-    %p
-      Gets triggered every time the specified interval is met.
+    %h2 Events:
+    %dl.methods 
+      %dt heading
+      %dd Gets triggered every time the specified interval is met.
+      %dt start
+      %dd Sent when the device has been started and is ready to use. 
 
     %h3 How to use events and call them on your drivers
     %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
     :markdown
-          :::ruby
+          :::javascript
           comming soon
 
   %section.how-to
     %h2 How to use
     %h3 Example using a HMC6352 Digital Compass.
     :markdown
-          :::ruby
+          :::javascript
           comming soon
 
   %section.circuit
@@ -52,6 +58,6 @@ layout: page
     %h2 Works with:
     .devices
       = partial "documentation/partials/arduino"
-      = #partial "documentation/partials/beaglebone"
+      = partial "documentation/partials/beaglebone"
       =# partial "documentation/partials/digispark"
-      =# partial "documentation/partials/raspberry-pi"
+      = partial "documentation/partials/raspberry-pi"

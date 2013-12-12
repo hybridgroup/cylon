@@ -1,0 +1,45 @@
+---
+layout: page
+title: Cylon.JS Example - Master
+page_title: "Example: Master"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "You can find more versions of this example <a href='https://github.com/hybridgroup/cylon/tree/master/examples/master' target='blank' class='repository'>here.</a>"
+---
+
+.example
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        var bots = [
+          { port: '/dev/cu.Sphero-RGB', name: 'Huey' },
+          { port: '/dev/cu.Sphero-GRB', name: 'Dewey' },
+          { port: '/dev/cu.Sphero-BRG', name: 'Louie' }
+        ];
+
+        var SpheroRobot = (function() {
+          function SpheroRobot() {}
+
+          SpheroRobot.prototype.connection = { name: 'Sphero', adaptor: 'sphero' };
+
+          SpheroRobot.prototype.work = function(my) {
+            Logger.info("Robot " + my.name + " is now working!");
+          };
+
+          return SpheroRobot;
+
+        })();
+
+        for (var i = 0; i < bots.length; i++) {
+          var bot = bots[i];
+          var robot = new SpheroRobot;
+
+          robot.connection.port = bot.port;
+          robot.name = bot.name;
+
+          Cylon.robot(robot);
+        }
+
+        Cylon.start();
+
