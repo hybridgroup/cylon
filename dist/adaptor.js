@@ -9,12 +9,16 @@
 
 (function() {
   'use strict';
-  var namespace;
+  var namespace,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   namespace = require('node-namespace');
 
   namespace('Cylon.Adaptors', function() {
-    return this.Adaptor = (function() {
+    return this.Adaptor = (function(_super) {
+      __extends(Adaptor, _super);
+
       function Adaptor(opts) {
         this.self = this;
         this.name = opts.name;
@@ -37,7 +41,7 @@
 
       return Adaptor;
 
-    })();
+    })(Cylon.Basestar);
   });
 
   module.exports = Cylon.Adaptors.Adaptor;

@@ -11,7 +11,7 @@
 namespace = require 'node-namespace'
 
 namespace 'Cylon.Drivers', ->
-  class @Driver
+  class @Driver extends Cylon.Basestar
     constructor: (opts) ->
       @self = this
       @name = opts.name

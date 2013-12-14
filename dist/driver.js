@@ -9,12 +9,16 @@
 
 (function() {
   'use strict';
-  var namespace;
+  var namespace,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   namespace = require('node-namespace');
 
   namespace('Cylon.Drivers', function() {
-    return this.Driver = (function() {
+    return this.Driver = (function(_super) {
+      __extends(Driver, _super);
+
       function Driver(opts) {
         this.self = this;
         this.name = opts.name;
@@ -35,7 +39,7 @@
 
       return Driver;
 
-    })();
+    })(Cylon.Basestar);
   });
 
   module.exports = Cylon.Drivers.Driver;
