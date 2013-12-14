@@ -6,7 +6,7 @@
 
   source("robot");
 
-  source("loopback");
+  source("test/loopback");
 
   describe("Connection", function() {
     var adaptor, connection, initAdaptor, robot;

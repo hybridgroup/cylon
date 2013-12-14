@@ -15,6 +15,7 @@ namespace 'Cylon.Drivers', ->
     constructor: (opts) ->
       @self = this
       @name = opts.name
+      @device = opts.device
 
     start: ->
       Logger.info "Driver #{@name} started"

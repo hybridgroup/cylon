@@ -57,8 +57,8 @@ namespace 'Cylon', ->
       @drivers = {}
       @commands = []
 
-      @registerAdaptor "./loopback", "loopback"
-      @registerDriver "./ping", "ping"
+      @registerAdaptor "./test/loopback", "loopback"
+      @registerDriver "./test/ping", "ping"
 
       @initConnections(opts.connection or opts.connections)
       @initDevices(opts.device or opts.devices)

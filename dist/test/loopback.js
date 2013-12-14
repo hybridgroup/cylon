@@ -1,5 +1,5 @@
 /*
- * Ping driver
+ * Loopback adaptor
  * cylonjs.com
  *
  * Copyright (c) 2013 The Hybrid Group
@@ -17,42 +17,34 @@
   namespace = require('node-namespace');
 
   module.exports = {
-    driver: function() {
+    adaptor: function() {
       var args;
       args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
       return (function(func, args, ctor) {
         ctor.prototype = func.prototype;
         var child = new ctor, result = func.apply(child, args);
         return Object(result) === result ? result : child;
-      })(Cylon.Drivers.Ping, args, function(){});
+      })(Cylon.Adaptors.Loopback, args, function(){});
     }
   };
 
-  namespace('Cylon.Drivers', function() {
-    return this.Ping = (function(_super) {
-      __extends(Ping, _super);
+  namespace('Cylon.Adaptors', function() {
+    var _ref;
+    return this.Loopback = (function(_super) {
+      __extends(Loopback, _super);
 
-      function Ping(opts) {
-        this.self = this;
-        this.name = opts.name;
+      function Loopback() {
+        _ref = Loopback.__super__.constructor.apply(this, arguments);
+        return _ref;
       }
 
-      Ping.prototype.commands = function() {
+      Loopback.prototype.commands = function() {
         return ['ping'];
       };
 
-      Ping.prototype.start = function(callback) {
-        Logger.info("Starting driver '" + this.name + "'...");
-        return callback(null);
-      };
+      return Loopback;
 
-      Ping.prototype.ping = function() {
-        return "pong";
-      };
-
-      return Ping;
-
-    })(this.Driver);
+    })(this.Adaptor);
   });
 
 }).call(this);

@@ -18,6 +18,7 @@
       function Driver(opts) {
         this.self = this;
         this.name = opts.name;
+        this.device = opts.device;
       }
 
       Driver.prototype.start = function() {

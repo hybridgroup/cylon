@@ -16,17 +16,5 @@ module.exports =
 
 namespace 'Cylon.Adaptors', ->
   class @Loopback extends @Adaptor
-    constructor: (opts) ->
-      @self = this
-      @name = opts.name
-
-    connect: (callback) ->
-      Logger.info "Connecting to adaptor '#{@name}'..."
-      (callback)(null)
-      @connection.emit 'connect'
-
-    disconnect: ->
-      Logger.info "Disconnecting from adaptor '#{@name}'..."
-
     commands: ->
       ['ping']

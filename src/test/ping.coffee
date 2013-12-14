@@ -16,16 +16,8 @@ module.exports =
 
 namespace 'Cylon.Drivers', ->
   class @Ping extends @Driver
-    constructor: (opts) ->
-      @self = this
-      @name = opts.name
-
     commands: ->
       ['ping']
-
-    start: (callback) ->
-      Logger.info "Starting driver '#{@name}'..."
-      (callback)(null)
 
     ping: ->
       "pong"

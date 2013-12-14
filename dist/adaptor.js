@@ -16,7 +16,9 @@
   namespace('Cylon.Adaptors', function() {
     return this.Adaptor = (function() {
       function Adaptor(opts) {
+        this.self = this;
         this.name = opts.name;
+        this.connection = opts.connection;
       }
 
       Adaptor.prototype.commands = function() {
@@ -25,7 +27,8 @@
 
       Adaptor.prototype.connect = function(callback) {
         Logger.info("Connecting to adaptor '" + this.name + "'...");
-        return callback(null);
+        callback(null);
+        return this.connection.emit('connect');
       };
 
       Adaptor.prototype.disconnect = function() {

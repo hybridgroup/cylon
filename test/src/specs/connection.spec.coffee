@@ -3,7 +3,7 @@
 source "connection"
 source "adaptor"
 source "robot"
-source "loopback"
+source "test/loopback"
 
 describe "Connection", ->
   robot = new Cylon.Robot(name: 'me')
