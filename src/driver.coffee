@@ -10,17 +10,19 @@
 
 namespace = require 'node-namespace'
 
-# A test class, used to create dummy Drivers
-namespace 'Cylon', ->
+namespace 'Cylon.Drivers', ->
   class @Driver
     constructor: (opts) ->
       @self = this
       @name = opts.name
 
     start: ->
-      Logger.info "started"
+      Logger.info "Driver #{@name} started"
+
+    stop: ->
+      Logger.info "Driver #{@name} stopped"
 
     commands: ->
-      ['smile', 'laugh', 'help']
+      []
 
-module.exports = Cylon.Driver
+module.exports = Cylon.Drivers.Driver

@@ -9,8 +9,12 @@
 
 (function() {
   'use strict';
-  var Adaptor, Loopback,
-    __slice = [].slice;
+  var namespace,
+    __slice = [].slice,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  namespace = require('node-namespace');
 
   module.exports = {
     adaptor: function() {
@@ -20,12 +24,14 @@
         ctor.prototype = func.prototype;
         var child = new ctor, result = func.apply(child, args);
         return Object(result) === result ? result : child;
-      })(Adaptor.Loopback, args, function(){});
+      })(Cylon.Adaptors.Loopback, args, function(){});
     }
   };
 
-  Adaptor = {
-    Loopback: Loopback = (function() {
+  namespace('Cylon.Adaptors', function() {
+    return this.Loopback = (function(_super) {
+      __extends(Loopback, _super);
+
       function Loopback(opts) {
         this.self = this;
         this.name = opts.name;
@@ -33,7 +39,8 @@
 
       Loopback.prototype.connect = function(callback) {
         Logger.info("Connecting to adaptor '" + this.name + "'...");
-        return callback(null);
+        callback(null);
+        return this.connection.emit('connect');
       };
 
       Loopback.prototype.disconnect = function() {
@@ -46,7 +53,7 @@
 
       return Loopback;
 
-    })()
-  };
+    })(this.Adaptor);
+  });
 
 }).call(this);

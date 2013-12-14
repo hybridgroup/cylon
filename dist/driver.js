@@ -13,7 +13,7 @@
 
   namespace = require('node-namespace');
 
-  namespace('Cylon', function() {
+  namespace('Cylon.Drivers', function() {
     return this.Driver = (function() {
       function Driver(opts) {
         this.self = this;
@@ -21,11 +21,15 @@
       }
 
       Driver.prototype.start = function() {
-        return Logger.info("started");
+        return Logger.info("Driver " + this.name + " started");
+      };
+
+      Driver.prototype.stop = function() {
+        return Logger.info("Driver " + this.name + " stopped");
       };
 
       Driver.prototype.commands = function() {
-        return ['smile', 'laugh', 'help'];
+        return [];
       };
 
       return Driver;
@@ -33,6 +37,6 @@
     })();
   });
 
-  module.exports = Cylon.Driver;
+  module.exports = Cylon.Drivers.Driver;
 
 }).call(this);

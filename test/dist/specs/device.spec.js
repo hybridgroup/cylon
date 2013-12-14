@@ -4,14 +4,16 @@
 
   source("robot");
 
-  source("test/driver");
+  source("driver");
+
+  source("ping");
 
   describe("Device", function() {
     var device, driver, initDriver, robot;
     robot = new Cylon.Robot({
       name: 'me'
     });
-    driver = new Cylon.Driver({
+    driver = new Cylon.Drivers.Ping({
       name: 'driving'
     });
     initDriver = sinon.stub(robot, 'initDriver').returns(driver);

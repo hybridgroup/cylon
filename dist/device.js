@@ -16,6 +16,8 @@
 
   require('./cylon');
 
+  require('./driver');
+
   namespace = require('node-namespace');
 
   EventEmitter = require('events').EventEmitter;

@@ -9,8 +9,12 @@
 
 (function() {
   'use strict';
-  var Driver, Ping,
-    __slice = [].slice;
+  var namespace,
+    __slice = [].slice,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  namespace = require('node-namespace');
 
   module.exports = {
     driver: function() {
@@ -20,12 +24,14 @@
         ctor.prototype = func.prototype;
         var child = new ctor, result = func.apply(child, args);
         return Object(result) === result ? result : child;
-      })(Driver.Ping, args, function(){});
+      })(Cylon.Drivers.Ping, args, function(){});
     }
   };
 
-  Driver = {
-    Ping: Ping = (function() {
+  namespace('Cylon.Drivers', function() {
+    return this.Ping = (function(_super) {
+      __extends(Ping, _super);
+
       function Ping(opts) {
         this.self = this;
         this.name = opts.name;
@@ -46,7 +52,7 @@
 
       return Ping;
 
-    })()
-  };
+    })(this.Driver);
+  });
 
 }).call(this);

@@ -18,6 +18,8 @@
 
   require("./port");
 
+  require("./adaptor");
+
   namespace = require('node-namespace');
 
   EventEmitter = require('events').EventEmitter;

@@ -13,14 +13,23 @@
 
   namespace = require('node-namespace');
 
-  namespace('Cylon', function() {
+  namespace('Cylon.Adaptors', function() {
     return this.Adaptor = (function() {
       function Adaptor(opts) {
         this.name = opts.name;
       }
 
       Adaptor.prototype.commands = function() {
-        return ['smile', 'laugh', 'help'];
+        return [];
+      };
+
+      Adaptor.prototype.connect = function(callback) {
+        Logger.info("Connecting to adaptor '" + this.name + "'...");
+        return callback(null);
+      };
+
+      Adaptor.prototype.disconnect = function() {
+        return Logger.info("Disconnecting from adaptor '" + this.name + "'...");
       };
 
       return Adaptor;
@@ -28,6 +37,6 @@
     })();
   });
 
-  module.exports = Cylon.Adaptor;
+  module.exports = Cylon.Adaptors.Adaptor;
 
 }).call(this);

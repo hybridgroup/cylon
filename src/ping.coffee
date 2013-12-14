@@ -8,12 +8,14 @@
 
 'use strict'
 
+namespace = require 'node-namespace'
+
 module.exports =
   driver: (args...) ->
-    new Driver.Ping(args...)
+    new Cylon.Drivers.Ping(args...)
 
-Driver =
-  Ping: class Ping
+namespace 'Cylon.Drivers', ->
+  class @Ping extends @Driver
     constructor: (opts) ->
       @self = this
       @name = opts.name

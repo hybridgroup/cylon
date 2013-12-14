@@ -2,11 +2,12 @@
 
 source "device"
 source "robot"
-source "test/driver"
+source "driver"
+source "ping"
 
 describe "Device", ->
   robot = new Cylon.Robot(name: 'me')
-  driver = new Cylon.Driver(name: 'driving')
+  driver = new Cylon.Drivers.Ping(name: 'driving')
   initDriver = sinon.stub(robot, 'initDriver').returns(driver)
   device = new Cylon.Device(name: "devisive", driver: 'driving', robot: robot)
 

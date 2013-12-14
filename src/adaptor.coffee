@@ -1,5 +1,5 @@
 ###
- * Loopback adaptor
+ * adaptor
  * cylonjs.com
  *
  * Copyright (c) 2013 The Hybrid Group
@@ -10,23 +10,19 @@
 
 namespace = require 'node-namespace'
 
-module.exports =
-  adaptor: (args...) ->
-    new Cylon.Adaptors.Loopback(args...)
-
 namespace 'Cylon.Adaptors', ->
-  class @Loopback extends @Adaptor
+  class @Adaptor
     constructor: (opts) ->
-      @self = this
       @name = opts.name
+
+    commands: ->
+      []
 
     connect: (callback) ->
       Logger.info "Connecting to adaptor '#{@name}'..."
       (callback)(null)
-      @connection.emit 'connect'
 
     disconnect: ->
       Logger.info "Disconnecting from adaptor '#{@name}'..."
 
-    commands: ->
-      ['ping']
+module.exports = Cylon.Adaptors.Adaptor
