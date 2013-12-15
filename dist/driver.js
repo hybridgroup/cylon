@@ -15,6 +15,8 @@
 
   namespace = require('node-namespace');
 
+  require('./basestar');
+
   namespace('Cylon.Drivers', function() {
     return this.Driver = (function(_super) {
       __extends(Driver, _super);
@@ -25,8 +27,11 @@
         this.device = opts.device;
       }
 
-      Driver.prototype.start = function() {
-        return Logger.info("Driver " + this.name + " started");
+      Driver.prototype.start = function(callback) {
+        Logger.info("Driver " + this.name + " started");
+        callback(null);
+        this.device.emit('start');
+        return true;
       };
 
       Driver.prototype.stop = function() {
@@ -41,7 +46,5 @@
 
     })(Cylon.Basestar);
   });
-
-  module.exports = Cylon.Drivers.Driver;
 
 }).call(this);

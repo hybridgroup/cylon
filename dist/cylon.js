@@ -19,6 +19,10 @@
 
   require('./api');
 
+  require('./driver');
+
+  require('./adaptor');
+
   Logger.setup();
 
   Cylon = (function() {

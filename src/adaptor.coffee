@@ -10,6 +10,8 @@
 
 namespace = require 'node-namespace'
 
+require './basestar'
+
 namespace 'Cylon.Adaptors', ->
   class @Adaptor extends Cylon.Basestar
     constructor: (opts) ->
@@ -28,4 +30,4 @@ namespace 'Cylon.Adaptors', ->
     disconnect: ->
       Logger.info "Disconnecting from adaptor '#{@name}'..."
 
-module.exports = Cylon.Adaptors.Adaptor
+#module.exports = Cylon.Adaptor

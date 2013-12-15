@@ -15,6 +15,8 @@
 
   namespace = require('node-namespace');
 
+  require('./basestar');
+
   namespace('Cylon.Adaptors', function() {
     return this.Adaptor = (function(_super) {
       __extends(Adaptor, _super);
@@ -43,7 +45,5 @@
 
     })(Cylon.Basestar);
   });
-
-  module.exports = Cylon.Adaptors.Adaptor;
 
 }).call(this);

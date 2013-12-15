@@ -10,6 +10,8 @@
 
 namespace = require 'node-namespace'
 
+require './basestar'
+
 namespace 'Cylon.Drivers', ->
   class @Driver extends Cylon.Basestar
     constructor: (opts) ->
@@ -17,8 +19,11 @@ namespace 'Cylon.Drivers', ->
       @name = opts.name
       @device = opts.device
 
-    start: ->
+    start: (callback) ->
       Logger.info "Driver #{@name} started"
+      (callback)(null)
+      @device.emit 'start'
+      true
 
     stop: ->
       Logger.info "Driver #{@name} stopped"
@@ -26,4 +31,4 @@ namespace 'Cylon.Drivers', ->
     commands: ->
       []
 
-module.exports = Cylon.Drivers.Driver
+#module.exports = Cylon.Driver

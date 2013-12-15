@@ -29,13 +29,11 @@
   };
 
   namespace('Cylon.Drivers', function() {
-    var _ref;
     return this.Ping = (function(_super) {
       __extends(Ping, _super);
 
-      function Ping() {
-        _ref = Ping.__super__.constructor.apply(this, arguments);
-        return _ref;
+      function Ping(opts) {
+        Ping.__super__.constructor.apply(this, arguments);
       }
 
       Ping.prototype.commands = function() {
@@ -48,7 +46,7 @@
 
       return Ping;
 
-    })(this.Driver);
+    })(Cylon.Drivers.Driver);
   });
 
 }).call(this);

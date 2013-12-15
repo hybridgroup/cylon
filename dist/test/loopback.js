@@ -29,13 +29,11 @@
   };
 
   namespace('Cylon.Adaptors', function() {
-    var _ref;
     return this.Loopback = (function(_super) {
       __extends(Loopback, _super);
 
-      function Loopback() {
-        _ref = Loopback.__super__.constructor.apply(this, arguments);
-        return _ref;
+      function Loopback(opts) {
+        Loopback.__super__.constructor.apply(this, arguments);
       }
 
       Loopback.prototype.commands = function() {
@@ -44,7 +42,7 @@
 
       return Loopback;
 
-    })(this.Adaptor);
+    })(Cylon.Adaptors.Adaptor);
   });
 
 }).call(this);
