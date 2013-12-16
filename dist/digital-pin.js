@@ -94,7 +94,7 @@
           this._setMode('r');
         }
         readData = null;
-        setInterval(function() {
+        every(interval, function() {
           return FS.readFile(_this._valuePath(), function(err, data) {
             if (err) {
               return _this.emit('error', "Error occurred while reading from pin " + _this.pinNum);
@@ -103,7 +103,7 @@
               return _this.emit('digitalRead', readData);
             }
           });
-        }, interval);
+        });
         return true;
       };
 

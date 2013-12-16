@@ -11,6 +11,8 @@
 require './utils'
 require './logger'
 require './api'
+require './driver'
+require './adaptor'
 
 Logger.setup()
 

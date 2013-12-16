@@ -10,12 +10,14 @@
 
 require './cylon'
 require './basestar'
+require "./connection"
+require "./adaptor"
+require "./device"
+require "./driver"
 require './digital-pin'
 
 namespace = require 'node-namespace'
 
-require "./connection"
-require "./device"
 Async = require "async"
 
 # A Robot is the primary interface for interacting with a collection of physical
@@ -57,8 +59,8 @@ namespace 'Cylon', ->
       @drivers = {}
       @commands = []
 
-      @registerAdaptor "./loopback", "loopback"
-      @registerDriver "./ping", "ping"
+      @registerAdaptor "./test/loopback", "loopback"
+      @registerDriver "./test/ping", "ping"
 
       @initConnections(opts.connection or opts.connections)
       @initDevices(opts.device or opts.devices)

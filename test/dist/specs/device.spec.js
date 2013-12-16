@@ -4,15 +4,21 @@
 
   source("robot");
 
-  source("test/driver");
+  source("driver");
+
+  source("test/ping");
 
   describe("Device", function() {
     var device, driver, initDriver, robot;
     robot = new Cylon.Robot({
       name: 'me'
     });
-    driver = new Cylon.Driver({
-      name: 'driving'
+    driver = new Cylon.Drivers.Ping({
+      name: 'driving',
+      device: {
+        connection: 'connect',
+        pin: 13
+      }
     });
     initDriver = sinon.stub(robot, 'initDriver').returns(driver);
     device = new Cylon.Device({
@@ -20,17 +26,29 @@
       driver: 'driving',
       robot: robot
     });
-    it("should belong to a robot", function() {
+    it("belongs to a robot", function() {
       return device.robot.name.should.be.equal('me');
     });
-    it("should have a name", function() {
+    it("has a name", function() {
       return device.name.should.be.equal('devisive');
     });
-    it("should use default connection if none specified");
-    it("should use connection if one is specified");
-    return it("should init a driver", function() {
+    it("can init a driver", function() {
       return initDriver.should.be.called;
     });
+    it("can start a driver", function() {
+      var driverStart;
+      driverStart = sinon.stub(driver, 'start').returns(true);
+      device.start();
+      return driverStart.should.be.called;
+    });
+    it("can stop a driver", function() {
+      var driverStop;
+      driverStop = sinon.stub(driver, 'stop').returns(true);
+      device.stop();
+      return driverStop.should.be.called;
+    });
+    it("should use default connection if none specified");
+    return it("should use connection if one is specified");
   });
 
 }).call(this);

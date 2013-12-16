@@ -17,13 +17,17 @@
 
   require('./basestar');
 
+  require("./connection");
+
+  require("./adaptor");
+
+  require("./device");
+
+  require("./driver");
+
   require('./digital-pin');
 
   namespace = require('node-namespace');
-
-  require("./connection");
-
-  require("./device");
 
   Async = require("async");
 
@@ -57,8 +61,8 @@
         this.adaptors = {};
         this.drivers = {};
         this.commands = [];
-        this.registerAdaptor("./loopback", "loopback");
-        this.registerDriver("./ping", "ping");
+        this.registerAdaptor("./test/loopback", "loopback");
+        this.registerDriver("./test/ping", "ping");
         this.initConnections(opts.connection || opts.connections);
         this.initDevices(opts.device || opts.devices);
         this.work = opts.work || function() {

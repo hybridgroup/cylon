@@ -2,17 +2,19 @@
   'use strict';
   source("connection");
 
-  source("test/adaptor");
+  source("adaptor");
 
   source("robot");
+
+  source("test/loopback");
 
   describe("Connection", function() {
     var adaptor, connection, initAdaptor, robot;
     robot = new Cylon.Robot({
       name: 'me'
     });
-    adaptor = new Cylon.Adaptor({
-      name: 'loopback'
+    adaptor = new Cylon.Adaptors.Loopback({
+      name: 'loopy'
     });
     initAdaptor = sinon.stub(robot, 'initAdaptor').returns(adaptor);
     connection = new Cylon.Connection({
@@ -20,18 +22,30 @@
       adaptor: "loopback",
       robot: robot
     });
-    it("should belong to a robot", function() {
+    it("belongs to a robot", function() {
       return connection.robot.name.should.be.equal('me');
     });
-    it("should have a name", function() {
+    it("has a name", function() {
       return connection.name.should.be.equal('connective');
     });
-    it("should have an adaptor", function() {
-      return connection.adaptor.name.should.be.equal('loopback');
+    it("has an adaptor", function() {
+      return connection.adaptor.name.should.be.equal('loopy');
     });
-    it("should be able to require an external adaptor module");
-    it("should be able to connect");
-    return it("should be able to disconnect");
+    it("can init an external adaptor module", function() {
+      return initAdaptor.should.be.called;
+    });
+    it("can connect to adaptor", function() {
+      var adaptorConnect;
+      adaptorConnect = sinon.stub(adaptor, 'connect').returns(true);
+      connection.connect();
+      return adaptorConnect.should.be.called;
+    });
+    return it("can disconnect from adaptor", function() {
+      var adaptorDisconnect;
+      adaptorDisconnect = sinon.stub(adaptor, 'disconnect').returns(true);
+      connection.disconnect();
+      return adaptorDisconnect.should.be.called;
+    });
   });
 
 }).call(this);
