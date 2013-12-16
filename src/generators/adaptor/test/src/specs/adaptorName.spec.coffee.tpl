@@ -1,11 +1,5 @@
 'use strict'
 
-# Needed so that tests don't implode
-namespace = require 'node-namespace'
-namespace 'Cylon', ->
-  class @Basestar
-    constructor: ->
-
 module = source "<%= adaptorName %>"
 
 describe "basic tests", ->
