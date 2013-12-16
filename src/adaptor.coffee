@@ -14,7 +14,7 @@ require './basestar'
 
 namespace 'Cylon.Adaptors', ->
   class @Adaptor extends Cylon.Basestar
-    constructor: (opts) ->
+    constructor: (opts={}) ->
       @self = this
       @name = opts.name
       @connection = opts.connection

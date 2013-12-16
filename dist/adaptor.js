@@ -22,6 +22,9 @@
       __extends(Adaptor, _super);
 
       function Adaptor(opts) {
+        if (opts == null) {
+          opts = {};
+        }
         this.self = this;
         this.name = opts.name;
         this.connection = opts.connection;

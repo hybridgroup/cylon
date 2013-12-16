@@ -22,6 +22,9 @@
       __extends(Driver, _super);
 
       function Driver(opts) {
+        if (opts == null) {
+          opts = {};
+        }
         this.self = this;
         this.name = opts.name;
         this.device = opts.device;

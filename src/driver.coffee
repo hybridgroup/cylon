@@ -14,7 +14,7 @@ require './basestar'
 
 namespace 'Cylon.Drivers', ->
   class @Driver extends Cylon.Basestar
-    constructor: (opts) ->
+    constructor: (opts={}) ->
       @self = this
       @name = opts.name
       @device = opts.device
