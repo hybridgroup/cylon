@@ -16,7 +16,7 @@ layout: page
     %h3 JavaScript
     :markdown
           :::javascript
-          var Cylon = require('cylon');
+          Cylon = require('cylon');
 
           Cylon.robot({
             connection: {
@@ -24,11 +24,10 @@ layout: page
               adaptor: 'leapmotion',
               port: '127.0.0.1:6437'
             },
-
             device: {
               name: 'leapmotion',
               driver: 'leapmotion'
-            }
+            },
            ... 
     %h3 CoffeeScript
     :markdown
@@ -57,11 +56,11 @@ layout: page
 
   %section.how-to
     %h2 How to use
-    -#%p Example receiving hand motion events from a Leap Motion.
+    %p Example receiving hand gesture events from a Leap Motion.
     %h3 JavaScript
     :markdown
           :::javascript
-          var Cylon = require('cylon');
+          Cylon = require('cylon');
 
           Cylon.robot({
             connection: {
@@ -69,38 +68,17 @@ layout: page
               adaptor: 'leapmotion',
               port: '127.0.0.1:6437'
             },
-
             device: {
               name: 'leapmotion',
               driver: 'leapmotion'
             },
-
             work: function(my) {
-              my.leapmotion.on('connect', function() {
-                Logger.info("Connected");
-              });
-
-              my.leapmotion.on('start', function() {
-                Logger.info("Started");
-              });
-
-              my.leapmotion.on('frame', function(frame) {
-                Logger.info(frame.toString());
-              });
-
-              my.leapmotion.on('hand', function(hand) {
-                Logger.info(hand.toString());
-              });
-
-              my.leapmotion.on('pointable', function(pointable) {
-                Logger.info(pointable.toString());
-              });
-
-              my.leapmotion.on('gesture', function(gesture) {
-                Logger.info(gesture.toString());
+              return my.leapmotion.on('gesture', function(gesture) {
+                return Logger.info(gesture);
               });
             }
           }).start();
+
 
     %h3 CoffeeScript
     :markdown
@@ -112,17 +90,8 @@ layout: page
             device: { name: 'leapmotion', driver: 'leapmotion' }
 
             work: (my) ->
-              my.leapmotion.on 'connect', ->
-                Logger.info "Connected"
-
-              my.leapmotion.on 'start', ->
-                Logger.info "Started"
-
-              events = ["frame", "hand", "pointable", "gesture"]
-
-              for event in events
-                my.leapmotion.on event, (payload) ->
-                  Logger.info payload.toString()
+              my.leapmotion.on 'gesture', (gesture) ->
+                Logger.info gesture
 
           .start()
 

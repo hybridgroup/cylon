@@ -68,6 +68,6 @@ To create a new example for any driver or platform, do this :
 		  layout: page
 		  ---
 
-### Sned your Pull Request
+### Send your Pull Request
 
 When you have your code ready, create a new PR : `base: cylonjs.com` and `compare:"your_branch"`
