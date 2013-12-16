@@ -17,14 +17,14 @@ module.exports =
     # Provide a function that's an instance of your adaptor here. For example,
     # the Sphero adaptor creates a new instance of the Sphero adaptor class:
     #
-    # new Cylon.Adaptor.Sphero(args...)
+    # new Cylon.Adaptors.Sphero(args...)
     return ->
 
   driver: (args...) ->
     # Provide a function that's an instance of your driver here. For example,
     # the Sphero adaptor creates a new instance of the Sphero driver class:
     #
-    # new Cylon.Driver.Sphero(args...)
+    # new Cylon.Drivers.Sphero(args...)
     return ->
 
   register: (robot) ->

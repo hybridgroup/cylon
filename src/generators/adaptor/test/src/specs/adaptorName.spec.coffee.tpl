@@ -2,7 +2,7 @@
 
 module = source "<%= adaptorName %>"
 
-describe "basic tests", ->
+describe "<%= adaptorName %>", ->
   it "standard async test", (done) ->
     bool = false
     bool.should.be.false
