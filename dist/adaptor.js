@@ -17,7 +17,7 @@
 
   require('./basestar');
 
-  namespace('Cylon.Adaptors', function() {
+  namespace('Cylon', function() {
     return this.Adaptor = (function(_super) {
       __extends(Adaptor, _super);
 

@@ -17,7 +17,7 @@
 
   require('./basestar');
 
-  namespace('Cylon.Drivers', function() {
+  namespace('Cylon', function() {
     return this.Driver = (function(_super) {
       __extends(Driver, _super);
 

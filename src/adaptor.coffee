@@ -12,7 +12,7 @@ namespace = require 'node-namespace'
 
 require './basestar'
 
-namespace 'Cylon.Adaptors', ->
+namespace 'Cylon', ->
   class @Adaptor extends Cylon.Basestar
     constructor: (opts={}) ->
       @self = this

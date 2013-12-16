@@ -12,7 +12,7 @@ namespace = require 'node-namespace'
 
 require './basestar'
 
-namespace 'Cylon.Drivers', ->
+namespace 'Cylon', ->
   class @Driver extends Cylon.Basestar
     constructor: (opts={}) ->
       @self = this

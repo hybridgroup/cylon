@@ -3,6 +3,6 @@
 source "adaptor"
 
 describe "Adaptor", ->
-  adaptor = new Cylon.Adaptors.Adaptor(name: 'adapt')
+  adaptor = new Cylon.Adaptor(name: 'adapt')
 
   it 'needs tests'

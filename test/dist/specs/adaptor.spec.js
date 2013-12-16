@@ -4,7 +4,7 @@
 
   describe("Adaptor", function() {
     var adaptor;
-    adaptor = new Cylon.Adaptors.Adaptor({
+    adaptor = new Cylon.Adaptor({
       name: 'adapt'
     });
     return it('needs tests');

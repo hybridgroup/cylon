@@ -4,7 +4,7 @@
 
   describe("Driver", function() {
     var driver;
-    driver = new Cylon.Drivers.Driver({
+    driver = new Cylon.Driver({
       name: 'max',
       device: {
         connection: 'connect',

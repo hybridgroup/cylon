@@ -48,7 +48,7 @@
 
       return Ping;
 
-    })(Cylon.Drivers.Driver);
+    })(Cylon.Driver);
   });
 
 }).call(this);
