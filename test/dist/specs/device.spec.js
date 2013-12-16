@@ -14,7 +14,11 @@
       name: 'me'
     });
     driver = new Cylon.Drivers.Ping({
-      name: 'driving'
+      name: 'driving',
+      device: {
+        connection: 'connect',
+        pin: 13
+      }
     });
     initDriver = sinon.stub(robot, 'initDriver').returns(driver);
     device = new Cylon.Device({

@@ -28,6 +28,7 @@
         this.self = this;
         this.name = opts.name;
         this.device = opts.device;
+        this.connection = this.device.connection;
       }
 
       Driver.prototype.start = function(callback) {

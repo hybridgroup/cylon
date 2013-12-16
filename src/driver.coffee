@@ -18,6 +18,7 @@ namespace 'Cylon.Drivers', ->
       @self = this
       @name = opts.name
       @device = opts.device
+      @connection = @device.connection
 
     start: (callback) ->
       Logger.info "Driver #{@name} started"

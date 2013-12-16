@@ -7,7 +7,7 @@ source "test/ping"
 
 describe "Device", ->
   robot = new Cylon.Robot(name: 'me')
-  driver = new Cylon.Drivers.Ping(name: 'driving')
+  driver = new Cylon.Drivers.Ping(name: 'driving', device: {connection: 'connect', pin: 13})
   initDriver = sinon.stub(robot, 'initDriver').returns(driver)
   device = new Cylon.Device(name: "devisive", driver: 'driving', robot: robot)
 

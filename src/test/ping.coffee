@@ -16,9 +16,6 @@ module.exports =
 
 namespace 'Cylon.Drivers', ->
   class @Ping extends Cylon.Drivers.Driver
-    constructor: (opts) ->
-      super
-
     commands: ->
       ['ping']
 

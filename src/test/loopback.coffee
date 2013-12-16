@@ -16,8 +16,5 @@ module.exports =
 
 namespace 'Cylon.Adaptors', ->
   class @Loopback extends Cylon.Adaptors.Adaptor
-    constructor: (opts) ->
-      super
-
     commands: ->
       ['ping']
