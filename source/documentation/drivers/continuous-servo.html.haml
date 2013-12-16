@@ -20,7 +20,7 @@ layout: page
           Cylon.robot({
             connection: {name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'},
 
-            device: {name: 'servo', driver: 'servo', pin: 3},
+            device: {name: 'servo', driver: 'continuous-servo', pin: 3},
           ...
 
     %h3 CoffeeScript
@@ -33,7 +33,7 @@ layout: page
               name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
 
             device:
-              name: 'servo', driver: 'servo', pin: 3
+              name: 'servo', driver: 'continuous-servo', pin: 3
           ...
 
   %section.public-methods
@@ -66,7 +66,7 @@ layout: page
           Cylon.robot({
             connection: {name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'},
 
-            device: {name: 'servo', driver: 'servo', pin: 3},
+            device: {name: 'servo', driver: 'continuous-servo', pin: 3},
 
             work: function(my) {
               var angle = 45 ;
@@ -91,7 +91,7 @@ layout: page
               name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
 
             device:
-              name: 'servo', driver: 'servo', pin: 3
+              name: 'servo', driver: 'continuous-servo', pin: 3
 
             work: (my) ->
               angle = 45
