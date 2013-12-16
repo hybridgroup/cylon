@@ -30,4 +30,3 @@ namespace 'Cylon.Adaptors', ->
     disconnect: ->
       Logger.info "Disconnecting from adaptor '#{@name}'..."
 
-#module.exports = Cylon.Adaptor

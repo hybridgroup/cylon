@@ -31,4 +31,3 @@ namespace 'Cylon.Drivers', ->
     commands: ->
       []
 
-#module.exports = Cylon.Driver

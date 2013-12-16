@@ -17,13 +17,17 @@
 
   require('./basestar');
 
+  require("./connection");
+
+  require("./adaptor");
+
+  require("./device");
+
+  require("./driver");
+
   require('./digital-pin');
 
   namespace = require('node-namespace');
-
-  require("./connection");
-
-  require("./device");
 
   Async = require("async");
 
