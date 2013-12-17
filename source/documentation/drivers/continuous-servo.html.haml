@@ -1,13 +1,13 @@
 ---
-title: Cylon.js - Servo Driver
+title: Cylon.js - Continuous Servo Driver
 author: The Hybrid Group
-page_title: Servo
+page_title: Continous Servo
 page_subtitle: Driver
 layout: page
 ---
 .documentation
   %section.intro
-    = image_tag "/images/servo.jpg", class: "display"
+    = image_tag "/images/continuous-servo.jpg", class: "display"
     %p Provides an interface for making servos easy to work and interact with from Cylon.js.
 
   %section.how-to
@@ -20,7 +20,7 @@ layout: page
           Cylon.robot({
             connection: {name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'},
 
-            device: {name: 'servo', driver: 'servo', pin: 3},
+            device: {name: 'servo', driver: 'continuous-servo', pin: 3},
           ...
 
     %h3 CoffeeScript
@@ -33,18 +33,20 @@ layout: page
               name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
 
             device:
-              name: 'servo', driver: 'servo', pin: 3
+              name: 'servo', driver: 'continuous-servo', pin: 3
           ...
 
   %section.public-methods
     %h2 Commands:
     
     %dl.methods 
-      %dt angle → true | nil
-      %dd Moves the servo to the specified angle, angle must be an integer value between 0 and 180.
-      %dt currentAngle → integer_value (0 - 180)
-      %dd Returns the current angle of the servo, an integer value between 0 and 180.
-      
+      %dt clockwise
+      %dd Turns the servo to go clockwise, if the driver is continuous. 
+      %dt counterClockwise
+      %dd Turns the servo to go counter clockwise, if the driver is continuous. 
+      %dt stop
+      %dd Stops the driver.
+
     %h2 Events
 
     %dl.methods 
@@ -64,7 +66,7 @@ layout: page
           Cylon.robot({
             connection: {name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'},
 
-            device: {name: 'servo', driver: 'servo', pin: 3},
+            device: {name: 'servo', driver: 'continuous-servo', pin: 3},
 
             work: function(my) {
               var angle = 45 ;
@@ -89,7 +91,7 @@ layout: page
               name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
 
             device:
-              name: 'servo', driver: 'servo', pin: 3
+              name: 'servo', driver: 'continuous-servo', pin: 3
 
             work: (my) ->
               angle = 45
