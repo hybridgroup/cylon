@@ -23,9 +23,16 @@ work: (my) ->
   my.pixel.fadeToRandomHSB(100, 180, 90)
   my.pixel.playLightScript(1, 0, 0)
   my.pixel.stopScript()
+  my.pixel.setFadeSpeed(50)
+  my.pixel.setTimeAdjust(50)
   # For read commands you get (err, data) passed back to the callback,
   # data contains the read data buffer, in case of Sync call (no callback)
   # you get a regular return.
-  my.pixel.getRGBColor()
+  color = my.pixel.getRGBColor()
+  console.log(color) unless err?
+  # Example getting the color usinc async call and a callback
+  my.pixel.getRGBColor((err, data) ->
+    console.log(data) unless err?
+  )
 
 .start()
