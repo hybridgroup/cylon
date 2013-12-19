@@ -122,7 +122,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
         birthday: ->
           @age += 1
 
-          Logger.info "Happy birthday, \1@name}. You are \1@age} and had \1@contacts} contacts."
+          Logger.info "Happy birthday, \#{@name}. You are \#{@age} and had \#{@contacts} contacts."
 
           if @enoughContacts()
             @rebirth() if not @alive?
