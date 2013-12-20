@@ -2,11 +2,8 @@ Cylon = require('..')
 
 # Initialize the robot
 Cylon.robot
-  connection:
-    name: 'beaglebone', adaptor: 'beaglebone'
-
-  device:
-    name: 'led', driver: 'led', pin: 11
+  connection: { name: 'beaglebone', adaptor: 'beaglebone' }
+  device: { name: 'led', driver: 'led', pin: 'P9_14' }
 
   work: (my) ->
     # we do our thing here
