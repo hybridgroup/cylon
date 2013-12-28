@@ -69,7 +69,7 @@ robot.start()
 ##### JavaScript:
 
 ```javascript
-var Cylon = require('../..');
+var Cylon = require('cylon');
 
 Cylon.robot({
   connection: { name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1' },
@@ -85,7 +85,7 @@ Cylon.robot({
 ##### CoffeeScript:
 
 ```javascript
-Cylon = require '../..'
+Cylon = require 'cylon'
 
 Cylon.robot
   connection: { name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1' }
@@ -117,7 +117,7 @@ Cylon.js has a extensible system for connecting to hardware devices. The followi
 - [Sphero](http://www.gosphero.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-sphero)
 
 Support for many devices that use General Purpose Input/Output (GPIO) have
-a shared set of drivers provded using the cylon-gpio module:
+a shared set of drivers provided using the cylon-gpio module:
 
   - [GPIO](https://en.wikipedia.org/wiki/General_Purpose_Input/Output) <=> [Drivers](https://github.com/hybridgroup/cylon-gpio)
     - Analog Sensor
@@ -129,7 +129,7 @@ a shared set of drivers provded using the cylon-gpio module:
     - Servo
 
 Support for devices that use Inter-Integrated Circuit (I2C) have a shared set of
-drivers provded using the cylon-i2c module:
+drivers provided using the cylon-i2c module:
 
   - [I2C](https://en.wikipedia.org/wiki/I%C2%B2C) <=> [Drivers](https://github.com/hybridgroup/cylon-i2c)
     - BlinkM
@@ -209,7 +209,6 @@ Thank you!
   * If there are commits after yours use “git rebase -i <new_head_branch>”
   * If you have local changes you may need to use “git stash”
   * For git help see [progit](http://git-scm.com/book) which is an awesome (and free) book on git
-
 
 ## Release History
 
