@@ -135,7 +135,7 @@ drivers provided using the cylon-i2c module:
     - BlinkM
     - HMC6352 Digital Compass
 
-More platforms and drivers are coming soon...
+More platforms and drivers are coming soon... follow us on Twitter [@cylonjs](http://twitter.com/cylonjs) for latest updates.
 
 ## Getting Started
 
