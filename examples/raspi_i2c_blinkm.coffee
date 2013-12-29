@@ -2,10 +2,10 @@ Cylon = require('..')
 
 Cylon.robot
   connection:
-    name: 'beaglebone', adaptor: 'beaglebone'
+    name: 'raspi', adaptor: 'raspi'
 
   device:
-    name: 'pixel', driver: 'blinkm', pin: 'P9_20'
+    name: 'pixel', driver: 'blinkm', pin: 3
 
   work: (my) ->
     # we do our thing here
