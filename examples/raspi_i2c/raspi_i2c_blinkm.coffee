@@ -5,7 +5,7 @@ Cylon.robot
     name: 'raspi', adaptor: 'raspi'
 
   device:
-    name: 'pixel', driver: 'blinkm', pin: 3
+    name: 'pixel', driver: 'blinkm'
 
   work: (my) ->
 
