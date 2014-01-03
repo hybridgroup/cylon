@@ -113,10 +113,98 @@
         return pin.emit.restore();
       });
     });
-    it("should digitalRead");
-    it("should setHigh");
-    it("should setLow");
-    return it("should toggle");
+    describe("#digitalRead", function() {
+      it("sets the mode to 'r' if it isn't already", function() {
+        var setMode;
+        sinon.stub(global, 'every');
+        setMode = sinon.stub(pin, "_setMode").returns(true);
+        pin.mode = 'w';
+        pin.digitalRead(1);
+        assert(setMode.calledWith("r"));
+        global.every.restore();
+        return pin._setMode.restore();
+      });
+      it("runs readFile on an interval", function() {
+        var clock, readFile;
+        clock = sinon.useFakeTimers();
+        readFile = sinon.stub(fs, 'readFile').returns(true);
+        sinon.stub(pin, "_setMode").returns(true);
+        pin.digitalRead(250);
+        clock.tick(300);
+        assert(readFile.calledOnce);
+        fs.readFile.restore();
+        pin._setMode.restore();
+        return clock.restore();
+      });
+      it("emits 'digitalRead' with the data on success", function() {
+        var clock, emit;
+        clock = sinon.useFakeTimers();
+        sinon.stub(fs, 'readFile').callsArgWith(1, null, "1");
+        emit = sinon.stub(pin, 'emit').returns(true);
+        sinon.stub(pin, "_setMode").returns(true);
+        pin.digitalRead(250);
+        clock.tick(300);
+        assert(emit.calledWith('digitalRead', 1));
+        fs.readFile.restore();
+        pin.emit.restore();
+        pin._setMode.restore();
+        return clock.restore();
+      });
+      return it("emits 'error' with the on failure", function() {
+        var clock, emit;
+        clock = sinon.useFakeTimers();
+        sinon.stub(fs, 'readFile').callsArgWith(1, true, "1");
+        emit = sinon.stub(pin, 'emit').returns(true);
+        sinon.stub(pin, "_setMode").returns(true);
+        pin.digitalRead(250);
+        clock.tick(300);
+        assert(emit.calledWith('error'));
+        fs.readFile.restore();
+        pin.emit.restore();
+        pin._setMode.restore();
+        return clock.restore();
+      });
+    });
+    describe("#setHigh", function() {
+      return it("calls digitalWrite, setting the pin to 'HIGH'", function() {
+        var write;
+        write = sinon.stub(pin, 'digitalWrite').returns(true);
+        pin.setHigh();
+        assert(write.calledWith(1));
+        return pin.digitalWrite.restore();
+      });
+    });
+    describe("#setLow", function() {
+      return it("calls digitalWrite, setting the pin to 'low'", function() {
+        var write;
+        write = sinon.stub(pin, 'digitalWrite').returns(true);
+        pin.setLow();
+        assert(write.calledWith(0));
+        return pin.digitalWrite.restore();
+      });
+    });
+    return describe("#toggle", function() {
+      context("when the pin is 'high'", function() {
+        return it("sets the pin to 'low'", function() {
+          var set;
+          pin.status = 'high';
+          set = sinon.stub(pin, 'setLow').returns(true);
+          pin.toggle();
+          assert(set.calledOnce);
+          return pin.setLow.restore();
+        });
+      });
+      return context("when the pin is 'low'", function() {
+        return it("sets the pin to 'high'", function() {
+          var set;
+          pin.status = 'low';
+          set = sinon.stub(pin, 'setHigh').returns(true);
+          pin.toggle();
+          assert(set.calledOnce);
+          return pin.setHigh.restore();
+        });
+      });
+    });
   });
 
 }).call(this);

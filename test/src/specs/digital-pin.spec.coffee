@@ -114,7 +114,93 @@ describe "DigitalPin", ->
       fs.writeFile.restore()
       pin.emit.restore()
 
-  it "should digitalRead"
-  it "should setHigh"
-  it "should setLow"
-  it "should toggle"
+
+  describe "#digitalRead", ->
+    it "sets the mode to 'r' if it isn't already", ->
+      sinon.stub(global, 'every')
+      setMode = sinon.stub(pin, "_setMode").returns(true)
+
+      pin.mode = 'w'
+      pin.digitalRead 1
+
+      assert setMode.calledWith("r")
+
+      global.every.restore()
+      pin._setMode.restore()
+
+    it "runs readFile on an interval", ->
+      clock = sinon.useFakeTimers()
+      readFile = sinon.stub(fs, 'readFile').returns(true)
+      sinon.stub(pin, "_setMode").returns(true)
+
+      pin.digitalRead 250
+
+      clock.tick(300)
+      assert readFile.calledOnce
+
+      fs.readFile.restore()
+      pin._setMode.restore()
+      clock.restore()
+
+    it "emits 'digitalRead' with the data on success", ->
+      clock = sinon.useFakeTimers()
+      sinon.stub(fs, 'readFile').callsArgWith(1, null, "1")
+      emit = sinon.stub(pin, 'emit').returns(true)
+      sinon.stub(pin, "_setMode").returns(true)
+
+      pin.digitalRead 250
+
+      clock.tick(300)
+      assert emit.calledWith 'digitalRead', 1
+
+      fs.readFile.restore()
+      pin.emit.restore()
+      pin._setMode.restore()
+      clock.restore()
+
+    it "emits 'error' with the on failure", ->
+      clock = sinon.useFakeTimers()
+      sinon.stub(fs, 'readFile').callsArgWith(1, true, "1")
+      emit = sinon.stub(pin, 'emit').returns(true)
+      sinon.stub(pin, "_setMode").returns(true)
+
+      pin.digitalRead 250
+
+      clock.tick(300)
+      assert emit.calledWith 'error'
+
+      fs.readFile.restore()
+      pin.emit.restore()
+      pin._setMode.restore()
+      clock.restore()
+
+  describe "#setHigh", ->
+    it "calls digitalWrite, setting the pin to 'HIGH'", ->
+      write = sinon.stub(pin, 'digitalWrite').returns(true)
+      pin.setHigh()
+      assert write.calledWith(1)
+      pin.digitalWrite.restore()
+
+  describe "#setLow", ->
+    it "calls digitalWrite, setting the pin to 'low'", ->
+      write = sinon.stub(pin, 'digitalWrite').returns(true)
+      pin.setLow()
+      assert write.calledWith(0)
+      pin.digitalWrite.restore()
+
+  describe "#toggle", ->
+    context "when the pin is 'high'", ->
+      it "sets the pin to 'low'", ->
+        pin.status = 'high'
+        set = sinon.stub(pin, 'setLow').returns(true)
+        pin.toggle()
+        assert set.calledOnce
+        pin.setLow.restore()
+
+    context "when the pin is 'low'", ->
+      it "sets the pin to 'high'", ->
+        pin.status = 'low'
+        set = sinon.stub(pin, 'setHigh').returns(true)
+        pin.toggle()
+        assert set.calledOnce
+        pin.setHigh.restore()

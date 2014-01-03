@@ -57,9 +57,12 @@ namespace 'Cylon.IO', ->
 
       value
 
-    # Reads the pin input every interval amount of time:
-    # params:
-    #   interval: amount in miliseconds
+    # Public: Reads the digial pin's value periodicly on a supplied interval,
+    # and emits the result or an error
+    #
+    # interval - time (in milliseconds) to read from the pin at
+    #
+    # Returns the defined interval
     digitalRead: (interval) ->
       @_setMode('r') unless @mode is 'r'
       readData = null
@@ -71,8 +74,6 @@ namespace 'Cylon.IO', ->
           else
             readData = parseInt(data.toString())
             @emit 'digitalRead', readData
-
-      true
 
     setHigh: ->
       @digitalWrite 1
