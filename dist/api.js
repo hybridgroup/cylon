@@ -93,31 +93,29 @@
           });
         });
         this.server.get("/robots/:robotname/devices/:devicename", function(req, res) {
-          var devicename, params, robotname;
-          params = [req.params.robotname, req.params.devicename];
-          robotname = params[0], devicename = params[1];
+          var devicename, robotname, _ref;
+          _ref = [req.params.robotname, req.params.devicename], robotname = _ref[0], devicename = _ref[1];
           return master.findRobotDevice(robotname, devicename, function(err, device) {
             return res.json(err ? err : device.data());
           });
         });
         this.server.get("/robots/:robotname/devices/:devicename/commands", function(req, res) {
-          var devicename, params, robotname;
-          params = [req.params.robotname, req.params.devicename];
-          robotname = params[0], devicename = params[1];
+          var devicename, robotname, _ref;
+          _ref = [req.params.robotname, req.params.devicename], robotname = _ref[0], devicename = _ref[1];
           return master.findRobotDevice(robotname, devicename, function(err, device) {
             return res.json(err ? err : device.data().commands);
           });
         });
         this.server.all("/robots/:robot/devices/:device/commands/:commandname", function(req, res) {
-          var commandname, devicename, key, params, robotname, value, _ref;
+          var commandname, devicename, params, robotname, v, _, _ref;
           params = [req.params.robot, req.params.device, req.params.commandname];
           robotname = params[0], devicename = params[1], commandname = params[2];
           params = [];
           if (typeof req.body === 'object') {
             _ref = req.body;
-            for (key in _ref) {
-              value = _ref[key];
-              params.push(value);
+            for (_ in _ref) {
+              v = _ref[_];
+              params.push(v);
             }
           }
           return master.findRobotDevice(robotname, devicename, function(err, device) {
@@ -137,9 +135,8 @@
           });
         });
         this.server.get("/robots/:robot/connections/:connection", function(req, res) {
-          var connectionname, params, robotname;
-          params = [req.params.robot, req.params.connection];
-          robotname = params[0], connectionname = params[1];
+          var connectionname, robotname, _ref;
+          _ref = [req.params.robot, req.params.connection], robotname = _ref[0], connectionname = _ref[1];
           return master.findRobotConnection(robotname, connectionname, function(err, connection) {
             return res.json(err ? err : connection.data());
           });
@@ -148,9 +145,8 @@
           return req.io.route('events');
         });
         return this.server.io.route('events', function(req) {
-          var devicename, params, robotname;
-          params = [req.params.robotname, req.params.devicename];
-          robotname = params[0], devicename = params[1];
+          var devicename, robotname, _ref;
+          _ref = [req.params.robotname, req.params.devicename], robotname = _ref[0], devicename = _ref[1];
           return master.findRobotDevice(robotname, devicename, function(err, device) {
             if (err) {
               req.io.respond(err);

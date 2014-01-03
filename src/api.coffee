@@ -51,8 +51,7 @@ namespace 'Api', ->
 
       @server.all "/robots/:robotname/commands/:commandname", (req, res) ->
         params = []
-        if typeof req.body is 'object'
-          params.push(value) for key, value of req.body
+        params.push(v) for _, v of req.body if typeof req.body is 'object'
 
         master.findRobot req.params.robotname, (err, robot) ->
           if err then return res.json err
@@ -64,29 +63,23 @@ namespace 'Api', ->
           res.json if err then err else robot.data().devices
 
       @server.get "/robots/:robotname/devices/:devicename", (req, res) ->
-        params = [req.params.robotname, req.params.devicename]
-        [robotname, devicename] = params
+        [robotname, devicename] = [req.params.robotname, req.params.devicename]
 
         master.findRobotDevice robotname, devicename, (err, device) ->
           res.json if err then err else device.data()
 
       @server.get "/robots/:robotname/devices/:devicename/commands", (req, res) ->
-        params = [req.params.robotname, req.params.devicename]
-        [robotname, devicename] = params
+        [robotname, devicename] = [req.params.robotname, req.params.devicename]
 
         master.findRobotDevice robotname, devicename, (err, device) ->
           res.json if err then err else device.data().commands
 
       @server.all "/robots/:robot/devices/:device/commands/:commandname", (req, res) ->
-
         params = [req.params.robot, req.params.device, req.params.commandname]
-
         [robotname, devicename, commandname] = params
 
         params = []
-
-        if typeof req.body is 'object'
-          params.push(value) for key, value of req.body
+        params.push(v) for _, v of req.body if typeof req.body is 'object'
 
         master.findRobotDevice robotname, devicename, (err, device) ->
           if err then return res.json err
@@ -98,8 +91,7 @@ namespace 'Api', ->
           res.json if err then err else robot.data().connections
 
       @server.get "/robots/:robot/connections/:connection", (req, res) ->
-        params = [req.params.robot, req.params.connection]
-        [robotname, connectionname] = params
+        [robotname, connectionname] = [req.params.robot, req.params.connection]
 
         master.findRobotConnection robotname, connectionname, (err, connection) ->
           res.json if err then err else connection.data()
@@ -108,8 +100,7 @@ namespace 'Api', ->
         req.io.route 'events'
 
       @server.io.route 'events', (req) ->
-        params = [req.params.robotname, req.params.devicename]
-        [robotname, devicename] = params
+        [robotname, devicename] = [req.params.robotname, req.params.devicename]
 
         master.findRobotDevice robotname, devicename, (err, device) ->
           req.io.respond(err) if err
