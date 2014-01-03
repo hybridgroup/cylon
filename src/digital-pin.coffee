@@ -13,8 +13,8 @@ EventEmitter = require('events').EventEmitter
 
 namespace = require 'node-namespace'
 
-# DigitalPin class to interface with linux GPIO in single board computers such as Raspberry Pi and BeagleBone
-#
+# DigitalPin class offers an interface with the Linux GPIO system present in
+# single-board computers such as a Raspberry Pi, or a BeagleBone
 namespace 'Cylon.IO', ->
   class @DigitalPin extends EventEmitter
 
