@@ -27,6 +27,7 @@ namespace 'Api', ->
 
       @server.set 'name', 'Cylon API Server'
       @server.use express.bodyParser()
+      @server.use express.static __dirname + "/../api"
 
       @server.get "/*", (req, res, next) ->
         res.set 'Content-Type', 'application/json'
