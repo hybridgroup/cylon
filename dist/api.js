@@ -67,13 +67,13 @@
           });
         });
         this.server.all("/robots/:robotname/commands/:commandname", function(req, res) {
-          var key, params, value, _ref;
+          var params, v, _, _ref;
           params = [];
           if (typeof req.body === 'object') {
             _ref = req.body;
-            for (key in _ref) {
-              value = _ref[key];
-              params.push(value);
+            for (_ in _ref) {
+              v = _ref[_];
+              params.push(v);
             }
           }
           return master.findRobot(req.params.robotname, function(err, robot) {
