@@ -11,7 +11,7 @@ Cylon.robot({
     every(1..seconds(), function() {
       angle += increment;
       my.servo.angle(angle);
-      Logger.info("Current Angle: " + (my.servo.currentAngle()));
+      console.log("Current Angle: " + (my.servo.currentAngle()));
       if ((angle === 30) || (angle === 150)) { increment = -increment; }
     });
   }

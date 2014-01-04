@@ -39,7 +39,7 @@ supported:
           angle += increment
           my.servo.angle(angle)
 
-          Logger.info "Current angle: #{my.servo.currentAngle() }"
+          console.log "Current angle: #{my.servo.currentAngle() }"
 
           increment = -increment if (angle is 30) or (angle is 150)
 

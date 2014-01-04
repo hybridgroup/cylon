@@ -38,7 +38,7 @@ busy, we'll just tell it to print it's name every second.
 
       work: (me) ->
         every 1.seconds(), ->
-          Logger.info me.name
+          console.log me.name
 
 And with that all done, we can now instantiate our robot:
 

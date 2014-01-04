@@ -17,10 +17,10 @@ message after ten seconds have elapsed.
 
       work: ->
         every 1.second(), ->
-          Logger.info("Hello, human!")
+          console.log("Hello, human!")
 
         after 10.seconds(), ->
-          Logger.info "Impressive."
+          console.log "Impressive."
 
 Simple as can be. Now that we're done, let's start the robot:
 

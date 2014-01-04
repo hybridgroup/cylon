@@ -10,7 +10,7 @@ class MyRobot
 
   work: (me) ->
     every 1.seconds(), ->
-      Logger.info me.name
+      console.log me.name
 
 robot = new MyRobot
 robot.name = "frankie"

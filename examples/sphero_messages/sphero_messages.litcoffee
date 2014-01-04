@@ -26,7 +26,7 @@ When the Sphero's connected, we want to set up collision detection and change
 it's color.
 
         me.sphero.on 'connect', ->
-          Logger.info "Setting up Collision Detection..."
+          console.log "Setting up Collision Detection..."
           me.sphero.detectCollisions()
           me.sphero.setRGB 0x00FF00
 
@@ -34,33 +34,33 @@ When the Sphero emits an 'update' event, we want to log the data it's provided
 to us:
 
         me.sphero.on 'update', (data) ->
-          Logger.info "Update event eventName: #{data} "
-          Logger.info "Update event args: "
-          Logger.info data
+          console.log "Update event eventName: #{data} "
+          console.log "Update event args: "
+          console.log data
 
 Similarly, when we get a message from the Sphero, we want to log the data, but
 we'll also change it's color while we're at it.
 
         me.sphero.on 'message', (data) ->
           me.sphero.setRGB 0x0000FF
-          Logger.info "Message:"
-          Logger.info data
+          console.log "Message:"
+          console.log data
 
 In the event of a collision, we want to change the color of the Sphero again, as
 well as logging the data provided by the collision event.
 
         me.sphero.on 'collision', (data) ->
           me.sphero.setRGB 0xFF0000
-          Logger.info "Collision:"
-          Logger.info data
+          console.log "Collision:"
+          console.log data
 
 And, last but not least, when we get a notification event we want to record it's
 data and change the color.
 
         me.sphero.on 'notification', (data) ->
           me.sphero.setRGB 0xFF0000
-          Logger.info "Notification:"
-          Logger.info data
+          console.log "Notification:"
+          console.log data
 
 And with all that done, we can finally start the robot.
 

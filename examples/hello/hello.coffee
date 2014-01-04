@@ -3,9 +3,9 @@ Cylon = require '../..'
 Cylon.robot
   work: ->
     every 1.second(), ->
-      Logger.info("Hello, human!")
+      console.log("Hello, human!")
 
     after 10.seconds(), ->
-      Logger.info "Impressive."
+      console.log "Impressive."
 
 .start()

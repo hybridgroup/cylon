@@ -6,7 +6,7 @@ class SpheroRobot
 
   work: (my) ->
     every 1.seconds(), ->
-      Logger.info my.name
+      console.log my.name
       my.sphero.setRandomColor()
       my.sphero.roll 60, Math.floor(Math.random() * 360)
 

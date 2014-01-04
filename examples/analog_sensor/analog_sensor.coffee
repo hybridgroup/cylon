@@ -15,9 +15,9 @@ Cylon.robot
 
   work: (my) ->
     my.sensor.on 'upperLimit', (val) ->
-      Logger.info "Upper limit reached ===> #{val}"
+      console.log "Upper limit reached ===> #{val}"
 
     my.sensor.on 'lowerLimit', (val) ->
-      Logger.info "Lower limit reached ===> #{val}"
+      console.log "Lower limit reached ===> #{val}"
 
 .start()

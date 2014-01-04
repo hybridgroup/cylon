@@ -12,7 +12,7 @@ var SpheroRobot = (function() {
   SpheroRobot.prototype.connection = { name: 'Sphero', adaptor: 'sphero' };
 
   SpheroRobot.prototype.work = function(my) {
-    Logger.info("Robot " + my.name + " is now working!");
+    console.log("Robot " + my.name + " is now working!");
   };
 
   return SpheroRobot;

@@ -14,7 +14,7 @@ var SpheroRobot = {
 
   work: function(my) {
     every((1).seconds(), function() {
-      Logger.info(my.name);
+      console.log(my.name);
       my.sphero.setRandomColor();
       my.sphero.roll(60, Math.floor(Math.random() * 360));
     });

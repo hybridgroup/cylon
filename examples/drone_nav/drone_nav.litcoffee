@@ -32,7 +32,7 @@ drone's config, and log data to the console whenever the nav board emits the
 
       work: (my) ->
         my.drone.config 'general:navdata_demo', 'TRUE'
-        my.nav.on 'update', (data) -> Logger.info data
+        my.nav.on 'update', (data) -> console.log data
 
 Simple enough. Now all that's left is to start the robot:
 

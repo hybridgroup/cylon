@@ -17,11 +17,11 @@ Cylon.robot({
 
   work: function(my) {
     my.sensor.on('upperLimit', function(val) {
-      Logger.info("Upper limit reached ===> " + val);
+      console.log("Upper limit reached ===> " + val);
     });
 
     my.sensor.on('lowerLimit', function(val) {
-      Logger.info("Lower limit reached ===> " + val);
+      console.log("Lower limit reached ===> " + val);
     });
   }
 
