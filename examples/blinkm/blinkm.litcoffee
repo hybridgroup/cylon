@@ -13,13 +13,15 @@ With Cylon imported, we can start defining our robot.
 
     Cylon.robot
 
-Our robot will be using an Arduino, and communicating over the Firmata protocol:
+Our robot will be using an Arduino, and communicating over the Firmata protocol
 
-      connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' }
+      connection:
+        name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
 
 And we'll have one device, a BlinkM led.
 
-      device: { name: 'blinkm', driver: 'blinkm' }
+      device:
+        name: 'blinkm', driver: 'blinkm'
 
 We'll now set up our robot's work.
 
@@ -29,29 +31,33 @@ When the BlinkM sends the 'start' event, we'll set up our events
 
         my.blinkm.on 'start', ->
 
-We'll request the BlinkM's version, and print that to the console:
+We stop the default BlinkM's light script
 
-          my.blinkm.version (version) ->
-            console.log "Started BlinkM version #{version}"
+          my.blinkm.stopScript()
 
-By default, we'll turn the LED off and assign a boolean that we'll use to
-determine if it's on or not:
+We'll request the BlinkM's version, and print that to the console
 
-          my.blinkm.off()
-          lit = false
+          my.blinkm.getFirmware((version) ->
+            Logger.info "Started BlinkM version #{version}"
+          )
 
-Now, every second, we'll toggle the LED, using the `lit` variable to determine
-which state we need to transition the BlinkM to:
+By default, we'll turn the LED off
 
-          every 1.second(), ->
-            if lit
-              lit = false
-              console.log 'on'
-              my.blinkm.rgb 0xaa, 0, 0
-            else
-              lit = true
-              console.log 'off'
-              my.blinkm.rgb 0, 0, 0
+          my.blinkm.goToRGB(0,0,0)
+
+We print the default starting color (in this case 0,0,0 since we turned the led off)
+
+          my.blinkm.getRGBColor((data) ->
+            console.log("Starting Color: #{ data }")
+          )
+
+Now, every 2 seconds, we'll change the LED color to a random value:
+
+          every 2.second(), ->
+            my.blinkm.getRGBColor((data) ->
+              console.log("Current Color: #{ data }")
+            )
+            my.blinkm.fadeToRandomRGB(128, 128, 128)
 
 Now that our robot knows what to do, let's get started:
 

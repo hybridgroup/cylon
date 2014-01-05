@@ -10,7 +10,7 @@ Cylon.robot
   work: (my) ->
     my.blinkm.on 'start', ->
       my.blinkm.stopScript()
-      my.blinkm.goToRGB(255, 0, 0)
+
       my.blinkm.getFirmware((version) ->
         Logger.info "Started BlinkM version #{version}"
       )
