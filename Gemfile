@@ -9,3 +9,4 @@ gem 'rake'
 gem "therubyracer"
 gem 'bourbon'
 gem "middleman-neat"
+gem 'rack-google-analytics'
