@@ -25,14 +25,14 @@
   color: #eee;
 }
 
-.robot {
+.robot, .device {
   border: 3px solid #ababab;
   border-radius: 5px;
   margin-bottom: 20px;
   padding: 15px 5px;
 }
 
-.robot .robot-type {
+.robot .robot-type, .device .device-type {
   background: #ababab;
   padding: 10px;
   text-align: center;
@@ -42,12 +42,12 @@
   color: white;
 }
 
-.robot b {
+.robot b, .device b {
   font-weight: bold;
   line-height: 40px;
 }
 
-.robot .controls {
+.robot .controls, .device .controls {
   float: right;
 }
 
@@ -55,7 +55,11 @@
   margin-bottom: 0;
 }
 
-.robot dt, .robot dd {
+.device {
+  min-height: 75px;
+}
+
+.robot dt, .robot dd, .device dt, .device dd {
   display: inline-block;
 }
 
@@ -65,4 +69,23 @@
 
 .robot dt i.fa {
   color: #aaa;
+}
+
+.dropdown-input {
+  height: 34px;
+  line-height: 33px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border: 1px solid #ccc;
+  padding: 0px 5px;
+  width: 125px;
+}
+
+.details .console code {
+  display: block;
+  height: 150px;
+  width: 97%;
+  margin: 0 auto;
+  overflow: scroll;
+  white-space: pre;
 }

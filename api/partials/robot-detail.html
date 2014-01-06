@@ -45,19 +45,19 @@
               <dd ng-show="deviceDetail.connection.name">{{deviceDetail.connection.name}}</dd>
             </span>
           </dl>
-          <div class="input-prepend">
-            <div class="commands btn-group" >
-              <a class="btn dropdown-toggle btn-mini" data-toggle="dropdown" href="#">
+          <div class="input-group">
+            <div class="commands input-group-btn">
+              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
                 Commands
                 <span class="caret"></span>
-              </a>
+              </button>
               <ul class="dropdown-menu">
                 <div ng-repeat="command in deviceDetail.commands">
                   <li><a ng-click="executeCommand(deviceDetail.name, command)">{{command }}</a></li>
                 </div>
               </ul>
             </div>
-            <input id="appendedDropdownButton" type="text">
+            <input class="dropdown-input" type="text">
           </div>
         </b>
       </div>
@@ -74,7 +74,7 @@
       <div class="device" ng-repeat="device in robot.devices" ng-click="getDeviceDetail(device.name)">
         <div class="row-fluid">
           <div class="col-md-2">
-            <div class="display">
+            <div class="device-type display">
               D
             </div>
           </div>
@@ -99,7 +99,7 @@
       <div class="device" ng-repeat="connection in robot.connections">
         <div class="row-fluid">
           <div class="col-md-2">
-            <div class="display">
+            <div class="device-type display">
               <i class="fa fa-exchange"></i>
             </div>
           </div>
