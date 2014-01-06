@@ -1,1 +1,26 @@
+.navbar {
+  background-color: #444;
+  border: none;
+  border-radius: 0px;
+}
 
+.navbar-default .navbar-brand {
+  color: #efefef;
+}
+
+.navbar-default .navbar-brand:hover {
+  color: #ccc;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: #ccc;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  color: #ccc;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #eee;
+}
