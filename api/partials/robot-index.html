@@ -1,14 +1,15 @@
 <div class="container">
   <h1>Listing all Robots</h1>
 
-  <div class="container device clickable" ng-repeat="robot in robots" ng-click="robotDetail(robot.name)">
+  <div class="container robot clickable" ng-repeat="robot in robots" ng-click="robotDetail(robot.name)">
     <div class="row-fluid">
-      <div class="span2">
-        <div class="display sphero">
+      <div class="col-md-2">
+        <section class="robot-type display">
           {{robot.type || "Robot"}}
-        </div>
+        </section>
       </div>
-      <div class="span10">
+
+      <div class="col-md-10">
         <b>
           <span class="name">{{robot.name}}</span>
 

@@ -24,3 +24,45 @@
 .navbar-default .navbar-nav > li > a:focus {
   color: #eee;
 }
+
+.robot {
+  border: 3px solid #ababab;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  padding: 15px 5px;
+}
+
+.robot .robot-type {
+  background: #ababab;
+  padding: 10px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: white;
+}
+
+.robot b {
+  font-weight: bold;
+  line-height: 40px;
+}
+
+.robot .controls {
+  float: right;
+}
+
+.robot dl {
+  margin-bottom: 0;
+}
+
+.robot dt, .robot dd {
+  display: inline-block;
+}
+
+.robot dd {
+  margin-right: 10px;
+}
+
+.robot dt i.fa {
+  color: #aaa;
+}

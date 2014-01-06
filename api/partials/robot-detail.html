@@ -1,12 +1,12 @@
 <div class="container">
-  <div class="container device">
+  <div class="container robot">
     <div class="row-fluid">
-      <div class="span2">
-        <div class="display">
+      <div class="col-md-2">
+        <section class="robot-type display">
           {{robot.type || "Robot"}}
-        </div>
+        </section>
       </div>
-      <div class="span10">
+      <div class="col-md-10">
         <b>
           <span class="name">{{robot.name}}</span>
           <dl class="controls">
@@ -22,10 +22,10 @@
 
   <div class="container device details" ng-show='deviceDetail'>
     <div class="row-fluid">
-      <div class="span2">
+      <div class="col-md-2">
         <b><span class="name">{{deviceDetail.name}}</span></b>
       </div>
-      <div class="span5 pull-right">
+      <div class="col-md-5 pull-right">
         <b>
           <dl class="controls">
             <span ng-show='deviceDetail.pin'>
@@ -70,15 +70,15 @@
   </div>
 
   <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
       <div class="device" ng-repeat="device in robot.devices" ng-click="getDeviceDetail(device.name)">
         <div class="row-fluid">
-          <div class="span2">
+          <div class="col-md-2">
             <div class="display">
               D
             </div>
           </div>
-          <div class="span10">
+          <div class="col-md-10">
             <b>
               <span class="name">{{device.name}}</span>
               <dl class="controls">
@@ -95,15 +95,15 @@
       </div>
     </div>
 
-    <div class="span6">
+    <div class="col-md-6">
       <div class="device" ng-repeat="connection in robot.connections">
         <div class="row-fluid">
-          <div class="span2">
+          <div class="col-md-2">
             <div class="display">
               <i class="fa fa-exchange"></i>
             </div>
           </div>
-          <div class="span10">
+          <div class="col-md-10">
             <b>
               <span class="name">{{connection.name}}</span>
               <dl class="controls">
