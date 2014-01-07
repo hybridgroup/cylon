@@ -36,7 +36,7 @@
   background: #ababab;
   padding: 10px;
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: white;
@@ -73,19 +73,27 @@
 
 .dropdown-input {
   height: 34px;
-  line-height: 33px;
+  line-height: 1;
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
   border: 1px solid #ccc;
   padding: 0px 5px;
   width: 125px;
+  margin-top: 6px;
 }
 
 .details .console code {
   display: block;
   height: 150px;
-  width: 97%;
+  width: 98%;
   margin: 0 auto;
   overflow: scroll;
   white-space: pre;
+  border: 1px solid #ababab;
+  background: #fbfbfb;
+  margin-bottom: 8px;
+}
+
+.device.details {
+  padding: 15px;
 }
