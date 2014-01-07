@@ -3,11 +3,14 @@ title: Cylon.js - Wii Classic Controller Driver
 author: The Hybrid Group
 page_title: Wii Classic Controller
 page_subtitle: Driver
-layout: page
+layout: documentation
+page_title_show: true
+
+arduino_platform: true
 ---
 .documentation
   %section.intro
-    =image_tag "/images/wii-classic-controller.jpg", class: "display"
+    =image_tag "/images/devices/wii-classic-controller.jpg", class: "display"
     %p
       Allows user to use a Nintendo Wii Classic Controller via i2c interface
 
@@ -67,7 +70,4 @@ layout: page
   %section.compatability.hardware
     %h2 Works with:
     .devices
-      = partial "documentation/partials/arduino"
-      = #partial "documentation/partials/beaglebone"
-      =# partial "documentation/partials/digispark"
-      = #partial "documentation/partials/raspberry-pi"
+      = partial "documentation/partials/devices_platforms"

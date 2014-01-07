@@ -3,11 +3,14 @@ title: Pebble with Cylon.js
 author: The Hybrid Group
 page_title: Pebble
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-pebble' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-pebble/issues'>Issues</a>"
-layout: page
+layout: documentation
+page_title_show: true
+
+pebble_driver: true
 ---
 .documentation
   %section.intro
-    = image_tag "/images/pebble.jpg", class: "display"
+    = image_tag "/images/devices/pebble.jpg", class: "display"
 
     %p The Pebble is a smart watch, that connects via bluetooth.
 
@@ -160,4 +163,5 @@ layout: page
 
     .hardware
       .devices
-        = partial "documentation/partials/pebble-driver"
+        // TODO: Update drivers list at the top of the page.
+        = partial "documentation/partials/devices_pebble_drivers"

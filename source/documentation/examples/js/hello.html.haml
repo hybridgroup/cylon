@@ -1,5 +1,6 @@
 ---
-layout: page
+layout: documentation
+page_title_show: true
 title: Cylon.JS Example - Hello
 page_title: "Example: Hello"
 author: The Hybrid Group
@@ -14,8 +15,8 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
         Cylon.robot({
           work: function() {
-            every(1..second(), function() { Logger.info("Hello, human!"); });
-            after(10..seconds(), function() { Logger.info("Impressive."); });
+            every(1..second(), function() { console.log("Hello, human!"); });
+            after(10..seconds(), function() { console.log("Impressive."); });
           }
         }).start();
 

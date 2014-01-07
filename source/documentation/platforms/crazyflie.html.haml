@@ -3,11 +3,14 @@ title: Crazyflie with Cylon.js
 author: The Hybrid Group
 page_title: Crazyflie
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-crazyflie' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-crazyflie/issues'>Issues</a>"
-layout: page
+layout: documentation
+page_title_show: true
+
+crazyflie_flight_driver: true
 ---
 .documentation
   %section.intro
-    = image_tag "/images/crazyflie.jpg", class: "display"
+    = image_tag "/images/devices/crazyflie.jpg", class: "display"
 
     %p You can use Cylon.js with the Crazyflie micro-quadcopter.
 
@@ -98,4 +101,5 @@ layout: page
 
     .hardware
       .devices
-        = partial "documentation/partials/crazyflie-flight"
+        // TODO: Update drivers list at the top of the page.
+        = partial "documentation/partials/devices_crazyflie_drivers"

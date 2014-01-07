@@ -3,11 +3,13 @@ title: Sphero with Cylon.js
 author: The Hybrid Group
 page_title: Sphero
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-sphero' target='blanck' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-sphero/issues' target='blanck' >Issues</a>"
-layout: page
+layout: documentation
+page_title_show: true
+sphero_driver: true
 ---
 .documentation
   %section.intro
-    =image_tag "/images/sphero.jpg", class: "display"
+    =image_tag "/images/devices/sphero.jpg", class: "display"
 
     %h3 What is Sphero?
     %p Sphero is a sophisticated and programmable robot housed in a polycarbonate sphere shell.
@@ -79,4 +81,5 @@ layout: page
 
     .hardware
       .devices
-        = partial "documentation/partials/sphero-driver"
+        // TODO: Update drivers list at the top of the page.
+        = partial "documentation/partials/devices_sphero_drivers"

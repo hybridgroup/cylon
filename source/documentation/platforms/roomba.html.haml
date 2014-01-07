@@ -3,11 +3,14 @@ title: Roomba with Cylon.js
 author: The Hybrid Group
 page_title: Roomba
 page_subtitle: "<a href='https://github.com/hybridgroup/Cylon.js-roomba' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/Cylon.js-roomba/issues'>Issues</a>"
-layout: page
+layout: documentation
+page_title_show: true
+
+roomba_driver: true
 ---
 .documentation
   %section.intro
-    = image_tag "/images/roomba.jpg", class: "display"
+    = image_tag "/images/devices/roomba.jpg", class: "display"
 
     %p The Roomba is a simple robot that usually cleans floors.
 
@@ -34,4 +37,5 @@ layout: page
 
     .hardware
       .devices
-        = partial "documentation/partials/roomba-driver"
+        =# TODO: Update drivers list at the top of the page.
+        = partial "documentation/partials/devices_roomba_drivers"

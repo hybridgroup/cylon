@@ -1,5 +1,6 @@
 ---
-layout: page
+layout: documentation
+page_title_show: true
 title: Cylon.JS Example - Motor
 page_title: "Example: Motor"
 author: The Hybrid Group
@@ -54,7 +55,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
           every 0.05.seconds(), ->
             speed += increment
             my.motor.speed(speed)
-            Logger.info "Current Speed: \#{my.motor.currentSpeed() }"
+            console.log "Current Speed: \#{my.motor.currentSpeed() }"
             increment = -increment if (speed is 0) or (speed is 255)
 
   And with all that done, we can now start our robot:

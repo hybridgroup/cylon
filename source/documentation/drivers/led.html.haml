@@ -3,11 +3,17 @@ title: Cylon.js - LED Driver
 author: The Hybrid Group
 page_title: LED
 page_subtitle: Driver
-layout: page
+layout: documentation
+page_title_show: true
+
+arduino_platform: true
+beaglebone_platform: true
+raspberry_platform: true
+spark_platform: true
 ---
 .documentation
   %section.intro
-    =image_tag "/images/LED.jpg", class: "display"
+    =image_tag "/images/devices/LED.jpg", class: "display"
     %p
       Allows user to interact with LEDs through digital output and PWM (Pulse Width Modulation)
 
@@ -102,8 +108,4 @@ layout: page
     %h2 Works with:
     =# TODO: Update platform list with all that work with this driver in Cylon.js.
     .devices
-      = partial "documentation/partials/arduino"
-      = partial "documentation/partials/beaglebone"
-      =# partial "documentation/partials/digispark"
-      = partial "documentation/partials/raspberry-pi"
-      = partial "documentation/partials/spark"
+      = partial "documentation/partials/devices_platforms"

@@ -3,11 +3,18 @@ title: BeagleBone with Cylon.js
 author: The Hybrid Group
 page_title: BeagleBone
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-beaglebone' class='repository'>Repository</a> <a class='issues' href='https://github.com/hybridgroup/cylon-beaglebone/issues'>Issues</a>"
-layout: page
+layout: documentation
+page_title_show: true
+
+button_driver: true
+continuous_servo_driver: true        
+led_driver: true
+motor_driver: true
+servo_driver: true 
 ---
 .documentation
   %section.intro
-    = image_tag "/images/beaglebone.jpg", class: "display"
+    = image_tag "/images/devices/beaglebone.jpg", class: "display"
 
     %p The BeagleBone is an ARM based single board computer, with many different GPIO interfaces built in.
     %p
@@ -81,13 +88,7 @@ layout: page
     %p All Cylon.js digital and PWM GPIO drivers listed below should work with the BeagleBone:
 
     .hardware
+      %h2 GPIO Drivers
       .devices
-        = partial "documentation/partials/button"
-        = partial "documentation/partials/continuous-servo"        
-        = partial "documentation/partials/led"
-        = partial "documentation/partials/motor"
-        = partial "documentation/partials/servo"        
-        = #partial "documentation/partials/blinkm"
-        = #partial "documentation/partials/hmc6352-compass"
-        = #partial "documentation/partials/wiichuck"
-        = #partial "documentation/partials/wiiclassic"
+        = partial "documentation/partials/devices_gpio_drivers"
+    

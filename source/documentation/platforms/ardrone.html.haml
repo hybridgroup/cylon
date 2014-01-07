@@ -3,11 +3,15 @@ title: Ardrone with Cylon.js
 author: The Hybrid Group
 page_title: Ardrone
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-ardrone' target='blanck' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-ardrone/issues' target='blanck'>Issues</a>"
-layout: page
+layout: documentation
+page_title_show: true
+
+ardrone_flight_driver: true
+ardrone_nav_driver: true
 ---
 .documentation
   %section.intro
-    = image_tag "/images/ardrone.jpg", class: "display"
+    = image_tag "/images/devices/ardrone.jpg", class: "display"
 
     %p The ARDrone from Parrot is an inexpensive quadcopter that is controlled using WiFi. It includes a built-in front-facing HD video camera, as well as a second lower resolution bottom facing video camera.
 
@@ -85,6 +89,5 @@ layout: page
 
     .hardware
       .devices
-        = partial "documentation/partials/ardrone-flight"
-        = partial "documentation/partials/ardrone-navigation"
-        = #partial "documentation/partials/ardrone-video"
+        // TODO: Update drivers list at the top of the page.
+        = partial "documentation/partials/devices_ardrone_drivers"

@@ -3,11 +3,19 @@ title: Digispark with Cylon.js
 author: The Hybrid Group
 page_title: Digispark
 page_subtitle: "<a href='https://github.com/hybridgroup/Cylon.js-digispark' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/Cylon.js-digispark/issues'>Issues</a>"
-layout: page
+layout: documentation
+page_title_show: true
+
+analog_sensor_driver: true
+button_driver: true
+led_driver: true
+motor_driver: true
+servo_driver: true
+blinkm_driver: true
 ---
 .documentation
   %section.intro
-    = image_tag "/images/digispark.jpg", class: "display"
+    = image_tag "/images/devices/digispark.jpg", class: "display"
 
     %p The Digispark is an Attiny85 based microcontroller development board similar to the Arduino line, only cheaper, smaller, and a bit less powerful. With a whole host of shields to extend its functionality and the ability to use the familiar Arduino IDE the Digispark is a great way to jump into electronics, or perfect for when an Arduino is too big or too much.
 
@@ -103,14 +111,11 @@ layout: page
     %p Available drivers for the digispark platform are listed below, the drivers contain detailed documentation and examples of what kind physical computing (using Cylon.js and Node.js) you could be doing:
 
     .hardware
+      // TODO: Update drivers list at the top of the page.
+      %h2 GPIO Drivers
       .devices
-        = partial "documentation/partials/analog-sensor"
-        = partial "documentation/partials/button"
-        = partial "documentation/partials/led"
-        = #partial "documentation/partials/maxbotix"
-        = partial "documentation/partials/motor"
-        = partial "documentation/partials/servo"
-        = partial "documentation/partials/blinkm"
-        = #partial "documentation/partials/hmc6352-compass"
-        =# partial "documentation/partials/wiichuck"
-        = #partial "documentation/partials/wiiclassic"
+        = partial "documentation/partials/devices_gpio_drivers"
+      %h2 i2c Drivers
+      .devices
+        = partial "documentation/partials/devices_i2c_drivers"
+        

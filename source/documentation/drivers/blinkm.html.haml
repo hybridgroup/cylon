@@ -3,11 +3,16 @@ title: Cylon.js - BlinkM Driver
 author: The Hybrid Group
 page_title: BlinkM
 page_subtitle: Driver
-layout: page
+layout: documentation
+page_title_show: true
+
+arduino_platform: true
+beaglebone_platform: true
+raspberry_platform: true
 ---
 .documentation
   %section.intro
-    =image_tag "/images/blinkm.jpg", class: "display"
+    =image_tag "/images/devices/blinkm.jpg", class: "display"
     %p
       Allows user to control BlinkM RGB LED via i2c interface.
 
@@ -101,7 +106,5 @@ layout: page
   %section.compatability.hardware
     %h2 Works with:
     .devices
-      = partial "documentation/partials/arduino"
-      = partial "documentation/partials/beaglebone"
-      =# partial "documentation/partials/digispark"
-      = partial "documentation/partials/raspberry-pi"
+      = partial "documentation/partials/devices_platforms"
+      

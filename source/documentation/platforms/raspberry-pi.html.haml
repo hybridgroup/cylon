@@ -3,11 +3,18 @@ title: Raspberry Pi with Cylon.js
 author: The Hybrid Group
 page_title: Raspberry Pi
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-raspi' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-raspi/issues'>Issues</a>"
-layout: page
+layout: documentation
+page_title_show: true
+
+button_driver: true
+continuous_servo_driver: true        
+led_driver: true
+servo_driver: true
+motor_driver: true
 ---
 .documentation
   %section.intro
-    = image_tag "/images/raspi.jpg", class: "display"
+    = image_tag "/images/devices/raspi.jpg", class: "display"
 
     %p The Raspberry Pi is an inexpensive and popular ARM based single board computer with digital & PWM GPIO, and i2c interfaces built in.
 
@@ -97,13 +104,11 @@ layout: page
     %p All Cylon.js digital and PWM GPIO drivers listed below should work with the Raspberry Pi:
 
     .hardware
+      %h2 GPIO Drivers
       .devices
-        = partial "documentation/partials/button"
-        = partial "documentation/partials/continuous-servo"        
-        = partial "documentation/partials/led"
-        = partial "documentation/partials/servo"
-        = partial "documentation/partials/motor"
-        = #partial "documentation/partials/blinkm"
-        = #partial "documentation/partials/hmc6352-compass"
-        = #partial "documentation/partials/wiichuck"
-        = #partial "documentation/partials/wiiclassic"
+        // TODO: Update drivers list at the top of the page.
+        = partial "documentation/partials/devices_gpio_drivers"
+      // %h2 i2c Drivers
+      .devices
+        = partial "documentation/partials/devices_i2c_drivers"
+

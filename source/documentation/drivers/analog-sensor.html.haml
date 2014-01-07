@@ -3,11 +3,15 @@ title: Cylon.js - Analog Sensor Driver
 author: The Hybrid Group
 page_title: Analog Sensor
 page_subtitle: Driver
-layout: page
+layout: documentation
+page_title_show: true
+
+arduino_platform: true
+spark_platform: true
 ---
 .documentation
   %section.intro
-    = image_tag "/images/analog-sensor.jpg", class: "display"
+    = image_tag "/images/devices/analog-sensor.jpg", class: "display"
     %p
       Makes it possible to interact with analog inputs on your device and obtain values that represent the analog input send by the sensors.
       The value received from an analog input read from the sensor goes from 0 to 1027.
@@ -120,6 +124,4 @@ layout: page
     %h2 Works with:
     =# TODO: Update platform list with all that work with this driver in Cylon.js.
     .devices
-      = partial "documentation/partials/arduino"
-      = partial "documentation/partials/spark"
-      = #partial "documentation/partials/digispark"
+      = partial "documentation/partials/devices_platforms"

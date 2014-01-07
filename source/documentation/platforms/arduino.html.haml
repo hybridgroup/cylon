@@ -3,11 +3,16 @@ title: Arduino with Cylon.js
 author: The Hybrid Group
 page_title: Arduino
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-firmata' target='blanck' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-firmata/issues' target='blanck'>Issues</a>"
-layout: page
+layout: documentation
+page_title_show: true
+
+gpio_drivers: true
+blinkm_driver: true
+hmc6352_compass_driver: true
 ---
 .documentation
   %section.intro
-    = image_tag "/images/arduino.jpg", class: "display"
+    = image_tag "/images/devices/arduino.jpg", class: "display"
 
     %p Arduino is an open-source electronics prototyping platform based on flexible, easy-to-use hardware and software. It's intended for artists, designers, hobbyists and anyone interested in creating interactive objects or environments.
 
@@ -82,16 +87,12 @@ layout: page
     %p Available drivers for the arduino platform are listed below, the drivers contain detailed documentation and examples of what kind physical computing (using cylon.js and node.js) you could be doing:
 
     .hardware
+      %h2 GPIO Drivers
       .devices
-        = partial "documentation/partials/analog-sensor"
-        = partial "documentation/partials/button"
-        = partial "documentation/partials/continuous-servo"
-        = partial "documentation/partials/led"
-        = partial "documentation/partials/maxbotix"
-        = partial "documentation/partials/motor"
-        = partial "documentation/partials/servo"
-        = partial "documentation/partials/blinkm"
-        = partial "documentation/partials/hmc6352-compass"
-        = #partial "documentation/partials/wiichuck"
-        = #partial "documentation/partials/wiiclassic"
+        // TODO: Update drivers list at the top of the page.
+        = partial "documentation/partials/devices_gpio_drivers"
+      %h2 i2c Drivers
+      .devices
+        = partial "documentation/partials/devices_i2c_drivers"
+
 

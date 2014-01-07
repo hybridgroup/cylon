@@ -1,5 +1,6 @@
 ---
-layout: page
+layout: documentation
+page_title_show: true
 title: Cylon.JS Example - Servo
 page_title: "Example: Servo"
 author: The Hybrid Group
@@ -24,7 +25,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
               angle += increment;
               my.servo.angle(angle);
 
-              Logger.info("Current Angle: " + (my.servo.currentAngle()));
+              console.log("Current Angle: " + (my.servo.currentAngle()));
 
               if ((angle === 30) || (angle === 150)) { increment = -increment; }
             });

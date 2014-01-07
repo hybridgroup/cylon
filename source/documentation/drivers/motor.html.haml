@@ -3,11 +3,16 @@ title: Cylon.js - Motor Driver
 author: The Hybrid Group
 page_title: Motor
 page_subtitle: Driver
-layout: page
+layout: documentation
+page_title_show: true
+
+arduino_platform: true
+raspberry_platform: true
+spark_platform: true
 ---
 .documentation
   %section.intro
-    =image_tag "/images/motor.jpg", class: "display"
+    =image_tag "/images/devices/motor.jpg", class: "display"
     %p
       Provides motor manipulation tools for Cylon.js like on/off, speed modulation using PWM,
       use of bidirectional motors using forward/backward pins.
@@ -113,9 +118,6 @@ layout: page
     %h2 Works with:
     =# TODO: Update platform list with all that work with this driver in Cylon.js.
     .devices
-      = partial "documentation/partials/arduino"
-      =# partial "documentation/partials/beaglebone"
-      =# partial "documentation/partials/digispark"
-      = partial "documentation/partials/raspberry-pi"
-      = partial "documentation/partials/spark"
+      = partial "documentation/partials/devices_platforms"
+
 

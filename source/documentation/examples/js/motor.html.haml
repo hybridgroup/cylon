@@ -1,5 +1,6 @@
 ---
-layout: page
+layout: documentation
+page_title_show: true
 title: Cylon.JS Example - Motor
 page_title: "Example: Motor"
 author: The Hybrid Group
@@ -24,7 +25,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
               speed += increment;
               my.motor.speed(speed);
 
-              Logger.info("Current Speed: " + (my.motor.currentSpeed()));
+              console.log("Current Speed: " + (my.motor.currentSpeed()));
 
               if ((speed === 0) || (speed === 255)) { increment = -increment; }
             });
