@@ -70,7 +70,7 @@
         }
         process.on("SIGINT", function() {
           Cylon.getInstance().stop();
-          return process.exit();
+          return process.kill();
         });
       }
 
