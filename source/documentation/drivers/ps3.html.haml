@@ -8,71 +8,71 @@ page_title_show: true
 
 joystick_platform: true
 ---
-.documentation
-  %section.intro
-    =image_tag "/images/devices/ps3.jpg", class: "display"
-    %p
-      Allows user to interact with Cylon.js devices using a PS3 game controller.
 
-  %section.how-to
-    %h2 How to establish a connection and setup the driver
-    :markdown
-          :::javascript
-          require 'Cylon.js'
-          connection :joystick, :adaptor => :joystick
-          device :controller, :driver => :ps3, :connection => :joystick, :interval => 0.1
+%section.intro
+  =image_tag "/images/devices/ps3.jpg", class: "display"
+  %p
+    Allows user to interact with Cylon.js devices using a PS3 game controller.
 
-  %section.public-events
-    %h2 Events
-    %dl.methods 
-      %dt button_left_joystiq
-      %dd Get's triggered every interval amount of time if a left joystick click event occured.
-      %dt button_right_joystiq
-      %dd Get's triggered every interval amount of time if a right joystick click event occured.
-      %dt button_square
-      %dd Get's triggered every interval amount of time if the square button was pressed.
-      %dt button_x
-      %dd Get's triggered every interval amount of time if the 'x' button was pressed.
-      %dt button_circle
-      %dd Get's triggered every interval amount of time if the circle button was pressed.
-      %dt button_triangle
-      %dd Get's triggered every interval amount of time if the triangle button was pressed.
-      %dt button_l1
-      %dd Get's triggered every interval amount of time if the l1 button was pressed.
-      %dt button_l2
-      %dd Get's triggered every interval amount of time if the l2 button was pressed.
-      %dt button_r1
-      %dd Get's triggered every interval amount of time if the r1 button was pressed.
-      %dt button_r2
-      %dd Get's triggered every interval amount of time if the r2 button was pressed.
-      %dt button_start
-      %dd Get's triggered every interval amount of time if the start button was pressed.
-      %dt button_select
-      %dd  Get's triggered every interval amount of time if the select button was pressed.
-      %dt button_home
-      %dd Get's triggered every interval amount of time if the home button was pressed.
-      %dt joystick
-      %dd Get's triggered every interval amount of time if a joystick event occured, you can access values x, y, s(joystick number, 0 and 1 for left and right).
-      %dt joystick_0
-      %dd Get's triggered every interval amount of time if a joystick_0 event occured, you can access values x, y.
-      %dt joystick_1
-      %dd Get's triggered every interval amount of time if a joystick_1 event occured, you can access values x, y.
+%section.how-to
+  %h2 How to establish a connection and setup the driver
+  :markdown
+        :::javascript
+        require 'Cylon.js'
+        connection :joystick, :adaptor => :joystick
+        device :controller, :driver => :ps3, :connection => :joystick, :interval => 0.1
+
+%section.public-events
+  %h2 Events
+  %dl.methods 
+    %dt button_left_joystiq
+    %dd Get's triggered every interval amount of time if a left joystick click event occured.
+    %dt button_right_joystiq
+    %dd Get's triggered every interval amount of time if a right joystick click event occured.
+    %dt button_square
+    %dd Get's triggered every interval amount of time if the square button was pressed.
+    %dt button_x
+    %dd Get's triggered every interval amount of time if the 'x' button was pressed.
+    %dt button_circle
+    %dd Get's triggered every interval amount of time if the circle button was pressed.
+    %dt button_triangle
+    %dd Get's triggered every interval amount of time if the triangle button was pressed.
+    %dt button_l1
+    %dd Get's triggered every interval amount of time if the l1 button was pressed.
+    %dt button_l2
+    %dd Get's triggered every interval amount of time if the l2 button was pressed.
+    %dt button_r1
+    %dd Get's triggered every interval amount of time if the r1 button was pressed.
+    %dt button_r2
+    %dd Get's triggered every interval amount of time if the r2 button was pressed.
+    %dt button_start
+    %dd Get's triggered every interval amount of time if the start button was pressed.
+    %dt button_select
+    %dd  Get's triggered every interval amount of time if the select button was pressed.
+    %dt button_home
+    %dd Get's triggered every interval amount of time if the home button was pressed.
+    %dt joystick
+    %dd Get's triggered every interval amount of time if a joystick event occured, you can access values x, y, s(joystick number, 0 and 1 for left and right).
+    %dt joystick_0
+    %dd Get's triggered every interval amount of time if a joystick_0 event occured, you can access values x, y.
+    %dt joystick_1
+    %dd Get's triggered every interval amount of time if a joystick_1 event occured, you can access values x, y.
 
 
-    %h3 How to use events and call them on your drivers
-    %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
-    :markdown
-          :::javascript
-          ...
+  %h3 How to use events and call them on your drivers
+  %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
+  :markdown
+        :::javascript
+        ...
 
-  %section.how-to
-    %h2 How to use
-    %h3 Example receiving button events from PS3 controller joystick.
-    :markdown
-          :::javascript
-          ...
+%section.how-to
+  %h2 How to use
+  %h3 Example receiving button events from PS3 controller joystick.
+  :markdown
+        :::javascript
+        ...
 
-  %section.compatability.hardware
-    %h2 Works with:
-    .devices
-      = partial "documentation/partials/devices_platforms"
+%section.compatability.hardware
+  %h2 Works with:
+  .devices
+    = partial "documentation/partials/devices_platforms"

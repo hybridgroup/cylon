@@ -8,42 +8,42 @@ page_title_show: true
 
 joystick_platform: true
 ---
-.documentation
-  %section.intro
-    =image_tag "/images/devices/joystick.jpg", class: "display"
-    %p
-      Allows user to interact with Cylon.js devices using any joystick or game controller that is compatible with SDL.
 
-  %section.how-to
-    %h2 How to establish a connection and setup the driver
-    :markdown
-          :::ruby
-          require 'Cylon.js'
-          ..
+%section.intro
+  =image_tag "/images/devices/joystick.jpg", class: "display"
+  %p
+    Allows user to interact with Cylon.js devices using any joystick or game controller that is compatible with SDL.
 
-  %section.public-events
-    %h2 Events:
-    %dl.methods 
-      %dt joystick
-      %dd Get's triggered every "interval" amount of time if a joystick event occured, you can access values x, y, s.
-      %dt button
-      %dd Get's triggered every "interval" amount of time if the button was pressed, you can access the value of the pressed button.
+%section.how-to
+  %h2 How to establish a connection and setup the driver
+  :markdown
+        :::ruby
+        require 'Cylon.js'
+        ..
 
-    %h3 How to use events and call them on your drivers
-    %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
-    :markdown
-          :::javascript
-          ..
+%section.public-events
+  %h2 Events:
+  %dl.methods 
+    %dt joystick
+    %dd Get's triggered every "interval" amount of time if a joystick event occured, you can access values x, y, s.
+    %dt button
+    %dd Get's triggered every "interval" amount of time if the button was pressed, you can access the value of the pressed button.
 
-  %section.how-to
-    %h2 How to use
-    %h3 Example receiving button events from a generic joystick.
-    :markdown
-          :::javascript
-          require 'Cylon.js'
-          ..
+  %h3 How to use events and call them on your drivers
+  %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
+  :markdown
+        :::javascript
+        ..
 
-  %section.compatability.hardware
-    %h2 Works with:
-    .devices
-      = partial "documentation/partials/devices_platforms"
+%section.how-to
+  %h2 How to use
+  %h3 Example receiving button events from a generic joystick.
+  :markdown
+        :::javascript
+        require 'Cylon.js'
+        ..
+
+%section.compatability.hardware
+  %h2 Works with:
+  .devices
+    = partial "documentation/partials/devices_platforms"

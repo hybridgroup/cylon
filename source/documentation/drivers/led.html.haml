@@ -11,101 +11,101 @@ beaglebone_platform: true
 raspberry_platform: true
 spark_platform: true
 ---
-.documentation
-  %section.intro
-    =image_tag "/images/devices/LED.jpg", class: "display"
-    %p
-      Allows user to interact with LEDs through digital output and PWM (Pulse Width Modulation)
 
-  %section.how-to
-    %h2 How to establish a connection and setup the driver
-    %h3 JavaScript
-    :markdown
-          :::javascript
+%section.intro
+  =image_tag "/images/devices/LED.jpg", class: "display"
+  %p
+    Allows user to interact with LEDs through digital output and PWM (Pulse Width Modulation)
 
-          var Cylon = require('cylon');
+%section.how-to
+  %h2 How to establish a connection and setup the driver
+  %h3 JavaScript
+  :markdown
+        :::javascript
 
-          Cylon.robot({
-            connection: {name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'},
+        var Cylon = require('cylon');
 
-            device: {name: 'led', driver: 'led', pin: 13},
-            ...
+        Cylon.robot({
+          connection: {name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'},
 
-    %h3 CoffeeScript
-    :markdown
-          :::javascript
-          Cylon = require 'cylon'
+          device: {name: 'led', driver: 'led', pin: 13},
+          ...
 
-          Cylon.robot
-            connection:
-              name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
-            ...
+  %h3 CoffeeScript
+  :markdown
+        :::javascript
+        Cylon = require 'cylon'
 
-  %section.public-methods
-    %h2 Commands:
-    
-    %dl.methods 
-      %dt turnOn
-      %dd Turns LED on.
-      %dt turnOff
-      %dd Turns LED off.
-      %dt toggle
-      %dd Turns the LED on, or off, depending on if it is already off, or on, respectively.
-      %dt brightness(brightness_int) → true | nil
-      %dd Sets brightness of the led to the specified brightness value passed to brightness(brightness_int) using PWM, brightness can be any integer value between 0 and 255.
+        Cylon.robot
+          connection:
+            name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
+          ...
 
-    %h2 Events
+%section.public-methods
+  %h2 Commands:
+  
+  %dl.methods 
+    %dt turnOn
+    %dd Turns LED on.
+    %dt turnOff
+    %dd Turns LED off.
+    %dt toggle
+    %dd Turns the LED on, or off, depending on if it is already off, or on, respectively.
+    %dt brightness(brightness_int) → true | nil
+    %dd Sets brightness of the led to the specified brightness value passed to brightness(brightness_int) using PWM, brightness can be any integer value between 0 and 255.
 
-    %dl.methods 
-      %dt start
-      %dd Sent when the device has been started and is ready to use.  
+  %h2 Events
 
-  %section.how-to
-    %h2 How to use
-    %p
-      This example turns an LED on and off.
+  %dl.methods 
+    %dt start
+    %dd Sent when the device has been started and is ready to use.  
 
-    %h3 JavaScript
-    :markdown
-          :::javascript
+%section.how-to
+  %h2 How to use
+  %p
+    This example turns an LED on and off.
 
-          var Cylon = require('cylon');
+  %h3 JavaScript
+  :markdown
+        :::javascript
 
-          Cylon.robot({
-            connection: {name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'},
+        var Cylon = require('cylon');
 
-            device: {name: 'led', driver: 'led', pin: 13},
+        Cylon.robot({
+          connection: {name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'},
 
-            work: function(my) {
-              every((1).second(), function(my) {
-                my.led.toggle();
-              });
-            }
-          }).start();
+          device: {name: 'led', driver: 'led', pin: 13},
 
-    %h3 CoffeeScript
-    :markdown
-          :::javascript
-          Cylon = require 'cylon'
+          work: function(my) {
+            every((1).second(), function(my) {
+              my.led.toggle();
+            });
+          }
+        }).start();
 
-          Cylon.robot
-            connection:
-              name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
+  %h3 CoffeeScript
+  :markdown
+        :::javascript
+        Cylon = require 'cylon'
 
-            device:
-              name: 'led', driver: 'led', pin: 13
+        Cylon.robot
+          connection:
+            name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
 
-            work: (my) ->
-              every 1.second(), -> my.led.toggle()
+          device:
+            name: 'led', driver: 'led', pin: 13
 
-          .start()
+          work: (my) ->
+            every 1.second(), -> my.led.toggle()
 
-  %section.circuit
-    %h2 Circuit and Schematic
-    =link_to "http://arduino.cc/en/Tutorial/Blink", "http://arduino.cc/en/Tutorial/Blink"
+        .start()
 
-  %section.compatability.hardware
-    %h2 Works with:
-    =# TODO: Update platform list with all that work with this driver in Cylon.js.
-    .devices
-      = partial "documentation/partials/devices_platforms"
+%section.circuit
+  %h2 Circuit and Schematic
+  =link_to "http://arduino.cc/en/Tutorial/Blink", "http://arduino.cc/en/Tutorial/Blink"
+
+%section.compatability.hardware
+  %h2 Works with:
+  =# TODO: Update platform list with all that work with this driver in Cylon.js.
+  .devices
+    = partial "documentation/partials/devices_platforms"

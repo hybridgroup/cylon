@@ -8,92 +8,92 @@ page_title_show: true
 
 leapmotion_driver: true
 ---
-.documentation
-  %section.intro
-    = image_tag "/images/devices/leap_motion.jpg", class: "display"
 
-    %p The Leap Motion is a user-interface device that tracks the user's hand motions, and translates them into events that can control robots and physical computing hardware.
+%section.intro
+  = image_tag "/images/devices/leap_motion.jpg", class: "display"
 
-    %p
-      For more info about the Leap Motion platform click
-      = succeed "." do
-        = link_to "here", "https://www.leapmotion.com/", target: :blank
+  %p The Leap Motion is a user-interface device that tracks the user's hand motions, and translates them into events that can control robots and physical computing hardware.
 
-  %section.how-to
-    %h2 How to install
-    %p Installing Cylon.js with leapmotion support is pretty easy.
-    :markdown
-          :::bash
-          npm install cylon-leapmotion
+  %p
+    For more info about the Leap Motion platform click
+    = succeed "." do
+      = link_to "here", "https://www.leapmotion.com/", target: :blank
 
-    %h2 How to use
-    %p This small program uses a Leap Motion to detect the user's hand position
-    %h3 JavaScript
-    :markdown
-          :::javascript
-          Cylon = require('cylon');
+%section.how-to
+  %h2 How to install
+  %p Installing Cylon.js with leapmotion support is pretty easy.
+  :markdown
+        :::bash
+        npm install cylon-leapmotion
 
-          Cylon.robot({
-            connection: {
-              name: 'leapmotion',
-              adaptor: 'leapmotion',
-              port: '127.0.0.1:6437'
-            },
-            device: {
-              name: 'leapmotion',
-              driver: 'leapmotion'
-            },
-            work: function(my) {
-              return my.leapmotion.on('hand', function(hand) {
-                return Logger.info("" + hand.palmX + "," + hand.palmY + "," + hand.palmZ);
-              });
-            }
-          }).start();
+  %h2 How to use
+  %p This small program uses a Leap Motion to detect the user's hand position
+  %h3 JavaScript
+  :markdown
+        :::javascript
+        Cylon = require('cylon');
 
-    %h3 CoffeeScript
-    :markdown
-          :::javascript
-          Cylon = require 'cylon'
+        Cylon.robot({
+          connection: {
+            name: 'leapmotion',
+            adaptor: 'leapmotion',
+            port: '127.0.0.1:6437'
+          },
+          device: {
+            name: 'leapmotion',
+            driver: 'leapmotion'
+          },
+          work: function(my) {
+            return my.leapmotion.on('hand', function(hand) {
+              return Logger.info("" + hand.palmX + "," + hand.palmY + "," + hand.palmZ);
+            });
+          }
+        }).start();
 
-          Cylon.robot
-            connection: { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' }
-            device: { name: 'leapmotion', driver: 'leapmotion' }
+  %h3 CoffeeScript
+  :markdown
+        :::javascript
+        Cylon = require 'cylon'
 
-            work: (my) ->
-              my.leapmotion.on 'hand', (hand) ->
-                Logger.info "\#{hand.palmX},\#{hand.palmY},\#{hand.palmZ}"
+        Cylon.robot
+          connection: { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' }
+          device: { name: 'leapmotion', driver: 'leapmotion' }
 
-          .start()
+          work: (my) ->
+            my.leapmotion.on 'hand', (hand) ->
+              Logger.info "\#{hand.palmX},\#{hand.palmY},\#{hand.palmZ}"
 
-    %h2 How to connect
-    %h3 OSX
-    %p
-      This driver works out of the box with the vanilla installation of the Leap Motion Software that you get in their 
-      =link_to "Setup Guide." ,"https://www.leapmotion.com/setup"
+        .start()
 
-    %p The main steps are:
+  %h2 How to connect
+  %h3 OSX
+  %p
+    This driver works out of the box with the vanilla installation of the Leap Motion Software that you get in their 
+    =link_to "Setup Guide." ,"https://www.leapmotion.com/setup"
 
-    %ul
-      %li Run Leap Motion.app
-      %li Connect your Computer and Leap Motion Controller.
-      %li Connect to the device via Cylon.js.
+  %p The main steps are:
 
-    %h3 Ubuntu
-    %p
-      The Linux download of the Leap Motion software can be obtained from
-      =link_to "Leap Motion Dev Center", "https://developer.leapmotion.com/downloads"  
-      (requires free signup)
-    %p The main steps are:
-    %ul
-      %li Run the leapd daemon.
-      %li Connect your computer and the Leap Motion controller
-      %li Connect to the device via Cylon.js
+  %ul
+    %li Run Leap Motion.app
+    %li Connect your Computer and Leap Motion Controller.
+    %li Connect to the device via Cylon.js.
 
-  %section.drivers
-    %h2 Drivers
-    %p There is only one driver for the Leap Motion platform as listed below.
+  %h3 Ubuntu
+  %p
+    The Linux download of the Leap Motion software can be obtained from
+    =link_to "Leap Motion Dev Center", "https://developer.leapmotion.com/downloads"  
+    (requires free signup)
+  %p The main steps are:
+  %ul
+    %li Run the leapd daemon.
+    %li Connect your computer and the Leap Motion controller
+    %li Connect to the device via Cylon.js
 
-    .hardware
-      .devices
-        =# TODO: Update drivers list at the top of the page.
-        = partial "documentation/partials/devices_leapmotion_drivers"
+%section.drivers
+  %h2 Drivers
+  %p There is only one driver for the Leap Motion platform as listed below.
+
+  .hardware
+    .devices
+      =# TODO: Update drivers list at the top of the page.
+      = partial "documentation/partials/devices_leapmotion_drivers"

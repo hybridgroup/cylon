@@ -8,875 +8,875 @@ page_title_show: true
 
 sphero_platform: true
 ---
-.documentation
-  %section.intro
-    =image_tag "/images/devices/sphero.jpg", class: "display"
-    %p Allows user to interact with the Sphero robotic sphero using Cylon.js.
 
-  %section.how-to
-    %h2 How to establish a connection and setup the driver
-    %p
-      That is pretty simple once the Sphero is ready (connected and listening), you just need three lines of code and you are set,
-      Cylon.js and the Sphero driver take care of the rest.
+%section.intro
+  =image_tag "/images/devices/sphero.jpg", class: "display"
+  %p Allows user to interact with the Sphero robotic sphero using Cylon.js.
 
-      %h3 JavaScript
-      :markdown
-            :::javascript
-            var Cylon = require('cylon');
+%section.how-to
+  %h2 How to establish a connection and setup the driver
+  %p
+    That is pretty simple once the Sphero is ready (connected and listening), you just need three lines of code and you are set,
+    Cylon.js and the Sphero driver take care of the rest.
 
-            Cylon.robot({
-              connection: {name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'},
+    %h3 JavaScript
+    :markdown
+          :::javascript
+          var Cylon = require('cylon');
 
-              device: {name: 'sphero', driver: 'sphero'},
+          Cylon.robot({
+            connection: {name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'},
+
+            device: {name: 'sphero', driver: 'sphero'},
+          ...
+
+    %h3 CoffeeScript
+    :markdown
+          :::javascript
+          Cylon = require 'cylon'
+
+          Cylon.robot
+            connection:
+              name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'
+
+            device:
+              name: 'sphero', driver: 'sphero'
             ...
 
-      %h3 CoffeeScript
-      :markdown
-            :::javascript
-            Cylon = require 'cylon'
-
-            Cylon.robot
-              connection:
-                name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'
-
-              device:
-                name: 'sphero', driver: 'sphero'
-              ...
-
-  %section.public-methods
-    %h2 Commands:
-    
-    %dl.methods
-      %dt abortMacro → (ID code , command number)
-      %dd 
-      %dt abortOrbBasicProgram 
-      %dd
-      %dt appendMacroChunck(MACRO Chunk) 
-      %dd 
-      %dt appendOrbBasicFragment(Area, Program Code) 
-      %dd  
-      %dt configureCollisionDetection(Meth,(Xt, Yt),(Xspd, Yspd),Dead) 
-      %dd Sets the sphero to detect collisions and report them.
-      %dt configureLocator(flag, x, y, Yaw Tare) 
-      %dd 
-      %dt detectCollisions 
-      %dd Sets the sphero to detect collisions and report them.
-      %dt eraseOrbBasicStorage(Area) 
-      %dd 
-      %dt executeOrbBasicProgram(Area, Start Line, Start Line) 
-      %dd 
-      %dt getApplicationConfigurationBlock 
-      %dd 
-      %dt getConfigurationBlock(ID) 
-      %dd 
-      %dt getDeviceMode → (Mode), options: 00h (Normal mode) | 01h (User Hack mode)
-      %dd 
-      %dt getMacroStatus → (ID code , cmd number, cmd number)
-      %dd 
-      %dt getPermanentOptionFlags → (FLAGS), options: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 6-31
-      %dd 
-      %dt getRGB → (red,green,blue) | (color)
-      %dd 
-      %dt getTemporaryOptionFlags → (FLAGS), options: 0 | 1-31
-      %dd 
-      %dt reInitializeMacroExecutive 
-      %dd 
-      %dt readLocator → (XPOS, YPOS, XVEL, YVEL, SOG)
-      %dd 
-      %dt roll(speed, heading, state) 
-      %dd This commands Sphero to roll along the provided vector. Both a speed and a heading are required; the latter is considered relative to the last calibrated direction.
-      %dt runMacro(SEQ, DLEN, ID) 
-      %dd 
-      %dt saveMacro(data) 
-      %dd 
-      %dt saveTemporaryMacro(data) 
-      %dd 
-      %dt selfLevel(Options, Angle Limit, Timeout, True Time), options: ((0 | 1 | 2 |3 ), (0 | 1 to 90), (0 | 1 to 255), (0 | 1 to 255) 
-      %dd 
-      %dt setAccelerometerRange(Range Idx), options: 0 | 1 | 2 | 3 
-      %dd 
-      %dt setApplicationConfigurationBlock
-      %dd 
-      %dt setBackLED(BRIGHT) 
-      %dd 
-      %dt setBoostWithTime(STATE) 
-      %dd 
-      %dt setColor(color) 
-      %dd This allows you to set the color of the sphero, just pass an array containing RGB hex or a string with one of the color names of the list.
-      %dt setConfigurationBlock(value) 
-      %dd 
-      %dt setDataStreaming(N, M, MASK, PCNT, MASK2) 
-      %dd 
-      %dt setDeviceMode(MODE) 
-      %dd 
-      %dt setHeading(HEADING) 
-      %dd
-      %dt setMacroParameter(Param, Val1, Val2) 
-      %dd 
-      %dt setMotionTimeout(TIME) 
-      %dd 
-      %dt setPermanentOptionFlags(FLAGS) 
-      %dd 
-      %dt setRGB(color, persist) 
-      %dd This allows you to set the RGB LED color, just pass an array containing RGB hex or a string with one of the color names of the list.  
-      %dt setRawMotorValues(L-MODE, L-POWER, R-MODE, R-POWER) 
-      %dd 
-      %dt setRotationRate(RATE) 
-      %dd 
-      %dt setStabalisation(bool) 
-      %dd 
-      %dt setTemporaryOptionFlags(FLAGS) 
-      %dd 
-      %dt stop
-      %dd Stops the sphero.
-      %dt submitValueToInputStatement(VAL) 
-      %dd 
-
-  %section.public-events
-    %h2 Events:
-
-    %dl.methods 
-      %dt update
-      %dd 
-        This event will contain one of the following events.
-        %br/  
-        You can also subscribe to one of the specific events, if that is the information you are interested in.
-      %dt collision
-      %dd Gets triggered when the sphero hits something or falls from a step.
-      %dt messages(data)
-      %dd Gets triggered when has a message.
-      %dt notifications(data)
-      %dd Gets triggered when has a notification.
-      %dt connect
-      %dd Opens the connection to Sphero.
-      %dt start
-      %dd Sent when the device has been started and is ready to use.
-
-  %section.how-to
-    %h2 How to use
-    %p 
-      This example rolls the sphero in a random direction and change direction every second.
-
-      %h3 JavaScript
-      :markdown
-            :::javascript
-
-            var Cylon = require('cylon');
-
-            Cylon.robot({
-              connection: {name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'},
-
-              device: {name: 'sphero', driver: 'sphero'},
-
-              work: function(me) {
-                every((1).second(), function() {
-                  me.sphero.roll 60, Math.floor(Math.random() * 360)
-                });
-              }
-            }).start();
-
-      %h3 CoffeeScript
-      :markdown
-            :::javascript
-
-            Cylon = require('..')
-
-            Cylon.robot
-              connection:
-                name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'
-
-              device:
-                name: 'sphero', driver: 'sphero'
-
-              work: (me) ->
-                every 1.second(), ->
-                  me.sphero.roll 60, Math.floor(Math.random() * 360)
-
-            .start()
+%section.public-methods
+  %h2 Commands:
   
-  %section 
-    %h2 Sphero Colors 
+  %dl.methods
+    %dt abortMacro → (ID code , command number)
+    %dd 
+    %dt abortOrbBasicProgram 
+    %dd
+    %dt appendMacroChunck(MACRO Chunk) 
+    %dd 
+    %dt appendOrbBasicFragment(Area, Program Code) 
+    %dd  
+    %dt configureCollisionDetection(Meth,(Xt, Yt),(Xspd, Yspd),Dead) 
+    %dd Sets the sphero to detect collisions and report them.
+    %dt configureLocator(flag, x, y, Yaw Tare) 
+    %dd 
+    %dt detectCollisions 
+    %dd Sets the sphero to detect collisions and report them.
+    %dt eraseOrbBasicStorage(Area) 
+    %dd 
+    %dt executeOrbBasicProgram(Area, Start Line, Start Line) 
+    %dd 
+    %dt getApplicationConfigurationBlock 
+    %dd 
+    %dt getConfigurationBlock(ID) 
+    %dd 
+    %dt getDeviceMode → (Mode), options: 00h (Normal mode) | 01h (User Hack mode)
+    %dd 
+    %dt getMacroStatus → (ID code , cmd number, cmd number)
+    %dd 
+    %dt getPermanentOptionFlags → (FLAGS), options: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 6-31
+    %dd 
+    %dt getRGB → (red,green,blue) | (color)
+    %dd 
+    %dt getTemporaryOptionFlags → (FLAGS), options: 0 | 1-31
+    %dd 
+    %dt reInitializeMacroExecutive 
+    %dd 
+    %dt readLocator → (XPOS, YPOS, XVEL, YVEL, SOG)
+    %dd 
+    %dt roll(speed, heading, state) 
+    %dd This commands Sphero to roll along the provided vector. Both a speed and a heading are required; the latter is considered relative to the last calibrated direction.
+    %dt runMacro(SEQ, DLEN, ID) 
+    %dd 
+    %dt saveMacro(data) 
+    %dd 
+    %dt saveTemporaryMacro(data) 
+    %dd 
+    %dt selfLevel(Options, Angle Limit, Timeout, True Time), options: ((0 | 1 | 2 |3 ), (0 | 1 to 90), (0 | 1 to 255), (0 | 1 to 255) 
+    %dd 
+    %dt setAccelerometerRange(Range Idx), options: 0 | 1 | 2 | 3 
+    %dd 
+    %dt setApplicationConfigurationBlock
+    %dd 
+    %dt setBackLED(BRIGHT) 
+    %dd 
+    %dt setBoostWithTime(STATE) 
+    %dd 
+    %dt setColor(color) 
+    %dd This allows you to set the color of the sphero, just pass an array containing RGB hex or a string with one of the color names of the list.
+    %dt setConfigurationBlock(value) 
+    %dd 
+    %dt setDataStreaming(N, M, MASK, PCNT, MASK2) 
+    %dd 
+    %dt setDeviceMode(MODE) 
+    %dd 
+    %dt setHeading(HEADING) 
+    %dd
+    %dt setMacroParameter(Param, Val1, Val2) 
+    %dd 
+    %dt setMotionTimeout(TIME) 
+    %dd 
+    %dt setPermanentOptionFlags(FLAGS) 
+    %dd 
+    %dt setRGB(color, persist) 
+    %dd This allows you to set the RGB LED color, just pass an array containing RGB hex or a string with one of the color names of the list.  
+    %dt setRawMotorValues(L-MODE, L-POWER, R-MODE, R-POWER) 
+    %dd 
+    %dt setRotationRate(RATE) 
+    %dd 
+    %dt setStabalisation(bool) 
+    %dd 
+    %dt setTemporaryOptionFlags(FLAGS) 
+    %dd 
+    %dt stop
+    %dd Stops the sphero.
+    %dt submitValueToInputStatement(VAL) 
+    %dd 
 
-    %dl.colors 
-      %dt aliceblue            
-      %dd 
-        .aliceblue.square
-        %p 0xF0F8FF
-      %dt antiquewhite         
-      %dd 
-        .antiquewhite.square
-        %p 0xFAEBD7 
-      %dt aqua                 
-      %dd 
-        .square.aqua
-        %p 0x00FFFF
-      %dt aquamarine           
-      %dd
-        .square.aquamarine 
-        %p 0x7FFFD4
-      %dt azure                 
-      %dd 
-        .square.azure
-        %p 0xF0FFFF
-      %dt beige                 
-      %dd 
-        .square.beige
-        %p 0xF5F5DC
-      %dt bisque                
-      %dd 
-        .square.bisque
-        %p 0xFFE4C4
-      %dt black                 
-      %dd 
-        .square.black
-        %p 0x000000
-      %dt blanchedalmond        
-      %dd 
-        .square.blanchedalmond
-        %p 0xFFEBCD
-      %dt blue                 
-      %dd 
-        .square.blue
-        %p 0x0000FF
-      %dt blueviolet            
-      %dd 
-        .square.blueviolet
-        %p 0x8A2BE2
-      %dt brown                 
-      %dd 
-        .square.brown
-        %p 0xA52A2A
-      %dt burlywood             
-      %dd 
-        .square.burlywood
-        %p 0xDEB887
-      %dt cadetblue             
-      %dd
-        .square.cadetblue 
-        %p 0x5F9EA0
-      %dt chartreuse            
-      %dd 
-        .square.chartreuse
-        %p 0x7FFF00
-      %dt chocolate             
-      %dd 
-        .square.chocolate
-        %p 0xD2691E
-      %dt coral                 
-      %dd 
-        .square.coral
-        %p 0xFF7F50
-      %dt cornflowerblue        
-      %dd 
-        .square.cornflowerblue
-        %p 0x6495ED
-      %dt cornsilk              
-      %dd   
-        .square.cornsilk
-        %p 0xFFF8DC
-      %dt crimson               
-      %dd 
-        .square.crimson
-        %p 0xDC143C
-      %dt cyan                  
-      %dd 
-        .square.cyan
-        %p 0x00FFFF
-      %dt darkblue              
-      %dd 
-        .square.darkblue
-        %p 0x00008B
-        
-      %dt darkcyan              
-      %dd 
-        .square.darkcyan
-        %p 0x008B8B
-        
-      %dt darkgoldenrod         
-      %dd 
-        .square.darkgoldenrod
-        %p 0xB8860B
-        
-      %dt darkgray              
-      %dd 
-        .square.darkgray
-        %p 0xA9A9A9
-        
-      %dt darkgreen             
-      %dd 
-        .square.darkgreen
-        %p 0x006400
-        
-      %dt darkkhaki             
-      %dd 
-        .square.darkkhaki
-        %p 0xBDB76B
-        
-      %dt darkmagenta           
-      %dd 
-        .square.darkmagenta
-        %p 0x8B008B
-        
-      %dt darkolivegreen        
-      %dd 
-        .square.darkolivegreen
-        %p 0x556B2F
-        
-      %dt darkorange            
-      %dd 
-        .square.darkorange
-        %p 0xFF8C00
-        
-      %dt darkorchid            
-      %dd 
-        .square.darkorchid
-        %p 0x9932CC
-        
-      %dt darkred               
-      %dd 
-        .square.darkred
-        %p 0x8B0000
-        
-      %dt darksalmon            
-      %dd 
-        .square.darksalmon
-        %p 0xE9967A
-        
-      %dt darkseagreen          
-      %dd 
-        .square.darkseagreen
-        %p 0x8FBC8F
-        
-      %dt darkslateblue         
-      %dd 
-        .square.darkslateblue
-        %p 0x483D8B
-        
-    %dl.colors   
-      %dt darkslategray         
-      %dd 
-        .square.darkslategray
-        %p 0x2F4F4F
-      %dt darkturquoise         
-      %dd 
-        .square.darkturquoise
-        %p 0x00CED1
-      %dt darkviolet            
-      %dd 
-        .square.darkviolet
-        %p 0x9400D3
-      %dt deeppink              
-      %dd 
-        .square.deeppink
-        %p 0xFF1493
-      %dt deepskyblue           
-      %dd 
-        .square.deepskyblue
-        %p 0x00BFFF
-      %dt dimgray               
-      %dd 
-        .square.dimgray
-        %p 0x696969
-      %dt dodgerblue            
-      %dd 
-        .square.dodgerblue
-        %p 0x1E90FF
-        
-      %dt firebrick:             
-      %dd 
-        .square.firebrick
-        %p 0xB22222
-        
-      %dt floralwhite           
-      %dd 
-        .square.floralwhite
-        %p 0xFFFAF0
-        
-      %dt forestgreen           
-      %dd 
-        .square.forestgreen
-        %p 0x228B22
-        
-      %dt fuchsia               
-      %dd 
-        .square.fuchsia
-        %p 0xFF00FF
-        
-      %dt gainsboro             
-      %dd 
-        .square.gainsboro
-        %p 0xDCDCDC
-        
-      %dt ghostwhite            
-      %dd 
-        .square.ghostwhite
-        %p 0xF8F8FF
-        
-      %dt gold                  
-      %dd 
-        .square.gold
-        %p 0xFFD700
-        
-      %dt goldenrod             
-      %dd 
-        .square.goldenrod
-        %p 0xDAA520
-        
-      %dt gray                  
-      %dd 
-        .square.gray
-        %p 0x808080
-        
-      %dt green                 
-      %dd 
-        .square.green
-        %p 0x008000
-        
-      %dt greenyellow           
-      %dd 
-        .square.greenyellow
-        %p 0xADFF2F
-        
-      %dt honeydew              
-      %dd 
-        .square.honeydew
-        %p 0xF0FFF0
-        
-      %dt hotpink               
-      %dd 
-        .square.hotpink
-        %p 0xFF69B4
-        
-      %dt indianred             
-      %dd 
-        .square.indianred
-        %p 0xCD5C5C
-        
-      %dt indigo                
-      %dd 
-        .square.indigo
-        %p 0x4B0082
-        
-      %dt ivory                 
-      %dd 
-        .square.ivory
-        %p 0xFFFFF0
-        
-      %dt khaki                 
-      %dd 
-        .square.khaki
-        %p 0xF0E68C
-        
-      %dt lavender              
-      %dd 
-        .square.lavender
-        %p 0xE6E6FA
-        
-      %dt lavenderblush         
-      %dd 
-        .square.lavenderblush
-        %p 0xFFF0F5
-        
-      %dt lawngreen             
-      %dd 
-        .square.lawngreen
-        %p 0x7CFC00
-        
-      %dt lemonchiffon          
-      %dd 
-        .square.lemonchiffon
-        %p 0xFFFACD
-        
-      %dt lightblue             
-      %dd 
-        .square.lightblue
-        %p 0xADD8E6
-        
-      %dt lightcoral            
-      %dd 
-        .square.lightcoral
-        %p 0xF08080
-        
-      %dt lightcyan             
-      %dd 
-        .square.lightcyan
-        %p 0xE0FFFF
-        
-      %dt lightgoldenrodyellow  
-      %dd 
-        .square.lightgoldenrodyellow
-        %p 0xFAFAD2
-        
-      %dt lightgreen            
-      %dd 
-        .square.lightgreen
-        %p 0x90EE90
-        
-      %dt lightgrey             
-      %dd 
-        .square.lightgrey
-        %p 0xD3D3D3
-        
-      %dt lightpink             
-      %dd 
-        .square.lightpink
-        %p 0xFFB6C1
-        
-    %dl.colors   
-      %dt lightsalmon           
-      %dd 
-        .square.lightsalmon
-        %p 0xFFA07A
-        
-      %dt lightseagreen         
-      %dd 
-        .square.lightseagreen
-        %p 0x20B2AA
-        
-      %dt lightskyblue          
-      %dd 
-        .square.lightskyblue
-        %p 0x87CEFA
-        
-      %dt lightslategray        
-      %dd 
-        .square.lightslategray
-        %p 0x778899
-        
-      %dt lightsteelblue        
-      %dd 
-        .square.lightsteelblue
-        %p 0xB0C4DE
-        
-      %dt lightyellow           
-      %dd 
-        .square.lightyellow
-        %p 0xFFFFE0
-        
-      %dt lime                  
-      %dd 
-        .square.lime
-        %p 0x00FF00
-        
-      %dt limegreen             
-      %dd 
-        .square.limegreen
-        %p 0x32CD32
-        
-      %dt linen                 
-      %dd 
-        .square.linen
-        %p 0xFAF0E6
-        
-      %dt magenta               
-      %dd 
-        .square.magenta
-        %p 0xFF00FF
-        
-      %dt maroon                
-      %dd 
-        .square.maroon
-        %p 0x800000
-        
-      %dt mediumaquamarine      
-      %dd 
-        .square.mediumaquamarine
-        %p 0x66CDAA
-        
-      %dt mediumblue            
-      %dd 
-        .square.mediumblue
-        %p 0x0000CD
-        
-      %dt mediumorchid          
-      %dd 
-        .square.mediumorchid
-        %p 0xBA55D3
-        
-      %dt mediumpurple          
-      %dd 
-        .square.mediumpurple
-        %p 0x9370DB
-        
-      %dt mediumseagreen        
-      %dd 
-        .square.mediumseagreen
-        %p 0x3CB371
-        
-      %dt mediumslateblue       
-      %dd 
-        .square.mediumslateblue
-        %p 0x7B68EE
-        
-      %dt mediumspringgreen     
-      %dd 
-        .square.mediumspringgreen
-        %p 0x00FA9A
-        
-      %dt mediumturquoise       
-      %dd 
-        .square.mediumturquoise
-        %p 0x48D1CC
-        
-      %dt mediumvioletred       
-      %dd 
-        .square.mediumvioletred
-        %p 0xC71585
-        
-      %dt midnightblue          
-      %dd 
-        .square.midnightblue
-        %p 0x191970
-        
-      %dt mintcream             
-      %dd 
-        .square.mintcream
-        %p 0xF5FFFA
-        
-      %dt mistyrose             
-      %dd 
-        .square.mistyrose
-        %p 0xFFE4E1
-        
-      %dt moccasin              
-      %dd 
-        .square.moccasin
-        %p 0xFFE4B5
-        
-      %dt navajowhite           
-      %dd 
-        .square.navajowhite
-        %p 0xFFDEAD
-        
-      %dt navy                  
-      %dd 
-        .square.navy
-        %p 0x000080
-        
-      %dt oldlace               
-      %dd 
-        .square.oldlace
-        %p 0xFDF5E6
-        
-      %dt olive                 
-      %dd 
-        .square.olive
-        %p 0x808000
-        
-      %dt olivedrab             
-      %dd 
-        .square.olivedrab
-        %p 0x6B8E23
-        
-      %dt orange                
-      %dd 
-        .square.orange
-        %p 0xFFA500
-        
-      %dt orangered             
-      %dd 
-        .square.orangered
-        %p 0xFF4500
-        
-      %dt orchid                
-      %dd 
-        .square.orchid
-        %p 0xDA70D6
-        
-      %dt palegoldenrod         
-      %dd 
-        .square.palegoldenrod
-        %p 0xEEE8AA
-        
-      %dt palegreen             
-      %dd 
-        .square.palegreen
-        %p 0x98FB98
-        
-      %dt paleturquoise         
-      %dd 
-        .square.paleturquoise
-        %p 0xAFEEEE
-        
-    %dl.colors   
-      %dt palevioletred         
-      %dd 
-        .square.palevioletred
-        %p 0xDB7093
-        
-      %dt papayawhip            
-      %dd 
-        .square.papayawhip
-        %p 0xFFEFD5
-        
-      %dt peachpuff             
-      %dd 
-        .square.peachpuff
-        %p 0xFFDAB9
-        
-      %dt peru                  
-      %dd 
-        .square.peru
-        %p 0xCD853F
-        
-      %dt pink                  
-      %dd 
-        .square.pink
-        %p 0xFFC0CB
-        
-      %dt plum                  
-      %dd 
-        .square.plum
-        %p 0xDDA0DD
-        
-      %dt powderblue            
-      %dd 
-        .square.powderblue
-        %p 0xB0E0E6
-        
-      %dt purple                
-      %dd 
-        .square.purple
-        %p 0x800080
-        
-      %dt red                   
-      %dd 
-        .square.red
-        %p 0xFF0000
-        
-      %dt rosybrown             
-      %dd 
-        .square.rosybrown
-        %p 0xBC8F8F
-        
-      %dt royalblue             
-      %dd 
-        .square.royalblue
-        %p 0x4169E1
-        
-      %dt saddlebrown           
-      %dd 
-        .square.saddlebrown
-        %p 0x8B4513
-        
-      %dt salmon                
-      %dd 
-        .square.salmon
-        %p 0xFA8072
-        
-      %dt sandybrown            
-      %dd 
-        .square.sandybrown
-        %p 0xF4A460
-        
-      %dt seagreen              
-      %dd 
-        .square.seagreen
-        %p 0x2E8B57
-        
-      %dt seashell              
-      %dd 
-        .square.seashell
-        %p 0xFFF5EE
-        
-      %dt sienna                
-      %dd 
-        .square.sienna
-        %p 0xA0522D
-        
-      %dt silver                
-      %dd 
-        .square.silver
-        %p 0xC0C0C0
-        
-      %dt skyblue               
-      %dd 
-        .square.skyblue
-        %p 0x87CEEB
-        
-      %dt slateblue             
-      %dd 
-        .square.slateblue
-        %p 0x6A5ACD
-        
-      %dt slategray             
-      %dd 
-        .square.slategray
-        %p 0x708090
-        
-      %dt snow                  
-      %dd 
-        .square.snow
-        %p 0xFFFAFA
-        
-      %dt springgreen           
-      %dd 
-        .square.springgreen
-        %p 0x00FF7F
-        
-      %dt steelblue             
-      %dd 
-        .square.steelblue
-        %p 0x4682B4
-        
-      %dt tan                   
-      %dd 
-        .square.tan
-        %p 0xD2B48C
-        
-      %dt teal                  
-      %dd 
-        .square.teal
-        %p 0x008080
-        
-      %dt thistle               
-      %dd 
-        .square.thistle
-        %p 0xD8BFD8
-        
-      %dt tomato                
-      %dd 
-        .square.tomato
-        %p 0xFF6347
-        
-      %dt turquoise             
-      %dd 
-        .square.turquoise
-        %p 0x40E0D0
-        
-      %dt violet                
-      %dd 
-        .square.violet
-        %p 0xEE82EE
-        
-      %dt wheat                 
-      %dd 
-        .square.wheat
-        %p 0xF5DEB3
-        
-      %dt white                 
-      %dd 
-        .square.white
-        %p 0xFFFFFF
-        
-      %dt whitesmoke            
-      %dd 
-        .square.whitesmoke
-        %p 0xF5F5F5
-        
-      %dt yellow                
-      %dd 
-        .square.yellow
-        %p 0xFFFF00
-        
-      %dt yellowgreen           
-      %dd 
-        .square.yellowgreen
-        %p 0x9ACD32
-        
+%section.public-events
+  %h2 Events:
 
-  %section.compatability.hardware
-    %h2 Works with:
-    =# TODO: Update platform list with all that work with this driver in Cylon.js.
-    .devices
-      = partial "documentation/partials/devices_platforms"
+  %dl.methods 
+    %dt update
+    %dd 
+      This event will contain one of the following events.
+      %br/  
+      You can also subscribe to one of the specific events, if that is the information you are interested in.
+    %dt collision
+    %dd Gets triggered when the sphero hits something or falls from a step.
+    %dt messages(data)
+    %dd Gets triggered when has a message.
+    %dt notifications(data)
+    %dd Gets triggered when has a notification.
+    %dt connect
+    %dd Opens the connection to Sphero.
+    %dt start
+    %dd Sent when the device has been started and is ready to use.
+
+%section.how-to
+  %h2 How to use
+  %p 
+    This example rolls the sphero in a random direction and change direction every second.
+
+    %h3 JavaScript
+    :markdown
+          :::javascript
+
+          var Cylon = require('cylon');
+
+          Cylon.robot({
+            connection: {name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'},
+
+            device: {name: 'sphero', driver: 'sphero'},
+
+            work: function(me) {
+              every((1).second(), function() {
+                me.sphero.roll 60, Math.floor(Math.random() * 360)
+              });
+            }
+          }).start();
+
+    %h3 CoffeeScript
+    :markdown
+          :::javascript
+
+          Cylon = require('..')
+
+          Cylon.robot
+            connection:
+              name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'
+
+            device:
+              name: 'sphero', driver: 'sphero'
+
+            work: (me) ->
+              every 1.second(), ->
+                me.sphero.roll 60, Math.floor(Math.random() * 360)
+
+          .start()
+
+%section 
+  %h2 Sphero Colors 
+
+  %dl.colors 
+    %dt aliceblue            
+    %dd 
+      .aliceblue.square
+      %p 0xF0F8FF
+    %dt antiquewhite         
+    %dd 
+      .antiquewhite.square
+      %p 0xFAEBD7 
+    %dt aqua                 
+    %dd 
+      .square.aqua
+      %p 0x00FFFF
+    %dt aquamarine           
+    %dd
+      .square.aquamarine 
+      %p 0x7FFFD4
+    %dt azure                 
+    %dd 
+      .square.azure
+      %p 0xF0FFFF
+    %dt beige                 
+    %dd 
+      .square.beige
+      %p 0xF5F5DC
+    %dt bisque                
+    %dd 
+      .square.bisque
+      %p 0xFFE4C4
+    %dt black                 
+    %dd 
+      .square.black
+      %p 0x000000
+    %dt blanchedalmond        
+    %dd 
+      .square.blanchedalmond
+      %p 0xFFEBCD
+    %dt blue                 
+    %dd 
+      .square.blue
+      %p 0x0000FF
+    %dt blueviolet            
+    %dd 
+      .square.blueviolet
+      %p 0x8A2BE2
+    %dt brown                 
+    %dd 
+      .square.brown
+      %p 0xA52A2A
+    %dt burlywood             
+    %dd 
+      .square.burlywood
+      %p 0xDEB887
+    %dt cadetblue             
+    %dd
+      .square.cadetblue 
+      %p 0x5F9EA0
+    %dt chartreuse            
+    %dd 
+      .square.chartreuse
+      %p 0x7FFF00
+    %dt chocolate             
+    %dd 
+      .square.chocolate
+      %p 0xD2691E
+    %dt coral                 
+    %dd 
+      .square.coral
+      %p 0xFF7F50
+    %dt cornflowerblue        
+    %dd 
+      .square.cornflowerblue
+      %p 0x6495ED
+    %dt cornsilk              
+    %dd   
+      .square.cornsilk
+      %p 0xFFF8DC
+    %dt crimson               
+    %dd 
+      .square.crimson
+      %p 0xDC143C
+    %dt cyan                  
+    %dd 
+      .square.cyan
+      %p 0x00FFFF
+    %dt darkblue              
+    %dd 
+      .square.darkblue
+      %p 0x00008B
+      
+    %dt darkcyan              
+    %dd 
+      .square.darkcyan
+      %p 0x008B8B
+      
+    %dt darkgoldenrod         
+    %dd 
+      .square.darkgoldenrod
+      %p 0xB8860B
+      
+    %dt darkgray              
+    %dd 
+      .square.darkgray
+      %p 0xA9A9A9
+      
+    %dt darkgreen             
+    %dd 
+      .square.darkgreen
+      %p 0x006400
+      
+    %dt darkkhaki             
+    %dd 
+      .square.darkkhaki
+      %p 0xBDB76B
+      
+    %dt darkmagenta           
+    %dd 
+      .square.darkmagenta
+      %p 0x8B008B
+      
+    %dt darkolivegreen        
+    %dd 
+      .square.darkolivegreen
+      %p 0x556B2F
+      
+    %dt darkorange            
+    %dd 
+      .square.darkorange
+      %p 0xFF8C00
+      
+    %dt darkorchid            
+    %dd 
+      .square.darkorchid
+      %p 0x9932CC
+      
+    %dt darkred               
+    %dd 
+      .square.darkred
+      %p 0x8B0000
+      
+    %dt darksalmon            
+    %dd 
+      .square.darksalmon
+      %p 0xE9967A
+      
+    %dt darkseagreen          
+    %dd 
+      .square.darkseagreen
+      %p 0x8FBC8F
+      
+    %dt darkslateblue         
+    %dd 
+      .square.darkslateblue
+      %p 0x483D8B
+      
+  %dl.colors   
+    %dt darkslategray         
+    %dd 
+      .square.darkslategray
+      %p 0x2F4F4F
+    %dt darkturquoise         
+    %dd 
+      .square.darkturquoise
+      %p 0x00CED1
+    %dt darkviolet            
+    %dd 
+      .square.darkviolet
+      %p 0x9400D3
+    %dt deeppink              
+    %dd 
+      .square.deeppink
+      %p 0xFF1493
+    %dt deepskyblue           
+    %dd 
+      .square.deepskyblue
+      %p 0x00BFFF
+    %dt dimgray               
+    %dd 
+      .square.dimgray
+      %p 0x696969
+    %dt dodgerblue            
+    %dd 
+      .square.dodgerblue
+      %p 0x1E90FF
+      
+    %dt firebrick:             
+    %dd 
+      .square.firebrick
+      %p 0xB22222
+      
+    %dt floralwhite           
+    %dd 
+      .square.floralwhite
+      %p 0xFFFAF0
+      
+    %dt forestgreen           
+    %dd 
+      .square.forestgreen
+      %p 0x228B22
+      
+    %dt fuchsia               
+    %dd 
+      .square.fuchsia
+      %p 0xFF00FF
+      
+    %dt gainsboro             
+    %dd 
+      .square.gainsboro
+      %p 0xDCDCDC
+      
+    %dt ghostwhite            
+    %dd 
+      .square.ghostwhite
+      %p 0xF8F8FF
+      
+    %dt gold                  
+    %dd 
+      .square.gold
+      %p 0xFFD700
+      
+    %dt goldenrod             
+    %dd 
+      .square.goldenrod
+      %p 0xDAA520
+      
+    %dt gray                  
+    %dd 
+      .square.gray
+      %p 0x808080
+      
+    %dt green                 
+    %dd 
+      .square.green
+      %p 0x008000
+      
+    %dt greenyellow           
+    %dd 
+      .square.greenyellow
+      %p 0xADFF2F
+      
+    %dt honeydew              
+    %dd 
+      .square.honeydew
+      %p 0xF0FFF0
+      
+    %dt hotpink               
+    %dd 
+      .square.hotpink
+      %p 0xFF69B4
+      
+    %dt indianred             
+    %dd 
+      .square.indianred
+      %p 0xCD5C5C
+      
+    %dt indigo                
+    %dd 
+      .square.indigo
+      %p 0x4B0082
+      
+    %dt ivory                 
+    %dd 
+      .square.ivory
+      %p 0xFFFFF0
+      
+    %dt khaki                 
+    %dd 
+      .square.khaki
+      %p 0xF0E68C
+      
+    %dt lavender              
+    %dd 
+      .square.lavender
+      %p 0xE6E6FA
+      
+    %dt lavenderblush         
+    %dd 
+      .square.lavenderblush
+      %p 0xFFF0F5
+      
+    %dt lawngreen             
+    %dd 
+      .square.lawngreen
+      %p 0x7CFC00
+      
+    %dt lemonchiffon          
+    %dd 
+      .square.lemonchiffon
+      %p 0xFFFACD
+      
+    %dt lightblue             
+    %dd 
+      .square.lightblue
+      %p 0xADD8E6
+      
+    %dt lightcoral            
+    %dd 
+      .square.lightcoral
+      %p 0xF08080
+      
+    %dt lightcyan             
+    %dd 
+      .square.lightcyan
+      %p 0xE0FFFF
+      
+    %dt lightgoldenrodyellow  
+    %dd 
+      .square.lightgoldenrodyellow
+      %p 0xFAFAD2
+      
+    %dt lightgreen            
+    %dd 
+      .square.lightgreen
+      %p 0x90EE90
+      
+    %dt lightgrey             
+    %dd 
+      .square.lightgrey
+      %p 0xD3D3D3
+      
+    %dt lightpink             
+    %dd 
+      .square.lightpink
+      %p 0xFFB6C1
+      
+  %dl.colors   
+    %dt lightsalmon           
+    %dd 
+      .square.lightsalmon
+      %p 0xFFA07A
+      
+    %dt lightseagreen         
+    %dd 
+      .square.lightseagreen
+      %p 0x20B2AA
+      
+    %dt lightskyblue          
+    %dd 
+      .square.lightskyblue
+      %p 0x87CEFA
+      
+    %dt lightslategray        
+    %dd 
+      .square.lightslategray
+      %p 0x778899
+      
+    %dt lightsteelblue        
+    %dd 
+      .square.lightsteelblue
+      %p 0xB0C4DE
+      
+    %dt lightyellow           
+    %dd 
+      .square.lightyellow
+      %p 0xFFFFE0
+      
+    %dt lime                  
+    %dd 
+      .square.lime
+      %p 0x00FF00
+      
+    %dt limegreen             
+    %dd 
+      .square.limegreen
+      %p 0x32CD32
+      
+    %dt linen                 
+    %dd 
+      .square.linen
+      %p 0xFAF0E6
+      
+    %dt magenta               
+    %dd 
+      .square.magenta
+      %p 0xFF00FF
+      
+    %dt maroon                
+    %dd 
+      .square.maroon
+      %p 0x800000
+      
+    %dt mediumaquamarine      
+    %dd 
+      .square.mediumaquamarine
+      %p 0x66CDAA
+      
+    %dt mediumblue            
+    %dd 
+      .square.mediumblue
+      %p 0x0000CD
+      
+    %dt mediumorchid          
+    %dd 
+      .square.mediumorchid
+      %p 0xBA55D3
+      
+    %dt mediumpurple          
+    %dd 
+      .square.mediumpurple
+      %p 0x9370DB
+      
+    %dt mediumseagreen        
+    %dd 
+      .square.mediumseagreen
+      %p 0x3CB371
+      
+    %dt mediumslateblue       
+    %dd 
+      .square.mediumslateblue
+      %p 0x7B68EE
+      
+    %dt mediumspringgreen     
+    %dd 
+      .square.mediumspringgreen
+      %p 0x00FA9A
+      
+    %dt mediumturquoise       
+    %dd 
+      .square.mediumturquoise
+      %p 0x48D1CC
+      
+    %dt mediumvioletred       
+    %dd 
+      .square.mediumvioletred
+      %p 0xC71585
+      
+    %dt midnightblue          
+    %dd 
+      .square.midnightblue
+      %p 0x191970
+      
+    %dt mintcream             
+    %dd 
+      .square.mintcream
+      %p 0xF5FFFA
+      
+    %dt mistyrose             
+    %dd 
+      .square.mistyrose
+      %p 0xFFE4E1
+      
+    %dt moccasin              
+    %dd 
+      .square.moccasin
+      %p 0xFFE4B5
+      
+    %dt navajowhite           
+    %dd 
+      .square.navajowhite
+      %p 0xFFDEAD
+      
+    %dt navy                  
+    %dd 
+      .square.navy
+      %p 0x000080
+      
+    %dt oldlace               
+    %dd 
+      .square.oldlace
+      %p 0xFDF5E6
+      
+    %dt olive                 
+    %dd 
+      .square.olive
+      %p 0x808000
+      
+    %dt olivedrab             
+    %dd 
+      .square.olivedrab
+      %p 0x6B8E23
+      
+    %dt orange                
+    %dd 
+      .square.orange
+      %p 0xFFA500
+      
+    %dt orangered             
+    %dd 
+      .square.orangered
+      %p 0xFF4500
+      
+    %dt orchid                
+    %dd 
+      .square.orchid
+      %p 0xDA70D6
+      
+    %dt palegoldenrod         
+    %dd 
+      .square.palegoldenrod
+      %p 0xEEE8AA
+      
+    %dt palegreen             
+    %dd 
+      .square.palegreen
+      %p 0x98FB98
+      
+    %dt paleturquoise         
+    %dd 
+      .square.paleturquoise
+      %p 0xAFEEEE
+      
+  %dl.colors   
+    %dt palevioletred         
+    %dd 
+      .square.palevioletred
+      %p 0xDB7093
+      
+    %dt papayawhip            
+    %dd 
+      .square.papayawhip
+      %p 0xFFEFD5
+      
+    %dt peachpuff             
+    %dd 
+      .square.peachpuff
+      %p 0xFFDAB9
+      
+    %dt peru                  
+    %dd 
+      .square.peru
+      %p 0xCD853F
+      
+    %dt pink                  
+    %dd 
+      .square.pink
+      %p 0xFFC0CB
+      
+    %dt plum                  
+    %dd 
+      .square.plum
+      %p 0xDDA0DD
+      
+    %dt powderblue            
+    %dd 
+      .square.powderblue
+      %p 0xB0E0E6
+      
+    %dt purple                
+    %dd 
+      .square.purple
+      %p 0x800080
+      
+    %dt red                   
+    %dd 
+      .square.red
+      %p 0xFF0000
+      
+    %dt rosybrown             
+    %dd 
+      .square.rosybrown
+      %p 0xBC8F8F
+      
+    %dt royalblue             
+    %dd 
+      .square.royalblue
+      %p 0x4169E1
+      
+    %dt saddlebrown           
+    %dd 
+      .square.saddlebrown
+      %p 0x8B4513
+      
+    %dt salmon                
+    %dd 
+      .square.salmon
+      %p 0xFA8072
+      
+    %dt sandybrown            
+    %dd 
+      .square.sandybrown
+      %p 0xF4A460
+      
+    %dt seagreen              
+    %dd 
+      .square.seagreen
+      %p 0x2E8B57
+      
+    %dt seashell              
+    %dd 
+      .square.seashell
+      %p 0xFFF5EE
+      
+    %dt sienna                
+    %dd 
+      .square.sienna
+      %p 0xA0522D
+      
+    %dt silver                
+    %dd 
+      .square.silver
+      %p 0xC0C0C0
+      
+    %dt skyblue               
+    %dd 
+      .square.skyblue
+      %p 0x87CEEB
+      
+    %dt slateblue             
+    %dd 
+      .square.slateblue
+      %p 0x6A5ACD
+      
+    %dt slategray             
+    %dd 
+      .square.slategray
+      %p 0x708090
+      
+    %dt snow                  
+    %dd 
+      .square.snow
+      %p 0xFFFAFA
+      
+    %dt springgreen           
+    %dd 
+      .square.springgreen
+      %p 0x00FF7F
+      
+    %dt steelblue             
+    %dd 
+      .square.steelblue
+      %p 0x4682B4
+      
+    %dt tan                   
+    %dd 
+      .square.tan
+      %p 0xD2B48C
+      
+    %dt teal                  
+    %dd 
+      .square.teal
+      %p 0x008080
+      
+    %dt thistle               
+    %dd 
+      .square.thistle
+      %p 0xD8BFD8
+      
+    %dt tomato                
+    %dd 
+      .square.tomato
+      %p 0xFF6347
+      
+    %dt turquoise             
+    %dd 
+      .square.turquoise
+      %p 0x40E0D0
+      
+    %dt violet                
+    %dd 
+      .square.violet
+      %p 0xEE82EE
+      
+    %dt wheat                 
+    %dd 
+      .square.wheat
+      %p 0xF5DEB3
+      
+    %dt white                 
+    %dd 
+      .square.white
+      %p 0xFFFFFF
+      
+    %dt whitesmoke            
+    %dd 
+      .square.whitesmoke
+      %p 0xF5F5F5
+      
+    %dt yellow                
+    %dd 
+      .square.yellow
+      %p 0xFFFF00
+      
+    %dt yellowgreen           
+    %dd 
+      .square.yellowgreen
+      %p 0x9ACD32
+      
+
+%section.compatability.hardware
+  %h2 Works with:
+  =# TODO: Update platform list with all that work with this driver in Cylon.js.
+  .devices
+    = partial "documentation/partials/devices_platforms"
