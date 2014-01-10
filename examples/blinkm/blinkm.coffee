@@ -8,7 +8,7 @@ Cylon.robot
   work: (my) ->
     my.blinkm.on 'start', ->
       my.blinkm.version (version) ->
-        Logger.info "Started BlinkM version #{version}"
+        console.log "Started BlinkM version #{version}"
 
       my.blinkm.off()
       lit = false
@@ -16,11 +16,11 @@ Cylon.robot
       every 1.second(), ->
         if lit
           lit = false
-          Logger.info 'on'
+          console.log 'on'
           my.blinkm.rgb 0xaa, 0, 0
         else
           lit = true
-          Logger.info 'off'
+          console.log 'off'
           my.blinkm.rgb 0, 0, 0
 
 .start()

@@ -13,7 +13,7 @@ Cylon.robot
       angle += increment
       my.servo.angle angle
 
-      Logger.info "Current Angle: #{my.servo.currentAngle()}"
+      console.log "Current Angle: #{my.servo.currentAngle()}"
 
       increment = -increment if (angle is 30) or (angle is 150)
 

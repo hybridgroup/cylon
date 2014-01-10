@@ -51,7 +51,7 @@ class Cylon
 
       process.on "SIGINT", ->
         Cylon.getInstance().stop()
-        process.exit()
+        process.kill()
 
     # Public: Creates a new Robot
     #

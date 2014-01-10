@@ -16,7 +16,7 @@ Cylon.robot({
     var name = "cylon"
 
     me.checkTravis = function() {
-      Logger.info("Checking repo "+user+"/"+name);
+      console.log("Checking repo "+user+"/"+name);
       me.sphero.setRGB(BLUE, true);
 
       travis.repos(

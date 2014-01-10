@@ -6,28 +6,28 @@ Cylon.robot
 
   work: (me) ->
     me.sphero.on 'connect', ->
-      Logger.info "Setting up Collision Detection..."
+      console.log "Setting up Collision Detection..."
       me.sphero.detectCollisions()
       me.sphero.setRGB 0x00FF00
 
     me.sphero.on 'update', (data) ->
-      Logger.info "Update event eventName: #{data} "
-      Logger.info "Update event args: "
-      Logger.info data
+      console.log "Update event eventName: #{data} "
+      console.log "Update event args: "
+      console.log data
 
     me.sphero.on 'message', (data) ->
       me.sphero.setRGB 0x0000FF
-      Logger.info "Message:"
-      Logger.info data
+      console.log "Message:"
+      console.log data
 
     me.sphero.on 'collision', (data) ->
       me.sphero.setRGB 0xFF0000
-      Logger.info "Collision:"
-      Logger.info data
+      console.log "Collision:"
+      console.log data
 
     me.sphero.on 'notification', (data) ->
       me.sphero.setRGB 0xFF0000
-      Logger.info "Notification:"
-      Logger.info data
+      console.log "Notification:"
+      console.log data
 
 .start()

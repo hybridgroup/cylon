@@ -51,7 +51,7 @@ var ConwayRobot = (function() {
   ConwayRobot.prototype.birthday = function() {
     this.age += 1;
 
-    Logger.info("Happy birthday, " + this.name + ". You are " + this.age + " and had " + this.contacts + " contacts.");
+    console.log("Happy birthday, " + this.name + ". You are " + this.age + " and had " + this.contacts + " contacts.");
 
     if (this.enoughContacts()) {
       if (this.alive == null) { this.rebirth(); }

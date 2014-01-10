@@ -13,7 +13,7 @@ var MyRobot = (function() {
 
   MyRobot.prototype.work = function(me) {
     every((1).seconds(), function() {
-      Logger.info(me.name);
+      console.log(me.name);
     });
   };
 

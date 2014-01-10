@@ -12,7 +12,7 @@ Cylon.robot({
       speed += increment;
       my.motor.speed(speed);
 
-      Logger.info("Current Speed: " + (my.motor.currentSpeed()));
+      console.log("Current Speed: " + (my.motor.currentSpeed()));
 
       if ((speed === 0) || (speed === 255)) { increment = -increment; }
     });

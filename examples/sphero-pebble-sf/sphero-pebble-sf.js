@@ -17,7 +17,7 @@ var PebbleRobot = (function() {
   };
 
   PebbleRobot.prototype.work = function(me) {
-    me.pebble.on('connect', function() { Logger.info("Connected!"); });
+    me.pebble.on('connect', function() { console.log("Connected!"); });
   };
 
   return PebbleRobot;
@@ -55,7 +55,7 @@ var SalesforceRobot = (function() {
         msg += "data Bucks: " + bucks + ",";
         msg += "SM_Id: " + data.sobject.Id;
 
-        Logger.info(msg);
+        console.log(msg);
 
         me.master.findRobot(name, function(err, spheroBot) {
           spheroBot.react(spheroBot.devices.sphero);
@@ -122,7 +122,7 @@ var SpheroRobot = (function() {
 
   SpheroRobot.prototype.work = function(me) {
     me.sphero.on('connect', function() {
-      Logger.info('Setting up Collision Detection...');
+      console.log('Setting up Collision Detection...');
       me.sphero.detectCollisions();
       me.sphero.stop();
       me.sphero.setRGB(0x00FF00);

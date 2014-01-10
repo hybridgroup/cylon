@@ -34,7 +34,7 @@ When our Sphero emits the 'connect' event, we're going to hook up collision
 detection, make sure it's not moving, and set a color.
 
         me.sphero.on 'connect', ->
-          Logger.info "Setting up Collision Detection..."
+          console.log "Setting up Collision Detection..."
           me.sphero.detectCollisions()
           me.sphero.setRGB color
           me.sphero.stop()
@@ -43,7 +43,7 @@ And when our Sphero detects a collision, we want to notify the user of this via
 the console.
 
     me.sphero.on 'collision', (data) ->
-      Logger.info "Collision:"
+      console.log "Collision:"
 
 We get the new color for a Sphero by doing a bitwise XOR operation on it, using
 the bitfilter above.
@@ -54,7 +54,7 @@ With our new color in hand, we can let the user know what color we're using now,
 and change the Sphero to that color. We'll also tell the Sphero to roll in
 a random direction, at speed 90.
 
-      Logger.info "Color: #{color.toString(16)} "
+      console.log "Color: #{color.toString(16)} "
       me.sphero.setRGB color
 
       me.sphero.roll 90, Math.floor(Math.random() * 360)

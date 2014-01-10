@@ -11,6 +11,6 @@ Cylon.robot
 
   work: (my) ->
     my.drone.config 'general:navdata_demo', 'TRUE'
-    my.nav.on 'update', (data) -> Logger.info data
+    my.nav.on 'update', (data) -> console.log data
 
 .start()

@@ -58,31 +58,31 @@
     BasicLogger.prototype.debug = function() {
       var args;
       args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-      return console.log.apply(console, args);
+      return console.log.apply(console, ["D, [" + (new Date().toISOString()) + "] DEBUG -- :"].concat(__slice.call(args)));
     };
 
     BasicLogger.prototype.info = function() {
       var args;
       args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-      return console.log.apply(console, args);
+      return console.log.apply(console, ["I, [" + (new Date().toISOString()) + "]  INFO -- :"].concat(__slice.call(args)));
     };
 
     BasicLogger.prototype.warn = function() {
       var args;
       args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-      return console.log.apply(console, args);
+      return console.log.apply(console, ["W, [" + (new Date().toISOString()) + "]  WARN -- :"].concat(__slice.call(args)));
     };
 
     BasicLogger.prototype.error = function() {
       var args;
       args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-      return console.log.apply(console, args);
+      return console.log.apply(console, ["E, [" + (new Date().toISOString()) + "] ERROR -- :"].concat(__slice.call(args)));
     };
 
     BasicLogger.prototype.fatal = function() {
       var args;
       args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-      return console.log.apply(console, args);
+      return console.log.apply(console, ["F, [" + (new Date().toISOString()) + "] FATAL -- :"].concat(__slice.call(args)));
     };
 
     return BasicLogger;
