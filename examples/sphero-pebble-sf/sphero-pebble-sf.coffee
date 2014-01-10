@@ -10,7 +10,7 @@ class PebbleRobot
     robot.message_queue().push(msg)
 
   work: (me) ->
-    me.pebble.on 'connect', -> Logger.info "Connected!"
+    me.pebble.on 'connect', -> console.log "Connected!"
 
 class SalesforceRobot
   connection:
@@ -37,7 +37,7 @@ class SalesforceRobot
         msg += "data Bucks: #{bucks},"
         msg += "SM_Id: #{data.sobject.Id}"
 
-        Logger.info msg
+        console.log msg
 
         me.master.findRobot name, (err, spheroBot) ->
           spheroBot.react spheroBot.devices.sphero
@@ -78,7 +78,7 @@ class SpheroRobot
   work: (me) ->
 
     me.sphero.on 'connect', ->
-      Logger.info 'Setting up Collision Detection...'
+      console.log 'Setting up Collision Detection...'
       me.sphero.detectCollisions()
       me.sphero.stop()
       me.sphero.setRGB 0x00FF00

@@ -38,7 +38,7 @@ We'll just give our robots some basic work so we can tell they're actually
 working:
 
       work: (my) ->
-        Logger.info "Robot #{my.name} is now working!"
+        console.log "Robot #{my.name} is now working!"
 
 And that's all we need for that.
 

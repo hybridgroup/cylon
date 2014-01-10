@@ -32,7 +32,7 @@ When the BlinkM sends the 'start' event, we'll set up our events
 We'll request the BlinkM's version, and print that to the console:
 
           my.blinkm.version (version) ->
-            Logger.info "Started BlinkM version #{version}"
+            console.log "Started BlinkM version #{version}"
 
 By default, we'll turn the LED off and assign a boolean that we'll use to
 determine if it's on or not:
@@ -46,11 +46,11 @@ which state we need to transition the BlinkM to:
           every 1.second(), ->
             if lit
               lit = false
-              Logger.info 'on'
+              console.log 'on'
               my.blinkm.rgb 0xaa, 0, 0
             else
               lit = true
-              Logger.info 'off'
+              console.log 'off'
               my.blinkm.rgb 0, 0, 0
 
 Now that our robot knows what to do, let's get started:

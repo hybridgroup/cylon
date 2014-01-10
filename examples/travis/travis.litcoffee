@@ -65,7 +65,7 @@ on the state of the last build.
 
 First, it will log that it's checking Travis to the logger:
 
-          Logger.info "Checking last build status for #{user}/#{name}"
+          console.log "Checking last build status for #{user}/#{name}"
 
 Let's set the default color of the Sphero to blue until we know what the build
 status is:

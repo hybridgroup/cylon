@@ -38,7 +38,7 @@ supported:
         every 1.seconds(), ->
           angle += increment
           my.servo.angle(angle)
-          Logger.info "Current angle: #{my.servo.currentAngle() }"
+          console.log "Current angle: #{my.servo.currentAngle() }"
           increment = -increment if (angle is 30) or (angle is 150)
 
 And with all that done, we can now start our robot:

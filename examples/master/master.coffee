@@ -10,7 +10,7 @@ class SpheroRobot
   connection: { name: 'Sphero', adaptor: 'sphero' }
 
   work: (my) ->
-    Logger.info "Robot #{my.name} is now working!"
+    console.log "Robot #{my.name} is now working!"
 
 for bot in bots
   robot = new SpheroRobot

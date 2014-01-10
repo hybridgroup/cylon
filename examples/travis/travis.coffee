@@ -20,7 +20,7 @@ Cylon.robot
     name = "cylon"
 
     me.checkTravis = ->
-      Logger.info "Checking repo #{user}/#{name}"
+      console.log "Checking repo #{user}/#{name}"
       me.sphero.setRGB BLUE, true
 
       travis.repos {

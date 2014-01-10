@@ -20,7 +20,7 @@ Cylon.robot
         msg += "Bucks: #{data.sobject.Bucks__c},"
         msg += "SM_Id: #{data.sobject.Id}"
 
-        Logger.info msg
+        console.log msg
 
     i = 0
 

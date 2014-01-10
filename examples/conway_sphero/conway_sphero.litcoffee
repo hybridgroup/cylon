@@ -101,7 +101,7 @@ the number of contacts it had in the last tick.
       birthday: ->
         @age += 1
 
-        Logger.info "Happy birthday, #{@name}. You are #{@age} and had #{@contacts} contacts."
+        console.log "Happy birthday, #{@name}. You are #{@age} and had #{@contacts} contacts."
 
         if @enoughContacts()
           @rebirth() if not @alive?

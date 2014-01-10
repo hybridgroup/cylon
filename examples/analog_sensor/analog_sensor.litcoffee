@@ -36,10 +36,10 @@ tell it what work we want to do:
 
       work: (my) ->
         my.sensor.on 'upperLimit', (val) ->
-          Logger.info "Upper limit reached: #{val}"
+          console.log "Upper limit reached: #{val}"
 
         my.sensor.on 'lowerLimit', (val) ->
-          Logger.info "Lower limit reached: #{val}"
+          console.log "Lower limit reached: #{val}"
 
 Now that our robot knows what work to do, and the work it will be doing that
 hardware with, we can start it:
