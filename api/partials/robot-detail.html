@@ -53,7 +53,7 @@
               </button>
               <ul class="dropdown-menu">
                 <div ng-repeat="command in deviceDetail.commands">
-                  <li><a ng-click="executeCommand(deviceDetail.name, command)">{{command }}</a></li>
+                  <a ng-click="executeCommand(deviceDetail.name, command)"><li>{{command}}</li></a>
                 </div>
               </ul>
             </div>

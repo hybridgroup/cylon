@@ -71,6 +71,24 @@
   color: #aaa;
 }
 
+.dropdown-menu {
+  padding: 0;
+}
+
+.dropdown-menu li {
+  padding: 10px;
+  line-height: 1;
+}
+
+.dropdown-menu li:hover {
+  cursor: pointer;
+  background: #efefef;
+}
+
+.dropdown-menu a {
+  color: #444;
+}
+
 .dropdown-input {
   height: 34px;
   line-height: 1;
