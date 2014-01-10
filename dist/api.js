@@ -30,8 +30,9 @@
         this.port = opts.port || "3000";
         master = opts.master;
         this.server = express().http().io();
-        this.server.set('name', 'Cylon API Server');
-        this.server.use(express.bodyParser());
+        this.server.set('title', 'Cylon API Server');
+        this.server.use(express.json());
+        this.server.use(express.urlencoded());
         this.server.use(express["static"](__dirname + "/../api"));
         this.server.get("/*", function(req, res, next) {
           res.set('Content-Type', 'application/json');
@@ -39,7 +40,7 @@
         });
         this.configureRoutes();
         this.server.listen(this.port, this.host, function() {
-          return Logger.info("" + _this.server.name + " is listening at " + _this.host + ":" + _this.port);
+          return Logger.info("" + (_this.server.get('title')) + " is listening on " + _this.host + ":" + _this.port);
         });
       }
 

@@ -25,8 +25,9 @@ namespace 'Api', ->
 
       @server = express().http().io()
 
-      @server.set 'name', 'Cylon API Server'
-      @server.use express.bodyParser()
+      @server.set 'title', 'Cylon API Server'
+      @server.use express.json()
+      @server.use express.urlencoded()
       @server.use express.static __dirname + "/../api"
 
       @server.get "/*", (req, res, next) ->
@@ -36,7 +37,7 @@ namespace 'Api', ->
       do @configureRoutes
 
       @server.listen @port, @host, =>
-        Logger.info "#{@server.name} is listening at #{@host}:#{@port}"
+        Logger.info "#{@server.get('title')} is listening on #{@host}:#{@port}"
 
     configureRoutes: ->
       @server.get "/robots", (req, res) ->
