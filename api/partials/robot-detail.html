@@ -1,0 +1,119 @@
+<div class="container">
+  <div class="container robot">
+    <div class="row-fluid">
+      <div class="col-md-2">
+        <section class="robot-type display">
+          {{robot.type || "Robot"}}
+        </section>
+      </div>
+      <div class="col-md-10">
+        <b>
+          <span class="name">{{robot.name}}</span>
+          <dl class="controls">
+            <dt><i class="fa fa-fighter-jet"></i> devices: </dt>
+              <dd>{{robot.connections.length}}</dd>
+            <dt><i class="fa fa-exchange"></i> connections: </dt>
+              <dd>{{robot.connections.length}}</dd>
+          </dl>
+        </b>
+      </div>
+    </div>
+  </div>
+
+  <div class="container device details" ng-show='deviceDetail'>
+    <div class="row-fluid">
+      <div class="col-md-2">
+        <b><span class="name">{{deviceDetail.name}}</span></b>
+      </div>
+      <div class="col-md-5 pull-right">
+        <b>
+          <dl class="controls">
+            <span ng-show='deviceDetail.pin'>
+              <dt><i class="fa fa-fighter-jet"></i> </dt>
+                <dd>{{ deviceDetail.pin }}</dd>
+            </span>
+            <span ng-show='deviceDetail.driver'>
+              <dt><i class="fa fa-hdd"></i></dt>
+                <dd>{{ deviceDetail.driver }}</dd>
+            </span>
+            <span ng-show='deviceDetail.adaptor'>
+              <dt><i class="fa fa-resize-horizontal"></i></dt>
+                <dd>{{ deviceDetail.adaptor }}</dd>
+            </span>
+            <span ng-show='deviceDetail.connection'>
+              <dt><i class="fa fa-circle" ng-class="isConnected(deviceDetail.connection)"></i> </dt>
+              <dd ng-show="deviceDetail.connection.name">{{deviceDetail.connection.name}}</dd>
+            </span>
+          </dl>
+          <div class="input-group">
+            <div class="commands input-group-btn">
+              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                Commands
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <div ng-repeat="command in deviceDetail.commands">
+                  <a ng-click="executeCommand(deviceDetail.name, command)"><li>{{command}}</li></a>
+                </div>
+              </ul>
+            </div>
+            <input class="dropdown-input" type="text">
+          </div>
+        </b>
+      </div>
+    </div>
+    <div class="row-fluid content">
+      <div class="console">
+        <code></code>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="device" ng-repeat="device in robot.devices" ng-click="getDeviceDetail(device.name)">
+        <div class="row-fluid">
+          <div class="col-md-2">
+            <div class="device-type display">
+              D
+            </div>
+          </div>
+          <div class="col-md-10">
+            <b>
+              <span class="name">{{device.name}}</span>
+              <dl class="controls">
+                <span  ng-show="device.pin">
+                  <dt ><i class="fa fa-bolt"></i> pin: </dt>
+                  <dd>{{device.pin}}</dd>
+                </span>
+                <dt><i class="fa fa-exchange"></i> </dt>
+                <dd>{{device.connection.name}}</dd>
+              </dl>
+            </b>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="device" ng-repeat="connection in robot.connections">
+        <div class="row-fluid">
+          <div class="col-md-2">
+            <div class="device-type display">
+              <i class="fa fa-exchange"></i>
+            </div>
+          </div>
+          <div class="col-md-10">
+            <b>
+              <span class="name">{{connection.name}}</span>
+              <dl class="controls">
+                <dt><i class="fa fa-circle" ng-class="isConnected(connection)"></i> </dt>
+                <dd ng-show="connection.port">{{connection.port}}</dd>
+              </dl>
+            </b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

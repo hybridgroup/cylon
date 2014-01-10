@@ -10,7 +10,6 @@
 
 require './utils'
 require './logger'
-require './api'
 require './driver'
 require './adaptor'
 
@@ -159,9 +158,10 @@ class Cylon
     # Creates a new instance of the Cylon API server, or returns the
     # already-existing one.
     #
-    # Returns an Api.Server instance
+    # Returns an Cylon.ApiServer instance
     startAPI: ->
+      server = require('./api')
       api_config.master = @self
-      api ?= new Api.Server(api_config)
+      api ?= new server(api_config)
 
 module.exports = Cylon.getInstance()

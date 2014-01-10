@@ -1,0 +1,117 @@
+.navbar {
+  background-color: #444;
+  border: none;
+  border-radius: 0px;
+}
+
+.navbar-default .navbar-brand {
+  color: #efefef;
+}
+
+.navbar-default .navbar-brand:hover {
+  color: #ccc;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: #ccc;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  color: #ccc;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #eee;
+}
+
+.robot, .device {
+  border: 3px solid #ababab;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  padding: 15px 5px;
+}
+
+.robot .robot-type, .device .device-type {
+  background: #ababab;
+  padding: 10px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: white;
+}
+
+.robot b, .device b {
+  font-weight: bold;
+  line-height: 40px;
+}
+
+.robot .controls, .device .controls {
+  float: right;
+}
+
+.robot dl {
+  margin-bottom: 0;
+}
+
+.device {
+  min-height: 75px;
+}
+
+.robot dt, .robot dd, .device dt, .device dd {
+  display: inline-block;
+}
+
+.robot dd {
+  margin-right: 10px;
+}
+
+.robot dt i.fa {
+  color: #aaa;
+}
+
+.dropdown-menu {
+  padding: 0;
+}
+
+.dropdown-menu li {
+  padding: 10px;
+  line-height: 1;
+}
+
+.dropdown-menu li:hover {
+  cursor: pointer;
+  background: #efefef;
+}
+
+.dropdown-menu a {
+  color: #444;
+}
+
+.dropdown-input {
+  height: 34px;
+  line-height: 1;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border: 1px solid #ccc;
+  padding: 0px 5px;
+  width: 125px;
+  margin-top: 6px;
+}
+
+.details .console code {
+  display: block;
+  height: 150px;
+  width: 98%;
+  margin: 0 auto;
+  overflow: scroll;
+  white-space: pre;
+  border: 1px solid #ababab;
+  background: #fbfbfb;
+  margin-bottom: 8px;
+}
+
+.device.details {
+  padding: 15px;
+}

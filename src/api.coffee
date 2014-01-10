@@ -11,10 +11,10 @@
 express = require 'express.io'
 namespace = require 'node-namespace'
 
-namespace 'Api', ->
+namespace 'Cylon', ->
   # The Cylon API Server provides an interface to communicate with master class
   # and retrieve information about the robots being controlled.
-  class @Server
+  class @ApiServer
     master = null
 
     constructor: (opts = {}) ->
@@ -25,8 +25,10 @@ namespace 'Api', ->
 
       @server = express().http().io()
 
-      @server.set 'name', 'Cylon API Server'
-      @server.use express.bodyParser()
+      @server.set 'title', 'Cylon API Server'
+      @server.use express.json()
+      @server.use express.urlencoded()
+      @server.use express.static __dirname + "/../api"
 
       @server.get "/*", (req, res, next) ->
         res.set 'Content-Type', 'application/json'
@@ -35,7 +37,7 @@ namespace 'Api', ->
       do @configureRoutes
 
       @server.listen @port, @host, =>
-        Logger.info "#{@server.name} is listening at #{@host}:#{@port}"
+        Logger.info "#{@server.get('title')} is listening on #{@host}:#{@port}"
 
     configureRoutes: ->
       @server.get "/robots", (req, res) ->
@@ -106,3 +108,5 @@ namespace 'Api', ->
           req.io.respond(err) if err
           device.on 'update', (data) ->
             req.io.emit 'update', { data: data }
+
+module.exports = Cylon.ApiServer

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" ng-app="cylon">
+  <head>
+    <meta charset="utf-8">
+    <title>Cylon</title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+    <link rel="stylesheet" href="/stylesheets/font-awesome.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Cylon</a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav" ng-app="link">
+            <li class="active"><a href="#">Robots</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div ng-view></div>
+
+    <script src="/javascripts/vendor/jquery.min.js"></script>
+    <script src="/javascripts/vendor/angular.min.js"></script>
+    <script src="/javascripts/vendor/angular-route.min.js"></script>
+    <script src="/javascripts/vendor/bootstrap.min.js"></script>
+    <script src="/javascripts/app.js"></script>
+  </body>
+</html>
