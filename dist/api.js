@@ -16,12 +16,12 @@
   namespace = require('node-namespace');
 
   namespace('Api', function() {
-    return this.Server = (function() {
+    return this.ApiServer = (function() {
       var master;
 
       master = null;
 
-      function Server(opts) {
+      function ApiServer(opts) {
         var _this = this;
         if (opts == null) {
           opts = {};
@@ -43,7 +43,7 @@
         });
       }
 
-      Server.prototype.configureRoutes = function() {
+      ApiServer.prototype.configureRoutes = function() {
         this.server.get("/robots", function(req, res) {
           var robot;
           return res.json((function() {
@@ -161,7 +161,7 @@
         });
       };
 
-      return Server;
+      return ApiServer;
 
     })();
   });

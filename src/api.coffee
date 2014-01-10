@@ -14,7 +14,7 @@ namespace = require 'node-namespace'
 namespace 'Api', ->
   # The Cylon API Server provides an interface to communicate with master class
   # and retrieve information about the robots being controlled.
-  class @Server
+  class @ApiServer
     master = null
 
     constructor: (opts = {}) ->
