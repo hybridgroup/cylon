@@ -186,7 +186,7 @@
 
       Master.prototype.startAPI = function() {
         api_config.master = this.self;
-        return api != null ? api : api = new Api.Server(api_config);
+        return api != null ? api : api = new Api.ApiServer(api_config);
       };
 
       return Master;

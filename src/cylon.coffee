@@ -162,6 +162,6 @@ class Cylon
     # Returns an Api.Server instance
     startAPI: ->
       api_config.master = @self
-      api ?= new Api.Server(api_config)
+      api ?= new Api.ApiServer(api_config)
 
 module.exports = Cylon.getInstance()
