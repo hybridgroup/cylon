@@ -15,13 +15,13 @@
 
   namespace = require('node-namespace');
 
-  namespace('Api', function() {
-    return this.Server = (function() {
+  namespace('Cylon', function() {
+    return this.ApiServer = (function() {
       var master;
 
       master = null;
 
-      function Server(opts) {
+      function ApiServer(opts) {
         var _this = this;
         if (opts == null) {
           opts = {};
@@ -30,19 +30,21 @@
         this.port = opts.port || "3000";
         master = opts.master;
         this.server = express().http().io();
-        this.server.set('name', 'Cylon API Server');
-        this.server.use(express.bodyParser());
+        this.server.set('title', 'Cylon API Server');
+        this.server.use(express.json());
+        this.server.use(express.urlencoded());
+        this.server.use(express["static"](__dirname + "/../api"));
         this.server.get("/*", function(req, res, next) {
           res.set('Content-Type', 'application/json');
           return next();
         });
         this.configureRoutes();
         this.server.listen(this.port, this.host, function() {
-          return Logger.info("" + _this.server.name + " is listening at " + _this.host + ":" + _this.port);
+          return Logger.info("" + (_this.server.get('title')) + " is listening on " + _this.host + ":" + _this.port);
         });
       }
 
-      Server.prototype.configureRoutes = function() {
+      ApiServer.prototype.configureRoutes = function() {
         this.server.get("/robots", function(req, res) {
           var robot;
           return res.json((function() {
@@ -160,9 +162,11 @@
         });
       };
 
-      return Server;
+      return ApiServer;
 
     })();
   });
+
+  module.exports = Cylon.ApiServer;
 
 }).call(this);
