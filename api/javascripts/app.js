@@ -52,13 +52,13 @@ var RobotDetailCtrl = function($scope, $http, $routeParams, $location) {
   };
   $scope.executeCommand = function(deviceId, command) {
     var params, post_params;
-    params = $("#appendedDropdownButton").val();
+    params = $(".dropdown-input").val();
     post_params = {};
     if (params !== "") {
-      post_params = "{\"params\": [" + params + "]}";
+      post_params = { params: [params] };
     }
     return $http.post('/robots/' + $scope.robot.name + "/devices/" + deviceId + "/commands/" + command, post_params).success(function(data) {
-      return true;
+      $(".console code").append(data.result + "\n");
     });
   };
   device = {
