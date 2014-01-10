@@ -11,7 +11,7 @@
 express = require 'express.io'
 namespace = require 'node-namespace'
 
-namespace 'Api', ->
+namespace 'Cylon', ->
   # The Cylon API Server provides an interface to communicate with master class
   # and retrieve information about the robots being controlled.
   class @ApiServer
@@ -108,3 +108,5 @@ namespace 'Api', ->
           req.io.respond(err) if err
           device.on 'update', (data) ->
             req.io.emit 'update', { data: data }
+
+module.exports = Cylon.ApiServer

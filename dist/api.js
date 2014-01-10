@@ -15,7 +15,7 @@
 
   namespace = require('node-namespace');
 
-  namespace('Api', function() {
+  namespace('Cylon', function() {
     return this.ApiServer = (function() {
       var master;
 
@@ -166,5 +166,7 @@
 
     })();
   });
+
+  module.exports = Cylon.ApiServer;
 
 }).call(this);

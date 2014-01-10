@@ -17,8 +17,6 @@
 
   require('./logger');
 
-  require('./api');
-
   require('./driver');
 
   require('./adaptor');
@@ -185,8 +183,10 @@
       };
 
       Master.prototype.startAPI = function() {
+        var server;
+        server = require('./api');
         api_config.master = this.self;
-        return api != null ? api : api = new Api.ApiServer(api_config);
+        return api != null ? api : api = new server(api_config);
       };
 
       return Master;
