@@ -53,4 +53,12 @@
     return this.seconds(this);
   };
 
+  Number.prototype.fromScale = function(start, end) {
+    return (this - Math.min(start, end)) / (Math.max(start, end) - Math.min(start, end));
+  };
+
+  Number.prototype.toScale = function(start, end) {
+    return Math.ceil(this * (Math.max(start, end) - Math.min(start, end)) + Math.min(start, end));
+  };
+
 }).call(this);
