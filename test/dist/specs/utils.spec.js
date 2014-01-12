@@ -7,8 +7,20 @@
       it("adds seconds() method", function() {
         return 5..seconds().should.be.equal(5000);
       });
-      return it("adds second() method", function() {
+      it("adds second() method", function() {
         return 1..second().should.be.equal(1000);
+      });
+      it("scales an Integer", function() {
+        return 2..fromScale(1, 10).toScale(1, 20).should.be.equal(4);
+      });
+      it("scales a right angle", function() {
+        return 90..fromScale(1, 180).toScale(-90, 90).should.be.equal(0);
+      });
+      it("scales an acute angle", function() {
+        return 45..fromScale(1, 180).toScale(0, 90).should.be.equal(23);
+      });
+      return it("scales a Float", function() {
+        return 2.5.fromScale(1, 10).toScale(1, 20).should.be.equal(5);
       });
     });
     return describe("#proxyFunctionsToObject", function() {

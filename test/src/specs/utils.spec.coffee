@@ -10,6 +10,18 @@ describe "Utils", ->
     it "adds second() method", ->
       1.second().should.be.equal 1000
 
+    it "scales an Integer", ->
+      2.fromScale(1,10).toScale(1,20).should.be.equal 4
+
+    it "scales a right angle", ->
+      90.fromScale(1,180).toScale(-90, 90).should.be.equal 0
+
+    it "scales an acute angle", ->
+      45.fromScale(1,180).toScale(0, 90).should.be.equal 23
+
+    it "scales a Float", ->
+      (2.5).fromScale(1,10).toScale(1, 20).should.be.equal 5
+
   describe "#proxyFunctionsToObject", ->
     methods = ['asString', 'toString', 'returnString']
 

@@ -78,3 +78,15 @@ Number::seconds = ->
 #   #=> 1000
 Number::second = ->
   @seconds(this)
+
+# Public: Convert value from old scale (start, end) to (0..1) scale
+#
+# Returns an integer representing the scaled value
+Number::fromScale = (start, end) ->
+  (this - Math.min(start, end)) / (Math.max(start, end) - Math.min(start, end))
+
+# Public: Convert value from (0..1) scale to new (start, end) scale
+#
+# Returns an integer representing the scaled value
+Number::toScale = (start, end) ->
+  Math.ceil(this * (Math.max(start, end) - Math.min(start, end)) + Math.min(start, end))
