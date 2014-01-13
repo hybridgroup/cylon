@@ -45,16 +45,34 @@ raspberry_platform: true
   %h2 Commands:
   
   %dl.methods 
+    %dt goToRGB
+    %dd Sets the color of the BlinkM RGB LED to the specified combination of RGB color provided (red, green and blue values should be between 0 and 255).
+    %dt fadeToRGB
+    %dd Fades the color of the BlinkM RGB LED to the specified combination of RGB color provided (red, green and blue values should be between 0 and 255).
+    %dt fadeToHSB
+    %dd Fades the color of the BlinkM RGB LED to the specified combination of HSB provided.
+    %dt fadeToRandomRGB
+    %dd Fades the color of the BlinkM RGB LED to a random combination of RGB color (red, green and blue values should be between 0 and 255).
+    %dt fadeToRandomHSB
+    %dd Fades the color of the BlinkM RGB LED to a random combination of HSB .
+    %dt playLightScript
+    %dd Plays a light script for the BlinkM RGB LED.
+    %dt stopScript
+    %dd Stops an specific script for the BlinkM RGB LED.
+    %dt setFadeSpeed
+    %dd Sets a fade to an specific speed for the BlinkM RGB LED.
+    %dt setTimeAdjust
+    %dd Sets a time adjust for the BlinkM RGB LED.
+    %dt getRGBColor
+    %dd Returns an array containing the RGB values for the current color (all integer between 0 and 255).
+    %dt setAddress
+    %dd Sets an address to the driver.
+    %dt getAddress
+    %dd Returns an sring describing the I2C addresss being used.
+    %dt getFirmware
+    %dd Returns an sring describing the I2C firmware version being used.
     %dt off
     %dd Turns BlinkM off.
-    %dt rgb → nil
-    %dd Sets the color of the BlinkM RGB LED to the specified combination of RGB color provided (red, green and blue values should be between 0 and 255).
-    %dt fade → nil
-    %dd Fades the color of the BlinkM RGB LED to the specified combination of RGB color provided (red, green and blue values should be between 0 and 255).
-    %dt color → [red, green, blue] (integer)
-    %dd Returns an array containing the RGB values for the current color (all integer between 0 and 255).
-    %dt version → String
-    %dd Returns an sring describing the I2C firmware version being used.
 
   %h2 Events
 
@@ -107,3 +125,4 @@ raspberry_platform: true
   .devices
     = partial "documentation/partials/devices_platforms"
     
+
