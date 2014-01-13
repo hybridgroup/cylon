@@ -18,14 +18,14 @@ module.exports =
     # the Sphero adaptor creates a new instance of the Sphero adaptor class:
     #
     # new Cylon.Adaptors.Sphero(args...)
-    return ->
+    new Cylon.Adaptors.<%= adaptorClassName %>(args...)
 
   driver: (args...) ->
     # Provide a function that's an instance of your driver here. For example,
     # the Sphero adaptor creates a new instance of the Sphero driver class:
     #
     # new Cylon.Drivers.Sphero(args...)
-    return ->
+    new Cylon.Drivers.<%= adaptorClassName %>(args...)
 
   register: (robot) ->
     # Bootstrap your adaptor here. For example, with a Sphero, you would call

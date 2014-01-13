@@ -4,7 +4,7 @@
 
   module = source("<%= adaptorName %>");
 
-  describe("basic tests", function() {
+  describe("<%= adaptorName %>", function() {
     it("standard async test", function(done) {
       var bool;
       bool = false;
