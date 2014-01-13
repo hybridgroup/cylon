@@ -1,4 +1,5 @@
 ---
+page_title_show: true
 title: Dreamforce Means Connected Devices Are A Thing
 page_title: Blog
 date: 2013-11-26

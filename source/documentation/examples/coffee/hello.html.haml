@@ -1,5 +1,6 @@
 ---
-layout: page
+layout: documentation
+page_title_show: true
 title: Cylon.JS Example - Hello
 page_title: "Example: Hello"
 author: The Hybrid Group
@@ -30,10 +31,10 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
       :::coffeescript
         work: ->
           every 1.second(), ->
-            Logger.info("Hello, human!")
+            console.log("Hello, human!")
 
           after 10.seconds(), ->
-            Logger.info "Impressive."
+            console.log "Impressive."
 
   Simple as can be. Now that we're done, let's start the robot:
 

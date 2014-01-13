@@ -3,95 +3,96 @@ title: Arduino with Cylon.js
 author: The Hybrid Group
 page_title: Arduino
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-firmata' target='blanck' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-firmata/issues' target='blanck'>Issues</a>"
-layout: page
+layout: documentation
+page_title_show: true
+
+gpio_drivers: true
+blinkm_driver: true
+hmc6352_compass_driver: true
 ---
-.documentation
-  %section.intro
-    = image_tag "/images/arduino.jpg", class: "display"
 
-    %p Arduino is an open-source electronics prototyping platform based on flexible, easy-to-use hardware and software. It's intended for artists, designers, hobbyists and anyone interested in creating interactive objects or environments.
+%section.intro
+  = image_tag "/images/devices/arduino.jpg", class: "display"
 
-    %p
-      For more info about the arduino platform click
-      = succeed "." do
-        = link_to "here", "http://arduino.cc/", target: :blank
+  %p Arduino is an open-source electronics prototyping platform based on flexible, easy-to-use hardware and software. It's intended for artists, designers, hobbyists and anyone interested in creating interactive objects or environments.
 
-  %section.how_to
-    %h2 How to install
-    %p Installing Cylon.js with Arduino support is pretty easy.
-    :markdown
-          :::ruby
-          npm install cylon-firmata
-    %h2 How to use
-    %p This small program lets you push a button on the arduino board to turn a LED on or off. In less than 10 lines of code using Cylon.js.
-    %h3 Javascript  
-    :markdown
-          :::javascript
-          var Cylon = require('cylon');
+  %p
+    For more info about the arduino platform click
+    = succeed "." do
+      = link_to "here", "http://arduino.cc/", target: :blank
 
-          Cylon.robot({
-            connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
-            devices: [{name: 'led', driver: 'led', pin: 13},
-                     {name: 'button', driver: 'button', pin: 2}],
+%section.how_to
+  %h2 How to install
+  %p Installing Cylon.js with Arduino support is pretty easy.
+  :markdown
+        :::ruby
+        npm install cylon-firmata
+  %h2 How to use
+  %p This small program lets you push a button on the arduino board to turn a LED on or off. In less than 10 lines of code using Cylon.js.
+  %h3 Javascript  
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
 
-            work: function(my) {
-              my.button.on('push', function() {my.led.toggle()});
-            }
-          }).start();
+        Cylon.robot({
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+          devices: [{name: 'led', driver: 'led', pin: 13},
+                   {name: 'button', driver: 'button', pin: 2}],
 
-    %h3 CoffeeScript
-    :markdown
-          :::javascript
-          Cylon = require('cylon')
+          work: function(my) {
+            my.button.on('push', function() {my.led.toggle()});
+          }
+        }).start();
 
-          Cylon.robot
-            connection:
-              name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
+  %h3 CoffeeScript
+  :markdown
+        :::javascript
+        Cylon = require('cylon')
 
-            devices:
-              [
-                {name: 'led', driver: 'led', pin: 13},
-                {name: 'button', driver: 'button', pin: 2}
-              ]
+        Cylon.robot
+          connection:
+            name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
 
-            work: (my) ->
-              my.button.on 'push', -> my.led.toggle()
+          devices:
+            [
+              {name: 'led', driver: 'led', pin: 13},
+              {name: 'button', driver: 'button', pin: 2}
+            ]
 
-            .start()
+          work: (my) ->
+            my.button.on 'push', -> my.led.toggle()
 
-    %h2 How to connect
-    %h3 OSX
-    %p Coming soon.
+          .start()
 
-    %h3 Ubuntu
+  %h2 How to connect
+  %h3 OSX
+  %p Coming soon.
 
-    %p Coming soon.
+  %h3 Ubuntu
 
-  %section.drivers
-    %h2 Drivers
-    %p
-      Thanks to
-      %b cylon.js
-      and
-      %b node.js
-      it is possible to interact with several I/O hardware devices and interfaces connected to the arduino
-      using a set of already defined and easy to use drivers, all of this thanks to the cylon.js architecture, in conjuction with the cylon-firmata
-      adaptor (using the firmata communication protocol),
-      which makes it even possible to swap the entire platform for something else like digispark, and keep using the same code you just wrote for
-      arduino, this just by swapping a couple of lines in your program.
-    %p Available drivers for the arduino platform are listed below, the drivers contain detailed documentation and examples of what kind physical computing (using cylon.js and node.js) you could be doing:
+  %p Coming soon.
 
-    .hardware
-      .devices
-        = partial "documentation/partials/analog-sensor"
-        = partial "documentation/partials/button"
-        = partial "documentation/partials/continuous-servo"
-        = partial "documentation/partials/led"
-        = partial "documentation/partials/maxbotix"
-        = partial "documentation/partials/motor"
-        = partial "documentation/partials/servo"
-        = partial "documentation/partials/blinkm"
-        = partial "documentation/partials/hmc6352-compass"
-        = #partial "documentation/partials/wiichuck"
-        = #partial "documentation/partials/wiiclassic"
+%section.drivers
+  %h2 Drivers
+  %p
+    Thanks to
+    %b cylon.js
+    and
+    %b node.js
+    it is possible to interact with several I/O hardware devices and interfaces connected to the arduino
+    using a set of already defined and easy to use drivers, all of this thanks to the cylon.js architecture, in conjuction with the cylon-firmata
+    adaptor (using the firmata communication protocol),
+    which makes it even possible to swap the entire platform for something else like digispark, and keep using the same code you just wrote for
+    arduino, this just by swapping a couple of lines in your program.
+  %p Available drivers for the arduino platform are listed below, the drivers contain detailed documentation and examples of what kind physical computing (using cylon.js and node.js) you could be doing:
+
+  .hardware
+    %h2 GPIO Drivers
+    .devices
+      // TODO: Update drivers list at the top of the page.
+      = partial "documentation/partials/devices_gpio_drivers"
+    %h2 i2c Drivers
+    .devices
+      = partial "documentation/partials/devices_i2c_drivers"
+
 

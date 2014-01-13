@@ -3,52 +3,52 @@ title: Cylon.js - Wii Nunchuck Driver
 author: The Hybrid Group
 page_title: Wii Nunchuk
 page_subtitle: Driver
-layout: page
+layout: documentation
+page_title_show: true
+
+arduino_platform: true
 ---
-.documentation
-  %section.intro
-    =image_tag "/images/wii-chuck.jpg", class: "display"
-    %p
-      Allows user to use a Nintendo Wii Nunchuck controller via i2c interface
 
-  %section.how-to
-    %h2 How to establish a connection and setup the driver
-    %h3 For Arduino:
-    :markdown
-          :::javascript
-          comming soon
+%section.intro
+  =image_tag "/images/devices/wii-chuck.jpg", class: "display"
+  %p
+    Allows user to use a Nintendo Wii Nunchuck controller via i2c interface
 
-  %section.public-methods
-    %h2 Events:
-    %dl.methods 
-      %dt c_button
-      %dd Get's triggered every interval amount of time if the square button is pressed.
-      %dt z_button
-      %dd Get's triggered every interval amount of time if the square button is pressed.
-      %dt joystick
-      %dd Get's triggered every "interval" amount of time if a joystick event occured, you can access values x, y.
-      
-    %h3 How to use events and call them on your drivers
-    %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
-    :markdown
-          :::javascript
-          comming soon
+%section.how-to
+  %h2 How to establish a connection and setup the driver
+  %h3 For Arduino:
+  :markdown
+        :::javascript
+        comming soon
 
-  %section.how_to
-    %h2 Example using a Nintendo Wii Nunchuck.
-    :markdown
-          :::javascript
-          comming soon
+%section.public-methods
+  %h2 Events:
+  %dl.methods 
+    %dt c_button
+    %dd Get's triggered every interval amount of time if the square button is pressed.
+    %dt z_button
+    %dd Get's triggered every interval amount of time if the square button is pressed.
+    %dt joystick
+    %dd Get's triggered every "interval" amount of time if a joystick event occured, you can access values x, y.
+    
+  %h3 How to use events and call them on your drivers
+  %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
+  :markdown
+        :::javascript
+        comming soon
 
-  %section.circuit
-    %h2 Circuit and Schematic
-    %p
-      Coming soon
+%section.how_to
+  %h2 Example using a Nintendo Wii Nunchuck.
+  :markdown
+        :::javascript
+        comming soon
 
-  %section.compatability.hardware
-    %h2 Works with:
-    .devices
-      = partial "documentation/partials/arduino"
-      = #partial "documentation/partials/beaglebone"
-      = #partial "documentation/partials/digispark"
-      = #partial "documentation/partials/raspberry-pi"
+%section.circuit
+  %h2 Circuit and Schematic
+  %p
+    Coming soon
+
+%section.compatability.hardware
+  %h2 Works with:
+  .devices
+    = partial "documentation/partials/devices_platforms"

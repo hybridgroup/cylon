@@ -1,4 +1,5 @@
 ---
+page_title_show: true
 title: RobotsConf Was Remarkable
 page_title: Blog
 date: 2013-12-12

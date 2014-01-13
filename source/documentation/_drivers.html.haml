@@ -1,51 +1,43 @@
 %section.hardware
   %h2 General Purpose Input/Output (GPIO) Drivers
   Cylon's GPIO drivers work with several different platforms that support the required GPIO interfaces. For example, the Arduino. 
-  -#and Digispark.
-  .devices
-    = partial "../partials/analog-sensor"
-    = partial "../partials/button"
-    = partial "../partials/continuous-servo"
-    = partial "../partials/led"
-    = partial "../partials/maxbotix"
-    = partial "../partials/motor"
-    = partial "../partials/servo"
 
+  .devices
+    = partial "/documentation/partials/devices_gpio_drivers"
 
   %h2 i2c Drivers 
   Cylon.js's i2c drivers work with several different platforms that support the required interfaces. For example, the Arduino.
   .devices
-    =# partial "../partials/wiichuck"
-    =# partial "../partials/wiiclassic"
-    = partial "../partials/blinkm"
-    = partial "../partials/hmc6352-compass"
+    = partial "/documentation/partials/devices_i2c_drivers"
 
   %h2 ARDrone Drivers
   .devices
-    = partial "../partials/ardrone-flight"
-    = partial "../partials/ardrone-navigation"
-    = #partial "../partials/ardrone-video"
+    = partial "/documentation/partials/devices_ardrone_drivers"
 
   %h2 Crazyflie Driver
   .devices
-    = partial "../partials/crazyflie-flight"
+    = partial "/documentation/partials/devices_crazyflie_drivers"
+
+  %h2 Force Driver
+  .devices
+    = partial "/documentation/partials/devices_force_drivers"
 
   %h2 Keyboard Driver
   .devices
-    = partial "../partials/keyboard-driver"
+    = partial "/documentation/partials/devices_keyboard_drivers"
   
   %h2 Leap Motion Driver
   .devices
-    = partial "../partials/leapmotion-driver"
+    = partial "/documentation/partials/devices_leapmotion_drivers"
 
   %h2 Pebble Driver
   .devices
-    = partial "../partials/pebble-driver"
+    = partial "/documentation/partials/devices_pebble_drivers"
 
   -#%h2 Roomba Driver
   -#.devices
-    =# partial "../partials/roomba-driver"
+    = #partial "/documentation/partials/devices_roomba_drivers"
 
   %h2 Sphero Driver
   .devices
-    = partial "../partials/sphero-driver"
+    = partial "/documentation/partials/devices_sphero_drivers"

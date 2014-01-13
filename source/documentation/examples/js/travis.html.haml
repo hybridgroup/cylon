@@ -1,5 +1,6 @@
 ---
-layout: page
+layout: documentation
+page_title_show: true
 title: Cylon.JS Example - Cylon and Travis
 page_title: "Example: Cylon and Travis"
 author: The Hybrid Group
@@ -28,7 +29,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
             var name = "cylon"
 
             me.checkTravis = function() {
-              Logger.info("Checking repo "+user+"/"+name);
+              console.log("Checking repo "+user+"/"+name);
               me.sphero.setRGB(BLUE, true);
 
               travis.repos(

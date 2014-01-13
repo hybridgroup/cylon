@@ -1,5 +1,6 @@
 ---
-layout: page
+layout: documentation
+page_title_show: true
 title: Cylon.JS Example - BlinkM
 page_title: "Example: BlinkM"
 author: The Hybrid Group
@@ -49,7 +50,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
       :::coffeescript
             my.blinkm.version (version) ->
-              Logger.info "Started BlinkM version \#{version}"
+              console.log "Started BlinkM version \#{version}"
 
   By default, we'll turn the LED off and assign a boolean that we'll use to
   determine if it's on or not:
@@ -65,11 +66,11 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
             every 1.second(), ->
               if lit
                 lit = false
-                Logger.info 'on'
+                console.log 'on'
                 my.blinkm.rgb 0xaa, 0, 0
               else
                 lit = true
-                Logger.info 'off'
+                console.log 'off'
                 my.blinkm.rgb 0, 0, 0
 
   Now that our robot knows what to do, let's get started:
