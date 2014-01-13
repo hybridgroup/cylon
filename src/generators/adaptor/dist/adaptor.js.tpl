@@ -1,5 +1,5 @@
 /*
- * cylon-keyboard adaptor
+ * <%= adaptorName %> adaptor
  * http://cylonjs.com
  *
  * Copyright (c) 2013-2014 Your Name Here
@@ -15,26 +15,26 @@
 
   namespace = require('node-namespace');
 
-  require('./cylon-keyboard');
+  require('./<%= adaptorName %>');
 
   require('./driver');
 
   namespace('Cylon.Adaptors', function() {
-    return this.Keyboard = (function(_super) {
-      __extends(Keyboard, _super);
+    return this.<%= adaptorClassName %> = (function(_super) {
+      __extends(<%= adaptorClassName %>, _super);
 
-      function Keyboard(opts) {
+      function <%= adaptorClassName %>(opts) {
         if (opts == null) {
           opts = {};
         }
-        Keyboard.__super__.constructor.apply(this, arguments);
+        <%= adaptorClassName %>.__super__.constructor.apply(this, arguments);
       }
 
-      Keyboard.prototype.connect = function(callback) {
-        return Keyboard.__super__.connect.apply(this, arguments);
+      <%= adaptorClassName %>.prototype.connect = function(callback) {
+        return <%= adaptorClassName %>.__super__.connect.apply(this, arguments);
       };
 
-      return Keyboard;
+      return <%= adaptorClassName %>;
 
     })(Cylon.Adaptor);
   });
