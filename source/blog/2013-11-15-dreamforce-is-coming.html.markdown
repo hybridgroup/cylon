@@ -1,4 +1,5 @@
 ---
+page_title_show: true
 title: Dreamforce Is Coming!
 page_title: Blog
 date: 2013-11-15

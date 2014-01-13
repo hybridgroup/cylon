@@ -3,123 +3,126 @@ title: Cylon.js - BlinkM Driver
 author: The Hybrid Group
 page_title: BlinkM
 page_subtitle: Driver
-layout: page
+layout: documentation
+page_title_show: true
+
+arduino_platform: true
+beaglebone_platform: true
+raspberry_platform: true
 ---
-.documentation
-  %section.intro
-    =image_tag "/images/blinkm.jpg", class: "display"
-    %p
-      Allows user to control BlinkM RGB LED via i2c interface.
+%section.intro
+  =image_tag "/images/devices/blinkm.jpg", class: "display"
+  %p
+    Allows user to control BlinkM RGB LED via i2c interface.
 
-  %section.how-to
-    %h2 How to establish a connection and setup the driver
-    :markdown
-      Install the module with `npm install cylon-i2c`
-    %h3 JavaScript
-    :markdown
-          :::javascript
-          var Cylon = require('cylon');
+%section.how-to
+  %h2 How to establish a connection and setup the driver
+  :markdown
+    Install the module with `npm install cylon-i2c`
+  %h3 JavaScript
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
 
-          Cylon.robot({
-            connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
-            device: {name: 'led', driver: 'led', pin: 13},
-            ...
+        Cylon.robot({
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+          device: {name: 'led', driver: 'led', pin: 13},
+          ...
 
-    %h3 CoffeeScript
-    :markdown
-          :::javascript
-          Cylon = require('cylon')
+  %h3 CoffeeScript
+  :markdown
+        :::javascript
+        Cylon = require('cylon')
 
-          Cylon.robot
-            connection:
-              name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
+        Cylon.robot
+          connection:
+            name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
 
-            device:
-              name: 'led', driver: 'led', pin: 13
-            ...
-  %section.public-events
-    %h2 Commands:
+          device:
+            name: 'led', driver: 'led', pin: 13
+          ...
+%section.public-events
+  %h2 Commands:
+  
+  %dl.methods 
+    %dt goToRGB
+    %dd Sets the color of the BlinkM RGB LED to the specified combination of RGB color provided (red, green and blue values should be between 0 and 255).
+    %dt fadeToRGB
+    %dd Fades the color of the BlinkM RGB LED to the specified combination of RGB color provided (red, green and blue values should be between 0 and 255).
+    %dt fadeToHSB
+    %dd Fades the color of the BlinkM RGB LED to the specified combination of HSB provided.
+    %dt fadeToRandomRGB
+    %dd Fades the color of the BlinkM RGB LED to a random combination of RGB color (red, green and blue values should be between 0 and 255).
+    %dt fadeToRandomHSB
+    %dd Fades the color of the BlinkM RGB LED to a random combination of HSB .
+    %dt playLightScript
+    %dd Plays a light script for the BlinkM RGB LED.
+    %dt stopScript
+    %dd Stops an specific script for the BlinkM RGB LED.
+    %dt setFadeSpeed
+    %dd Sets a fade to an specific speed for the BlinkM RGB LED.
+    %dt setTimeAdjust
+    %dd Sets a time adjust for the BlinkM RGB LED.
+    %dt getRGBColor
+    %dd Returns an array containing the RGB values for the current color (all integer between 0 and 255).
+    %dt setAddress
+    %dd Sets an address to the driver.
+    %dt getAddress
+    %dd Returns an sring describing the I2C addresss being used.
+    %dt getFirmware
+    %dd Returns an sring describing the I2C firmware version being used.
+    %dt off
+    %dd Turns BlinkM off.
+
+  %h2 Events
+
+  %dl.methods 
+    %dt start
+    %dd Sent when the device has been started and is ready to use.  
+
+%section.how-to
+  %h2 How to use
+  %p Example using a BlinkM.
+  %h3 JavaScript
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+          device: {name: 'led', driver: 'led', pin: 13},
+
+          work: function(my) {
+            every((1).seconds(), function() {my.led.toggle()});
+          }
+        }).start();
+
+  %h3 CoffeeScript
+  :markdown
+        :::javascript
+        Cylon = require('cylon')
+
+        Cylon.robot
+          connection:
+            name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
+
+          device:
+            name: 'led', driver: 'led', pin: 13
+
+          work: (my) ->
+            # we do our thing here
+            every 1.second(), -> my.led.toggle()
+
+        .start()
+
+%section.circuit
+  %h2 Circuit and Schematic
+  %p
+    Coming soon...
+
+%section.compatability.hardware
+  %h2 Works with:
+  .devices
+    = partial "documentation/partials/devices_platforms"
     
-    %dl.methods 
-      %dt goToRGB
-      %dd Sets the color of the BlinkM RGB LED to the specified combination of RGB color provided (red, green and blue values should be between 0 and 255).
-      %dt fadeToRGB
-      %dd Fades the color of the BlinkM RGB LED to the specified combination of RGB color provided (red, green and blue values should be between 0 and 255).
-      %dt fadeToHSB
-      %dd Fades the color of the BlinkM RGB LED to the specified combination of HSB provided.
-      %dt fadeToRandomRGB
-      %dd Fades the color of the BlinkM RGB LED to a random combination of RGB color (red, green and blue values should be between 0 and 255).
-      %dt fadeToRandomHSB
-      %dd Fades the color of the BlinkM RGB LED to a random combination of HSB .
-      %dt playLightScript
-      %dd Plays a light script for the BlinkM RGB LED.
-      %dt stopScript
-      %dd Stops an specific script for the BlinkM RGB LED.
-      %dt setFadeSpeed
-      %dd Sets a fade to an specific speed for the BlinkM RGB LED.
-      %dt setTimeAdjust
-      %dd Sets a time adjust for the BlinkM RGB LED.
-      %dt getRGBColor
-      %dd Returns an array containing the RGB values for the current color (all integer between 0 and 255).
-      %dt setAddress
-      %dd Sets an address to the driver.
-      %dt getAddress
-      %dd Returns an sring describing the I2C addresss being used.
-      %dt getFirmware
-      %dd Returns an sring describing the I2C firmware version being used.
-      %dt off
-      %dd Turns BlinkM off.
 
-    %h2 Events
-
-    %dl.methods 
-      %dt start
-      %dd Sent when the device has been started and is ready to use.  
-
-  %section.how-to
-    %h2 How to use
-    %p Example using a BlinkM.
-    %h3 JavaScript
-    :markdown
-          :::javascript
-          var Cylon = require('cylon');
-
-          Cylon.robot({
-            connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
-            device: {name: 'led', driver: 'led', pin: 13},
-
-            work: function(my) {
-              every((1).seconds(), function() {my.led.toggle()});
-            }
-          }).start();
-
-    %h3 CoffeeScript
-    :markdown
-          :::javascript
-          Cylon = require('cylon')
-
-          Cylon.robot
-            connection:
-              name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
-
-            device:
-              name: 'led', driver: 'led', pin: 13
-
-            work: (my) ->
-              # we do our thing here
-              every 1.second(), -> my.led.toggle()
-
-          .start()
-
-  %section.circuit
-    %h2 Circuit and Schematic
-    %p
-      Coming soon...
-
-  %section.compatability.hardware
-    %h2 Works with:
-    .devices
-      = partial "documentation/partials/arduino"
-      = partial "documentation/partials/beaglebone"
-      =# partial "documentation/partials/digispark"
-      = partial "documentation/partials/raspberry-pi"

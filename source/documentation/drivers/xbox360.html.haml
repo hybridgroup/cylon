@@ -3,13 +3,14 @@ title: Cylon.js - XBox360 Controller Driver
 author: The Hybrid Group
 page_title: XBox360 Controller
 page_subtitle: Driver
-layout: page
+layout: documentation
+page_title_show: true
+
+joystick_platform: true
 ---
-.documentation
-  %section.intro
-    =image_tag "/images/xbox360.jpg", class: "display"
-    %p
-      Allows user to interact with Cylon.js devices using a XBox360 game controller.
+%section.intro
+  =image_tag "/images/devices/xbox360.jpg", class: "display"
+  %p Allows user to interact with Cylon.js devices using a XBox360 game controller.
 
   %section.how-to
     %h2 How to establish a connection and setup the driver
@@ -151,7 +152,7 @@ layout: page
 
           .start()
 
-  %section.compatability.hardware
-    %h2 Works with:
-    .devices
-      = partial "documentation/partials/joystick"
+%section.compatability.hardware
+  %h2 Works with:
+  .devices
+    = partial "documentation/partials/devices_platforms"

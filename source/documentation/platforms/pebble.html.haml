@@ -3,161 +3,165 @@ title: Pebble with Cylon.js
 author: The Hybrid Group
 page_title: Pebble
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-pebble' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-pebble/issues'>Issues</a>"
-layout: page
+layout: documentation
+page_title_show: true
+
+pebble_driver: true
 ---
-.documentation
-  %section.intro
-    = image_tag "/images/pebble.jpg", class: "display"
 
-    %p The Pebble is a smart watch, that connects via bluetooth.
+%section.intro
+  = image_tag "/images/devices/pebble.jpg", class: "display"
 
-    %p
-      For more info about the Pebble platform click
-      = succeed "." do
-        = link_to "here", "http://getpebble.com/", target: :blank
+  %p The Pebble is a smart watch, that connects via bluetooth.
 
-  %section.how-to
-    %h2 How to install
-    %p
-      Installing Cylon.js with pebble support is pretty easy.
+  %p
+    For more info about the Pebble platform click
+    = succeed "." do
+      = link_to "here", "http://getpebble.com/", target: :blank
 
-    :markdown
-          :::bash
-          npm install cylon-pebble
-    %h2 How to use
-    %p This small program receives message queue events from a Pebble smart watch.
-    %h3 JavaScript
-    :markdown
-          :::javascript
-          Cylon = require('cylon');
+%section.how-to
+  %h2 How to install
+  %p
+    Installing Cylon.js with pebble support is pretty easy.
 
-          Cylon.api({
-            host: '0.0.0.0',
-            port: '8080'
-          });
+  :markdown
+        :::bash
+        npm install cylon-pebble
+  %h2 How to use
+  %p This small program receives message queue events from a Pebble smart watch.
+  %h3 JavaScript
+  :markdown
+        :::javascript
+        Cylon = require('cylon');
 
-          PebbleRobot = (function() {
+        Cylon.api({
+          host: '0.0.0.0',
+          port: '8080'
+        });
 
-            function PebbleRobot() {}
+        PebbleRobot = (function() {
 
-            PebbleRobot.prototype.connection = {
-              name: 'pebble',
-              adaptor: 'pebble'
-            };
+          function PebbleRobot() {}
 
-            PebbleRobot.prototype.device = {
-              name: 'pebble',
-              driver: 'pebble'
-            };
+          PebbleRobot.prototype.connection = {
+            name: 'pebble',
+            adaptor: 'pebble'
+          };
 
-            PebbleRobot.prototype.work = function(self) {
-              var c;
-              c = 100;
-              return every(1..second(), function() {
-                var str;
-                c++;
-                str = "c: " + c;
-                self.pebble.message_queue().push(str);
-                return console.log(self.pebble.last_message());
-              });
-            };
+          PebbleRobot.prototype.device = {
+            name: 'pebble',
+            driver: 'pebble'
+          };
 
-            return PebbleRobot;
+          PebbleRobot.prototype.work = function(self) {
+            var c;
+            c = 100;
+            return every(1..second(), function() {
+              var str;
+              c++;
+              str = "c: " + c;
+              self.pebble.message_queue().push(str);
+              return console.log(self.pebble.last_message());
+            });
+          };
 
-          })();
+          return PebbleRobot;
 
-          bot = new PebbleRobot();
+        })();
 
-          bot.name = 'pebble';
+        bot = new PebbleRobot();
 
-          Cylon.robot(bot);
+        bot.name = 'pebble';
 
-          Cylon.start();
+        Cylon.robot(bot);
 
-    %h3 CoffeeScript
-    :markdown
-          :::javascript
-          Cylon = require('cylon')
+        Cylon.start();
 
-          Cylon.api host: '0.0.0.0', port: '8080'
+  %h3 CoffeeScript
+  :markdown
+        :::javascript
+        Cylon = require('cylon')
 
-          class PebbleRobot
-            connection:
-              name: 'pebble', adaptor: 'pebble'
+        Cylon.api host: '0.0.0.0', port: '8080'
 
-            device:
-              name: 'pebble', driver: 'pebble'
+        class PebbleRobot
+          connection:
+            name: 'pebble', adaptor: 'pebble'
 
-            work: (self) ->
-              c = 100
-              every 1.second(), ->
-                c++
-                str = "c: \#{c}"
-                self.pebble.message_queue().push(str)
-                console.log(self.pebble.last_message())
+          device:
+            name: 'pebble', driver: 'pebble'
 
-          bot = new PebbleRobot()
-          bot.name = 'pebble'
-          Cylon.robot bot
+          work: (self) ->
+            c = 100
+            every 1.second(), ->
+              c++
+              str = "c: \#{c}"
+              self.pebble.message_queue().push(str)
+              console.log(self.pebble.last_message())
 
-          Cylon.start()
+        bot = new PebbleRobot()
+        bot.name = 'pebble'
+        Cylon.robot bot
 
-    %h2 How to connect
-    %p This software requires version 1.12.0 of the Pebble watch firmware.
+        Cylon.start()
 
-    %h3 OSX
+  %h2 How to connect
+  %p This software requires version 1.12.0 of the Pebble watch firmware.
 
-    %p The main steps are:
+  %h3 OSX
 
-    %ul
-      %li Pair your computer and the Pebble
-      %li Use a socket to serial connection to map a TCP socket to the local port
-      %li Connect to the device via Cylon.js
-      -#%li To figure out which port your pebble is connected to, use the Cylon.js connect scan command:
+  %p The main steps are:
 
-    -#:markdown
-          -#:::bash
-          -#$ Cylon.js connect scan
+  %ul
+    %li Pair your computer and the Pebble
+    %li Use a socket to serial connection to map a TCP socket to the local port
+    %li Connect to the device via Cylon.js
+    -#%li To figure out which port your pebble is connected to, use the Cylon.js connect scan command:
 
-    -#%p Now you are ready to connect to the Sphero using the socket, in this example port 4567:
+  -#:markdown
+        -#:::bash
+        -#$ Cylon.js connect scan
 
-    -#:markdown
-          -#:::bash
-          -#Cylon.js connect serial 4567 pebble
+  -#%p Now you are ready to connect to the Sphero using the socket, in this example port 4567:
 
-    %h3 Ubuntu
+  -#:markdown
+        -#:::bash
+        -#Cylon.js connect serial 4567 pebble
 
-    %p The main steps are:
+  %h3 Ubuntu
 
-    %ul
-      %li Pair your computer and the Pebble
-      %li Map your device to a port
-      %li Use a socket to serial connection to map a TCP socket to the local port
-      %li Connect to the device via Cylon.js
-      %li You will need to pair with the Pebble, entering any needed password.
+  %p The main steps are:
 
-    -#%p Then you can find the Bluetooth address, for example 00:18:33:86:37:8B, by using the Cylon.js connect scan command:
+  %ul
+    %li Pair your computer and the Pebble
+    %li Map your device to a port
+    %li Use a socket to serial connection to map a TCP socket to the local port
+    %li Connect to the device via Cylon.js
+    %li You will need to pair with the Pebble, entering any needed password.
 
-    -#:markdown
-          -#:::bash
-          -#$ Cylon.js connect scan
+  -#%p Then you can find the Bluetooth address, for example 00:18:33:86:37:8B, by using the Cylon.js connect scan command:
 
-    -#%p Once you know the address, you can use the Cylon.js connect bind command to map a port to the device:
+  -#:markdown
+        -#:::bash
+        -#$ Cylon.js connect scan
 
-    -#:markdown
-          -#:::bash
-          -#Cylon.js connect bind 00:18:33:86:37:8B pebble
+  -#%p Once you know the address, you can use the Cylon.js connect bind command to map a port to the device:
 
-    -#%p Now you are ready to connect to the Pebble using a socket, in this example port 4567:
+  -#:markdown
+        -#:::bash
+        -#Cylon.js connect bind 00:18:33:86:37:8B pebble
 
-    -#:markdown
-          -#:::bash
-          -#Cylon.js connect socat pebble 4567
+  -#%p Now you are ready to connect to the Pebble using a socket, in this example port 4567:
 
-  %section.drivers
-    %h2 Drivers
-    %p There is only one driver for the Pebble platform, as listed below.
+  -#:markdown
+        -#:::bash
+        -#Cylon.js connect socat pebble 4567
 
-    .hardware
-      .devices
-        = partial "documentation/partials/pebble-driver"
+%section.drivers
+  %h2 Drivers
+  %p There is only one driver for the Pebble platform, as listed below.
+
+  .hardware
+    .devices
+      // TODO: Update drivers list at the top of the page.
+      = partial "documentation/partials/devices_pebble_drivers"

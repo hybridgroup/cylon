@@ -1,5 +1,6 @@
 ---
-layout: page
+layout: documentation
+page_title_show: true
 title: Cylon.JS Example - Drone Navigation
 page_title: "Example: Drone Navigation"
 author: The Hybrid Group
@@ -46,7 +47,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
       :::coffeescript
         work: (my) ->
           my.drone.config 'general:navdata_demo', 'TRUE'
-          my.nav.on 'update', (data) -> Logger.info data
+          my.nav.on 'update', (data) -> console.log data
 
   Simple enough. Now all that's left is to start the robot:
 

@@ -3,91 +3,92 @@ title: BeagleBone with Cylon.js
 author: The Hybrid Group
 page_title: BeagleBone
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-beaglebone' class='repository'>Repository</a> <a class='issues' href='https://github.com/hybridgroup/cylon-beaglebone/issues'>Issues</a>"
-layout: page
+layout: documentation
+page_title_show: true
+
+button_driver: true
+continuous_servo_driver: true        
+led_driver: true
+motor_driver: true
+servo_driver: true 
 ---
-.documentation
-  %section.intro
-    = image_tag "/images/beaglebone.jpg", class: "display"
 
-    %p The BeagleBone is an ARM based single board computer, with many different GPIO interfaces built in.
-    %p
-      For more info about the BeagleBone platform click
-      = succeed "." do
-        = link_to "here", "http://beagleboard.org/Products/BeagleBone", target: :blank
-    -#%p
-      -#We have created a bootable image of Arch Linux that contains the needed drivers to use the Beaglebone Black with Cylon.js. You can download it from
-      -#= succeed "." do
-        -#= link_to "here", "https://s3.amazonaws.com/Cylon.js-images/beaglebone/Cylon.js-arch-armv7-1380751200.tar.xz", target: :blank
+%section.intro
+  = image_tag "/images/devices/beaglebone.jpg", class: "display"
 
-  %section.how-to
-    %h2 How to install
-    %p Installing Cylon.js for beaglebone is pretty easy.
-    :markdown
-          :::bash
-          npm install cylon-beaglebone
+  %p The BeagleBone is an ARM based single board computer, with many different GPIO interfaces built in.
+  %p
+    For more info about the BeagleBone platform click
+    = succeed "." do
+      = link_to "here", "http://beagleboard.org/Products/BeagleBone", target: :blank
+  -#%p
+    -#We have created a bootable image of Arch Linux that contains the needed drivers to use the Beaglebone Black with Cylon.js. You can download it from
+    -#= succeed "." do
+      -#= link_to "here", "https://s3.amazonaws.com/Cylon.js-images/beaglebone/Cylon.js-arch-armv7-1380751200.tar.xz", target: :blank
 
-    %h2 How to use
-    %p This small program causes an LED and a button.
-    %h3 JavaScript
-    :markdown
-          :::javascript
-          Cylon = require('cylon');
+%section.how-to
+  %h2 How to install
+  %p Installing Cylon.js for beaglebone is pretty easy.
+  :markdown
+        :::bash
+        npm install cylon-beaglebone
 
-          Cylon.robot({
-            connection: {
-              name: 'beaglebone',
-              adaptor: 'beaglebone'
-            },
-            devices: [
-              {
-                name: 'led',
-                driver: 'led',
-                pin: 'P9_12'
-              }, {
-                name: 'button',
-                driver: 'button',
-                pin: 'P9_14'
-              }
-            ],
-            work: function(my) {
-              return my.button.on('push', function() {
-                return my.led.toggle();
-              });
+  %h2 How to use
+  %p This small program causes an LED and a button.
+  %h3 JavaScript
+  :markdown
+        :::javascript
+        Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: {
+            name: 'beaglebone',
+            adaptor: 'beaglebone'
+          },
+          devices: [
+            {
+              name: 'led',
+              driver: 'led',
+              pin: 'P9_12'
+            }, {
+              name: 'button',
+              driver: 'button',
+              pin: 'P9_14'
             }
-          }).start();
+          ],
+          work: function(my) {
+            return my.button.on('push', function() {
+              return my.led.toggle();
+            });
+          }
+        }).start();
 
-    %h3 CoffeeScript
-    :markdown
-          :::javascript
-          Cylon = require('cylon')
+  %h3 CoffeeScript
+  :markdown
+        :::javascript
+        Cylon = require('cylon')
 
-          Cylon.robot
-            connection:
-              name: 'beaglebone', adaptor: 'beaglebone'
+        Cylon.robot
+          connection:
+            name: 'beaglebone', adaptor: 'beaglebone'
 
-            devices:
-              [
-                {name: 'led', driver: 'led', pin: 'P9_12'},
-                {name: 'button', driver: 'button', pin: 'P9_14'}
-              ]
+          devices:
+            [
+              {name: 'led', driver: 'led', pin: 'P9_12'},
+              {name: 'button', driver: 'button', pin: 'P9_14'}
+            ]
 
-            work: (my) ->
-              my.button.on 'push', () -> my.led.toggle()
+          work: (my) ->
+            my.button.on 'push', () -> my.led.toggle()
 
-          .start()
+        .start()
 
-  %section.drivers
-    %h2 Drivers
-    %p All Cylon.js digital and PWM GPIO drivers listed below should work with the BeagleBone:
+%section.drivers
+  %h2 Drivers
+  %p All Cylon.js digital and PWM GPIO drivers listed below should work with the BeagleBone:
 
-    .hardware
-      .devices
-        = partial "documentation/partials/button"
-        = partial "documentation/partials/continuous-servo"        
-        = partial "documentation/partials/led"
-        = partial "documentation/partials/motor"
-        = partial "documentation/partials/servo"        
-        = #partial "documentation/partials/blinkm"
-        = #partial "documentation/partials/hmc6352-compass"
-        = #partial "documentation/partials/wiichuck"
-        = #partial "documentation/partials/wiiclassic"
+  .hardware
+    %h2 GPIO Drivers
+    .devices
+      = partial "documentation/partials/devices_gpio_drivers"
+  

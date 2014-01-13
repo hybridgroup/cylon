@@ -1,5 +1,6 @@
 ---
-layout: page
+layout: documentation
+page_title_show: true
 title: Cylon.JS Example - API
 page_title: "Example: API"
 author: The Hybrid Group
@@ -62,7 +63,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
       :::coffeescript
         work: (my) ->
           every 1.seconds(), ->
-            Logger.info my.name
+            console.log my.name
             my.sphero.setRandomColor()
             my.sphero.roll 60, Math.floor(Math.random() * 360)
 

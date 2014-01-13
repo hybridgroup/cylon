@@ -3,142 +3,145 @@ title: Cylon.js - Pebble Driver
 author: The Hybrid Group
 page_title: Pebble
 page_subtitle: Driver
-layout: page
+layout: documentation
+page_title_show: true
+
+pebble_platform: true
 ---
-.documentation
-  %section.intro
-    =image_tag "/images/pebble.jpg", class: "display"
-    %p
-      Allows user to interact with Cylon.js devices using a Pebble smart watch.
 
-  %section.how-to
-    %h2 How to establish a connection and setup the driver
-    %h3 JavaScript
-    :markdown
-          :::javascript
-          Cylon = require('cylon');
+%section.intro
+  =image_tag "/images/devices/pebble.jpg", class: "display"
+  %p
+    Allows user to interact with Cylon.js devices using a Pebble smart watch.
 
-          robot = {
-            connection: {
-              name: 'pebble',
-              adaptor: 'pebble'
-            },
-            device: {
-              name: 'pebble',
-              driver: 'pebble'
-            },
-    %h3 CoffeeScript
-    :markdown
-          :::javascript
-          Cylon = require('cylon')
+%section.how-to
+  %h2 How to establish a connection and setup the driver
+  %h3 JavaScript
+  :markdown
+        :::javascript
+        Cylon = require('cylon');
 
-          robot = 
-            connection:
-              name: 'pebble', adaptor: 'pebble'
+        robot = {
+          connection: {
+            name: 'pebble',
+            adaptor: 'pebble'
+          },
+          device: {
+            name: 'pebble',
+            driver: 'pebble'
+          },
+  %h3 CoffeeScript
+  :markdown
+        :::javascript
+        Cylon = require('cylon')
 
-            device:
-              name: 'pebble', driver: 'pebble'
-          ...
-  %section.public-methods
+        robot = 
+          connection:
+            name: 'pebble', adaptor: 'pebble'
 
-    %h2 Commands
-    %dl.methods 
-      %dt message
-      %dd 
-      %dt message_queue
-      %dd 
-      %dt last_message
-      %dd 
+          device:
+            name: 'pebble', driver: 'pebble'
+        ...
+%section.public-methods
 
-    %h2 Events
-    %dl.methods 
-      %dt Stop
-      %dd Stop the driver.
-      %dt start
-      %dd Sent when the device has been started and is ready to use.
+  %h2 Commands
+  %dl.methods 
+    %dt message
+    %dd 
+    %dt message_queue
+    %dd 
+    %dt last_message
+    %dd 
 
-
-  %section.how-to
-    %h2 How to use
-    %h3 Example receiving message queue from a Pebble smart watch.
-    %h3 JavaScript
-    :markdown
-          :::javascript
-          Cylon = require('cylon');
-
-          Cylon.api({
-            host: '0.0.0.0',
-            port: '8080'
-          });
-
-          PebbleRobot = (function() {
-
-            function PebbleRobot() {}
-
-            PebbleRobot.prototype.connection = {
-              name: 'pebble',
-              adaptor: 'pebble'
-            };
-
-            PebbleRobot.prototype.device = {
-              name: 'pebble',
-              driver: 'pebble'
-            };
-
-            PebbleRobot.prototype.work = function(self) {
-              var c;
-              c = 100;
-              return every(1..second(), function() {
-                var str;
-                c++;
-                str = "c: " + c;
-                self.pebble.message_queue().push(str);
-                return console.log(self.pebble.last_message());
-              });
-            };
-
-            return PebbleRobot;
-
-          })();
-
-          bot = new PebbleRobot();
-
-          bot.name = 'pebble';
-
-          Cylon.robot(bot);
-
-          Cylon.start();
-
-    %h3 CoffeeScript
-    :markdown
-          :::javascript
-          Cylon = require('cylon')
-
-          Cylon.api host: '0.0.0.0', port: '8080'
-
-          class PebbleRobot
-            connection:
-              name: 'pebble', adaptor: 'pebble'
-
-            device:
-              name: 'pebble', driver: 'pebble'
-
-            work: (self) ->
-              c = 100
-              every 1.second(), ->
-                c++
-                str = "c: \#{c}"
-                self.pebble.message_queue().push(str)
-                console.log(self.pebble.last_message())
-
-          bot = new PebbleRobot()
-          bot.name = 'pebble'
-          Cylon.robot bot
-
-          Cylon.start()
+  %h2 Events
+  %dl.methods 
+    %dt Stop
+    %dd Stop the driver.
+    %dt start
+    %dd Sent when the device has been started and is ready to use.
 
 
-  %section.compatability.hardware
-    %h2 Works with:
-    .devices
-      = partial "documentation/partials/pebble"
+%section.how-to
+  %h2 How to use
+  %h3 Example receiving message queue from a Pebble smart watch.
+  %h3 JavaScript
+  :markdown
+        :::javascript
+        Cylon = require('cylon');
+
+        Cylon.api({
+          host: '0.0.0.0',
+          port: '8080'
+        });
+
+        PebbleRobot = (function() {
+
+          function PebbleRobot() {}
+
+          PebbleRobot.prototype.connection = {
+            name: 'pebble',
+            adaptor: 'pebble'
+          };
+
+          PebbleRobot.prototype.device = {
+            name: 'pebble',
+            driver: 'pebble'
+          };
+
+          PebbleRobot.prototype.work = function(self) {
+            var c;
+            c = 100;
+            return every(1..second(), function() {
+              var str;
+              c++;
+              str = "c: " + c;
+              self.pebble.message_queue().push(str);
+              return console.log(self.pebble.last_message());
+            });
+          };
+
+          return PebbleRobot;
+
+        })();
+
+        bot = new PebbleRobot();
+
+        bot.name = 'pebble';
+
+        Cylon.robot(bot);
+
+        Cylon.start();
+
+  %h3 CoffeeScript
+  :markdown
+        :::javascript
+        Cylon = require('cylon')
+
+        Cylon.api host: '0.0.0.0', port: '8080'
+
+        class PebbleRobot
+          connection:
+            name: 'pebble', adaptor: 'pebble'
+
+          device:
+            name: 'pebble', driver: 'pebble'
+
+          work: (self) ->
+            c = 100
+            every 1.second(), ->
+              c++
+              str = "c: \#{c}"
+              self.pebble.message_queue().push(str)
+              console.log(self.pebble.last_message())
+
+        bot = new PebbleRobot()
+        bot.name = 'pebble'
+        Cylon.robot bot
+
+        Cylon.start()
+
+
+%section.compatability.hardware
+  %h2 Works with:
+  .devices
+    = partial "documentation/partials/devices_platforms"
