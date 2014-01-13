@@ -4,7 +4,7 @@
 
   module = source("<%= adaptorName %>");
 
-  describe("<%= adaptorName %>", function() {
+  describe("Cylon.<%= adaptorClassName %>", function() {
     it("standard async test", function(done) {
       var bool;
       bool = false;
