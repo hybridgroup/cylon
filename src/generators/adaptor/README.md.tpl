@@ -13,17 +13,43 @@ sister project Gobot (http://gobot.io).
 For more information about Cylon, check out our repo at
 https://github.com/hybridgroup/cylon
 
-## Installing
+## Getting Started
 
-    npm install <%= adaptorName %>
+Install the module with: `npm install <%= adaptorName %>`
 
-## Using
-
-```coffeescript
-# your example code here...
-```
+## Examples
 
 ## Connecting
+
+### JavaScript
+
+```javascript
+var Cylon = require('cylon');
+
+Cylon.robot({
+  connection: { name: '<%= basename %>', adaptor: '<%= basename %>' },
+  device: {name: '<%= basename %>', driver: '<%= basename %>'},
+
+  work: function(my) {
+    // provide an example of your module here
+  }
+}).start();
+```
+
+### CoffeeScript
+
+```
+Cylon = require 'cylon'
+
+Cylon.robot
+  connection: { name: '<%= basename %>', adaptor: '<%= basename %>' }
+  device: { name: '<%= basename %>', driver: '<%= basename %>' }
+
+  work: (my) ->
+    # provide an example of your module here
+
+.start()
+```
 
 Explain how to connect from the computer to the device here...
 
@@ -39,4 +65,4 @@ None yet...
 
 ## License
 
-Copyright (c) 2013 Your Name Here. See `LICENSE` for more details
+Copyright (c) 2014 Your Name Here. See `LICENSE` for more details

@@ -20,12 +20,20 @@
     adaptor: function() {
       var args;
       args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-      return function() {};
+      return (function(func, args, ctor) {
+        ctor.prototype = func.prototype;
+        var child = new ctor, result = func.apply(child, args);
+        return Object(result) === result ? result : child;
+      })(Cylon.Adaptors.<%= adaptorClassName %>, args, function(){});
     },
     driver: function() {
       var args;
       args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-      return function() {};
+      return (function(func, args, ctor) {
+        ctor.prototype = func.prototype;
+        var child = new ctor, result = func.apply(child, args);
+        return Object(result) === result ? result : child;
+      })(Cylon.Drivers.<%= adaptorClassName %>, args, function(){});
     },
     register: function(robot) {}
   };
