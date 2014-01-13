@@ -1,0 +1,66 @@
+---
+title: Keyboard with Cylon.js
+author: The Hybrid Group
+page_title: Keyboard
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-keyboard' target='blanck' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-keyboard/issues' target='blanck'>Issues</a>"
+layout: documentation
+page_title_show: true
+
+keyboard_driver: true
+---
+.documentation
+  %section.intro
+    = image_tag "/images/devices/keyboard.jpg", class: "display"
+
+    %p The Cylon adaptor for keyboard input.
+
+
+  %section.how-to
+    %h2 How to install
+    %p Installing cylon.js with a keyboard support is pretty easy.
+    :markdown
+          :::javascript
+          npm install cylon-keyboard
+
+    %h2 How to use
+    
+    %h3 Javascript
+    
+    :markdown
+          :::javascript
+          var Cylon = require('cylon');
+
+          Cylon.robot({
+            connection: { name: 'keyboard', adaptor: 'keyboard' },
+            device: {name: 'keyboard', driver: 'keyboard'},
+
+            work: function(my) {
+              my.keyboard.on('a', function(key) { 
+                console.log("A PRESSED!");
+              });
+            }
+          }).start();
+    
+    %h3 CoffeeScript
+
+    :markdown
+          :::javascript
+          Cylon = require 'cylon'
+
+          Cylon.robot
+            device: { name: 'keyboard', driver: 'keyboard' }
+            connection: { name: 'keyboard', adaptor: 'keyboard' }
+            work: (my) ->
+              my.keyboard.on 'a', (key) ->
+                console.log "A PRESSED!"
+
+          .start()
+
+  %section.drivers
+    %h2 Drivers
+    %p Available drivers for the keyboard platform are listed below. 
+
+    .hardware
+      .devices
+        = partial "documentation/partials/devices_keyboard_drivers"
+        
