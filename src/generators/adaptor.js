@@ -50,6 +50,7 @@ var generateTemplateData = function() {
   return {
     adaptorName: cylonAdaptorName(),
     adaptorClassName: adaptorClassName(),
+    basename: String(adaptorName).toLowerCase(),
     cylonVersion: pkg.version
   };
 }
