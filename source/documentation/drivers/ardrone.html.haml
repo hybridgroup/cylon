@@ -76,9 +76,9 @@ layout: page
         Causes the drone to bank to the right, controls the roll, which is a horizontal movement using the camera as a reference point. 
         :markdown
           `speed`can be a value from `0` to `1`.
-      %dt front(speed) 
+      %dt front(speed) | forward(speed)
       %dd 
-        Causes the drone to bank to the front, controls the pitch, which a horizontal movement using the camera as a reference point. 
+        Causes the drone to bank forward, controls the pitch, which a horizontal movement using the camera as a reference point. 
         :markdown
           `speed` can be a value from `0` to `1`.
       %dt back(speed) 
@@ -114,6 +114,31 @@ layout: page
               'yawDance', 'phiDance', 'thetaDance', 'vzDance', 'wave', 'phiThetaMixed',
               'doublePhiThetaMixed', 'flipAhead', 'flipBehind', 'flipLeft', 'flipRight']
 
+      %dt frontFlip
+      %dd 
+        :markdown
+          Tells the drone to do a front-flip. Alias of `animate('flipAhead', 150)`.
+
+      %dt backFlip
+      %dd 
+        :markdown
+          Tells the drone to do a back-flip. Alias of `animate('flipBehind', 150)`.
+
+      %dt leftFlip
+      %dd 
+        :markdown
+          Tells the drone to do a left-flip. Alias of `animate('flipLeft', 150)`.
+
+      %dt rightFlip
+      %dd 
+        :markdown
+          Tells the drone to do a right-flip. Alias of `animate('flipRight', 150)`.
+
+      %dt wave
+      %dd 
+        :markdown
+          Tells the drone to do a wave. Alias of `animate('wave', 750)`.
+
       %dt animateLeds(animation, hz, duration)
       %dd 
         :markdown
@@ -132,6 +157,18 @@ layout: page
       %dd 
         :markdown
           Causes the emergency REF bit to be set to 1 until `navdata.droneState.emergencyLanding is 0`. This recovers a drone that has flipped over and is showing red lights to be flyable again and show green lights. It is also done implicitly when creating a new high level client.
+      %dt forward
+      %dd Causes the drone to go forward.
+      %dt frontFlip
+      %dd Causes the drone to do a front flip.
+      %dt backFlip 
+      %dd Causes the drone to do a back flip.
+      %dt leftFlip
+      %dd Causes the drone to do a left flip.
+      %dt rightFlip
+      %dd Causes the drone to do a right flip.
+      %dt wave
+      %dd Causes the drone to do a wave.
 
     %h2 Events
 

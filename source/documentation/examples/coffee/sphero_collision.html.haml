@@ -73,7 +73,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   a random direction, at speed 90.
 
       :::coffeescript
-        Logger.info "Color: \1color.toString(16)} "
+        Logger.info "Color: \#{color.toString(16)} "
         me.sphero.setRGB color
 
         me.sphero.roll 90, Math.floor(Math.random() * 360)

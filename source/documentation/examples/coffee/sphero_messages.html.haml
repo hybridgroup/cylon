@@ -50,7 +50,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
       :::coffeescript
           me.sphero.on 'update', (data) ->
-            Logger.info "Update event eventName: \1data} "
+            Logger.info "Update event eventName: \#{data} "
             Logger.info "Update event args: "
             Logger.info data
 

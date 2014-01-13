@@ -55,7 +55,7 @@ def create_litcoffee_pages
     end
 
     # escape interpolation as to not confuse HAML
-    body.gsub! /(#\{)/, '\\\1'
+    body.gsub! /(#\{)/, "\\\#{"
 
     # change import path for cylon
     body.gsub! /\.\.\/\.\./, 'cylon'

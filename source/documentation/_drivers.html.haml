@@ -5,10 +5,12 @@
   .devices
     = partial "../partials/analog-sensor"
     = partial "../partials/button"
+    = partial "../partials/continuous-servo"
     = partial "../partials/led"
     = partial "../partials/maxbotix"
     = partial "../partials/motor"
     = partial "../partials/servo"
+
 
   %h2 i2c Drivers 
   Cylon.js's i2c drivers work with several different platforms that support the required interfaces. For example, the Arduino.
@@ -27,6 +29,10 @@
   %h2 Crazyflie Driver
   .devices
     = partial "../partials/crazyflie-flight"
+
+  %h2 Keyboard Driver
+  .devices
+    = partial "../partials/keyboard-driver"
   
   %h2 Leap Motion Driver
   .devices

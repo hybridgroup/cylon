@@ -55,7 +55,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
             angle += increment
             my.servo.angle(angle)
 
-            Logger.info "Current angle: \1my.servo.currentAngle() }"
+            Logger.info "Current angle: \#{my.servo.currentAngle() }"
 
             increment = -increment if (angle is 30) or (angle is 150)
 

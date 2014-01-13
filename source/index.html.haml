@@ -101,9 +101,17 @@ layout: home
       &lt;==&gt;
       = link_to "Adaptor", "https://github.com/hybridgroup/cylon-firmata", target:"_blank" 
     %li
+      = link_to "Beaglebone Black", "http://beagleboard.org/Products/BeagleBone+Black/", target:"_blank" 
+      &lt;==&gt;
+      = link_to "Adaptor", "https://github.com/hybridgroup/cylon-beaglebone", target:"_blank" 
+    %li
       = link_to "Crazyflie", "http://www.bitcraze.se/", target:"_blank" 
       &lt;==&gt;
-      = link_to "Adaptor/Driver", "https://github.com/hybridgroup/cylon-crazyflie" 
+      = link_to "Adaptor/Driver", "https://github.com/hybridgroup/cylon-crazyflie", target:"_blank" 
+    %li
+      = link_to "Keyboard", "http://en.wikipedia.org/wiki/Computer_keyboard", target:"_blank" 
+      &lt;==&gt;
+      = link_to "Adaptor/Driver", "https://github.com/hybridgroup/cylon-keyboard" , target:"_blank" 
     %li
       = link_to "Leap Motion", "http://www.leapmotion.com/", target:"_blank" 
       &lt;==&gt;
@@ -121,10 +129,14 @@ layout: home
       &lt;==&gt;
       = link_to "Adaptor/Driver", "https://github.com/hybridgroup/cylon-force", target:"_blank" 
     %li
+      = link_to "Spark", "https://www.spark.io/", target:"_blank" 
+      &lt;==&gt;
+      = link_to "Adaptor", "https://github.com/hybridgroup/cylon-spark", target:"_blank" 
+    %li
       = link_to "Sphero", "http://www.gosphero.com/", target:"_blank"  
       &lt;==&gt;
       = link_to "Adaptor/Driver", "https://github.com/hybridgroup/cylon-sphero", target:"_blank" 
-%p Support for many devices that use General Purpose Input/Output (GPIO) have a shared set of drivers provded using the cylon-gpio module:
+%p Support for many devices that use General Purpose Input/Output (GPIO) have a shared set of drivers provided using the cylon-gpio module:
 %ul
   %li
     = link_to "GPIO", "https://en.wikipedia.org/wiki/General_Purpose_Input/Output" , target:"_blank" 
@@ -133,6 +145,7 @@ layout: home
     %ul 
       %li Analog Sensor
       %li Button
+      %li Continuous Servo
       %li LED
       %li Motor
       %li Maxbotix Ultrasonic Range Finder

@@ -1,20 +1,53 @@
 @import 'mixins'
 @import 'barebones'
 @import 'coderay'
+@import 'bourbon'
+@import "neat"
+
 
 // Config
-$red           : #ee274a
-$blue          : #F8F4EF
-$gray          : #373737
-$light_gray    : #505252
-$bright-red    : #971542
+
+$body-bg-color          : #F8F4EF
+$footer-text-color      : #E6D6D6
+
+$link-color             : #9E162E
+$link-hover-color       : #580A25
+
+$title-color            : #971542
+$lesser-title-color     : #523D47
+$header-subtitle-color  : #505252
+
+$hero-color             : #580A25
+$hero-title-color       : #FAFAF1
+$hero-subtitle-color    : #B39F89
+$hero-link-color        : #FFFBDA
+$hero-link-hover-color  : #FFFFFF
+
+$cta-color              : #C51F3C
+$cta-hover-color        : $cta-color - 30
+$cta-text-color         : $hero-link-color
+$cta-text-hover-color   : $hero-link-hover-color
+
+$blog-title-color       : #EE274A
+$blog-date-top-color    : #B39F89
+
+$doc-description-color:  #808080
+
+$social-catcher-background-color: #FDFCF5
 
 $header-size   : 66px
-$logo-size     : 155px
+$logo-size     : 226px
 
 $small-screen  : 479px
 $medium-screen : 767px
 $big-screen    : 964px
+
+//URL SRC
+$body-background-src: '../images/bg-cylon.png'
+$header-logo-src: '/images/logo.png'
+
+//Page Font
+$page-title-font: "Montserrat", sans-serif
 
 // Partials
 @import 'shared/base'
@@ -35,3 +68,7 @@ $big-screen    : 964px
 @import 'elements/documentation'
 @import 'elements/sphero_colors'
 
+// Custom
+.app-logo a
+  @extend .hidden-text
+  margin-top: 10px

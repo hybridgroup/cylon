@@ -1,0 +1,17 @@
+---
+title: Release 0.8.0 Makes 10 Platforms
+page_title: Blog
+date: 2013-12-16
+tags: robots
+author: Ron Evans
+---
+
+After plenty of effort and a lot of help from our friends, we've just released version 0.8.0 of Cylon.js (<a href="http://cylonjs.com" target="blank">http://cylonjs.com</a>) the powerful new JavaScript robotics framework based on <a href="http://nodejs.org/" target="blank">Node.js</a>. This release brings us up to 10 different hardware and software platforms that we support! Even simultaneously!
+
+From single board Linux computers such as the <a href="http://www.raspberrypi.org/" target="blank">Raspberry Pi</a> and <a href="http://beagleboard.org/Products/BeagleBone+Black/" target="blank">BeagleBone Black</a>, to next generation wireless micro-controllers such as the <a href="http://spark.io" target="blank">Spark</a>, to gestural controllers such as the <a href="https://www.leapmotion.com/" target="blank">Leap Motion</a>, we've been working hard to make it easy for you to develop multi-hardware robotics and physical computing solutions using Cylon.js. We have also been working just as hard on making it easy for anyone to add support for new hardware platforms quickly.
+
+With the new 0.8.0 release, we've mostly locked down the core interfaces that will lead us down the road to 1.0. This will help all our collaborators and implementors, especially those who are working to add new hardware platform support. Thanks for helping us get all this sorted out, especially everyone at <a href="http://robotsconf.com" target="blank">RobotsConf</a>.
+
+We've also done a lot to add to our documentation. Among many upgrades, we've got a new <a href="http://cylonjs.com/documentation/examples/" target="blank">examples page</a>, with both pure JavaScript, as well as <a href="http://ashkenas.com/literate-coffeescript/" target="blank">literate CoffeeScript</a> versions of all our code samples.
+
+Please let us know anything we can do to make it easier and better to develop solutions. we're here to help!
