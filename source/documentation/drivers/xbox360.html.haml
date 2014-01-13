@@ -13,51 +13,143 @@ layout: page
 
   %section.how-to
     %h2 How to establish a connection and setup the driver
+    %h3 JavaScript
     :markdown
-          :::ruby
-          require 'Cylon.js'
-          connection :joystick, :adaptor => :joystick
-          device :controller, :driver => :xbox360, :connection => :joystick, :interval => 0.1
+          :::javascript
+          var Cylon = require('cylon');
+
+          Cylon.robot({
+            connection: { name: 'joystick', adaptor: 'joystick' },
+            device: {name: 'joystick', driver: 'xbox360'}
+          ..
+
+    %h3 CoffeeScript
+    :markdown
+          :::javascript
+          Cylon = require 'cylon'
+
+          Cylon.robot
+            connection:
+              name: 'joystick', adaptor: 'joystick'
+
+            device:
+              name: 'joystick', driver: 'xbox360'
+          ...
 
   %section.public-methods
     %h2 Events:
     %dl.methods 
-      %dt button_a
-      %dd Get's triggered every interval amount of time if the a button is pressed.
-      %dt button_b
-      %dd Get's triggered every interval amount of time if the b button is pressed.
-      %dt button_x
-      %dd Get's triggered every interval amount of time if the x button is pressed.
-      %dt button_y
-      %dd Get's triggered every interval amount of time if the y button is pressed.
-      %dt button_lb
-      %dd Get's triggered every interval amount of time if the left bumper button is pressed.
-      %dt button_rb
-      %dd Get's triggered every interval amount of time if the right bumper button is pressed.
-      %dt button_start
-      %dd Get's triggered every interval amount of time if the start button is pressed.
-      %dt button_back
-      %dd Get's triggered every interval amount of time if the back button is pressed.
-      %dt joystick
-      %dd Get's triggered every interval amount of time if a joystick event occured, you can access values x, y, s(joystick number, 0 and 1 for left and right).
-      %dt joystick_0
-      %dd Get's triggered every interval amount of time if a joystick_0 event occured, you can access values x, y.
-      %dt joystick_1
-      %dd Get's triggered every interval amount of time if a joystick_1 event occured, you can access values x, y.
+      %dt dupbutton:press
+      %dd Gets triggered every interval amount of time if the dup button is pressed.
+      %dt ddown:press
+      %dd Gets triggered every interval amount of time if the ddown button is pressed.
+      %dt dleft:press
+      %dd Gets triggered every interval amount of time if the dleft button is pressed.
+      %dt dright:press
+      %dd Gets triggered every interval amount of time if the dright button is pressed.
+      %dt xboxbutton:press
+      %dd Gets triggered every interval amount of time if the xboxbutton button is pressed.
+      %dt start:press
+      %dd Gets triggered every interval amount of time if the start button is pressed.
+      %dt back:press
+      %dd Gets triggered every interval amount of time if the back button is pressed.
+      %dt leftstick:press
+      %dd Gets triggered every interval amount of time if the leftstick button is pressed.
+      %dt rightstick:press
+      %dd Gets triggered every interval amount of time if the rightstick button is pressed.
+      %dt leftshoulder:press
+      %dd Gets triggered every interval amount of time if the leftshoulder button is pressed.
+      %dt rightshoulder:press
+      %dd Gets triggered every interval amount of time if the rightshoulder button is pressed.
+      %dt a:press
+      %dd Gets triggered every interval amount of time if the a button is pressed.
+      %dt b:press
+      %dd Gets triggered every interval amount of time if the b button is pressed.
+      %dt x:press
+      %dd Gets triggered every interval amount of time if the x button is pressed.
+      %dt y:press
+      %dd Gets triggered every interval amount of time if the y button is pressed.
+      %dt dupbutton:release
+      %dd Gets triggered every interval amount of time if the dupbutton button is released.
+      %dt ddown:release
+      %dd Gets triggered every interval amount of time if the ddown button is released.
+      %dt dleft:release
+      %dd Gets triggered every interval amount of time if the dleft button is released.
+      %dt dright:release
+      %dd Gets triggered every interval amount of time if the dright button is released.
+      %dt xboxbutton:release
+      %dd Gets triggered every interval amount of time if the xboxbutton button is released.
+      %dt start:release
+      %dd Gets triggered every interval amount of time if the start button is released.
+      %dt back:release
+      %dd Gets triggered every interval amount of time if the back button is released.
+      %dt leftstick:release
+      %dd Gets triggered every interval amount of time if the leftstick button is released.
+      %dt rightstick:release
+      %dd Gets triggered every interval amount of time if the rightstick button is released.
+      %dt leftshoulder:release
+      %dd Gets triggered every interval amount of time if the leftshoulder button is released.
+      %dt rightshoulder:release
+      %dd Gets triggered every interval amount of time if the rightshoulder button is released.
+      %dt a:release
+      %dd Gets triggered every interval amount of time if the a button is released.
+      %dt b:release
+      %dd Gets triggered every interval amount of time if the b button is released.
+      %dt x:release
+      %dd Gets triggered every interval amount of time if the x button is released.
+      %dt y:release
+      %dd Gets triggered every interval amount of time if the y button is released.
+      %dt lefttrigger
+      %dd Left trigger emits the current amount pressed, from 0-250.
+      %dt righttrigger
+      %dd Right trigger emits the current amount pressed, from 0-250.
+      %dt left:move
+      %dd Gets triggered every left movement.
+      %dt right:move
+      %dd Gets triggered every right movement.
+      %dt start
+      %dd Sent when the device has been started and is ready to use.
+
+
+    -#%h3 How to use events and call them on your drivers
+    -#%p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
     
-
-    %h3 How to use events and call them on your drivers
-    %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
-    :markdown
-          :::javascript
-          ...
-
   %section.how-to
     %h2 How to use
-    %h3 Example receiving button events from XBox360 controller joystick.
+    %p Example receiving button events from XBox360 controller joystick.
+    %h3 JavaScript
     :markdown
           :::javascript
-          ...
+          var Cylon = require('cylon');
+
+          Cylon.robot({
+            connection: { name: 'joystick', adaptor: 'joystick' },
+            device: {name: 'joystick', driver: 'xbox360'},
+
+            work: function(my) {
+              my.joystick.on("left:move", function(position) { 
+                console.log(position);
+              });
+            }
+          }).start();
+
+    %h3 CoffeeScript
+    :markdown
+          :::javascript
+          Cylon = require 'cylon'
+
+          Cylon.robot
+            connection:
+              name: 'joystick', adaptor: 'joystick'
+
+            device:
+              name: 'joystick', driver: 'xbox360'
+
+            work: (my) ->
+              my.joystick.on "left:move", (position) ->
+                console.log position
+
+          .start()
 
   %section.compatability.hardware
     %h2 Works with:
