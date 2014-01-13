@@ -42,8 +42,9 @@ Cylon.robot({
 Cylon = require 'cylon'
 
 Cylon.robot
-  device: { name: '<%= basename %>', driver: '<%= basename %>' }
   connection: { name: '<%= basename %>', adaptor: '<%= basename %>' }
+  device: { name: '<%= basename %>', driver: '<%= basename %>' }
+
   work: (my) ->
     # provide an example of your module here
 
