@@ -24,7 +24,7 @@
         ctor.prototype = func.prototype;
         var child = new ctor, result = func.apply(child, args);
         return Object(result) === result ? result : child;
-      })(Cylon.Adaptors.Keyboard, args, function(){});
+      })(Cylon.Adaptors.<%= adaptorClassName %>, args, function(){});
     },
     driver: function() {
       var args;
@@ -33,7 +33,7 @@
         ctor.prototype = func.prototype;
         var child = new ctor, result = func.apply(child, args);
         return Object(result) === result ? result : child;
-      })(Cylon.Drivers.Keyboard, args, function(){});
+      })(Cylon.Drivers.<%= adaptorClassName %>, args, function(){});
     },
     register: function(robot) {}
   };
