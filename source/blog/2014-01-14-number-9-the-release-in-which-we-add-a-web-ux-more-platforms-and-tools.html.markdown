@@ -12,7 +12,7 @@ Our team is kicking off our first release of 2014, with the brand new version 0.
 First of all, the new Cylon user interface. Wouldn't it be great to be able to browse to a web page, and check on the status of your running robots, and even send them commands? Now you can, with our shiny new single-page web-based user interface written using <a href="http://angularjs.org/" target="blank">AngularJS</a>, that is now built right in to the Cylon API! The great thing is that it uses the same RESTful and web sockets calls that you can use to control your robotic minions over the web. Yes, of *course* you can command entire swarms of robots using Cylon.js!
 
 <a href="/images/screenshots/api-ng-app.png" target="_blank">
-  <img alt="Angular App Screenshot" src="/images/screenshots/api-ng-app.png">
+  <img class="full-width" alt="Angular App Screenshot" src="/images/screenshots/api-ng-app.png">
 </a>
 
 We've now added <a href="https://github.com/hybridgroup/cylon-joystick" target="blank">cylon-joystick</a> an adaptor for USB joysticks, along with a driver that supports the <a href="http://en.wikipedia.org/wiki/Xbox_360_Controller" target="blank">Xbox 360 controller</a>. This is only the first of several joystick drivers that we will be adding soon. We've also added <a href="https://github.com/hybridgroup/cylon-keyboard" target="blank">cylon-keyboard</a> an adaptor and driver for standard keyboard control of your robots. And perhaps most excitingly, we now have <a href="https://github.com/hybridgroup/cylon-opencv" target="blank">cylon-opencv</a>, adaptor and drivers for <a href="http://opencv.org/" target="blank">OpenCV</a> support, which is a powerful open source platform for computer vision.
