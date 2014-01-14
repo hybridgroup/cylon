@@ -1,6 +1,6 @@
 ---
 page_title_show: true
-title: Number 9! Release 0.9.0 Adds More Platforms and Tools
+title: Number 9! The Release In Which We Add A Web UX, More Platforms, and Tools
 page_title: Blog
 date: 2014-01-14
 tags: robots
