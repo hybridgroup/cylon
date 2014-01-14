@@ -8,267 +8,267 @@ page_title_show: true
 ---
 
 :markdown
-	## How To Connect
+  ## How To Connect
 
-	Now you are ready to write your own code you can access a running Cylon.js API server.
+  Now you are ready to write your own code you can access a running Cylon.js API server.
 
-	### Running your robot:
-	
-	To test your code you can type this on your console:
+  ### Running your robot:
 
-	#### Javascript
+  To test your code you can type this on your console:
 
-	    :::javascript
-	      node robotfilename.js
+  #### Javascript
 
-	#### CoffeeScript      
+      :::javascript
+        node robotfilename.js
 
-	    :::javascript
-	      coffee robotfilename.coffee
-	
-	For example, on this code:
+  #### CoffeeScript
 
-	#### Javascript
-	    :::javascript
-	    var Cylon = require('..');
+      :::javascript
+        coffee robotfilename.coffee
 
-		Cylon.robot({
-		  connection: { name: 'looped', adaptor: 'loopback'},
+  For example, on this code:
 
-		  work: function() {
-		    every((1).second(), function() { Logger.info("Hello, human!"); });
-		    after((10).seconds(), function() { Logger.info("Impressive."); });
-		  }
-		}).start();
+  #### Javascript
+      :::javascript
+      var Cylon = require('..');
 
-	#### CoffeeScript 
+    Cylon.robot({
+      connection: { name: 'looped', adaptor: 'loopback'},
 
-	    :::javascript
-	    Cylon = require('cylon')
+      work: function() {
+        every((1).second(), function() { Logger.info("Hello, human!"); });
+        after((10).seconds(), function() { Logger.info("Impressive."); });
+      }
+    }).start();
 
-		Cylon.robot
-		  work: ->
-		    every 1.second(), ->
-		      Logger.info("Hello, human!")
+  #### CoffeeScript
 
-		    after 10.seconds(), ->
-		      Logger.info "Impressive."
+      :::javascript
+      Cylon = require('cylon')
 
-		.start()
+    Cylon.robot
+      work: ->
+        every 1.second(), ->
+          Logger.info("Hello, human!")
 
-	`.start(); - .start()` automatically, starts the server.
+        after 10.seconds(), ->
+          Logger.info "Impressive."
 
-	## How To Configure
-	
-	The Cylon.js API server, allows a configuration for your robots.
+    .start()
 
-	You can set it up like this:
+  `.start(); - .start()` automatically, starts the server.
 
-	    :::javascript
-		  Cylon.api(host: '0.0.0.0', port: '80')
-		
-	Now you can run the server on the curl : `http://0.0.0.0:80`.
+  ## How To Configure
 
-	## Routes
+  The Cylon.js API server, allows a configuration for your robots.
 
-	### GET /robots
+  You can set it up like this:
 
-	Our first route returns all the Robots the master class knows about in JSON
-	format.
-      	
-	   
-	    [
-	      {
-	        "name": "SpheroBot",
-	        "connections": [
-	          {
-	            "name": "sphero",
-	            "port": "/dev/rfcomm0",
-	            "adaptor": "Sphero",
-	            "connection_id": 2778
-	          }
-	        ],
-	        "devices": [
-	          {
-	            "name": "sphero",
-	            "driver": "Sphero",
-	            "pin": null,
-	            "connection": {
-	              "name": "sphero",
-	              "port": "/dev/rfcomm0",
-	              "adaptor": "Sphero",
-	              "connection_id": 2778
-	            },
-	            "commands": [
-	              "detectCollisions",
-	              "roll",
-	              "setColor",
-	              "setRGB",
-	              "stop"
-	            ]
-	          }
-	        ]
-	      }
-	    ]
+      :::javascript
+      Cylon.api(host: '0.0.0.0', port: '80')
 
-	### GET /robots/:robotname
+  Now you can run the server on the curl : `http://0.0.0.0:80`.
 
-	Given a robot's name, returns JSON information about the requested Robot:
+  ## Routes
 
-	    {
-	      "name": "SpheroBot",
-	      "connections": [
-	        {
-	          "name": "sphero",
-	          "port": "/dev/rfcomm0",
-	          "adaptor": "Sphero",
-	          "connection_id": 2778
-	        }
-	      ],
-	      "devices": [
-	        {
-	          "name": "sphero",
-	          "driver": "Sphero",
-	          "pin": null,
-	          "connection": {
-	            "name": "sphero",
-	            "port": "/dev/rfcomm0",
-	            "adaptor": "Sphero",
-	            "connection_id": 2778
-	          },
-	          "commands": [
-	            "detectCollisions",
-	            "roll",
-	            "setColor",
-	            "setRGB",
-	            "stop"
-	          ]
-	        }
-	      ]
-	    }
-	
-	### GET /robots/:robotname/commands
-	
-	Given a robot's name, returns JSON information about the commands belonging to
-	the requested Robot:
+  ### GET /robots
 
-	    [
-	      "detectCollisions",
-	      "roll",
-	      "setColor",
-	      "setRGB",
-	      "stop"
-	    ]
+  Our first route returns all the Robots the master class knows about in JSON
+  format.
 
-	### POST /robots/:robotname/commands/:commandname
 
-	Given a robot name, commands, and command name, executes a robot's command
-	and returns the result.
+      [
+        {
+          "name": "SpheroBot",
+          "connections": [
+            {
+              "name": "sphero",
+              "port": "/dev/rfcomm0",
+              "adaptor": "Sphero",
+              "connection_id": 2778
+            }
+          ],
+          "devices": [
+            {
+              "name": "sphero",
+              "driver": "Sphero",
+              "pin": null,
+              "connection": {
+                "name": "sphero",
+                "port": "/dev/rfcomm0",
+                "adaptor": "Sphero",
+                "connection_id": 2778
+              },
+              "commands": [
+                "detectCollisions",
+                "roll",
+                "setColor",
+                "setRGB",
+                "stop"
+              ]
+            }
+          ]
+        }
+      ]
 
-	    // example pending
+  ### GET /robots/:robotname
 
-	### GET /robots/:robotname/devices
+  Given a robot's name, returns JSON information about the requested Robot:
 
-	Given a robot's name, returns JSON information about the devices belonging to
-	the requested Robot:
+      {
+        "name": "SpheroBot",
+        "connections": [
+          {
+            "name": "sphero",
+            "port": "/dev/rfcomm0",
+            "adaptor": "Sphero",
+            "connection_id": 2778
+          }
+        ],
+        "devices": [
+          {
+            "name": "sphero",
+            "driver": "Sphero",
+            "pin": null,
+            "connection": {
+              "name": "sphero",
+              "port": "/dev/rfcomm0",
+              "adaptor": "Sphero",
+              "connection_id": 2778
+            },
+            "commands": [
+              "detectCollisions",
+              "roll",
+              "setColor",
+              "setRGB",
+              "stop"
+            ]
+          }
+        ]
+      }
 
-	    [
-	      {
-	        "name": "sphero",
-	        "driver": "Sphero",
-	        "pin": null,
-	        "connection": {
-	          "name": "sphero",
-	          "port": "/dev/rfcomm0",
-	          "adaptor": "Sphero",
-	          "connection_id": 2778
-	        },
-	        "commands": [
-	          "detectCollisions",
-	          "roll",
-	          "setColor",
-	          "setRGB",
-	          "stop"
-	        ]
-	      }
-	    ]
+  ### GET /robots/:robotname/commands
 
-	### GET /robots/:robotname/devices/:devicename
+  Given a robot's name, returns JSON information about the commands belonging to
+  the requested Robot:
 
-	Given the names of a device and the robot it belongs to, returns data on the
-	specified device.
+      [
+        "detectCollisions",
+        "roll",
+        "setColor",
+        "setRGB",
+        "stop"
+      ]
 
-	    {
-	      "name": "sphero",
-	      "driver": "Sphero",
-	      "pin": null,
-	      "connection": {
-	        "name": "sphero",
-	        "port": "/dev/rfcomm0",
-	        "adaptor": "Sphero",
-	        "connection_id": 2778
-	      },
-	      "commands": [
-	        "detectCollisions",
-	        "roll",
-	        "setColor",
-	        "setRGB",
-	        "stop"
-	      ]
-	    }
+  ### POST /robots/:robotname/commands/:commandname
 
-	### GET /robots/:robotname/devices/:devicename/commands
+  Given a robot name, commands, and command name, executes a robot's command
+  and returns the result.
 
-	Given the names of a device and the robot it belongs to, returns all commands
-	available for the specified device.
+      // example pending
 
-	    [
-	      "detectCollisions",
-	      "roll",
-	      "setColor",
-	      "setRGB",
-	      "stop"
-	    ]
+  ### GET /robots/:robotname/devices
 
-	### POST /robots/:robotname/devices/:devicename/commands/:commandname
+  Given a robot's name, returns JSON information about the devices belonging to
+  the requested Robot:
 
-	Given a robot name, device name, and command name, executes a robot's command
-	and returns the result.
+      [
+        {
+          "name": "sphero",
+          "driver": "Sphero",
+          "pin": null,
+          "connection": {
+            "name": "sphero",
+            "port": "/dev/rfcomm0",
+            "adaptor": "Sphero",
+            "connection_id": 2778
+          },
+          "commands": [
+            "detectCollisions",
+            "roll",
+            "setColor",
+            "setRGB",
+            "stop"
+          ]
+        }
+      ]
 
-	    // example pending
+  ### GET /robots/:robotname/devices/:devicename
 
-	### GET /robots/:robotname/connections
+  Given the names of a device and the robot it belongs to, returns data on the
+  specified device.
 
-	Given a robot's name, returns JSON information about the connections belonging
-	to the requested Robot:
+      {
+        "name": "sphero",
+        "driver": "Sphero",
+        "pin": null,
+        "connection": {
+          "name": "sphero",
+          "port": "/dev/rfcomm0",
+          "adaptor": "Sphero",
+          "connection_id": 2778
+        },
+        "commands": [
+          "detectCollisions",
+          "roll",
+          "setColor",
+          "setRGB",
+          "stop"
+        ]
+      }
 
-	    [
-	      {
-	        "name": "sphero",
-	        "port": "/dev/rfcomm0",
-	        "adaptor": "Sphero",
-	        "connection_id": 2778
-	      }
-	    ]
+  ### GET /robots/:robotname/devices/:devicename/commands
 
-	### GET /robots/:robotname/connections/:connectionname
+  Given the names of a device and the robot it belongs to, returns all commands
+  available for the specified device.
 
-	Given a robot's name, returns JSON information about the connections belonging
-	to the requested Robot:
+      [
+        "detectCollisions",
+        "roll",
+        "setColor",
+        "setRGB",
+        "stop"
+      ]
 
-	    {
-	      "name": "sphero",
-	      "port": "/dev/rfcomm0",
-	      "adaptor": "Sphero",
-	      "connection_id": 2778
-	    }
+  ### POST /robots/:robotname/devices/:devicename/commands/:commandname
 
-	### GET /robots/:robotname/devices/:devicename/events
+  Given a robot name, device name, and command name, executes a robot's command
+  and returns the result.
 
-	Routes to a Socket.IO route to handle WebSockets connections requesting updates
-	on device events.
+      // example pending
 
-	### WS_GET /events
+  ### GET /robots/:robotname/connections
 
-	A Socket.IO route to handle updating clients whenever a device sends
-	an 'update' event.
+  Given a robot's name, returns JSON information about the connections belonging
+  to the requested Robot:
+
+      [
+        {
+          "name": "sphero",
+          "port": "/dev/rfcomm0",
+          "adaptor": "Sphero",
+          "connection_id": 2778
+        }
+      ]
+
+  ### GET /robots/:robotname/connections/:connectionname
+
+  Given a robot's name, returns JSON information about the connections belonging
+  to the requested Robot:
+
+      {
+        "name": "sphero",
+        "port": "/dev/rfcomm0",
+        "adaptor": "Sphero",
+        "connection_id": 2778
+      }
+
+  ### GET /robots/:robotname/devices/:devicename/events
+
+  Routes to a Socket.IO route to handle WebSockets connections requesting updates
+  on device events.
+
+  ### WS_GET /events
+
+  A Socket.IO route to handle updating clients whenever a device sends
+  an 'update' event.
