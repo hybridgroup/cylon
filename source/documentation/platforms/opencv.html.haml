@@ -71,7 +71,47 @@ page_title_show: true
         sudo make install
 
   %h2 How to use
-  %p 
+  %p Example using face detection.
+  %h3 CoffeeScript
   :markdown
         :::javascript
-        ...
+        Cylon = require('cylon')
+
+        Cylon.robot
+          connection:
+            name: 'opencv', adaptor: 'opencv'
+
+          devices: [
+            { name: 'window', driver: 'window' }
+            {
+              name: 'camera',
+              driver: 'camera',
+              camera: 1,
+              haarcascade: "\#{ __dirname }/haarcascade_frontalface_alt.xml"
+            }
+          ]
+
+          work: (my) ->
+            my.camera.once('cameraReady', ->
+              console.log('The camera is ready!')
+
+              my.camera.on('facesDetected', (err, im, faces) ->
+                for face in faces
+                  im.rectangle([face.x, face.y], [face.x + face.width, face.y + face.height], [0,255,0], 2)
+                my.window.show(im, 40)
+
+                my.camera.readFrame()
+              )
+
+              my.camera.on('frameReady', (err, im) ->
+                my.camera.detectFaces(im)
+              )
+
+              my.camera.readFrame()
+            )
+
+        .start()
+
+				      
+				  
+
