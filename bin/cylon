@@ -12,6 +12,23 @@ program
   .description("Generates a new adaptor")
   .action(function(name) { require('../src/generators/adaptor')(name) });
 
+// require all cylon-* modules
+require('fs').readdirSync(process.cwd() + '/node_modules/').forEach(function(dir) {
+  if (dir.match(/^cylon-.*/) !== null) {
+    if (typeof require(dir).registerCommands === 'function') {
+      var commands = require(dir).registerCommands();
+      for (name in commands) {
+        var command = commands[name];
+
+        program
+          .command(name)
+          .description(command.description)
+          .action(command.command);
+      }
+    }
+  }
+});
+
 program.parse(process.argv);
 
 // print help if no arguments were provided
