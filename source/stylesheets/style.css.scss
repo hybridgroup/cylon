@@ -1,7 +1,20 @@
 @import "../hybridpages/assets/stylesheets/main.scss";
 
 // Custom
-.app-logo a {
-  @extend .hidden-text;
-  margin-top: 10px;
+.app-logo {
+  a {
+    @extend .hidden-text;
+    margin-top: 10px;
+  }
 }
+
+.content {
+	.documentation {
+		.api {
+			img {
+  				width: 100%;
+			}
+		}
+	}
+}
+
