@@ -10,64 +10,61 @@ page_title_show: true
 :markdown
   ## How To Connect
 
-  Now you are ready to write your own code you can access a running Cylon.js API server.
+  Now you're ready to write code that will let you access your robots on a Cylon.js API server.
 
   ### Running your robot:
 
-  To test your code you can type this on your console:
+  To run your script, use one of the following commands:
 
   #### Javascript
 
-      :::javascript
-        node robotfilename.js
+      node robotfilename.js
 
   #### CoffeeScript
 
-      :::javascript
-        coffee robotfilename.coffee
+      coffee robotfilename.coffee
 
-  For example, on this code:
+  Both of the following code examples will spin up an API server.
 
   #### Javascript
       :::javascript
       var Cylon = require('..');
 
-    Cylon.robot({
-      connection: { name: 'looped', adaptor: 'loopback'},
+      Cylon.robot({
+        connection: { name: 'looped', adaptor: 'loopback'},
 
-      work: function() {
-        every((1).second(), function() { Logger.info("Hello, human!"); });
-        after((10).seconds(), function() { Logger.info("Impressive."); });
-      }
-    }).start();
+        work: function() {
+          every((1).second(), function() { console.log("Hello, human!"); });
+        }
+      });
+
+      Cylon.start();
 
   #### CoffeeScript
 
       :::javascript
       Cylon = require('cylon')
 
-    Cylon.robot
-      work: ->
-        every 1.second(), ->
-          Logger.info("Hello, human!")
+      Cylon.robot
+        work: ->
+          every 1.second(), ->
+            console.log "Hello, human!"
 
-        after 10.seconds(), ->
-          Logger.info "Impressive."
+      Cylon.start()
 
-    .start()
-
-  `.start(); - .start()` automatically, starts the server.
+  `Cylon.start()` automatically starts up the API server.
 
   ## How To Configure
 
-  The Cylon.js API server, allows a configuration for your robots.
+  The Cylon.js API server allows for port and host configuration.
 
-  You can set it up like this:
+  In your scripts, you can set it up like this:
 
       :::javascript
-      Cylon.api(host: '0.0.0.0', port: '80')
+      Cylon.api(host: '127.0.0.1', port: '4321')
 
-  Now you can run the server on the curl : `http://0.0.0.0:80`.
+  Now, when you run the script, your server will be listening at
+  `http://127.0.0.1:4321`.
 
   ## Routes
 
@@ -75,7 +72,6 @@ page_title_show: true
 
   Our first route returns all the Robots the master class knows about in JSON
   format.
-
 
       [
         {
@@ -165,7 +161,9 @@ page_title_show: true
   Given a robot name, commands, and command name, executes a robot's command
   and returns the result.
 
-      // example pending
+      {
+        result: "successful"
+      }
 
   ### GET /robots/:robotname/devices
 
@@ -235,7 +233,9 @@ page_title_show: true
   Given a robot name, device name, and command name, executes a robot's command
   and returns the result.
 
-      // example pending
+      {
+        result: "successful"
+      }
 
   ### GET /robots/:robotname/connections
 
