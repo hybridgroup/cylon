@@ -2,15 +2,17 @@
 title: Joysticks with Cylon.js
 author: The Hybrid Group
 page_title: Joysticks
-page_subtitle: "<a href='https://github.com/hybridgroup/cylon-joystick' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-joystick/issues'>Issues</a>"
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-joystick' class='repository' target='blank'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-joystick/issues'  target='blank'>Issues</a>"
 layout: documentation
 page_title_show: true
+
+xbox360_driver: true
 ---
 
 %section.intro
   = image_tag "/images/devices/joystick.jpg", class: "display"
 
-  %p You can use Cylon.js with a PS3 game controller, an XBox360 game controller, or any other USB joystick or game controller that is compatible with Simple DirectMedia Layer (SDL).
+  %p You can use Cylon.js with a XBox360 game controller, or any other USB joystick or game controller that is compatible with Simple DirectMedia Layer (SDL).
 
   %p
     For more info about Simple DirectMedia Layer (SDL) go to
@@ -22,23 +24,58 @@ page_title_show: true
   %p Installing Cylon.js with Joystick support is pretty easy.
   :markdown
         :::bash
-        npm install Cylon-joystick
+        npm install cylon-joystick
+  %h3 Note for OS X Users
+  %p 
+    You'll need to install OS X Drivers for the Xbox Controller from 
+    = link_to "http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller/OsxDriver", "http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller/OsxDriver" , target: :blank
+    if you want to use it.
 
   %h2 How to use
   %p This small program receives joystick and button press events from an XBox 360 game controller.
+  %h3 JavaScript
   :markdown
         :::javascript
-        ...
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'joystick', adaptor: 'joystick' },
+          device: {name: 'joystick', driver: 'xbox360'},
+
+          work: function(my) {
+            my.joystick.on("left:move", function(position) { 
+              console.log(position);
+            });
+          }
+        }).start();
+
+  %h3 CoffeeScript
+  :markdown
+        :::javascript
+        Cylon = require 'cylon'
+
+        Cylon.robot
+          connection:
+            name: 'joystick', adaptor: 'joystick'
+
+          device:
+            name: 'joystick', driver: 'xbox360'
+
+          work: (my) ->
+            my.joystick.on "left:move", (position) ->
+              console.log position
+
+        .start()
 
   %h2 How to connect
   %p Plug your USB joystick or game controller into your USB port. If your device is supported by SDL, you are now ready.
 
 %section.drivers
   %h2 Drivers
-  %p There are 3 driver for different joysticks, as listed below:
+  %p Available drivers for the joystick platform are listed below:
+  -#%p There are 3 driver for different joysticks, as listed below:
 
   .hardware
     .devices
-      = partial "documentation/partials/joystick-driver"
-      = partial "documentation/partials/ps3"
-      = partial "documentation/partials/xbox360"
+      = partial "/documentation/partials/devices_joystick_drivers"
+

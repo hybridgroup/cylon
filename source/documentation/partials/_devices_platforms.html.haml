@@ -12,7 +12,10 @@
     %img{src: "/images/devices/beaglebone.jpg"}  
   /// Crazylie
   %a.device{href:"/documentation/platforms/crazyflie", title: "Crazyflie"}
-    %img{src: "/images/devices/crazyflie.jpg"}  
+    %img{src: "/images/devices/crazyflie.jpg"} 
+  ///Joystick  
+  %a.device{href:"/documentation/platforms/joystick", title: "AR Drone"}
+    %img{src: "/images/devices/joystick.jpg"} 
   ///Keyboard  
   %a.device{href:"/documentation/platforms/keyboard", title: "AR Drone"}
     %img{src: "/images/devices/keyboard.jpg"}
@@ -69,6 +72,10 @@
   %a.device{href:"/documentation/platforms/crazyflie", title: "Crazyflie"}
     %img{src: "/images/devices/crazyflie.jpg"}  
 
+- if current_page.data.joystick_platform == true
+  ///Joystick  
+  %a.device{href:"/documentation/platforms/joystick", title: "AR Drone"}
+    %img{src: "/images/devices/joystick.jpg"} 
 - if current_page.data.keyboard_platform == true 
   ///Keyboard  
   %a.device{href:"/documentation/platforms/keyboard", title: "AR Drone"}
@@ -82,11 +89,6 @@
   //Force
   %a.device{href:"/documentation/platforms/force", title: "Force"}
     %img{src: "/images/devices/force.jpg"}
-
-- if current_page.data.joystick_platform == true
-  /// Joystick
-  %a.device{href:"/documentation/platforms/joystick", title: "Joystick"}
-    %img{src: "/images/devices/joystick.jpg"}
 
 - if current_page.data.leapmotion_platform == true
   /// Leap Motion
