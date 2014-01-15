@@ -1,0 +1,157 @@
+---
+page_title_show: true
+title: Helpers
+author: The Hybrid Group
+description: Cylon.js Helpers
+page_title: Helpers
+page_subtitle: Some helpful utility functions
+layout: documentation
+---
+
+:markdown
+
+  ## every(interval, action)
+
+  Alias to Javascript's setInterval() function, combined with monkeypatches to
+  Number detailed below.
+
+  - **interval** - interval to run action on
+  - **action** - action to perform on interval
+
+  Returns a setInterval
+
+  ### Examples:
+
+      :::coffeescript
+      every 5.seconds(), ->
+        console.log "Hello world! (and again in 5 seconds)"
+
+  ## after(interval, action)
+
+  Alias to Javascript's setTimeout() function, combined with monkeypatches to
+  Number detailed below.
+
+  - **interval** - interval to run action after
+  - **action** - action to perform after interval
+
+  Returns a setTimeout
+
+  ### Examples:
+
+      :::coffeescript
+      after 10.seconds(), ->
+        console.log "Hello world!"
+
+  ## proxyFunctionsToObject(methods, target, base = this, force = false)
+
+  Proxies a list of methods from one object to another. It will not overwrite
+  existing methods unless told to.
+
+
+  - **methods** - array of functions to proxy
+  - **target** - object to proxy the functions to
+  - **base** - (optional) object that proxied functions will be declared on.
+    Defaults to `this`
+  - **force** - (optional) boolean - whether or not to force method assignment.
+    Defaults to `false`
+
+  ### Examples:
+
+      :::coffeescript
+      class ProxyClass
+        reverse: (string) ->
+          string.split('').reverse().join('')
+
+      class BaseClass
+        constructor: ->
+          @proxy = new ProxyClass
+          proxyFunctionsToObject ['reverse'], @proxy
+
+      klass = new BaseClass
+      klass.reverse("Hello, World!")
+      #=> !dlroW ,olleH
+
+  ## Number::seconds
+
+  A monkey-patch to Number that allows for using numbers to represent time in
+  terms of seconds.
+
+  Note that while using this in Javascript, you have to use it in one of these
+  ways:
+
+      :::javascript
+      10..seconds()
+      // or
+      (10).seconds()
+
+  Otherwise, the Javascript interpreter will get confused and think you're
+  trying to represent a float.
+
+  In CoffeeScript you can use `10.seconds()`, as the compiler will turn it into 
+  `10..seconds()` for you.
+
+  Returns a Number representing the time in milliseconds
+
+  ### Examples:
+
+      :::coffeescript
+      10.seconds()
+      #=> 10000
+
+  ## Number::second
+
+  Aliases to `Number::seconds`. See that method for more information
+
+  Returns a Number representing the time in milliseconds
+
+  ### Examples:
+
+      :::coffeescript
+      1.second()
+      #=> 1000
+
+
+  ## Number::fromScale(start, end)
+
+  Monkey-patch on Number, converts a value from an old number scale (start, end)
+  to (0..1) scale.
+
+  - **start** - starting number of the scale
+  - **end** - top number number of the scale
+
+  Returns a number representing the scaled value.
+
+  ### Examples:
+
+      :::coffeescript
+      150.fromScale(0, 200)
+      #=> 0.75
+
+      5.fromScale(0, 10)
+      #=> 0.5
+
+  ## Number::toScale(start, end)
+
+  Monkey-patch on Number, converts a value from (0..1) scale to a new (start,
+  end) scale.
+
+  - **start** - starting number of the scale
+  - **end** - top number number of the scale
+
+  This can be chained together with `Number::fromScale` to quickly and handily
+  convert numbers between scales. e.g
+
+      :::coffeescript
+      100.fromScale(0, 200).toScale(0, 100)
+      #=> 50
+
+  Returns a number representing the scaled value.
+
+  ### Examples:
+
+      :::coffeescript
+      0.75.toScale(0, 200)
+      #=> 150
+
+      0.5.toScale(0, 10)
+      #=> 5

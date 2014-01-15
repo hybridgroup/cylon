@@ -8,8 +8,10 @@
   }
 
   .article {
-    display: inline-block;
     margin-bottom: 30px;
+    img {
+      width: 100%;
+    }
     h3, h4, a {
       color: $blog-title-color;
     }
