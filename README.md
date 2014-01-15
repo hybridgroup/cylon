@@ -1,4 +1,4 @@
-[![Cylon.js](https://raw.github.com/hybridgroup/cylon/gh-pages/images/logo.png)](http://cylonjs.com)
+[![Cylon.js](https://raw.github.com/hybridgroup/cylon/gh-pages/images/elements/logo.png)](http://cylonjs.com)
 
 http://cylonjs.com
 
