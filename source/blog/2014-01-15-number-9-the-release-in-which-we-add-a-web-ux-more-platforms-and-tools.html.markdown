@@ -2,7 +2,7 @@
 page_title_show: true
 title: Number 9! The Release In Which We Add A Web UX, More Platforms, and Tools
 page_title: Blog
-date: 2014-01-14
+date: 2014-01-15
 tags: robots
 author: Ron Evans
 ---
@@ -20,3 +20,5 @@ We've now added <a href="https://github.com/hybridgroup/cylon-joystick" target="
 This new 0.9.0 release also adds a powerful set of command line utilities. Each Cylon.js adaptor module can also add new commands that are specific to that platform. This CLI add-in capability just makes it that much easier to handle your "RobotOps" needs. We will be adding lots of platform specific utilties now that we have this capability. We have also been continuing our work to make it easy for anyone to add support for new hardware platforms. The `cylon generate adaptor` command now uses the latest and greatest code that incorporate our best practices for adaptor development.
 
 Please let us know how you like the new release, and anything we can do to improve. We're here to help!
+
+UPDATE: We pushed 0.9.2 to accomodate a checksum error pointed out by a user. Thanks!
