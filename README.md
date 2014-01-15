@@ -215,6 +215,8 @@ Thank you!
 
 [![NPM](https://nodei.co/npm/cylon.png?compact=true)](https://nodei.co/npm/cylon/) 
 
+Version 0.9.0 - Add AngularJS web interface to API, extensible commands for CLI
+
 Version 0.8.0 - Refactored Adaptor and Driver into proper base classes for easier authoring of new modules
 
 Version 0.7.0 - cylon command for generating new adaptors, support code for better GPIO support, literate examples
