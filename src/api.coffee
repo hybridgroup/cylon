@@ -30,7 +30,7 @@ namespace 'Cylon', ->
       @server.use express.urlencoded()
       @server.use express.static __dirname + "/../api"
 
-      @server.get "/*", (req, res, next) ->
+      @server.get "/*", (req, res, next) =>
         res.set 'Content-Type', 'application/json'
         do next
 
@@ -39,69 +39,82 @@ namespace 'Cylon', ->
       @server.listen @port, @host, =>
         Logger.info "#{@server.get('title')} is listening on #{@host}:#{@port}"
 
+    # Parses req to extract params to be used for commands.
+    #
+    # Returns an array of params
+    parseCommandParams: (req) ->
+      params = []
+      param_container = {}
+
+      if req.method is 'GET' or Object.keys(req.query).length > 0
+        param_container = req.query
+      else if typeof req.body is 'object'
+        param_container = req.body
+
+      params.push(v) for _, v of param_container
+      params
+
     configureRoutes: ->
-      @server.get "/robots", (req, res) ->
+      @server.get "/robots", (req, res) =>
         res.json (robot.data() for robot in master.robots())
 
-      @server.get "/robots/:robotname", (req, res) ->
+      @server.get "/robots/:robotname", (req, res) =>
         master.findRobot req.params.robotname, (err, robot) ->
           res.json if err then err else robot.data()
 
-      @server.get "/robots/:robotname/commands", (req, res) ->
+      @server.get "/robots/:robotname/commands", (req, res) =>
         master.findRobot req.params.robotname, (err, robot) ->
           res.json if err then err else robot.data().commands
 
-      @server.all "/robots/:robotname/commands/:commandname", (req, res) ->
-        params = []
-        params.push(v) for _, v of req.body if typeof req.body is 'object'
+      @server.all "/robots/:robotname/commands/:commandname", (req, res) =>
+        params = @parseCommandParams req
 
         master.findRobot req.params.robotname, (err, robot) ->
           if err then return res.json err
           result = robot[req.params.commandname](params...)
           res.json result: result
 
-      @server.get "/robots/:robotname/devices", (req, res) ->
+      @server.get "/robots/:robotname/devices", (req, res) =>
         master.findRobot req.params.robotname, (err, robot) ->
           res.json if err then err else robot.data().devices
 
-      @server.get "/robots/:robotname/devices/:devicename", (req, res) ->
+      @server.get "/robots/:robotname/devices/:devicename", (req, res) =>
         [robotname, devicename] = [req.params.robotname, req.params.devicename]
 
         master.findRobotDevice robotname, devicename, (err, device) ->
           res.json if err then err else device.data()
 
-      @server.get "/robots/:robotname/devices/:devicename/commands", (req, res) ->
+      @server.get "/robots/:robotname/devices/:devicename/commands", (req, res) =>
         [robotname, devicename] = [req.params.robotname, req.params.devicename]
 
         master.findRobotDevice robotname, devicename, (err, device) ->
           res.json if err then err else device.data().commands
 
-      @server.all "/robots/:robot/devices/:device/commands/:commandname", (req, res) ->
+      @server.all "/robots/:robot/devices/:device/commands/:commandname", (req, res) =>
         params = [req.params.robot, req.params.device, req.params.commandname]
         [robotname, devicename, commandname] = params
 
-        params = []
-        params.push(v) for _, v of req.body if typeof req.body is 'object'
+        params = @parseCommandParams req
 
         master.findRobotDevice robotname, devicename, (err, device) ->
           if err then return res.json err
           result = device[commandname](params...)
           res.json result: result
 
-      @server.get "/robots/:robotname/connections", (req, res) ->
+      @server.get "/robots/:robotname/connections", (req, res) =>
         master.findRobot req.params.robotname, (err, robot) ->
           res.json if err then err else robot.data().connections
 
-      @server.get "/robots/:robot/connections/:connection", (req, res) ->
+      @server.get "/robots/:robot/connections/:connection", (req, res) =>
         [robotname, connectionname] = [req.params.robot, req.params.connection]
 
         master.findRobotConnection robotname, connectionname, (err, connection) ->
           res.json if err then err else connection.data()
 
-      @server.get "/robots/:robotname/devices/:devicename/events", (req, res) ->
+      @server.get "/robots/:robotname/devices/:devicename/events", (req, res) =>
         req.io.route 'events'
 
-      @server.io.route 'events', (req) ->
+      @server.io.route 'events', (req) =>
         [robotname, devicename] = [req.params.robotname, req.params.devicename]
 
         master.findRobotDevice robotname, devicename, (err, device) ->

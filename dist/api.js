@@ -44,7 +44,24 @@
         });
       }
 
+      ApiServer.prototype.parseCommandParams = function(req) {
+        var param_container, params, v, _;
+        params = [];
+        param_container = {};
+        if (req.method === 'GET' || Object.keys(req.query).length > 0) {
+          param_container = req.query;
+        } else if (typeof req.body === 'object') {
+          param_container = req.body;
+        }
+        for (_ in param_container) {
+          v = param_container[_];
+          params.push(v);
+        }
+        return params;
+      };
+
       ApiServer.prototype.configureRoutes = function() {
+        var _this = this;
         this.server.get("/robots", function(req, res) {
           var robot;
           return res.json((function() {
@@ -69,15 +86,8 @@
           });
         });
         this.server.all("/robots/:robotname/commands/:commandname", function(req, res) {
-          var params, v, _, _ref;
-          params = [];
-          if (typeof req.body === 'object') {
-            _ref = req.body;
-            for (_ in _ref) {
-              v = _ref[_];
-              params.push(v);
-            }
-          }
+          var params;
+          params = _this.parseCommandParams(req);
           return master.findRobot(req.params.robotname, function(err, robot) {
             var result;
             if (err) {
@@ -109,17 +119,10 @@
           });
         });
         this.server.all("/robots/:robot/devices/:device/commands/:commandname", function(req, res) {
-          var commandname, devicename, params, robotname, v, _, _ref;
+          var commandname, devicename, params, robotname;
           params = [req.params.robot, req.params.device, req.params.commandname];
           robotname = params[0], devicename = params[1], commandname = params[2];
-          params = [];
-          if (typeof req.body === 'object') {
-            _ref = req.body;
-            for (_ in _ref) {
-              v = _ref[_];
-              params.push(v);
-            }
-          }
+          params = _this.parseCommandParams(req);
           return master.findRobotDevice(robotname, devicename, function(err, device) {
             var result;
             if (err) {
