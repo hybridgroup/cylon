@@ -22,16 +22,17 @@ namespace 'Cylon', ->
   class @Connection extends EventEmitter
 
     # Public: Creates a new Connection
-    # @opts - a hash of acceptable params:
-    #   - id - a string ID for the connection
-    #   - name - a name for the connection
-    #   - robot - Robot the Connection belongs to
-    #   - adaptor - the string module of the adaptor to be set up
-    #   - port - a port to use for the Connection
+    #
+    # opts - hash of acceptable params:
+    #   id - string ID for the connection
+    #   robot - Robot the Connection belongs to
+    #   name - name for the connection
+    #   adaptor - string module name of the adaptor to be set up
+    #   port - string port to use for the Connection
     #
     # Returns the newly set-up connection
     constructor: (opts = {}) ->
-      opts.id ?= Math.floor(Math.random() * 10000)
+      opts.id ?= Math.floor Math.random() * 10000
       @self = this
       @robot = opts.robot
       @name = opts.name
@@ -60,7 +61,7 @@ namespace 'Cylon', ->
       msg = "Connecting to '#{@name}'"
       msg += " on port '#{@port.toString()}'" if @port?
       Logger.info msg
-      @adaptor.connect(callback)
+      @adaptor.connect callback
 
     # Public: Disconnect the adaptor's connection
     #
@@ -79,6 +80,6 @@ namespace 'Cylon', ->
     # Returns the set-up adaptor
     initAdaptor: (opts) ->
       Logger.debug "Loading adaptor '#{opts.adaptor}'"
-      @robot.initAdaptor(opts.adaptor, @self, opts)
+      @robot.initAdaptor opts.adaptor, @self, opts
 
 module.exports = Cylon.Connection
