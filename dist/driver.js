@@ -31,6 +31,10 @@
         this.connection = this.device.connection;
       }
 
+      Driver.prototype.commands = function() {
+        return [];
+      };
+
       Driver.prototype.start = function(callback) {
         Logger.info("Driver " + this.name + " started");
         callback(null);
@@ -40,10 +44,6 @@
 
       Driver.prototype.stop = function() {
         return Logger.info("Driver " + this.name + " stopped");
-      };
-
-      Driver.prototype.commands = function() {
-        return [];
       };
 
       return Driver;
