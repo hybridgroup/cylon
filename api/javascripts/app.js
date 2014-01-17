@@ -40,45 +40,72 @@ var RobotIndexCtrl = function($scope, $http, $location, $route) {
 };
 
 var RobotDetailCtrl = function($scope, $http, $routeParams, $location) {
-  var device;
+  $scope.params = [
+    { name: '', value: '', type: 'string' }
+  ];
+
+  $scope.paramTypes = ["string", "boolean", "integer"]
+
+  $scope.addParam = function() {
+    $scope.params.push({name: '', value: '', type: 'string'});
+  }
+
+  $scope.removeParam = function(index) {
+    $scope.params.splice(index, 1)
+  }
+
+  $scope.isConnected = function(connection) {
+    if (connection && connection.connected) { return "connected"; }
+  };
+
   $http.get('/robots/' + $routeParams.robotId).success(function(data) {
-    return $scope.robot = data;
+    $scope.robot = data;
   });
+
   $scope.getDeviceDetail = function(deviceId) {
-    return $http.get('/robots/' + $scope.robot.name + "/devices/" + deviceId).success(function(data) {
+    $http.get('/robots/' + $scope.robot.name + "/devices/" + deviceId).success(function(data) {
       $scope.deviceDetail = data;
-      return device.console();
     });
   };
-  $scope.executeCommand = function(deviceId, command) {
-    var params, post_params;
-    params = $(".dropdown-input").val();
-    post_params = {};
-    if (params !== "") {
-      post_params = { params: [params] };
-    }
-    return $http.post('/robots/' + $scope.robot.name + "/devices/" + deviceId + "/commands/" + command, post_params).success(function(data) {
+
+  $scope.executeDisabled = function() {
+    return $scope.command === void 0
+  }
+
+  $scope.executeCommand = function() {
+    var robotName = $scope.robot.name,
+        deviceName = $scope.deviceDetail.name,
+        command = $scope.command,
+        params = extractParams();
+
+    $http.post('/robots/' + robotName + "/devices/" + deviceName + "/commands/" + command, params).success(function(data) {
       $(".console code").append(data.result + "\n");
     });
   };
-  device = {
-    console: function() {
-      var wspath;
-      if (window.ws) {
-        window.ws.onmessage = null;
-        window.ws.close();
-        $(".console code").empty();
+
+  var extractParams = function() {
+    var params = {}
+
+    for (var i = 0; i < $scope.params.length; i++) {
+      var base = $scope.params[i];
+      params[base.name] = base.value;
+
+      switch (base.type) {
+        case "boolean":
+          str = String(params[base.name]).toLowerCase();
+          params[base.name] = (str === 'true' || str === 't');
+          break;
+
+        case "integer":
+          params[base.name] = Number(params[base.name]);
+          break;
+
+        default:
+          // assume string, nothing changes
+          break;
       }
-      wspath = "ws://" + location.host + "/robots/";
-      window.ws = new WebSocket(wspath + $scope.robot.name + "/devices/" + $scope.deviceDetail.name + "/events");
-      return window.ws.onmessage = function(evt) {
-        return $(".console code").prepend(evt.data + "\n");
-      };
     }
-  };
-  return $scope.isConnected = function(connection) {
-    if (connection && connection.connected) {
-      return "connected";
-    }
-  };
+
+    return params;
+  }
 };

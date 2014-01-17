@@ -45,23 +45,33 @@
               <dd ng-show="deviceDetail.connection.name">{{deviceDetail.connection.name}}</dd>
             </span>
           </dl>
-          <div class="input-group">
-            <div class="commands input-group-btn">
-              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                Commands
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu">
-                <div ng-repeat="command in deviceDetail.commands">
-                  <a ng-click="executeCommand(deviceDetail.name, command)"><li>{{command}}</li></a>
-                </div>
-              </ul>
-            </div>
-            <input class="dropdown-input" type="text">
-          </div>
         </b>
       </div>
     </div>
+
+    <div class="row-fluid device-command">
+      <div class="col-md-4 command-select">
+        <span>Command:</span>
+        <select ng-model="command" ng-options="cmd for cmd in deviceDetail.commands" required class="form-control"></select>
+      </div>
+
+      <div class="col-md-6 command-inputs">
+        <div class="param-input" ng-class="{'last': $last}" ng-repeat="param in params">
+          <input type="text" value="{{param.name}}" ng-model="param.name" placeholder="name">
+          <input type="text" value="{{param.value}}" ng-model="param.value" placeholder="value">
+          <select class="form-control" ng-model="param.type" ng-options="type for type in paramTypes"></select>
+          <span class="pull-right param-remove" ng-hide="$last" ng-click="removeParam($index)"></span>
+        </div>
+
+        <button class="btn btn-sm btn-default" ng-click="addParam()">Add Param</button>
+      </div>
+
+      <div class="col-md-1 pull-right command-submit">
+        <button ng-disabled="executeDisabled()" ng-click="executeCommand()" class="pull-right btn btn-primary">Submit</button>
+      </div>
+
+    </div>
+
     <div class="row-fluid content">
       <div class="console">
         <code></code>
