@@ -2,36 +2,16 @@
 var cylon = angular.module("cylon", ['ngRoute']);
 
 cylon.config(["$routeProvider", function($routeProvider) {
-    $routeProvider.when("/robots", {
-      templateUrl: "/partials/robot-index.html",
-      controller: RobotIndexCtrl
-    }).when("/robots/:robotId", {
-      templateUrl: "/partials/robot-detail.html",
-      controller: RobotDetailCtrl
-    }).otherwise({
-      redirectTo: "/robots"
-    });
+  $routeProvider.when("/robots", {
+    templateUrl: "/partials/robot-index.html",
+    controller: RobotIndexCtrl
+  }).when("/robots/:robotId", {
+    templateUrl: "/partials/robot-detail.html",
+    controller: RobotDetailCtrl
+  }).otherwise({
+    redirectTo: "/robots"
+  });
 }])
-
-cylon.directive("activeLink", ["$location", function(location) {
-    return {
-      restrict: "A",
-      link: function(scope, element, attrs, controller) {
-        var klass, path;
-        klass = attrs.activeLink;
-        path = attrs.$$element.find('a').attr('href');
-        path = path.substring(1);
-        scope.location = location;
-        return scope.$watch("location.path()", function(newPath) {
-          if (path === newPath) {
-            element.addClass(klass);
-          } else {
-            element.removeClass(klass);
-          }
-        });
-      }
-    };
-}]);
 
 // Controllers
 var RobotIndexCtrl = function($scope, $http, $location, $route) {
