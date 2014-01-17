@@ -1,6 +1,8 @@
 // Routes
-angular.module("cylon", ['ngRoute']).config(["$routeProvider", function($routeProvider) {
-    return $routeProvider.when("/robots", {
+var cylon = angular.module("cylon", ['ngRoute']);
+
+cylon.config(["$routeProvider", function($routeProvider) {
+    $routeProvider.when("/robots", {
       templateUrl: "/partials/robot-index.html",
       controller: RobotIndexCtrl
     }).when("/robots/:robotId", {
@@ -9,7 +11,9 @@ angular.module("cylon", ['ngRoute']).config(["$routeProvider", function($routePr
     }).otherwise({
       redirectTo: "/robots"
     });
-}]).directive("activeLink", ["$location", function(location) {
+}])
+
+cylon.directive("activeLink", ["$location", function(location) {
     return {
       restrict: "A",
       link: function(scope, element, attrs, controller) {
@@ -20,9 +24,9 @@ angular.module("cylon", ['ngRoute']).config(["$routeProvider", function($routePr
         scope.location = location;
         return scope.$watch("location.path()", function(newPath) {
           if (path === newPath) {
-            return element.addClass(klass);
+            element.addClass(klass);
           } else {
-            return element.removeClass(klass);
+            element.removeClass(klass);
           }
         });
       }
@@ -32,9 +36,10 @@ angular.module("cylon", ['ngRoute']).config(["$routeProvider", function($routePr
 // Controllers
 var RobotIndexCtrl = function($scope, $http, $location, $route) {
   $http.get('/robots').success(function(data) {
-    return $scope.robots = data;
+    $scope.robots = data;
   });
-  return $scope.robotDetail = function(robotId) {
+
+  $scope.robotDetail = function(robotId) {
     return $location.path("/robots/" + robotId);
   };
 };
