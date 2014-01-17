@@ -6,14 +6,16 @@
           {{robot.type || "Robot"}}
         </section>
       </div>
+
       <div class="col-md-10">
         <b>
           <span class="name">{{robot.name}}</span>
           <dl class="controls">
             <dt><i class="fa fa-fighter-jet"></i> devices: </dt>
-              <dd>{{robot.connections.length}}</dd>
+            <dd>{{robot.connections.length}}</dd>
+
             <dt><i class="fa fa-exchange"></i> connections: </dt>
-              <dd>{{robot.connections.length}}</dd>
+            <dd>{{robot.connections.length}}</dd>
           </dl>
         </b>
       </div>
@@ -23,23 +25,29 @@
   <div class="container device details" ng-show='deviceDetail'>
     <div class="row-fluid">
       <div class="col-md-2">
-        <b><span class="name">{{deviceDetail.name}}</span></b>
+        <b>
+          <span class="name">{{deviceDetail.name}}</span>
+        </b>
       </div>
+
       <div class="col-md-5 pull-right">
         <b>
           <dl class="controls">
             <span ng-show='deviceDetail.pin'>
               <dt><i class="fa fa-fighter-jet"></i> </dt>
-                <dd>{{ deviceDetail.pin }}</dd>
+              <dd>{{ deviceDetail.pin }}</dd>
             </span>
+
             <span ng-show='deviceDetail.driver'>
               <dt><i class="fa fa-hdd"></i></dt>
-                <dd>{{ deviceDetail.driver }}</dd>
+              <dd>{{ deviceDetail.driver }}</dd>
             </span>
+
             <span ng-show='deviceDetail.adaptor'>
               <dt><i class="fa fa-resize-horizontal"></i></dt>
-                <dd>{{ deviceDetail.adaptor }}</dd>
+              <dd>{{ deviceDetail.adaptor }}</dd>
             </span>
+
             <span ng-show='deviceDetail.connection'>
               <dt><i class="fa fa-circle" ng-class="isConnected(deviceDetail.connection)"></i> </dt>
               <dd ng-show="deviceDetail.connection.name">{{deviceDetail.connection.name}}</dd>
@@ -92,10 +100,11 @@
             <b>
               <span class="name">{{device.name}}</span>
               <dl class="controls">
-                <span  ng-show="device.pin">
-                  <dt ><i class="fa fa-bolt"></i> pin: </dt>
+                <span ng-show="device.pin">
+                  <dt><i class="fa fa-bolt"></i> pin: </dt>
                   <dd>{{device.pin}}</dd>
                 </span>
+
                 <dt><i class="fa fa-exchange"></i> </dt>
                 <dd>{{device.connection.name}}</dd>
               </dl>
@@ -113,6 +122,7 @@
               <i class="fa fa-exchange"></i>
             </div>
           </div>
+
           <div class="col-md-10">
             <b>
               <span class="name">{{connection.name}}</span>
