@@ -115,6 +115,10 @@
   width: 30%;
 }
 
+.device-command input[type='text']:focus {
+  outline: none;
+}
+
 .device-command select {
   width: 20%;
 }
