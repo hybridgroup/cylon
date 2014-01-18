@@ -48,7 +48,8 @@ var RobotDetailCtrl = function($scope, $http, $routeParams, $location) {
   });
 
   $scope.getDeviceDetail = function(deviceId) {
-    $http.get('/robots/' + $scope.robot.name + "/devices/" + deviceId).success(function(data) {
+    var url = '/robots/' + $scope.robot.name + "/devices/" + deviceId;
+    $http.get(url).success(function(data) {
       $scope.deviceDetail = data;
     });
   };
@@ -58,12 +59,13 @@ var RobotDetailCtrl = function($scope, $http, $routeParams, $location) {
   }
 
   $scope.executeCommand = function() {
-    var robotName = $scope.robot.name,
-        deviceName = $scope.deviceDetail.name,
+    var robot = $scope.robot.name,
+        device = $scope.deviceDetail.name,
         command = $scope.command,
-        params = extractParams();
+        params = extractParams(),
+        url ='/robots/' + robot + "/devices/" + device + "/commands/" + command;
 
-    $http.post('/robots/' + robotName + "/devices/" + deviceName + "/commands/" + command, params).success(function(data) {
+    $http.post(url, params).success(function(data) {
       $(".console code").append(data.result + "\n");
     });
   };
