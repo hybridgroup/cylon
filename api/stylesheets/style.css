@@ -71,35 +71,6 @@
   color: #aaa;
 }
 
-.dropdown-menu {
-  padding: 0;
-}
-
-.dropdown-menu li {
-  padding: 10px;
-  line-height: 1;
-}
-
-.dropdown-menu li:hover {
-  cursor: pointer;
-  background: #efefef;
-}
-
-.dropdown-menu a {
-  color: #444;
-}
-
-.dropdown-input {
-  height: 34px;
-  line-height: 1;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-  border: 1px solid #ccc;
-  padding: 0px 5px;
-  width: 125px;
-  margin-top: 6px;
-}
-
 .details .console code {
   display: block;
   height: 150px;
@@ -114,4 +85,59 @@
 
 .device.details {
   padding: 15px;
+}
+
+.device-command {
+  display: block;
+  clear: both;
+  margin: 10px 0;
+  padding: 0 15px;
+}
+
+.device-command select {
+  width: auto;
+  min-width: 150px;
+  display: inline;
+}
+
+.device-command .param-input {
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+.device-command input[type='text'] {
+  border: none;
+  box-shadow: none;
+  border-bottom: 1px solid #bbb;
+  line-height: 18px;
+  padding: 5px;
+  margin-right: 10px;
+  width: 30%;
+}
+
+.device-command input[type='text']:focus {
+  outline: none;
+}
+
+.device-command select {
+  width: 20%;
+}
+
+.device-command .command-inputs button {
+  width: 63%;
+  margin-bottom: 30px;
+}
+
+.device-command select {
+  background: white;
+}
+
+.device-command .param-remove {
+  width: 18px;
+  height: 18px;
+  background-image: url(/images/delete.png);
+  display: inline-block;
+  cursor: pointer;
+  margin-top: 6px;
+  margin-right: 5px;
 }
