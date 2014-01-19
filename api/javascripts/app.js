@@ -29,7 +29,7 @@ var RobotDetailCtrl = function($scope, $http, $routeParams, $location) {
     { name: '', value: '', type: 'string' }
   ];
 
-  $scope.paramTypes = ["string", "boolean", "integer"]
+  $scope.paramTypes = ["string", "boolean", "number"]
 
   $scope.addParam = function() {
     $scope.params.push({name: '', value: '', type: 'string'});
@@ -83,7 +83,7 @@ var RobotDetailCtrl = function($scope, $http, $routeParams, $location) {
           params[base.name] = (str === 'true' || str === 't');
           break;
 
-        case "integer":
+        case "number":
           params[base.name] = Number(params[base.name]);
           break;
 
