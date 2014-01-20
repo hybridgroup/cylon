@@ -7,24 +7,23 @@ Cylon.robot({
 
   work: function(my) {
     my.blinkm.on('start', function() {
-      my.blinkm.version(function(version) {
-        console.log("Started BlinkM version " + version);
+
+      my.blinkm.stopScript();
+
+      my.blinkm.getFirmware(function(version) {
+        Logger.info("Started BlinkM version " + version);
       });
 
-      my.blinkm.off();
+      my.blinkm.goToRGB(0,0,0);
+      my.blinkm.getRGBColor(function(data){
+        console.log("Starting Color: #{ data }")
+      });
 
-      var lit = false;
-
-      every((1).second(), function() {
-        if (lit) {
-          lit = false;
-          console.log('on');
-          my.blinkm.rgb(0xaa, 0, 0);
-        } else {
-          lit = true;
-          console.log('off');
-          my.blinkm.rgb(0, 0, 0);
-        }
+      every((2).second(), function() {
+        my.blinkm.getRGBColor(function(data){
+          console.log("Current Color: #{ data }");
+        });
+        my.blinkm.fadeToRandomRGB(128, 128, 128);
       });
     });
   }
