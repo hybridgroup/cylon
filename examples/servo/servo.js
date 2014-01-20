@@ -2,7 +2,7 @@ var Cylon = require('../..');
 
 Cylon.robot({
   connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
-  device: { name: 'servo', driver: 'servo', pin: 3 },
+  device: { name: 'servo', driver: 'servo', pin: 3, range: { min: 30, max: 150 } },
 
   work: function(my) {
     var angle = 30;
