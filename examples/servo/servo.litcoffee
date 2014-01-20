@@ -15,10 +15,16 @@ Now we can start defining our robot:
     Cylon.robot
 
 We'll be connecting to an Ardunio, using the Firmata protocol, and a servo
-attached to the Arduino on pin 3.
+attached to the Arduino on pin 3. We have the option to pass an extra 'range'
+param to the device, this param sets the min and max angle values. By default
+this is set to min: 30, max: 150 to prevent damaging the servo when giving it
+an angle outside the range it can cover.
 
-      connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' }
-      device: { name: 'servo', driver: 'servo', pin: 3 }
+      connection:
+        name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
+
+      device:
+        name: 'servo', driver: 'servo', pin: 3, range: { low: 30, high: 150}
 
 We'll start defining the work for our robot next:
 
