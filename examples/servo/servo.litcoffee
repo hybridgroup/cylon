@@ -24,7 +24,7 @@ an angle outside the range it can cover.
         name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
 
       device:
-        name: 'servo', driver: 'servo', pin: 3, range: { low: 30, high: 150}
+        name: 'servo', driver: 'servo', pin: 3, range: { min: 30, max: 150}
 
 We'll start defining the work for our robot next:
 
