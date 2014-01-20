@@ -1,4 +1,4 @@
-Cylon = require('..')
+Cylon = require('../..')
 
 # Initialize the robot
 Cylon.robot
