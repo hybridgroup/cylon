@@ -7,7 +7,7 @@ tags: robots
 author: Ron Evans
 ---
 
-Last week we conducted the robot hackathon at (<a href="http://ng-conf.org" target="blank">ng-conf</a>), the first conference dedicated to <a href="http://angularjs.org/" target="blank">AngularJS</a>. It was perfect timing with the release of 0.9.0 of Cylon.js (<a href="http://cylonjs.com" target="blank">http://cylonjs.com</a>), the JavaScript robotics framework that added a AngularJS-based web UI to our API.
+We conducted the official robot hackathon at <a href="http://ng-conf.org" target="blank">ng-conf</a>, the first conference dedicated to <a href="http://angularjs.org/" target="blank">AngularJS</a>, that took place last week in Salt Lake City, Utah. It was perfect timing, given that the release of 0.9.0 of Cylon.js (<a href="http://cylonjs.com" target="blank">http://cylonjs.com</a>) our JavaScript open source robotics framework, had just added a AngularJS-based web UI to our API.
 
 Over 120 people registered for the evening event that featured <a href="http://gosphero.com" target="blank">Sphero</a> robots kindly provided by our friends at Orbotix. We also brought a bunch of our new Arduino Starter Kits, some Makey Makey's, and some Leap Motion controllers. Combining them together into something useful, fun, and/or creative had the participants completely captivated!
 
