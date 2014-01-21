@@ -34,7 +34,7 @@ def extract_example_files
     content = File.read file
     js_content = File.read file.gsub(/litcoffee$/, 'js')
     @example_files << {
-      :name => file.match(/\/([A-Za-z_-]+)\.litcoffee$/)[1],
+      :name => file.match(/\/([0-9A-Za-z_-]+)\.litcoffee$/)[1],
       :content => content,
       :title => content.match(/\A#\s+(.+)$/)[1],
       :js_content => js_content
