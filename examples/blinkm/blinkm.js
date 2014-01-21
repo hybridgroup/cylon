@@ -16,12 +16,12 @@ Cylon.robot({
 
       my.blinkm.goToRGB(0,0,0);
       my.blinkm.getRGBColor(function(data){
-        console.log("Starting Color: #{ data }")
+        console.log("Starting Color: ", data)
       });
 
       every((2).second(), function() {
         my.blinkm.getRGBColor(function(data){
-          console.log("Current Color: #{ data }");
+          console.log("Current Color: ", data);
         });
         my.blinkm.fadeToRandomRGB(128, 128, 128);
       });
