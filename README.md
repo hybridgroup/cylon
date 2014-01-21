@@ -52,21 +52,16 @@ To add new information to any driver, do this :
 
 #### Examples
 
-To create a new example for any driver or platform, do this : 
+To import examples from the main Cylon.js repository, run the
+`bin/import_examples` script. You'll need to have Git installed.
 
-- 1) Go to the file `source/documentation/examples` , and create a new file `file.html.haml`.
+This script will:
 
-- 2) Add the path into this file `source/documentation/index.html.haml`, on the examples section.
-
-- 3) Add this code to the top part of your file :
-		
-		  ---
-		  title: Site Title
-		  author: Author
-		  page_title: Page Title
-		  page_subtitle: "Page Subtitle"
-		  layout: page
-		  ---
+- clone down the Cylon.js repo
+- extract all examples
+- create missing example pages (`.litcoffee` and `.js`) and remove those that have
+  also been removed from the main repo
+- create/update examples index page
 
 ### Send your Pull Request
 
