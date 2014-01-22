@@ -90,6 +90,14 @@ sphero_driver: true
         :::bash
         sudo rfcomm connect /dev/rfcomm1 <address> 1
 
+  %h2 How To Calibrate Sphero
+  
+  %p You might want to calibrate the orientation of the Sphero so that it is pointed 'forward'. There are 2 functions that have been added to the Sphero driver to help with this.
+
+  %p Call `startCalibration()` to put the Sphero into 'calibration mode' by turning on the tail LED and turning off the auto-stablization. You can now manually turn the Sphero to so the tail LED is pointed to the rear of the direction in which you want the Sphero to go.
+
+  %p Call `finishCalibration()` to turn off 'calibration mode' by turning off the tail LED and turning back on the auto-stablization. Whichever direction that the tail LED was pointed, is now the rear direction for the Sphero.
+
 %section.drivers
   %h2 Drivers
   %p There is only one driver for the Sphero.
