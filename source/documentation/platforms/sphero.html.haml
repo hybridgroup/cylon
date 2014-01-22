@@ -73,7 +73,22 @@ sphero_driver: true
 
   %h3 Ubuntu
 
-  %p Coming soon.
+  %p Connecting to the Sphero from Ubuntu or any other Linux-based OS can be done entirely from the command line. Here are the steps:
+
+  %p Find the address of the Sphero, by using:
+  :markdown
+        :::bash
+        hcitool scan
+
+  %p Pair to Sphero using this command (substituting the actual address of your Sphero):
+  :markdown
+        :::bash
+        sudo bluez-simple-agent hci0 <address>
+
+  %p Connect to the Sphero using this command (substituting the actual address of your Sphero):
+  :markdown
+        :::bash
+        sudo rfcomm connect /dev/rfcomm1 <address> 1
 
 %section.drivers
   %h2 Drivers
