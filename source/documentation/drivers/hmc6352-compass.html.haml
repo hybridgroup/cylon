@@ -29,17 +29,34 @@ raspberry_platform: true
 
 %section.public-methods
   %h2 Commands:
-  %dl.methods 
-    %dt heading → float
-    %dd Returns the heading data for the compass.
+  %table.commands 
+    %tr 
+      %th Command (param)
+      %th Description
+    %tr 
+      %td.command heading
+      %td.param  
+        %p Returns the heading data for the compass.
+        %span heading() → float
+        %h5 Returns 
+        %span float
+
 
 %section.public-events
   %h2 Events:
-  %dl.methods 
-    %dt heading
-    %dd Gets triggered every time the specified interval is met.
-    %dt start
-    %dd Sent when the device has been started and is ready to use. 
+  %table.commands 
+    %tr 
+      %th Event
+      %th Description
+    %tr 
+      %td.command 
+        %span heading
+      %td Gets triggered every time the specified interval is met.
+    %tr 
+      %td.command 
+        %span start
+      %td Sent when the device has been started and is ready to use.
+      
 
   %h3 How to use events and call them on your drivers
   %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:

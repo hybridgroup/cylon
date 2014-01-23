@@ -59,6 +59,15 @@
     font-weight: bold;
     font-size: 11pt;
   }
+  .param {
+    .markdown {
+      span {
+        background:none;
+        border: none;
+        padding: 0;
+      }
+    }
+  }
 }
 
 .methods {

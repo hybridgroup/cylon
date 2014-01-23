@@ -58,35 +58,59 @@ force_platform: true
 
 %section.public-methods
   %h2 Commands:
-  %dl.methods 
-    -#here we need the list of the commands, %dt for the title %dd for the description  *************
-    -#%dt Title
-    -#%dd description
-    %dt authenticate
-    %dd This allows you to authenticate the device.
-    %dt subscribe
-    %dd This allows you to suscribe the device.
-    %dt push
-    %dd This allows you to push data.
-  
+  %table.commands 
+    %tr 
+      %th Command (param)
+      %th Description
+    %tr 
+      %td.command authenticate
+      %td.param  
+        %p This allows you to authenticate the device.
+        %span authenticate() → (callback)
+        %h5 Returns 
+        %span (callback)
+    %tr 
+      %td.command subscribe
+      %td.param  
+        %p This allows you to suscribe the device.
+        %span subscribe() → (streamPath, callback)
+        %h5 Returns 
+        %span (streamPath, callback)
+    %tr 
+      %td.command push
+      %td.param  
+        %p This allows you to push data.
+        %span push() → (apexPath, method, data)
+        %h5 Returns 
+        %span (apexPath, method, data)
 
 %section.public-events
   %h2 Events:
+  %table.commands 
+    %tr 
+      %th Event
+      %th Description
+    %tr 
+      %td.command 
+        %span connect
+      %td Gets triggered when it´s connected.
+    %tr 
+      %td.command 
+        %span authenticate
+      %td Gets triggered when it´s authenticated.
+    %tr 
+      %td.command 
+        %span subscribe
+      %td Gets triggered when it´s subscribed.
+    %tr 
+      %td.command 
+        %span stop
+      %td Stops the driver.
+    %tr 
+      %td.command 
+        %span start
+      %td Sent when the device has been started and is ready to use.
 
-  %dl.methods
-    -#same thing, here we need the list of the events, %dt for the title %dd for the description  *************
-    -#%dt Title
-    -#%dd description
-    %dt connect
-    %dd Gets triggered when it´s connected.
-    %dt authenticate
-    %dd Gets triggered when it´s authenticated.
-    %dt subscribe
-    %dd Gets triggered when it´s subscribed.
-    %dt stop
-    %dd Stop the driver.
-    %dt start
-    %dd Sent when the device has been started and is ready to use.
 
 %section.how-to
   %h2 How to use
