@@ -43,22 +43,49 @@ spark_platform: true
 
 %section.public-methods
   %h2 Commands:
-  
-  %dl.methods 
-    %dt turnOn
-    %dd Turns LED on.
-    %dt turnOff
-    %dd Turns LED off.
-    %dt toggle
-    %dd Turns the LED on, or off, depending on if it is already off, or on, respectively.
-    %dt brightness(brightness_int) → true | nil
-    %dd Sets brightness of the led to the specified brightness value passed to brightness(brightness_int) using PWM, brightness can be any integer value between 0 and 255.
+  %table.commands 
+    %tr 
+      %th Command (param)
+      %th Description
+    %tr 
+      %td.command turnOn
+      %td.param  
+        %p Turns LED on. 
+        %span turnOn() →
+        %h5 Returns 
+        %span 
+    %tr 
+      %td.command turnOff
+      %td.param  
+        %p Turns LED off.
+        %span turnOn() →
+        %h5 Returns 
+        %span 
+    %tr 
+      %td.command toggle
+      %td.param  
+        %p Turns the LED on, or off, depending on if it is already off, or on, respectively.
+        %span toggle() →
+        %h5 Returns 
+        %span 
+    %tr 
+      %td.command brightness(brightness_int)
+      %td.param  
+        %p Sets brightness of the led to the specified brightness value passed to brightness(brightness_int) using PWM, brightness can be any integer value between 0 and 255.
+        %span brightness(brightness_int) → true | nil
+        %h5 Returns 
+        %span true | nil
+
 
   %h2 Events
-
-  %dl.methods 
-    %dt start
-    %dd Sent when the device has been started and is ready to use.  
+  %table.commands 
+    %tr 
+      %th Event
+      %th Description
+    %tr 
+      %td.command 
+        %span start
+      %td Sent when the device has been started and is ready to use. 
 
 %section.how-to
   %h2 How to use
