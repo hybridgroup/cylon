@@ -51,9 +51,30 @@ spark_platform: true
       %td.command analogRead(pin_number)
       %td.param  
         %p Returns an integer value that represents the analog read from the sensor.
-        %span analogRead(pin_number) → integer_value
-        %h5 Returns 
-        %span integer_value
+        %h5 Params
+        %span  pin_number → integer
+        The pin number for which to return data
+        %h5 Returns
+        %span integer
+        Current analog sensor value
+    %tr 
+      %td.command upperLimit(limit)
+      %td 
+        %p Sets an upper limit for the sensor, that when exceeded, triggers a notification event of the same name.
+        %h5 Params
+        %span  limit → integer
+        The upper limit that triggers notification event
+        %h5 Returns
+        %span null
+    %tr 
+      %td.command lowerLimit(limit)
+      %td 
+        %p Sets an lower limit for the sensor, that when exceeded, triggers a notification event of the same name.
+        %h5 Params
+        %span  limit → integer
+        The lower limit that triggers notification event
+        %h5 Returns
+        %span null
 
 %section.public-events
   %h2 Events:
@@ -65,32 +86,33 @@ spark_platform: true
       %td.command 
         %span update
       %td 
-        This event will contain one of the following events.
+        This event will contain one of the events listed below.
         %br/  
         You can also subscribe to one of the specific events, if that is the information you are interested in.
     %tr 
       %td.command 
-        %span analogRead
-      %td 
-        %p Returns an integer value that represents the analog read from the sensor.
-        %h5 Returns
-        %span integer_value
+        %span analogRead(data)
+      %td   
+        %p The analogRead event data contains an integer value that represents the analog read from the sensor.
+        %h5 data
+        %span integer
+        Current sensor reading
     %tr 
       %td.command 
-        %span upperLimit
+        %span upperLimit(data)
       %td 
         %p Gets triggered if the value read by the sensor is greater or equal to upperLimit (value passed when setting up the sensor).
-        %span  upperLimit() → integer_value
-        %h5 Returns
-        %span integer_value
+        %h5 data
+        %span integer
+        Current sensor reading that triggered the notification
     %tr 
       %td.command 
-        %span lowerLimit
+        %span lowerLimit(data)
       %td 
         %p Gets triggered if the value read by the sensor is less or equal to lowerLimit (value passed when setting up the sensor).
-        %span  lowerLimit() → integer_value
-        %h5 Returns
-        %span integer_value
+        %h5 data
+        %span integer
+        Current sensor reading that triggered the notification
     %tr 
       %td.command 
         %span start

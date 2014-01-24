@@ -53,7 +53,8 @@ spark_platform: true
       %td.command isPressed
       %td.param  
         %p Returns true or false matching state of the button.
-        %span isPressed() → true | false
+        %h5 Params
+        %span no params
         %h5 Returns 
         %span true | false
 
@@ -75,11 +76,19 @@ spark_platform: true
     %tr 
       %td.command 
         %span push
-      %td This event gets triggered when the button changes state from released to pushed.
+      %td 
+        %p This event gets triggered when the button changes state from released to pushed.
+        %h5 data
+        %span integer
+        Button changes state (data = 1)
     %tr 
       %td.command 
         %span release
-      %td This event gets triggered when the button changes state from pushed to released.
+      %td 
+        %p This event gets triggered when the button changes state from pushed to released.
+        %h5 data
+        %span integer
+        Button changes state
     %tr 
       %td.command 
         %span start
