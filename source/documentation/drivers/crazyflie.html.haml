@@ -50,58 +50,68 @@ crazyflie_platform: true
       %td.command land
       %td.param  
         %p Initiates a landing sequence.
-        %span land() → 
+        %h5 Params
+        %span no params
         %h5 Returns 
-        %span 
+        %span nil
     %tr 
       %td.command takeoff
       %td.param  
         %p Initiates take off sequence.
-        %span takeoff() → 
+        %h5 Params
+        %span no params
         %h5 Returns 
-        %span 
+        %span nil
     %tr 
       %td.command hover
       %td.param  
         %p Makes the crazyflie hover in a position.
-        %span hover() → 
+        %h5 Params
+        %span no params
         %h5 Returns 
-        %span 
+        %span nil
     %tr 
-      %td.command setPitch
+      %td.command setPitch(deg)
       %td.param  
         %p Orders crazyflie to go forward or backward by the amount specified by deg.
-        %span setPitch() → 
+        %h5 Params
+        %span deg → nil
+        The degrees which to return data
         %h5 Returns 
-        %span
+        %span nil
     %tr 
-      %td.command setYaw
+      %td.command setYaw(deg)
       %td.param  
         %p Orders crazyflie to turn left or right by the amount specified by deg.
-        %span setYaw() → 
+        %h5 Params
+        %span deg → nil
+        The degrees which to return data
         %h5 Returns 
-        %span 
+        %span nil
     %tr 
-      %td.command setThrust
+      %td.command setThrust(accelerate)
       %td.param  
         %p Orders crazyflie to accelerate. 
-        %span setThrust() → 
+        %span accelerate → nil
+        The acceleration which to return data
         %h5 Returns 
-        %span 
+        %span nil
     %tr 
       %td.command shutdown
       %td.param  
         %p Shutdown the device.
-        %span shutdown() → 
+        %h5 Params
+        %span no params
         %h5 Returns 
-        %span 
+        %span nil
     %tr 
-      %td.command setParam
+      %td.command setParam(param, value)
       %td.param  
         %p Set the parameters for crazyflie.
-        %span setParam() → 
+        %span (param, value) → (param, value)
+        The param and value which to return data
         %h5 Returns 
-        %span 
+        %span (param, value)
         
   %h2 Events:
   %table.commands 
@@ -115,7 +125,11 @@ crazyflie_platform: true
     %tr 
       %td.command 
         %span setParam(param, value)
-      %td  Set the parameters for crazyflie. 
+      %td  
+        %p Set the parameters for crazyflie.
+        %h5 data
+        %span param, value
+        Current param and value reading 
     %tr 
       %td.command 
         %span start

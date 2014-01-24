@@ -54,7 +54,8 @@ raspberry_platform: true
           Sets the color of the BlinkM RGB LED to the specified combination of RGB color provided. 
           %br/ 
           (red, green and blue values should be between 0 and 255)
-        %span goToRGB() → (r, g, b, cb)
+        %h5 Params
+        %span no params
         %h5 Returns 
         %span (r, g, b, cb)
     %tr 
@@ -64,14 +65,16 @@ raspberry_platform: true
           Fades the color of the BlinkM RGB LED to the specified combination of RGB color provided. 
           %br/ 
           (red, green and blue values should be between 0 and 255)
-        %span fadeToRGB() → (r, g, b, cb)
+        %h5 Params
+        %span no params
         %h5 Returns 
         %span (r, g, b, cb)
     %tr 
       %td.command fadeToHSB
       %td.param  
         %p Fades the color of the BlinkM RGB LED to the specified combination of HSB provided.
-        %span fadeToHSB() → (h, s, b, cb)
+        %h5 Params
+        %span no params
         %h5 Returns 
         %span (h, s, b, cb)
     %tr 
@@ -81,42 +84,48 @@ raspberry_platform: true
           Fades the color of the BlinkM RGB LED to a random combination of RGB color. 
           %br/ 
           (red, green and blue values should be between 0 and 255)
-        %span fadeToRandomRGB() → (r, g, b, cb)
+        %h5 Params
+        %span no params
         %h5 Returns 
         %span (r, g, b, cb)
     %tr 
       %td.command fadeToRandomHSB
       %td.param  
         %p Fades the color of the BlinkM RGB LED to a random combination of HSB .
-        %span fadeToRandomHSB() → (h, s, b, cb)
+        %h5 Params
+        %span no params
         %h5 Returns 
         %span (h, s, b, cb)
     %tr 
       %td.command playLightScript
       %td.param  
         %p Plays a light script for the BlinkM RGB LED.
-        %span playLightScript() → (id, repeats, startAtLine, cb)
+        %h5 Params
+        %span no params
         %h5 Returns 
         %span (id, repeats, startAtLine, cb)
     %tr 
       %td.command stopScript
       %td.param  
         %p Stops an specific script for the BlinkM RGB LED.
-        %span stopScript() → cd
+        %h5 Params
+        %span no params
         %h5 Returns 
         %span cd
     %tr 
       %td.command setFadeSpeed
       %td.param  
         %p Sets a fade to an specific speed for the BlinkM RGB LED.
-        %span setFadeSpeed() →  speed
+        %h5 Params
+        %span no params
         %h5 Returns 
         %span speed
     %tr 
       %td.command setTimeAdjust
       %td.param  
         %p Sets a time adjust for the BlinkM RGB LED.
-        %span setTimeAdjust() → (time, cb)
+        %h5 Params
+        %span no params
         %h5 Returns 
         %span (time, cb)
     %tr 
@@ -126,28 +135,32 @@ raspberry_platform: true
           Returns an array containing the RGB values for the current color. 
           %br/ 
           (all integer between 0 and 255)
-        %span getRGBColor() → array (cb) 
+        %h5 Params
+        %span no params
         %h5 Returns 
-        %span array (cb) 
+        %span integer_array (cb) 
     %tr 
       %td.command setAddress
       %td.param  
         %p Sets an address to the driver.
-        %span setAddress() → (cb) 
+        %h5 Params
+        %span no params
         %h5 Returns 
         %span (cb) 
     %tr 
       %td.command getAddress
       %td.param  
         %p Returns an sring describing the I2C addresss being used.
-        %span getAddress() → (address, cb)
+        %h5 Params
+        %span no params
         %h5 Returns 
         %span (address, cb)
     %tr 
       %td.command getFirmware
       %td.param  
         %p Returns an sring describing the I2C firmware version being used.
-        %span getFirmware() → integer_value
+        %h5 Params
+        %span no params
         %h5 Returns 
         %span integer_value
   

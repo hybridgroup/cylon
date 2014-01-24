@@ -58,6 +58,11 @@ ardrone_platform: true
           %span true, 
           %span callback 
           is invoked after the drone reports that it is hovering.
+        %h5 Params
+        %span  callback → nil
+        The callback for which to return data
+        %h5 Returns
+        %span nil
         
     %tr 
       %td.command land(callback)
@@ -69,6 +74,11 @@ ardrone_platform: true
           %span false, 
           %span callback
           is invoked after the drone reports it has landed.
+        %h5 Params
+        %span  callback → nil
+        The callback for which to return data
+        %h5 Returns
+        %span nil
         
     %tr 
       %td.command stop
@@ -77,6 +87,10 @@ ardrone_platform: true
           Sets all drone movement commands to
           %span 0
           , making it effectively hover in place.
+        %h5 Params
+        %span  no params
+        %h5 Returns
+        %span nil
         
     %tr 
       %td.command up(speed) 
@@ -89,9 +103,11 @@ ardrone_platform: true
           %span 0
           to 
           %span  1.
-        %span up(speed) → speed
+        %h5 Params
+        %span  speed → integer
+        The speed for which to return data
         %h5 Returns 
-        %span speed
+        %span integer
     %tr 
       %td.command down(speed) 
       %td.param  
@@ -103,9 +119,11 @@ ardrone_platform: true
           %span 0
           to 
           %span  1.
-        %span down(speed) → speed
+        %h5 Params
+        %span  speed → integer
+        The speed for which to return data
         %h5 Returns 
-        %span speed
+        %span integer
     %tr 
       %td.command left(speed)
       %td.param  
@@ -117,9 +135,11 @@ ardrone_platform: true
           %span 0
           to 
           %span  1.
-        %span left(speed) → speed
+        %h5 Params
+        %span  speed → integer
+        The speed for which to return data
         %h5 Returns 
-        %span speed
+        %span integer
     %tr 
       %td.command right(speed) 
       %td.param  
@@ -131,9 +151,11 @@ ardrone_platform: true
           %span 0
           to 
           %span  1.
-        %span right(speed)  → speed
+        %h5 Params
+        %span  speed → integer
+        The speed for which to return data
         %h5 Returns 
-        %span speed
+        %span integer
     %tr 
       %td.command front(speed) | forward(speed)
       %td.param  
@@ -145,9 +167,11 @@ ardrone_platform: true
           %span 0
           to 
           %span  1.
-        %span front(speed) | forward(speed)  → speed
+        %h5 Params
+        %span  speed | speed → integer
+        The speed for which to return data
         %h5 Returns 
-        %span speed
+        %span integer
     %tr 
       %td.command back(speed) 
       %td.param  
@@ -159,9 +183,10 @@ ardrone_platform: true
           %span 0
           to 
           %span  1.
-        %span back(speed) → speed
+        %h5 Params
+        %span speed → integer
         %h5 Returns 
-        %span speed
+        %span integer
     %tr 
       %td.command clockwise 
       %td.param  
@@ -173,9 +198,10 @@ ardrone_platform: true
           %span 0
           to 
           %span  1.
-        %span clockwise → speed
+        %h5 Params
+        %span no params
         %h5 Returns 
-        %span speed
+        %span integer
     %tr 
       %td.command counterClockwise 
       %td.param  
@@ -187,21 +213,24 @@ ardrone_platform: true
           %span 0
           to 
           %span  1.
-        %span counterClockwise → speed
+        %h5 Params
+        %span no params
         %h5 Returns 
-        %span speed
+        %span integer
     %tr 
       %td.command calibrate(device_num) 
       %td.param  
         %p Asks the drone to calibrate a device.
-        %span calibrate(device_num) → speed
+        %h5 Params
+        %span device_num → integer
         %h5 Returns 
-        %span speed
+        %span integer
     %tr 
       %td.command config(key, value, callback)
       %td.param  
         %p Sends a config command to the drone.
-        %span config(key, value, callback) → speed
+        %h5 Params
+        %span key, value, callback → speed
         %h5 Returns 
         %span speed
     %tr 
@@ -219,6 +248,10 @@ ardrone_platform: true
                 'theta20degYawM200deg', 'turnaround', 'turnaroundGodown', 'yawShake',
                 'yawDance', 'phiDance', 'thetaDance', 'vzDance', 'wave', 'phiThetaMixed',
                 'doublePhiThetaMixed', 'flipAhead', 'flipBehind', 'flipLeft', 'flipRight']
+        %h5 Params
+        %span animation, duration → nil
+        %h5 Returns 
+        %span nil
         
     %tr 
       %td.command frontFlip
@@ -226,13 +259,20 @@ ardrone_platform: true
         %p 
           Tells the drone to do a front-flip. Alias of 
           %span animate('flipAhead', 150).
-        
+        %h5 Params
+        %span no params
+        %h5 Returns 
+        %span nil
     %tr 
       %td.command backFlip
       %td.param  
         %p 
           Tells the drone to do a back-flip. Alias of 
           %span animate('flipBehind', 150).
+        %h5 Params
+        %span no params
+        %h5 Returns 
+        %span nil
         
     %tr 
       %td.command leftFlip
@@ -240,6 +280,10 @@ ardrone_platform: true
         %p 
           Tells the drone to do a left-flip. Alias of
           %span animate('flipLeft', 150).
+        %h5 Params
+        %span no params
+        %h5 Returns 
+        %span nil
         
     %tr 
       %td.command rightFlip
@@ -247,6 +291,10 @@ ardrone_platform: true
         %p 
           Tells the drone to do a right-flip. Alias of
           %span animate('flipRight', 150).
+        %h5 Params
+        %span no params
+        %h5 Returns 
+        %span nil
         
     %tr 
       %td.command wave
@@ -254,6 +302,10 @@ ardrone_platform: true
         %p 
           Tells the drone to do a wave. Alias of
           %span animate('wave', 750).
+        %h5 Params
+        %span no params
+        %h5 Returns 
+        %span nil
         
     %tr 
       %td.command animateLeds(animation, hz, duration)
@@ -274,6 +326,10 @@ ardrone_platform: true
                 'frontRightGreenOthersRed', 'rearRightGreenOthersRed',
                 'rearLeftGreenOthersRed', 'leftGreenRightRed', 'leftRedRightGreen',
                 'blinkStandard']
+        %h5 Params
+        %span animation, hz, duration → nil
+        %h5 Returns 
+        %span nil
         
     %tr 
       %td.command disableEmergency
@@ -283,39 +339,50 @@ ardrone_platform: true
           %span navdata.droneState.emergencyLanding is 0. 
           %br/ 
           This recovers a drone that has flipped over and is showing red lights to be flyable again and show green lights. It is also done implicitly when creating a new high level client.
-        %span disableEmergency() → integer_value
+        %h5 Params
+        %span no params
         %h5 Returns 
         %span integer_value
     %tr 
       %td.command forward
       %td.param  
         %p Causes the drone to go forward.
+        %h5 Params
+        %span no params
         %h5 Returns 
-        %span nothing
+        %span nil
     %tr 
       %td.command frontFlip
       %td.param  
         %p Causes the drone to do a front flip.
+        %h5 Params
+        %span no params
         %h5 Returns 
-        %span nothing
+        %span nil
     %tr 
       %td.command backFlip
       %td.param  
         %p Causes the drone to do a back flip.
+        %h5 Params
+        %span no params
         %h5 Returns 
-        %span nothing
+        %span nil
     %tr 
       %td.command leftFlip
       %td.param  
         %p Causes the drone to do a left flip.
+        %h5 Params
+        %span no params
         %h5 Returns 
-        %span nothing
+        %span nil
     %tr 
       %td.command rightFlip
       %td.param  
         %p Causes the drone to do a right flip.
+        %h5 Params
+        %span no params
         %h5 Returns 
-        %span nothing
+        %span nil
 
 
   %h2 Events
