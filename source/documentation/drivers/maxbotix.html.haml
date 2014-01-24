@@ -28,24 +28,49 @@ spark_platform: true
 
 %section.public-methods
   %h2 Commands:
-  %dl.methods 
-    %dt analogValue
-    %dd 
-    %dt range
-    %dd Returns the distance measured by the sonar in inches.
-    %dt rangeCm
-    %dd Returns the distance measured by the sonar in cm.
+  %table.commands 
+    %tr 
+      %th Command (param)
+      %th Description
+    %tr 
+      %td.command analogValue
+      %td.param  
+        %p 
+        %span analogValue() → integer_value
+        %h5 Returns 
+        %span integer_value
+    %tr 
+      %td.command range
+      %td.param  
+        %p Returns the distance measured by the sonar in inches.
+        %span range() → integer_value
+        %h5 Returns 
+        %span integer_value
+    %tr 
+      %td.command rangeCm
+      %td.param  
+        %p Returns the distance measured by the sonar in cm.
+        %span rangeCm() → integer_value
+        %h5 Returns 
+        %span integer_value
 
 %section.public-events
   %h2 Events:
   %p
     The events will be triggered when the amount of time specified by the param :interval, when setting up the driver, passes.
+  %table.commands 
+    %tr 
+      %th Event
+      %th Description
+    %tr 
+      %td.command 
+        %span start
+      %td Sent when the device has been started and is ready to use.
+    %tr 
+      %td.command 
+        %span stop
+      %td Sent when the device has been stopped.
 
-  %dl.methods 
-    %dt start
-    %dd Sent when the device has been started and is ready to use. 
-    %dt stop
-    %dd Sent when the device has been stopped.
 
   %h3 How to use events and call them on your drivers
   %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:

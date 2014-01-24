@@ -43,18 +43,34 @@ spark_platform: true
 
 %section.public-methods
   %h2 Commands:
-  
-  %dl.methods 
-    %dt angle → true | nil
-    %dd Moves the servo to the specified angle, angle must be an integer value between 0 and 180.
-    %dt currentAngle → integer_value (0 - 180)
-    %dd Returns the current angle of the servo, an integer value between 0 and 180.
+  %table.commands 
+    %tr 
+      %th Command (param)
+      %th Description
+    %tr 
+      %td.command angle
+      %td.param  
+        %p Moves the servo to the specified angle, angle must be an integer value between 0 and 180.
+        %span angle() → integer_value
+        %h5 Returns 
+        %span integer_value (between 0 and 180)
+    %tr 
+      %td.command currentAngle
+      %td.param  
+        %p Returns the current angle of the servo, an integer value between 0 and 180.
+        %span currentAngle() → integer_value
+        %h5 Returns 
+        %span integer_value (between 0 and 180)
     
   %h2 Events
-
-  %dl.methods 
-    %dt start
-    %dd Sent when the device has been started and is ready to use.
+  %table.commands 
+    %tr 
+      %th Event
+      %th Description
+    %tr 
+      %td.command 
+        %span start
+      %td Sent when the device has been started and is ready to use.
   
 %section.how-to
   %h2 How to use

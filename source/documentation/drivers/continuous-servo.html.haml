@@ -42,20 +42,40 @@ spark_platform: true
 
 %section.public-methods
   %h2 Commands:
-  
-  %dl.methods 
-    %dt clockwise
-    %dd Turns the servo to go clockwise, if the driver is continuous. 
-    %dt counterClockwise
-    %dd Turns the servo to go counter clockwise, if the driver is continuous. 
-    %dt stop
-    %dd Stops the driver.
+  %table.commands 
+    %tr 
+      %th Command (param)
+      %th Description
+    %tr 
+      %td.command clockwise
+      %td.param  
+        %p Turns the servo to go clockwise, if the driver is continuous. 
+        %h5 Params
+        %span no params
+        %h5 Returns 
+        %span true | nil
+    %tr 
+      %td.command counterClockwise
+      %td.param  
+        %p Turns the servo to go counter clockwise, if the driver is continuous. 
+        %h5 Params
+        %span no params
+        %h5 Returns 
+        %span true | nil
+    %tr 
+      %td.command stop
+      %td.param  
+        %p Stops the driver.
 
   %h2 Events
-
-  %dl.methods 
-    %dt start
-    %dd Sent when the device has been started and is ready to use.
+  %table.commands 
+    %tr 
+      %th Event
+      %th Description
+    %tr 
+      %td.command 
+        %span start
+      %td Sent when the device has been started and is ready to use. 
   
 %section.how-to
   %h2 How to use

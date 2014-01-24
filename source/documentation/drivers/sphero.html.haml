@@ -45,112 +45,344 @@ sphero_platform: true
 
 %section.public-methods
   %h2 Commands:
+  %table.commands 
+    %tr 
+      %th Command (param)
+      %th Description
+    %tr 
+      %td.command abortMacro
+      %td.param  
+        %p This command aborts any executing macro and returns both its ID code and the command number currently in process.
+        %span abortMacro → (ID code , command number)
+        %h5 Returns 
+        %span (ID code , command number)
+    %tr 
+      %td.command abortOrbBasicProgram
+      %td.param  
+        %p Aborts execution of any currently running orbBasic program.
+        %span abortOrbBasicProgram → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command appendMacroChunck(MACRO Chunk) 
+      %td.param  
+        %p This stores the attached macro definition into the temporary RAM buffer for later execution. It is similar to the Save Temporary Macro call but allows you to build up longer temporary macros.
+        %span appendMacroChunck(MACRO Chunk) → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command appendOrbBasicFragment(Area, Program Code) 
+      %td.param  
+        %p Sending an orbBasic program to Sphero involves appending blocks of text to existing ones in the specified storage area.
+        %span appendOrbBasicFragment(Area, Program Code) → Simple Response 
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command configureCollisionDetection(Meth,(Xt, Yt),(Xspd, Yspd),Dead) 
+      %td.param  
+        %p Sets the sphero to detect collisions and report them.
+        %span configureCollisionDetection(Meth,(Xt, Yt),(Xspd, Yspd),Dead) → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command configureLocator(flag, x, y, Yaw Tare) 
+      %td.param  
+        %p Through the streaming interface, Sphero provides real-time location data in the form of (X,Y) coordinates on the ground plane. 
+        %span configureLocator(flag, x, y, Yaw Tare) → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command detectCollisions
+      %td.param  
+        %p Sets the sphero to detect collisions and report them.
+        %span detectCollisions → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command eraseOrbBasicStorage(Area)
+      %td.param  
+        %p This erases any existing program in the specified storage area. Specify 00h for the temporary RAM buffer or 01h for the persistent storage area.
+        %span eraseOrbBasicStorage(Area) → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command executeOrbBasicProgram(Area, Start Line, Start Line)
+      %td.param  
+        %p This attempts to run a program in the specified storage area beginning at the specified line number. This command will fail if there is already an orbBasic program executing.
+        %span executeOrbBasicProgram(Area, Start Line, Start Line) → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command getApplicationConfigurationBlock
+      %td.param  
+        %p This allows you to retrieve the application configuration block that is set aside for exclusive use by applications.
+        %span getApplicationConfigurationBlock → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command getConfigurationBlock(ID) 
+      %td.param  
+        %p This command retrieves one of the configuration blocks.
+        %span getConfigurationBlock(ID) → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command getDeviceMode
+      %td.param  
+        %p Gets the operation mode of Sphero based on the supplied mode value.
+        %span getDeviceMode → (Mode)
+        %h5 Returns 
+        %span 00h (Normal mode) | 01h (User Hack mode)
+    %tr 
+      %td.command getMacroStatus
+      %td.param  
+        %p This command returns the ID code and command number of the currently executing macro.
+        %span getMacroStatus → (ID code , cmd number, cmd number)
+        %h5 Returns 
+        %span (ID code , cmd number, cmd number)
+    %tr 
+      %td.command getPermanentOptionFlags
+      %td.param  
+        %p Returns the permanent option flags.
+        %span getPermanentOptionFlags → (FLAGS)
+        %h5 Returns 
+        %span FLAGS opt: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 6-31
+    %tr 
+      %td.command getRGB
+      %td.param  
+        %p This retrieves the "user LED color" which is stored in the config block.
+        %span getRGB → (red,green,blue) | (color)
+        %h5 Returns 
+        %span (red,green,blue) | (color)
+    %tr 
+      %td.command getTemporaryOptionFlags
+      %td.param  
+        %p Returns the temporary option flags. 
+        %span getTemporaryOptionFlags → (FLAGS)
+        %h5 Returns 
+        %span FLAGS opt: 0 | 1-31
+    %tr 
+      %td.command reInitializeMacroExecutive
+      %td.param  
+        %p This terminates any running macro and reinitializes the macro system.
+        %span reInitializeMacroExecutive → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command readLocator
+      %td.param  
+        %p This reads Sphero's current position (X,Y), component velocities and SOG (speed over ground).
+        %span readLocator → (XPOS, YPOS, XVEL, YVEL, SOG)
+        %h5 Returns 
+        %span (XPOS, YPOS, XVEL, YVEL, SOG)
+    %tr 
+      %td.command roll(speed, heading, state) 
+      %td.param  
+        %p This commands Sphero to roll along the provided vector. Both a speed and a heading are required; the latter is considered relative to the last calibrated direction.
+        %span roll(speed, heading, state) → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command runMacro(SEQ, DLEN, ID)
+      %td.param  
+        %p This attempts to execute the specified macro.
+        %span runMacro(SEQ, DLEN, ID) → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command saveMacro(data) 
+      %td.param  
+        %p This stores the attached macro definition into the persistent store for later execution.
+        %span saveMacro(data) → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command saveTemporaryMacro(data)
+      %td.param  
+        %p This stores the attached macro definition into the temporary RAM buffer for later execution.
+        %span saveTemporaryMacro(data) → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command selfLevel(Options, Angle Limit, Timeout, True Time)
+      %td.param  
+        %p This command controls the self level routine.
+        %span selfLevel(Options, Angle Limit, Timeout, True Time) → array
+        %h5 Returns 
+        %span options: ((0 | 1 | 2 |3 ), (0 | 1 to 90), (0 | 1 to 255), (0 | 1 to 255) 
+    %tr 
+      %td.command setAccelerometerRange(Range Idx)
+      %td.param  
+        %p Normally, Sphero's solid state accelerometer is set for a range of ±8Gs.
+        %span setAccelerometerRange(Range Idx) → integer_value
+        %h5 Returns 
+        %span integer_value opt: 0 | 1 | 2 | 3 
+    %tr 
+      %td.command setApplicationConfigurationBlock
+      %td.param  
+        %p This allows you to retrieve the application configuration block that is set aside for exclusive use by applications.
+        %span setApplicationConfigurationBlock → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command setBackLED(BRIGHT)
+      %td.param  
+        %p This allows you to control the brightness of the back LED. The value does not persist across power cycles.
+        %span setBackLED(BRIGHT) → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command setBoostWithTime(STATE) 
+      %td.param  
+        %p 
+        %span setBoostWithTime(STATE) → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command setColor(color) 
+      %td.param  
+        %p This allows you to set the color of the sphero, just pass an array containing RGB hex or a string with one of the color names of the list.
+        %span setColor(color) → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command setConfigurationBlock(value) 
+      %td.param  
+        %p This command accepts an exact copy of the configuration block and loads it into the RAM copy of the configuration block.
+        %span setConfigurationBlock(value) → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command setDataStreaming(N, M, MASK, PCNT, MASK2)
+      %td.param  
+        %p Sphero supports asynchronous data streaming of certain control system and sensor parameters. 
+        %span setDataStreaming(N, M, MASK, PCNT, MASK2) → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command setDeviceMode(MODE) 
+      %td.param  
+        %p Assigns the operation mode of Sphero based on the supplied mode value.
+        %span setDeviceMode(MODE) → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command setHeading(HEADING) 
+      %td.param  
+        %p This allows the smartphone client to adjust the orientation of Sphero by commanding a new reference heading in degrees, which ranges from 0 to 359.
+        %span setHeading(HEADING) → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command setMacroParameter(Param, Val1, Val2) 
+      %td.param  
+        %p This command allows system globals that influence certain macro commands to be selectively altered from outside of the macro system itself.
+        %span setMacroParameter(Param, Val1, Val2) → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command setMotionTimeout(TIME) 
+      %td.param  
+        %p This sets the ultimate timeout for the last motion command to keep Sphero from rolling away in the case of a crashed (or paused) client app.
+        %span setMotionTimeout(TIME) → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command setPermanentOptionFlags(FLAGS) 
+      %td.param  
+        %p Assigns the permanent option flags to the provided value and writes them immediately to the config block for persistence across power cycles. 
+        %span setPermanentOptionFlags(FLAGS) → Simple Response
+        %h5 Returns 
+        %span Simple Response
   
-  %dl.methods
-    %dt abortMacro → (ID code , command number)
-    %dd 
-    %dt abortOrbBasicProgram 
-    %dd
-    %dt appendMacroChunck(MACRO Chunk) 
-    %dd 
-    %dt appendOrbBasicFragment(Area, Program Code) 
-    %dd  
-    %dt configureCollisionDetection(Meth,(Xt, Yt),(Xspd, Yspd),Dead) 
-    %dd Sets the sphero to detect collisions and report them.
-    %dt configureLocator(flag, x, y, Yaw Tare) 
-    %dd 
-    %dt detectCollisions 
-    %dd Sets the sphero to detect collisions and report them.
-    %dt eraseOrbBasicStorage(Area) 
-    %dd 
-    %dt executeOrbBasicProgram(Area, Start Line, Start Line) 
-    %dd 
-    %dt getApplicationConfigurationBlock 
-    %dd 
-    %dt getConfigurationBlock(ID) 
-    %dd 
-    %dt getDeviceMode → (Mode), options: 00h (Normal mode) | 01h (User Hack mode)
-    %dd 
-    %dt getMacroStatus → (ID code , cmd number, cmd number)
-    %dd 
-    %dt getPermanentOptionFlags → (FLAGS), options: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 6-31
-    %dd 
-    %dt getRGB → (red,green,blue) | (color)
-    %dd 
-    %dt getTemporaryOptionFlags → (FLAGS), options: 0 | 1-31
-    %dd 
-    %dt reInitializeMacroExecutive 
-    %dd 
-    %dt readLocator → (XPOS, YPOS, XVEL, YVEL, SOG)
-    %dd 
-    %dt roll(speed, heading, state) 
-    %dd This commands Sphero to roll along the provided vector. Both a speed and a heading are required; the latter is considered relative to the last calibrated direction.
-    %dt runMacro(SEQ, DLEN, ID) 
-    %dd 
-    %dt saveMacro(data) 
-    %dd 
-    %dt saveTemporaryMacro(data) 
-    %dd 
-    %dt selfLevel(Options, Angle Limit, Timeout, True Time), options: ((0 | 1 | 2 |3 ), (0 | 1 to 90), (0 | 1 to 255), (0 | 1 to 255) 
-    %dd 
-    %dt setAccelerometerRange(Range Idx), options: 0 | 1 | 2 | 3 
-    %dd 
-    %dt setApplicationConfigurationBlock
-    %dd 
-    %dt setBackLED(BRIGHT) 
-    %dd 
-    %dt setBoostWithTime(STATE) 
-    %dd 
-    %dt setColor(color) 
-    %dd This allows you to set the color of the sphero, just pass an array containing RGB hex or a string with one of the color names of the list.
-    %dt setConfigurationBlock(value) 
-    %dd 
-    %dt setDataStreaming(N, M, MASK, PCNT, MASK2) 
-    %dd 
-    %dt setDeviceMode(MODE) 
-    %dd 
-    %dt setHeading(HEADING) 
-    %dd
-    %dt setMacroParameter(Param, Val1, Val2) 
-    %dd 
-    %dt setMotionTimeout(TIME) 
-    %dd 
-    %dt setPermanentOptionFlags(FLAGS) 
-    %dd 
-    %dt setRGB(color, persist) 
-    %dd This allows you to set the RGB LED color, just pass an array containing RGB hex or a string with one of the color names of the list.  
-    %dt setRawMotorValues(L-MODE, L-POWER, R-MODE, R-POWER) 
-    %dd 
-    %dt setRotationRate(RATE) 
-    %dd 
-    %dt setStabalisation(bool) 
-    %dd 
-    %dt setTemporaryOptionFlags(FLAGS) 
-    %dd 
-    %dt stop
-    %dd Stops the sphero.
-    %dt submitValueToInputStatement(VAL) 
-    %dd 
+    %tr 
+      %td.command setRGB(color, persist)  
+      %td.param  
+        %p This allows you to set the RGB LED color, just pass an array containing RGB hex or a string with one of the color names of the list.
+        %span setRGB(color, persist) → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command setRawMotorValues(L-MODE, L-POWER, R-MODE, R-POWER) 
+      %td.param  
+        %p This allows you to take over one or both of the motor output values, instead of having the stabilization system control them. 
+        %span setRawMotorValues(L-MODE, L-POWER, R-MODE, R-POWER) → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command setRotationRate(RATE) 
+      %td.param  
+        %p This allows you to control the rotation rate that Sphero will use to meet new heading commands (DID 02h, CID 01h).
+        %span setRotationRate(RATE) → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command setStabalisation(bool) 
+      %td.param  
+        %p 
+        %span setStabalisation(bool) → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command setTemporaryOptionFlags(FLAGS) 
+      %td.param  
+        %p Assigns the temporary option flags to the provided value. These do not persist across a power cycle. See below for the bit definitions.
+        %span setTemporaryOptionFlags(FLAGS) → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command stop 
+      %td.param  
+        %p Stops the sphero.
+        %span stop → Simple Response
+        %h5 Returns 
+        %span Simple Response
+    %tr 
+      %td.command submitValueToInputStatement(VAL) 
+      %td.param  
+        %p This takes the place of the typical user console in orbBasic and allows a user to answer an input request.
+        %span submitValueToInputStatement(VAL) → Simple Response
+        %h5 Returns 
+        %span Simple Response
+
+  %h5 
+    Note: for more information about the documentation of the Sphero driver click
+    =link_to "here.", "https://github.com/orbotix/DeveloperResources/blob/master/docs/Sphero_API_1.50.pdf" 
 
 %section.public-events
   %h2 Events:
+  %table.commands 
+    %tr 
+      %th Event
+      %th Description
+    %tr 
+      %td.command 
+        %span update
+      %td 
+        This event will contain one of the following events.
+        %br/  
+        You can also subscribe to one of the specific events, if that is the information you are interested in.
+    %tr 
+      %td.command 
+        %span collision
+      %td Gets triggered when the sphero hits something or falls from a step.
+    %tr 
+      %td.command 
+        %span messages(data)
+      %td Gets triggered when has a message.
+    %tr 
+      %td.command 
+        %span notifications(data)
+      %td Gets triggered when has a notification.
+    %tr 
+      %td.command 
+        %span connect
+      %td Opens the connection to Sphero.
+    %tr 
+      %td.command 
+        %span start
+      %td Sent when the device has been started and is ready to use.
 
-  %dl.methods 
-    %dt update
-    %dd 
-      This event will contain one of the following events.
-      %br/  
-      You can also subscribe to one of the specific events, if that is the information you are interested in.
-    %dt collision
-    %dd Gets triggered when the sphero hits something or falls from a step.
-    %dt messages(data)
-    %dd Gets triggered when has a message.
-    %dt notifications(data)
-    %dd Gets triggered when has a notification.
-    %dt connect
-    %dd Opens the connection to Sphero.
-    %dt start
-    %dd Sent when the device has been started and is ready to use.
 
 %section.how-to
   %h2 How to use
@@ -197,683 +429,785 @@ sphero_platform: true
 %section 
   %h2 Sphero Colors 
 
-  %dl.colors 
-    %dt aliceblue            
-    %dd 
-      .aliceblue.square
-      %p 0xF0F8FF
-    %dt antiquewhite         
-    %dd 
-      .antiquewhite.square
-      %p 0xFAEBD7 
-    %dt aqua                 
-    %dd 
-      .square.aqua
-      %p 0x00FFFF
-    %dt aquamarine           
-    %dd
-      .square.aquamarine 
-      %p 0x7FFFD4
-    %dt azure                 
-    %dd 
-      .square.azure
-      %p 0xF0FFFF
-    %dt beige                 
-    %dd 
-      .square.beige
-      %p 0xF5F5DC
-    %dt bisque                
-    %dd 
-      .square.bisque
-      %p 0xFFE4C4
-    %dt black                 
-    %dd 
-      .square.black
-      %p 0x000000
-    %dt blanchedalmond        
-    %dd 
-      .square.blanchedalmond
-      %p 0xFFEBCD
-    %dt blue                 
-    %dd 
-      .square.blue
-      %p 0x0000FF
-    %dt blueviolet            
-    %dd 
-      .square.blueviolet
-      %p 0x8A2BE2
-    %dt brown                 
-    %dd 
-      .square.brown
-      %p 0xA52A2A
-    %dt burlywood             
-    %dd 
-      .square.burlywood
-      %p 0xDEB887
-    %dt cadetblue             
-    %dd
-      .square.cadetblue 
-      %p 0x5F9EA0
-    %dt chartreuse            
-    %dd 
-      .square.chartreuse
-      %p 0x7FFF00
-    %dt chocolate             
-    %dd 
-      .square.chocolate
-      %p 0xD2691E
-    %dt coral                 
-    %dd 
-      .square.coral
-      %p 0xFF7F50
-    %dt cornflowerblue        
-    %dd 
-      .square.cornflowerblue
-      %p 0x6495ED
-    %dt cornsilk              
-    %dd   
-      .square.cornsilk
-      %p 0xFFF8DC
-    %dt crimson               
-    %dd 
-      .square.crimson
-      %p 0xDC143C
-    %dt cyan                  
-    %dd 
-      .square.cyan
-      %p 0x00FFFF
-    %dt darkblue              
-    %dd 
-      .square.darkblue
-      %p 0x00008B
-      
-    %dt darkcyan              
-    %dd 
-      .square.darkcyan
-      %p 0x008B8B
-      
-    %dt darkgoldenrod         
-    %dd 
-      .square.darkgoldenrod
-      %p 0xB8860B
-      
-    %dt darkgray              
-    %dd 
-      .square.darkgray
-      %p 0xA9A9A9
-      
-    %dt darkgreen             
-    %dd 
-      .square.darkgreen
-      %p 0x006400
-      
-    %dt darkkhaki             
-    %dd 
-      .square.darkkhaki
-      %p 0xBDB76B
-      
-    %dt darkmagenta           
-    %dd 
-      .square.darkmagenta
-      %p 0x8B008B
-      
-    %dt darkolivegreen        
-    %dd 
-      .square.darkolivegreen
-      %p 0x556B2F
-      
-    %dt darkorange            
-    %dd 
-      .square.darkorange
-      %p 0xFF8C00
-      
-    %dt darkorchid            
-    %dd 
-      .square.darkorchid
-      %p 0x9932CC
-      
-    %dt darkred               
-    %dd 
-      .square.darkred
-      %p 0x8B0000
-      
-    %dt darksalmon            
-    %dd 
-      .square.darksalmon
-      %p 0xE9967A
-      
-    %dt darkseagreen          
-    %dd 
-      .square.darkseagreen
-      %p 0x8FBC8F
-      
-    %dt darkslateblue         
-    %dd 
-      .square.darkslateblue
-      %p 0x483D8B
-      
-  %dl.colors   
-    %dt darkslategray         
-    %dd 
-      .square.darkslategray
-      %p 0x2F4F4F
-    %dt darkturquoise         
-    %dd 
-      .square.darkturquoise
-      %p 0x00CED1
-    %dt darkviolet            
-    %dd 
-      .square.darkviolet
-      %p 0x9400D3
-    %dt deeppink              
-    %dd 
-      .square.deeppink
-      %p 0xFF1493
-    %dt deepskyblue           
-    %dd 
-      .square.deepskyblue
-      %p 0x00BFFF
-    %dt dimgray               
-    %dd 
-      .square.dimgray
-      %p 0x696969
-    %dt dodgerblue            
-    %dd 
-      .square.dodgerblue
-      %p 0x1E90FF
-      
-    %dt firebrick:             
-    %dd 
-      .square.firebrick
-      %p 0xB22222
-      
-    %dt floralwhite           
-    %dd 
-      .square.floralwhite
-      %p 0xFFFAF0
-      
-    %dt forestgreen           
-    %dd 
-      .square.forestgreen
-      %p 0x228B22
-      
-    %dt fuchsia               
-    %dd 
-      .square.fuchsia
-      %p 0xFF00FF
-      
-    %dt gainsboro             
-    %dd 
-      .square.gainsboro
-      %p 0xDCDCDC
-      
-    %dt ghostwhite            
-    %dd 
-      .square.ghostwhite
-      %p 0xF8F8FF
-      
-    %dt gold                  
-    %dd 
-      .square.gold
-      %p 0xFFD700
-      
-    %dt goldenrod             
-    %dd 
-      .square.goldenrod
-      %p 0xDAA520
-      
-    %dt gray                  
-    %dd 
-      .square.gray
-      %p 0x808080
-      
-    %dt green                 
-    %dd 
-      .square.green
-      %p 0x008000
-      
-    %dt greenyellow           
-    %dd 
-      .square.greenyellow
-      %p 0xADFF2F
-      
-    %dt honeydew              
-    %dd 
-      .square.honeydew
-      %p 0xF0FFF0
-      
-    %dt hotpink               
-    %dd 
-      .square.hotpink
-      %p 0xFF69B4
-      
-    %dt indianred             
-    %dd 
-      .square.indianred
-      %p 0xCD5C5C
-      
-    %dt indigo                
-    %dd 
-      .square.indigo
-      %p 0x4B0082
-      
-    %dt ivory                 
-    %dd 
-      .square.ivory
-      %p 0xFFFFF0
-      
-    %dt khaki                 
-    %dd 
-      .square.khaki
-      %p 0xF0E68C
-      
-    %dt lavender              
-    %dd 
-      .square.lavender
-      %p 0xE6E6FA
-      
-    %dt lavenderblush         
-    %dd 
-      .square.lavenderblush
-      %p 0xFFF0F5
-      
-    %dt lawngreen             
-    %dd 
-      .square.lawngreen
-      %p 0x7CFC00
-      
-    %dt lemonchiffon          
-    %dd 
-      .square.lemonchiffon
-      %p 0xFFFACD
-      
-    %dt lightblue             
-    %dd 
-      .square.lightblue
-      %p 0xADD8E6
-      
-    %dt lightcoral            
-    %dd 
-      .square.lightcoral
-      %p 0xF08080
-      
-    %dt lightcyan             
-    %dd 
-      .square.lightcyan
-      %p 0xE0FFFF
-      
-    %dt lightgoldenrodyellow  
-    %dd 
-      .square.lightgoldenrodyellow
-      %p 0xFAFAD2
-      
-    %dt lightgreen            
-    %dd 
-      .square.lightgreen
-      %p 0x90EE90
-      
-    %dt lightgrey             
-    %dd 
-      .square.lightgrey
-      %p 0xD3D3D3
-      
-    %dt lightpink             
-    %dd 
-      .square.lightpink
-      %p 0xFFB6C1
-      
-  %dl.colors   
-    %dt lightsalmon           
-    %dd 
-      .square.lightsalmon
-      %p 0xFFA07A
-      
-    %dt lightseagreen         
-    %dd 
-      .square.lightseagreen
-      %p 0x20B2AA
-      
-    %dt lightskyblue          
-    %dd 
-      .square.lightskyblue
-      %p 0x87CEFA
-      
-    %dt lightslategray        
-    %dd 
-      .square.lightslategray
-      %p 0x778899
-      
-    %dt lightsteelblue        
-    %dd 
-      .square.lightsteelblue
-      %p 0xB0C4DE
-      
-    %dt lightyellow           
-    %dd 
-      .square.lightyellow
-      %p 0xFFFFE0
-      
-    %dt lime                  
-    %dd 
-      .square.lime
-      %p 0x00FF00
-      
-    %dt limegreen             
-    %dd 
-      .square.limegreen
-      %p 0x32CD32
-      
-    %dt linen                 
-    %dd 
-      .square.linen
-      %p 0xFAF0E6
-      
-    %dt magenta               
-    %dd 
-      .square.magenta
-      %p 0xFF00FF
-      
-    %dt maroon                
-    %dd 
-      .square.maroon
-      %p 0x800000
-      
-    %dt mediumaquamarine      
-    %dd 
-      .square.mediumaquamarine
-      %p 0x66CDAA
-      
-    %dt mediumblue            
-    %dd 
-      .square.mediumblue
-      %p 0x0000CD
-      
-    %dt mediumorchid          
-    %dd 
-      .square.mediumorchid
-      %p 0xBA55D3
-      
-    %dt mediumpurple          
-    %dd 
-      .square.mediumpurple
-      %p 0x9370DB
-      
-    %dt mediumseagreen        
-    %dd 
-      .square.mediumseagreen
-      %p 0x3CB371
-      
-    %dt mediumslateblue       
-    %dd 
-      .square.mediumslateblue
-      %p 0x7B68EE
-      
-    %dt mediumspringgreen     
-    %dd 
-      .square.mediumspringgreen
-      %p 0x00FA9A
-      
-    %dt mediumturquoise       
-    %dd 
-      .square.mediumturquoise
-      %p 0x48D1CC
-      
-    %dt mediumvioletred       
-    %dd 
-      .square.mediumvioletred
-      %p 0xC71585
-      
-    %dt midnightblue          
-    %dd 
-      .square.midnightblue
-      %p 0x191970
-      
-    %dt mintcream             
-    %dd 
-      .square.mintcream
-      %p 0xF5FFFA
-      
-    %dt mistyrose             
-    %dd 
-      .square.mistyrose
-      %p 0xFFE4E1
-      
-    %dt moccasin              
-    %dd 
-      .square.moccasin
-      %p 0xFFE4B5
-      
-    %dt navajowhite           
-    %dd 
-      .square.navajowhite
-      %p 0xFFDEAD
-      
-    %dt navy                  
-    %dd 
-      .square.navy
-      %p 0x000080
-      
-    %dt oldlace               
-    %dd 
-      .square.oldlace
-      %p 0xFDF5E6
-      
-    %dt olive                 
-    %dd 
-      .square.olive
-      %p 0x808000
-      
-    %dt olivedrab             
-    %dd 
-      .square.olivedrab
-      %p 0x6B8E23
-      
-    %dt orange                
-    %dd 
-      .square.orange
-      %p 0xFFA500
-      
-    %dt orangered             
-    %dd 
-      .square.orangered
-      %p 0xFF4500
-      
-    %dt orchid                
-    %dd 
-      .square.orchid
-      %p 0xDA70D6
-      
-    %dt palegoldenrod         
-    %dd 
-      .square.palegoldenrod
-      %p 0xEEE8AA
-      
-    %dt palegreen             
-    %dd 
-      .square.palegreen
-      %p 0x98FB98
-      
-    %dt paleturquoise         
-    %dd 
-      .square.paleturquoise
-      %p 0xAFEEEE
-      
-  %dl.colors   
-    %dt palevioletred         
-    %dd 
-      .square.palevioletred
-      %p 0xDB7093
-      
-    %dt papayawhip            
-    %dd 
-      .square.papayawhip
-      %p 0xFFEFD5
-      
-    %dt peachpuff             
-    %dd 
-      .square.peachpuff
-      %p 0xFFDAB9
-      
-    %dt peru                  
-    %dd 
-      .square.peru
-      %p 0xCD853F
-      
-    %dt pink                  
-    %dd 
-      .square.pink
-      %p 0xFFC0CB
-      
-    %dt plum                  
-    %dd 
-      .square.plum
-      %p 0xDDA0DD
-      
-    %dt powderblue            
-    %dd 
-      .square.powderblue
-      %p 0xB0E0E6
-      
-    %dt purple                
-    %dd 
-      .square.purple
-      %p 0x800080
-      
-    %dt red                   
-    %dd 
-      .square.red
-      %p 0xFF0000
-      
-    %dt rosybrown             
-    %dd 
-      .square.rosybrown
-      %p 0xBC8F8F
-      
-    %dt royalblue             
-    %dd 
-      .square.royalblue
-      %p 0x4169E1
-      
-    %dt saddlebrown           
-    %dd 
-      .square.saddlebrown
-      %p 0x8B4513
-      
-    %dt salmon                
-    %dd 
-      .square.salmon
-      %p 0xFA8072
-      
-    %dt sandybrown            
-    %dd 
-      .square.sandybrown
-      %p 0xF4A460
-      
-    %dt seagreen              
-    %dd 
-      .square.seagreen
-      %p 0x2E8B57
-      
-    %dt seashell              
-    %dd 
-      .square.seashell
-      %p 0xFFF5EE
-      
-    %dt sienna                
-    %dd 
-      .square.sienna
-      %p 0xA0522D
-      
-    %dt silver                
-    %dd 
-      .square.silver
-      %p 0xC0C0C0
-      
-    %dt skyblue               
-    %dd 
-      .square.skyblue
-      %p 0x87CEEB
-      
-    %dt slateblue             
-    %dd 
-      .square.slateblue
-      %p 0x6A5ACD
-      
-    %dt slategray             
-    %dd 
-      .square.slategray
-      %p 0x708090
-      
-    %dt snow                  
-    %dd 
-      .square.snow
-      %p 0xFFFAFA
-      
-    %dt springgreen           
-    %dd 
-      .square.springgreen
-      %p 0x00FF7F
-      
-    %dt steelblue             
-    %dd 
-      .square.steelblue
-      %p 0x4682B4
-      
-    %dt tan                   
-    %dd 
-      .square.tan
-      %p 0xD2B48C
-      
-    %dt teal                  
-    %dd 
-      .square.teal
-      %p 0x008080
-      
-    %dt thistle               
-    %dd 
-      .square.thistle
-      %p 0xD8BFD8
-      
-    %dt tomato                
-    %dd 
-      .square.tomato
-      %p 0xFF6347
-      
-    %dt turquoise             
-    %dd 
-      .square.turquoise
-      %p 0x40E0D0
-      
-    %dt violet                
-    %dd 
-      .square.violet
-      %p 0xEE82EE
-      
-    %dt wheat                 
-    %dd 
-      .square.wheat
-      %p 0xF5DEB3
-      
-    %dt white                 
-    %dd 
-      .square.white
-      %p 0xFFFFFF
-      
-    %dt whitesmoke            
-    %dd 
-      .square.whitesmoke
-      %p 0xF5F5F5
-      
-    %dt yellow                
-    %dd 
-      .square.yellow
-      %p 0xFFFF00
-      
-    %dt yellowgreen           
-    %dd 
-      .square.yellowgreen
-      %p 0x9ACD32
-      
+  %table.commands 
+    %tr 
+      %th Example
+      %th Name
+      %th Code
+      %th Example
+      %th Name
+      %th Code
+    %tr 
+      %td
+        .aliceblue.square
+      %td.command 
+        %span aliceblue
+      %td 0xF0F8FF
+      %td
+        .antiquewhite.square
+      %td.command 
+        %span antiquewhite
+      %td 0xFAEBD7
+    %tr 
+      %td
+        .square.aqua
+      %td.command 
+        %span aqua
+      %td 0x00FFFF
+      %td
+        .square.aquamarine 
+      %td.command 
+        %span aquamarine
+      %td 0x7FFFD4
+    %tr 
+      %td
+        .square.azure
+      %td.command 
+        %span azure
+      %td 0xF0FFFF
+      %td
+        .square.beige
+      %td.command 
+        %span beige
+      %td 0xF5F5DC
+    %tr 
+      %td
+        .square.bisque
+      %td.command 
+        %span bisque
+      %td 0xFFE4C4
+      %td
+        .square.black
+      %td.command 
+        %span black
+      %td 0x000000
+    %tr 
+      %td
+        .square.blanchedalmond
+      %td.command 
+        %span blanchedalmond
+      %td 0xFFEBCD
+      %td
+        .square.blue
+      %td.command 
+        %span blue
+      %td 0x0000FF
+    %tr 
+      %td
+        .square.blueviolet
+      %td.command 
+        %span blueviolet
+      %td 0x8A2BE2
+      %td
+        .square.brown
+      %td.command 
+        %span brown
+      %td 0xA52A2A
+    %tr 
+      %td
+        .square.burlywood
+      %td.command 
+        %span burlywood
+      %td 0xDEB887
+      %td
+        .square.cadetblue
+      %td.command 
+        %span cadetblue
+      %td 0x5F9EA0
+    %tr 
+      %td
+        .square.chartreuse
+      %td.command 
+        %span chartreuse
+      %td 0x7FFF00
+      %td
+        .square.chocolate
+      %td.command 
+        %span chocolate
+      %td 0xD2691E
+    %tr 
+      %td
+        .square.coral
+      %td.command 
+        %span coral
+      %td 0xFF7F50
+      %td
+        .square.cornflowerblue
+      %td.command 
+        %span cornflowerblue
+      %td 0x6495ED
+    %tr 
+      %td
+        .square.cornsilk
+      %td.command 
+        %span cornsilk
+      %td 0xFFF8DC
+      %td
+        .square.crimson
+      %td.command 
+        %span crimson
+      %td 0xDC143C
+    %tr 
+      %td
+        .square.cyan
+      %td.command 
+        %span cyan
+      %td 0x00FFFF
+      %td
+        .square.darkblue
+      %td.command 
+        %span darkblue
+      %td 0x00008B
+    %tr 
+      %td
+        .square.darkcyan
+      %td.command 
+        %span darkcyan
+      %td 0x008B8B
+      %td
+        .square.darkgoldenrod
+      %td.command 
+        %span darkgoldenrod
+      %td 0xB8860B
+    %tr 
+      %td
+        .square.darkgray
+      %td.command 
+        %span darkgray
+      %td 0xA9A9A9
+      %td
+        .square.darkgreen
+      %td.command 
+        %span darkgreen
+      %td 0x006400
+    %tr 
+      %td
+        .square.darkkhaki
+      %td.command 
+        %span darkkhaki
+      %td 0xBDB76B
+      %td
+        .square.darkmagenta
+      %td.command 
+        %span darkmagenta
+      %td 0x8B008B
+    %tr 
+      %td
+        .square.darkolivegreen
+      %td.command 
+        %span darkolivegreen
+      %td 0x556B2F
+      %td
+        .square.darkorange
+      %td.command 
+        %span darkorange
+      %td 0xFF8C00
+    %tr 
+      %td
+        .square.darkorchid
+      %td.command 
+        %span darkorchid
+      %td 0x9932CC
+      %td
+        .square.darkred
+      %td.command 
+        %span darkred
+      %td 0x8B0000
+    %tr 
+      %td
+        .square.darksalmon
+      %td.command 
+        %span darksalmon
+      %td 0xE9967A
+      %td
+        .square.darkseagreen
+      %td.command 
+        %span darkseagreen
+      %td 0x8FBC8F
+    %tr 
+      %td
+        .square.darkslateblue
+      %td.command 
+        %span darkslateblue
+      %td 0x483D8B
+      %td
+        .square.darkslategray
+      %td.command 
+        %span darkslategray
+      %td 0x2F4F4F
+    %tr 
+      %td
+        .square.darkturquoise
+      %td.command 
+        %span darkturquoise
+      %td 0x00CED1
+      %td
+        .square.darkviolet
+      %td.command 
+        %span darkviolet
+      %td 0x9400D3
+    %tr 
+      %td
+        .square.deeppink
+      %td.command 
+        %span deeppink
+      %td 0xFF1493
+      %td
+        .square.deepskyblue
+      %td.command 
+        %span deepskyblue
+      %td 0x00BFFF
+    %tr 
+      %td
+        .square.dimgray
+      %td.command 
+        %span dimgray
+      %td 0x696969
+      %td
+        .square.dodgerblue
+      %td.command 
+        %span dodgerblue
+      %td 0x1E90FF
+    %tr 
+      %td
+        .square.firebrick
+      %td.command 
+        %span firebrick
+      %td 0xB22222
+      %td
+        .square.floralwhite
+      %td.command 
+        %span floralwhite
+      %td 0xFFFAF0
+    %tr 
+      %td
+        .square.forestgreen
+      %td.command 
+        %span forestgreen
+      %td 0x228B22
+      %td
+        .square.fuchsia
+      %td.command 
+        %span fuchsia
+      %td 0xFF00FF
+    %tr 
+      %td
+        .square.gainsboro
+      %td.command 
+        %span gainsboro
+      %td 0xDCDCDC
+      %td
+        .square.ghostwhite
+      %td.command 
+        %span ghostwhite
+      %td 0xF8F8FF
+    %tr 
+      %td
+        .square.gold
+      %td.command 
+        %span gold
+      %td 0xFFD700
+      %td
+        .square.goldenrod
+      %td.command 
+        %span goldenrod
+      %td 0xDAA520
+    %tr 
+      %td
+        .square.gray
+      %td.command 
+        %span gray
+      %td 0x808080
+      %td
+        .square.green
+      %td.command 
+        %span green
+      %td 0x008000
+    %tr 
+      %td
+        .square.greenyellow
+      %td.command 
+        %span greenyellow
+      %td 0xADFF2F
+      %td
+        .square.honeydew
+      %td.command 
+        %span honeydew
+      %td 0xF0FFF0
+    %tr 
+      %td
+        .square.hotpink
+      %td.command 
+        %span hotpink
+      %td 0xFF69B4
+      %td
+        .square.indianred
+      %td.command 
+        %span indianred
+      %td 0xCD5C5C
+    %tr 
+      %td
+        .square.indigo
+      %td.command 
+        %span indigo
+      %td 0x4B0082
+      %td
+        .square.ivory
+      %td.command 
+        %span ivory
+      %td 0xFFFFF0
+    %tr 
+      %td
+        .square.khaki
+      %td.command 
+        %span khaki
+      %td 0xF0E68C
+      %td
+        .square.lavender
+      %td.command 
+        %span lavender
+      %td 0xE6E6FA
+    %tr 
+      %td
+        .square.lavenderblush
+      %td.command 
+        %span lavenderblush
+      %td 0xFFF0F5
+      %td
+        .square.lawngreen
+      %td.command 
+        %span lawngreen
+      %td 0x7CFC00
+    %tr 
+      %td
+        .square.lemonchiffon
+      %td.command 
+        %span lemonchiffon
+      %td 0xFFFACD
+      %td
+        .square.lightblue
+      %td.command 
+        %span lightblue
+      %td 0xADD8E6
+    %tr 
+      %td
+        .square.lightcoral
+      %td.command 
+        %span lightcoral
+      %td 0xF08080
+      %td
+        .square.lightcyan
+      %td.command 
+        %span lightcyan
+      %td 0xE0FFFF
+    %tr 
+      %td
+        .square.lightgoldenrodyellow
+      %td.command 
+        %span lightgoldenrodyellow
+      %td 0xFAFAD2
+      %td
+        .square.lightgreen
+      %td.command 
+        %span lightgreen
+      %td 0x90EE90
+    %tr 
+      %td
+        .square.lightgrey
+      %td.command 
+        %span lightgrey
+      %td 0xD3D3D3
+      %td
+        .square.lightpink
+      %td.command 
+        %span lightpink
+      %td 0xFFB6C1
+    %tr 
+      %td
+        .square.lightsalmon
+      %td.command 
+        %span lightsalmon
+      %td 0xFFA07A
+      %td
+        .square.lightseagreen
+      %td.command 
+        %span lightseagreen
+      %td 0x20B2AA
+    %tr 
+      %td
+        .square.lightskyblue
+      %td.command 
+        %span lightskyblue
+      %td 0x87CEFA
+      %td
+        .square.lightslategray
+      %td.command 
+        %span lightslategray
+      %td 0x778899
+    %tr 
+      %td
+        .square.lightsteelblue
+      %td.command 
+        %span lightsteelblue
+      %td 0xB0C4DE
+      %td
+        .square.lightyellow
+      %td.command 
+        %span lightyellow
+      %td 0xFFFFE0
+    %tr 
+      %td
+        .square.lime
+      %td.command 
+        %span lime
+      %td 0x00FF00
+      %td
+        .square.limegreen
+      %td.command 
+        %span limegreen
+      %td 0x32CD32
+    %tr 
+      %td
+        .square.linen
+      %td.command 
+        %span linen
+      %td 0xFAF0E6
+      %td
+        .square.magenta
+      %td.command 
+        %span magenta
+      %td 0xFF00FF
+    %tr 
+      %td
+        .square.maroon
+      %td.command 
+        %span maroon
+      %td 0x800000
+      %td
+        .square.mediumaquamarine
+      %td.command 
+        %span mediumaquamarine
+      %td 0x66CDAA
+    %tr 
+      %td
+        .square.mediumblue
+      %td.command 
+        %span mediumblue
+      %td 0x0000CD
+      %td
+        .square.mediumorchid
+      %td.command 
+        %span mediumorchid
+      %td 0xBA55D3
+    %tr 
+      %td
+        .square.mediumpurple
+      %td.command 
+        %span mediumpurple
+      %td 0x9370DB
+      %td
+        .square.mediumseagreen
+      %td.command 
+        %span mediumseagreen
+      %td 0x3CB371
+    %tr 
+      %td
+        .square.mediumslateblue
+      %td.command 
+        %span mediumslateblue
+      %td 0x7B68EE
+      %td
+        .square.mediumspringgreen
+      %td.command 
+        %span mediumspringgreen
+      %td 0x00FA9A
+    %tr 
+      %td
+        .square.mediumturquoise
+      %td.command 
+        %span mediumturquoise
+      %td 0x48D1CC
+      %td
+        .square.mediumvioletred
+      %td.command 
+        %span mediumvioletred
+      %td 0xC71585
+    %tr 
+      %td
+        .square.midnightblue
+      %td.command 
+        %span midnightblue
+      %td 0x191970
+      %td
+        .square.mintcream
+      %td.command 
+        %span mintcream
+      %td 0xF5FFFA
+    %tr 
+      %td
+        .square.mistyrose
+      %td.command 
+        %span mistyrose
+      %td 0xFFE4E1
+      %td
+        .square.moccasin
+      %td.command 
+        %span moccasin
+      %td 0xFFE4B5
+    %tr 
+      %td
+        .square.navajowhite
+      %td.command 
+        %span navajowhite
+      %td 0xFFDEAD
+      %td
+        .square.navy
+      %td.command 
+        %span navy
+      %td 0x000080
+    %tr 
+      %td
+        .square.oldlace
+      %td.command 
+        %span oldlace
+      %td 0xFDF5E6
+      %td
+        .square.olive
+      %td.command 
+        %span olive
+      %td 0x808000
+    %tr 
+      %td
+        .square.olivedrab
+      %td.command 
+        %span olivedrab
+      %td 0x6B8E23
+      %td
+        .square.orange
+      %td.command 
+        %span orange
+      %td 0xFFA500
+    %tr 
+      %td
+        .square.orangered
+      %td.command 
+        %span orangered
+      %td 0xFF4500
+      %td
+        .square.orchid
+      %td.command 
+        %span orchid
+      %td 0xDA70D6
+    %tr 
+      %td
+        .square.palegoldenrod
+      %td.command 
+        %span palegoldenrod
+      %td 0xEEE8AA
+      %td
+        .square.palegreen
+      %td.command 
+        %span palegreen
+      %td 0x98FB98
+    %tr 
+      %td
+        .square.paleturquoise
+      %td.command 
+        %span paleturquoise
+      %td 0xAFEEEE
+      %td
+        .square.palevioletred
+      %td.command 
+        %span palevioletred
+      %td 0xDB7093
+    %tr 
+      %td
+        .square.papayawhip
+      %td.command 
+        %span papayawhip
+      %td 0xFFEFD5
+      %td
+        .square.peachpuff
+      %td.command 
+        %span peachpuff
+      %td 0xFFDAB9
+    %tr 
+      %td
+        .square.peru
+      %td.command 
+        %span peru
+      %td 0xCD853F
+      %td
+        .square.pink
+      %td.command 
+        %span pink
+      %td 0xFFC0CB
+    %tr 
+      %td
+        .square.plum
+      %td.command 
+        %span plum
+      %td 0xDDA0DD
+      %td
+        .square.powderblue
+      %td.command 
+        %span powderblue
+      %td 0xB0E0E6
+    %tr 
+      %td
+        .square.purple
+      %td.command 
+        %span purple
+      %td 0x800080
+      %td
+        .square.red
+      %td.command 
+        %span red
+      %td 0xFF0000
+    %tr 
+      %td
+        .square.rosybrown
+      %td.command 
+        %span rosybrown
+      %td 0xBC8F8F
+      %td
+        .square.royalblue
+      %td.command 
+        %span royalblue
+      %td 0x4169E1
+    %tr 
+      %td
+        .square.saddlebrown
+      %td.command 
+        %span saddlebrown
+      %td 0x8B4513
+      %td
+        .square.salmon
+      %td.command 
+        %span salmon
+      %td 0xFA8072
+    %tr 
+      %td
+        .square.sandybrown
+      %td.command 
+        %span sandybrown
+      %td 0xF4A460
+      %td
+        .square.seagreen
+      %td.command 
+        %span seagreen
+      %td 0x2E8B57
+    %tr 
+      %td
+        .square.seashell
+      %td.command 
+        %span seashell
+      %td 0xFFF5EE
+      %td
+        .square.sienna
+      %td.command 
+        %span sienna
+      %td 0xA0522D
+    %tr 
+      %td
+        .square.silver
+      %td.command 
+        %span silver
+      %td 0xC0C0C0
+      %td
+        .square.skyblue
+      %td.command 
+        %span skyblue
+      %td 0x87CEEB
+    %tr 
+      %td
+        .square.slateblue
+      %td.command 
+        %span slateblue
+      %td 0x6A5ACD
+      %td
+        .square.slategray
+      %td.command 
+        %span slategray
+      %td 0x708090
+    %tr 
+      %td
+        .square.snow
+      %td.command 
+        %span snow
+      %td 0xFFFAFA
+      %td
+        .square.springgreen
+      %td.command 
+        %span springgreen
+      %td 0x00FF7F
+    %tr 
+      %td
+        .square.steelblue
+      %td.command 
+        %span steelblue
+      %td 0x4682B4
+      %td
+        .square.tan
+      %td.command 
+        %span tan
+      %td 0xD2B48C
+    %tr 
+      %td
+        .square.teal
+      %td.command 
+        %span teal
+      %td 0x008080
+      %td
+        .square.thistle
+      %td.command 
+        %span thistle
+      %td 0xD8BFD8
+    %tr 
+      %td
+        .square.tomato
+      %td.command 
+        %span tomato
+      %td 0xFF6347
+      %td
+        .square.turquoise
+      %td.command 
+        %span turquoise
+      %td 0x40E0D0
+    %tr 
+      %td
+        .square.violet
+      %td.command 
+        %span violet
+      %td 0xEE82EE
+      %td
+        .square.wheat
+      %td.command 
+        %span wheat
+      %td 0xF5DEB3
+    %tr 
+      %td
+        .square.white
+      %td.command 
+        %span white
+      %td 0xFFFFFF
+      %td
+        .square.whitesmoke
+      %td.command 
+        %span whitesmoke
+      %td 0xF5F5F5
+    %tr 
+      %td
+        .square.yellow
+      %td.command 
+        %span yellow
+      %td 0xFFFF00
+      %td
+        .square.yellowgreen
+      %td.command 
+        %span yellowgreen
+      %td 0x9ACD32
+
 
 %section.compatability.hardware
   %h2 Works with:

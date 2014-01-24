@@ -45,27 +45,55 @@ spark_platform: true
 
 %section.public-methods
   %h2 Commands:
+  %table.commands 
+    %tr 
+      %th Command (param)
+      %th Description
+    %tr 
+      %td.command isPressed
+      %td.param  
+        %p Returns true or false matching state of the button.
+        %h5 Params
+        %span no params
+        %h5 Returns 
+        %span true | false
 
-  %dl.methods
-    %dt isPressed → true | false
-    %dd
-      Returns true or false matching state of the button.
+
 
 %section.public-events
   %h2 Events:
+  %table.commands 
+    %tr 
+      %th Event
+      %th Description
+    %tr 
+      %td.command 
+        %span update
+      %td
+        This event will contain one of the following events.
+        %br/  
+        You can also subscribe to one of the specific events, if that is the information you are interested in.
+    %tr 
+      %td.command 
+        %span push
+      %td 
+        %p This event gets triggered when the button changes state from released to pushed.
+        %h5 data
+        %span integer
+        Button changes state (data = 1)
+    %tr 
+      %td.command 
+        %span release
+      %td 
+        %p This event gets triggered when the button changes state from pushed to released.
+        %h5 data
+        %span integer
+        Button changes state
+    %tr 
+      %td.command 
+        %span start
+      %td Sent when the device has been started and is ready to use. 
 
-  %dl.methods 
-    %dt update
-    %dd 
-      This event will contain one of the following events.
-      %br/  
-      You can also subscribe to one of the specific events, if that is the information you are interested in.
-    %dt push
-    %dd This event gets triggered when the button changes state from released to pushed.
-    %dt release
-    %dd This event gets triggered when the button changes state from pushed to released.
-    %dt start
-    %dd Sent when the device has been started and is ready to use. 
 
 %section.how-to
   %h2 How to use
