@@ -44,22 +44,48 @@ digispark_platform: true
 
 %section.public-methods
   %h2 Commands:
-  
-  %dl.methods 
-    %dt turnOn
-    %dd Turns LED on.
-    %dt turnOff
-    %dd Turns LED off.
-    %dt toggle
-    %dd Turns the LED on, or off, depending on if it is already off, or on, respectively.
-    %dt brightness(brightness_int) → true | nil
-    %dd Sets brightness of the led to the specified brightness value passed to brightness(brightness_int) using PWM, brightness can be any integer value between 0 and 255.
+  %table.commands 
+    %tr 
+      %th Command (param)
+      %th Description
+    %tr 
+      %td.command turnOn()
+      %td.param  
+        %p Turns LED on. 
+        %h5 Returns 
+        %span null
+    %tr 
+      %td.command turnOff()
+      %td.param  
+        %p Turns LED off.
+        %h5 Returns 
+        %span null
+    %tr 
+      %td.command toggle()
+      %td.param  
+        %p Turns the LED on, or off, depending on if it is already off, or on, respectively.
+        %h5 Returns 
+        %span null
+    %tr 
+      %td.command brightness(level)
+      %td.param  
+        %p Sets brightness of the led to the specified brightness value passed to brightness(brightness_int) using PWM, brightness can be any integer value between 0 and 255.
+        %h5 Params
+        %span level → integer
+        %p The brightness level
+        %h5 Returns 
+        %span null
+
 
   %h2 Events
-
-  %dl.methods 
-    %dt start
-    %dd Sent when the device has been started and is ready to use.  
+  %table.commands 
+    %tr 
+      %th Event
+      %th Description
+    %tr 
+      %td.command 
+        %span start
+      %td Sent when the device has been started and is ready to use. 
 
 %section.how-to
   %h2 How to use
