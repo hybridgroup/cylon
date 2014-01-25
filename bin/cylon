@@ -9,9 +9,9 @@ var program = require('commander'),
 
 var stdExec = function(command){
   exec(command, function(error, stdout, stderr){
-    sys.print('stdout: ' + stdout);
+    sys.print(stdout);
     if (stderr != '' && stderr != null){
-      sys.print('stderr: \n' + stderr);
+      sys.print('Some errors were found: \n' + stderr);
     }
   });
 }
@@ -32,24 +32,24 @@ program
     switch(os.platform()){
     case 'linux':
       switch(type){
-      case 'serial'
+      case 'serial':
         stdExec('ls /dev/tty*');
         break;
-      case 'bluetooth'
+      case 'bluetooth':
         stdExec('hcitool scan');
         break;
-      case 'usb'
+      case 'usb':
         stdExec('lsusb');
         break;
-      else
-        sys.print('Device type not yet supported...')
+      default:
+        sys.print('Device type not yet supported...\n')
       }
       break;
     case 'darwin':
       stdExec('ls /dev/tty*');
       break;
-    else
-      sys.print('OS not yet supported...')
+    default:
+      sys.print('OS not yet supported...\n')
       break;
     }
   });
