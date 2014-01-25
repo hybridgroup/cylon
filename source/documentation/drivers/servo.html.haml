@@ -48,21 +48,20 @@ spark_platform: true
       %th Command (param)
       %th Description
     %tr 
-      %td.command angle
+      %td.command angle(val)
       %td.param  
         %p Moves the servo to the specified angle, angle must be an integer value between 0 and 180.
         %h5 Params
-        %span no params
+        %span val
+        %p Angle for servo - integer (between 0 and 180)
         %h5 Returns 
-        %span integer_value (between 0 and 180)
+        %span null
     %tr 
-      %td.command currentAngle
+      %td.command currentAngle()
       %td.param  
         %p Returns the current angle of the servo, an integer value between 0 and 180.
-        %h5 Params
-        %span no params
         %h5 Returns 
-        %span integer_value (between 0 and 180)
+        %span integer (between 0 and 180)
     
   %h2 Events
   %table.commands 

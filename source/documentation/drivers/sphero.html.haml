@@ -50,7 +50,7 @@ sphero_platform: true
       %th Command (param)
       %th Description
     %tr 
-      %td.command abortMacro
+      %td.command abortMacro()
       %td.param  
         %p This command aborts any executing macro and returns both its ID code and the command number currently in process.
         %h5 Params
@@ -58,139 +58,131 @@ sphero_platform: true
         %h5 Returns 
         %span (ID code , command number)
     %tr 
-      %td.command abortOrbBasicProgram
+      %td.command abortOrbBasicProgram()
       %td.param  
         %p Aborts execution of any currently running orbBasic program.
-        %h5 Params
-        %span no params
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
-      %td.command appendMacroChunck(MACRO Chunk) 
+      %td.command appendMacroChunk(chunk) 
       %td.param  
         %p This stores the attached macro definition into the temporary RAM buffer for later execution. It is similar to the Save Temporary Macro call but allows you to build up longer temporary macros.
         %h5 Params
-        %span MACRO Chunk → Simple Response
+        %span chunk
         %h5 Returns 
-        %span Simple Response
+        %span true | false
     %tr 
-      %td.command appendOrbBasicFragment(Area, Program Code) 
+      %td.command appendOrbBasicFragment(area, programCode) 
       %td.param  
         %p Sending an orbBasic program to Sphero involves appending blocks of text to existing ones in the specified storage area.
         %h5 Params
-        %span (Area, Program Code) → Simple Response
+        %span area
+        %span programCode
         %h5 Returns 
-        %span Simple Response
+        %span true | false
     %tr 
-      %td.command configureCollisionDetection(Meth,(Xt, Yt),(Xspd, Yspd),Dead) 
+      %td.command configureCollisionDetection(meth, xT, yT, xSpd, ySpd, dead) 
       %td.param  
         %p Sets the sphero to detect collisions and report them.
         %h5 Params
-        %span (Meth,(Xt, Yt),(Xspd, Yspd),Dead) → Simple Response
+        %span meth 
+        %span xT
+        %span yT
+        %span xSpd
+        %span ySpd
+        %span dead
         %h5 Returns 
-        %span Simple Response
+        %span true | false
     %tr 
-      %td.command configureLocator(flag, x, y, Yaw Tare) 
+      %td.command configureLocator(flag, x, y, yawTare) 
       %td.param  
         %p Through the streaming interface, Sphero provides real-time location data in the form of (X,Y) coordinates on the ground plane. 
         %h5 Params
-        %span (flag, x, y, Yaw Tare) → Simple Response
+        %span flag
+        %span x
+        %span y
+        %span yawTare
         %h5 Returns 
-        %span Simple Response
+        %span truw | false
     %tr 
-      %td.command detectCollisions
+      %td.command detectCollisions()
       %td.param  
         %p Sets the sphero to detect collisions and report them.
-        %h5 Params
-        %span no params
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
-      %td.command eraseOrbBasicStorage(Area)
+      %td.command eraseOrbBasicStorage(area)
       %td.param  
         %p This erases any existing program in the specified storage area. Specify 00h for the temporary RAM buffer or 01h for the persistent storage area.
         %h5 Params
-        %span (Area) → Simple Response
+        %span area
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
-      %td.command executeOrbBasicProgram(Area, Start Line, Start Line)
+      %td.command executeOrbBasicProgram(area, startLine)
       %td.param  
         %p This attempts to run a program in the specified storage area beginning at the specified line number. This command will fail if there is already an orbBasic program executing.
         %h5 Params
-        %span (Area, Start Line, Start Line) → Simple Response
+        %span area
+        %span startLine
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
-      %td.command getApplicationConfigurationBlock
+      %td.command getApplicationConfigurationBlock()
       %td.param  
         %p This allows you to retrieve the application configuration block that is set aside for exclusive use by applications.
-        %h5 Params
-        %span no params
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
-      %td.command getConfigurationBlock(ID) 
+      %td.command getConfigurationBlock(id) 
       %td.param  
         %p This command retrieves one of the configuration blocks.
         %h5 Params
-        %span (ID) → Simple Response
+        %span id
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
-      %td.command getDeviceMode
+      %td.command getDeviceMode()
       %td.param  
         %p Gets the operation mode of Sphero based on the supplied mode value.
-        %h5 Params
-        %span no params
         %h5 Returns 
         %span 00h (Normal mode) | 01h (User Hack mode)
     %tr 
-      %td.command getMacroStatus
+      %td.command getMacroStatus()
       %td.param  
         %p This command returns the ID code and command number of the currently executing macro.
         %h5 Params
         %span no params
         %h5 Returns 
-        %span (ID code , cmd number, cmd number)
+        %span (ID code, cmd number, cmd number)
     %tr 
-      %td.command getPermanentOptionFlags
+      %td.command getPermanentOptionFlags()
       %td.param  
         %p Returns the permanent option flags.
-        %h5 Params
-        %span no params
         %h5 Returns 
         %span FLAGS opt: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 6-31
     %tr 
-      %td.command getRGB
+      %td.command getRGB()
       %td.param  
         %p This retrieves the "user LED color" which is stored in the config block.
-        %h5 Params
-        %span no params
         %h5 Returns 
         %span (red,green,blue) | (color)
     %tr 
-      %td.command getTemporaryOptionFlags
+      %td.command getTemporaryOptionFlags()
       %td.param  
         %p Returns the temporary option flags. 
-        %h5 Params
-        %span no params
         %h5 Returns 
         %span FLAGS opt: 0 | 1-31
     %tr 
-      %td.command reInitializeMacroExecutive
+      %td.command reInitializeMacroExecutive()
       %td.param  
         %p This terminates any running macro and reinitializes the macro system.
-        %h5 Params
-        %span no params
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
-      %td.command readLocator
+      %td.command readLocator()
       %td.param  
         %p This reads Sphero's current position (X,Y), component velocities and SOG (speed over ground).
-        %h5 Params
-        %span no params
         %h5 Returns 
         %span (XPOS, YPOS, XVEL, YVEL, SOG)
     %tr 
@@ -198,194 +190,207 @@ sphero_platform: true
       %td.param  
         %p This commands Sphero to roll along the provided vector. Both a speed and a heading are required; the latter is considered relative to the last calibrated direction.
         %h5 Params
-        %span (speed, heading, state) → Simple Response
+        %span speed
+        %span heading
+        %span state
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
-      %td.command runMacro(SEQ, DLEN, ID)
+      %td.command runMacro(seq, dLen, id)
       %td.param  
         %p This attempts to execute the specified macro.
         %h5 Params
-        %span (SEQ, DLEN, ID) → Simple Response
+        %span seq
+        %span dLen
+        %span id
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
       %td.command saveMacro(data) 
       %td.param  
         %p This stores the attached macro definition into the persistent store for later execution.
         %h5 Params
-        %span (data) → Simple Response
+        %span data
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
       %td.command saveTemporaryMacro(data)
       %td.param  
         %p This stores the attached macro definition into the temporary RAM buffer for later execution.
         %h5 Params
-        %span (data) → Simple Response
+        %span data
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
-      %td.command selfLevel(Options, Angle Limit, Timeout, True Time)
+      %td.command selfLevel(options, angleLimit, timeout, trueTime)
       %td.param  
         %p This command controls the self level routine.
         %h5 Params
-        %span (Options, Angle Limit, Timeout, True Time) → array
+        %span options
+        %span angleLimit
+        %span timeout
+        %span trueTime
         %h5 Returns 
-        %span options: ((0 | 1 | 2 |3 ), (0 | 1 to 90), (0 | 1 to 255), (0 | 1 to 255) 
+        %span options: array [(0 | 1 | 2 |3 ), (0 | 1 to 90), (0 | 1 to 255), (0 | 1 to 255)]
     %tr 
-      %td.command setAccelerometerRange(Range Idx)
+      %td.command setAccelerometerRange(range)
       %td.param  
         %p Normally, Sphero's solid state accelerometer is set for a range of ±8Gs.
         %h5 Params
-        %span (Range Idx) → integer_value
+        %span range → integer
         %h5 Returns 
-        %span integer_value opt: 0 | 1 | 2 | 3 
+        %span integer opt: 0 | 1 | 2 | 3 
     %tr 
-      %td.command setApplicationConfigurationBlock
+      %td.command setApplicationConfigurationBlock()
       %td.param  
         %p This allows you to retrieve the application configuration block that is set aside for exclusive use by applications.
-        %h5 Params
-        %span no params
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
-      %td.command setBackLED(BRIGHT)
+      %td.command setBackLED(level)
       %td.param  
         %p This allows you to control the brightness of the back LED. The value does not persist across power cycles.
         %h5 Params
-        %span (BRIGHT) → Simple Response
+        %span level
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
-      %td.command setBoostWithTime(STATE) 
+      %td.command setBoostWithTime(state)
       %td.param  
         %p 
         %h5 Params
-        %span (STATE) → Simple Response
+        %span state
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
       %td.command setColor(color) 
       %td.param  
         %p This allows you to set the color of the sphero, just pass an array containing RGB hex or a string with one of the color names of the list.
         %h5 Params
-        %span (color) → Simple Response
+        %span color
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
       %td.command setConfigurationBlock(value) 
       %td.param  
         %p This command accepts an exact copy of the configuration block and loads it into the RAM copy of the configuration block.
         %h5 Params
-        %span (value) → Simple Response
+        %span value
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
-      %td.command setDataStreaming(N, M, MASK, PCNT, MASK2)
+      %td.command setDataStreaming(n, m, mask, pcnt, mask2)
       %td.param  
         %p Sphero supports asynchronous data streaming of certain control system and sensor parameters. 
         %h5 Params
-        %span (N, M, MASK, PCNT, MASK2) → Simple Response
+        %span n
+        %span m
+        %span mask
+        %span pcnt
+        %span mask2
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
-      %td.command setDeviceMode(MODE) 
+      %td.command setDeviceMode(mode)
       %td.param  
         %p Assigns the operation mode of Sphero based on the supplied mode value.
         %h5 Params
-        %span (MODE) → Simple Response
+        %span mode
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
-      %td.command setHeading(HEADING) 
+      %td.command setHeading(heading)
       %td.param  
         %p This allows the smartphone client to adjust the orientation of Sphero by commanding a new reference heading in degrees, which ranges from 0 to 359.
         %h5 Params
-        %span (HEADING) → Simple Response
+        %span heading
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
-      %td.command setMacroParameter(Param, Val1, Val2) 
+      %td.command setMacroParameter(param, val1, val2) 
       %td.param  
         %p This command allows system globals that influence certain macro commands to be selectively altered from outside of the macro system itself.
         %h5 Params
-        %span (Param, Val1, Val2) → Simple Response
+        %span param
+        %span val1
+        %span val2
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
-      %td.command setMotionTimeout(TIME) 
+      %td.command setMotionTimeout(time)
       %td.param  
         %p This sets the ultimate timeout for the last motion command to keep Sphero from rolling away in the case of a crashed (or paused) client app.
         %h5 Params
-        %span (TIME) → Simple Response
+        %span time
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
-      %td.command setPermanentOptionFlags(FLAGS) 
+      %td.command setPermanentOptionFlags(flags) 
       %td.param  
         %p Assigns the permanent option flags to the provided value and writes them immediately to the config block for persistence across power cycles. 
         %h5 Params
-        %span (FLAGS) → Simple Response
+        %span flags
         %h5 Returns 
-        %span Simple Response
+        %span null
   
     %tr 
       %td.command setRGB(color, persist)  
       %td.param  
         %p This allows you to set the RGB LED color, just pass an array containing RGB hex or a string with one of the color names of the list.
         %h5 Params
-        %span (color, persist) → Simple Response
+        %span color
+        %span persist
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
-      %td.command setRawMotorValues(L-MODE, L-POWER, R-MODE, R-POWER) 
+      %td.command setRawMotorValues(lMode, lPower, rMode, rPower) 
       %td.param  
         %p This allows you to take over one or both of the motor output values, instead of having the stabilization system control them. 
         %h5 Params
-        %span (L-MODE, L-POWER, R-MODE, R-POWER) → Simple Response
+        %span lMode
+        %span lPower
+        %span rMode
+        %span rPower
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
-      %td.command setRotationRate(RATE) 
+      %td.command setRotationRate(rate) 
       %td.param  
-        %p This allows you to control the rotation rate that Sphero will use to meet new heading commands (DID 02h, CID 01h).
+        %p This allows you to control the rotation rate that Sphero will use to meet new heading commands.
         %h5 Params
-        %span (RATE) → Simple Response
+        %span rate
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
-      %td.command setStabalisation(bool) 
+      %td.command setStabalization(on) 
       %td.param  
         %p 
         %h5 Params
-        %span (bool) → Simple Response
+        %span on → boolean
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
-      %td.command setTemporaryOptionFlags(FLAGS) 
+      %td.command setTemporaryOptionFlags(flags) 
       %td.param  
         %p Assigns the temporary option flags to the provided value. These do not persist across a power cycle. See below for the bit definitions.
         %h5 Params
-        %span (FLAGS) → Simple Response
+        %span flags
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
-      %td.command stop 
+      %td.command stop()
       %td.param  
         %p Stops the sphero.
-        %h5 Params
-        %span no params
         %h5 Returns 
-        %span Simple Response
+        %span null
     %tr 
-      %td.command submitValueToInputStatement(VAL) 
+      %td.command submitValueToInputStatement(val) 
       %td.param  
         %p This takes the place of the typical user console in orbBasic and allows a user to answer an input request.
         %h5 Params
-        %span (VAL) → Simple Response
+        %span val
         %h5 Returns 
-        %span Simple Response
+        %span null
 
   %h5 
     Note: for more information about the documentation of the Sphero driver click

@@ -51,27 +51,21 @@ spark_platform: true
       %th Command (param)
       %th Description
     %tr 
-      %td.command turnOn
+      %td.command turnOn()
       %td.param  
         %p Starts the motor.
-        %h5 Params
-        %span no params
         %h5 Returns 
-        %span true | nil
+        %span nil
     %tr 
-      %td.command turnOff
+      %td.command turnOff()
       %td.param  
         %p Stops the motor.
-        %h5 Params
-        %span no params
         %h5 Returns 
         %span true | nil
     %tr 
-      %td.command toggle
+      %td.command toggle()
       %td.param  
         %p Sets the state of the motor to the oposite of the current state, if motor is on then sets it to off.
-        %h5 Params
-        %span no params
         %h5 Returns 
         %span true | nil
     %tr 
@@ -79,18 +73,16 @@ spark_platform: true
       %td.param  
         %p Sets the speed of the motor to the value provided in the speed param, speed value must be an integer between 0 and 255.
         %h5 Params
-        %span  speed_value → integer_value
-        The speed value for which to return data
+        %span  speed_value → integer
+        %p The speed value for which to return data
         %h5 Returns 
-        %span integer_value
+        %span integer
     %tr 
-      %td.command currentSpeed
+      %td.command currentSpeed()
       %td.param  
         %p Returns the current speed of the motor as an integer between 0 and 255.
-        %h5 Params
-        %span no params
         %h5 Returns 
-        %span integer_value 
+        %span integer
 
   %h2 Events
   %table.commands 

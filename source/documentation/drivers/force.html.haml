@@ -63,30 +63,37 @@ force_platform: true
       %th Command (param)
       %th Description
     %tr 
-      %td.command authenticate
+      %td.command authenticate()
       %td.param  
         %p This allows you to authenticate the device.
-        %h5 Params
-        %span no params
         %h5 Returns 
         %span (callback)
     %tr 
-      %td.command subscribe
+      %td.command subscribe(streamPath, callback)
       %td.param  
         %p This allows you to suscribe the device.
-        %span subscribe() → (streamPath, callback)
-        %h5 Params
-        %span no params
+        %span streamPath
+        %p
+        %span callback
+        %p
         %h5 Returns 
-        %span (streamPath, callback)
+        %span null
     %tr 
-      %td.command push
+      %td.command push(apexPath, method, data)
       %td.param  
         %p This allows you to push data.
         %h5 Params
-        %span no params
+        %span apexPath
+        %p apexPath
+
+        %span method
+        %p method
+
+        %span data
+        %p data
+
         %h5 Returns 
-        %span (apexPath, method, data)
+        %span null
 
 %section.public-events
   %h2 Events:

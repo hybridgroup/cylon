@@ -48,38 +48,32 @@ spark_platform: true
       %th Command (param)
       %th Description
     %tr 
-      %td.command turnOn
+      %td.command turnOn()
       %td.param  
         %p Turns LED on. 
-        %h5 Params
-        %span no params
         %h5 Returns 
-        %span true | false
+        %span null
     %tr 
-      %td.command turnOff
+      %td.command turnOff()
       %td.param  
         %p Turns LED off.
-        %h5 Params
-        %span no params
         %h5 Returns 
-        %span true | false
+        %span null
     %tr 
-      %td.command toggle
+      %td.command toggle()
       %td.param  
         %p Turns the LED on, or off, depending on if it is already off, or on, respectively.
-        %h5 Params
-        %span no params
         %h5 Returns 
-        %span on | off
+        %span null
     %tr 
-      %td.command brightness(brightness_int)
+      %td.command brightness(level)
       %td.param  
         %p Sets brightness of the led to the specified brightness value passed to brightness(brightness_int) using PWM, brightness can be any integer value between 0 and 255.
         %h5 Params
-        %span  brightness_int → integer
-        The brightness for which to return data
+        %span level → integer
+        %p The brightness level
         %h5 Returns 
-        %span integer
+        %span null
 
 
   %h2 Events

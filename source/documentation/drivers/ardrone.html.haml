@@ -81,7 +81,7 @@ ardrone_platform: true
         %span nil
         
     %tr 
-      %td.command stop
+      %td.command stop()
       %td.param  
         %p 
           Sets all drone movement commands to
@@ -188,7 +188,7 @@ ardrone_platform: true
         %h5 Returns 
         %span integer
     %tr 
-      %td.command clockwise 
+      %td.command clockwise()
       %td.param  
         %p 
           Causes the drone to spin.
@@ -203,7 +203,7 @@ ardrone_platform: true
         %h5 Returns 
         %span integer
     %tr 
-      %td.command counterClockwise 
+      %td.command counterClockwise()
       %td.param  
         %p 
           Causes the drone to spin.
@@ -218,11 +218,11 @@ ardrone_platform: true
         %h5 Returns 
         %span integer
     %tr 
-      %td.command calibrate(device_num) 
+      %td.command calibrate(deviceNumber) 
       %td.param  
         %p Asks the drone to calibrate a device.
         %h5 Params
-        %span device_num → integer
+        %span deviceNumber → integer
         %h5 Returns 
         %span integer
     %tr 
@@ -254,7 +254,7 @@ ardrone_platform: true
         %span nil
         
     %tr 
-      %td.command frontFlip
+      %td.command frontFlip()
       %td.param  
         %p 
           Tells the drone to do a front-flip. Alias of 
@@ -264,7 +264,7 @@ ardrone_platform: true
         %h5 Returns 
         %span nil
     %tr 
-      %td.command backFlip
+      %td.command backFlip()
       %td.param  
         %p 
           Tells the drone to do a back-flip. Alias of 
@@ -275,7 +275,7 @@ ardrone_platform: true
         %span nil
         
     %tr 
-      %td.command leftFlip
+      %td.command leftFlip()
       %td.param  
         %p 
           Tells the drone to do a left-flip. Alias of
@@ -286,7 +286,7 @@ ardrone_platform: true
         %span nil
         
     %tr 
-      %td.command rightFlip
+      %td.command rightFlip()
       %td.param  
         %p 
           Tells the drone to do a right-flip. Alias of
@@ -297,7 +297,7 @@ ardrone_platform: true
         %span nil
         
     %tr 
-      %td.command wave
+      %td.command wave()
       %td.param  
         %p 
           Tells the drone to do a wave. Alias of
@@ -332,55 +332,43 @@ ardrone_platform: true
         %span nil
         
     %tr 
-      %td.command disableEmergency
+      %td.command disableEmergency()
       %td.param  
         %p 
           Causes the emergency REF bit to be set to 1 until 
           %span navdata.droneState.emergencyLanding is 0. 
           %br/ 
           This recovers a drone that has flipped over and is showing red lights to be flyable again and show green lights. It is also done implicitly when creating a new high level client.
-        %h5 Params
-        %span no params
         %h5 Returns 
-        %span integer_value
+        %span integer
     %tr 
-      %td.command forward
+      %td.command forward()
       %td.param  
         %p Causes the drone to go forward.
-        %h5 Params
-        %span no params
         %h5 Returns 
         %span nil
     %tr 
-      %td.command frontFlip
+      %td.command frontFlip()
       %td.param  
         %p Causes the drone to do a front flip.
-        %h5 Params
-        %span no params
         %h5 Returns 
         %span nil
     %tr 
-      %td.command backFlip
+      %td.command backFlip()
       %td.param  
         %p Causes the drone to do a back flip.
-        %h5 Params
-        %span no params
         %h5 Returns 
         %span nil
     %tr 
-      %td.command leftFlip
+      %td.command leftFlip()
       %td.param  
         %p Causes the drone to do a left flip.
-        %h5 Params
-        %span no params
         %h5 Returns 
         %span nil
     %tr 
-      %td.command rightFlip
+      %td.command rightFlip()
       %td.param  
         %p Causes the drone to do a right flip.
-        %h5 Params
-        %span no params
         %h5 Returns 
         %span nil
 
