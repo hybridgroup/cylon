@@ -43,42 +43,154 @@ raspberry_platform: true
           ...
 %section.public-events
   %h2 Commands:
-  
-  %dl.methods 
-    %dt goToRGB
-    %dd Sets the color of the BlinkM RGB LED to the specified combination of RGB color provided (red, green and blue values should be between 0 and 255).
-    %dt fadeToRGB
-    %dd Fades the color of the BlinkM RGB LED to the specified combination of RGB color provided (red, green and blue values should be between 0 and 255).
-    %dt fadeToHSB
-    %dd Fades the color of the BlinkM RGB LED to the specified combination of HSB provided.
-    %dt fadeToRandomRGB
-    %dd Fades the color of the BlinkM RGB LED to a random combination of RGB color (red, green and blue values should be between 0 and 255).
-    %dt fadeToRandomHSB
-    %dd Fades the color of the BlinkM RGB LED to a random combination of HSB .
-    %dt playLightScript
-    %dd Plays a light script for the BlinkM RGB LED.
-    %dt stopScript
-    %dd Stops an specific script for the BlinkM RGB LED.
-    %dt setFadeSpeed
-    %dd Sets a fade to an specific speed for the BlinkM RGB LED.
-    %dt setTimeAdjust
-    %dd Sets a time adjust for the BlinkM RGB LED.
-    %dt getRGBColor
-    %dd Returns an array containing the RGB values for the current color (all integer between 0 and 255).
-    %dt setAddress
-    %dd Sets an address to the driver.
-    %dt getAddress
-    %dd Returns an sring describing the I2C addresss being used.
-    %dt getFirmware
-    %dd Returns an sring describing the I2C firmware version being used.
-    %dt off
-    %dd Turns BlinkM off.
+  %table.commands 
+    %tr 
+      %th Command (param)
+      %th Description
+    %tr 
+      %td.command goToRGB(r, g, b, cb)
+      %td.param  
+        %p 
+          Sets the color of the BlinkM RGB LED to the specified combination of RGB color provided. 
+          %br/ 
+          (red, green and blue values should be between 0 and 255)
+        %h5 Params
+        %span r
+        Red value
+        %span g
+        Green value
+        %span b
+        Blue value
+        %span cb
+        cb value
+        %h5 Returns 
+        %span true | false
+    %tr 
+      %td.command fadeToRGB(r, g, b, cb)
+      %td.param  
+        %p 
+          Fades the color of the BlinkM RGB LED to the specified combination of RGB color provided. 
+          %br/ 
+          (red, green and blue values should be between 0 and 255)
+        %h5 Params
+        %span r
+        Red value
+        %span g
+        Green value
+        %span b
+        Blue value
+        %span cb
+        cb value
+        %h5 Returns 
+        %span true | false
+    %tr 
+      %td.command fadeToHSB(h, s, b, cb)
+      %td.param  
+        %p Fades the color of the BlinkM RGB LED to the specified combination of HSB provided.
+        %span r
+        Hue value
+        %span g
+        Saturation value
+        %span b
+        Brightness value
+        %span cb
+        cb value
+        %h5 Returns 
+        %span true | false
+    %tr 
+      %td.command fadeToRandomRGB()
+      %td.param  
+        %p 
+          Fades the color of the BlinkM RGB LED to a random combination of RGB color. 
+          %br/ 
+          (red, green and blue values should be between 0 and 255)
+        %h5 Params
+        %span no params
+        %h5 Returns 
+        %span null
+    %tr 
+      %td.command fadeToRandomHSB()
+      %td.param  
+        %p Fades the color of the BlinkM RGB LED to a random combination of HSB .
+        %h5 Returns 
+        %span null
+    %tr 
+      %td.command playLightScript(id, repeats, startAtLine, cb)
+      %td.param  
+        %p Plays a light script for the BlinkM RGB LED.
+        %h5 Params
+        %span id
+        %span repeats
+        %span startAtLine
+        %span cb
+        %h5 Returns 
+        %span null
+    %tr 
+      %td.command stopScript()
+      %td.param  
+        %p Stops an specific script for the BlinkM RGB LED.
+        %h5 Params
+        %span no params
+        %h5 Returns 
+        %span cd
+    %tr 
+      %td.command setFadeSpeed(speed)
+      %td.param  
+        %p Sets a fade to an specific speed for the BlinkM RGB LED.
+        %h5 Params
+        %span speed
+        %h5 Returns 
+        %span null
+    %tr 
+      %td.command setTimeAdjust(time, cb)
+      %td.param  
+        %p Sets a time adjust for the BlinkM RGB LED.
+        %h5 Params
+        %span time
+        %span cb
+        %h5 Returns 
+        %span null
+    %tr 
+      %td.command getRGBColor()
+      %td.param  
+        %p 
+          Returns an array containing the RGB values for the current color. 
+          %br/ 
+          (all integer between 0 and 255)
+        %h5 Returns 
+        %span array [r, g, b] 
+    %tr 
+      %td.command setAddress(cb)
+      %td.param  
+        %p Sets an address to the driver.
+        %h5 Params
+        %span cb
+        %h5 Returns 
+        %span null 
+    %tr 
+      %td.command getAddress()
+      %td.param  
+        %p Returns an string describing the I2C addresss being used.
+        %h5 Returns 
+        %span string
+        address
+    %tr 
+      %td.command getFirmware()
+      %td.param  
+        %p Returns an sring describing the I2C firmware version being used.
+        %h5 Returns 
+        %span string
+        firmware version  
 
   %h2 Events
-
-  %dl.methods 
-    %dt start
-    %dd Sent when the device has been started and is ready to use.  
+  %table.commands 
+    %tr 
+      %th Event
+      %th Description
+    %tr 
+      %td.command 
+        %span start
+      %td Sent when the device has been started and is ready to use.
 
 %section.how-to
   %h2 How to use

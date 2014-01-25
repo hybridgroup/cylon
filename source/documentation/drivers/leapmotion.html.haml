@@ -44,18 +44,31 @@ leapmotion_platform: true
 
 %section.public-methods
   %h2 Events
+  %table.commands 
+    %tr 
+      %th Event
+      %th Description
+    %tr 
+      %td.command 
+        %span hand
+      %td Gets triggered when doing a hand motion, makes hand input available.
+    %tr 
+      %td.command 
+        %span gesture
+      %td Gets triggered when doing a gesture motion, makes hand input available.
+    %tr 
+      %td.command 
+        %span pointable
+      %td Gets triggered when doing a pointable motion, makes hand input available.
+    %tr 
+      %td.command 
+        %span frame
+      %td Gets triggered with every motion detected, makes frame input available.
+    %tr 
+      %td.command 
+        %span start
+      %td Sent when the device has been started and is ready to use.
 
-  %dl.methods 
-    %dt hand
-    %dd Gets triggered when doing a hand motion, makes hand input available.
-    %dt gesture
-    %dd Gets triggered when doing a gesture motion, makes hand input available.
-    %dt pointable
-    %dd Gets triggered when doing a pointable motion, makes hand input available.
-    %dt frame
-    %dd Gets triggered with every motion detected, makes frame input available.
-    %dt start
-    %dd Sent when the device has been started and is ready to use.  
 
 %section.how-to
   %h2 How to use

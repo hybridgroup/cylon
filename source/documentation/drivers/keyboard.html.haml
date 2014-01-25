@@ -37,11 +37,19 @@ keyboard_platform: true
 
   %section.public-events
     %h2 Events:
-    %dl.methods 
-      %dt key
-      %dd Gets triggered when we press a key on the keyboard.
-      %dt start
-      %dd Sent when the device has been started and is ready to use. 
+    %table.commands 
+      %tr 
+        %th Event
+        %th Description
+      %tr 
+        %td.command 
+          %span key
+        %td Gets triggered when we press a key on the keyboard.
+      %tr 
+        %td.command 
+          %span start
+        %td Sent when the device has been started and is ready to use.
+
 
   %section.how-to
     %h2 How to use

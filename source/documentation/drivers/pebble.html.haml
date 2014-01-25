@@ -45,21 +45,48 @@ pebble_platform: true
 %section.public-methods
 
   %h2 Commands
-  %dl.methods 
-    %dt message
-    %dd 
-    %dt message_queue
-    %dd 
-    %dt last_message
-    %dd 
+  %table.commands 
+    %tr 
+      %th Command (param)
+      %th Description
+    %tr 
+      %td.command message
+      %td.param  
+        %p We need some more complete documentation here. Please help us out with your pull request!
+        %h5 Params
+        %span no params
+        %h5 Returns 
+        %span 
+    %tr 
+      %td.command message_queue
+      %td.param  
+        %p We need some more complete documentation here. Please help us out with your pull request!
+        %h5 Params
+        %span no params
+        %h5 Returns 
+        %span 
+    %tr 
+      %td.command last_message
+      %td.param  
+        %p We need some more complete documentation here. Please help us out with your pull request!
+        %h5 Params
+        %span no params
+        %h5 Returns 
+        %span 
 
   %h2 Events
-  %dl.methods 
-    %dt Stop
-    %dd Stop the driver.
-    %dt start
-    %dd Sent when the device has been started and is ready to use.
-
+  %table.commands 
+    %tr 
+      %th Event
+      %th Description
+    %tr 
+      %td.command 
+        %span stop
+      %td Stop the driver.
+    %tr 
+      %td.command 
+        %span start
+      %td Sent when the device has been started and is ready to use.
 
 %section.how-to
   %h2 How to use

@@ -39,78 +39,150 @@ joystick_platform: true
 
   %section.public-methods
     %h2 Events:
-    %dl.methods 
-      %dt dupbutton:press
-      %dd Gets triggered every interval amount of time if the dup button is pressed.
-      %dt ddown:press
-      %dd Gets triggered every interval amount of time if the ddown button is pressed.
-      %dt dleft:press
-      %dd Gets triggered every interval amount of time if the dleft button is pressed.
-      %dt dright:press
-      %dd Gets triggered every interval amount of time if the dright button is pressed.
-      %dt xboxbutton:press
-      %dd Gets triggered every interval amount of time if the xboxbutton button is pressed.
-      %dt start:press
-      %dd Gets triggered every interval amount of time if the start button is pressed.
-      %dt back:press
-      %dd Gets triggered every interval amount of time if the back button is pressed.
-      %dt leftstick:press
-      %dd Gets triggered every interval amount of time if the leftstick button is pressed.
-      %dt rightstick:press
-      %dd Gets triggered every interval amount of time if the rightstick button is pressed.
-      %dt leftshoulder:press
-      %dd Gets triggered every interval amount of time if the leftshoulder button is pressed.
-      %dt rightshoulder:press
-      %dd Gets triggered every interval amount of time if the rightshoulder button is pressed.
-      %dt a:press
-      %dd Gets triggered every interval amount of time if the a button is pressed.
-      %dt b:press
-      %dd Gets triggered every interval amount of time if the b button is pressed.
-      %dt x:press
-      %dd Gets triggered every interval amount of time if the x button is pressed.
-      %dt y:press
-      %dd Gets triggered every interval amount of time if the y button is pressed.
-      %dt dupbutton:release
-      %dd Gets triggered every interval amount of time if the dupbutton button is released.
-      %dt ddown:release
-      %dd Gets triggered every interval amount of time if the ddown button is released.
-      %dt dleft:release
-      %dd Gets triggered every interval amount of time if the dleft button is released.
-      %dt dright:release
-      %dd Gets triggered every interval amount of time if the dright button is released.
-      %dt xboxbutton:release
-      %dd Gets triggered every interval amount of time if the xboxbutton button is released.
-      %dt start:release
-      %dd Gets triggered every interval amount of time if the start button is released.
-      %dt back:release
-      %dd Gets triggered every interval amount of time if the back button is released.
-      %dt leftstick:release
-      %dd Gets triggered every interval amount of time if the leftstick button is released.
-      %dt rightstick:release
-      %dd Gets triggered every interval amount of time if the rightstick button is released.
-      %dt leftshoulder:release
-      %dd Gets triggered every interval amount of time if the leftshoulder button is released.
-      %dt rightshoulder:release
-      %dd Gets triggered every interval amount of time if the rightshoulder button is released.
-      %dt a:release
-      %dd Gets triggered every interval amount of time if the a button is released.
-      %dt b:release
-      %dd Gets triggered every interval amount of time if the b button is released.
-      %dt x:release
-      %dd Gets triggered every interval amount of time if the x button is released.
-      %dt y:release
-      %dd Gets triggered every interval amount of time if the y button is released.
-      %dt lefttrigger
-      %dd Left trigger emits the current amount pressed, from 0-250.
-      %dt righttrigger
-      %dd Right trigger emits the current amount pressed, from 0-250.
-      %dt left:move
-      %dd Gets triggered every left movement.
-      %dt right:move
-      %dd Gets triggered every right movement.
-      %dt start
-      %dd Sent when the device has been started and is ready to use.
-
+    %table.commands 
+      %tr 
+        %th Event
+        %th Description
+      %tr 
+        %td.command 
+          %span dupbutton:press
+        %td Gets triggered every interval amount of time if the dup button is pressed.
+      %tr 
+        %td.command 
+          %span ddown:press
+        %td Gets triggered every interval amount of time if the ddown button is pressed.
+      %tr 
+        %td.command 
+          %span dleft:press
+        %td Gets triggered every interval amount of time if the dleft button is pressed.
+      %tr 
+        %td.command 
+          %span dright:press
+        %td Gets triggered every interval amount of time if the dright button is pressed.
+      %tr 
+        %td.command 
+          %span xboxbutton:press
+        %td Gets triggered every interval amount of time if the xboxbutton button is pressed.
+      %tr 
+        %td.command 
+          %span start:press
+        %td Gets triggered every interval amount of time if the start button is pressed.
+      %tr 
+        %td.command 
+          %span back:press
+        %td Gets triggered every interval amount of time if the back button is pressed.
+      %tr 
+        %td.command 
+          %span leftstick:press
+        %td Gets triggered every interval amount of time if the leftstick button is pressed.
+      %tr 
+        %td.command 
+          %span rightstick:press
+        %td Gets triggered every interval amount of time if the rightstick button is pressed.
+      %tr 
+        %td.command 
+          %span leftshoulder:press
+        %td Gets triggered every interval amount of time if the leftshoulder button is pressed.
+      %tr 
+        %td.command 
+          %span rightshoulder:press
+        %td Gets triggered every interval amount of time if the rightshoulder button is pressed.
+      %tr 
+        %td.command 
+          %span a:press
+        %td Gets triggered every interval amount of time if the a button is pressed.
+      %tr 
+        %td.command 
+          %span b:press
+        %td Gets triggered every interval amount of time if the b button is pressed.
+      %tr 
+        %td.command 
+          %span x:press
+        %td Gets triggered every interval amount of time if the x button is pressed.
+      %tr 
+        %td.command 
+          %span y:press
+        %td Gets triggered every interval amount of time if the y button is pressed.
+      %tr 
+        %td.command 
+          %span dupbutton:release
+        %td Gets triggered every interval amount of time if the dupbutton button is released.
+      %tr 
+        %td.command 
+          %span ddown:release
+        %td Gets triggered every interval amount of time if the ddown button is released.
+      %tr 
+        %td.command 
+          %span dleft:release
+        %td Gets triggered every interval amount of time if the dleft button is released.
+      %tr 
+        %td.command 
+          %span dright:release
+        %td Gets triggered every interval amount of time if the dright button is released.
+      %tr 
+        %td.command 
+          %span xboxbutton:release
+        %td Gets triggered every interval amount of time if the xboxbutton button is released.
+      %tr 
+        %td.command 
+          %span start:release
+        %td Gets triggered every interval amount of time if the start button is released.
+      %tr 
+        %td.command 
+          %span back:release
+        %td Gets triggered every interval amount of time if the back button is released.
+      %tr 
+        %td.command 
+          %span leftstick:release
+        %td Gets triggered every interval amount of time if the leftstick button is released.
+      %tr 
+        %td.command 
+          %span rightstick:release
+        %td Gets triggered every interval amount of time if the rightstick button is released.
+      %tr 
+        %td.command 
+          %span leftshoulder:release
+        %td Gets triggered every interval amount of time if the leftshoulder button is released.
+      %tr 
+        %td.command 
+          %span rightshoulder:release
+        %td Gets triggered every interval amount of time if the rightshoulder button is released.
+      %tr 
+        %td.command 
+          %span a:release
+        %td Gets triggered every interval amount of time if the a button is released.
+      %tr 
+        %td.command 
+          %span b:release
+        %td Gets triggered every interval amount of time if the b button is released.
+      %tr 
+        %td.command 
+          %span x:release
+        %td Gets triggered every interval amount of time if the x button is released.
+      %tr 
+        %td.command 
+          %span y:release
+        %td Gets triggered every interval amount of time if the y button is released.
+      %tr 
+        %td.command 
+          %span lefttrigger
+        %td Left trigger emits the current amount pressed, from 0-250.
+      %tr 
+        %td.command 
+          %span righttrigger
+        %td Right trigger emits the current amount pressed, from 0-250.
+      %tr 
+        %td.command 
+          %span left:move
+        %td Gets triggered every left movement.
+      %tr 
+        %td.command 
+          %span right:move
+        %td Gets triggered every right movement.
+      %tr 
+        %td.command 
+          %span start
+        %td Sent when the device has been started and is ready to use.
 
     -#%h3 How to use events and call them on your drivers
     -#%p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:

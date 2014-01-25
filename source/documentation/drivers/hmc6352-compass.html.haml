@@ -21,38 +21,58 @@ raspberry_platform: true
   %h3 JavaScript
   :markdown
         :::javascript
-        comming soon
+        coming soon
   %h3 CoffeeScript
   :markdown
         :::javascript
-        comming soon
+        coming soon
 
 %section.public-methods
   %h2 Commands:
-  %dl.methods 
-    %dt heading → float
-    %dd Returns the heading data for the compass.
+  %table.commands 
+    %tr 
+      %th Command (param)
+      %th Description
+    %tr 
+      %td.command heading()
+      %td.param  
+        %p Returns the heading data for the compass
+        %h5 Returns 
+        %span float
+
 
 %section.public-events
   %h2 Events:
-  %dl.methods 
-    %dt heading
-    %dd Gets triggered every time the specified interval is met.
-    %dt start
-    %dd Sent when the device has been started and is ready to use. 
+  %table.commands 
+    %tr 
+      %th Event
+      %th Description
+    %tr 
+      %td.command 
+        %span heading
+      %td 
+        %p Gets triggered every time the specified interval is met.
+        %h5 data
+        %span interval
+        Current compass reading
+    %tr 
+      %td.command 
+        %span start
+      %td Sent when the device has been started and is ready to use.
+      
 
   %h3 How to use events and call them on your drivers
   %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
   :markdown
         :::javascript
-        comming soon
+        coming soon
 
 %section.how-to
   %h2 How to use
   %h3 Example using a HMC6352 Digital Compass.
   :markdown
         :::javascript
-        comming soon
+        coming soon
 
 %section.circuit
   %h2 Circuit and Schematic
