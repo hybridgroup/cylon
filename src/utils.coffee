@@ -12,7 +12,8 @@
 # interval - interval to run action on
 # action - action to perform at interval
 #
-# Examples:
+# Examples
+#
 #   every 5.seconds(), -> console.log("hello world (and again in 5 seconds)!")
 #
 # Returns an interval
@@ -25,7 +26,8 @@ global.every = (interval, action) ->
 # interval - interval to run action on
 # action - action to perform at interval
 #
-# Examples:
+# Examples
+#
 #   after 10.seconds(), -> console.log("hello world from ten seconds ago!")
 #
 # Returns an interval
@@ -38,7 +40,7 @@ global.after = (delay, action) ->
 # methods - array of functions to proxy
 # target - object to proxy the functions to
 # base - (optional) object that proxied functions will be declared on. Defaults
-# to this
+#       to this
 # force - (optional) boolean - whether or not to force method assignment
 #
 # Returns base
@@ -55,13 +57,10 @@ global.proxyFunctionsToObject = (methods, target, base = this, force = false) ->
 # due to the way the Javascript parser works, applying functions on numbers is
 # kind of weird. See examples for details.
 #
-# Examples:
-#   # Thanks to Javascript's parser, this will generate a syntax error
+# Examples
 #
 #   2.seconds()
 #   #=> SyntaxError: Unexpected token ILLEGAL
-#
-#   # So instead, use something like the following:
 #
 #   10..seconds()
 #   #=> 10000
@@ -75,7 +74,8 @@ Number::seconds = ->
 
 # Public: Alias for Number::seconds, see comments for that method
 #
-# Examples:
+# Examples
+#
 #   1.second()
 #   #=> 1000
 #
@@ -85,11 +85,27 @@ Number::second = ->
 
 # Public: Convert value from old scale (start, end) to (0..1) scale
 #
+# start - low point of scale to convert value from
+# end - high point of scale to convert value from
+#
+# Examples
+#
+#   5..fromScale(0, 10)
+#   #=> 0.5
+#
 # Returns an integer representing the scaled value
 Number::fromScale = (start, end) ->
   (this - Math.min(start, end)) / (Math.max(start, end) - Math.min(start, end))
 
 # Public: Convert value from (0..1) scale to new (start, end) scale
+#
+# start - low point of scale to convert value to
+# end - high point of scale to convert value to
+#
+# Examples
+#
+#   0.5.toScale(0, 10)
+#   #=> 5
 #
 # Returns an integer representing the scaled value
 Number::toScale = (start, end) ->
