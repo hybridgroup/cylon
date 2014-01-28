@@ -1,60 +1,25 @@
 #!/usr/bin/env node
 
-var program = require('commander'),
-    sys = require('sys'),
-    exec = require('child_process').exec,
-    os = require('os'),
-    pkg = require('../package.json'),
+var Program = require('commander'),
+    Pkg = require('../package.json'),
+    CliCommands = require('../src/commands/commands'),
     fs = require('fs');
 
-var stdExec = function(command){
-  exec(command, function(error, stdout, stderr){
-    sys.print(stdout);
-    if (stderr != '' && stderr != null){
-      sys.print('Some errors were found: \n' + stderr);
-    }
-  });
-}
-
-program
-  .version(pkg.version)
+Program
+  .version(Pkg.version)
   .usage('[command] [options]');
 
-program
+Program
   .command("generate <name>")
   .description("Generates a new adaptor")
   .action(function(name) { require('../src/generators/adaptor')(name) });
 
-program
+Program
   .command("scan <type>")
   .description("Scans usb port for connected devices")
-  .action(function(type) {
-    switch(os.platform()){
-    case 'linux':
-      switch(type){
-      case 'serial':
-        stdExec('ls /dev/tty*');
-        break;
-      case 'bluetooth':
-        stdExec('hcitool scan');
-        break;
-      case 'usb':
-        stdExec('lsusb');
-        break;
-      default:
-        sys.print('Device type not yet supported...\n')
-      }
-      break;
-    case 'darwin':
-      stdExec('ls /dev/tty*');
-      break;
-    default:
-      sys.print('OS not yet supported...\n')
-      break;
-    }
-  });
+  .action(function(type) { CliCommands.scan(type) });
 
-argv = program.parse(process.argv);
+argv = Program.parse(process.argv);
 
 var modules_path = process.cwd() + '/node_modules/';
 
@@ -63,14 +28,14 @@ if (fs.existsSync(modules_path)) {
   fs.readdirSync(modules_path).forEach(function(dir) {
     if (dir.match(/^cylon-.*/) !== null) {
       if (typeof require(dir).registerCommands === 'function') {
-        var commands = require(dir).registerCommands();
-        for (name in commands) {
-          var command = commands[name];
+        var Commands = require(dir).registerCommands();
+        for (name in Commands) {
+          var command = Commands[name];
 
           // get subcommand arguments
           args = argv.args.slice(1)
 
-          program
+          Program
             .command(name)
             .description(command.description)
             .action(command.command(args));
@@ -81,4 +46,4 @@ if (fs.existsSync(modules_path)) {
 }
 
 // print help if no arguments were provided
-if(!program.args.length) { program.help(); }
+if(!Program.args.length) { Program.help(); }
