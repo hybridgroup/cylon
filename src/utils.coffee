@@ -34,6 +34,18 @@ global.every = (interval, action) ->
 global.after = (delay, action) ->
   setTimeout action, delay
 
+# Public: Sleep - do nothing for some duration of time.
+#
+# ms - number of ms to sleep for
+#
+# Returns a function
+# Examples:
+#   sleep 1.second()
+global.sleep = (ms) ->
+  start = Date.now()
+  while (Date.now() < start + ms)
+    i = 1
+
 # Public: Proxies a list of methods from one oject to another. It will not
 # overwrite existing methods unless told to.
 #
