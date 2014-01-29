@@ -21,27 +21,38 @@ Program
   .action(function(type) { CliCommands.scan(type); });
 
 Program
-  .command("pair <address> [hciX]")
-  .description("Pairs a bluetooth device")
-  .action(function(address, hciX) {
-    hciX = (hciX === null || hciX === undefined) ? 'hci0' : hciX;
-    CliCommands.pair(hciX, address);
+  .command("connect <subcmd> <address> [option]")
+  .description("Connect bluetooth device to PC (pairs) or stablishes serial to bluetooth connection")
+  .action(function(subcmd, address, option){
+    switch(subcmd){
+    case 'serial':
+      option = (option === null || option === undefined) ? '/dev/rfcomm0' : option;
+      CliCommands.connectToSerial(option, address);
+      break;
+    default:
+      console.log("cylon connect argument not recognized, try:\n");
+      console.log("1.- cylon connect serial <address> [dev]\n");
+  }
   });
 
 Program
-  .command("unpair <address> [hciX]")
-  .description("Removes a bluetooth device from paired devices list")
-  .action(function(address, hciX) {
-    hciX = (hciX === null || hciX === undefined) ? 'hci0' : hciX;
-    CliCommands.unpair(hciX, address);
-  });
-
-Program
-  .command("connect-to-serial <address> [dev]")
-  .description("Connects a bluetooth paired device to a serial port")
-  .action(function(address, dev) {
-    dev = (dev === null || dev === undefined) ? '/dev/rfcomm0' : dev;
-    CliCommands.connectToSerial(dev, address);
+  .command("bluetooth <subcmd> <address> [option]")
+  .description("Pair or unpair bluetooth devices to the PC")
+  .action(function(subcmd, address, option){
+    switch(subcmd){
+    case 'pair':
+      option = (option === null || option === undefined) ? 'hci0' : option;
+      CliCommands.pair(option, address);
+      break;
+    case 'unpair':
+      option = (option === null || option === undefined) ? 'hci0' : option;
+      CliCommands.unpair(option, address);
+      break;
+    default:
+      console.log("cylon bluetooth argument not recognized, try:\n");
+      console.log("1.- cylon bluetooth pair <address> [hciX]");
+      console.log("2.- cylon bluetooth unpair <address> [hciX]\n");
+  }
   });
 
 argv = Program.parse(process.argv);

@@ -5,7 +5,7 @@ var ChildProcess = require('./child_process'),
 var connectToSerial = function(dev, address) {
   switch(os.platform()){
   case 'linux':
-    ChildProcess.exec('sudo rfcomm connect ' + dev + ' ' + address + ' 1');
+    ChildProcess.spawn('sudo', ['rfcomm', 'connect', dev, address, '1']);
     break;
   case 'darwin':
     sys.print('OSX binds devices on its own volition...\n')
