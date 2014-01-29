@@ -38,7 +38,7 @@ Program
 
 Program
   .command("connect-to-serial <address> [dev]")
-  .description("Removes a bluetooth device from paired devices list")
+  .description("Connects a bluetooth paired device to a serial port")
   .action(function(address, dev) {
     dev = (dev === null || dev === undefined) ? '/dev/rfcomm0' : dev;
     CliCommands.connectToSerial(dev, address);

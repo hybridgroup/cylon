@@ -7,7 +7,7 @@ var scan = function(type) {
   case 'linux':
     switch(type){
     case 'serial':
-      ChildProcess.exec('ls /dev/tty*');
+      ChildProcess.exec('dmesg | grep tty');
       break;
     case 'bluetooth':
       ChildProcess.exec('hcitool scan');
@@ -20,7 +20,7 @@ var scan = function(type) {
     }
     break;
   case 'darwin':
-    ChildProcess.exec('ls /dev/tty*');
+    ChildProcess.exec('ls /dev/tty.*');
     break;
   default:
     sys.print('OS not yet supported...\n')
