@@ -18,6 +18,16 @@
     return setTimeout(action, delay);
   };
 
+  global.sleep = function(ms) {
+    var i, start, _results;
+    start = Date.now();
+    _results = [];
+    while (Date.now() < start + ms) {
+      _results.push(i = 1);
+    }
+    return _results;
+  };
+
   global.proxyFunctionsToObject = function(methods, target, base, force) {
     var method, _fn, _i, _len;
     if (base == null) {
