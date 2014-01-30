@@ -18,7 +18,9 @@ Program
 Program
   .command("scan <type>")
   .description("Scans serial, bluetooth or usb (pass param <serial> | <bluetooth> | <usb>) for connected devices")
-  .action(function(type) { CliCommands.scan(type); });
+  .action(function(type) {
+    CliCommands.scan(type);
+  });
 
 Program
   .command("bluetooth <subcmd> <address> [option]")
@@ -27,11 +29,11 @@ Program
     switch(subcmd){
     case 'pair':
       option = (option === null || option === undefined) ? 'hci0' : option;
-      CliCommands.pair(option, address);
+      CliCommands.bluetooth.pair(option, address);
       break;
     case 'unpair':
       option = (option === null || option === undefined) ? 'hci0' : option;
-      CliCommands.unpair(option, address);
+      CliCommands.bluetooth.unpair(option, address);
       break;
     case 'connect':
       option = (option === null || option === undefined) ? '/dev/rfcomm0' : option;
@@ -42,7 +44,21 @@ Program
       console.log("1.- cylon bluetooth pair <address> [hciX]");
       console.log("2.- cylon bluetooth unpair <address> [hciX]");
       console.log("3.- cylon bluetooth connect <address> [dev]\n");
-  }
+    }
+  });
+
+Program
+  .command("firmata <subcmd> <address> [hexFile]")
+  .description("Upload firmata protocol to arduino")
+  .action(function(subcmd, address, hexFile){
+    switch(subcmd){
+    case 'upload':
+      CliCommands.firmata.upload(address, hexFile);
+      break;
+    default:
+      console.log("cylon firmata argument not recognized, try:\n");
+      console.log("1.- cylon firmata upload <serial_address>");
+    }
   });
 
 argv = Program.parse(process.argv);
