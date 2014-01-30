@@ -14,8 +14,7 @@ var firmata = {
       ChildProcess.spawn('avrdude', [part, programmer, port, baudrate, '-D', hexFile]);
       break;
     case 'darwin':
-      // FIXME: FIRMATA PORT FOR MAC HERE.
-      port = '-P/dev/' + serialPort;
+      port = '-P' + serialPort;
       ChildProcess.spawn('avrdude', [part, programmer, port, baudrate, '-D', hexFile]);
       sys.print('OSX upload firmata command in the works...\n')
       break;
