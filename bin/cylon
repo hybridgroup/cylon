@@ -1,34 +1,67 @@
 #!/usr/bin/env node
 
-var program = require('commander'),
-    pkg = require('../package.json'),
+var Program = require('commander'),
+    Pkg = require('../package.json'),
+    CliCommands = require('../src/cli/cli_commands'),
+    sys = require('sys'),
     fs = require('fs');
 
-program
-  .version(pkg.version)
+Program
+  .version(Pkg.version)
   .usage('[command] [options]');
 
-program
+Program
   .command("generate <name>")
   .description("Generates a new adaptor")
   .action(function(name) { require('../src/generators/adaptor')(name) });
 
-argv = program.parse(process.argv);
+Program
+  .command("scan <type>")
+  .description("Scans serial, bluetooth or usb (pass param <serial> | <bluetooth> | <usb>) for connected devices")
+  .action(function(type) { CliCommands.scan(type); });
+
+Program
+  .command("bluetooth <subcmd> <address> [option]")
+  .description("Connect bluetooth device to PC (pairs) or stablishes serial to bluetooth connection")
+  .action(function(subcmd, address, option){
+    switch(subcmd){
+    case 'pair':
+      option = (option === null || option === undefined) ? 'hci0' : option;
+      CliCommands.pair(option, address);
+      break;
+    case 'unpair':
+      option = (option === null || option === undefined) ? 'hci0' : option;
+      CliCommands.unpair(option, address);
+      break;
+    case 'connect':
+      option = (option === null || option === undefined) ? '/dev/rfcomm0' : option;
+      CliCommands.connectToSerial(option, address);
+      break;
+    default:
+      console.log("cylon bluetooth argument not recognized, try:\n");
+      console.log("1.- cylon bluetooth pair <address> [hciX]");
+      console.log("2.- cylon bluetooth unpair <address> [hciX]");
+      console.log("3.- cylon bluetooth connect <address> [dev]\n");
+  }
+  });
+
+argv = Program.parse(process.argv);
 
 var modules_path = process.cwd() + '/node_modules/';
+
 if (fs.existsSync(modules_path)) {
   // require all cylon-* modules
   fs.readdirSync(modules_path).forEach(function(dir) {
     if (dir.match(/^cylon-.*/) !== null) {
       if (typeof require(dir).registerCommands === 'function') {
-        var commands = require(dir).registerCommands();
-        for (name in commands) {
-          var command = commands[name];
+        var Commands = require(dir).registerCommands();
+        for (name in Commands) {
+          var command = Commands[name];
 
           // get subcommand arguments
           args = argv.args.slice(1)
 
-          program
+          Program
             .command(name)
             .description(command.description)
             .action(command.command(args));
@@ -39,4 +72,4 @@ if (fs.existsSync(modules_path)) {
 }
 
 // print help if no arguments were provided
-if(!program.args.length) { program.help(); }
+if(!Program.args.length) { Program.help(); }
