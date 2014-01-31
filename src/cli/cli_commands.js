@@ -5,8 +5,10 @@ var scan = require('./scan'),
 var cliCommands = {
   scan: scan,
   connectToSerial: connectToSerial,
-  pair: bluetooth.pair,
-  unpair: bluetooth.unpair
+  bluetooth: {
+    pair: bluetooth.pair,
+    unpair: bluetooth.unpair
+  }
 }
 
 module.exports = cliCommands;
