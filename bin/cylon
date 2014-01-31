@@ -47,20 +47,6 @@ Program
     }
   });
 
-Program
-  .command("firmata <subcmd> <address> [hexFile]")
-  .description("Upload firmata protocol to arduino")
-  .action(function(subcmd, address, hexFile){
-    switch(subcmd){
-    case 'upload':
-      CliCommands.firmata.upload(address, hexFile);
-      break;
-    default:
-      console.log("cylon firmata argument not recognized, try:\n");
-      console.log("1.- cylon firmata upload <serial_address>");
-    }
-  });
-
 argv = Program.parse(process.argv);
 
 var modules_path = process.cwd() + '/node_modules/';
