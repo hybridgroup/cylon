@@ -68,7 +68,6 @@ if (fs.existsSync(modules_path)) {
             .command(name)
             .description(command.description)
             .action(function(){
-              console.log(args);
               command.command(args);
             });
         }
