@@ -28,7 +28,7 @@ namespace 'Cylon', ->
       @server.set 'title', 'Cylon API Server'
       @server.use express.json()
       @server.use express.urlencoded()
-      @server.use express.static __dirname + "/../node_modules/roboux/"
+      @server.use express.static __dirname + "/../node_modules/robeaux/"
 
       @server.get "/*", (req, res, next) =>
         res.set 'Content-Type', 'application/json'

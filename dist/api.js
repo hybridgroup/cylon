@@ -33,7 +33,7 @@
         this.server.set('title', 'Cylon API Server');
         this.server.use(express.json());
         this.server.use(express.urlencoded());
-        this.server.use(express["static"](__dirname + "/../node_modules/roboux/"));
+        this.server.use(express["static"](__dirname + "/../node_modules/robeaux/"));
         this.server.get("/*", function(req, res, next) {
           res.set('Content-Type', 'application/json');
           return next();
