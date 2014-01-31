@@ -47,8 +47,6 @@ Program
     }
   });
 
-argv = process.argv.slice(2);
-
 var modules_path = process.cwd() + '/node_modules/';
 
 if (fs.existsSync(modules_path)) {
@@ -61,8 +59,7 @@ if (fs.existsSync(modules_path)) {
           var command = Commands[name];
 
           // get subcommand arguments
-          //args = argv.args.slice(1);
-          args = argv.slice(1);
+          var args = process.argv.slice(3);
 
           Program
             .command(name)
@@ -76,7 +73,7 @@ if (fs.existsSync(modules_path)) {
   });
 }
 
-argv = Program.parse(process.argv);
+var argv = Program.parse(process.argv);
 
 // print help if no arguments were provided
 if(!Program.args.length) { Program.help(); }
