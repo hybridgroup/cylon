@@ -1,14 +1,14 @@
 (function() {
   var bluetooth, os;
 
-  require("./cylon-process");
+  require("./process");
 
   os = require('os');
 
   bluetooth = {
     pair: function(hciX, address) {
       var cylonProcess;
-      cylonProcess = new Cylon.CylonProcess;
+      cylonProcess = new Cylon.Process;
       switch (os.platform()) {
         case 'linux':
           return cylonProcess.spawn('bluez-simple-agent', [hciX, address]);
@@ -20,7 +20,7 @@
     },
     unpair: function(hciX, address) {
       var cylonProcess;
-      cylonProcess = new Cylon.CylonProcess;
+      cylonProcess = new Cylon.Process;
       switch (os.platform()) {
         case 'linux':
           return cylonProcess.spawn('bluez-simple-agent', [hciX, address, 'remove']);

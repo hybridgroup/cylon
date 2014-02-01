@@ -2,7 +2,7 @@ require "./cylon-process"
 os = require('os')
 
 connectToSerial = (dev, address) ->
-  cylonProcess = new Cylon.CylonProcess
+  cylonProcess = new Cylon.Process
   switch(os.platform())
     when 'linux'
       cylonProcess.spawn('sudo', ['rfcomm', 'connect', dev, address, '1'])

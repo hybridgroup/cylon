@@ -1,9 +1,9 @@
-require "./cylon-process"
+require "./process"
 os = require('os')
 
 bluetooth =
   pair: (hciX, address) ->
-    cylonProcess = new Cylon.CylonProcess
+    cylonProcess = new Cylon.Process
     switch(os.platform())
       when 'linux'
         cylonProcess.spawn('bluez-simple-agent', [hciX, address])
@@ -13,7 +13,7 @@ bluetooth =
         console.log('OS not yet supported...\n')
 
   unpair: (hciX, address) ->
-    cylonProcess = new Cylon.CylonProcess
+    cylonProcess = new Cylon.Process
     switch(os.platform())
       when 'linux'
         cylonProcess.spawn('bluez-simple-agent', [hciX, address, 'remove'])

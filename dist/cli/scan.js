@@ -1,13 +1,13 @@
 (function() {
   var os, scan;
 
-  require("./cylon-process");
+  require("./process");
 
   os = require('os');
 
   scan = function(type) {
     var cylonProcess;
-    cylonProcess = new Cylon.CylonProcess;
+    cylonProcess = new Cylon.Process;
     switch (os.platform()) {
       case 'linux':
         switch (type) {

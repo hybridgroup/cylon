@@ -7,7 +7,7 @@
 
   connectToSerial = function(dev, address) {
     var cylonProcess;
-    cylonProcess = new Cylon.CylonProcess;
+    cylonProcess = new Cylon.Process;
     switch (os.platform()) {
       case 'linux':
         return cylonProcess.spawn('sudo', ['rfcomm', 'connect', dev, address, '1']);
