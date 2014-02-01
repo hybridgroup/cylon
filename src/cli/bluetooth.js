@@ -1,5 +1,4 @@
 var ChildProcess = require('./child_process'),
-    sys = require('sys'),
     os = require('os');
 
 var bluetooth = {
@@ -9,10 +8,10 @@ var bluetooth = {
       ChildProcess.spawn('bluez-simple-agent', [hciX, address]);
       break;
     case 'darwin':
-      sys.print('OSX pairs devices on its own volition...\n')
+      console.log('OSX pairs devices on its own volition...\n')
       break;
     default:
-      sys.print('OS not yet supported...\n')
+      console.log('OS not yet supported...\n')
       break;
     }
   },
@@ -23,10 +22,10 @@ var bluetooth = {
       ChildProcess.spawn('bluez-simple-agent', [hciX, address, 'remove']);
       break;
     case 'darwin':
-      sys.print('OSX unpairs devices on its own volition...\n')
+      console.log('OSX unpairs devices on its own volition...\n')
       break;
     default:
-      sys.print('OS not yet supported...\n')
+      console.log('OS not yet supported...\n')
       break;
     }
   }

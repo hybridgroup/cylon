@@ -1,5 +1,4 @@
 var ChildProcess = require('./child_process'),
-    sys = require('sys'),
     os = require('os');
 
 var scan = function(type) {
@@ -16,14 +15,14 @@ var scan = function(type) {
       ChildProcess.exec('lsusb');
       break;
     default:
-      sys.print('Device type not yet supported...\n')
+      console.log('Device type not yet supported...\n')
     }
     break;
   case 'darwin':
     ChildProcess.exec('ls /dev/tty.*');
     break;
   default:
-    sys.print('OS not yet supported...\n')
+    console.log('OS not yet supported...\n')
     break;
   }
 }
