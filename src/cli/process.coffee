@@ -3,7 +3,7 @@ exec = require('child_process').exec
 namespace = require 'node-namespace'
 
 namespace "Cylon", ->
-  class @CylonProcess
+  class @Process
 
     constructor: (args) ->
       true

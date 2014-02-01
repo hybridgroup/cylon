@@ -8,18 +8,27 @@
   namespace = require('node-namespace');
 
   namespace("Cylon", function() {
-    return this.CylonProcess = (function() {
-      function CylonProcess(args) {}
+    return this.Process = (function() {
+      function Process(args) {
+        true;
+      }
 
-      CylonProcess.prototype.exec = function(command) {
-        return exec(command, function(err, stdout, stderr) {
-          console.log(stdout);
-          console.log(stderr);
-          return console.log(err);
+      Process.prototype.exec = function(command) {
+        exec(command, function(err, stdout, stderr) {
+          if (stdout != null) {
+            console.log(stdout);
+          }
+          if (stderr != null) {
+            console.log(stderr);
+          }
+          if (err != null) {
+            return console.log(err);
+          }
         });
+        return true;
       };
 
-      CylonProcess.prototype.spawn = function(command, args) {
+      Process.prototype.spawn = function(command, args) {
         var cmd;
         cmd = spawn(command, args, {
           stdio: 'inherit'
@@ -36,7 +45,7 @@
         });
       };
 
-      return CylonProcess;
+      return Process;
 
     })();
   });

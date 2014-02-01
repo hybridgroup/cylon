@@ -1,8 +1,8 @@
-require "./cylon-process"
+require "./process"
 os = require('os')
 
 scan = (type) ->
-  cylonProcess = new Cylon.CylonProcess
+  cylonProcess = new Cylon.Process
   switch(os.platform())
     when 'linux'
       switch(type)
