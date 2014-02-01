@@ -1,5 +1,4 @@
 var ChildProcess = require('./child_process'),
-    sys = require('sys'),
     os = require('os');
 
 var connectToSerial = function(dev, address) {
@@ -8,10 +7,10 @@ var connectToSerial = function(dev, address) {
     ChildProcess.spawn('sudo', ['rfcomm', 'connect', dev, address, '1']);
     break;
   case 'darwin':
-    sys.print('OSX binds devices on its own volition...\n')
+    console.log('OSX binds devices on its own volition...\n')
     break;
   default:
-    sys.print('OS not yet supported...\n')
+    console.log('OS not yet supported...\n')
     break;
   }
 }
