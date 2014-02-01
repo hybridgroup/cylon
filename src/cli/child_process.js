@@ -1,13 +1,12 @@
-var sys = require('sys'),
-    spawn = require('child_process').spawn,
+var spawn = require('child_process').spawn,
     exec = require('child_process').exec;
 
 var childProcess = {
   exec: function(command){
     exec(command, function(err, stdout, stderr){
-      sys.print(stdout);
-      sys.print(stderr);
-      sys.print(err);
+      console.log(stdout);
+      console.log(stderr);
+      console.log(err);
     });
   },
 
