@@ -7,6 +7,15 @@ require 'git'
 require 'fileutils'
 
 REPOS = %w(
+  https://github.com/hybridgroup/cylon-ardrone.git
+  https://github.com/hybridgroup/cylon-crazyflie.git
+  https://github.com/hybridgroup/cylon-force.git
+  https://github.com/hybridgroup/cylon-gpio.git
+  https://github.com/hybridgroup/cylon-i2c.git
+  https://github.com/hybridgroup/cylon-joystick.git
+  https://github.com/hybridgroup/cylon-keyboard.git
+  https://github.com/hybridgroup/cylon-leapmotion.git
+  https://github.com/hybridgroup/cylon-pebble.git
   https://github.com/hybridgroup/cylon-sphero.git
 )
 
