@@ -63,6 +63,17 @@ This script will:
   also been removed from the main repo
 - create/update examples index page
 
+#### Repo Docs
+
+To import docs partials from Cylon adaptor repositories, run the
+`bin/import_repo_docs` script.
+
+This script will:
+
+- clone down Cylon adaptor repositories
+- extract all `docs/*.md` documents
+- add them as partials to `source/documentation/drivers/partials`
+
 ### Send your Pull Request
 
 When you have your code ready, create a new PR : `base: cylonjs.com` and `compare:"your_branch"`
