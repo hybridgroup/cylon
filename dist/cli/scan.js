@@ -6,25 +6,26 @@
   os = require('os');
 
   scan = function(type) {
-    var cylonProcess;
-    cylonProcess = new Cylon.Process;
-    switch (os.platform()) {
+    var platform, process;
+    process = new Cylon.Process;
+    platform = os.platform();
+    switch (platform) {
       case 'linux':
         switch (type) {
           case 'serial':
-            return cylonProcess.exec('dmesg | grep tty');
+            return process.exec("dmesg | grep tty");
           case 'bluetooth':
-            return cylonProcess.exec('hcitool scan');
+            return process.exec("hcitool scan");
           case 'usb':
-            return cylonProcess.exec('lsusb');
+            return process.exec("lsusb");
           default:
-            return console.log('Device type not yet supported...\n');
+            return console.log("Device type not yet supported.");
         }
         break;
       case 'darwin':
-        return cylonProcess.exec('ls /dev/tty.*');
+        return process.exec("ls /dev/{tty,cu}.*");
       default:
-        return console.log('OS not yet supported...\n');
+        return console.log("OS not yet supported.");
     }
   };
 
