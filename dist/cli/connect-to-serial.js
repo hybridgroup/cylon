@@ -1,7 +1,7 @@
 (function() {
   var connectToSerial, os;
 
-  require("./cylon-process");
+  require("./process");
 
   os = require('os');
 
