@@ -1,14 +1,18 @@
 require "./process"
-os = require('os')
+os = require 'os'
 
 connectToSerial = (dev, address) ->
-  cylonProcess = new Cylon.Process
-  switch(os.platform())
+  process = new Cylon.Process
+  platform = os.platform()
+
+  switch platform
     when 'linux'
-      cylonProcess.spawn('sudo', ['rfcomm', 'connect', dev, address, '1'])
+      process.spawn 'sudo', ['rfcomm', 'connect', dev, address, '1']
+
     when 'darwin'
-      console.log('OSX binds devices on its own volition...\n')
+      console.log "OS X manages binding itself."
+
     else
-      console.log('OS not yet supported...\n')
+      console.log "OS not yet supported"
 
 module.exports = connectToSerial

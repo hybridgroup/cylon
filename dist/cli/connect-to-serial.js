@@ -6,15 +6,16 @@
   os = require('os');
 
   connectToSerial = function(dev, address) {
-    var cylonProcess;
-    cylonProcess = new Cylon.Process;
-    switch (os.platform()) {
+    var platform, process;
+    process = new Cylon.Process;
+    platform = os.platform();
+    switch (platform) {
       case 'linux':
-        return cylonProcess.spawn('sudo', ['rfcomm', 'connect', dev, address, '1']);
+        return process.spawn('sudo', ['rfcomm', 'connect', dev, address, '1']);
       case 'darwin':
-        return console.log('OSX binds devices on its own volition...\n');
+        return console.log("OS X manages binding itself.");
       default:
-        return console.log('OS not yet supported...\n');
+        return console.log("OS not yet supported");
     }
   };
 

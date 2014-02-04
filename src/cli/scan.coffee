@@ -2,21 +2,28 @@ require "./process"
 os = require('os')
 
 scan = (type) ->
-  cylonProcess = new Cylon.Process
-  switch(os.platform())
+  process = new Cylon.Process
+  platform = os.platform()
+
+  switch platform
     when 'linux'
-      switch(type)
+      switch type
         when 'serial'
-          cylonProcess.exec('dmesg | grep tty')
+          process.exec "dmesg | grep tty"
+
         when 'bluetooth'
-          cylonProcess.exec('hcitool scan')
+          process.exec "hcitool scan"
+
         when 'usb'
-          cylonProcess.exec('lsusb')
+          process.exec "lsusb"
+
         else
-          console.log('Device type not yet supported...\n')
+          console.log "Device type not yet supported."
+
     when 'darwin'
-      cylonProcess.exec('ls /dev/tty.*')
+      process.exec "ls /dev/{tty,cu}.*"
+
     else
-      console.log('OS not yet supported...\n')
+      console.log "OS not yet supported."
 
 module.exports = scan

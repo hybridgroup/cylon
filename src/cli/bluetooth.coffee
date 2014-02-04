@@ -3,23 +3,31 @@ os = require('os')
 
 bluetooth =
   pair: (hciX, address) ->
-    cylonProcess = new Cylon.Process
-    switch(os.platform())
+    process = new Cylon.Process
+    platform = os.platform()
+
+    switch platform
       when 'linux'
-        cylonProcess.spawn('bluez-simple-agent', [hciX, address])
+        process.spawn 'bluez-simple-agent', [hciX, address]
+
       when 'darwin'
-        console.log('OSX pairs devices on its own volition...\n')
+        console.log "OS X manages Bluetooth pairing itself."
+
       else
-        console.log('OS not yet supported...\n')
+        console.log "OS not yet supported."
 
   unpair: (hciX, address) ->
-    cylonProcess = new Cylon.Process
-    switch(os.platform())
+    process = new Cylon.Process
+    platform = os.platform()
+
+    switch platform
       when 'linux'
-        cylonProcess.spawn('bluez-simple-agent', [hciX, address, 'remove'])
+        process.spawn 'bluez-simple-agent', [hciX, address, 'remove']
+
       when 'darwin'
-        console.log('OSX unpairs devices on its own volition...\n')
+        console.log "OS X manages Bluetooth unpairing itself."
+
       else
-        console.log('OS not yet supported...\n')
+        console.log "OS not yet supported."
 
 module.exports = bluetooth

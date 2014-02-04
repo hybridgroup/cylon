@@ -9,9 +9,7 @@
 
   namespace("Cylon", function() {
     return this.Process = (function() {
-      function Process(args) {
-        true;
-      }
+      function Process() {}
 
       Process.prototype.exec = function(command) {
         exec(command, function(err, stdout, stderr) {
@@ -35,12 +33,12 @@
         });
         cmd.on('close', function(code) {
           if (code !== 0) {
-            return console.log('ps process exited with code ' + code);
+            return console.log("ps process exited with code " + code);
           }
         });
         return cmd.on('exit', function(code) {
           if (code !== 0) {
-            return console.log('ps process exited with code ' + code);
+            return console.log("ps process exited with code " + code);
           }
         });
       };
@@ -49,5 +47,7 @@
 
     })();
   });
+
+  module.exports = Cylon.Process;
 
 }).call(this);
