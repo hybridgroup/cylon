@@ -1,4 +1,4 @@
-require "./cylon-process"
+require "./process"
 os = require('os')
 
 connectToSerial = (dev, address) ->
