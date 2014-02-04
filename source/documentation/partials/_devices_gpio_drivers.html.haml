@@ -12,6 +12,9 @@
   /// LED
   %a.device{href: "/documentation/drivers/led", title: "LED"}
     %img{src: "/images/devices/LED.jpg"}
+  /// Makey Button
+  %a.device{href: "/documentation/drivers/makey-button", title: "Maxbotix Range Finder"}
+    %img{src: "/images/devices/makey-button.jpg"}
   /// Maxbotix
   %a.device{href: "/documentation/drivers/maxbotix", title: "Maxbotix Range Finder"}
     %img{src: "/images/devices/maxbotix.jpg"}
@@ -42,6 +45,11 @@
   /// LED
   %a.device{href: "/documentation/drivers/led", title: "LED"}
     %img{src: "/images/devices/LED.jpg"}
+
+-if current_page.data.makey_driver == true
+  /// Makey Button
+  %a.device{href: "/documentation/drivers/makey-button", title: "Maxbotix Range Finder"}
+    %img{src: "/images/devices/makey-button.jpg"}  
 
 -if current_page.data.maxbotix_driver == true
   /// Maxbotix

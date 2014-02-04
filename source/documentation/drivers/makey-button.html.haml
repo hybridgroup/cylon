@@ -1,0 +1,104 @@
+---
+title: Cylon.js - Makey Button Driver
+author: The Hybrid Group
+page_title: Makey Button
+page_subtitle: Driver
+layout: documentation
+page_title_show: true
+
+arduino_platform: true
+---
+%section.intro
+  = image_tag "/images/devices/makey-button.jpg", class: "display"
+  %p
+    Simple interface that makes it possible to register clicks through physical input.
+
+%section.how_to
+  %h2 How to establish a connection and setup the driver 
+  %h3 JavaScript
+  :markdown
+        :::javascript
+
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: {name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'},
+
+          device: {name: 'makey-button', driver: 'makey-button', pin: 2},
+          ...
+
+  %h3 CoffeeScript
+  :markdown
+        :::javascript
+        Cylon = require 'cylon'
+
+        Cylon.robot
+          connection:
+            name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
+
+          device:
+            name: 'makey-button', driver: 'makey-button', pin: 2
+          ...
+
+%section.public-methods
+  %h2 Commands:
+  %table.commands 
+    %tr 
+      %th Command (param)
+      %th Description
+    %tr 
+      %td.command isPressed()
+      %td.param  
+        %p Returns true or false matching state of the button.
+        %h5 Params
+        %span no params
+        %h5 Returns 
+        %span true | false
+
+
+
+%section.public-events
+  %h2 Events:
+  %table.commands 
+    %tr 
+      %th Event
+      %th Description
+    %tr 
+      %td.command 
+        %span push
+      %td 
+        %p This event gets triggered when the button changes state from released to pushed.
+        
+    %tr 
+      %td.command 
+        %span release
+      %td 
+        %p This event gets triggered when the button changes state from pushed to released.
+      
+    %tr 
+      %td.command 
+        %span start
+      %td Sent when the device has been started and is ready to use. 
+
+
+%section.how-to
+  %h2 How to use
+  %p 
+
+  %h3 JavaScript    
+  :markdown
+        :::javascript
+        coming soon
+
+  %h3 CoffeeScript
+  :markdown
+        :::javascript
+        coming soon
+
+
+%section.compatability.hardware
+  %h2 Works with:
+  =# TODO: Update platform list with all that work with this driver in Cylon.js.
+  .devices
+    = partial "documentation/partials/devices_platforms"
+    
