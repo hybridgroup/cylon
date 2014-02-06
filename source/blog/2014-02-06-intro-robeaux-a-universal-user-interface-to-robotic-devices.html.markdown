@@ -21,4 +21,4 @@ We've also upgraded our Sphero ([http://gosphero.com](http://gosphero.com)) supp
 
 The entire documentation site for Cylon.js has been completely updated to better serve your needs. The API formatting and info has been very much improved, and we've also added more examples.
 
-We're very excited about this new release. Please let us know what you think!
+Please follow us on Twitter at [@cylonjs](http://twitter.com/cylonjs) for the latest updates. We're very excited about this new release. Please let us know what you think!
