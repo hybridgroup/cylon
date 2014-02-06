@@ -22,15 +22,7 @@ arduino_platform: true
         comming soon
 
 %section.public-methods
-  %h2 Events:
-  %dl.methods 
-    %dt c_button
-    %dd Get's triggered every interval amount of time if the square button is pressed.
-    %dt z_button
-    %dd Get's triggered every interval amount of time if the square button is pressed.
-    %dt joystick
-    %dd Get's triggered every "interval" amount of time if a joystick event occured, you can access values x, y.
-    
+
   %h3 How to use events and call them on your drivers
   %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
   :markdown
@@ -42,6 +34,10 @@ arduino_platform: true
   :markdown
         :::javascript
         comming soon
+
+%section.public-methods
+  .commands_api
+    = partial "/documentation/drivers/partials/i2c/events"
 
 %section.circuit
   %h2 Circuit and Schematic

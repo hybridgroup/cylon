@@ -42,33 +42,6 @@ leapmotion_platform: true
           device: { name: 'leapmotion', driver: 'leapmotion' }
         ...
 
-%section.public-methods
-  %h2 Events
-  %table.commands 
-    %tr 
-      %th Event
-      %th Description
-    %tr 
-      %td.command 
-        %span hand
-      %td Gets triggered when doing a hand motion, makes hand input available.
-    %tr 
-      %td.command 
-        %span gesture
-      %td Gets triggered when doing a gesture motion, makes hand input available.
-    %tr 
-      %td.command 
-        %span pointable
-      %td Gets triggered when doing a pointable motion, makes hand input available.
-    %tr 
-      %td.command 
-        %span frame
-      %td Gets triggered with every motion detected, makes frame input available.
-    %tr 
-      %td.command 
-        %span start
-      %td Sent when the device has been started and is ready to use.
-
 
 %section.how-to
   %h2 How to use
@@ -110,6 +83,10 @@ leapmotion_platform: true
               Logger.info gesture
 
         .start()
+
+%section.public-methods
+  .commands_api
+    = partial "/documentation/drivers/partials/leapmotion/events"
 
 %section.compatability.hardware
   %h2 Works with:

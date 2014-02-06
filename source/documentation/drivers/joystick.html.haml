@@ -21,14 +21,6 @@ joystick_platform: true
         require 'Cylon.js'
         ..
 
-%section.public-events
-  %h2 Events:
-  %dl.methods 
-    %dt joystick
-    %dd Get's triggered every "interval" amount of time if a joystick event occured, you can access values x, y, s.
-    %dt button
-    %dd Get's triggered every "interval" amount of time if the button was pressed, you can access the value of the pressed button.
-
   %h3 How to use events and call them on your drivers
   %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
   :markdown
@@ -42,6 +34,7 @@ joystick_platform: true
         :::javascript
         require 'Cylon.js'
         ..
+
 
 %section.compatability.hardware
   %h2 Works with:

@@ -43,16 +43,6 @@ sphero_platform: true
               name: 'sphero', driver: 'sphero'
             ...
 
-%section.public-methods
-  = partial "documentation/drivers/partials/sphero/commands"
-
-  %h5
-    Note: for more information about the documentation of the Sphero driver click
-    =link_to "here.", "https://github.com/orbotix/DeveloperResources/blob/master/docs/Sphero_API_1.50.pdf" 
-
-%section.public-events
-  = partial "documentation/drivers/partials/sphero/events"
-
 %section.how-to
   %h2 How to use
   %p 
@@ -94,6 +84,15 @@ sphero_platform: true
                 me.sphero.roll 60, Math.floor(Math.random() * 360)
 
           .start()
+
+%section.public-methods
+  .commands_api
+    = partial "/documentation/drivers/partials/sphero/commands"
+    %h5
+      Note: for more information about the documentation of the Sphero driver click
+      =link_to "here.", "https://github.com/orbotix/DeveloperResources/blob/master/docs/Sphero_API_1.50.pdf" 
+  .commands_api
+    = partial "/documentation/drivers/partials/sphero/events"
 
 %section 
   %h2 Sphero Colors 

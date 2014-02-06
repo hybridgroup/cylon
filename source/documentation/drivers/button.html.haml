@@ -43,53 +43,6 @@ spark_platform: true
             name: 'button', driver: 'button', pin: 2
           ...
 
-%section.public-methods
-  %h2 Commands:
-  %table.commands 
-    %tr 
-      %th Command (param)
-      %th Description
-    %tr 
-      %td.command isPressed()
-      %td.param  
-        %p Returns true or false matching state of the button.
-        %h5 Params
-        %span no params
-        %h5 Returns 
-        %span true | false
-
-
-
-%section.public-events
-  %h2 Events:
-  %table.commands 
-    %tr 
-      %th Event
-      %th Description
-    %tr 
-      %td.command 
-        %span update
-      %td
-        This event will contain one of the following events.
-        %br/  
-        You can also subscribe to one of the specific events, if that is the information you are interested in.
-    %tr 
-      %td.command 
-        %span push
-      %td 
-        %p This event gets triggered when the button changes state from released to pushed.
-        
-    %tr 
-      %td.command 
-        %span release
-      %td 
-        %p This event gets triggered when the button changes state from pushed to released.
-      
-    %tr 
-      %td.command 
-        %span start
-      %td Sent when the device has been started and is ready to use. 
-
 
 %section.how-to
   %h2 How to use
@@ -130,6 +83,12 @@ spark_platform: true
             my.button.on 'push', -> Logger.info "Button pushed!"
 
         .start()
+
+%section.public-methods
+  .commands_api
+    = partial "/documentation/drivers/partials/gpio/commands_button"
+  .commands_api
+    = partial "/documentation/drivers/partials/gpio/events_button"
 
 %section.circuit
   %h2 Circuit and Schematic

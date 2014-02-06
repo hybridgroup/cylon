@@ -40,95 +40,6 @@ crazyflie_platform: true
             name: 'drone', driver: 'crazyflie'
         ...
 
-%section.public-methods
-  %h2 Commands:
-  %table.commands 
-    %tr 
-      %th Command (param)
-      %th Description
-    %tr 
-      %td.command land()
-      %td.param  
-        %p Initiates a landing sequence.
-        %h5 Returns 
-        %span null
-    %tr 
-      %td.command takeoff()
-      %td.param  
-        %p Initiates take off sequence.
-        %h5 Returns 
-        %span null
-    %tr 
-      %td.command hover()
-      %td.param  
-        %p Makes the crazyflie hover in a position.
-        %h5 Returns 
-        %span null
-    %tr 
-      %td.command setPitch(deg)
-      %td.param  
-        %p Orders crazyflie to go forward or backward by the amount specified by deg.
-        %h5 Params
-        %span deg → number
-        The degrees to set pitch
-        %h5 Returns 
-        %span null
-    %tr 
-      %td.command setYaw(deg)
-      %td.param  
-        %p Orders crazyflie to turn left or right by the amount specified by deg.
-        %h5 Params
-        %span deg → number
-        %p The degrees to set yaw
-        %h5 Returns 
-        %span null
-    %tr 
-      %td.command setThrust(accelerate)
-      %td.param  
-        %p Orders crazyflie to accelerate. 
-        %span accelerate → number
-        %p The acceleration to set thrust
-        %h5 Returns 
-        %span null
-    %tr 
-      %td.command shutdown()
-      %td.param  
-        %p Shutdown the device.
-        %h5 Returns 
-        %span null
-    %tr 
-      %td.command setParam(param, value)
-      %td.param  
-        %p Set the parameters for crazyflie.
-        %span param
-        %p The param for which to set a value for
-        %span value
-        %p The value to set the param to
-        %h5 Returns 
-        %span null
-        
-  %h2 Events:
-  %table.commands 
-    %tr 
-      %th Event
-      %th Description
-    %tr 
-      %td.command 
-        %span stop
-      %td Sent when the device has been stopped.
-    %tr 
-      %td.command 
-        %span setParam(param, value)
-      %td  
-        %p Set the parameters for crazyflie.
-        %h5 data
-        %span param, value
-        Current param and value reading 
-    %tr 
-      %td.command 
-        %span start
-      %td Sent when the device has been started and is ready to use.
-
 
 %section.how-to
   %h2 How to use
@@ -177,6 +88,12 @@ crazyflie_platform: true
                 my.drone.stop()
 
         .start()
+
+%section.public-methods
+  .commands_api
+    = partial "/documentation/drivers/partials/crazyflie/commands"
+  .commands_api
+    = partial "/documentation/drivers/partials/crazyflie/events"
 
 %section.compatability.hardware
   %h2 Works with:

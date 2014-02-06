@@ -1,0 +1,94 @@
+:markdown
+  # Commands
+
+  ## goToRGB(r, g, b, cb)
+
+  Sets the color of the BlinkM RGB LED to the specified combination of RGB color provided. 
+  (red, green and blue values should be between `0` and `255`)
+
+  ##### Returns 
+
+  `nil`
+
+  ## fadeToRGB(r, g, b, cb)
+
+  Fades the color of the BlinkM RGB LED to the specified combination of RGB color provided. 
+  (red, green and blue values should be between `0` and `255`)
+
+  ##### Returns 
+
+  `nil`
+
+  ## fadeToHSB(h, s, b, cb)
+
+  Fades the color of the BlinkM RGB LED to the specified combination of HSB provided.
+
+  ##### Returns 
+
+  `nil`
+
+  ## fadeToRandomRGB(r, g, b, cb)
+
+  Fades the color of the BlinkM RGB LED to a random combination of RGB color. 
+  (red, green and blue values should be between `0` and `255`)
+
+  ##### Returns 
+
+  `nil`
+
+  ## fadeToRandomHSB(h, s, b, cb)
+
+  Fades the color of the BlinkM RGB LED to a random combination of HSB .
+
+  ##### Returns 
+
+  `nil`
+
+  ## playLightScript(id, repeats, startAtLine, cb)
+
+  Plays a light script for the BlinkM RGB LED.
+
+  ##### Returns 
+
+  `nil`
+
+  ## stopScript(cb)
+
+  Stops an specific script for the BlinkM RGB LED.
+
+  ##### Returns 
+
+  `nil`
+
+  ## setFadeSpeed(time, cb)
+
+  Sets a time adjust for the BlinkM RGB LED.
+
+  ##### Returns 
+
+  `nil`
+
+  ## getRGBColor()
+
+  Returns an array containing the RGB values for the current color
+  (all integer between `0` and `255`).
+
+  ##### Returns 
+
+  `integer_array` (cb).
+
+  ## setAddress(address, cb)
+
+  Returns an sring describing the I2C addresss being used.
+
+  ##### Returns 
+
+  `nil`
+
+  ## getFirmware()
+
+  Returns an sring describing the I2C firmware version being used.
+
+  ##### Returns 
+
+  `integer_value`

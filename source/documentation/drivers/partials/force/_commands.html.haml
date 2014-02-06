@@ -1,20 +1,41 @@
 :markdown
   # Commands
 
-  ## authenticate → callback
+  ## authenticate(creds)
 
-  Public: This allows you to authenticate the device.
+  This allows you to authenticate the device.
 
-  Returns callback.
+  ##### Params
 
-  ## subscribe → (streamPath, callback)
+  - **creds** - params
 
-  Public: This allows you to subscribe the device.
+  ##### Returns 
 
-  Returns (streamPath, callback).
+  `null`
 
-  ## push → (apexPath, method, data)
+  ## subscribe(streamPath, callback) 
 
-  Public: This allows you to push data.
+  This allows you to subscribe the device.
 
-  Returns (apexPath, method, data).
+  ##### Params
+
+  - **streamPath** - params
+  - **callback** - params
+
+  ##### Returns 
+
+  `null`
+
+  ## push(apexPath, method, data)
+
+  This allows you to push data.
+
+  ##### Params
+
+  - **apexPath** - params
+  - **method** - params
+  - **data** - params
+
+  ##### Returns 
+
+  `null`
