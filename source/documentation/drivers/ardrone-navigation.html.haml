@@ -48,61 +48,6 @@ ardrone_platform: true
             ]
         ...
 
-%section.public-methods
-  %h2 Events
-  %table.commands 
-    %tr 
-      %th Event
-      %th Description
-    %tr 
-      %td.command 
-        %span update
-      %td
-        This event will contain one of the following events.
-        %br/  
-        You can also subscribe to one of the specific events, if that is the information you are interested in.
-    %tr 
-      %td.command 
-        %span navdata
-      %td Gets triggered every time interval amount of time passes, returns and lets you access a NavData object.
-    %tr 
-      %td.command 
-        %span landing
-      %td Gets triggered when is landing.
-    %tr 
-      %td.command 
-        %span landed
-      %td Gets triggered when has landing.
-    %tr 
-      %td.command 
-        %span takeoff
-      %td Gets triggered when has takeoff.
-    %tr 
-      %td.command 
-        %span hovering
-      %td Gets triggered when is hovering.
-    %tr 
-      %td.command 
-        %span flying
-      %td Gets triggered when is flying.
-    %tr 
-      %td.command 
-        %span lowBattery
-      %td Gets triggered when have low battery.
-    %tr 
-      %td.command 
-        %span batteryChange
-      %td Gets triggered when the battery has changed.
-    %tr 
-      %td.command 
-        %span altitudeChange
-      %td Gets triggered when the altitude has changed. 
-    %tr 
-      %td.command 
-        %span start
-      %td Sent when the device has been started and is ready to use.
-
-  
 %section.how-to
   %h2 How to use events and call them on your drivers
   %p Once the connection and the devices have been setup (as explained above) you can receive navigation events on them as follows:
@@ -150,6 +95,12 @@ ardrone_platform: true
               Logger.info data
 
         .start()
+
+%section.public-methods
+  .commands_api
+    = partial "/documentation/drivers/partials/ardrone/commands"
+  .commands_api
+    = partial "/documentation/drivers/partials/ardrone/events"
 
 %section.compatability.hardware
   %h2 Works with:

@@ -56,73 +56,6 @@ force_platform: true
            ...
   
 
-%section.public-methods
-  %h2 Commands:
-  %table.commands 
-    %tr 
-      %th Command (param)
-      %th Description
-    %tr 
-      %td.command authenticate()
-      %td.param  
-        %p This allows you to authenticate the device.
-        %h5 Returns 
-        %span (callback)
-    %tr 
-      %td.command subscribe(streamPath, callback)
-      %td.param  
-        %p This allows you to suscribe the device.
-        %span streamPath
-        %p
-        %span callback
-        %p
-        %h5 Returns 
-        %span null
-    %tr 
-      %td.command push(apexPath, method, data)
-      %td.param  
-        %p This allows you to push data.
-        %h5 Params
-        %span apexPath
-        %p apexPath
-
-        %span method
-        %p method
-
-        %span data
-        %p data
-
-        %h5 Returns 
-        %span null
-
-%section.public-events
-  %h2 Events:
-  %table.commands 
-    %tr 
-      %th Event
-      %th Description
-    %tr 
-      %td.command 
-        %span connect
-      %td Gets triggered when it´s connected.
-    %tr 
-      %td.command 
-        %span authenticate
-      %td Gets triggered when it´s authenticated.
-    %tr 
-      %td.command 
-        %span subscribe
-      %td Gets triggered when it´s subscribed.
-    %tr 
-      %td.command 
-        %span stop
-      %td Stops the driver.
-    %tr 
-      %td.command 
-        %span start
-      %td Sent when the device has been started and is ready to use.
-
-
 %section.how-to
   %h2 How to use
   %p This example uses the sphero with cylonjs-force
@@ -194,6 +127,12 @@ force_platform: true
             toSend = "{ \"identifier\" :\"\#{ me.name }\", \"msg\": \"\#{ 'Salesforce Bot #2' }\" }"
             me.salesforce.push('SpheroController', 'POST', toSend)
         .start()
+
+%section.public-methods
+  .commands_api
+    = partial "/documentation/drivers/partials/force/commands"
+  .commands_api
+    = partial "/documentation/drivers/partials/force/events"
 
 %section.circuit
   -#%h2 Circuit and Schematic

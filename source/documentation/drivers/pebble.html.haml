@@ -42,51 +42,7 @@ pebble_platform: true
           device:
             name: 'pebble', driver: 'pebble'
         ...
-%section.public-methods
 
-  %h2 Commands
-  %table.commands 
-    %tr 
-      %th Command (param)
-      %th Description
-    %tr 
-      %td.command message
-      %td.param  
-        %p We need some more complete documentation here. Please help us out with your pull request!
-        %h5 Params
-        %span no params
-        %h5 Returns 
-        %span 
-    %tr 
-      %td.command message_queue
-      %td.param  
-        %p We need some more complete documentation here. Please help us out with your pull request!
-        %h5 Params
-        %span no params
-        %h5 Returns 
-        %span 
-    %tr 
-      %td.command last_message
-      %td.param  
-        %p We need some more complete documentation here. Please help us out with your pull request!
-        %h5 Params
-        %span no params
-        %h5 Returns 
-        %span 
-
-  %h2 Events
-  %table.commands 
-    %tr 
-      %th Event
-      %th Description
-    %tr 
-      %td.command 
-        %span stop
-      %td Stop the driver.
-    %tr 
-      %td.command 
-        %span start
-      %td Sent when the device has been started and is ready to use.
 
 %section.how-to
   %h2 How to use
@@ -167,6 +123,11 @@ pebble_platform: true
 
         Cylon.start()
 
+%section.public-methods
+  .commands_api
+    = partial "/documentation/drivers/partials/pebble/commands"
+  .commands_api
+    = partial "/documentation/drivers/partials/pebble/events"
 
 %section.compatability.hardware
   %h2 Works with:

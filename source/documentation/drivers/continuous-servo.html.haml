@@ -39,39 +39,6 @@ spark_platform: true
           device:
             name: 'servo', driver: 'continuous-servo', pin: 3
         ...
-
-%section.public-methods
-  %h2 Commands:
-  %table.commands 
-    %tr 
-      %th Command (param)
-      %th Description
-    %tr 
-      %td.command clockwise()
-      %td.param  
-        %p Turns the servo to go clockwise, if the driver is continuous. 
-        %h5 Returns 
-        %span true | nil
-    %tr 
-      %td.command counterClockwise()
-      %td.param  
-        %p Turns the servo to go counter clockwise, if the driver is continuous. 
-        %h5 Returns 
-        %span true | nil
-    %tr 
-      %td.command stop()
-      %td.param  
-        %p Stops the driver.
-
-  %h2 Events
-  %table.commands 
-    %tr 
-      %th Event
-      %th Description
-    %tr 
-      %td.command 
-        %span start
-      %td Sent when the device has been started and is ready to use. 
   
 %section.how-to
   %h2 How to use
@@ -122,6 +89,12 @@ spark_platform: true
               my.servo.angle angle
 
         .start()
+
+%section.public-methods
+  .commands_api
+    = partial "/documentation/drivers/partials/gpio/commands_continuous_servo"
+  .commands_api
+    = partial "/documentation/drivers/partials/gpio/events_continuous_servo"
 
 %section.circuit
   %h2 Circuit and Schematic

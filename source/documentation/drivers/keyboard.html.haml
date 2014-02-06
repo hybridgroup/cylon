@@ -8,82 +8,70 @@ page_title_show: true
 
 keyboard_platform: true
 ---
-.documentation
-  %section.intro
-    =image_tag "/images/devices/keyboard.jpg", class: "display"
-    %p The Cylon adaptor for keyboard input.
 
-  %section.how-to
-    %h2 How to establish a connection and setup the driver
-    %h3 Javascript
-    :markdown
-          :::javascript
-          var Cylon = require('cylon');
+%section.intro
+  =image_tag "/images/devices/keyboard.jpg", class: "display"
+  %p The Cylon adaptor for keyboard input.
 
-          Cylon.robot({
-            connection: { name: 'keyboard', adaptor: 'keyboard' },
-            device: {name: 'keyboard', driver: 'keyboard'}
-          ...
+%section.how-to
+  %h2 How to establish a connection and setup the driver
+  %h3 Javascript
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
 
-    %h3 CoffeeScript
-    :markdown
-          :::javascript
-          Cylon = require 'cylon'
+        Cylon.robot({
+          connection: { name: 'keyboard', adaptor: 'keyboard' },
+          device: {name: 'keyboard', driver: 'keyboard'}
+        ...
 
-          Cylon.robot
-            device: { name: 'keyboard', driver: 'keyboard' }
-            connection: { name: 'keyboard', adaptor: 'keyboard' }
-          ...
+  %h3 CoffeeScript
+  :markdown
+        :::javascript
+        Cylon = require 'cylon'
 
-  %section.public-events
-    %h2 Events:
-    %table.commands 
-      %tr 
-        %th Event
-        %th Description
-      %tr 
-        %td.command 
-          %span key
-        %td Gets triggered when we press a key on the keyboard.
-      %tr 
-        %td.command 
-          %span start
-        %td Sent when the device has been started and is ready to use.
+        Cylon.robot
+          device: { name: 'keyboard', driver: 'keyboard' }
+          connection: { name: 'keyboard', adaptor: 'keyboard' }
+        ...
 
+%section.how-to
+  %h2 How to use
+  %p Example receiving button events from a generic joystick.
+  %h3 Javascript
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
 
-  %section.how-to
-    %h2 How to use
-    %p Example receiving button events from a generic joystick.
-    %h3 Javascript
-    :markdown
-          :::javascript
-          var Cylon = require('cylon');
+        Cylon.robot({
+          connection: { name: 'keyboard', adaptor: 'keyboard' },
+          device: {name: 'keyboard', driver: 'keyboard'},
 
-          Cylon.robot({
-            connection: { name: 'keyboard', adaptor: 'keyboard' },
-            device: {name: 'keyboard', driver: 'keyboard'},
+          work: function(my) {
+            my.keyboard.on('a', function(key) { 
+              console.log("A PRESSED!");
+            });
+          }
+        }).start();
+  %h3 CoffeeScript
+  :markdown
+        :::javascript
+        Cylon = require 'cylon'
 
-            work: function(my) {
-              my.keyboard.on('a', function(key) { 
-                console.log("A PRESSED!");
-              });
-            }
-          }).start();
-    %h3 CoffeeScript
-    :markdown
-          :::javascript
-          Cylon = require 'cylon'
+        Cylon.robot
+          device: { name: 'keyboard', driver: 'keyboard' }
+          connection: { name: 'keyboard', adaptor: 'keyboard' }
+          work: (my) ->
+            my.keyboard.on 'a', (key) ->
+              console.log "A PRESSED!"
 
-          Cylon.robot
-            device: { name: 'keyboard', driver: 'keyboard' }
-            connection: { name: 'keyboard', adaptor: 'keyboard' }
-            work: (my) ->
-              my.keyboard.on 'a', (key) ->
-                console.log "A PRESSED!"
+        .start()
 
-          .start()
+%section.public-methods
+  .commands_api
+    = partial "/documentation/drivers/partials/keyboard/events"
 
-  %section.compatability.hardware
-    %h2 Works with:
-    .devices
-      = partial "documentation/partials/devices_platforms"
+%section.compatability.hardware
+  %h2 Works with:
+  .devices
+    = partial "documentation/partials/devices_platforms"

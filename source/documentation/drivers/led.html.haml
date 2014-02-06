@@ -42,50 +42,6 @@ digispark_platform: true
             name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
           ...
 
-%section.public-methods
-  %h2 Commands:
-  %table.commands 
-    %tr 
-      %th Command (param)
-      %th Description
-    %tr 
-      %td.command turnOn()
-      %td.param  
-        %p Turns LED on. 
-        %h5 Returns 
-        %span null
-    %tr 
-      %td.command turnOff()
-      %td.param  
-        %p Turns LED off.
-        %h5 Returns 
-        %span null
-    %tr 
-      %td.command toggle()
-      %td.param  
-        %p Turns the LED on, or off, depending on if it is already off, or on, respectively.
-        %h5 Returns 
-        %span null
-    %tr 
-      %td.command brightness(level)
-      %td.param  
-        %p Sets brightness of the led to the specified brightness value passed to brightness(brightness_int) using PWM, brightness can be any integer value between 0 and 255.
-        %h5 Params
-        %span level → integer
-        %p The brightness level
-        %h5 Returns 
-        %span null
-
-
-  %h2 Events
-  %table.commands 
-    %tr 
-      %th Event
-      %th Description
-    %tr 
-      %td.command 
-        %span start
-      %td Sent when the device has been started and is ready to use. 
 
 %section.how-to
   %h2 How to use
@@ -126,6 +82,12 @@ digispark_platform: true
             every 1.second(), -> my.led.toggle()
 
         .start()
+
+%section.public-methods
+  .commands_api
+    = partial "/documentation/drivers/partials/gpio/commands_led"
+  .commands_api
+    = partial "/documentation/drivers/partials/gpio/events_led"
 
 %section.circuit
   %h2 Circuit and Schematic

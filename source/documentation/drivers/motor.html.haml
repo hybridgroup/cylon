@@ -44,55 +44,6 @@ spark_platform: true
             name: 'motor', driver: 'motor', pin: 3
           ...
 
-%section.public-methods
-  %h2 Commands:
-  %table.commands 
-    %tr 
-      %th Command (param)
-      %th Description
-    %tr 
-      %td.command turnOn()
-      %td.param  
-        %p Starts the motor.
-        %h5 Returns 
-        %span nil
-    %tr 
-      %td.command turnOff()
-      %td.param  
-        %p Stops the motor.
-        %h5 Returns 
-        %span true | nil
-    %tr 
-      %td.command toggle()
-      %td.param  
-        %p Sets the state of the motor to the oposite of the current state, if motor is on then sets it to off.
-        %h5 Returns 
-        %span true | nil
-    %tr 
-      %td.command speed(speed_value)
-      %td.param  
-        %p Sets the speed of the motor to the value provided in the speed param, speed value must be an integer between 0 and 255.
-        %h5 Params
-        %span  speed_value → integer
-        %p The speed value for which to return data
-        %h5 Returns 
-        %span integer
-    %tr 
-      %td.command currentSpeed()
-      %td.param  
-        %p Returns the current speed of the motor as an integer between 0 and 255.
-        %h5 Returns 
-        %span integer
-
-  %h2 Events
-  %table.commands 
-    %tr 
-      %th Event
-      %th Description
-    %tr 
-      %td.command 
-        %span start
-      %td Sent when the device has been started and is ready to use.
 
 %section.how-to
   %h2 How to use
@@ -138,6 +89,11 @@ spark_platform: true
               my.motor.stop()
 
         .start()
+%section.public-methods
+  .commands_api
+    = partial "/documentation/drivers/partials/gpio/commands_motor"
+  .commands_api
+    = partial "/documentation/drivers/partials/gpio/events_motor"
 
   %h2 Circuit and Schematic
   %p
