@@ -6,27 +6,37 @@ Bundler.setup
 require 'git'
 require 'fileutils'
 
-REPOS = %w(
-  https://github.com/hybridgroup/cylon-ardrone.git
-  https://github.com/hybridgroup/cylon-beaglebone.git
-  https://github.com/hybridgroup/cylon-crazyflie.git
-  https://github.com/hybridgroup/cylon-digispark.git
-  https://github.com/hybridgroup/cylon-firmata.git
-  https://github.com/hybridgroup/cylon-force.git
-  https://github.com/hybridgroup/cylon-glass.git
-  https://github.com/hybridgroup/cylon-gpio.git
-  https://github.com/hybridgroup/cylon-i2c.git
-  https://github.com/hybridgroup/cylon-joystick.git
-  https://github.com/hybridgroup/cylon-keyboard.git
-  https://github.com/hybridgroup/cylon-leapmotion.git
-  https://github.com/hybridgroup/cylon-opencv.git
-  https://github.com/hybridgroup/cylon-pebble.git
-  https://github.com/hybridgroup/cylon-raspi.git
-  https://github.com/hybridgroup/cylon-spark.git
-  https://github.com/hybridgroup/cylon-sphero.git
-  https://github.com/hybridgroup/cylon-tessel-example.git
-  https://github.com/hybridgroup/cylon-tessel.git
-)
+if ARGV.any?
+  REPOS = ARGV.collect do |arg|
+    if arg[/^([\w-]+\/[\w-]+)$/, 1]
+      "https://github.com/#{arg}.git"
+    else
+      arg
+    end
+  end
+else
+  REPOS = %w(
+    https://github.com/hybridgroup/cylon-ardrone.git
+    https://github.com/hybridgroup/cylon-beaglebone.git
+    https://github.com/hybridgroup/cylon-crazyflie.git
+    https://github.com/hybridgroup/cylon-digispark.git
+    https://github.com/hybridgroup/cylon-firmata.git
+    https://github.com/hybridgroup/cylon-force.git
+    https://github.com/hybridgroup/cylon-glass.git
+    https://github.com/hybridgroup/cylon-gpio.git
+    https://github.com/hybridgroup/cylon-i2c.git
+    https://github.com/hybridgroup/cylon-joystick.git
+    https://github.com/hybridgroup/cylon-keyboard.git
+    https://github.com/hybridgroup/cylon-leapmotion.git
+    https://github.com/hybridgroup/cylon-opencv.git
+    https://github.com/hybridgroup/cylon-pebble.git
+    https://github.com/hybridgroup/cylon-raspi.git
+    https://github.com/hybridgroup/cylon-spark.git
+    https://github.com/hybridgroup/cylon-sphero.git
+    https://github.com/hybridgroup/cylon-tessel-example.git
+    https://github.com/hybridgroup/cylon-tessel.git
+  )
+end
 
 # Public: Gets the name of the repository from it's GitHub clone URI
 #
@@ -94,6 +104,8 @@ def add_docs_to_site(repo_name, docs)
   docs.each do |name, content|
     filename = "_" + File.basename(name, ".md") + ".html.haml"
     path = File.join docs_path, filename
+
+    content = content.force_encoding("UTF-8")
 
     # indent by two spaces
     content.gsub! /^(.+)/, '  \1'
