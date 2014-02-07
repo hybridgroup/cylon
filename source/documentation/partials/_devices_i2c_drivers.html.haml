@@ -5,6 +5,9 @@
   /// Hmc6352 Compass
   %a.device{href: "/documentation/drivers/hmc6352-compass", title: "Wii Nunchuck"}
     %img{src: "/images/devices/hmc6352-compass.jpg"}
+  /// LCD
+  %a.device{href: "/documentation/drivers/lcd", title: "LCD"}
+    %img{src: "/images/devices/lcd.jpg"}
   /// Wiichuck
   %a.device{href: "/documentation/drivers/wiichuck", title: "Wii Nunchuck"}
     %img{src: "/images/devices/wii-chuck.jpg"}   
@@ -21,6 +24,11 @@
   /// Hmc6352 Compass
   %a.device{href: "/documentation/drivers/hmc6352-compass", title: "Wii Nunchuck"}
     %img{src: "/images/devices/hmc6352-compass.jpg"}
+
+-if current_page.data.lcd_driver == true
+  /// LCD
+  %a.device{href: "/documentation/drivers/lcd", title: "LCD"}
+    %img{src: "/images/devices/lcd.jpg"}
 
 -if current_page.data.wiichuck_driver == true
   /// Wiichuck
