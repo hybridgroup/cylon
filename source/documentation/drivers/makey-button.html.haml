@@ -13,7 +13,7 @@ digispark_platform: true
 %section.intro
   = image_tag "/images/devices/makey-button.jpg", class: "display"
   %p
-    Simple interface that makes it possible to register clicks through physical input.
+    Inspired by the awesome MakeyMakey (<a href='http://makeymakey.com'>http://makeymakey.com</a>), this GPIO driver allows you to connect a 10 MOhm resistor to a digital pin on your Arduino or Raspberry Pi to control your robots with bananas, clay, or drawable circuitry.
 
 %section.how_to
   %h2 How to establish a connection and setup the driver 
@@ -50,12 +50,37 @@ digispark_platform: true
   %h3 JavaScript    
   :markdown
         :::javascript
-        coming soon
+
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: {name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'},
+
+          device: {name: 'button', driver: 'makey-button', pin: 2},
+
+          work: function(my) {
+            my.button.on('push', function() {
+              Logger.info("Button pushed!");
+            });
+          }
+        }).start();
 
   %h3 CoffeeScript
   :markdown
         :::javascript
-        coming soon
+        Cylon = require 'cylon'
+
+        Cylon.robot
+          connection:
+            name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
+
+          device:
+            name: 'button', driver: 'makey-button', pin: 2
+
+          work: (my) ->
+            my.button.on 'push', -> Logger.info "Button pushed!"
+
+        .start()
 
 %section.public-methods
   .commands_api
