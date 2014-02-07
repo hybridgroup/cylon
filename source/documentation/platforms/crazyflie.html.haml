@@ -31,7 +31,19 @@ crazyflie_flight_driver: true
 
   %p 
     You will also need to install the latest beta of firmware to the Crazyflie itself to use the 'hover' mode from 
-    =link_to "https://bitbucket.org/bitcraze/crazyflie-firmware/downloads/Crazyflie_2013.11-beta1.bin", "https://bitbucket.org/bitcraze/crazyflie-firmware/downloads/Crazyflie_2013.11-beta1.bin", target: :blanck
+    =link_to "https://bitbucket.org/bitcraze/crazyflie-firmware/downloads/Crazyflie_2013.11-beta1.bin", "https://bitbucket.org/bitcraze/crazyflie-firmware/downloads/Crazyflie_2013.11-beta1.bin", target: :blank
+
+  %h3 Ubuntu
+
+  %p
+    On Ubuntu, you will need to run:
+
+  :markdown
+        :::bash
+        sudo apt-get install build-essential pkg-config libusb-1.0-0-dev
+
+  %p
+    before you will be able to run `npm install cylon-crazyflie'
 
   %h2 How to use
   %p This small program causes the Crazyflie to takeoff for 10 seconds.
