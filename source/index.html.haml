@@ -166,6 +166,7 @@ getting_started_button: "<a href='/documentation/getting-started' class='cta'> G
       %li Button
       %li Continuous Servo
       %li LED
+      %li MakeyButton (high-resistance switch inspired by the MakeyMakey)
       %li Motor
       %li Maxbotix Ultrasonic Range Finder
       %li Servo 
@@ -178,7 +179,10 @@ getting_started_button: "<a href='/documentation/getting-started' class='cta'> G
     = link_to "Drivers", "https://github.com/hybridgroup/cylon-i2c", target:"_blank"  
     %ul 
       %li BlinkM
-      %li HMC6352 Digital Compass 
+      %li HMC6352 Digital Compass
+      %li LCD
+      %li MPL115A2 Barometer/Thermometer
+
 %p More platforms and drivers are coming soon...
 
 %h2 CLI
@@ -190,6 +194,8 @@ getting_started_button: "<a href='/documentation/getting-started' class='cta'> G
       Commands:
 
         generate <name>        Generates a new adaptor
+        scan <type>            Scans serial, bluetooth or usb (pass param <serial> | <bluetooth> | <usb>) for connected devices
+        bluetooth <subcmd> <address> [option] Connect bluetooth device to PC (pairs) or establishes serial to bluetooth connection
 
       Options:
 
