@@ -59,66 +59,95 @@ blinkm_driver: true
 
   %h2 How to connect
   %p
-    If your Digispark (
-    =link_to "http://www.kickstarter.com/projects/digistump/digispark-the-tiny-arduino-enabled-usb-dev-board","http://www.kickstarter.com/projects/digistump/digispark-the-tiny-arduino-enabled-usb-dev-board"
-    ) ATTiny-based USB development board already has the Little Wire (
-    =link_to "http://littlewire.cc/", "http://littlewire.cc/"
-    ) protocol firmware installed, you can connect right away with Cylon.js.
-
+    It is very easy to setup and connect to the Digispark using cylon CLI commands.
   %p
-    Otherwise, for instructions on how to install Little Wire on a Digispark check out 
-    =link_to "http://digistump.com/board/index.php/topic,160.0.html " , "http://digistump.com/board/index.php/topic,160.0.html" 
+    Connecting to the Digispark
+    =link_to "(Kickstarter Campaign)","http://www.kickstarter.com/projects/digistump/digispark-the-tiny-arduino-enabled-usb-dev-board"
+    ATTiny-based USB development board is very easy using Cylon, first we need to install the littlewire
+    =link_to "(http://littlewire.cc)", "http://littlewire.cc/"
+    protocol to communicate with the digispark, Cylon includes CLI commands to make the process of uploading littlewire to the
+    digispark as simple as possible, after littlewire has been uploaded you can connect and communicate using Cylon.
 
   %h3 OSX
   %p The main steps are:
   %ul
-    %li Plug in the Digispark to the USB port
-    %li Connect to the device via Cylon.js
-  %p First plug the Digispark into your computer via the USB port. 
+    %li Install the cylon-digispark npm module
+    %li Upload the Littlewire protocol to the digispark
+    %li Connect to the device using Cylon
+
+  %h4 DO NOT plug in the Digispark to your computer's USB port until prompted.
+
+  %p Install the cylon-digispark module:
+  :markdown
+        :::bash
+        $ npm install cylon-digispark
+
+  %p
+    After installing the cylon-digispark npm module run the following command to
+    upload littlewire to the digispark, plug it to a USB port when prompted:
+  :markdown
+        :::bash
+        $ cylon littlewire upload
+
+  %p Once plugged in, use the `cylon scan usb` command to verify your connection info:
+  :markdown
+        :::bash
+        $ cylon scan usb
+
+  %p
+    Now use the `ID` info returned to find the `product` and `vendor` ID's required
+    to establish a connection with the Digispark in your Cylon code.
+
+  %p That is it, you are set to start running Cylon digispark examples.
+
   %h3 Ubuntu
   %p The main steps are:
   %ul
-    %li Add a udev rule to allow access to the Digispark device
+    %li Install the cylon-digispark npm module
+    %li
+      Add a udev rule to allow access to the Digispark device (Do not worry
+      about this, the `cylon littlewire upload` command does it for you if none is detected)
     %li Plug in the Digispark to the USB port
-    %li Connect to the device via Cylon.js
-  
-  %p Coming Soon
+    %li Connect to the device using Cylon
 
-  -#%p First, you must add a udev rule, so that Cylon.js can communicate with the USB device. Ubuntu and other modern Linux distibutions use udev to manage device files when USB devices are added and removed. By default, udev will create a device with read-only permission which will not allow to you download code. You must place the udev rules below into a file named /etc/udev/rules.d/49-micronucleus.rules.
-  -#:markdown
-  -#      :::bash
-  -#      # UDEV Rules for Micronucleus boards including the Digispark.
-  -#      # This file must be placed at:
-  -#      #
-  -#      # /etc/udev/rules.d/49-micronucleus.rules    (preferred location)
-  -#      #   or
-  -#      # /lib/udev/rules.d/49-micronucleus.rules    (req'd on some broken systems)
-  -#      #
-  -#      # After this file is copied, physically unplug and reconnect the board.
-  -#      #
-  -#      SUBSYSTEMS=="usb", ATTRS{idVendor}=="1781", ATTRS{idProduct}=="0c9f", MODE:="0666"
-  -#      KERNEL=="ttyACM*", ATTRS{idVendor}=="1781", ATTRS{idProduct}=="0c9f", MODE:="0666", ENV{ID_MM_DEVICE_IGNORE}="1"
+  %h4 DO NOT plug in the Digispark to your computer's USB port until prompted.
 
-  -#      SUBSYSTEMS=="usb", ATTRS{idVendor}=="16d0", ATTRS{idProduct}=="0753", MODE:="0666"
-  -#      KERNEL=="ttyACM*", ATTRS{idVendor}=="16d0", ATTRS{idProduct}=="0753", MODE:="0666", ENV{ID_MM_DEVICE_IGNORE}="1"
-  -#      #
-  -#      # If you share your linux system with other users, or just don't like the
-  -#      # idea of write permission for everybody, you can replace MODE:="0666" with
-  -#      # OWNER:="yourusername" to create the device owned by you, or with
-  -#      # GROUP:="somegroupname" and mange access using standard unix groups.
-  -#%p
-  -#  Thanks to @bluebie for these instructions! (
-  -#  =link_to "https://github.com/Bluebie/micronucleus-t85/wiki/Ubuntu-Linux" , "https://github.com/Bluebie/micronucleus-t85/wiki/Ubuntu-Linux"
-  -#  )
+  %p Install the cylon-digispark npm module:
 
-  -#%p Now plug the Digispark into your computer via the USB port.
+  :markdown
+        :::bash
+        $ npm install cylon-digispark
 
-  -#%p Once plugged in, use the Cylon.js connect scan command with the -t usb option to verify your connection info:
+  %p
+    After installing the cylon-digispark module run the following command to
+    upload littlewire to the digispark, plug it to a USB port when
+    prompted. You might be asked to enter your sudo password, since
+    uploading littlewire to the digispark requires some new udev rules, you
+    can check and review them in `/etc/udev/rules.d/49-micronucleus.rules`
+    after running the `cylon littlewire upload` command:
 
-  -#:markdown
-  -#      :::bash
-  -#      $ Cylon.js connect scan -t usb
-  -#%p Now use the ID info returned to find the product and vendor ID's for the connection info Digispark in your Cylon.js code.
+  :markdown
+        :::bash
+        $ cylon littlewire upload
+
+  %p Once plugged in, use the `cylon scan usb` command to verify your connection info:
+
+  :markdown
+        :::bash
+        $ cylon scan usb
+
+  %p
+    Now use the `ID` info returned to find the `product` and `vendor` ID's required to
+    establish a connection with the Digispark in your cylon code.
+
+  %p That is it, you are set to start running Cylon digispark examples.
+
+  %p
+    Thanks to [@bluebie]
+    =link_to "https://github.com/Bluebie", "https://github.com/Bluebie"
+    for the help with udev rules used when uploading littlewire to the digispark!
+    =link_to "(https://github.com/Bluebie/micronucleus-t85/wiki/Ubuntu-Linux)", "https://github.com/Bluebie/micronucleus-t85/wiki/Ubuntu-Linux"
+
 %section.drivers
   %h2 Drivers
   %p
@@ -142,4 +171,3 @@ blinkm_driver: true
     %h2 i2c Drivers
     .devices
       = partial "documentation/partials/devices_i2c_drivers"
-      
