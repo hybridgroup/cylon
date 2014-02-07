@@ -1,6 +1,6 @@
 {
   "name": "cylon",
-  "version": "0.9.2",
+  "version": "0.10.0",
   "main": "dist/cylon.js",
   "description": "A JavaScript robotics framework using Node.js",
   "homepage": "http://cylonjs.com",
