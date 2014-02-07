@@ -30,7 +30,7 @@ lcd_driver: true
         npm install cylon-firmata
   %h2 How to use
   %p This small program lets you push a button on the arduino board to turn a LED on or off. In less than 10 lines of code using Cylon.js.
-  %h3 Javascript  
+  %h3 Javascript
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -67,9 +67,95 @@ lcd_driver: true
 
   %h2 How to connect
   %h3 OSX
-  %p Coming soon.
+
+  %p The main steps are:
+  %ul
+    %li Install the cylon-firmata npm module
+    %li Find out what serial port your arduino is connected to
+    %li Upload the Firmata protocol to the arduino
+    %li Connect to the device using Cylon
+
+  %p
+    First plug the Arduino into your computer via the USB/serial port.
+    A dialog box will appear telling you that a new network interface has been detected.
+    Click "Network Preferences...", and when it opens, simply click "Apply".
+
+  %p Install the cylon-firmata module:
+
+  :markdown
+        :::bash
+        $ npm install cylon-firmata
+
+  %p Once plugged in, use the `cylon scan serial` command to find out your connection info and serial port address:
+
+  :markdown
+        :::bash
+        $ cylon scan serial
+
+  %p
+    Use the `cylon firmata install` command to install avrdude,
+    this will allow you to upload firmata to the arduino:
+
+  :markdown
+        :::bash
+        $ cylon firmata install
+
+  %p
+    Once the avrdude uploader is installed we upload the firmata protocol to
+    the arduino, use the arduino serial port address found when you ran
+    `cylon scan serial`, or leave it blank to use the default address `/dev/ttyACM0`:
+
+  :markdown
+        :::bash
+        $ cylon firmata upload /dev/ttyACM0
+
+  %p Now you are ready to connect and communicate with the Arduino using serial port connection
 
   %h3 Ubuntu
+
+  %p The main steps are:
+  %ul
+    %li Install the cylon-firmata npm module
+    %li Find out what serial port your arduino is connected to
+    %li Upload the Firmata protocol to the arduino
+    %li Connect to the device using Cylon
+
+  %p First plug the Arduino into your computer via the USB/serial port.
+
+  %p Install the cylon-firmata module:
+
+  :markdown
+        :::bash
+        $ npm install cylon-firmata
+
+  %p Once plugged in, use the `cylon scan serial` command to find out your connection info and serial port address:
+
+  :markdown
+        :::bash
+        $ cylon scan serial
+
+  %p
+    Use the `cylon firmata install` command to install avrdude,
+    this will allow you to upload firmata to the arduino:
+
+  :markdown
+        :::bash
+        $ cylon firmata install
+
+  %p
+    Once the avrdude uploader is installed we upload the firmata protocol to
+    the arduino, use the arduino serial port address found when you ran
+    `cylon scan serial`, or leave it blank to use the default address `ttyACM0`:
+
+  :markdown
+        :::bash
+        $ cylon firmata upload ttyACM0
+
+  %p Now you are ready to connect and communicate with the Arduino using serial port connection
+
+  %h3 Windows
+
+  %p We are currently working on docs and instructions for Windows. Please check back soon!
 
   %p Coming soon.
 
