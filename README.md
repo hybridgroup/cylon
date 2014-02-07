@@ -128,6 +128,7 @@ a shared set of drivers provided using the cylon-gpio module:
     - Button
     - Continuous Servo
     - LED
+    - MakeyButton
     - Motor
     - Maxbotix Ultrasonic Range Finder
     - Servo
@@ -138,6 +139,8 @@ drivers provided using the cylon-i2c module:
   - [I2C](https://en.wikipedia.org/wiki/I%C2%B2C) <=> [Drivers](https://github.com/hybridgroup/cylon-i2c)
     - BlinkM
     - HMC6352 Digital Compass
+    - LCD
+    - MPL115A2 Barometer/Thermometer
 
 More platforms and drivers are coming soon... follow us on Twitter [@cylonjs](http://twitter.com/cylonjs) for latest updates.
 
@@ -215,6 +218,8 @@ Thank you!
   * For git help see [progit](http://git-scm.com/book) which is an awesome (and free) book on git
 
 ## Release History
+
+Version 0.10.0 - Use Robeaux UX, add CLI commands for helping connect to devices, bugfixes
 
 Version 0.9.0 - Add AngularJS web interface to API, extensible commands for CLI
 
