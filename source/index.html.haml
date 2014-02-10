@@ -52,7 +52,12 @@ getting_started_button: "<a href='/documentation/getting-started' class='cta'> G
 %p The example below connects to an Arduino, and every second turns the LED either on, or off.
 :markdown
   The example requires that the Arduino has the Firmata sketch installed, and that it is connected on the port `/dev/ttyACM0`. You need to install Firmata on your Arduino, and to change the `port` parameter to match the port that your system is actually using.
-%p Make sure to upload the "Standard Firmata" sketch or an equivalent Firmata sketch to your Arduino first. Without that code running on the Arduino, Firmata can't communicate with Cylon. You can find the example sketch in your Arduino software under "Examples > Firmata > StandardFirmata".
+%p Make sure to upload the "Standard Firmata" sketch or an equivalent Firmata sketch to your Arduino first. Without Firmata running on the Arduino, the Aruduino board can't communicate with Cylon running on your computer. You can do this by running these 2 commands:
+:markdown
+      :::javascript
+      cylon firmata install
+      cylon firmata upload ttyACM0
+%p Now here is the Cylon.js code:
 %h3 JavaScript:
 :markdown
       :::javascript
