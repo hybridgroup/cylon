@@ -3,7 +3,10 @@ title: Tessel with Cylon.js
 author: The Hybrid Group
 page_title: Tessel
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-tessel' target='blanck' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-tessel/issues' target='blanck'>Issues</a>"
-layout: page
+layout: documentation
+page_title_show: true
+
+led_driver: true
 ---
 .documentation
   %section.intro
@@ -75,14 +78,10 @@ layout: page
     %p Available drivers for the Tessel platform are listed below. 
 
     .hardware
+      // TODO: Update drivers list at the top of the page.
+      %h2 GPIO Drivers
       .devices
-        = #partial "documentation/partials/analog-sensor"
-        = #partial "documentation/partials/button"
-        = partial "documentation/partials/led"
-        = #partial "documentation/partials/maxbotix"
-        = #partial "documentation/partials/motor"
-        = #partial "documentation/partials/servo"
-        = #partial "documentation/partials/blinkm"
-        = #partial "documentation/partials/hmc6352-compass"
-        = #partial "documentation/partials/wiichuck"
-        = #partial "documentation/partials/wiiclassic"
+        = partial "documentation/partials/devices_gpio_drivers"
+      -#%h2 i2c Drivers
+      .devices
+        =# partial "documentation/partials/devices_i2c_drivers"

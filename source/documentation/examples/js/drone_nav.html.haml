@@ -1,5 +1,6 @@
 ---
-layout: page
+layout: documentation
+page_title_show: true
 title: Cylon.JS Example - Drone Navigation
 page_title: "Example: Drone Navigation"
 author: The Hybrid Group
@@ -21,7 +22,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
           work: function(my) {
             my.drone.config('general:navdata_demo', 'TRUE');
-            my.nav.on('update', function(data) { Logger.info(data); });
+            my.nav.on('update', function(data) { console.log(data); });
           }
         }).start();
 

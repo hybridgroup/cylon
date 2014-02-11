@@ -1,6 +1,7 @@
 - wrap_layout :layout do
   .main{:role => "main"}
-    .aside.right
-      %img{:src => "images/cylon.png"}
     %section.content
-      = yield
+      .index_content
+        = yield
+    .aside.right
+      = current_page.data.img_character

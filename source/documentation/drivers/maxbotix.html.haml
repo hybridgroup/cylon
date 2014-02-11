@@ -3,68 +3,56 @@ title: Cylon.js - Maxbotix Driver
 author: The Hybrid Group
 page_title: Maxbotix
 page_subtitle: Driver
-layout: page
+layout: documentation
+page_title_show: true
+
+arduino_platform: true
+spark_platform: true
 ---
-.documentation
-  %section.intro
-    =image_tag "/images/maxbotix.jpg", class: "display"
-    %p
-      Provides tools to use maxbotix sonar (range finder).
 
-  %section.how-to
-    %h2 How to stablish a connection and setup the driver
-    %h3 JavaScript
-    :markdown
-          :::javascript
-          comming soon
-    %h3 CoffeeScript
-    :markdown
-          :::javascript
-          comming soon
+%section.intro
+  =image_tag "/images/devices/maxbotix.jpg", class: "display"
+  %p
+    Provides tools to use maxbotix sonar (range finder).
 
-  %section.public-methods
-    %h2 Commands:
-    %dl.methods 
-      %dt analogValue
-      %dd 
-      %dt range
-      %dd Returns the distance measured by the sonar in inches.
-      %dt rangeCm
-      %dd Returns the distance measured by the sonar in cm.
+%section.how-to
+  %h2 How to stablish a connection and setup the driver
+  %h3 JavaScript
+  :markdown
+        :::javascript
+        coming soon
+  %h3 CoffeeScript
+  :markdown
+        :::javascript
+        coming soon
 
-  %section.public-events
-    %h2 Events:
-    %p
-      The events will be triggered when the amount of time specified by the param :interval, when setting up the driver, passes.
+  %h3 How to use events and call them on your drivers
+  %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
+  :markdown
+        :::javascript
+        comming soon
 
-    %dl.methods 
-      %dt start
-      %dd Sent when the device has been started and is ready to use. 
-      %dt stop
-      %dd Sent when the device has been stopped.
+%section.how-to
+  %h2 Examples
+  :markdown
+        :::javascript
+        comming soon
 
-    %h3 How to use events and call them on your drivers
-    %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
-    :markdown
-          :::javascript
-          comming soon
+%section.public-methods
+  .commands_api
+    = partial "/documentation/drivers/partials/gpio/commands_maxbotix"
+  .commands_api
+    = partial "/documentation/drivers/partials/gpio/events_maxbotix"
 
-  %section.how-to
-    %h2 Examples
-    :markdown
-          :::javascript
-          comming soon
+%section.circuit
+  %h2 Circuit and Schematic
+  %p
+    =link_to "http://www.electrojoystick.com/tutorial/?page_id=285", "http://www.electrojoystick.com/tutorial/?page_id=285"
 
-  %section.circuit
-    %h2 Circuit and Schematic
-    %p
-      =link_to "http://www.electrojoystick.com/tutorial/?page_id=285", "http://www.electrojoystick.com/tutorial/?page_id=285"
+%section.compatability.hardware
+  %h2 Works with:
+  =# TODO: Update platform list with all that work with this driver in Cylon.js.
+  .devices
+    = partial "documentation/partials/devices_platforms"
 
-  %section.compatability.hardware
-    %h2 Works with:
-    =# TODO: Update platform list with all that work with this driver in Cylon.js.
-    .devices
-      = partial "documentation/partials/arduino"
-      =# partial "documentation/partials/digispark"
-      = partial "documentation/partials/spark"
 

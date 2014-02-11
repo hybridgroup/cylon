@@ -1,5 +1,6 @@
 ---
-layout: page
+layout: documentation
+page_title_show: true
 title: Cylon.JS Example - Cylon and Travis
 page_title: "Example: Cylon and Travis"
 author: The Hybrid Group
@@ -85,7 +86,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   First, it will log that it's checking Travis to the logger:
 
       :::coffeescript
-            Logger.info "Checking last build status for \1user}/\1name}"
+            console.log "Checking last build status for \#{user}/\#{name}"
 
   Let's set the default color of the Sphero to blue until we know what the build
   status is:

@@ -1,5 +1,6 @@
 ---
-layout: page
+layout: documentation
+page_title_show: true
 title: Cylon.JS Example - Pure GPIO
 page_title: "Example: Pure GPIO"
 author: The Hybrid Group
@@ -35,7 +36,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
       :::coffeescript
       pin4.on 'digitalWrite', (value) ->
-        console.log "Value written to pin: \1value}"
+        console.log "Value written to pin: \#{value}"
 
   When the pin's been connected, we'll set it to high (1)
 

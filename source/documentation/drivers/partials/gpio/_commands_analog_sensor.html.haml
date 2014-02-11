@@ -1,0 +1,38 @@
+:markdown
+  # Commands
+
+  ## analogRead(pin_number)
+
+  Returns an integer value that represents the analog read from the sensor.
+
+  ##### Params
+
+  - **pin_number** -  The pin number for which to return data
+
+  ##### Returns 
+
+  `integer` Current analog sensor value.
+
+  ## upperLimit(limit)
+
+  Sets an upper limit for the sensor, that when exceeded, triggers a notification event of the same name.
+
+  ##### Params
+
+  - **limit** -  The upper limit that triggers notification event
+
+  ##### Returns  
+
+  `null`
+
+  ## lowerLimit(limit)
+
+  Sets an lower limit for the sensor, that when exceeded, triggers a notification event of the same name.
+
+  ##### Params
+
+  - **limit** -  The lower limit that triggers notification event
+
+  ##### Returns  
+
+  `null`

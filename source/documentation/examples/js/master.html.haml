@@ -1,5 +1,6 @@
 ---
-layout: page
+layout: documentation
+page_title_show: true
 title: Cylon.JS Example - Master
 page_title: "Example: Master"
 author: The Hybrid Group
@@ -24,7 +25,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
           SpheroRobot.prototype.connection = { name: 'Sphero', adaptor: 'sphero' };
 
           SpheroRobot.prototype.work = function(my) {
-            Logger.info("Robot " + my.name + " is now working!");
+            console.log("Robot " + my.name + " is now working!");
           };
 
           return SpheroRobot;

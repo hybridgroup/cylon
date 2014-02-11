@@ -34,7 +34,7 @@ def extract_example_files
     content = File.read file
     js_content = File.read file.gsub(/litcoffee$/, 'js')
     @example_files << {
-      :name => file.match(/\/([A-Za-z_-]+)\.litcoffee$/)[1],
+      :name => file.match(/\/([0-9A-Za-z_-]+)\.litcoffee$/)[1],
       :content => content,
       :title => content.match(/\A#\s+(.+)$/)[1],
       :js_content => js_content
@@ -55,7 +55,7 @@ def create_litcoffee_pages
     end
 
     # escape interpolation as to not confuse HAML
-    body.gsub! /(#\{)/, '\\\1'
+    body.gsub! /(#\{)/, "\\\#{"
 
     # change import path for cylon
     body.gsub! /\.\.\/\.\./, 'cylon'
@@ -65,7 +65,8 @@ def create_litcoffee_pages
 
     page_content = <<-EOS
 ---
-layout: page
+layout: documentation
+page_title_show: true
 title: Cylon.JS Example - #{example[:title]}
 page_title: "Example: #{example[:title]}"
 author: The Hybrid Group
@@ -96,7 +97,8 @@ def create_js_pages
 
     page_content = <<-EOS
 ---
-layout: page
+layout: documentation
+page_title_show: true
 title: Cylon.JS Example - #{example[:title]}
 page_title: "Example: #{example[:title]}"
 author: The Hybrid Group
@@ -122,7 +124,8 @@ def create_index
 
   page_content = <<-EOS
 ---
-layout: page
+layout: documentation
+page_title_show: true
 title: Examples
 page_title: Examples
 author: The Hybrid Group
@@ -130,7 +133,7 @@ description: Examples of using Cylon.JS with different hardware configurations
 page_subtitle: How you can get started.
 ---
 
-.documentation.examples
+.examples
   %table
     %thead
       %th Example

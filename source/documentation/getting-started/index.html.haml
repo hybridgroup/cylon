@@ -1,4 +1,5 @@
 ---
+page_title_show: true
 title: Cylon.js Getting Started
 author: The Hybrid Group
 description: Cylon.js Getting Started
@@ -9,8 +10,8 @@ layout: page
 
 %section.intro
 
-  = partial "../what_is_cylon"
-  
+  = partial "../what_is"
+
 %section.how-to
   %h2 How to Install Node.js
   %h3 OSX
@@ -38,7 +39,7 @@ layout: page
   %p 
     You might need to install under the 'root' user by running the above install command using `sudo`.
 
-%section.cylon-installation
+%section.installation
   %h2 How to Install Cylon.js
   %p
     In order to use Cylon.js, you must install the Cylon.js node modules needed to control your particular hardware setup. For example, to use Cylon.js with an Arduino, you will need to install the `cylon-firmata` module. Check out this example:
@@ -48,7 +49,7 @@ layout: page
         npm install cylon
         npm install cylon-firmata
 
-  %section.cylon-running
+  %section.running
   %h2 Cylon.js Robots
   %h3 Writing your robot code:
 
@@ -68,41 +69,8 @@ layout: page
   :markdown
         :::javascript
         coffee robotfilename.coffee
-%h2 CLI
-%p Cylon has a Command Line Interface (CLI) so you can access important features right from the command line.
-:markdown
-      :::bash
-      Usage: cylon [command] [options]
 
-      Commands:
-
-        generate <name>        Generates a new adaptor
-
-      Options:
-
-        -h, --help     output usage information
-        -V, --version  output the version number
-
-%h2 Generator
-
-%p Want to integrate a hardware device we don't have Cylon support for yet? There's a generator for that!
-%p You can easily generate a new skeleton Cylon adaptor to help you get started. Simply run the cylon generate command, and the generator will create a new directory with all of the files in place for your new adaptor module.
-:markdown
-      :::bash
-      $ cylon generate awesome_device
-      Creating cylon-awesome_device adaptor.
-      Compiling templates.
-
-      $ ls ./cylon-awesome_device
-      Gruntfile.js
-      LICENSE
-      README.md
-      dist/
-      package.json
-      src/
-      test/
-
-%section.cylon-code
+%section.app-code
   %h2 Cylon.js Code Examples
 
   %h3 Example: Hello
@@ -216,6 +184,41 @@ layout: page
               my.drone.stop()
 
         .start()
+
+%h2 CLI
+
+%p Cylon has a Command Line Interface (CLI) so you can access important features right from the command line.
+:markdown
+      :::bash
+      Usage: cylon [command] [options]
+
+      Commands:
+
+        generate <name>        Generates a new adaptor
+
+      Options:
+
+        -h, --help     output usage information
+        -V, --version  output the version number
+
+%h2 Generator
+
+%p Want to integrate a hardware device we don't have Cylon support for yet? There's a generator for that!
+%p You can easily generate a new skeleton Cylon adaptor to help you get started. Simply run the cylon generate command, and the generator will create a new directory with all of the files in place for your new adaptor module.
+:markdown
+      :::bash
+      $ cylon generate awesome_device
+      Creating cylon-awesome_device adaptor.
+      Compiling templates.
+
+      $ ls ./cylon-awesome_device
+      Gruntfile.js
+      LICENSE
+      README.md
+      dist/
+      package.json
+      src/
+      test/
 
 %section.contributing
   %h2 Contributing

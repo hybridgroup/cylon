@@ -3,71 +3,50 @@ title: Cylon.js - Wii Classic Controller Driver
 author: The Hybrid Group
 page_title: Wii Classic Controller
 page_subtitle: Driver
-layout: page
+layout: documentation
+page_title_show: true
+
+arduino_platform: true
 ---
-.documentation
-  %section.intro
-    =image_tag "/images/wii-classic-controller.jpg", class: "display"
-    %p
-      Allows user to use a Nintendo Wii Classic Controller via i2c interface
 
-  %section.how-to
-    %h2 How to establish a connection and setup the driver
-    %h3 For Arduino:
-    :markdown
-          :::javascript
-          comming soon
+%section.intro
+  =image_tag "/images/devices/wii-classic-controller.jpg", class: "display"
+  %p
+    Allows user to use a Nintendo Wii Classic Controller via i2c interface
 
-  %section.public-methods
-    %h2 Events:
-    %dl.methods 
-      %dt a_button
-      %dd Get's triggered every interval amount of time if the a button is pressed.
-      %dt b_button
-      %dd Get's triggered every interval amount of time if the b button is pressed.
-      %dt x_button
-      %dd Get's triggered every interval amount of time if the x button is pressed.
-      %dt y_button
-      %dd Get's triggered every interval amount of time if the y button is pressed.
-      %dt home_button
-      %dd Get's triggered every interval amount of time if the home button is pressed.
-      %dt select_button
-      %dd Get's triggered every interval amount of time if the select button (-) is pressed.
-      %dt start_button
-      %dd Get's triggered every interval amount of time if the start button (+) is pressed.
-      %dt right_trigger
-      %dd Get's triggered every interval amount of time if the right trigger button is pressed, makes right trigger value available.
-      %dt left_trigger
-      %dd Get's triggered every interval amount of time if the left trigger button is pressed, makes left trigger value available.
-      %dt left_joystick
-      %dd Get's triggered every "interval" amount of time if a left joystick event occured, you can access values x, y.
-      %dt right_joystick
-      %dd Get's triggered every "interval" amount of time if a right joystick event occured, you can access values x, y.
+%section.how-to
+  %h2 How to establish a connection and setup the driver
+  %h3 For Arduino:
+  :markdown
+        :::javascript
+        comming soon
+
+%section.public-methods
+
+  %h3 How to use events and call them on your drivers
+  %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
+  :markdown
+        :::javascript
+        comming soon
+
+%section.how-to
+  %h2 How to use
+  %h3 Example using a Nintendo Wii Classic Controller comming soon.
+  :markdown
+        :::javascript
+        comming soon
 
 
+%section.public-methods
+  .commands_api
+    = #partial "/documentation/drivers/partials/i2c/events"
 
-    %h3 How to use events and call them on your drivers
-    %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
-    :markdown
-          :::javascript
-          comming soon
+%section.circuit
+  %h2 Circuit and Schematic
+  %p
+    Coming soon...
 
-  %section.how-to
-    %h2 How to use
-    %h3 Example using a Nintendo Wii Classic Controller comming soon.
-    :markdown
-          :::javascript
-          comming soon
-
-  %section.circuit
-    %h2 Circuit and Schematic
-    %p
-      Coming soon...
-
-  %section.compatability.hardware
-    %h2 Works with:
-    .devices
-      = partial "documentation/partials/arduino"
-      = #partial "documentation/partials/beaglebone"
-      =# partial "documentation/partials/digispark"
-      = #partial "documentation/partials/raspberry-pi"
+%section.compatability.hardware
+  %h2 Works with:
+  .devices
+    = partial "documentation/partials/devices_platforms"

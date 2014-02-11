@@ -1,5 +1,6 @@
 ---
-layout: page
+layout: documentation
+page_title_show: true
 title: Cylon.JS Example - Sphero Collisions
 page_title: "Example: Sphero Collisions"
 author: The Hybrid Group
@@ -50,7 +51,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
       :::coffeescript
           me.sphero.on 'connect', ->
-            Logger.info "Setting up Collision Detection..."
+            console.log "Setting up Collision Detection..."
             me.sphero.detectCollisions()
             me.sphero.setRGB color
             me.sphero.stop()
@@ -60,7 +61,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
       :::coffeescript
       me.sphero.on 'collision', (data) ->
-        Logger.info "Collision:"
+        console.log "Collision:"
 
   We get the new color for a Sphero by doing a bitwise XOR operation on it, using
   the bitfilter above.
@@ -73,7 +74,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   a random direction, at speed 90.
 
       :::coffeescript
-        Logger.info "Color: \1color.toString(16)} "
+        console.log "Color: \#{color.toString(16)} "
         me.sphero.setRGB color
 
         me.sphero.roll 90, Math.floor(Math.random() * 360)

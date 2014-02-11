@@ -1,5 +1,6 @@
 ---
-layout: page
+layout: documentation
+page_title_show: true
 title: Cylon.JS Example - Raspberry Pi - Servo
 page_title: "Example: Raspberry Pi - Servo"
 author: The Hybrid Group
@@ -23,7 +24,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
             every(1..seconds(), function() {
               angle += increment;
               my.servo.angle(angle);
-              Logger.info("Current Angle: " + (my.servo.currentAngle()));
+              console.log("Current Angle: " + (my.servo.currentAngle()));
               if ((angle === 30) || (angle === 150)) { increment = -increment; }
             });
           }

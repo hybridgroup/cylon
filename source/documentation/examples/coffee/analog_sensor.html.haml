@@ -1,5 +1,6 @@
 ---
-layout: page
+layout: documentation
+page_title_show: true
 title: Cylon.JS Example - Analog Sensor
 page_title: "Example: Analog Sensor"
 author: The Hybrid Group
@@ -51,10 +52,10 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
       :::coffeescript
         work: (my) ->
           my.sensor.on 'upperLimit', (val) ->
-            Logger.info "Upper limit reached: \1val}"
+            console.log "Upper limit reached: \#{val}"
 
           my.sensor.on 'lowerLimit', (val) ->
-            Logger.info "Lower limit reached: \1val}"
+            console.log "Lower limit reached: \#{val}"
 
   Now that our robot knows what work to do, and the work it will be doing that
   hardware with, we can start it:

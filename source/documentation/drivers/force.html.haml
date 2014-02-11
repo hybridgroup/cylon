@@ -3,168 +3,145 @@ title: Cylon.js - Force Driver
 author: The Hybrid Group
 page_title: Force
 page_subtitle: Driver
-layout: page
+layout: documentation
+page_title_show: true
+
+force_platform: true
 ---
-.documentation
-  %section.intro
-    = image_tag "/images/force.jpg", class: "display"
-    %p 
-    -# I put this description but if you need to change it, no problem ;)  *************
-    This module provides an adaptor and drivers for Force.com .It uses the nforce module 
-    =link_to "(https://github.com/kevinohara80/nforce)" , "https://github.com/kevinohara80/nforce" 
-    created by @kevinohara80 thank you!
 
-    %p
-      For more info about the Force platform go to
-      = succeed "." do
-        = link_to "http://www.force.com/", "http://www.salesforce.com/platform/overview/", target: :blank
+%section.intro
+  = image_tag "/images/devices/force.jpg", class: "display"
+  %p 
+  -# I put this description but if you need to change it, no problem ;)  *************
+  This module provides an adaptor and drivers for Force.com .It uses the nforce module 
+  =link_to "(https://github.com/kevinohara80/nforce)" , "https://github.com/kevinohara80/nforce" 
+  created by @kevinohara80 thank you!
 
-  %section.how_to
-    %h2 How to establish a connection and setup the driver
-    %h3 JavaScript
-    -#here we need the connection and device in JS(coming soon ..)  *************
-    :markdown
-          :::javascript
-          Cylon = require('cylon');
+  %p
+    For more info about the Force platform go to
+    = succeed "." do
+      = link_to "http://www.force.com/", "http://www.salesforce.com/platform/overview/", target: :blank
 
-          Cylon.robot({
-            connection: {
-              name: 'sfcon',
-              adaptor: 'force'
-            },
-            device: {
-              name: 'salesforce',
-              driver: 'force'
-            }
-            ...
+%section.how_to
+  %h2 How to establish a connection and setup the driver
+  %h3 JavaScript
+  -#here we need the connection and device in JS(coming soon ..)  *************
+  :markdown
+        :::javascript
+        Cylon = require('cylon');
 
-    %h3 CoffeeScript
-    -#here we need the connection and device in Coffee(coming soon ..)  *************
-    :markdown
-          :::javascript
-            Cylon = require('cylon')
+        Cylon.robot({
+          connection: {
+            name: 'sfcon',
+            adaptor: 'force'
+          },
+          device: {
+            name: 'salesforce',
+            driver: 'force'
+          }
+          ...
 
-            Cylon.robot
-              connection:
-                name: 'sfcon', adaptor: 'force'
-
-              device:
-                name: 'salesforce', driver: 'force'
-             ...
-    
-
-  %section.public-methods
-    %h2 Commands:
-    %dl.methods 
-      -#here we need the list of the commands, %dt for the title %dd for the description  *************
-      -#%dt Title
-      -#%dd description
-      %dt authenticate
-      %dd This allows you to authenticate the device.
-      %dt subscribe
-      %dd This allows you to suscribe the device.
-      %dt push
-      %dd This allows you to push data.
-    
-
-  %section.public-events
-    %h2 Events:
-
-    %dl.methods
-      -#same thing, here we need the list of the events, %dt for the title %dd for the description  *************
-      -#%dt Title
-      -#%dd description
-      %dt connect
-      %dd Gets triggered when it´s connected.
-      %dt authenticate
-      %dd Gets triggered when it´s authenticated.
-      %dt subscribe
-      %dd Gets triggered when it´s subscribed.
-      %dt stop
-      %dd Stop the driver.
-      %dt start
-      %dd Sent when the device has been started and is ready to use.
-
-  %section.how-to
-    %h2 How to use
-    %p This example uses the sphero with cylonjs-force
-    %h3 JavaScript
-    -# here the code of the example in JS(coming soon..)*************
-    :markdown
-          :::javascript
-          Cylon = require('cylon');
-
-          Cylon.robot({
-            connection: {
-              name: 'sfcon',
-              adaptor: 'force',
-              sfuser: process.env.SF_USERNAME,
-              sfpass: process.env.SF_SECURITY_TOKEN,
-              orgCreds: {
-                clientId: process.env.SF_CLIENT_ID,
-                clientSecret: process.env.SF_CLIENT_SECRET,
-                redirectUri: 'http://localhost:3000/oauth/_callback'
-              }
-            },
-            device: {
-              name: 'salesforce',
-              driver: 'force'
-            },
-            work: function(me) {
-              var toSend;
-              me.salesforce.on('start', function() {
-                return me.salesforce.subscribe('/topic/SpheroMsgOutbound', function(data) {
-                  return Logger.info("Sphero: " + data.sobject.Sphero_Name__c + ", data Content: " + data.sobject.Content__c + ", SM_Id: " + data.sobject.Id);
-                });
-              });
-              toSend = "{ \"identifier\" :\"" + me.name + "\", \"msg\": \"" + 'Salesforce Bot #2' + "\" }";
-              return me.salesforce.push('SpheroController', 'POST', toSend);
-            }
-          }).start();
-
-    %h3 CoffeeScript
-    -# here the code of the example in Coffee(coming soon..)*************
-    
-    :markdown
-          :::javascript
-
+  %h3 CoffeeScript
+  -#here we need the connection and device in Coffee(coming soon ..)  *************
+  :markdown
+        :::javascript
           Cylon = require('cylon')
 
           Cylon.robot
             connection:
-              name: 'sfcon',
-              adaptor: 'force',
-              sfuser: process.env.SF_USERNAME,
-              sfpass: process.env.SF_SECURITY_TOKEN,
-              orgCreds: {
-                clientId: process.env.SF_CLIENT_ID,
-                clientSecret: process.env.SF_CLIENT_SECRET,
-                redirectUri: 'http://localhost:3000/oauth/_callback'
-              }
+              name: 'sfcon', adaptor: 'force'
 
             device:
               name: 'salesforce', driver: 'force'
+           ...
+  
 
-            work: (me) ->
+%section.how-to
+  %h2 How to use
+  %p This example uses the sphero with cylonjs-force
+  %h3 JavaScript
+  -# here the code of the example in JS(coming soon..)*************
+  :markdown
+        :::javascript
+        Cylon = require('cylon');
 
-              me.salesforce.on('start', () ->
-                me.salesforce.subscribe('/topic/SpheroMsgOutbound', (data) ->
-                  Logger.info "Sphero: \#{ data.sobject.Sphero_Name__c }, data Content: \#{ data.sobject.Content__c }, SM_Id: \#{ data.sobject.Id }"
-                )
+        Cylon.robot({
+          connection: {
+            name: 'sfcon',
+            adaptor: 'force',
+            sfuser: process.env.SF_USERNAME,
+            sfpass: process.env.SF_SECURITY_TOKEN,
+            orgCreds: {
+              clientId: process.env.SF_CLIENT_ID,
+              clientSecret: process.env.SF_CLIENT_SECRET,
+              redirectUri: 'http://localhost:3000/oauth/_callback'
+            }
+          },
+          device: {
+            name: 'salesforce',
+            driver: 'force'
+          },
+          work: function(me) {
+            var toSend;
+            me.salesforce.on('start', function() {
+              return me.salesforce.subscribe('/topic/SpheroMsgOutbound', function(data) {
+                return Logger.info("Sphero: " + data.sobject.Sphero_Name__c + ", data Content: " + data.sobject.Content__c + ", SM_Id: " + data.sobject.Id);
+              });
+            });
+            toSend = "{ \"identifier\" :\"" + me.name + "\", \"msg\": \"" + 'Salesforce Bot #2' + "\" }";
+            return me.salesforce.push('SpheroController', 'POST', toSend);
+          }
+        }).start();
+
+  %h3 CoffeeScript
+  -# here the code of the example in Coffee(coming soon..)*************
+  
+  :markdown
+        :::javascript
+
+        Cylon = require('cylon')
+
+        Cylon.robot
+          connection:
+            name: 'sfcon',
+            adaptor: 'force',
+            sfuser: process.env.SF_USERNAME,
+            sfpass: process.env.SF_SECURITY_TOKEN,
+            orgCreds: {
+              clientId: process.env.SF_CLIENT_ID,
+              clientSecret: process.env.SF_CLIENT_SECRET,
+              redirectUri: 'http://localhost:3000/oauth/_callback'
+            }
+
+          device:
+            name: 'salesforce', driver: 'force'
+
+          work: (me) ->
+
+            me.salesforce.on('start', () ->
+              me.salesforce.subscribe('/topic/SpheroMsgOutbound', (data) ->
+                Logger.info "Sphero: \#{ data.sobject.Sphero_Name__c }, data Content: \#{ data.sobject.Content__c }, SM_Id: \#{ data.sobject.Id }"
               )
+            )
 
-              toSend = "{ \"identifier\" :\"\#{ me.name }\", \"msg\": \"\#{ 'Salesforce Bot #2' }\" }"
-              me.salesforce.push('SpheroController', 'POST', toSend)
-          .start()
+            toSend = "{ \"identifier\" :\"\#{ me.name }\", \"msg\": \"\#{ 'Salesforce Bot #2' }\" }"
+            me.salesforce.push('SpheroController', 'POST', toSend)
+        .start()
 
-  %section.circuit
-    -#%h2 Circuit and Schematic
-    -# here the schemantic (coming soon)  *************
-    -#%p coming soon ...
+%section.public-methods
+  .commands_api
+    = partial "/documentation/drivers/partials/force/commands"
+  .commands_api
+    = partial "/documentation/drivers/partials/force/events"
 
-  %section.compatibility.hardware
-    %h2 Works with:
-    =# TODO: Update platform list with all that work with this driver in Cylon.js.
-    -# all ok here :)  *************
-    .devices
-      = partial "documentation/partials/force"
+%section.circuit
+  -#%h2 Circuit and Schematic
+  -# here the schemantic (coming soon)  *************
+  -#%p coming soon ...
+
+%section.compatibility.hardware
+  %h2 Works with:
+  =# TODO: Update platform list with all that work with this driver in Cylon.js.
+  -# all ok here :)  *************
+  .devices
+    = partial "documentation/partials/devices_platforms"

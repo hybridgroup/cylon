@@ -1,10 +1,21 @@
 ---
 hero: true
 social: true
+catcher: true
+
 title: CylonJS
 author: The Hybrid Group
 description: Cylon.js is a JavaScript framework for robotics and physical computing using Node.js. It provides a simple, but powerful DSL (domain-specific language) for robots and physical computing.
 layout: home
+
+hero_title: "JavaScript Robotics, By Your Command"
+hero_subtitle: "Cylon.js makes robotics  <a href='/documentation/getting-started'>Simple</a> and <a href='/documentation/platforms'>Extensible</a>"
+
+img_character: "<img src='images/elements/cylon.png'>"
+
+catcher_phrase: Ready to build the next big thing with JavaScript?
+getting_started_button: "<a href='/documentation/getting-started' class='cta'> Get Started</a>"
+
 ---
 
 %h2 About
@@ -41,7 +52,12 @@ layout: home
 %p The example below connects to an Arduino, and every second turns the LED either on, or off.
 :markdown
   The example requires that the Arduino has the Firmata sketch installed, and that it is connected on the port `/dev/ttyACM0`. You need to install Firmata on your Arduino, and to change the `port` parameter to match the port that your system is actually using.
-%p Make sure to upload the "Standard Firmata" sketch or an equivalent Firmata sketch to your Arduino first. Without that code running on the Arduino, Firmata can't communicate with Cylon. You can find the example sketch in your Arduino software under "Examples > Firmata > StandardFirmata".
+%p Make sure to upload the "Standard Firmata" sketch or an equivalent Firmata sketch to your Arduino first. Without Firmata running on the Arduino, the Aruduino board can't communicate with Cylon running on your computer. You can do this by running these 2 commands:
+:markdown
+      :::javascript
+      cylon firmata install
+      cylon firmata upload ttyACM0
+%p Now here is the Cylon.js code:
 %h3 JavaScript:
 :markdown
       :::javascript
@@ -101,13 +117,29 @@ layout: home
       &lt;==&gt;
       = link_to "Adaptor", "https://github.com/hybridgroup/cylon-firmata", target:"_blank" 
     %li
+      = link_to "Beaglebone Black", "http://beagleboard.org/Products/BeagleBone+Black/", target:"_blank" 
+      &lt;==&gt;
+      = link_to "Adaptor", "https://github.com/hybridgroup/cylon-beaglebone", target:"_blank" 
+    %li
       = link_to "Crazyflie", "http://www.bitcraze.se/", target:"_blank" 
       &lt;==&gt;
-      = link_to "Adaptor/Driver", "https://github.com/hybridgroup/cylon-crazyflie" 
+      = link_to "Adaptor/Driver", "https://github.com/hybridgroup/cylon-crazyflie", target:"_blank" 
+    %li
+      = link_to "Joystick", "http://en.wikipedia.org/wiki/Joystick", target:"_blank" 
+      &lt;==&gt;
+      = link_to "Adaptor/Driver", "https://github.com/hybridgroup/cylon-joystick", target:"_blank" 
+    %li
+      = link_to "Keyboard", "http://en.wikipedia.org/wiki/Computer_keyboard", target:"_blank" 
+      &lt;==&gt;
+      = link_to "Adaptor/Driver", "https://github.com/hybridgroup/cylon-keyboard" , target:"_blank" 
     %li
       = link_to "Leap Motion", "http://www.leapmotion.com/", target:"_blank" 
       &lt;==&gt;
       = link_to "Adaptor/Driver", "https://github.com/hybridgroup/cylon-leapmotion", target:"_blank" 
+    %li
+      = link_to "OpenCV", "http://opencv.org/", target:"_blank" 
+      &lt;==&gt;
+      = link_to "Adaptor", "https://github.com/hybridgroup/cylon-opencv"
     %li
       = link_to "Pebble", "https://getpebble.com/", target:"_blank" 
       &lt;==&gt;
@@ -121,10 +153,14 @@ layout: home
       &lt;==&gt;
       = link_to "Adaptor/Driver", "https://github.com/hybridgroup/cylon-force", target:"_blank" 
     %li
+      = link_to "Spark", "https://www.spark.io/", target:"_blank" 
+      &lt;==&gt;
+      = link_to "Adaptor", "https://github.com/hybridgroup/cylon-spark", target:"_blank" 
+    %li
       = link_to "Sphero", "http://www.gosphero.com/", target:"_blank"  
       &lt;==&gt;
       = link_to "Adaptor/Driver", "https://github.com/hybridgroup/cylon-sphero", target:"_blank" 
-%p Support for many devices that use General Purpose Input/Output (GPIO) have a shared set of drivers provded using the cylon-gpio module:
+%p Support for many devices that use General Purpose Input/Output (GPIO) have a shared set of drivers provided using the cylon-gpio module:
 %ul
   %li
     = link_to "GPIO", "https://en.wikipedia.org/wiki/General_Purpose_Input/Output" , target:"_blank" 
@@ -133,7 +169,9 @@ layout: home
     %ul 
       %li Analog Sensor
       %li Button
+      %li Continuous Servo
       %li LED
+      %li MakeyButton (high-resistance switch inspired by the MakeyMakey)
       %li Motor
       %li Maxbotix Ultrasonic Range Finder
       %li Servo 
@@ -146,7 +184,10 @@ layout: home
     = link_to "Drivers", "https://github.com/hybridgroup/cylon-i2c", target:"_blank"  
     %ul 
       %li BlinkM
-      %li HMC6352 Digital Compass 
+      %li HMC6352 Digital Compass
+      %li LCD
+      %li MPL115A2 Barometer/Thermometer
+
 %p More platforms and drivers are coming soon...
 
 %h2 CLI
@@ -158,6 +199,8 @@ layout: home
       Commands:
 
         generate <name>        Generates a new adaptor
+        scan <type>            Scans serial, bluetooth or usb (pass param <serial> | <bluetooth> | <usb>) for connected devices
+        bluetooth <subcmd> <address> [option] Connect bluetooth device to PC (pairs) or establishes serial to bluetooth connection
 
       Options:
 

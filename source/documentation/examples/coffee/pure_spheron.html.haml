@@ -1,5 +1,6 @@
 ---
-layout: page
+layout: documentation
+page_title_show: true
 title: Cylon.JS Example - Pure Spheron
 page_title: "Example: Pure Spheron"
 author: The Hybrid Group
@@ -53,10 +54,10 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
       :::coffeescript
       sphero.on 'notification', (packet) ->
-        console.log "Packet contents: \1packet}"
+        console.log "Packet contents: \#{packet}"
 
       sphero.on 'message', (packet) ->
-        console.log "Packet contents: \1packet}"
+        console.log "Packet contents: \#{packet}"
 
   And that wraps up our event listeners. All that's left to do is open
   a connection to the Sphero:

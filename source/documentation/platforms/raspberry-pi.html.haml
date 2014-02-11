@@ -3,106 +3,112 @@ title: Raspberry Pi with Cylon.js
 author: The Hybrid Group
 page_title: Raspberry Pi
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-raspi' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-raspi/issues'>Issues</a>"
-layout: page
+layout: documentation
+page_title_show: true
+
+button_driver: true
+continuous_servo_driver: true        
+led_driver: true
+servo_driver: true
+motor_driver: true
 ---
-.documentation
-  %section.intro
-    = image_tag "/images/raspi.jpg", class: "display"
 
-    %p The Raspberry Pi is an inexpensive and popular ARM based single board computer with digital & PWM GPIO, and i2c interfaces built in.
+%section.intro
+  = image_tag "/images/devices/raspi.jpg", class: "display"
 
-    %p
-      For more info about the Raspberry Pi platform go to
-      = succeed "." do
-        = link_to "http://www.raspberrypi.org/", "http://www.raspberrypi.org/", target: :blank
+  %p The Raspberry Pi is an inexpensive and popular ARM based single board computer with digital & PWM GPIO, and i2c interfaces built in.
 
-  %section.how-to
-    %h2 How to install
-    %p Installing cylon.js with raspberri-pi support is pretty easy.
-    :markdown
-          :::bash
-          npm install cylon-raspi
+  %p
+    For more info about the Raspberry Pi platform go to
+    = succeed "." do
+      = link_to "http://www.raspberrypi.org/", "http://www.raspberrypi.org/", target: :blank
 
-    %h2 How to use
-    %p This small program causes an LED to blink.
-    %h3 JavaScript
-    :markdown
-          :::javascript
-          Cylon = require('..');
+%section.how-to
+  %h2 How to install
+  %p Installing cylon.js with raspberri-pi support is pretty easy.
+  :markdown
+        :::bash
+        npm install cylon-raspi
 
-          Cylon.robot({
-            connection: {
-              name: 'raspi',
-              adaptor: 'raspi'
-            },
-            device: {
-              name: 'led',
-              driver: 'led',
-              pin: 11
-            },
-            work: function(my) {
-              return every(1..second(), function() {
-                return my.led.toggle();
-              });
-            }
-          }).start();
+  %h2 How to use
+  %p This small program causes an LED to blink.
+  %h3 JavaScript
+  :markdown
+        :::javascript
+        Cylon = require('..');
 
-    %h3 CoffeeScript
-    :markdown
-          :::javascript
-          Cylon = require('cylon')
+        Cylon.robot({
+          connection: {
+            name: 'raspi',
+            adaptor: 'raspi'
+          },
+          device: {
+            name: 'led',
+            driver: 'led',
+            pin: 11
+          },
+          work: function(my) {
+            return every(1..second(), function() {
+              return my.led.toggle();
+            });
+          }
+        }).start();
 
-          Cylon.robot
-            connection:
-              name: 'raspi', adaptor: 'raspi'
+  %h3 CoffeeScript
+  :markdown
+        :::javascript
+        Cylon = require('cylon')
 
-            device:
-              name: 'led', driver: 'led', pin: 11
+        Cylon.robot
+          connection:
+            name: 'raspi', adaptor: 'raspi'
 
-            work: (my) ->
-              every 1.second(), -> my.led.toggle()
+          device:
+            name: 'led', driver: 'led', pin: 11
 
-          .start()
-    
+          work: (my) ->
+            every 1.second(), -> my.led.toggle()
 
-    %h2 How to connect
-    %h3 Connecting to Raspberry Pi GPIO
-    %p This module only works on a real Raspberry Pi. Do not bother trying on any other kind of computer it will not work. Also note you will need to connect actual circuits to the Raspberry Pi's GPIO pins.
+        .start()
+  
 
-    %h3 Enabling the Raspberry Pi i2c on raspbian
-    %p You must add these two entries in your /etc/modules
+  %h2 How to connect
+  %h3 Connecting to Raspberry Pi GPIO
+  %p This module only works on a real Raspberry Pi. Do not bother trying on any other kind of computer it will not work. Also note you will need to connect actual circuits to the Raspberry Pi's GPIO pins.
 
-    :markdown
-          :::bash
-          i2c-bcm2708
-          i2c-dev
+  %h3 Enabling the Raspberry Pi i2c on raspbian
+  %p You must add these two entries in your /etc/modules
 
-    %p You must also ensure that these entries are commented in your /etc/modprobe.d/raspi-blacklist.conf
+  :markdown
+        :::bash
+        i2c-bcm2708
+        i2c-dev
 
-    :markdown
-          :::bash
-          #blacklist spi-bcm2708
-          #blacklist i2c-bcm2708
+  %p You must also ensure that these entries are commented in your /etc/modprobe.d/raspi-blacklist.conf
 
-    %p Now restart your raspberry pi.
+  :markdown
+        :::bash
+        #blacklist spi-bcm2708
+        #blacklist i2c-bcm2708
 
-    %h3 Enabling PWM output on GPIO pins.
+  %p Now restart your raspberry pi.
 
-    %p You need to install and have pi-blaster running in the raspberry-pi, you can follow the instructions for pi-blaster install on our repo here:
+  %h3 Enabling PWM output on GPIO pins.
 
-    =link_to "https://github.com/hybridgroup/pi-blaster" , "https://github.com/hybridgroup/pi-blaster"
+  %p You need to install and have pi-blaster running in the raspberry-pi, you can follow the instructions for pi-blaster install on our repo here:
 
-  %section.drivers
-    %h2 Drivers
-    %p All Cylon.js digital and PWM GPIO drivers listed below should work with the Raspberry Pi:
+  =link_to "https://github.com/hybridgroup/pi-blaster" , "https://github.com/hybridgroup/pi-blaster"
 
-    .hardware
-      .devices
-        = partial "documentation/partials/button"
-        = partial "documentation/partials/led"
-        = partial "documentation/partials/servo"
-        = partial "documentation/partials/motor"
-        = #partial "documentation/partials/blinkm"
-        = #partial "documentation/partials/hmc6352-compass"
-        = #partial "documentation/partials/wiichuck"
-        = #partial "documentation/partials/wiiclassic"
+%section.drivers
+  %h2 Drivers
+  %p All Cylon.js digital and PWM GPIO drivers listed below should work with the Raspberry Pi:
+
+  .hardware
+    %h2 GPIO Drivers
+    .devices
+      // TODO: Update drivers list at the top of the page.
+      = partial "documentation/partials/devices_gpio_drivers"
+    // %h2 i2c Drivers
+    .devices
+      = partial "documentation/partials/devices_i2c_drivers"
+

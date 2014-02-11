@@ -3,130 +3,92 @@ title: Cylon.js - Leap Motion Driver
 author: The Hybrid Group
 page_title: Leap Motion
 page_subtitle: Driver
-layout: page
+layout: documentation
+page_title_show: true
+
+leapmotion_platform: true
 ---
-.documentation
-  %section.intro
-    =image_tag "/images/leap_motion.jpg", class: "display"
-    %p
-      Allows user to interact with Cylon.js devices using a Leap Motion controller. The Leap Motion uses its built in cameras to track the user's hand motions, and translations those to events that Cylon.js can use to trigger actions or control hardware.
 
-  %section.how-to
-    %h2 How to establish a connection and setup the driver
-    %h3 JavaScript
-    :markdown
-          :::javascript
-          var Cylon = require('cylon');
+%section.intro
+  =image_tag "/images/devices/leap_motion.jpg", class: "display"
+  %p
+    Allows user to interact with Cylon.js devices using a Leap Motion controller. The Leap Motion uses its built in cameras to track the user's hand motions, and translations those to events that Cylon.js can use to trigger actions or control hardware.
 
-          Cylon.robot({
-            connection: {
-              name: 'leapmotion',
-              adaptor: 'leapmotion',
-              port: '127.0.0.1:6437'
-            },
+%section.how-to
+  %h2 How to establish a connection and setup the driver
+  %h3 JavaScript
+  :markdown
+        :::javascript
+        Cylon = require('cylon');
 
-            device: {
-              name: 'leapmotion',
-              driver: 'leapmotion'
-            }
-           ... 
-    %h3 CoffeeScript
-    :markdown
-          :::javascript
-          Cylon = require 'cylon'
+        Cylon.robot({
+          connection: {
+            name: 'leapmotion',
+            adaptor: 'leapmotion',
+            port: '127.0.0.1:6437'
+          },
+          device: {
+            name: 'leapmotion',
+            driver: 'leapmotion'
+          },
+         ... 
+  %h3 CoffeeScript
+  :markdown
+        :::javascript
+        Cylon = require 'cylon'
 
-          Cylon.robot
-            connection: { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' }
-            device: { name: 'leapmotion', driver: 'leapmotion' }
-          ...
+        Cylon.robot
+          connection: { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' }
+          device: { name: 'leapmotion', driver: 'leapmotion' }
+        ...
 
-  %section.public-methods
-    %h2 Events
 
-    %dl.methods 
-      %dt hand
-      %dd Gets triggered when doing a hand motion, makes hand input available.
-      %dt gesture
-      %dd Gets triggered when doing a gesture motion, makes hand input available.
-      %dt pointable
-      %dd Gets triggered when doing a pointable motion, makes hand input available.
-      %dt frame
-      %dd Gets triggered with every motion detected, makes frame input available.
-      %dt start
-      %dd Sent when the device has been started and is ready to use.  
+%section.how-to
+  %h2 How to use
+  %p Example receiving hand gesture events from a Leap Motion.
+  %h3 JavaScript
+  :markdown
+        :::javascript
+        Cylon = require('cylon');
 
-  %section.how-to
-    %h2 How to use
-    -#%p Example receiving hand motion events from a Leap Motion.
-    %h3 JavaScript
-    :markdown
-          :::javascript
-          var Cylon = require('cylon');
+        Cylon.robot({
+          connection: {
+            name: 'leapmotion',
+            adaptor: 'leapmotion',
+            port: '127.0.0.1:6437'
+          },
+          device: {
+            name: 'leapmotion',
+            driver: 'leapmotion'
+          },
+          work: function(my) {
+            return my.leapmotion.on('gesture', function(gesture) {
+              return Logger.info(gesture);
+            });
+          }
+        }).start();
 
-          Cylon.robot({
-            connection: {
-              name: 'leapmotion',
-              adaptor: 'leapmotion',
-              port: '127.0.0.1:6437'
-            },
 
-            device: {
-              name: 'leapmotion',
-              driver: 'leapmotion'
-            },
+  %h3 CoffeeScript
+  :markdown
+        :::javascript
+        Cylon = require 'cylon'
 
-            work: function(my) {
-              my.leapmotion.on('connect', function() {
-                Logger.info("Connected");
-              });
+        Cylon.robot
+          connection: { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' }
+          device: { name: 'leapmotion', driver: 'leapmotion' }
 
-              my.leapmotion.on('start', function() {
-                Logger.info("Started");
-              });
+          work: (my) ->
+            my.leapmotion.on 'gesture', (gesture) ->
+              Logger.info gesture
 
-              my.leapmotion.on('frame', function(frame) {
-                Logger.info(frame.toString());
-              });
+        .start()
 
-              my.leapmotion.on('hand', function(hand) {
-                Logger.info(hand.toString());
-              });
+%section.public-methods
+  .commands_api
+    = partial "/documentation/drivers/partials/leapmotion/events"
 
-              my.leapmotion.on('pointable', function(pointable) {
-                Logger.info(pointable.toString());
-              });
-
-              my.leapmotion.on('gesture', function(gesture) {
-                Logger.info(gesture.toString());
-              });
-            }
-          }).start();
-
-    %h3 CoffeeScript
-    :markdown
-          :::javascript
-          Cylon = require 'cylon'
-
-          Cylon.robot
-            connection: { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' }
-            device: { name: 'leapmotion', driver: 'leapmotion' }
-
-            work: (my) ->
-              my.leapmotion.on 'connect', ->
-                Logger.info "Connected"
-
-              my.leapmotion.on 'start', ->
-                Logger.info "Started"
-
-              events = ["frame", "hand", "pointable", "gesture"]
-
-              for event in events
-                my.leapmotion.on event, (payload) ->
-                  Logger.info payload.toString()
-
-          .start()
-
-  %section.compatability.hardware
-    %h2 Works with:
-    .devices
-      = partial "documentation/partials/leapmotion"
+%section.compatability.hardware
+  %h2 Works with:
+  .devices
+    = partial "documentation/partials/devices_platforms"

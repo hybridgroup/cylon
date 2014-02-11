@@ -1,5 +1,6 @@
 ---
-layout: page
+layout: documentation
+page_title_show: true
 title: Cylon.JS Example - Robot Commands
 page_title: "Example: Robot Commands"
 author: The Hybrid Group
@@ -25,7 +26,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
           MyRobot.prototype.work = function(me) {
             every((1).seconds(), function() {
-              Logger.info(me.name);
+              console.log(me.name);
             });
           };
 

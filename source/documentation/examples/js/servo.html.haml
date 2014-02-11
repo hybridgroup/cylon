@@ -1,5 +1,6 @@
 ---
-layout: page
+layout: documentation
+page_title_show: true
 title: Cylon.JS Example - Servo
 page_title: "Example: Servo"
 author: The Hybrid Group
@@ -14,7 +15,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
         Cylon.robot({
           connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
-          device: { name: 'servo', driver: 'servo', pin: 3 },
+          device: { name: 'servo', driver: 'servo', pin: 3, range: { min: 30, max: 150 } },
 
           work: function(my) {
             var angle = 30;
@@ -24,7 +25,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
               angle += increment;
               my.servo.angle(angle);
 
-              Logger.info("Current Angle: " + (my.servo.currentAngle()));
+              console.log("Current Angle: " + (my.servo.currentAngle()));
 
               if ((angle === 30) || (angle === 150)) { increment = -increment; }
             });

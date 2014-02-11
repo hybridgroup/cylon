@@ -15,6 +15,10 @@ For deploying the webpage, your must be in 'Cylon.js.io' branch and run the foll
 
       rake publish
 
+You must not have any uncomitted or untracked files in the site dirs, or the publish operation will fail with a message such as `Directory not clean`.
+
+If the publish fails, you might need to remove the `build` dir before trying to run `rake publish` again.
+
 ### Documentation
 
 This project uses HAML.
@@ -48,22 +52,28 @@ To add new information to any driver, do this :
 
 #### Examples
 
-To create a new example for any driver or platform, do this : 
+To import examples from the main Cylon.js repository, run the
+`bin/import_examples` script. You'll need to have Git installed.
 
-- 1) Go to the file `source/documentation/examples` , and create a new file `file.html.haml`.
+This script will:
 
-- 2) Add the path into this file `source/documentation/index.html.haml`, on the examples section.
+- clone down the Cylon.js repo
+- extract all examples
+- create missing example pages (`.litcoffee` and `.js`) and remove those that have
+  also been removed from the main repo
+- create/update examples index page
 
-- 3) Add this code to the top part of your file :
-		
-		  ---
-		  title: Site Title
-		  author: Author
-		  page_title: Page Title
-		  page_subtitle: "Page Subtitle"
-		  layout: page
-		  ---
+#### Repo Docs
 
-### Sed your Pull Request
+To import docs partials from Cylon adaptor repositories, run the
+`bin/import_repo_docs` script.
+
+This script will:
+
+- clone down Cylon adaptor repositories
+- extract all `docs/*.md` documents
+- add them as partials to `source/documentation/drivers/partials`
+
+### Send your Pull Request
 
 When you have your code ready, create a new PR : `base: cylonjs.com` and `compare:"your_branch"`

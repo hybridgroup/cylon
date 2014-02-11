@@ -3,64 +3,37 @@ title: Cylon.js - Roomba Driver
 author: The Hybrid Group
 page_title: Roomba
 page_subtitle: Driver
-layout: page
+layout: documentation
+page_title_show: true
+
+roomba_platform: true
 ---
-.documentation
-  %section.intro
-    =image_tag "/images/roomba.jpg", class: "display"
-    %p
-      Allows user to control a Roomba iRobot Create using Cylon.js.
 
-  %section.how-to
-    %h2 How to establish a connection and setup the driver
-    :markdown
-          :::javascript
-          ...
+%section.intro
+  =image_tag "/images/devices/roomba.jpg", class: "display"
+  %p
+    Allows user to control a Roomba iRobot Create using Cylon.js.
 
-  %section.public-methods
-    %h2 Commands
-    %dl.methods 
-      %dt start
-      %dd Puts roomba in start mode.
-      %dt safe_mode
-      %dd Puts roomba in safe mode.
-      %dt full_mode
-      %dd Puts roomba in full mode.
-      %dt forward(seconds, speed=slow) → nil
-      %dd Moves roomba forward for &lt;seconds&gt; amount of time at &lt;speed&gt; (speed(int) between 0 and 500).
-      %dt fast_forward(seconds) → nil
-      %dd Moves roomba forward for &lt;seconds&gt; amount of time at max speed.
-      %dt stop
-      %dd Stops the roomba.
-      %dt backwards(seconds) → nil
-      %dd Moves roomba backwards for &lt;seconds&gt; amount of time at default speed.
-      %dt nudge_left
-      %dd Turns roomba a little bit to the left.
-      %dt nudge_right
-      %dd Turns roomba a little bit to the right.
-      %dt turn_left(seconds=1) → nil
-      %dd Turns roomba to the left the specefied amount of seconds.
-      %dt turn_right(seconds=1) → nil
-      %dd Turns roomba to the right the specefied amount of seconds.
-      %dt turn_around
-      %dd Turns roomba 180 degrees.
-      %dt drive(speed, direction, seconds = 0)  → nil
-      %dd Drives the roomba at speed (from 0 to 500) and direction (straight=32768, clockwise=65535, counterclockwise=1) for the specefied amount of time (seconds).
-      %dt play(song_number)  → nil
-      %dd Plays the song specified by song_numer.
-      %dt song(notes[Collection], song_number[Integer])  → nil
-      %dd Stores a song in the roomba.
-      %dt beep
-      %dd Makes roomba beep.
+%section.how-to
+  %h2 How to establish a connection and setup the driver
+  :markdown
+        :::javascript
+        ...
 
-  %section.how-to
-    %h2 How to use
-    %h3 Example controlling a Roomba.
-    :markdown
-          :::javascript
-          ...
+%section.how-to
+  %h2 How to use
+  %h3 Example controlling a Roomba.
+  :markdown
+        :::javascript
+        ...
 
-  %section.compatability.hardware
-    %h2 Works with:
-    .devices
-      = partial "documentation/partials/roomba"
+%section.public-methods
+  .commands_api
+    = #partial "/documentation/drivers/partials/roomba/commands"
+  .commands_api
+    = #partial "/documentation/drivers/partials/roomba/events"
+
+%section.compatability.hardware
+  %h2 Works with:
+  .devices
+    = partial "documentation/partials/devices_platforms"

@@ -1,0 +1,97 @@
+---
+title: Cylon.js - Makey Button Driver
+author: The Hybrid Group
+page_title: Makey Button
+page_subtitle: Driver
+layout: documentation
+page_title_show: true
+
+arduino_platform: true
+beaglebone_platform: true
+digispark_platform: true
+---
+%section.intro
+  = image_tag "/images/devices/makey-button.jpg", class: "display"
+  %p
+    Inspired by the awesome MakeyMakey (<a href='http://makeymakey.com'>http://makeymakey.com</a>), this GPIO driver allows you to connect a 10 MOhm resistor to a digital pin on your Arduino or Raspberry Pi to control your robots with bananas, clay, or drawable circuitry.
+
+%section.how_to
+  %h2 How to establish a connection and setup the driver 
+  %h3 JavaScript
+  :markdown
+        :::javascript
+
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: {name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'},
+
+          device: {name: 'makey-button', driver: 'makey-button', pin: 2},
+          ...
+
+  %h3 CoffeeScript
+  :markdown
+        :::javascript
+        Cylon = require 'cylon'
+
+        Cylon.robot
+          connection:
+            name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
+
+          device:
+            name: 'makey-button', driver: 'makey-button', pin: 2
+          ...
+
+
+%section.how-to
+  %h2 How to use
+  %p 
+
+  %h3 JavaScript    
+  :markdown
+        :::javascript
+
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: {name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'},
+
+          device: {name: 'button', driver: 'makey-button', pin: 2},
+
+          work: function(my) {
+            my.button.on('push', function() {
+              Logger.info("Button pushed!");
+            });
+          }
+        }).start();
+
+  %h3 CoffeeScript
+  :markdown
+        :::javascript
+        Cylon = require 'cylon'
+
+        Cylon.robot
+          connection:
+            name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
+
+          device:
+            name: 'button', driver: 'makey-button', pin: 2
+
+          work: (my) ->
+            my.button.on 'push', -> Logger.info "Button pushed!"
+
+        .start()
+
+%section.public-methods
+  .commands_api
+    = partial "/documentation/drivers/partials/gpio/commands_makey_button"
+  .commands_api
+    = partial "/documentation/drivers/partials/gpio/events_makey_button"
+
+
+%section.compatability.hardware
+  %h2 Works with:
+  =# TODO: Update platform list with all that work with this driver in Cylon.js.
+  .devices
+    = partial "documentation/partials/devices_platforms"
+    

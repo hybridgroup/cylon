@@ -3,63 +3,84 @@ title: Cylon.js - XBox360 Controller Driver
 author: The Hybrid Group
 page_title: XBox360 Controller
 page_subtitle: Driver
-layout: page
+layout: documentation
+page_title_show: true
+
+joystick_platform: true
 ---
-.documentation
-  %section.intro
-    =image_tag "/images/xbox360.jpg", class: "display"
-    %p
-      Allows user to interact with Cylon.js devices using a XBox360 game controller.
+%section.intro
+  =image_tag "/images/devices/xbox360.jpg", class: "display"
+  %p Allows user to interact with Cylon.js devices using a XBox360 game controller.
 
   %section.how-to
     %h2 How to establish a connection and setup the driver
-    :markdown
-          :::ruby
-          require 'Cylon.js'
-          connection :joystick, :adaptor => :joystick
-          device :controller, :driver => :xbox360, :connection => :joystick, :interval => 0.1
-
-  %section.public-methods
-    %h2 Events:
-    %dl.methods 
-      %dt button_a
-      %dd Get's triggered every interval amount of time if the a button is pressed.
-      %dt button_b
-      %dd Get's triggered every interval amount of time if the b button is pressed.
-      %dt button_x
-      %dd Get's triggered every interval amount of time if the x button is pressed.
-      %dt button_y
-      %dd Get's triggered every interval amount of time if the y button is pressed.
-      %dt button_lb
-      %dd Get's triggered every interval amount of time if the left bumper button is pressed.
-      %dt button_rb
-      %dd Get's triggered every interval amount of time if the right bumper button is pressed.
-      %dt button_start
-      %dd Get's triggered every interval amount of time if the start button is pressed.
-      %dt button_back
-      %dd Get's triggered every interval amount of time if the back button is pressed.
-      %dt joystick
-      %dd Get's triggered every interval amount of time if a joystick event occured, you can access values x, y, s(joystick number, 0 and 1 for left and right).
-      %dt joystick_0
-      %dd Get's triggered every interval amount of time if a joystick_0 event occured, you can access values x, y.
-      %dt joystick_1
-      %dd Get's triggered every interval amount of time if a joystick_1 event occured, you can access values x, y.
-    
-
-    %h3 How to use events and call them on your drivers
-    %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
+    %h3 JavaScript
     :markdown
           :::javascript
-          ...
+          var Cylon = require('cylon');
 
-  %section.how-to
-    %h2 How to use
-    %h3 Example receiving button events from XBox360 controller joystick.
+          Cylon.robot({
+            connection: { name: 'joystick', adaptor: 'joystick' },
+            device: {name: 'joystick', driver: 'xbox360'}
+          ..
+
+    %h3 CoffeeScript
     :markdown
           :::javascript
+          Cylon = require 'cylon'
+
+          Cylon.robot
+            connection:
+              name: 'joystick', adaptor: 'joystick'
+
+            device:
+              name: 'joystick', driver: 'xbox360'
           ...
 
-  %section.compatability.hardware
-    %h2 Works with:
-    .devices
-      = partial "documentation/partials/joystick"
+%section.how-to
+  %h2 How to use
+  %p Example receiving button events from XBox360 controller joystick.
+  %h3 JavaScript
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'joystick', adaptor: 'joystick' },
+          device: {name: 'joystick', driver: 'xbox360'},
+
+          work: function(my) {
+            my.joystick.on("left:move", function(position) { 
+              console.log(position);
+            });
+          }
+        }).start();
+
+  %h3 CoffeeScript
+  :markdown
+        :::javascript
+        Cylon = require 'cylon'
+
+        Cylon.robot
+          connection:
+            name: 'joystick', adaptor: 'joystick'
+
+          device:
+            name: 'joystick', driver: 'xbox360'
+
+          work: (my) ->
+            my.joystick.on "left:move", (position) ->
+              console.log position
+
+        .start()
+
+%section.public-methods
+  .commands_api
+    = partial "/documentation/drivers/partials/joystick/commands_xbox360"
+  .commands_api
+    = partial "/documentation/drivers/partials/joystick/events_xbox360"
+
+%section.compatability.hardware
+  %h2 Works with:
+  .devices
+    = partial "documentation/partials/devices_platforms"

@@ -1,5 +1,6 @@
 ---
-layout: page
+layout: documentation
+page_title_show: true
 title: Cylon.JS Example - BlinkM
 page_title: "Example: BlinkM"
 author: The Hybrid Group
@@ -19,24 +20,23 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
           work: function(my) {
             my.blinkm.on('start', function() {
-              my.blinkm.version(function(version) {
+
+              my.blinkm.stopScript();
+
+              my.blinkm.getFirmware(function(version) {
                 Logger.info("Started BlinkM version " + version);
               });
 
-              my.blinkm.off();
+              my.blinkm.goToRGB(0,0,0);
+              my.blinkm.getRGBColor(function(data){
+                console.log("Starting Color: ", data)
+              });
 
-              var lit = false;
-
-              every((1).second(), function() {
-                if (lit) {
-                  lit = false;
-                  Logger.info('on');
-                  my.blinkm.rgb(0xaa, 0, 0);
-                } else {
-                  lit = true;
-                  Logger.info('off');
-                  my.blinkm.rgb(0, 0, 0);
-                }
+              every((2).second(), function() {
+                my.blinkm.getRGBColor(function(data){
+                  console.log("Current Color: ", data);
+                });
+                my.blinkm.fadeToRandomRGB(128, 128, 128);
               });
             });
           }
