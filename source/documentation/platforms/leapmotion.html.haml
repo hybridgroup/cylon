@@ -5,6 +5,7 @@ page_title: Leapmotion
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-leapmotion' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-leapmotion/issues'>Issues</a>"
 layout: documentation
 page_title_show: true
+subnav_platform: true
 
 leapmotion_driver: true
 ---
@@ -19,14 +20,15 @@ leapmotion_driver: true
     = succeed "." do
       = link_to "here", "https://www.leapmotion.com/", target: :blank
 
-%section.how-to
-  %h2 How to install
+%section.how-to#HowToInstall
+  %h2 How To Install
   %p Installing Cylon.js with leapmotion support is pretty easy.
   :markdown
         :::bash
         npm install cylon-leapmotion
 
-  %h2 How to use
+%section.how-to#HowToUse
+  %h2 How To Use
   %p This small program uses a Leap Motion to detect the user's hand position
   %h3 JavaScript
   :markdown
@@ -65,7 +67,8 @@ leapmotion_driver: true
 
         .start()
 
-  %h2 How to connect
+%section.how-to#HowToConnect
+  %h2 How To Connect
   %h3 OSX
   %p
     This driver works out of the box with the vanilla installation of the Leap Motion Software that you get in their 
@@ -89,7 +92,7 @@ leapmotion_driver: true
     %li Connect your computer and the Leap Motion controller
     %li Connect to the device via Cylon.js
 
-%section.drivers
+%section.drivers#Drivers
   %h2 Drivers
   %p There is only one driver for the Leap Motion platform as listed below.
 

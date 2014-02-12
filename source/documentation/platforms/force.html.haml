@@ -5,6 +5,7 @@ page_title: Force
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-force' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-force/issues'>Issues</a>"
 layout: documentation
 page_title_show: true
+subnav_platform: true
 
 force_drivers: true
 ---
@@ -24,8 +25,9 @@ force_drivers: true
       = link_to "http://www.force.com/", "http://www.salesforce.com/platform/overview/", target: :blank
 
 
-%section.how-to
-  %h2 How to install
+
+%section.how-to#HowToInstall
+  %h2 How To Install
   
   %p
     Installing cylon.js with Force support is pretty easy.
@@ -33,7 +35,8 @@ force_drivers: true
         :::bash
         npm install cylon-force
 
-  %h2 How to use
+%section.how-to#HowToUse
+  %h2 How To Use
   %p
   -# here the description of the example *************
     This example uses the sphero and the cylonjs-force
@@ -107,7 +110,8 @@ force_drivers: true
         .start()
 
 
-
+%section.how-to#HowToConnect
+  %h2 How To Connect
   %h2 Salesforce Setup
   %h3 Getting Started
   %ul 
@@ -177,7 +181,7 @@ force_drivers: true
 	
 
 
-%section.drivers
+%section.drivers#Drivers
   %h2 Drivers
   %p All Cylon.js drivers listed below should work with the Force:
 
