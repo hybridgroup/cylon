@@ -13,13 +13,13 @@ beaglebone_platform: true
 raspberry_platform: true
 ---
 
-%section.intro#Top
+%section.intro
   =image_tag "/images/devices/hmc6352-compass.jpg", class: "display"
   %p
     Allows user to read heading from HMC6352 Digital Compass via i2c interface
 
 %section.how-to#HowToConnect
-  %h2 How to establish a connection and setup the driver
+  %h2 How To Connect
   %h3 JavaScript
   :markdown
         :::javascript
@@ -31,8 +31,7 @@ raspberry_platform: true
 
 
 %section.how-to#HowToUse
-  %h2 How to use
-  %h3 How to use events and call them on your drivers
+  %h2 How To Use
   %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
   :markdown
         :::javascript
@@ -57,7 +56,7 @@ raspberry_platform: true
   .clear 
 
 %section.compatability.hardware#Compatability
-  %h2 Works with:
+  %h2 Compatability
   .devices
     = partial "documentation/partials/devices_platforms"
    

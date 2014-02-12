@@ -10,13 +10,13 @@ subnav_driver: true
 ardrone_platform: true
 ---
 
-%section.intro#Top
+%section.intro
   =image_tag "/images/devices/ardrone-navigation.jpg", class: "display"
   %p
     Allows user to receive in-flight navgation data from an ARDrone. Navigation data includes such information as the ARDrone's current pitch and yaw, along with many other data elements.
 
 %section.how-to#HowToConnect
-  %h2 How to establish a connection and setup the driver
+  %h2 How To Connect
   %p
     Communication with the ARDrone's navigation data interface takes place using a WiFi connection. The ARDrone is a WiFi access point, so it normally can be the only device you connect to, without some additional effort to reconfigure the drone itself to put it into infrastructure mode.
 
@@ -50,7 +50,7 @@ ardrone_platform: true
         ...
 
 %section.how-to#HowToUse
-  %h2 How to use events and call them on your drivers
+  %h2 How To Use
   %p Once the connection and the devices have been setup (as explained above) you can receive navigation events on them as follows:
 
   %h3 JavaScript
@@ -102,6 +102,6 @@ ardrone_platform: true
     = partial "/documentation/drivers/partials/ardrone/events_nav"
 
 %section.compatability.hardware#Compatability
-  %h2 Works with:
+  %h2 Compatability
   .devices
     = partial "documentation/partials/devices_platforms"
