@@ -5,6 +5,7 @@ page_title: Arduino
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-firmata' target='blanck' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-firmata/issues' target='blanck'>Issues</a>"
 layout: documentation
 page_title_show: true
+subnav_platform: true
 
 gpio_drivers: true
 blinkm_driver: true
@@ -23,13 +24,15 @@ lcd_driver: true
     = succeed "." do
       = link_to "here", "http://arduino.cc/", target: :blank
 
-%section.how_to
-  %h2 How to install
+%section.how_to#HowToInstall
+  %h2 How To Install
   %p Installing Cylon.js with Arduino support is pretty easy.
   :markdown
         :::ruby
         npm install cylon-firmata
-  %h2 How to use
+
+%section.how_to#HowToUse
+  %h2 How To Use
   %p This small program lets you push a button on the arduino board to turn a LED on or off. In less than 10 lines of code using Cylon.js.
   %h3 Javascript
   :markdown
@@ -66,7 +69,8 @@ lcd_driver: true
 
           .start()
 
-  %h2 How to connect
+%section.how-to#HowToConnect
+  %h2 How To Connect
   %h3 OSX
 
   %p The main steps are:
@@ -160,7 +164,7 @@ lcd_driver: true
 
   %p Coming soon.
 
-%section.drivers
+%section.drivers#Drivers
   %h2 Drivers
   %p
     Thanks to

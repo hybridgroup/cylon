@@ -5,6 +5,7 @@ page_title: Ardrone
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-ardrone' target='blanck' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-ardrone/issues' target='blanck'>Issues</a>"
 layout: documentation
 page_title_show: true
+subnav_platform: true
 
 ardrone_flight_driver: true
 ardrone_nav_driver: true
@@ -20,14 +21,15 @@ ardrone_nav_driver: true
     = succeed "." do
       = link_to "here", "http://ardrone2.parrot.com/", target: :blank
 
-%section.how-to
-  %h2 How to install
+%section.how-to#HowToInstall
+  %h2 How To Install
   %p Installing cylon.js with ardrone support is pretty easy.
   :markdown
         :::javascript
         npm install cylon-ardrone
 
-  %h2 How to use
+%section.how-to#HowToUse
+  %h2 How To Use
   %p This small program lets the ARDrone take-off, hover, and land.
   
   %h3 Javascript
@@ -73,7 +75,8 @@ ardrone_nav_driver: true
 
         .start()
 
-  %h2 How to connect
+%section.how-to#HowToConnect
+  %h2 How To Connect
   %p The ARDrone is a WiFi device, so there is no additional work to establish a connection to a single drone. However, in order to connect to multiple drones, you need to perform some configuration steps on each drone via SSH.
 
   %h2 Automatic Reset From Emergency Mode
@@ -83,7 +86,8 @@ ardrone_nav_driver: true
   :markdown
         :::javascript
         Coming soon.
-%section.drivers
+
+%section.drivers#Drivers
   %h2 Drivers
   %p Available drivers for the ARDrone platform are listed below. There are three drivers for the ARDrone: the ARDrone for flight control and the ARDroneNav for navigation data.
 

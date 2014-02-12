@@ -5,6 +5,7 @@ page_title: Raspberry Pi
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-raspi' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-raspi/issues'>Issues</a>"
 layout: documentation
 page_title_show: true
+subnav_platform: true
 
 button_driver: true
 continuous_servo_driver: true        
@@ -23,14 +24,15 @@ motor_driver: true
     = succeed "." do
       = link_to "http://www.raspberrypi.org/", "http://www.raspberrypi.org/", target: :blank
 
-%section.how-to
-  %h2 How to install
+%section.how-to#HowToInstall
+  %h2 How To Install
   %p Installing cylon.js with raspberri-pi support is pretty easy.
   :markdown
         :::bash
         npm install cylon-raspi
 
-  %h2 How to use
+%section.how-to#HowToUse
+  %h2 How To Use
   %p This small program causes an LED to blink.
   %h3 JavaScript
   :markdown
@@ -72,7 +74,8 @@ motor_driver: true
         .start()
   
 
-  %h2 How to connect
+%section.how-to#HowToConnect
+  %h2 How To Connect
   %h3 Connecting to Raspberry Pi GPIO
   %p This module only works on a real Raspberry Pi. Do not bother trying on any other kind of computer it will not work. Also note you will need to connect actual circuits to the Raspberry Pi's GPIO pins.
 
@@ -99,7 +102,7 @@ motor_driver: true
 
   =link_to "https://github.com/hybridgroup/pi-blaster" , "https://github.com/hybridgroup/pi-blaster"
 
-%section.drivers
+%section.drivers#Drivers
   %h2 Drivers
   %p All Cylon.js digital and PWM GPIO drivers listed below should work with the Raspberry Pi:
 

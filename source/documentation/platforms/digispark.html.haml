@@ -5,6 +5,7 @@ page_title: Digispark
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-digispark' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-digispark/issues'>Issues</a>"
 layout: documentation
 page_title_show: true
+subnav_platform: true
 
 led_driver: true
 servo_driver: true
@@ -24,13 +25,15 @@ lcd_driver: true
     = succeed "." do
       = link_to "here", "http://digistump.com/category/1", target: :blank
 
-%section.how-to
-  %h2 How to install
+%section.how-to#HowToInstall
+  %h2 How To Install
   %p Installing Cylon.js with digispark support is pretty easy.
   :markdown
         :::bash
         npm install cylon-digispark
-  %h2 How to use
+
+%section.how-to#HowToUse
+  %h2 How To Use
   %p This small program lets you toggle an LED on and off.
   %h3 JavaScript
   :markdown
@@ -60,7 +63,8 @@ lcd_driver: true
 
         .start()
 
-  %h2 How to connect
+%section.how-to#HowToConnect
+  %h2 How To Connect
   %p
     It is very easy to setup and connect to the Digispark using cylon CLI commands.
   %p

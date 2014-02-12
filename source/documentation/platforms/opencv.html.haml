@@ -5,6 +5,7 @@ page_title: Opencv
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-opencv' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-opencv/issues'>Issues</a>"
 layout: documentation
 page_title_show: true
+subnav_platform: true
 ---
 
 %section.intro
@@ -17,8 +18,9 @@ page_title_show: true
     = succeed "." do
       = link_to "here", "http://opencv.org/", target: :blank
 
-%section.how-to
-  %h2 How to install
+
+%section.how-to#HowToInstall
+  %h2 How To Install
   %p Installing Cylon.js with Opencv support is pretty easy.
   :markdown
         :::bash
@@ -70,7 +72,8 @@ page_title_show: true
         make
         sudo make install
 
-  %h2 How to use
+%section.how-to#HowToUse
+  %h2 How To Use
   %p Example using face detection.
   %h3 CoffeeScript
   :markdown

@@ -5,6 +5,7 @@ page_title: Spark
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-spark' target='blanck' class='repository'>Repository</a> <a class='issues' href='https://github.com/hybridgroup/cylon-spark/issues' target='blanck'>Issues</a>"
 layout: documentation
 page_title_show: true
+subnav_platform: true
 
 analog_sensor_driver: true
 button_driver: true
@@ -25,13 +26,15 @@ servo_driver: true
     = succeed "." do
       = link_to "https://www.spark.io/", "https://www.spark.io/", target: :blank
 
-%section.how_to
-  %h2 How to install
+%section.how-to#HowToInstall
+  %h2 How To Install
   %p Installing Cylon.js with Spark support is pretty easy.
   :markdown
         :::ruby
         npm install cylon-spark
-  %h2 How to use
+
+%section.how-to#HowToUse
+  %h2 How To Use
   %p This small program lets you turn on or off a LED for every 1 sec.
   %h3 Javascript  
   :markdown
@@ -65,7 +68,7 @@ servo_driver: true
         .start()
 
 
-%section.drivers
+%section.drivers#Drivers
   %h2 Drivers
   
   %p Available drivers for the spark platform are listed below, the drivers contain detailed documentation and examples of what kinds of physical computing (using Cylon.js and Node.js) you can be doing:
