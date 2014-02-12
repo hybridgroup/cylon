@@ -5,6 +5,7 @@ page_title: Leap Motion
 page_subtitle: Driver
 layout: documentation
 page_title_show: true
+subnav_driver: true
 
 leapmotion_platform: true
 ---
@@ -14,8 +15,8 @@ leapmotion_platform: true
   %p
     Allows user to interact with Cylon.js devices using a Leap Motion controller. The Leap Motion uses its built in cameras to track the user's hand motions, and translations those to events that Cylon.js can use to trigger actions or control hardware.
 
-%section.how-to
-  %h2 How to establish a connection and setup the driver
+%section.how-to#HowToConnect
+  %h2 How To Connect
   %h3 JavaScript
   :markdown
         :::javascript
@@ -43,8 +44,8 @@ leapmotion_platform: true
         ...
 
 
-%section.how-to
-  %h2 How to use
+%section.how-to#HowToUse
+  %h2 How To Use
   %p Example receiving hand gesture events from a Leap Motion.
   %h3 JavaScript
   :markdown
@@ -85,10 +86,10 @@ leapmotion_platform: true
         .start()
 
 %section.public-methods
-  .commands_api
+  .commands_api#Events
     = partial "/documentation/drivers/partials/leapmotion/events"
 
-%section.compatability.hardware
-  %h2 Works with:
+%section.compatability.hardware#Compatability
+  %h2 Compatibility
   .devices
     = partial "documentation/partials/devices_platforms"

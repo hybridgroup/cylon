@@ -5,6 +5,8 @@ page_title: Maxbotix
 page_subtitle: Driver
 layout: documentation
 page_title_show: true
+subnav_driver: true
+subnav_circuit_driver: true
 
 arduino_platform: true
 spark_platform: true
@@ -15,8 +17,8 @@ spark_platform: true
   %p
     Provides tools to use maxbotix sonar (range finder).
 
-%section.how-to
-  %h2 How to stablish a connection and setup the driver
+%section.how-to#HowToConnect
+  %h2 How To Connect
   %h3 JavaScript
   :markdown
         :::javascript
@@ -26,25 +28,25 @@ spark_platform: true
         :::javascript
         coming soon
 
-  %h3 How to use events and call them on your drivers
+%section.how-to#HowToUse
+  %h3 How To Use
   %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
   :markdown
         :::javascript
         comming soon
 
-%section.how-to
   %h2 Examples
   :markdown
         :::javascript
         comming soon
 
 %section.public-methods
-  .commands_api
+  .commands_api#Commands
     = partial "/documentation/drivers/partials/gpio/commands_maxbotix"
-  .commands_api
+  .commands_api#Events
     = partial "/documentation/drivers/partials/gpio/events_maxbotix"
 
-%section.circuit
+%section.circuit#Circuit
   %h2 Circuit
   .description_circuit
     %p  
@@ -52,8 +54,8 @@ spark_platform: true
     %img{:src => "/documentation/drivers/breadboards/gpio/maxbotix_bb.png", :alt => ""}/ 
   .clear 
 
-%section.compatability.hardware
-  %h2 Works with:
+%section.compatability.hardware#Compatability
+  %h2 Compatibility
   =# TODO: Update platform list with all that work with this driver in Cylon.js.
   .devices
     = partial "documentation/partials/devices_platforms"

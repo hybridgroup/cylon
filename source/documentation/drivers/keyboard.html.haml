@@ -5,6 +5,7 @@ page_title: Keyboard
 page_subtitle: Driver
 layout: documentation
 page_title_show: true
+subnav_driver: true
 
 keyboard_platform: true
 ---
@@ -13,8 +14,8 @@ keyboard_platform: true
   =image_tag "/images/devices/keyboard.jpg", class: "display"
   %p The Cylon adaptor for keyboard input.
 
-%section.how-to
-  %h2 How to establish a connection and setup the driver
+%section.how-to#HowToConnect
+  %h2 How To Connect
   %h3 Javascript
   :markdown
         :::javascript
@@ -35,8 +36,8 @@ keyboard_platform: true
           connection: { name: 'keyboard', adaptor: 'keyboard' }
         ...
 
-%section.how-to
-  %h2 How to use
+%section.how-to#HowToUse
+  %h2 How To Use
   %p Example receiving button events from a generic joystick.
   %h3 Javascript
   :markdown
@@ -68,10 +69,10 @@ keyboard_platform: true
         .start()
 
 %section.public-methods
-  .commands_api
+  .commands_api#Events
     = partial "/documentation/drivers/partials/keyboard/events"
 
-%section.compatability.hardware
-  %h2 Works with:
+%section.compatability.hardware#Compatability
+  %h2 Compatibility
   .devices
     = partial "documentation/partials/devices_platforms"

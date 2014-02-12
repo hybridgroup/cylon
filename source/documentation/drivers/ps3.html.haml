@@ -5,6 +5,8 @@ page_title: PS3 Controller
 page_subtitle: Driver
 layout: documentation
 page_title_show: true
+subnav_driver: true
+
 
 joystick_platform: true
 ---
@@ -15,7 +17,7 @@ joystick_platform: true
     Allows user to interact with Cylon.js devices using a PS3 game controller.
 
 %section.how-to
-  %h2 How to establish a connection and setup the driver
+  %h2 How To Connect
   :markdown
         :::javascript
         require 'Cylon.js'
@@ -30,7 +32,7 @@ joystick_platform: true
         ...
 
 %section.how-to
-  %h2 How to use
+  %h2 How To Use
   %h3 Example receiving button events from PS3 controller joystick.
   :markdown
         :::javascript
@@ -43,6 +45,6 @@ joystick_platform: true
     = partial "/documentation/drivers/partials/joystick/events_dualshock3"
 
 %section.compatability.hardware
-  %h2 Works with:
+  %h2 Compatibility
   .devices
     = partial "documentation/partials/devices_platforms"

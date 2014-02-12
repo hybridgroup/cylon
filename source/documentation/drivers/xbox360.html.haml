@@ -5,6 +5,7 @@ page_title: XBox360 Controller
 page_subtitle: Driver
 layout: documentation
 page_title_show: true
+subnav_driver: true
 
 joystick_platform: true
 ---
@@ -12,8 +13,8 @@ joystick_platform: true
   =image_tag "/images/devices/xbox360.jpg", class: "display"
   %p Allows user to interact with Cylon.js devices using a XBox360 game controller.
 
-  %section.how-to
-    %h2 How to establish a connection and setup the driver
+  %section.how-to#HowToConnect
+    %h2 How To Connect
     %h3 JavaScript
     :markdown
           :::javascript
@@ -37,8 +38,8 @@ joystick_platform: true
               name: 'joystick', driver: 'xbox360'
           ...
 
-%section.how-to
-  %h2 How to use
+%section.how-to#HowToUse
+  %h2 How To Use
   %p Example receiving button events from XBox360 controller joystick.
   %h3 JavaScript
   :markdown
@@ -75,12 +76,12 @@ joystick_platform: true
         .start()
 
 %section.public-methods
-  .commands_api
+  .commands_api#Commands
     = partial "/documentation/drivers/partials/joystick/commands_xbox360"
-  .commands_api
+  .commands_api#Events
     = partial "/documentation/drivers/partials/joystick/events_xbox360"
 
-%section.compatability.hardware
-  %h2 Works with:
+%section.compatability.hardware#Compatability
+  %h2 Compatibility
   .devices
     = partial "documentation/partials/devices_platforms"
