@@ -31,6 +31,20 @@
   clear: both;
 }
 
+.circuit {
+  .image_circuit {
+    width: 50%;
+    float: left;
+    img {
+      width: 90%;
+    }
+  }
+  .description_circuit {
+    width: 50%;
+    float: right;
+  }
+}
+
 .image-size-300 {
   width: 200px;
 }

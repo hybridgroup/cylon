@@ -91,7 +91,12 @@ digispark_platform: true
 
 %section.circuit
   %h2 Circuit and Schematic
-  =link_to "http://arduino.cc/en/Tutorial/Blink", "http://arduino.cc/en/Tutorial/Blink"
+  .description_circuit
+    %p This example shows the simplest thing you can do with an Arduino to see physical output: it blinks an LED.
+    =link_to "http://arduino.cc/en/Tutorial/Blink", "http://arduino.cc/en/Tutorial/Blink"
+  .image_circuit
+    %img{:src => "/documentation/drivers/breadboards/gpio/led_bb.png", :alt => ""}/ 
+  .clear
 
 %section.compatability.hardware
   %h2 Works with:
