@@ -5,15 +5,17 @@ page_title: Crazyflie
 page_subtitle: Driver
 layout: documentation
 page_title_show: true
+subnav_driver: true
+
 
 crazyflie_platform: true
 ---
-%section.intro
+%section.intro#Top
   =image_tag "/images/devices/crazyflie-flight.jpg", class: "display"
   %p
     Allows user to send flight control commands to a Crazyflie micro-quadcopter. Flight control commands are those used to tell the Crazyflie to take off, land, and or any number of other autonomous flight manuvers.
 
-%section.how-to
+%section.how-to#HowToConnect
   %h2 How to establish a connection and setup the driver
   %p
     Communication with the Crazyflie's flight control interface takes place using a 2.4GHz radio connection. The Crazyflie is controlled from your computer using a Crazyradio, which is a custom USB 2.4GHz radio device. 
@@ -41,7 +43,7 @@ crazyflie_platform: true
         ...
 
 
-%section.how-to
+%section.how-to#HowToUse
   %h2 How to use
   %h3 Examples
   %p This small program causes the Crazyflie to takeoff for 10 seconds.
@@ -90,12 +92,12 @@ crazyflie_platform: true
         .start()
 
 %section.public-methods
-  .commands_api
+  .commands_api#Commands
     = partial "/documentation/drivers/partials/crazyflie/commands"
-  .commands_api
+  .commands_api#Events
     = partial "/documentation/drivers/partials/crazyflie/events"
 
-%section.compatability.hardware
+%section.compatability.hardware#Compatability
   %h2 Works with:
   .devices
     = partial "documentation/partials/devices_platforms"

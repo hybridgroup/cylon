@@ -5,17 +5,21 @@ page_title: Analog Sensor
 page_subtitle: Driver
 layout: documentation
 page_title_show: true
+subnav_driver: true
+subnav_circuit_driver: true
 
 arduino_platform: true
 spark_platform: true
 ---
-%section.intro
+
+
+%section.intro#Top
   = image_tag "/images/devices/analog-sensor.jpg", class: "display"
   %p
     Makes it possible to interact with analog inputs on your device and obtain values that represent the analog input send by the sensors.
     The value received from an analog input read from the sensor goes from 0 to 1027.
 
-%section.how_to
+%section.how_to#HowToConnect
   %h2 How to establish a connection and setup the driver
   %h3 JavaScript
   :markdown
@@ -40,7 +44,8 @@ spark_platform: true
           device:
             name: 'sensor', driver: 'analogSensor', pin: 0, lowerLimit: 100, upperLimit: 900
           ...
-%section.how-to
+          
+%section.how-to#HowToUse
   %h2 How to use
   %p 
     This example detects lower and upper limits on a photoresistor sensor.
@@ -84,12 +89,12 @@ spark_platform: true
 
 
 %section.public-methods
-  .commands_api
+  .commands_api#Commands
     = partial "/documentation/drivers/partials/gpio/commands_analog_sensor"
-  .commands_api
+  .commands_api#Events
     = partial "/documentation/drivers/partials/gpio/events_analog_sensor"
 
-%section.circuit
+%section.circuit#Circuit
   %h2 Circuit 
   .description_circuit
     %p
@@ -98,7 +103,7 @@ spark_platform: true
   .clear 
   
     
-%section.compatibility.hardware
+%section.compatibility.hardware#Compatability
   %h2 Works with:
   =# TODO: Update platform list with all that work with this driver in Cylon.js.
   .devices

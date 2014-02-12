@@ -5,18 +5,20 @@ page_title: HMC6352 Digital Compass
 page_subtitle: Driver
 layout: documentation
 page_title_show: true
+subnav_driver: true
+subnav_circuit_driver: true
 
 arduino_platform: true
 beaglebone_platform: true
 raspberry_platform: true
 ---
 
-%section.intro
+%section.intro#Top
   =image_tag "/images/devices/hmc6352-compass.jpg", class: "display"
   %p
     Allows user to read heading from HMC6352 Digital Compass via i2c interface
 
-%section.how-to
+%section.how-to#HowToConnect
   %h2 How to establish a connection and setup the driver
   %h3 JavaScript
   :markdown
@@ -28,7 +30,7 @@ raspberry_platform: true
         coming soon
 
 
-%section.how-to
+%section.how-to#HowToUse
   %h2 How to use
   %h3 How to use events and call them on your drivers
   %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
@@ -41,12 +43,12 @@ raspberry_platform: true
         coming soon
 
 %section.public-methods
-  .commands_api
+  .commands_api#Commands
     = partial "/documentation/drivers/partials/force/commands"
-  .commands_api
+  .commands_api#Events
     = partial "/documentation/drivers/partials/force/events"
 
-%section.circuit
+%section.circuit#Circuit
   %h2 Circuit
   .description_circuit
     %p 
@@ -54,7 +56,7 @@ raspberry_platform: true
     %img{:src => "/documentation/drivers/breadboards/i2c/hmc6352_bb.png", :alt => ""}/ 
   .clear 
 
-%section.compatability.hardware
+%section.compatability.hardware#Compatability
   %h2 Works with:
   .devices
     = partial "documentation/partials/devices_platforms"

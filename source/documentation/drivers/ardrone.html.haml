@@ -5,15 +5,17 @@ page_title: ARDrone
 page_subtitle: Driver
 layout: documentation
 page_title_show: true
+subnav_driver: true
+
 
 ardrone_platform: true
 ---
-%section.intro
+%section.intro#Top
   =image_tag "/images/devices/ardrone-flight.jpg", class: "display"
   %p
     Allows user to send flight control commands to an ARDrone. Flight control commands are those used to tell the ARDrone to take off, land, and or any number of other autonomous flight manuvers.
 
-%section.how-to
+%section.how-to#HowToConnect
   %h2 How to establish a connection and setup the driver
   %p
     Communication with the ARDrone's flight control interface takes place using a WiFi connection. The ARDrone is a WiFi access point, so it normally can be the only device you connect to, without some additional effort to reconfigure the drone itself to put it into infrastructure mode.
@@ -43,7 +45,7 @@ ardrone_platform: true
         ...
 
 
-%section.how-to
+%section.how-to#HowToUse
   %h2 How to use
   %p 
     This example controls an ARDrone to take off, and then land.
@@ -93,12 +95,12 @@ ardrone_platform: true
         .start()
 
 %section.public-methods
-  .commands_api
+  .commands_api#Commands
     = partial "/documentation/drivers/partials/ardrone/commands_flight"
-  .commands_api
+  .commands_api#Events
     = partial "/documentation/drivers/partials/ardrone/events_flight"
 
-%section.compatability.hardware
+%section.compatability.hardware#Compatability
   %h2 Works with:
   .devices
     = partial "documentation/partials/devices_platforms"

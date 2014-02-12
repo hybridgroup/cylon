@@ -5,6 +5,8 @@ page_title: LED
 page_subtitle: Driver
 layout: documentation
 page_title_show: true
+subnav_driver: true
+subnav_circuit_driver: true
 
 arduino_platform: true
 beaglebone_platform: true
@@ -13,12 +15,12 @@ spark_platform: true
 digispark_platform: true
 ---
 
-%section.intro
+%section.intro#Top
   =image_tag "/images/devices/LED.jpg", class: "display"
   %p
     Allows user to interact with LEDs through digital output and PWM (Pulse Width Modulation)
 
-%section.how-to
+%section.how-to#HowToConnect
   %h2 How to establish a connection and setup the driver
   %h3 JavaScript
   :markdown
@@ -43,7 +45,7 @@ digispark_platform: true
           ...
 
 
-%section.how-to
+%section.how-to#HowToUse
   %h2 How to use
   %p
     This example turns an LED on and off.
@@ -84,12 +86,12 @@ digispark_platform: true
         .start()
 
 %section.public-methods
-  .commands_api
+  .commands_api#Commands
     = partial "/documentation/drivers/partials/gpio/commands_led"
-  .commands_api
+  .commands_api#Events
     = partial "/documentation/drivers/partials/gpio/events_led"
 
-%section.circuit
+%section.circuit#Circuit
   %h2 Circuit 
   .description_circuit
     %p 
@@ -97,7 +99,7 @@ digispark_platform: true
     %img{:src => "/documentation/drivers/breadboards/gpio/led_bb.png", :alt => ""}/ 
   .clear
 
-%section.compatability.hardware
+%section.compatability.hardware#Compatability
   %h2 Works with:
   =# TODO: Update platform list with all that work with this driver in Cylon.js.
   .devices

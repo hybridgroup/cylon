@@ -5,16 +5,17 @@ page_title: Pebble
 page_subtitle: Driver
 layout: documentation
 page_title_show: true
+subnav_driver: true
 
 pebble_platform: true
 ---
 
-%section.intro
+%section.intro#Top
   =image_tag "/images/devices/pebble.jpg", class: "display"
   %p
     Allows user to interact with Cylon.js devices using a Pebble smart watch.
 
-%section.how-to
+%section.how-to#HowToConnect
   %h2 How to establish a connection and setup the driver
   %h3 JavaScript
   :markdown
@@ -44,7 +45,7 @@ pebble_platform: true
         ...
 
 
-%section.how-to
+%section.how-to#HowToUse
   %h2 How to use
   %h3 Example receiving message queue from a Pebble smart watch.
   %h3 JavaScript
@@ -124,12 +125,12 @@ pebble_platform: true
         Cylon.start()
 
 %section.public-methods
-  .commands_api
+  .commands_api#Commands
     = partial "/documentation/drivers/partials/pebble/commands"
-  .commands_api
+  .commands_api#Events
     = partial "/documentation/drivers/partials/pebble/events"
 
-%section.compatability.hardware
+%section.compatability.hardware#Compatability
   %h2 Works with:
   .devices
     = partial "documentation/partials/devices_platforms"

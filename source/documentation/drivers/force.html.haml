@@ -5,11 +5,12 @@ page_title: Force
 page_subtitle: Driver
 layout: documentation
 page_title_show: true
+subnav_driver: true
 
 force_platform: true
 ---
 
-%section.intro
+%section.intro#Top
   = image_tag "/images/devices/force.jpg", class: "display"
   %p 
   -# I put this description but if you need to change it, no problem ;)  *************
@@ -22,7 +23,7 @@ force_platform: true
     = succeed "." do
       = link_to "http://www.force.com/", "http://www.salesforce.com/platform/overview/", target: :blank
 
-%section.how_to
+%section.how_to#HowToConnect
   %h2 How to establish a connection and setup the driver
   %h3 JavaScript
   -#here we need the connection and device in JS(coming soon ..)  *************
@@ -56,7 +57,7 @@ force_platform: true
            ...
   
 
-%section.how-to
+%section.how-to#HowToUse
   %h2 How to use
   %p This example uses the sphero with cylonjs-force
   %h3 JavaScript
@@ -129,17 +130,12 @@ force_platform: true
         .start()
 
 %section.public-methods
-  .commands_api
+  .commands_api#Commands
     = partial "/documentation/drivers/partials/force/commands"
-  .commands_api
+  .commands_api#Events
     = partial "/documentation/drivers/partials/force/events"
 
-%section.circuit
-  -#%h2 Circuit and Schematic
-  -# here the schemantic (coming soon)  *************
-  -#%p coming soon ...
-
-%section.compatibility.hardware
+%section.compatibility.hardware#Compatibility
   %h2 Works with:
   =# TODO: Update platform list with all that work with this driver in Cylon.js.
   -# all ok here :)  *************

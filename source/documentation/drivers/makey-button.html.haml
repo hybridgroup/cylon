@@ -5,6 +5,8 @@ page_title: Makey Button
 page_subtitle: Driver
 layout: documentation
 page_title_show: true
+subnav_driver: true
+subnav_circuit_driver: true
 
 arduino_platform: true
 beaglebone_platform: true
@@ -12,23 +14,13 @@ digispark_platform: true
 raspberry_platform: true
 spark_platform: true
 ---
-%section.intro
+%section.intro#Top
   = image_tag "/images/devices/makey-button.jpg", class: "display"
   %p
     Inspired by the awesome MakeyMakey (<a href='http://makeymakey.com'>http://makeymakey.com</a>), this GPIO driver allows you to connect a 10 MOhm resistor to a digital pin on your Arduino or Raspberry Pi to control your robots with bananas, clay, or drawable circuitry.
 
-%section.subnav
-  %p
-    subnav to each section goes here:
-    %ul
-      %li How To Connect
-      %li How To Use
-      %li Commands
-      %li Events
-      %li Circuit
-      %li Compatibility
 
-%section.how_to
+%section.how_to#HowToConnect
   %h2 How To Connect 
   %h3 JavaScript
   :markdown
@@ -56,7 +48,7 @@ spark_platform: true
           ...
 
 
-%section.how-to
+%section.how-to#HowToUse
   %h2 How To Use
   %p 
 
@@ -96,13 +88,13 @@ spark_platform: true
         .start()
 
 %section.public-methods
-  .commands_api
+  .commands_api#Commands
     = partial "/documentation/drivers/partials/gpio/commands_makey_button"
-  .commands_api
+  .commands_api#Events
     = partial "/documentation/drivers/partials/gpio/events_makey_button"
 
 
-%section.circuit
+%section.circuit#Circuit
   %h2 Circuit
   .description_circuit
     %p  
@@ -111,7 +103,7 @@ spark_platform: true
   .clear 
 
 
-%section.compatability.hardware
+%section.compatability.hardware#Compatability
   %h2 Works with:
   =# TODO: Update platform list with all that work with this driver in Cylon.js.
   .devices

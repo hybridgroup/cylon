@@ -5,19 +5,21 @@ page_title: Motor
 page_subtitle: Driver
 layout: documentation
 page_title_show: true
+subnav_driver: true
+subnav_circuit_driver: true
 
 arduino_platform: true
 raspberry_platform: true
 spark_platform: true
 ---
 
-%section.intro
+%section.intro#Top
   =image_tag "/images/devices/motor.jpg", class: "display"
   %p
     Provides motor manipulation tools for Cylon.js like on/off, speed modulation using PWM,
     use of bidirectional motors using forward/backward pins.
 
-%section.how-to
+%section.how-to#HowToConnect
   %h2 How to establish a connection and setup the driver
   %h3 JavaScript
   :markdown
@@ -45,7 +47,7 @@ spark_platform: true
           ...
 
 
-%section.how-to
+%section.how-to#HowToUse
   %h2 How to use
   %p
     This example turns on a DC motor using PWM.
@@ -90,12 +92,12 @@ spark_platform: true
 
         .start()
 %section.public-methods
-  .commands_api
+  .commands_api#Commands
     = partial "/documentation/drivers/partials/gpio/commands_motor"
-  .commands_api
+  .commands_api#Events
     = partial "/documentation/drivers/partials/gpio/events_motor"
 
-%section.circuit
+%section.circuit#Circuit
   %h2 Circuit
   .description_circuit
     %p  
@@ -105,7 +107,7 @@ spark_platform: true
 
   
 
-%section.compatability.hardware
+%section.compatability.hardware#Compatability
   %h2 Works with:
   =# TODO: Update platform list with all that work with this driver in Cylon.js.
   .devices

@@ -5,18 +5,20 @@ page_title: BlinkM
 page_subtitle: Driver
 layout: documentation
 page_title_show: true
+subnav_driver: true
+subnav_circuit_driver: true
 
 arduino_platform: true
 beaglebone_platform: true
 raspberry_platform: true
 digispark_platform: true
 ---
-%section.intro
+%section.intro#Top
   =image_tag "/images/devices/blinkm.jpg", class: "display"
   %p
     Allows user to control BlinkM RGB LED via i2c interface.
 
-%section.how-to
+%section.how-to#HowToConnect
   %h2 How to establish a connection and setup the driver
   :markdown
     Install the module with `npm install cylon-i2c`
@@ -43,7 +45,7 @@ digispark_platform: true
             name: 'led', driver: 'led', pin: 13
           ...
 
-%section.how-to
+%section.how-to#HowUse
   %h2 How to use
   %p Example using a BlinkM.
   %h3 JavaScript
@@ -79,12 +81,12 @@ digispark_platform: true
         .start()
 
 %section.public-methods
-  .commands_api
+  .commands_api#Commands
     = partial "/documentation/drivers/partials/i2c/commands_blinkm"
-  .commands_api
+  .commands_api#Events
     = partial "/documentation/drivers/partials/i2c/events_blinkm"
 
-%section.circuit
+%section.circuit#Circuit
   %h2 Circuit 
   .description_circuit
     %p
@@ -92,7 +94,7 @@ digispark_platform: true
     %img{:src => "/documentation/drivers/breadboards/i2c/blinkm_bb.png", :alt => ""}/ 
   .clear 
 
-%section.compatability.hardware
+%section.compatability.hardware#Compatability
   %h2 Works with:
   .devices
     = partial "documentation/partials/devices_platforms"

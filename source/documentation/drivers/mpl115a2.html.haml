@@ -5,17 +5,19 @@ page_title: MPL115A2
 page_subtitle: Driver
 layout: documentation
 page_title_show: true
+subnav_driver: true
+subnav_circuit_driver: true
 
 arduino_platform: true
 digispark_platform: true
 raspberry_platform: true
 ---
-%section.intro
+%section.intro#Top
   = image_tag "/images/devices/mpl115a2.jpg", class: "display"
   
   %p Used for measuring barometric pressure.
     
-%section.how_to
+%section.how_to#HowToConnect
   %h2 How to establish a connection and setup the driver 
   %h3 JavaScript
   :markdown
@@ -43,7 +45,7 @@ raspberry_platform: true
           ...
 
 
-%section.how-to
+%section.how-to#HowToUse
   %h2 How to use
   %p 
 
@@ -58,13 +60,13 @@ raspberry_platform: true
         coming soon
 
 %section.public-methods
-  .commands_api
+  .commands_api#Commands
     =# partial "/documentation/drivers/partials/i2c/commands_mpl115a2"
-  .commands_api
+  .commands_api#Events
     =# partial "/documentation/drivers/partials/i2c/events_mpl115a2"
 
 
-%section.circuit
+%section.circuit#Circuit
   %h2 Circuit
   .description_circuit
     %p 
@@ -72,7 +74,7 @@ raspberry_platform: true
     %img{:src => "/documentation/drivers/breadboards/i2c/mpl115a2_bb.png", :alt => ""}/ 
   .clear 
 
-%section.compatability.hardware
+%section.compatability.hardware#Compatability
   %h2 Works with:
   =# TODO: Update platform list with all that work with this driver in Cylon.js.
   .devices
