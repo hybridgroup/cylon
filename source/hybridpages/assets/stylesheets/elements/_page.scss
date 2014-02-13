@@ -41,9 +41,14 @@
 
 }
 
+
+
 .subnav_drivers {
   background: $hero-subtitle-color;
   padding: 20px 0;
+  @media only screen and (max-width: $medium-screen) {
+     display: none;
+  }
   nav {
     a {
       padding: 5px 10px;
