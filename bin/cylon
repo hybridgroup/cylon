@@ -23,7 +23,7 @@ Program
 
 Program
   .command("bluetooth <subcmd> <address> [option]")
-  .description("Connect bluetooth device to PC (pairs) or stablishes serial to bluetooth connection")
+  .description("Connect bluetooth device to PC (pairs) or establishes serial to bluetooth connection")
   .action(function(subcmd, address, option){
     switch(subcmd){
     case 'pair':
