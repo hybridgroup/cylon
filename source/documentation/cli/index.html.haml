@@ -1,5 +1,5 @@
 ---
-title: Cylon.js API
+title: Cylon.js CLI
 author: The Hybrid Group
 page_title: CLI
 page_subtitle: "Cylon CLI (Command Line Interface) provides several tools to make RobotOps easier."
@@ -212,15 +212,15 @@ page_title_show: true
         Reading | ################################################## | 100% 0.00s
 
         avrdude: Device signature = 0x1e950f
-        avrdude: reading input file "/home/edgar/workspace/cylon-cmds/node_modules/cylon-firmata/src/cli/hex/StandardFirmata.cpp.hex"
+        avrdude: reading input file "/home/myuser/workspace/cylon-cmds/node_modules/cylon-firmata/src/cli/hex/StandardFirmata.cpp.hex"
         avrdude: writing flash (11452 bytes):
 
         Writing | ################################################## | 100% 1.84s
 
         avrdude: 11452 bytes of flash written
-        avrdude: verifying flash memory against /home/edgar/workspace/cylon-cmds/node_modules/cylon-firmata/src/cli/hex/StandardFirmata.cpp.hex:
-        avrdude: load data flash data from input file /home/edgar/workspace/cylon-cmds/node_modules/cylon-firmata/src/cli/hex/StandardFirmata.cpp.hex:
-        avrdude: input file /home/edgar/workspace/cylon-cmds/node_modules/cylon-firmata/src/cli/hex/StandardFirmata.cpp.hex contains 11452 bytes
+        avrdude: verifying flash memory against /home/myuser/workspace/cylon-cmds/node_modules/cylon-firmata/src/cli/hex/StandardFirmata.cpp.hex:
+        avrdude: load data flash data from input file /home/myuser/workspace/cylon-cmds/node_modules/cylon-firmata/src/cli/hex/StandardFirmata.cpp.hex:
+        avrdude: input file /home/myuser/workspace/cylon-cmds/node_modules/cylon-firmata/src/cli/hex/StandardFirmata.cpp.hex contains 11452 bytes
         avrdude: reading on-chip flash data:
 
         Reading | ################################################## | 100% 1.47s
@@ -252,6 +252,8 @@ page_title_show: true
   %p
     %b Description:
     Uploads littlewire to the digispark (also installs the necessary udev-rules, only in linux systems).
+    %b Notes:
+    Do not connect the digispark until prompted to do so.
   :markdown
         $ cylon littlewire upload
         ---------------------------------------------------------------------------
