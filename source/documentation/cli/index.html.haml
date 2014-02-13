@@ -1,0 +1,103 @@
+---
+title: Cylon.js API
+author: The Hybrid Group
+page_title: CLI
+page_subtitle: "Cylon CLI (Command Line Interface) provides several tools to make RobotOps easier."
+layout: documentation
+page_title_show: true
+---
+.cli
+  %h2 What is it?
+  %p
+    Cylon CLI is a powerful command line interface tool that provides several tools to make RobotOps and
+    setting up your devices to work with cylon a lot easier.
+  %h2 How can I use it?
+  %p
+    The CylonJS command line interface tools are pretty easy to use and designed to be intuitive, they also
+    provide contextual help regarding the commands you are using. After you have installed CylonJS npm module
+    you just need to call the `cylon` command and a list of available commands (this may vary if you have extra
+    modules installed like cylon-firmata or cylon-digispark) will be printed to the terminal.
+
+  %h3 Printing a list of available commands
+  :markdown
+        :::bash
+        $ cylon
+
+        Usage: cylon [command] [options]
+
+        Commands:
+
+          generate <name>        Generates a new adaptor
+          scan <type>            Scans serial, bluetooth or usb (pass param <serial> | <bluetooth> | <usb>) for connected devices
+          bluetooth <subcmd> <address> [option] Connect bluetooth device to PC (pairs) or stablishes serial to bluetooth connection
+
+        Options:
+
+          -h, --help     output usage information
+          -V, --version  output the version number 
+
+  %h3 Scanning serial port for connected devices
+  :markdown
+        :::bash
+        $ cylon scan serial
+        [    0.000000] console [tty0] enabled
+        [    0.526190] 00:08: ttyS0 at I/O 0x3f8 (irq = 4) is a 16550A
+
+  %h2 What Cylon CLI commands are available?
+  %p
+    If you have only installed cylon the list of available commands is the one printed in the section above,
+    let's review them one by one.
+
+  %h3 cylon scan &lt;type&gt;
+  %h4 Description
+  %p
+    Scans different types of devices connected to your computer.
+    The available options for the type param are serial, bluetooth or usb.
+  :markdown
+        :::bash
+        $ cylon scan usb
+        $ ./node_modules/cylon/bin/cylon scan usb
+        Bus 002 Device 002: ID 8087:8000 Intel Corp.
+        Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+        Bus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+        Bus 003 Device 007: ID 08bb:2702 Texas Instruments Speakers
+        Bus 003 Device 012: ID 1781:0c9f Multiple Vendors USBtiny
+        Bus 003 Device 013: ID 2341:0043 Arduino SA Uno R3 (CDC ACM)
+  :markdown
+        :::bash
+        Scanning ...
+          00:06:66:4A:23:C3	Sphero-RPB
+
+  %h3 cylon bluetooth &lt;subcommand&gt; &lt;address&gt;
+  %h4 Description
+  %p
+    Let's you pair, unpair and connect to bluetooth devices by specifying one of three
+    subcommands; pair, unpair or connect.
+
+  %h4 cylon bluetooth pair &lt;address&gt;
+  %p Note: when prompted answer yes to confirm pairing pin.
+  :markdown
+        :::bash
+        $ cylon bluetooth pair 00:06:66:4A:23:C3
+        RequestConfirmation (/org/bluez/630/hci0/dev_00_06_66_4A_23_C3, 135070)
+        Confirm passkey (yes/no): yes
+        Release
+        New device (/org/bluez/630/hci0/dev_00_06_66_4A_23_C3)
+
+  %h4 cylon bluetooth unpair &lt;address&gt;
+  %p Note: when prompted answer no to deny pairing pin.
+  :markdown
+        :::bash
+        $ cylon bluetooth unpair 00:06:66:4A:23:C3
+        RequestConfirmation (/org/bluez/630/hci0/dev_00_06_66_4A_23_C3, 761422)
+        Confirm passkey (yes/no): no
+        Creating device failed: org.bluez.Error.AuthenticationFailed: Authentication Failed
+
+  %h4 cylon bluetooth connect &lt;address&gt;
+  %p Note: connects a bluetooth device to a serial port to enable communication with CylonJS.
+  :markdown
+        :::bash
+        $ cylon bluetooth connect 00:06:66:4A:23:C3
+        [sudo] password for edgar:
+        Connected /dev/rfcomm0 to 00:06:66:4A:23:C3 on channel 1
+        Press CTRL-C for hangup
