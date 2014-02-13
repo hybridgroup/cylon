@@ -17,3 +17,7 @@
 
 # Used for the import_examples script
 /.cylon
+
+#node modules
+/node_modules
+.rvmrc
