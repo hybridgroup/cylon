@@ -68,7 +68,7 @@ def clone_repo(uri)
   name = get_repo_name(uri)
   path = File.expand_path("#{__dir__}/../.docs/#{name}")
 
-  remove_repo(path) if File.directory?(path)
+  FileUtils.rm_r(path) if File.directory?(path)
 
   puts "  - Cloning #{name}."
   repo = Git.clone(uri, path)
@@ -96,7 +96,7 @@ def add_docs_to_site(repo_name, docs)
   docs_path += "/" + repo_name[/^cylon-(.*)$/, 1]
 
   if File.directory?(docs_path)
-    FileUtils.rm_rf docs_path + "/*.html.haml"
+    FileUtils.rm_r docs_path + "/*.html.haml"
   else
     FileUtils.mkdir_p docs_path
   end
@@ -116,11 +116,8 @@ end
 
 def extract_breadboard_images_from_repo(path)
   puts "  - Importing breadboard images from #{File.basename(path)}"
-
   images = Dir.glob(path + "/docs/breadboards/*_bb.png")
-
   images.each { |image| puts "    - #{File.basename(image)}" }
-
   images
 end
 
@@ -130,19 +127,10 @@ def add_breadboard_images_to_site(repo_name, images)
   images_path = File.expand_path("#{__dir__}/../source/documentation/drivers/breadboards/")
   images_path += "/" + repo_name[/^cylon-(.*)$/, 1]
 
-  FileUtils.rm_rf images_path if File.directory?(images_path)
+  FileUtils.rm_r images_path if File.directory?(images_path)
   FileUtils.mkdir_p images_path
 
-  FileUtils.cp(images, images_path)
-end
-
-# Public: Removes the existing git repository
-#
-# path - path to git repository to remove
-#
-# Returns nothing
-def remove_repo(path)
-  FileUtils.rm_r path
+  FileUtils.cp images, images_path
 end
 
 def main
@@ -158,7 +146,7 @@ def main
     images = extract_breadboard_images_from_repo path
     add_breadboard_images_to_site name, images
 
-    remove_repo path
+    FileUtils.rm_r path
   end
 end
 
