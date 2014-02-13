@@ -1,11 +1,15 @@
 #!/usr/bin/env ruby
 
+require 'bundler'
+Bundler.setup
+
+require 'git'
 require 'fileutils'
 
 REPO_URL = "https://github.com/hybridgroup/cylon.git"
-REPO_DIR = File.expand_path "./.cylon"
 
-SITE_DIR = File.expand_path "./source"
+REPO_DIR = File.join __dir__, "../.cylon"
+SITE_DIR = File.join __dir__, "../source"
 
 INDENTED_CODE_REGEX = / # Match a MARKDOWN CODE section.
   (\r?\n)              # $1: CODE must be preceded by blank line
@@ -22,22 +26,23 @@ INDENTED_CODE_REGEX = / # Match a MARKDOWN CODE section.
 @example_files = []
 
 def clone_repo
-  puts "Cloning remote copy of Cylon."
+  puts "Cloning down Cylon."
+
   FileUtils.rm_rf(REPO_DIR) if File.directory?(REPO_DIR)
-  Dir.mkdir(REPO_DIR)
-  `git clone #{REPO_URL} #{REPO_DIR} &> /dev/null`
+
+  Git.clone REPO_URL, REPO_DIR
 end
 
 def extract_example_files
-  puts "Extracting example files from clone of Cylon repo."
+  puts "Extracting example files from Cylon repo."
+
   Dir[REPO_DIR + "/examples/**/*.litcoffee"].each do |file|
-    content = File.read file
-    js_content = File.read file.gsub(/litcoffee$/, 'js')
+    content = File.read(file)
     @example_files << {
-      :name => file.match(/\/([0-9A-Za-z_-]+)\.litcoffee$/)[1],
+      :name => file[/\/([0-9A-Za-z_-]+)\.litcoffee$/, 1],
       :content => content,
-      :title => content.match(/\A#\s+(.+)$/)[1],
-      :js_content => js_content
+      :title => content[/\A#\s+(.+)$/, 1],
+      :js_content => File.read(file.gsub(/litcoffee$/, 'js'))
     }
   end
 end
