@@ -44,7 +44,7 @@ page_title_show: true
         Options:
 
           -h, --help     output usage information
-          -V, --version  output the version number 
+          -V, --version  output the version number
 
   %h3 Scanning serial port for connected devices
   :markdown
@@ -57,12 +57,13 @@ page_title_show: true
 
   %h3 Important note about Cylon CLI commands.
   %p
-    To use the commands as described here you need to install cylon as a global
-    module, that way the commads would be picked up as part of the $PATH  list of available commands.
+    To use the commands as described here you need to install cylon as a global module
+    by running `sudo npm install -g cylon`.
 
   %p
-    If you do not want to install globally and choose to install cylon locally, then you need to provide
-    the full path to the cylon command file, or add `./node_modules/cylon/bin` directory to the $PATH.
+    If you choose to install locally, using just local path, and you cannot call the
+    commands, you might need to use the full path to the cylon command file, or add
+    `./node_modules/cylon/bin` directory to the $PATH.
   :markdown
         :::bash
         $ ./node_modules/cylon/bin/cylon scan serial
