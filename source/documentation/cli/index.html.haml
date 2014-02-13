@@ -11,6 +11,16 @@ page_title_show: true
   %p
     Cylon CLI is a powerful command line interface tool that provides several tools to make RobotOps and
     setting up your devices to work with cylon a lot easier.
+
+  %h2 How to install
+  %p
+    For the commands to be available everywhere the cylon module needs to be installed globally.
+    Here's how to do it.
+
+  :markdown
+        :::bash
+        $ sudo npm install -g cylon
+
   %h2 How can I use it?
   %p
     The CylonJS command line interface tools are pretty easy to use and designed to be intuitive, they also
@@ -49,21 +59,13 @@ page_title_show: true
   %p
     To use the commands as described here you need to install cylon as a global
     module, that way the commads would be picked up as part of the $PATH  list of available commands.
-  :markdown
-        :::bash
-        $ cylon scan serial
 
   %p
-    Other options include installing locally and provide the full path to the cylon command file.
+    If you do not want to install globally and choose to install cylon locally, then you need to provide
+    the full path to the cylon command file, or add `./node_modules/cylon/bin` directory to the $PATH.
   :markdown
         :::bash
         $ ./node_modules/cylon/bin/cylon scan serial
-
-  %p
-    Or download the github repo to work with the examples available there.
-  :markdown
-        :::bash
-        $ ./bin/cylon scan serial
 
   %h2 What Cylon CLI commands are available?
   %p
