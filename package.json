@@ -19,6 +19,14 @@
       "type": "Apache 2.0"
     }
   ],
+  "hardware": {
+    "*": false,
+    "./": false,
+    "async": true,
+    "node-namespace": true,
+    "./dist": true,
+    "./dist/cli": false
+  },
   "bin": {
     "cylon": "./bin/cylon"
   },
