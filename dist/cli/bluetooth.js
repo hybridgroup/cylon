@@ -1,7 +1,9 @@
 (function() {
-  var bluetooth, os;
+  var bluetooth, os, scan;
 
   require("./process");
+
+  scan = require("./scan");
 
   os = require('os');
 
@@ -31,6 +33,9 @@
         default:
           return console.log("OS not yet supported.");
       }
+    },
+    scan: function() {
+      return scan('bluetooth');
     }
   };
 
