@@ -8,5 +8,6 @@ cliCommands =
   bluetooth:
     pair: bluetooth.pair
     unpair: bluetooth.unpair
+    scan: bluetooth.scan
 
 module.exports = cliCommands

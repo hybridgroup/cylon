@@ -22,8 +22,8 @@ Program
   });
 
 Program
-  .command("bluetooth <subcmd> <address> [option]")
-  .description("Connect bluetooth device to PC (pairs) or establishes serial to bluetooth connection")
+  .command("bluetooth <subcmd> [address] [option]")
+  .description("Scan, pair, unpair bluetooth devices to/from the PC, establishes serial to bluetooth connection. Try 'cylon bluetooth help'")
   .action(function(subcmd, address, option){
     switch(subcmd){
     case 'pair':
@@ -38,11 +38,15 @@ Program
       option = (option === null || option === undefined) ? '/dev/rfcomm0' : option;
       CliCommands.connectToSerial(option, address);
       break;
+    case 'scan':
+      CliCommands.bluetooth.scan();
+      break;
     default:
       console.log("cylon bluetooth argument not recognized, try:\n");
-      console.log("1.- cylon bluetooth pair <address> [hciX]");
-      console.log("2.- cylon bluetooth unpair <address> [hciX]");
-      console.log("3.- cylon bluetooth connect <address> [dev]\n");
+      console.log("1.- cylon bluetooth scan");
+      console.log("2.- cylon bluetooth pair <address> [hciX]");
+      console.log("3.- cylon bluetooth unpair <address> [hciX]");
+      console.log("4.- cylon bluetooth connect <address> [dev]\n");
     }
   });
 
