@@ -1,4 +1,5 @@
 require "./process"
+scan = require "./scan"
 os = require('os')
 
 bluetooth =
@@ -29,5 +30,8 @@ bluetooth =
 
       else
         console.log "OS not yet supported."
+
+  scan: () ->
+    scan('bluetooth')
 
 module.exports = bluetooth

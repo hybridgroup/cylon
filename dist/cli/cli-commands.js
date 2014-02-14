@@ -12,7 +12,8 @@
     connectToSerial: connectToSerial,
     bluetooth: {
       pair: bluetooth.pair,
-      unpair: bluetooth.unpair
+      unpair: bluetooth.unpair,
+      scan: bluetooth.scan
     }
   };
 
