@@ -12,10 +12,16 @@ keyboard_driver: true
 
 %section.intro
   = image_tag "/images/devices/keyboard.jpg", class: "display"
+  .info_intro
+    %p A keyboard is a typewriter-style device, which uses an arrangement of buttons or keys, to act as mechanical levers or electronic switches. Following the decline of punch cards and paper tape, interaction via teleprinter-style keyboards became the main input device for computers.
+    %p The Cylon adaptor for keyboard input.
+    %p
+      For more info about the Joystick platform click
+      = succeed "." do
+        = link_to "here", "http://en.wikipedia.org/wiki/Computer_keyboard", target: :blank
 
-  %p The Cylon adaptor for keyboard input.
-
-
+  .clear
+  
 %section.how-to#HowToInstall
   %h2 How To Install
   %p Installing cylon.js with a keyboard support is pretty easy.

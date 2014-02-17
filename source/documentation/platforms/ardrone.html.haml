@@ -13,14 +13,15 @@ ardrone_nav_driver: true
 
 %section.intro
   = image_tag "/images/devices/ardrone.jpg", class: "display"
+  .info_intro
+    %p The ARDrone from Parrot is an inexpensive quadcopter that is controlled using WiFi. It includes a built-in front-facing HD video camera, as well as a second lower resolution bottom facing video camera.
 
-  %p The ARDrone from Parrot is an inexpensive quadcopter that is controlled using WiFi. It includes a built-in front-facing HD video camera, as well as a second lower resolution bottom facing video camera.
-
-  %p
-    For more info about the ARDrone platform click
-    = succeed "." do
-      = link_to "here", "http://ardrone2.parrot.com/", target: :blank
-
+    %p
+      For more info about the ARDrone platform click
+      = succeed "." do
+        = link_to "here", "http://ardrone2.parrot.com/", target: :blank
+  .clear
+  
 %section.how-to#HowToInstall
   %h2 How To Install
   %p Installing cylon.js with ardrone support is pretty easy.

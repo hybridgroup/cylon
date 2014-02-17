@@ -13,8 +13,15 @@ dualshock_driver: true
 
 %section.intro
   = image_tag "/images/devices/joystick.jpg", class: "display"
-
-  %p You can use Cylon.js with an Xbox 360 game controller. The goal is to also support any other joysticks and game controllers that are HID devices.
+  .info_intro
+    %p A joystick is an input device consisting of a stick that pivots on a base and reports its angle or direction to the device it is controlling.
+    %p You can use Cylon.js with an Xbox 360 game controller. The goal is to also support any other joysticks and game controllers that are HID devices.
+    %p
+      For more info about the Joystick platform click
+      = succeed "." do
+        = link_to "here", "http://en.wikipedia.org/wiki/Joystick", target: :blank
+  
+  .clear
 
 %section.how_to#HowToInstall
   %h2 How To Install

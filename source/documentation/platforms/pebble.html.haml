@@ -12,14 +12,17 @@ pebble_driver: true
 
 %section.intro
   = image_tag "/images/devices/pebble.jpg", class: "display"
+  .info_intro
+    %p The Pebble is a smart watch, that connects via bluetooth.
 
-  %p The Pebble is a smart watch, that connects via bluetooth.
+    %p Pebble puts critical apps and notifications on your wrist, giving you immediate access to what's most important.
 
-  %p
-    For more info about the Pebble platform click
-    = succeed "." do
-      = link_to "here", "http://getpebble.com/", target: :blank
-
+    %p
+      For more info about the Pebble platform click
+      = succeed "." do
+        = link_to "here", "http://getpebble.com/", target: :blank
+  .clear
+  
 %section.how-to#HowToInstall
   %h2 How To Install
   %p

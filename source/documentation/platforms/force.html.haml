@@ -12,19 +12,22 @@ force_drivers: true
 
 %section.intro
   = image_tag "/images/devices/force.jpg", class: "display"
+  .info_intro
+    %p 
+    -# I put this description but if you need to change it, no problem ;)  *************
+    This module provides an adaptor and drivers for Force.com 
 
-  %p 
-  -# I put this description but if you need to change it, no problem ;)  *************
-  This module provides an adaptor and drivers for Force.com .It uses the nforce module 
-  =link_to "(https://github.com/kevinohara80/nforce)" , "https://github.com/kevinohara80/nforce" 
-  created by @kevinohara80 thank you!
+    %p 
+      It uses the nforce module 
+      =link_to "(https://github.com/kevinohara80/nforce)" , "https://github.com/kevinohara80/nforce" 
+      created by @kevinohara80 thank you!
 
-  %p
-    For more info about the Force platform go to
-    = succeed "." do
-      = link_to "http://www.force.com/", "http://www.salesforce.com/platform/overview/", target: :blank
+    %p
+      For more info about the Force platform go to
+      = succeed "." do
+        = link_to "http://www.force.com/", "http://www.salesforce.com/platform/overview/", target: :blank
 
-
+  .clear
 
 %section.how-to#HowToInstall
   %h2 How To Install

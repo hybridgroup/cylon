@@ -10,15 +10,17 @@ subnav_platform: true
 
 %section.intro
   = image_tag "/images/devices/opencv.jpg", class: "display"
+  .info_intro
+    %p OpenCV is a real-time computer vision library.
+    %p OpenCV (Open Source Computer Vision Library) is an open source computer vision and machine learning software library. OpenCV was built to provide a common infrastructure for computer vision applications and to accelerate the use of machine perception in the commercial products. Being a BSD-licensed product, OpenCV makes it easy for businesses to utilize and modify the code.
 
-  %p OpenCV is a real-time computer vision library.
+    %p
+      For more info about OpenCV click 
+      = succeed "." do
+        = link_to "here", "http://opencv.org/", target: :blank
 
-  %p
-    For more info about OpenCV click 
-    = succeed "." do
-      = link_to "here", "http://opencv.org/", target: :blank
-
-
+  .clear
+  
 %section.how-to#HowToInstall
   %h2 How To Install
   %p Installing Cylon.js with Opencv support is pretty easy.
