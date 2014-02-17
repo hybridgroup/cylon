@@ -16,14 +16,17 @@ motor_driver: true
 
 %section.intro
   = image_tag "/images/devices/raspi.jpg", class: "display"
+  .info_intro
+    %p The Raspberry Pi is an inexpensive and popular ARM based single board computer with digital & PWM GPIO, and i2c interfaces built in.
 
-  %p The Raspberry Pi is an inexpensive and popular ARM based single board computer with digital & PWM GPIO, and i2c interfaces built in.
+    %p The Raspberry Pi is a credit-card-sized single-board computer developed in the UK by the Raspberry Pi Foundation with the intention of promoting the teaching of basic computer science in schools
 
-  %p
-    For more info about the Raspberry Pi platform go to
-    = succeed "." do
-      = link_to "http://www.raspberrypi.org/", "http://www.raspberrypi.org/", target: :blank
-
+    %p
+      For more info about the Raspberry Pi platform go to
+      = succeed "." do
+        = link_to "http://www.raspberrypi.org/", "http://www.raspberrypi.org/", target: :blank
+  .clear
+  
 %section.how-to#HowToInstall
   %h2 How To Install
   %p Installing cylon.js with raspberri-pi support is pretty easy.

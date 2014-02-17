@@ -1,0 +1,154 @@
+---
+title: Cylon.js - Dualshock 3 Controller Driver
+author: The Hybrid Group
+page_title: Dualshock 3 Controller
+page_subtitle: Driver
+layout: documentation
+page_title_show: true
+subnav_driver: true
+
+
+joystick_platform: true
+---
+
+%section.intro
+  =image_tag "/images/devices/dualshock.jpg", class: "display"
+  .info_intro
+    %p Allows user to interact with Cylon.js devices using a Dualshock 3 controller.
+  .clear
+  
+%section.how-to#HowToConnect
+  %h2 How To Connect
+  %h3 JavaScript
+  :markdown
+        :::javascript
+        Cylon = require('cylon');
+
+        Cylon.robot({
+          name: "NewBot",
+          connection: {
+            name: 'joystick',
+            adaptor: 'joystick',
+            controller: 'dualshock3'
+          },
+          device: {
+            name: 'controller',
+            driver: 'dualshock3'
+          }
+        ...
+
+  %h3 CoffeeScript
+  :markdown
+        :::javascript
+        Cylon = require 'cylon'
+
+        Cylon.robot
+          name: "NewBot"
+          connection: { name: 'joystick', adaptor: 'joystick', controller: 'dualshock3' }
+          device: { name: 'controller', driver: 'dualshock3' }
+        ...
+
+%section.how-to#HowToUse
+  %h2 How To Use
+  %h3 Example receiving button events from Dualshock 3 joystick.
+  %h4 JavaScript
+  :markdown
+        :::javascript
+        Cylon = require('cylon');
+
+        Cylon.robot({
+          name: "NewBot",
+          connection: {
+            name: 'joystick',
+            adaptor: 'joystick',
+            controller: 'dualshock3'
+          },
+          device: {
+            name: 'controller',
+            driver: 'dualshock3'
+          },
+          work: function(my) {
+            var button_states, buttons;
+            button_states = ["press", "release"];
+            buttons = ["x", "square", "circle", "triangle", "l1", "r1", "l2", "r2", "left", "right", "select", "start", "dpad:left", "dpad:right", "dpad:up", "dpad:down", "psbutton"];
+            buttons.forEach(function(button) {
+              return button_states.forEach(function(state) {
+                return my.controller.on("" + button + ":" + state, function() {
+                  return console.log(button, state);
+                });
+              });
+            });
+            my.controller.on("left:move", function(pos) {
+              return console.log("left:", pos);
+            });
+            return my.controller.on("right:move", function(pos) {
+              return console.log("right:", pos);
+            });
+          }
+        });
+
+        Cylon.start();
+
+  %h4 CoffeeScript
+  :markdown
+        :::javascript
+        Cylon = require 'cylon'
+
+        Cylon.robot
+          name: "NewBot"
+          connection: { name: 'joystick', adaptor: 'joystick', controller: 'dualshock3' }
+          device: { name: 'controller', driver: 'dualshock3' }
+
+          work: (my) ->
+            button_states = ["press", "release"]
+
+            buttons = [
+              "x",
+              "square",
+              "circle",
+              "triangle",
+
+              "l1",
+              "r1",
+
+              "l2",
+              "r2",
+
+              "left",
+              "right",
+
+              "select",
+              "start",
+
+              "dpad:left",
+              "dpad:right",
+              "dpad:up",
+              "dpad:down",
+
+              "psbutton"
+            ]
+
+            buttons.forEach (button) ->
+              button_states.forEach (state) ->
+                my.controller.on "\#{button}:\#{state}", ->
+                  console.log button, state
+
+            my.controller.on "left:move", (pos) ->
+              console.log "left:", pos
+
+            my.controller.on "right:move", (pos) ->
+              console.log "right:", pos
+
+        Cylon.start()
+
+
+%section.public-methods
+  .commands_api#Commands
+    = partial "/documentation/drivers/partials/joystick/commands_dualshock3"
+  .commands_api#Events
+    = partial "/documentation/drivers/partials/joystick/events_dualshock3"
+
+%section.compatability.hardware#Compatability
+  %h2 Compatibility
+  .devices
+    = partial "documentation/partials/devices_platforms"

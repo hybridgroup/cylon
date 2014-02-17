@@ -3,6 +3,16 @@
 }
 
 .documentation {
+  .intro {
+    .info_intro {
+      float: left;
+      width: 60%;
+      margin: 0;
+      @media only screen and (max-width: $medium-screen) {
+        width: 100%;
+      }
+    }
+  }
   .index {
     @include outer-container;
     padding-left: 30px;
@@ -59,10 +69,13 @@
     margin: 10px;
   }
   .display {
-    width: 300px;
+    width: 35%;
     float: right;
     border: 1px solid rgba($hero-color, 0.14);
     margin: 0 0 19px 20px;
+    @media only screen and (max-width: $medium-screen) {
+        width: 100%;
+    }
   }
 }
 
