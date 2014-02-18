@@ -64,6 +64,7 @@
         this.registerAdaptor("./test/loopback", "loopback");
         this.registerAdaptor("./test/test-adaptor", "test");
         this.registerDriver("./test/ping", "ping");
+        this.registerDriver("./test/test-driver", "test");
         this.testing = process.env['CYLON_TEST'];
         this.initConnections(opts.connection || opts.connections);
         this.initDevices(opts.device || opts.devices);
@@ -226,28 +227,35 @@
       };
 
       Robot.prototype.registerAdaptor = function(moduleName, adaptorName) {
-        console.log('here ' + moduleName);
         if (this.adaptors[adaptorName] == null) {
-          this.adaptors[adaptorName] = require(moduleName);
+          return this.adaptors[adaptorName] = require(moduleName);
         }
-        return console.log('there');
       };
 
       Robot.prototype.initDriver = function(driverName, device, opts) {
+        var realDriver, testDriver;
         if (opts == null) {
           opts = {};
         }
-        return this.robot.requireDriver(driverName).driver({
+        realDriver = this.robot.requireDriver(driverName).driver({
           name: driverName,
           device: device,
           extraParams: opts
         });
+        if (this.robot.testing != null) {
+          testDriver = this.robot.requireDriver('test').driver({
+            name: driverName,
+            device: device,
+            extraParams: opts
+          });
+          testDriver.proxyTestCommands(realDriver);
+          return testDriver;
+        } else {
+          return realDriver;
+        }
       };
 
       Robot.prototype.requireDriver = function(driverName) {
-        if (this.robot.testing != null) {
-          return this.robot.drivers['ping'];
-        }
         if (this.robot.drivers[driverName] == null) {
           this.robot.registerDriver("cylon-" + driverName, driverName);
           this.robot.drivers[driverName].register(this);
