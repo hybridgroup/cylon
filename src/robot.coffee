@@ -60,6 +60,7 @@ namespace 'Cylon', ->
       @commands = []
 
       @registerAdaptor "./test/loopback", "loopback"
+      @registerAdaptor "./test/test-adaptor", "test"
       @registerDriver "./test/ping", "ping"
 
       @testing = process.env['CYLON_TEST']
@@ -175,10 +176,21 @@ namespace 'Cylon', ->
     #
     # Returns the adaptor
     initAdaptor: (adaptorName, connection, opts = {}) ->
-      @robot.requireAdaptor(adaptorName).adaptor
+      realAdaptor = @robot.requireAdaptor(adaptorName).adaptor
         name: adaptorName,
         connection: connection,
         extraParams: opts
+
+      if @robot.testing?
+        testAdaptor = @robot.requireAdaptor('test').adaptor
+          name: adaptorName,
+          connection: connection,
+          extraParams: opts
+
+        testAdaptor.proxyTestCommands(realAdaptor)
+        testAdaptor
+      else
+        realAdaptor
 
     # Public: Requires a hardware adaptor and adds it to @robot.adaptors
     #
@@ -186,7 +198,7 @@ namespace 'Cylon', ->
     #
     # Returns the module for the adaptor
     requireAdaptor: (adaptorName) =>
-      return @robot.adaptors['loopback'] if @robot.testing?
+      #return @robot.adaptors['test'] if @robot.testing?
 
       unless @robot.adaptors[adaptorName]?
         @robot.registerAdaptor "cylon-#{adaptorName}", adaptorName
@@ -201,7 +213,9 @@ namespace 'Cylon', ->
     #
     # Returns the registered module name
     registerAdaptor: (moduleName, adaptorName) =>
+      console.log 'here ' + moduleName
       @adaptors[adaptorName] = require(moduleName) unless @adaptors[adaptorName]?
+      console.log 'there'
 
     # Public: Init a hardware driver
     #
