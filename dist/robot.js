@@ -9,8 +9,10 @@
 
 (function() {
   'use strict';
-  var Async, namespace,
+  var Async, EventEmitter, namespace,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   require('./cylon');
@@ -31,9 +33,13 @@
 
   Async = require("async");
 
+  EventEmitter = require('events').EventEmitter;
+
   namespace('Cylon', function() {
-    return this.Robot = (function() {
+    return this.Robot = (function(_super) {
       var klass;
+
+      __extends(Robot, _super);
 
       klass = Robot;
 
@@ -61,6 +67,7 @@
         this.adaptors = {};
         this.drivers = {};
         this.commands = [];
+        this.running = false;
         this.registerAdaptor("./test/loopback", "loopback");
         this.registerAdaptor("./test/test-adaptor", "test");
         this.registerDriver("./test/ping", "ping");
@@ -149,7 +156,10 @@
         var _this = this;
         return this.startConnections(function() {
           return _this.robot.startDevices(function() {
-            return _this.robot.work.call(_this.robot, _this.robot);
+            _this.robot.work.call(_this.robot, _this.robot);
+            _this.running = true;
+            Logger.info("Working...");
+            return _this.robot.emit('working');
           });
         });
       };
@@ -275,7 +285,7 @@
 
       return Robot;
 
-    })();
+    })(EventEmitter);
   });
 
   module.exports = Cylon.Robot;
