@@ -19,11 +19,12 @@ require './digital-pin'
 namespace = require 'node-namespace'
 
 Async = require "async"
+EventEmitter = require('events').EventEmitter
 
 # A Robot is the primary interface for interacting with a collection of physical
 # computing capabilities.
 namespace 'Cylon', ->
-  class @Robot
+  class @Robot extends EventEmitter
     klass = this
 
     # Public: Creates a new Robot
@@ -58,6 +59,7 @@ namespace 'Cylon', ->
       @adaptors = {}
       @drivers = {}
       @commands = []
+      @running = false
 
       @registerAdaptor "./test/loopback", "loopback"
       @registerAdaptor "./test/test-adaptor", "test"
@@ -130,6 +132,9 @@ namespace 'Cylon', ->
       @startConnections =>
         @robot.startDevices =>
           @robot.work.call(@robot, @robot)
+          @running = true
+          Logger.info "Working..."
+          @robot.emit 'working'
 
     # Public: Starts the Robot's connections and triggers a callback
     #
