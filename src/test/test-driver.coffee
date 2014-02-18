@@ -16,7 +16,7 @@ module.exports =
 
 namespace 'Cylon.Drivers', ->
   class @TestDriver extends Cylon.Driver
-  	constructor: (opts={}) ->
+    constructor: (opts={}) ->
       super
       @commandList = []
 
@@ -24,9 +24,9 @@ namespace 'Cylon.Drivers', ->
       @commandList
 
     proxyTestCommands: (realDriver) ->
-    	for method in realDriver.commands()
-		    @self[method] = (args...) -> @self.success()
-		    @commandList.push method
+      for method in realDriver.commands()
+        @self[method] = (args...) -> @self.success()
+        @commandList.push method
 
     success: ->
-    	true
+      true
