@@ -1,5 +1,5 @@
 ###
- * Test adaptor
+ * Test driver
  * cylonjs.com
  *
  * Copyright (c) 2013 The Hybrid Group
@@ -11,11 +11,11 @@
 namespace = require 'node-namespace'
 
 module.exports =
-  adaptor: (args...) ->
-    new Cylon.Adaptors.TestAdaptor(args...)
+  driver: (args...) ->
+    new Cylon.Drivers.TestDriver(args...)
 
-namespace 'Cylon.Adaptors', ->
-  class @TestAdaptor extends Cylon.Adaptor
+namespace 'Cylon.Drivers', ->
+  class @TestDriver extends Cylon.Driver
   	constructor: (opts={}) ->
       super
       @commandList = []
@@ -23,8 +23,8 @@ namespace 'Cylon.Adaptors', ->
     commands: ->
       @commandList
 
-    proxyTestCommands: (realAdaptor) ->
-    	for method in realAdaptor.commands()
+    proxyTestCommands: (realDriver) ->
+    	for method in realDriver.commands()
 		    @self[method] = (args...) -> @self.success()
 		    @commandList.push method
 

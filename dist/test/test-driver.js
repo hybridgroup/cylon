@@ -1,5 +1,5 @@
 /*
- * Test adaptor
+ * Test driver
  * cylonjs.com
  *
  * Copyright (c) 2013 The Hybrid Group
@@ -17,36 +17,36 @@
   namespace = require('node-namespace');
 
   module.exports = {
-    adaptor: function() {
+    driver: function() {
       var args;
       args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
       return (function(func, args, ctor) {
         ctor.prototype = func.prototype;
         var child = new ctor, result = func.apply(child, args);
         return Object(result) === result ? result : child;
-      })(Cylon.Adaptors.TestAdaptor, args, function(){});
+      })(Cylon.Drivers.TestDriver, args, function(){});
     }
   };
 
-  namespace('Cylon.Adaptors', function() {
-    return this.TestAdaptor = (function(_super) {
-      __extends(TestAdaptor, _super);
+  namespace('Cylon.Drivers', function() {
+    return this.TestDriver = (function(_super) {
+      __extends(TestDriver, _super);
 
-      function TestAdaptor(opts) {
+      function TestDriver(opts) {
         if (opts == null) {
           opts = {};
         }
-        TestAdaptor.__super__.constructor.apply(this, arguments);
+        TestDriver.__super__.constructor.apply(this, arguments);
         this.commandList = [];
       }
 
-      TestAdaptor.prototype.commands = function() {
+      TestDriver.prototype.commands = function() {
         return this.commandList;
       };
 
-      TestAdaptor.prototype.proxyTestCommands = function(realAdaptor) {
+      TestDriver.prototype.proxyTestCommands = function(realDriver) {
         var method, _i, _len, _ref, _results;
-        _ref = realAdaptor.commands();
+        _ref = realDriver.commands();
         _results = [];
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           method = _ref[_i];
@@ -60,13 +60,13 @@
         return _results;
       };
 
-      TestAdaptor.prototype.success = function() {
+      TestDriver.prototype.success = function() {
         return true;
       };
 
-      return TestAdaptor;
+      return TestDriver;
 
-    })(Cylon.Adaptor);
+    })(Cylon.Driver);
   });
 
 }).call(this);

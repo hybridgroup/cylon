@@ -62,6 +62,7 @@ namespace 'Cylon', ->
       @registerAdaptor "./test/loopback", "loopback"
       @registerAdaptor "./test/test-adaptor", "test"
       @registerDriver "./test/ping", "ping"
+      @registerDriver "./test/test-driver", "test"
 
       @testing = process.env['CYLON_TEST']
 
@@ -198,8 +199,6 @@ namespace 'Cylon', ->
     #
     # Returns the module for the adaptor
     requireAdaptor: (adaptorName) =>
-      #return @robot.adaptors['test'] if @robot.testing?
-
       unless @robot.adaptors[adaptorName]?
         @robot.registerAdaptor "cylon-#{adaptorName}", adaptorName
         @robot.adaptors[adaptorName].register this
@@ -213,9 +212,7 @@ namespace 'Cylon', ->
     #
     # Returns the registered module name
     registerAdaptor: (moduleName, adaptorName) =>
-      console.log 'here ' + moduleName
       @adaptors[adaptorName] = require(moduleName) unless @adaptors[adaptorName]?
-      console.log 'there'
 
     # Public: Init a hardware driver
     #
@@ -225,10 +222,21 @@ namespace 'Cylon', ->
     #
     # Returns the new driver
     initDriver: (driverName, device, opts = {}) ->
-      @robot.requireDriver(driverName).driver
+      realDriver = @robot.requireDriver(driverName).driver
         name: driverName,
         device: device,
         extraParams: opts
+
+      if @robot.testing?
+        testDriver = @robot.requireDriver('test').driver
+          name: driverName,
+          device: device,
+          extraParams: opts
+
+        testDriver.proxyTestCommands(realDriver)
+        testDriver
+      else
+        realDriver
 
     # Public: Requires module for a driver and adds it to @robot.drivers
     #
@@ -236,8 +244,6 @@ namespace 'Cylon', ->
     #
     # Returns the module for driver
     requireDriver: (driverName) =>
-      return @robot.drivers['ping'] if @robot.testing?
-
       unless @robot.drivers[driverName]?
         @robot.registerDriver "cylon-#{driverName}", driverName
         @robot.drivers[driverName].register this
