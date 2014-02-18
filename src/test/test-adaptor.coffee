@@ -16,7 +16,7 @@ module.exports =
 
 namespace 'Cylon.Adaptors', ->
   class @TestAdaptor extends Cylon.Adaptor
-  	constructor: (opts={}) ->
+    constructor: (opts={}) ->
       super
       @commandList = []
 
@@ -24,9 +24,9 @@ namespace 'Cylon.Adaptors', ->
       @commandList
 
     proxyTestCommands: (realAdaptor) ->
-    	for method in realAdaptor.commands()
-		    @self[method] = (args...) -> @self.success()
-		    @commandList.push method
+      for method in realAdaptor.commands()
+        @self[method] = (args...) -> @self.success()
+        @commandList.push method
 
     success: ->
-    	true
+      true
