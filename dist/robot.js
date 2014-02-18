@@ -63,6 +63,7 @@
         this.commands = [];
         this.registerAdaptor("./test/loopback", "loopback");
         this.registerDriver("./test/ping", "ping");
+        this.testing = process.env['CYLON_TEST'];
         this.initConnections(opts.connection || opts.connections);
         this.initDevices(opts.device || opts.devices);
         this.work = opts.work || function() {
@@ -204,6 +205,9 @@
       };
 
       Robot.prototype.requireAdaptor = function(adaptorName) {
+        if (this.robot.testing != null) {
+          return this.robot.adaptors['loopback'];
+        }
         if (this.robot.adaptors[adaptorName] == null) {
           this.robot.registerAdaptor("cylon-" + adaptorName, adaptorName);
           this.robot.adaptors[adaptorName].register(this);
@@ -229,6 +233,9 @@
       };
 
       Robot.prototype.requireDriver = function(driverName) {
+        if (this.robot.testing != null) {
+          return this.robot.drivers['ping'];
+        }
         if (this.robot.drivers[driverName] == null) {
           this.robot.registerDriver("cylon-" + driverName, driverName);
           this.robot.drivers[driverName].register(this);

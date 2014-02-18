@@ -62,6 +62,8 @@ namespace 'Cylon', ->
       @registerAdaptor "./test/loopback", "loopback"
       @registerDriver "./test/ping", "ping"
 
+      @testing = process.env['CYLON_TEST']
+
       @initConnections(opts.connection or opts.connections)
       @initDevices(opts.device or opts.devices)
       @work = opts.work or -> (Logger.info "No work yet")
@@ -184,6 +186,8 @@ namespace 'Cylon', ->
     #
     # Returns the module for the adaptor
     requireAdaptor: (adaptorName) =>
+      return @robot.adaptors['loopback'] if @robot.testing?
+
       unless @robot.adaptors[adaptorName]?
         @robot.registerAdaptor "cylon-#{adaptorName}", adaptorName
         @robot.adaptors[adaptorName].register this
@@ -218,6 +222,8 @@ namespace 'Cylon', ->
     #
     # Returns the module for driver
     requireDriver: (driverName) =>
+      return @robot.drivers['ping'] if @robot.testing?
+
       unless @robot.drivers[driverName]?
         @robot.registerDriver "cylon-#{driverName}", driverName
         @robot.drivers[driverName].register this
