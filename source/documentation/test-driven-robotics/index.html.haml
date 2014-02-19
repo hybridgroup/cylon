@@ -14,15 +14,19 @@ page_title_show: true
   :markdown
         :::javascript
         "use strict";
+
+        // tell Cylon.js to stub connections to adaptors/devices
         process.env['CYLON_TEST'] = true;
 
+        // setup tests
         var chai = require("chai");
         var sinon = require("sinon");
         var sinonChai = require("sinon-chai");
         chai.should();
         chai.use(sinonChai);
-
         var clock = sinon.useFakeTimers();
+
+        // load robot in test mode
         var Cylon = require('cylon');
         require("./robot.js");
 
@@ -66,15 +70,19 @@ page_title_show: true
   :markdown
         :::javascript
         "use strict";
+
+        # tell Cylon.js to stub connections to adaptors/devices
         process.env['CYLON_TEST'] = true
 
+        # setup tests
         chai = require "chai"
         sinon = require "sinon"
         sinonChai = require "sinon-chai"
         chai.should()
         chai.use(sinonChai)
-
         clock = sinon.useFakeTimers()
+
+        # load robot in test mode
         Cylon = require "cylon"
         require "./robot"
 
