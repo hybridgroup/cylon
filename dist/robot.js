@@ -72,7 +72,6 @@
         this.registerAdaptor("./test/test-adaptor", "test");
         this.registerDriver("./test/ping", "ping");
         this.registerDriver("./test/test-driver", "test");
-        this.testing = process.env['CYLON_TEST'];
         this.initConnections(opts.connection || opts.connections);
         this.initDevices(opts.device || opts.devices);
         this.work = opts.work || function() {
@@ -215,7 +214,7 @@
           connection: connection,
           extraParams: opts
         });
-        if (this.robot.testing != null) {
+        if (CylonConfig.testing_mode) {
           testAdaptor = this.robot.requireAdaptor('test').adaptor({
             name: adaptorName,
             connection: connection,
@@ -251,7 +250,7 @@
           device: device,
           extraParams: opts
         });
-        if (this.robot.testing != null) {
+        if (CylonConfig.testing_mode) {
           testDriver = this.robot.requireDriver('test').driver({
             name: driverName,
             device: device,
