@@ -13,6 +13,8 @@
     __slice = [].slice,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
+  require('./config');
+
   require('./utils');
 
   require('./logger');

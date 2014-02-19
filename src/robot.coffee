@@ -66,8 +66,6 @@ namespace 'Cylon', ->
       @registerDriver "./test/ping", "ping"
       @registerDriver "./test/test-driver", "test"
 
-      @testing = process.env['CYLON_TEST']
-
       @initConnections(opts.connection or opts.connections)
       @initDevices(opts.device or opts.devices)
       @work = opts.work or -> (Logger.info "No work yet")
@@ -187,7 +185,7 @@ namespace 'Cylon', ->
         connection: connection,
         extraParams: opts
 
-      if @robot.testing?
+      if CylonConfig.testing_mode
         testAdaptor = @robot.requireAdaptor('test').adaptor
           name: adaptorName,
           connection: connection,
@@ -231,7 +229,7 @@ namespace 'Cylon', ->
         device: device,
         extraParams: opts
 
-      if @robot.testing?
+      if CylonConfig.testing_mode
         testDriver = @robot.requireDriver('test').driver
           name: driverName,
           device: device,
