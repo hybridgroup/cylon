@@ -23,7 +23,7 @@
         return 2.5.fromScale(1, 10).toScale(1, 20).should.be.equal(5);
       });
     });
-    return describe("#proxyFunctionsToObject", function() {
+    describe("#proxyFunctionsToObject", function() {
       var ProxyClass, TestClass, methods;
       methods = ['asString', 'toString', 'returnString'];
       ProxyClass = (function() {
@@ -71,6 +71,25 @@
         testclass = new TestClass;
         assert(typeof testclass.returnString === 'function');
         return testclass.returnString("testString").should.be.equal("testString");
+      });
+    });
+    return describe("#proxyTestStubs", function() {
+      it("proxies methods to an object's commandList", function() {
+        var base, methods;
+        methods = ["hello", "goodbye"];
+        base = {
+          commandList: []
+        };
+        proxyTestStubs(methods, base);
+        return expect(base.commandList).to.be.eql(methods);
+      });
+      return it("returns the object methods have been proxied to", function() {
+        var base, methods;
+        methods = ["hello", "goodbye"];
+        base = {
+          commandList: []
+        };
+        return expect(proxyTestStubs(methods, base)).to.be.eql(base);
       });
     });
   });
