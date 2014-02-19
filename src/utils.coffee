@@ -46,7 +46,7 @@ global.sleep = (ms) ->
   while (Date.now() < start + ms)
     i = 1
 
-# Public: Proxies a list of methods from one oject to another. It will not
+# Public: Proxies a list of methods from one object to another. It will not
 # overwrite existing methods unless told to.
 #
 # methods - array of functions to proxy
@@ -62,6 +62,20 @@ global.proxyFunctionsToObject = (methods, target, base = this, force = false) ->
       continue if typeof base[method] is 'function'
     do (method) ->
       base[method] = (args...) -> target[method](args...)
+
+  base
+
+# Public: Proxies a list of methods for test stubbing.
+#
+# methods - array of functions to proxy
+# base - (optional) object that proxied functions will be declared on. Defaults
+#       to this
+#
+# Returns base
+global.proxyTestStubs = (methods, base = this) ->
+  for method in methods
+    base[method] = (args...) -> true
+    base.commandList.push method
 
   base
 

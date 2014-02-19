@@ -29,12 +29,13 @@ namespace 'Cylon', ->
       @self = this
       @name = opts.name
       @connection = opts.connection
+      @commandList = []
 
     # Public: Exposes all commands the adaptor will respond to/proxy
     #
     # Returns an array of string method names
     commands: ->
-      []
+      @commandList
 
     # Public: Connects to the adaptor, and emits 'connect' from the @connection
     # when done.
@@ -53,3 +54,8 @@ namespace 'Cylon', ->
     disconnect: ->
       Logger.info "Disconnecting from adaptor '#{@name}'..."
 
+    # # Public: Disconnects from the adaptor
+    # #
+    # # Returns nothing
+    # proxyTestStubs: (testAdaptor) ->
+    #   proxyTestStubs(@self.commands(), testAdaptor)
