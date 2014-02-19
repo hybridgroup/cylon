@@ -43,7 +43,7 @@ page_title_show: true
             clock.tick((1).second());
             toggle.should.have.been.called;
             done();
-          });  
+          });
         });
 
   %p to test the following robot code:
@@ -68,7 +68,7 @@ page_title_show: true
   %p Here is the same example using CoffeeScript:
   %h2 CoffeeScript
   :markdown
-        :::javascript
+        :::ruby
         "use strict";
 
         # tell Cylon.js to stub connections to adaptors/devices
@@ -102,13 +102,13 @@ page_title_show: true
 
   %p to test the following robot code:
   :markdown
-        :::javascript
+        :::ruby
         Cylon = require "cylon"
 
         # Initialize the robot
         robot = Cylon.robot
           name: 'testor'
-          
+
           connection:
             name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
 
