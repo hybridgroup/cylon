@@ -34,6 +34,15 @@ global.every = (interval, action) ->
 global.after = (delay, action) ->
   setTimeout action, delay
 
+# Public: Alias to the `every` function, but passing 0
+# Examples
+#
+#   constantly -> console.log("hello world (and again and again)!")
+#
+# Returns an interval
+global.constantly = (action) ->
+  every 0, action
+
 # Public: Sleep - do nothing for some duration of time.
 #
 # ms - number of ms to sleep for
