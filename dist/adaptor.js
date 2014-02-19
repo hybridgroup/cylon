@@ -28,10 +28,11 @@
         this.self = this;
         this.name = opts.name;
         this.connection = opts.connection;
+        this.commandList = [];
       }
 
       Adaptor.prototype.commands = function() {
-        return [];
+        return this.commandList;
       };
 
       Adaptor.prototype.connect = function(callback) {

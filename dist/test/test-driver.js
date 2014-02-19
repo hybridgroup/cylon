@@ -37,32 +37,7 @@
           opts = {};
         }
         TestDriver.__super__.constructor.apply(this, arguments);
-        this.commandList = [];
       }
-
-      TestDriver.prototype.commands = function() {
-        return this.commandList;
-      };
-
-      TestDriver.prototype.proxyTestCommands = function(realDriver) {
-        var method, _i, _len, _ref, _results;
-        _ref = realDriver.commands();
-        _results = [];
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          method = _ref[_i];
-          this.self[method] = function() {
-            var args;
-            args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-            return this.self.success();
-          };
-          _results.push(this.commandList.push(method));
-        }
-        return _results;
-      };
-
-      TestDriver.prototype.success = function() {
-        return true;
-      };
 
       return TestDriver;
 

@@ -18,15 +18,3 @@ namespace 'Cylon.Adaptors', ->
   class @TestAdaptor extends Cylon.Adaptor
     constructor: (opts={}) ->
       super
-      @commandList = []
-
-    commands: ->
-      @commandList
-
-    proxyTestCommands: (realAdaptor) ->
-      for method in realAdaptor.commands()
-        @self[method] = (args...) -> @self.success()
-        @commandList.push method
-
-    success: ->
-      true

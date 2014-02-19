@@ -55,6 +55,23 @@
     return base;
   };
 
+  global.proxyTestStubs = function(methods, base) {
+    var method, _i, _len;
+    if (base == null) {
+      base = this;
+    }
+    for (_i = 0, _len = methods.length; _i < _len; _i++) {
+      method = methods[_i];
+      base[method] = function() {
+        var args;
+        args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+        return true;
+      };
+      base.commandList.push(method);
+    }
+    return base;
+  };
+
   Number.prototype.seconds = function() {
     return this * 1000;
   };
