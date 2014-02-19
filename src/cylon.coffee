@@ -8,6 +8,7 @@
 
 'use strict'
 
+require './config'
 require './utils'
 require './logger'
 require './driver'
