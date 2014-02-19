@@ -193,8 +193,7 @@ namespace 'Cylon', ->
           connection: connection,
           extraParams: opts
 
-        testAdaptor.proxyTestCommands(realAdaptor)
-        testAdaptor
+        proxyTestStubs(realAdaptor.commands(), testAdaptor)
       else
         realAdaptor
 
@@ -238,8 +237,7 @@ namespace 'Cylon', ->
           device: device,
           extraParams: opts
 
-        testDriver.proxyTestCommands(realDriver)
-        testDriver
+        proxyTestStubs(realDriver.commands(), testDriver)
       else
         realDriver
 

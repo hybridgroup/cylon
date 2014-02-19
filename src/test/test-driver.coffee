@@ -18,15 +18,3 @@ namespace 'Cylon.Drivers', ->
   class @TestDriver extends Cylon.Driver
     constructor: (opts={}) ->
       super
-      @commandList = []
-
-    commands: ->
-      @commandList
-
-    proxyTestCommands: (realDriver) ->
-      for method in realDriver.commands()
-        @self[method] = (args...) -> @self.success()
-        @commandList.push method
-
-    success: ->
-      true

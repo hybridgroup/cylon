@@ -221,8 +221,7 @@
             connection: connection,
             extraParams: opts
           });
-          testAdaptor.proxyTestCommands(realAdaptor);
-          return testAdaptor;
+          return proxyTestStubs(realAdaptor.commands(), testAdaptor);
         } else {
           return realAdaptor;
         }
@@ -258,8 +257,7 @@
             device: device,
             extraParams: opts
           });
-          testDriver.proxyTestCommands(realDriver);
-          return testDriver;
+          return proxyTestStubs(realDriver.commands(), testDriver);
         } else {
           return realDriver;
         }

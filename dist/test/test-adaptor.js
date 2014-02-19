@@ -37,32 +37,7 @@
           opts = {};
         }
         TestAdaptor.__super__.constructor.apply(this, arguments);
-        this.commandList = [];
       }
-
-      TestAdaptor.prototype.commands = function() {
-        return this.commandList;
-      };
-
-      TestAdaptor.prototype.proxyTestCommands = function(realAdaptor) {
-        var method, _i, _len, _ref, _results;
-        _ref = realAdaptor.commands();
-        _results = [];
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          method = _ref[_i];
-          this.self[method] = function() {
-            var args;
-            args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-            return this.self.success();
-          };
-          _results.push(this.commandList.push(method));
-        }
-        return _results;
-      };
-
-      TestAdaptor.prototype.success = function() {
-        return true;
-      };
 
       return TestAdaptor;
 
