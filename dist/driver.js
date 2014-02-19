@@ -29,10 +29,11 @@
         this.name = opts.name;
         this.device = opts.device;
         this.connection = this.device.connection;
+        this.commandList = [];
       }
 
       Driver.prototype.commands = function() {
-        return [];
+        return this.commandList;
       };
 
       Driver.prototype.start = function(callback) {

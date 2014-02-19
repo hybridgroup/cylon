@@ -30,12 +30,13 @@ namespace 'Cylon', ->
       @name = opts.name
       @device = opts.device
       @connection = @device.connection
+      @commandList = []
 
     # Public: Exposes all commands the driver will respond to/proxy
     #
     # Returns an array of string method names
     commands: ->
-      []
+      @commandList
 
     # Public: Starts up the driver, and emits 'connect' from the @device
     # when done.

@@ -9,8 +9,10 @@
 
 (function() {
   'use strict';
-  var Async, namespace,
+  var Async, EventEmitter, namespace,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   require('./cylon');
@@ -31,9 +33,13 @@
 
   Async = require("async");
 
+  EventEmitter = require('events').EventEmitter;
+
   namespace('Cylon', function() {
-    return this.Robot = (function() {
+    return this.Robot = (function(_super) {
       var klass;
+
+      __extends(Robot, _super);
 
       klass = Robot;
 
@@ -61,8 +67,12 @@
         this.adaptors = {};
         this.drivers = {};
         this.commands = [];
+        this.running = false;
         this.registerAdaptor("./test/loopback", "loopback");
+        this.registerAdaptor("./test/test-adaptor", "test");
         this.registerDriver("./test/ping", "ping");
+        this.registerDriver("./test/test-driver", "test");
+        this.testing = process.env['CYLON_TEST'];
         this.initConnections(opts.connection || opts.connections);
         this.initDevices(opts.device || opts.devices);
         this.work = opts.work || function() {
@@ -146,7 +156,10 @@
         var _this = this;
         return this.startConnections(function() {
           return _this.robot.startDevices(function() {
-            return _this.robot.work.call(_this.robot, _this.robot);
+            _this.robot.work.call(_this.robot, _this.robot);
+            _this.running = true;
+            Logger.info("Working...");
+            return _this.robot.emit('working');
           });
         });
       };
@@ -193,14 +206,25 @@
       };
 
       Robot.prototype.initAdaptor = function(adaptorName, connection, opts) {
+        var realAdaptor, testAdaptor;
         if (opts == null) {
           opts = {};
         }
-        return this.robot.requireAdaptor(adaptorName).adaptor({
+        realAdaptor = this.robot.requireAdaptor(adaptorName).adaptor({
           name: adaptorName,
           connection: connection,
           extraParams: opts
         });
+        if (this.robot.testing != null) {
+          testAdaptor = this.robot.requireAdaptor('test').adaptor({
+            name: adaptorName,
+            connection: connection,
+            extraParams: opts
+          });
+          return proxyTestStubs(realAdaptor.commands(), testAdaptor);
+        } else {
+          return realAdaptor;
+        }
       };
 
       Robot.prototype.requireAdaptor = function(adaptorName) {
@@ -218,14 +242,25 @@
       };
 
       Robot.prototype.initDriver = function(driverName, device, opts) {
+        var realDriver, testDriver;
         if (opts == null) {
           opts = {};
         }
-        return this.robot.requireDriver(driverName).driver({
+        realDriver = this.robot.requireDriver(driverName).driver({
           name: driverName,
           device: device,
           extraParams: opts
         });
+        if (this.robot.testing != null) {
+          testDriver = this.robot.requireDriver('test').driver({
+            name: driverName,
+            device: device,
+            extraParams: opts
+          });
+          return proxyTestStubs(realDriver.commands(), testDriver);
+        } else {
+          return realDriver;
+        }
       };
 
       Robot.prototype.requireDriver = function(driverName) {
@@ -248,7 +283,7 @@
 
       return Robot;
 
-    })();
+    })(EventEmitter);
   });
 
   module.exports = Cylon.Robot;

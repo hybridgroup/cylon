@@ -19,11 +19,12 @@ require './digital-pin'
 namespace = require 'node-namespace'
 
 Async = require "async"
+EventEmitter = require('events').EventEmitter
 
 # A Robot is the primary interface for interacting with a collection of physical
 # computing capabilities.
 namespace 'Cylon', ->
-  class @Robot
+  class @Robot extends EventEmitter
     klass = this
 
     # Public: Creates a new Robot
@@ -58,9 +59,14 @@ namespace 'Cylon', ->
       @adaptors = {}
       @drivers = {}
       @commands = []
+      @running = false
 
       @registerAdaptor "./test/loopback", "loopback"
+      @registerAdaptor "./test/test-adaptor", "test"
       @registerDriver "./test/ping", "ping"
+      @registerDriver "./test/test-driver", "test"
+
+      @testing = process.env['CYLON_TEST']
 
       @initConnections(opts.connection or opts.connections)
       @initDevices(opts.device or opts.devices)
@@ -126,6 +132,9 @@ namespace 'Cylon', ->
       @startConnections =>
         @robot.startDevices =>
           @robot.work.call(@robot, @robot)
+          @running = true
+          Logger.info "Working..."
+          @robot.emit 'working'
 
     # Public: Starts the Robot's connections and triggers a callback
     #
@@ -173,10 +182,20 @@ namespace 'Cylon', ->
     #
     # Returns the adaptor
     initAdaptor: (adaptorName, connection, opts = {}) ->
-      @robot.requireAdaptor(adaptorName).adaptor
+      realAdaptor = @robot.requireAdaptor(adaptorName).adaptor
         name: adaptorName,
         connection: connection,
         extraParams: opts
+
+      if @robot.testing?
+        testAdaptor = @robot.requireAdaptor('test').adaptor
+          name: adaptorName,
+          connection: connection,
+          extraParams: opts
+
+        proxyTestStubs(realAdaptor.commands(), testAdaptor)
+      else
+        realAdaptor
 
     # Public: Requires a hardware adaptor and adds it to @robot.adaptors
     #
@@ -207,10 +226,20 @@ namespace 'Cylon', ->
     #
     # Returns the new driver
     initDriver: (driverName, device, opts = {}) ->
-      @robot.requireDriver(driverName).driver
+      realDriver = @robot.requireDriver(driverName).driver
         name: driverName,
         device: device,
         extraParams: opts
+
+      if @robot.testing?
+        testDriver = @robot.requireDriver('test').driver
+          name: driverName,
+          device: device,
+          extraParams: opts
+
+        proxyTestStubs(realDriver.commands(), testDriver)
+      else
+        realDriver
 
     # Public: Requires module for a driver and adds it to @robot.drivers
     #
