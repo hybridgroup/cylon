@@ -2,11 +2,13 @@
 title: Cylon.js Test Driven Robotics
 author: The Hybrid Group
 page_title: Test Driven Robotics
-page_subtitle: "Add support for auto-stubbing of adaptors and drivers for use when doing test-driven robotics."
+page_subtitle: "Test-driven robotics: development your hardware/software solutions guided by tests."
 layout: documentation
 page_title_show: true
 ---
 .test
+  %p Test-driven robotics is our name for applying the principles of test-driven development to hardware/software solutions. Cylon.js as an example of a modern robotics development framework has test-driven robotics built right in.
+
   %p Here is an example using Mocha, Sinon, & Chai:
   %h2 JavaScript
   :markdown
@@ -59,13 +61,55 @@ page_title_show: true
 
         robot.start();
 
-  -#%h2 CoffeeScript
-  -#:markdown
-        -#:::javascript
-        -#code
+  %p Here is the same example using CoffeeScript:
+  %h2 CoffeeScript
+  :markdown
+        :::javascript
+        "use strict";
+        process.env['CYLON_TEST'] = true
 
-  -#%p to test the following robot code:
-  -#:markdown
-        -#:::javascript
-        -#code
+        chai = require "chai"
+        sinon = require "sinon"
+        sinonChai = require "sinon-chai"
+        chai.should()
+        chai.use(sinonChai)
+
+        clock = sinon.useFakeTimers()
+        Cylon = require "cylon"
+        require "./robot"
+
+        describe "robot", ->
+          robot = Cylon.findRobot("testor")
+
+          it "should have work", ->
+            robot.work.should.be.a 'function'
+
+          it "should toggle the led after 1 second", (done) ->
+            led = robot.devices['led']
+            toggle = sinon.stub(led, 'toggle')
+            clock.tick(1.second())
+            toggle.should.have.been.called
+            done()
+
+
+  %p to test the following robot code:
+  :markdown
+        :::javascript
+        Cylon = require "cylon"
+
+        # Initialize the robot
+        robot = Cylon.robot
+          name: 'testor'
+          
+          connection:
+            name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
+
+          device:
+            name: 'led', driver: 'led', pin: 13
+
+          work: (my) ->
+            # we do our thing here
+            every 1.second(), -> my.led.toggle()
+
+        robot.start()
 
