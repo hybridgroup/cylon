@@ -18,6 +18,10 @@
     return setTimeout(action, delay);
   };
 
+  global.constantly = function(action) {
+    return every(0, action);
+  };
+
   global.sleep = function(ms) {
     var i, start, _results;
     start = Date.now();
