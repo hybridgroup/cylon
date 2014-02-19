@@ -214,7 +214,7 @@
           connection: connection,
           extraParams: opts
         });
-        if (Config.testing_mode) {
+        if (CylonConfig.testing_mode) {
           testAdaptor = this.robot.requireAdaptor('test').adaptor({
             name: adaptorName,
             connection: connection,
@@ -250,7 +250,7 @@
           device: device,
           extraParams: opts
         });
-        if (Config.testing_mode) {
+        if (CylonConfig.testing_mode) {
           testDriver = this.robot.requireDriver('test').driver({
             name: driverName,
             device: device,

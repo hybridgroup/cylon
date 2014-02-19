@@ -32,7 +32,7 @@ namespace = require 'node-namespace'
 fetch = (variable, defaultValue = false) ->
   if process.env[variable]? then process.env[variable] else defaultValue
 
-namespace 'Config', ->
+namespace 'CylonConfig', ->
   @testing_mode = fetch("CYLON_TEST", false)
 
-module.exports = Config
+module.exports = CylonConfig

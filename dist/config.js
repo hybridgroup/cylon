@@ -23,10 +23,10 @@
     }
   };
 
-  namespace('Config', function() {
+  namespace('CylonConfig', function() {
     return this.testing_mode = fetch("CYLON_TEST", false);
   });
 
-  module.exports = Config;
+  module.exports = CylonConfig;
 
 }).call(this);

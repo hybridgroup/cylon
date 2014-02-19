@@ -185,7 +185,7 @@ namespace 'Cylon', ->
         connection: connection,
         extraParams: opts
 
-      if Config.testing_mode
+      if CylonConfig.testing_mode
         testAdaptor = @robot.requireAdaptor('test').adaptor
           name: adaptorName,
           connection: connection,
@@ -229,7 +229,7 @@ namespace 'Cylon', ->
         device: device,
         extraParams: opts
 
-      if Config.testing_mode
+      if CylonConfig.testing_mode
         testDriver = @robot.requireDriver('test').driver
           name: driverName,
           device: device,
