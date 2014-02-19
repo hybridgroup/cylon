@@ -52,3 +52,17 @@ describe "Utils", ->
       testclass = new TestClass
       assert typeof testclass.returnString is 'function'
       testclass.returnString("testString").should.be.equal "testString"
+
+  describe "#proxyTestStubs", ->
+    it "proxies methods to an object's commandList", ->
+      methods = ["hello", "goodbye"]
+      base = {commandList: []}
+
+      proxyTestStubs methods, base
+      expect(base.commandList).to.be.eql methods
+
+    it "returns the object methods have been proxied to", ->
+      methods = ["hello", "goodbye"]
+      base = {commandList: []}
+
+      expect(proxyTestStubs(methods, base)).to.be.eql base
