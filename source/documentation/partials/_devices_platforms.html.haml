@@ -63,6 +63,11 @@
   %a.device{href:"/documentation/platforms/roomba", title: "Roomba"}
     %img{src: "/images/devices/roomba.jpg"}
 
+- if current_page.data.skynet_platform == true
+  /// Spark
+  %a.device{href:"/documentation/platforms/skynet", title: "Skynet"}
+    %img{src: "/images/devices/skynet.jpg"}
+
 - if current_page.data.spark_platform == true
   /// Spark
   %a.device{href:"/documentation/platforms/spark", title: "Spark"}
