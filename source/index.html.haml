@@ -218,29 +218,31 @@ getting_started_button: "<a href='/documentation/getting-started' class='cta'> G
 %ul
   %li
     = link_to "GPIO", "https://en.wikipedia.org/wiki/General_Purpose_Input/Output" , target:"_blank" 
-    &lt;==&gt;
-    = link_to "Drivers", "https://github.com/hybridgroup/cylon-gpio" , target:"_blank"
+    &lt;==&gt; Drivers (
+    = link_to "repo", "https://github.com/hybridgroup/cylon-gpio", target:"_blank"
+    )
     %ul 
-      %li Analog Sensor
-      %li Button
-      %li Continuous Servo
-      %li LED
-      %li MakeyButton (high-resistance switch inspired by the MakeyMakey)
-      %li Motor
-      %li Maxbotix Ultrasonic Range Finder
-      %li Servo 
+      %li= link_to "Analog Sensor", "/documentation/drivers/analog-sensor", target:"_blank" 
+      %li= link_to "Button", "/documentation/drivers/button", target:"_blank"  
+      %li= link_to "Continuous Servo", "/documentation/drivers/continuous-servo", target:"_blank"   
+      %li= link_to "LED", "/documentation/drivers/continuous-servo", target:"_blank"  
+      %li= link_to "MakeyButton (high-resistance switch inspired by the MakeyMakey)", "/documentation/drivers/makey-button", target:"_blank" 
+      %li= link_to "Motor", "/documentation/drivers/motor", target:"_blank"   
+      %li= link_to "Maxbotix Ultrasonic Range Finder", "/documentation/drivers/maxbotix", target:"_blank"  
+      %li= link_to "Servo", "/documentation/drivers/servo", target:"_blank"   
 
 %p Support for devices that use Inter-Integrated Circuit (I2C) have a shared set of drivers provded using the cylon-i2c module:
 %ul 
   %li  
     = link_to "I2C", "https://en.wikipedia.org/wiki/I%C2%B2C", target:"_blank" 
-    &lt;==&gt;
-    = link_to "Drivers", "https://github.com/hybridgroup/cylon-i2c", target:"_blank"  
+    &lt;==&gt; Drivers (
+    = link_to "repo", "https://github.com/hybridgroup/cylon-i2c", target:"_blank"
+    )
     %ul 
-      %li BlinkM
-      %li HMC6352 Digital Compass
-      %li LCD
-      %li MPL115A2 Barometer/Thermometer
+      %li= link_to "BlinkM", "/documentation/drivers/blinkm", target:"_blank"  
+      %li= link_to "HMC6352 Digital Compass", "/documentation/drivers/hmc6352-compass", target:"_blank"   
+      %li= link_to "LCD", "/documentation/drivers/lcd", target:"_blank"   
+      %li= link_to "MPL115A2 Barometer/Thermometer", "/documentation/drivers/mpl115a2", target:"_blank"  
 
 %p More platforms and drivers are coming soon...
 
