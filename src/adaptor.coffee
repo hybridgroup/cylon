@@ -53,9 +53,3 @@ namespace 'Cylon', ->
     # Returns nothing
     disconnect: ->
       Logger.info "Disconnecting from adaptor '#{@name}'..."
-
-    # # Public: Disconnects from the adaptor
-    # #
-    # # Returns nothing
-    # proxyTestStubs: (testAdaptor) ->
-    #   proxyTestStubs(@self.commands(), testAdaptor)
