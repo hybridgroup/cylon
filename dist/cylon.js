@@ -19,6 +19,10 @@
 
   require('./logger');
 
+  require('./driver');
+
+  require('./adaptor');
+
   Logger.setup();
 
   Cylon = (function() {
