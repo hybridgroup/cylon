@@ -143,6 +143,7 @@ namespace 'Cylon', ->
       Logger.info "Starting connections..."
       starters = {}
       for n, connection of @connections
+        @robot[n] = connection
         starters[n] = connection.connect
 
       Async.parallel starters, callback

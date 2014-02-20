@@ -170,6 +170,7 @@
         _ref = this.connections;
         for (n in _ref) {
           connection = _ref[n];
+          this.robot[n] = connection;
           starters[n] = connection.connect;
         }
         return Async.parallel(starters, callback);
