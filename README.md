@@ -220,6 +220,8 @@ Thank you!
 
 ## Release History
 
+Version 0.10.3 - Fix dependency issue
+
 Version 0.10.2 - Create connections convenience vars, refactor config loading
 
 Version 0.10.1 - Updates required for test driven robotics, update Robeaux version, bugfixes
