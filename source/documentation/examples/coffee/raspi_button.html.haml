@@ -18,19 +18,19 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   First, let's import Cylon:
 
-      :::coffeescript
+      :::ruby
       Cylon = require 'cylon'
 
   With Cylon imported, we can now start defining our robot.
 
-      :::coffeescript
+      :::ruby
       Cylon.robot
 
   Our robot has one connection, to the Raspberry Pi the hardware will be running
   on. For hardware, we're keeping it simple. A LED on pin 11, and a button on pin
   7.
 
-      :::coffeescript
+      :::ruby
         connection: { name: 'raspi', adaptor: 'raspi' }
 
         devices: [
@@ -41,7 +41,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   With the hardware defined, we can get to the work our robot will perform. And as
   you can see, it's enormously complex:
 
-      :::coffeescript
+      :::ruby
         work: (my) ->
           my.button.on 'push', -> my.led.toggle()
 
@@ -51,6 +51,6 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   And voila! We now have a basic light switch. All we need to do now is tell the
   robot to start:
 
-      :::coffeescript
+      :::ruby
       .start()
 

@@ -17,18 +17,18 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   To start us off, let's import Cylon:
 
-      :::coffeescript
+      :::ruby
       Cylon = require 'cylon'
 
   Now that we've got that set up, we can start defining our robot:
 
-      :::coffeescript
+      :::ruby
       Cylon.robot
 
   We'll be using one connection and one device for this robot, both using the
   crazyflie adaptor. We'll be connecting to the Crazyflie using the CrazyRadio.
 
-      :::coffeescript
+      :::ruby
         connection:
           name: 'crazyflie', adaptor: 'crazyflie', port: "radio://1/10/250KPS"
 
@@ -37,13 +37,13 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   With the parts in place, we can start defining our robot's work.
 
-      :::coffeescript
+      :::ruby
         work: (my) ->
 
   When our drone is ready, we'll make it takeoff. After ten seconds, we'll tell it
   to land, and five seconds after that to stop.
 
-      :::coffeescript
+      :::ruby
           my.drone.on 'start', ->
             my.drone.takeoff()
             after 10.seconds(), -> my.drone.land()
@@ -51,6 +51,6 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   With all that done, we can start up the robot and get the Crazyflie flying:
 
-      :::coffeescript
+      :::ruby
       .start()
 

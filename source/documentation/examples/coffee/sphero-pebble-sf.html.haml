@@ -13,23 +13,23 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
       
   First, let's import Cylon:
 
-      :::coffeescript
+      :::ruby
       Cylon = require 'cylon'
 
   Next up, we'll configure the API Cylon will serve, telling it to serve on port
   `8080`.    
 
-      :::coffeescript
+      :::ruby
       Cylon.api host: '0.0.0.0', port: '8080'
 
   Now that we have Cylon imported, we can start defining our pebble robot
 
-      :::coffeescript
+      :::ruby
       class PebbleRobot
 
   Let's define the connections and devices:
 
-      :::coffeescript
+      :::ruby
         connection: { name: 'pebble', adaptor: 'pebble' }
         device: { name: 'pebble', driver: 'pebble' }
 
@@ -39,18 +39,18 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   Now that Cylon knows about the necessary hardware we're going to be using, we'll
   tell it what work we want to do:
 
-      :::coffeescript
+      :::ruby
         work: (me) ->
           me.pebble.on 'connect', -> console.log "Connected!"
 
   Let's define our Sales Force robot
 
-      :::coffeescript
+      :::ruby
       class SalesforceRobot
 
   Let's define the connections and devices:
 
-      :::coffeescript
+      :::ruby
         connection:
           name: 'sfcon'
           adaptor: 'force'
@@ -67,7 +67,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   Tell it what work we want to do:
 
-      :::coffeescript
+      :::ruby
         work: (me) ->
           me.salesforce.on 'start', () ->
             me.salesforce.subscribe '/topic/SpheroMsgOutbound', (data) ->
@@ -93,7 +93,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   Let's define our Sphero robot
 
-      :::coffeescript
+      :::ruby
       class SpheroRobot
         totalBucks: 1
         payingPower: true
@@ -121,7 +121,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   Tell it what work we want to do:
 
-      :::coffeescript
+      :::ruby
         work: (me) ->
 
           me.sphero.on 'connect', ->
@@ -168,6 +168,6 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   Now that our robot knows what work to do, and the work it will be doing that
   hardware with, we can start it:
 
-      :::coffeescript
+      :::ruby
       Cylon.start()
 

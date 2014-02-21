@@ -13,17 +13,17 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
       
   First, let's import Cylon:
 
-      :::coffeescript
+      :::ruby
       Cylon = require 'cylon'
 
   Now that we have Cylon imported, we can start defining our robot
 
-      :::coffeescript
+      :::ruby
       Cylon.robot
 
   Let's define the connections and devices:
 
-      :::coffeescript
+      :::ruby
         connections: [
           { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
       #    { name: 'skynet', adaptor: 'skynet', uuid: "742401f1-87a4-11e3-834d-670dadc0ddbf", token: "xjq9h3yzhemf5hfrme8y08fh0sm50zfr" }
@@ -35,7 +35,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   Now that Cylon knows about the necessary hardware we're going to be using, we'll
   tell it what work we want to do:
 
-      :::coffeescript
+      :::ruby
         work: (my) ->
           Logger.info "connected..."
           my.connections['skynet'].on 'message', (channel, data) ->
@@ -51,6 +51,6 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   Now that our robot knows what work to do, and the work it will be doing that
   hardware with, we can start it:
 
-      :::coffeescript
+      :::ruby
       .start()
 

@@ -19,30 +19,30 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   First, let's require Cylon:
 
-      :::coffeescript
+      :::ruby
       Cylon = require 'cylon'
 
   Now we can start defining our robot:
 
-      :::coffeescript
+      :::ruby
       Cylon.robot
 
   We'll be connecting to an Raspberry Pi, and using a servo attached to the
   Raspberry Pi on pin 11.
 
-      :::coffeescript
+      :::ruby
         connection: { name: 'raspi', adaptor: 'raspi', port: '/dev/ttyACM0' }
         device: { name: 'servo', driver: 'servo', pin: 11 }
 
   We'll start defining the work for our robot next:
 
-      :::coffeescript
+      :::ruby
         work: (my) ->
 
   We'll define variables to hold our servo's angle, and the rate at which that
   angle will change:
 
-      :::coffeescript
+      :::ruby
           angle = 30
           increment = 40
 
@@ -51,7 +51,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   change the increment if the angle is at the upper/lower bounds of the values
   supported:
 
-      :::coffeescript
+      :::ruby
           every 1.seconds(), ->
             angle += increment
             my.servo.angle(angle)
@@ -62,6 +62,6 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   And with all that done, we can now start our robot:
 
-      :::coffeescript
+      :::ruby
       .start()
 

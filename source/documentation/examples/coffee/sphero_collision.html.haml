@@ -18,38 +18,38 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   First, let's load up Cylon:
 
-      :::coffeescript
+      :::ruby
       Cylon = require 'cylon'
 
   With that loaded, we can begin defining our robot.
 
-      :::coffeescript
+      :::ruby
       Cylon.robot
 
   We're going to have one connection, and one device for this robot, both the same
   Sphero.
 
-      :::coffeescript
+      :::ruby
         connection: { name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0' }
         device: { name: 'sphero', driver: 'sphero' }
 
   With the necessary hardware defined, we can now start telling Cylon about the
   work our robot will be performing.
 
-      :::coffeescript
+      :::ruby
         work: (me) ->
 
   We'll assign some variables here for later, a basic color for our sphero and
   a variable we'll use for a bitwise math operation later.
 
-      :::coffeescript
+      :::ruby
           color = 0x00FF00
           bitFilter = 0xFFFF00
 
   When our Sphero emits the 'connect' event, we're going to hook up collision
   detection, make sure it's not moving, and set a color.
 
-      :::coffeescript
+      :::ruby
           me.sphero.on 'connect', ->
             console.log "Setting up Collision Detection..."
             me.sphero.detectCollisions()
@@ -59,21 +59,21 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   And when our Sphero detects a collision, we want to notify the user of this via
   the console.
 
-      :::coffeescript
+      :::ruby
       me.sphero.on 'collision', (data) ->
         console.log "Collision:"
 
   We get the new color for a Sphero by doing a bitwise XOR operation on it, using
   the bitfilter above.
 
-      :::coffeescript
+      :::ruby
         color = color ^ bitFilter
 
   With our new color in hand, we can let the user know what color we're using now,
   and change the Sphero to that color. We'll also tell the Sphero to roll in
   a random direction, at speed 90.
 
-      :::coffeescript
+      :::ruby
         console.log "Color: \#{color.toString(16)} "
         me.sphero.setRGB color
 

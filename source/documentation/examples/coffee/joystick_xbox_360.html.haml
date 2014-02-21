@@ -19,18 +19,18 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   First, let's load up Cylon:
 
-      :::coffeescript
+      :::ruby
       Cylon = require 'cylon'
 
   With that done, we can start defining our new robot.
 
-      :::coffeescript
+      :::ruby
       Cylon.robot
 
   We'll be setting up a connection to our 360 controller, and also setting the
   controller up as a device the robot can talk to:
 
-      :::coffeescript
+      :::ruby
         connection:
           name: 'joystick'
           adaptor: 'joystick'
@@ -42,13 +42,13 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   With our connection to the controller established, we'll tell it what to do:
 
-      :::coffeescript
+      :::ruby
         work: (my) ->
 
   Let's ask our robot to tell us when the face buttons on the controller (A, B, X,
   Y) are pressed and released:
 
-      :::coffeescript
+      :::ruby
           ["a", "b", "x", "y"].forEach (button) ->
             my.controller.on "\#{button}:press", ->
               console.log "Button \#{button} pressed."
@@ -63,7 +63,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   and `right:move` events even when the sticks aren't moved, we'll prevent it from
   emitting duplicate events, too:
 
-      :::coffeescript
+      :::ruby
           lastPosition =
             left: { x: 0, y: 0 }
             right: { x: 0, y: 0 }
@@ -80,6 +80,6 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   And with our work defined, we can tell Cylon to start up our Robot:
 
-      :::coffeescript
+      :::ruby
       Cylon.start()
 

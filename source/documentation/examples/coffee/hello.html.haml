@@ -17,18 +17,18 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   Let's start by importing Cylon:
 
-      :::coffeescript
+      :::ruby
       Cylon = require 'cylon'
 
   Now we can define our robot:
 
-      :::coffeescript
+      :::ruby
       Cylon.robot
 
   For work, it's going to print a message to the console every second, and another
   message after ten seconds have elapsed.
 
-      :::coffeescript
+      :::ruby
         work: ->
           every 1.second(), ->
             console.log("Hello, human!")
@@ -38,6 +38,6 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   Simple as can be. Now that we're done, let's start the robot:
 
-      :::coffeescript
+      :::ruby
       .start()
 

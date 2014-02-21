@@ -18,12 +18,12 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   Before we get started, make sure you've got the `cylon-ardrone` module
   installed. First, let's start by loading up Cylon:
 
-      :::coffeescript
+      :::ruby
       Cylon = require 'cylon'
 
   After we've got that loaded up, let's start defining our robot.
 
-      :::coffeescript
+      :::ruby
       Cylon.robot
 
   Our robot will, as with the basic ARDrone example, have a connection to an
@@ -31,7 +31,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   Except this time, we're also adding a `nav` device that will bind to the
   ARDrone's navigation board.
 
-      :::coffeescript
+      :::ruby
         connection:
           name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1'
 
@@ -44,13 +44,13 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   drone's config, and log data to the console whenever the nav board emits the
   'update' event.
 
-      :::coffeescript
+      :::ruby
         work: (my) ->
           my.drone.config 'general:navdata_demo', 'TRUE'
           my.nav.on 'update', (data) -> console.log data
 
   Simple enough. Now all that's left is to start the robot:
 
-      :::coffeescript
+      :::ruby
       .start()
 

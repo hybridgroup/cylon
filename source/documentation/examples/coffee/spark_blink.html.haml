@@ -17,19 +17,19 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   First, let's make sure to load the Cylon module:
 
-      :::coffeescript
+      :::ruby
       Cylon = require 'cylon'
 
   After we've got that done, we can start defining our robot:
 
-      :::coffeescript
+      :::ruby
       Cylon.robot
 
   We'll have a singular connection to a Spark Core, using the
   previously-mentioned `cylon-spark` module. We'll also have one device, the LED
   on pin D7.
 
-      :::coffeescript
+      :::ruby
         connection:
           name: 'spark', adaptor: 'spark', deviceId: '', accessToken: ''
 
@@ -39,12 +39,12 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   Those are all the components for our robot, so next we'll define the work. All
   we're going to do for this example is tell the LED to toggle every second.
 
-      :::coffeescript
+      :::ruby
         work: (my) ->
           every 1.second(), -> my.led.toggle()
 
   And with all those pieces in place, we can tell the robot to get started:
 
-      :::coffeescript
+      :::ruby
       .start()
 

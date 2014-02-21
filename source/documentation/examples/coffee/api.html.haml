@@ -19,13 +19,13 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   First, let's import Cylon:
 
-      :::coffeescript
+      :::ruby
       Cylon = require 'cylon'
 
   Next up, we'll configure the API Cylon will serve, telling it to serve on port
   `8080`.
 
-      :::coffeescript
+      :::ruby
       Cylon.api host: '0.0.0.0', port: '8080'
 
   Since we're making two very similar robots (Spheros, in this case), let's put
@@ -33,7 +33,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   The only differences between the bots are their names and the port they'll be
   using.
 
-      :::coffeescript
+      :::ruby
       bots = [
         { port: '/dev/rfcomm0', name: 'Thelma' },
         { port: '/dev/rfcomm1', name: 'Louise' }
@@ -41,26 +41,26 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   Now we can define the basic robot both of our Sphero robots will be based on.
 
-      :::coffeescript
+      :::ruby
       SpheroRobot =
 
   Both robots will be connecting to Spheros, and so using the cylon-sphero
   adaptor:
 
-      :::coffeescript
+      :::ruby
         connection: { name: 'Sphero', adaptor: 'sphero' }
 
   And both will be connecting to the same kind of device (you guessed it,
   a Sphero).
 
-      :::coffeescript
+      :::ruby
         device: { name: 'sphero', driver: 'sphero' }
 
   Both robots will be performing the same kind of work as well.  Every second,
   they'll print their name to the console, set themselves to a random color, and
   roll in a random direction.
 
-      :::coffeescript
+      :::ruby
         work: (my) ->
           every 1.seconds(), ->
             console.log my.name
@@ -72,7 +72,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   a new Robot, assigning it it's unique characteristics, then passing it off to
   Cylon so it can keep track of it.
 
-      :::coffeescript
+      :::ruby
       for bot in bots
         robot = Object.create SpheroRobot
         robot.connection.port = bot.port
@@ -83,7 +83,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   And now that Cylon has all the robots we're intending to give it, let's get
   started!
 
-      :::coffeescript
+      :::ruby
       Cylon.start()
 
   Now Cylon will start up the robots and their devices, as well as an API server

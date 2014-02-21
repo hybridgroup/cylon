@@ -13,17 +13,17 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   First, let's import Cylon:
 
-      :::coffeescript
+      :::ruby
       Cylon = require 'cylon'
        
   Now that we have Cylon imported, we can start defining our robot
 
-      :::coffeescript
+      :::ruby
       Cylon.robot
 
   Let's define the connections and devices:
 
-      :::coffeescript
+      :::ruby
         connections: [
           { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' },
           { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' }
@@ -37,7 +37,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   Now that Cylon knows about the necessary hardware we're going to be using, we'll
   tell it what work we want to do:
 
-      :::coffeescript
+      :::ruby
         work: (my) ->
           my.leapmotion.on 'frame', (frame) ->
             if (frame.hands.length > 0) then my.led.turnOn() else my.led.turnOff()

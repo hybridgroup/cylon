@@ -18,63 +18,63 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   First, let's import Cylon:
 
-      :::coffeescript
+      :::ruby
       Cylon = require 'cylon'
 
   With Cylon imported, we can start defining our robot.
 
-      :::coffeescript
+      :::ruby
       Cylon.robot
 
   Our robot will be using an Arduino, and communicating over the Firmata protocol
 
-      :::coffeescript
+      :::ruby
         connection:
           name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
 
   And we'll have one device, a BlinkM led.
 
-      :::coffeescript
+      :::ruby
         device:
           name: 'blinkm', driver: 'blinkm'
 
   We'll now set up our robot's work.
 
-      :::coffeescript
+      :::ruby
         work: (my) ->
 
   When the BlinkM sends the 'start' event, we'll set up our events
 
-      :::coffeescript
+      :::ruby
           my.blinkm.on 'start', ->
 
   We stop the default BlinkM's light script
 
-      :::coffeescript
+      :::ruby
             my.blinkm.stopScript()
 
   We'll request the BlinkM's version, and print that to the console
 
-      :::coffeescript
+      :::ruby
             my.blinkm.getFirmware((version) ->
               Logger.info "Started BlinkM version \#{version}"
             )
 
   By default, we'll turn the LED off
 
-      :::coffeescript
+      :::ruby
             my.blinkm.goToRGB(0,0,0)
 
   We print the default starting color (in this case 0,0,0 since we turned the led off)
 
-      :::coffeescript
+      :::ruby
             my.blinkm.getRGBColor((data) ->
               console.log("Starting Color: \#{ data }")
             )
 
   Now, every 2 seconds, we'll change the LED color to a random value:
 
-      :::coffeescript
+      :::ruby
             every 2.second(), ->
               my.blinkm.getRGBColor((data) ->
                 console.log("Current Color: \#{ data }")
@@ -83,6 +83,6 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   Now that our robot knows what to do, let's get started:
 
-      :::coffeescript
+      :::ruby
       .start()
 

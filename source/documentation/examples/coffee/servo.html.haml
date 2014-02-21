@@ -19,12 +19,12 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   First, let's require Cylon:
 
-      :::coffeescript
+      :::ruby
       Cylon = require 'cylon'
 
   Now we can start defining our robot:
 
-      :::coffeescript
+      :::ruby
       Cylon.robot
 
   We'll be connecting to an Ardunio, using the Firmata protocol, and a servo
@@ -33,7 +33,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   this is set to min: 30, max: 150 to prevent damaging the servo when giving it
   an angle outside the range it can cover.
 
-      :::coffeescript
+      :::ruby
         connection:
           name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
 
@@ -42,13 +42,13 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   We'll start defining the work for our robot next:
 
-      :::coffeescript
+      :::ruby
         work: (my) ->
 
   We'll define variables to hold our servo's angle, and the rate at which that
   angle will change:
 
-      :::coffeescript
+      :::ruby
           angle = 30
           increment = 40
 
@@ -57,7 +57,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   change the increment if the angle is at the upper/lower bounds of the values
   supported:
 
-      :::coffeescript
+      :::ruby
           every 1.seconds(), ->
             angle += increment
             my.servo.angle(angle)
@@ -66,6 +66,6 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   And with all that done, we can now start our robot:
 
-      :::coffeescript
+      :::ruby
       .start()
 

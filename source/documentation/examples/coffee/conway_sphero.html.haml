@@ -35,7 +35,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   First off, let's load up Cylon:
 
-      :::coffeescript
+      :::ruby
       Cylon = require 'cylon'
 
   We'll be using four robots for this example, but they'll have very similar
@@ -43,7 +43,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   Each of the robots will have a unique name, and will communicate on their own
   port.
 
-      :::coffeescript
+      :::ruby
       bots = [
         { port: '/dev/rfcomm0', name: 'Thelma' }
         { port: '/dev/rfcomm1', name: 'Louise' },
@@ -54,7 +54,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   For easier use later, let's define the colors we'll be using with the Spheros,
   green for alive and red for dead:
 
-      :::coffeescript
+      :::ruby
       Green = 0x0000FF
       Red = 0xFF0000
 
@@ -64,13 +64,13 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   functionality, we can define that functionality in a CoffeeScript class. Since
   we're feeling particularly creative today, let's call this class `ConwayRobot`:
 
-      :::coffeescript
+      :::ruby
       class ConwayRobot
 
   All of our robots will be connecting to a Sphero, and be operating via a single
   device (you guessed it, a Sphero).
 
-      :::coffeescript
+      :::ruby
         connection: { name: 'Sphero', adaptor: 'sphero' }
         device: { name: 'sphero', driver: 'sphero' }
 
@@ -78,7 +78,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   zero, their age to zero, makes them "alive", and starts them moving for the
   first tick.
 
-      :::coffeescript
+      :::ruby
         born: ->
           @contacts = 0
           @age = 0
@@ -87,14 +87,14 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   When a robot is asked to move, it rolls in a random direction at speed 60.
 
-      :::coffeescript
+      :::ruby
         move: ->
           @sphero.roll 60, Math.floor(Math.random() * 360)
 
   In the case of our robots, "life" just means the robot's internal "alive" state
   is set to `true`, and the Sphero's LED is set to green.
 
-      :::coffeescript
+      :::ruby
         life: ->
           @alive = true
           @sphero.setRGB Green
@@ -102,7 +102,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   Similarly, "death" just sets the "alive" state to false, the Sphero's color to
   red, and stops the Sphero from moving.
 
-      :::coffeescript
+      :::ruby
         death: ->
           @alive = false
           @sphero.setRGB Red
@@ -111,7 +111,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   A robot is decided to have enough contacts if it has between two and six
   contacts.
 
-      :::coffeescript
+      :::ruby
         enoughContacts: ->
           if @contacts >= 2 and @contacts < 7 then true else false
 
@@ -119,7 +119,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   contacts to the console, and then determines if it's now alive or dead based on
   the number of contacts it had in the last tick.
 
-      :::coffeescript
+      :::ruby
         birthday: ->
           @age += 1
 
@@ -137,7 +137,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   birthday every ten seconds if it's alive, and increments it's contacts every
   time the Sphero detects a collision.
 
-      :::coffeescript
+      :::ruby
         work: (me) ->
           me.born()
 
@@ -157,7 +157,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   we'll create a new `ConwayRobot`, assign it it's unique characteristics, and
   pass it to Cylon so it will keep track of them.
 
-      :::coffeescript
+      :::ruby
       for bot in bots
         robot = new ConwayRobot
         robot.connection.port = bot.port
@@ -166,6 +166,6 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   Now that Cylon knows about our robots and what they do, we can get started!
 
-      :::coffeescript
+      :::ruby
       Cylon.start()
 

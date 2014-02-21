@@ -19,30 +19,30 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   First, let's require Cylon:
 
-      :::coffeescript
+      :::ruby
       Cylon = require 'cylon'
 
   Now we can start defining our robot:
 
-      :::coffeescript
+      :::ruby
       Cylon.robot
 
   We'll be connecting to an Ardunio, using the Firmata protocol, and a motor
   attached to the Arduino on pin 3.
 
-      :::coffeescript
+      :::ruby
         connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' }
         device: { name: 'motor', driver: 'motor', pin: 3 }
 
   We'll start defining the work for our robot next:
 
-      :::coffeescript
+      :::ruby
         work: (my) ->
 
   We'll define variables to hold our motor's speed, and the rate at which that
   speed will change:
 
-      :::coffeescript
+      :::ruby
           speed = 0
           increment = 5
 
@@ -51,7 +51,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   sure to change the increment if the speed is at the upper/lower bounds of the
   values supported:
 
-      :::coffeescript
+      :::ruby
           every 0.05.seconds(), ->
             speed += increment
             my.motor.speed(speed)
@@ -60,6 +60,6 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   And with all that done, we can now start our robot:
 
-      :::coffeescript
+      :::ruby
       .start()
 

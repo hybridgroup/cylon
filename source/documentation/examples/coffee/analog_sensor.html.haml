@@ -19,17 +19,17 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   First, let's load up Cylon:
 
-      :::coffeescript
+      :::ruby
       Cylon = require 'cylon'
 
   Now that we have Cylon imported, we can start defining our robot
 
-      :::coffeescript
+      :::ruby
       Cylon.robot
 
   Let's define the connection to our Arduino:
 
-      :::coffeescript
+      :::ruby
         connection:
           name: "arduino"
           adaptor: "firmata"
@@ -38,7 +38,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   Now we can define the analog sensor we're going to use, along with it's upper
   and lower limits:
 
-      :::coffeescript
+      :::ruby
         device:
           name: 'sensor'
           driver: 'analogSensor'
@@ -49,7 +49,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   Now that Cylon knows about the necessary hardware we're going to be using, we'll
   tell it what work we want to do:
 
-      :::coffeescript
+      :::ruby
         work: (my) ->
           my.sensor.on 'upperLimit', (val) ->
             console.log "Upper limit reached: \#{val}"
@@ -60,6 +60,6 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   Now that our robot knows what work to do, and the work it will be doing that
   hardware with, we can start it:
 
-      :::coffeescript
+      :::ruby
       .start()
 

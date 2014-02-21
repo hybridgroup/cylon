@@ -22,7 +22,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
   First, let's load up Cylon
 
-      :::coffeescript
+      :::ruby
       Cylon = require 'cylon'
 
   With that in place, now we can start defining our robots. They'll all behave
@@ -30,7 +30,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   define an array of objects to hold these differences. Later, we can instantiate
   a base robot and change it's attributes as needed.
 
-      :::coffeescript
+      :::ruby
       bots = [
         { port: '/dev/cu.Sphero-RGB', name: 'Huey' },
         { port: '/dev/cu.Sphero-GRB', name: 'Dewey' },
@@ -40,19 +40,19 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   Now we can define our cleverly-named `SpheroRobot` class. This will be the base
   class for all three of the robots.
 
-      :::coffeescript
+      :::ruby
       class SpheroRobot
 
   Every robot needs to connect to a Sphero. We're doing this using the
   `cylon-sphero` adaptor.
 
-      :::coffeescript
+      :::ruby
         connection: { name: 'Sphero', adaptor: 'sphero' }
 
   We'll just give our robots some basic work so we can tell they're actually
   working:
 
-      :::coffeescript
+      :::ruby
         work: (my) ->
           console.log "Robot \#{my.name} is now working!"
 
@@ -62,7 +62,7 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   class, and modifying the attributes that are unique to each robot. After the
   customized robot is ready, we'll feed it into Cylon.
 
-      :::coffeescript
+      :::ruby
       for bot in bots
         robot = new SpheroRobot
         robot.connection.port = bot.port
@@ -75,6 +75,6 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
   Cylon triggers the `.start()` command on all the robots we've told Cylon about,
   so all three robots will start at once.
 
-      :::coffeescript
+      :::ruby
       Cylon.start()
 
