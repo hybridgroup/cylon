@@ -1,11 +1,11 @@
 ---
 layout: documentation
 page_title_show: true
-title: Cylon.JS Example - Digispark Blink
-page_title: "Example: Digispark Blink"
+title: Cylon.JS Example - Beaglebone Blink
+page_title: "Example: Beaglebone Blink"
 author: The Hybrid Group
 description: A Cylon.JS code example
-page_subtitle: "You can find more versions of this example <a href='https://github.com/hybridgroup/cylon/tree/master/examples/blink' target='blank' class='repository'>here.</a>"
+page_subtitle: "You can find more versions of this example <a href='https://github.com/hybridgroup/cylon/tree/master/examples/bbb_blink' target='blank' class='repository'>here.</a>"
 ---
 
 .example
@@ -15,13 +15,13 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 
         Cylon.robot({
           connection: {
-            name: 'digispark',
-            adaptor: 'digispark'
+            name: 'beaglebone',
+            adaptor: 'beaglebone'
           },
           device: {
             name: 'led',
             driver: 'led',
-            pin: 1
+            pin: 'P9_12'
           },
           work: function(my) {
             return every(1..second(), function() {
