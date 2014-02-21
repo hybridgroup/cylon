@@ -117,6 +117,7 @@ Cylon.js has a extensible system for connecting to hardware devices. The followi
 - [Pebble](http://www.getpebble.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-pebble)
 - [Raspberry Pi](http://www.raspberrypi.org/) <==> [Adaptor](https://github.com/hybridgroup/cylon-raspi)
 - [Salesforce](http://www.force.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-force)
+- [Skynet](http://skynet.im/) <==> [Adaptor](https://github.com/hybridgroup/cylon-skynet)
 - [Spark](http://www.spark.io/) <==> [Adaptor](https://github.com/hybridgroup/cylon-spark)
 - [Sphero](http://www.gosphero.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-sphero)
 
@@ -218,6 +219,12 @@ Thank you!
   * For git help see [progit](http://git-scm.com/book) which is an awesome (and free) book on git
 
 ## Release History
+
+Version 0.10.3 - Fix dependency issue
+
+Version 0.10.2 - Create connections convenience vars, refactor config loading
+
+Version 0.10.1 - Updates required for test driven robotics, update Robeaux version, bugfixes
 
 Version 0.10.0 - Use Robeaux UX, add CLI commands for helping connect to devices, bugfixes
 
