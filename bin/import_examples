@@ -55,7 +55,7 @@ def create_litcoffee_pages
 
     # mark all indented blocks as coffeescript
     body.gsub! INDENTED_CODE_REGEX do |code|
-      code.gsub! /\A\n+/, "\n\n    :::coffeescript\n"
+      code.gsub! /\A\n+/, "\n\n    :::ruby\n"
       code
     end
 
