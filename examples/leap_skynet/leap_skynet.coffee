@@ -9,20 +9,19 @@ Cylon.robot
   device:
     { name: 'leapmotion', driver: 'leapmotion', connection: 'leapmotion' }
  
+  turnLED: (status) ->
+    console.log status
+    this.skynet.message
+      "devices": ["742401f1-87a4-11e3-834d-670dadc0ddbf"],
+      "message":
+        'red': status
+
   work: (my) ->
     my.leapmotion.on 'frame', (frame) ->
-      if frame.hands.length > 0
-        console.log 'on' 
-        my.skynet.message
-          "devices": ["742401f1-87a4-11e3-834d-670dadc0ddbf"],
-          "message":
-            'red': 'on'
+      if frame.hands.length > 0         
+        my.turnLED 'on'
 
       else
-        console.log 'off' 
-        my.skynet.message
-          "devices": ["742401f1-87a4-11e3-834d-670dadc0ddbf"],
-          "message":
-            'red': 'off'
+        my.turnLED 'off'
  
 .start()
