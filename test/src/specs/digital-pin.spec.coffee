@@ -18,7 +18,7 @@ describe "DigitalPin", ->
       expect(pin.status).to.be.eql "low"
 
     it "sets @ready to false by default", ->
-      expect(pin.ready).to.be.eql false
+      expect(pin.ready).to.be.false
 
   describe "#connect", ->
     it "sets @mode if it wasn't already set", ->

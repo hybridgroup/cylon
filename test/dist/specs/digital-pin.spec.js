@@ -23,7 +23,7 @@
         return expect(pin.status).to.be.eql("low");
       });
       return it("sets @ready to false by default", function() {
-        return expect(pin.ready).to.be.eql(false);
+        return expect(pin.ready).to.be["false"];
       });
     });
     describe("#connect", function() {
