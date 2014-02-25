@@ -84,42 +84,6 @@ global.subclass = (child, parent) ->
   child.__super__ = parent::
   child
 
-# Public: Function for instantiating a class with all passed arguments to
-# a function
-#
-# Example
-#
-#  createNewThing = function() {
-#    var args = getArgs(arguments);
-#    return instantiate(ClassToMake, args, function(){});
-#  }
-#
-# Returns an instance of the new class
-global.instantiate = (func, args, ctor) ->
-  ctor.prototype = func.prototype
-  child = new ctor()
-  result = func.apply(child, args)
-  (if Object(result) is result then result else child)
-
-# Public: Function for obtaining array of function arguments. Copied from
-# a CoffeeScript utility function.
-#
-# Example
-#
-#   printArgs = function() {
-#     console.log(getArgs(arguments));
-#   }
-#
-#   printArgs();
-#   //=> []
-#
-#   printArgs('hello', 'world', 3);
-#   //=> ['hello', 'world', 3]
-#
-# Returns an array of args
-global.getArgs = (args) ->
-  if args.length >= 1 then slice.call(args, 0) else []
-
 # Public: Proxies a list of methods from one object to another. It will not
 # overwrite existing methods unless told to.
 #
