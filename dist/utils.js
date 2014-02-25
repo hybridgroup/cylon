@@ -32,6 +32,46 @@
     return _results;
   };
 
+  global.slice = [].slice;
+
+  global.hasProp = {}.hasOwnProperty;
+
+  global.subclass = function(child, parent) {
+    var ctor, key;
+    for (key in parent) {
+      if (hasProp.call(parent, key)) {
+        child[key] = parent[key];
+      }
+    }
+    ctor = function() {
+      return this.constructor = child;
+    };
+    ctor.prototype = parent.prototype;
+    child.prototype = new ctor();
+    child.__super__ = parent.prototype;
+    return child;
+  };
+
+  global.instantiate = function(func, args, ctor) {
+    var child, result;
+    ctor.prototype = func.prototype;
+    child = new ctor();
+    result = func.apply(child, args);
+    if (Object(result) === result) {
+      return result;
+    } else {
+      return child;
+    }
+  };
+
+  global.getArgs = function(args) {
+    if (args.length >= 1) {
+      return slice.call(args, 0);
+    } else {
+      return [];
+    }
+  };
+
   global.proxyFunctionsToObject = function(methods, target, base, force) {
     var method, _fn, _i, _len;
     if (base == null) {
