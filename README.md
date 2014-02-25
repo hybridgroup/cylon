@@ -220,6 +220,8 @@ Thank you!
 
 ## Release History
 
+Version 0.10.4 - Add JS helper functions
+
 Version 0.10.3 - Fix dependency issue
 
 Version 0.10.2 - Create connections convenience vars, refactor config loading
