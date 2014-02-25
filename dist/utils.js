@@ -52,26 +52,6 @@
     return child;
   };
 
-  global.instantiate = function(func, args, ctor) {
-    var child, result;
-    ctor.prototype = func.prototype;
-    child = new ctor();
-    result = func.apply(child, args);
-    if (Object(result) === result) {
-      return result;
-    } else {
-      return child;
-    }
-  };
-
-  global.getArgs = function(args) {
-    if (args.length >= 1) {
-      return slice.call(args, 0);
-    } else {
-      return [];
-    }
-  };
-
   global.proxyFunctionsToObject = function(methods, target, base, force) {
     var method, _fn, _i, _len;
     if (base == null) {
