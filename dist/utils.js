@@ -38,14 +38,14 @@
 
   global.subclass = function(child, parent) {
     var ctor, key;
+    ctor = function() {
+      this.constructor = child;
+    };
     for (key in parent) {
       if (hasProp.call(parent, key)) {
         child[key] = parent[key];
       }
     }
-    ctor = function() {
-      return this.constructor = child;
-    };
     ctor.prototype = parent.prototype;
     child.prototype = new ctor();
     child.__super__ = parent.prototype;
