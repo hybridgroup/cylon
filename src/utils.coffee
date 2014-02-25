@@ -72,14 +72,16 @@ global.hasProp = {}.hasOwnProperty
 #
 # Returns subclass
 global.subclass = (child, parent) ->
+  ctor = ->
+    @constructor = child
+    return
+
   for key of parent
-    child[key] = parent[key] if hasProp.call(parent, key)
+    child[key] = parent[key]  if hasProp.call(parent, key)
 
-  ctor = -> @constructor = child
-
-  ctor.prototype = parent.prototype
-  child.prototype = new ctor()
-  child.__super__ = parent.prototype
+  ctor:: = parent::
+  child:: = new ctor()
+  child.__super__ = parent::
   child
 
 # Public: Function for instantiating a class with all passed arguments to
