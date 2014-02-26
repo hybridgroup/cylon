@@ -52,7 +52,7 @@ leapmotion_platform: true
   %h3 JavaScript
   :markdown
         :::javascript
-        Cylon = require('cylon');
+        var Cylon = require('cylon');
 
         Cylon.robot({
           connection: {
@@ -60,17 +60,18 @@ leapmotion_platform: true
             adaptor: 'leapmotion',
             port: '127.0.0.1:6437'
           },
+
           device: {
             name: 'leapmotion',
             driver: 'leapmotion'
           },
+
           work: function(my) {
-            return my.leapmotion.on('gesture', function(gesture) {
-              return Logger.info(gesture);
+            my.leapmotion.on('hand', function(payload) {
+              Logger.info(payload.toString());
             });
           }
         }).start();
-
 
   %h3 CoffeeScript
   :markdown
@@ -82,8 +83,8 @@ leapmotion_platform: true
           device: { name: 'leapmotion', driver: 'leapmotion' }
 
           work: (my) ->
-            my.leapmotion.on 'gesture', (gesture) ->
-              Logger.info gesture
+            my.leapmotion.on 'hand', (payload) ->
+              Logger.info payload.toString()
 
         .start()
 
