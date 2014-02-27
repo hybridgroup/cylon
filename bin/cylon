@@ -12,7 +12,7 @@ Program
 Program
   .command("generate <name>")
   .description("Generates a new adaptor")
-  .action(function(name) { require('../src/generators/adaptor')(name) });
+  .action(function(name) { require('../lib/generators/adaptor')(name) });
 
 Program
   .command("scan <type>")
