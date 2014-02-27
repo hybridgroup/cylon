@@ -8,7 +8,7 @@ var path = require('path');
 var chai = require('chai');
 var sinonChai = require('sinon-chai');
 
-require('cylon');
+require('./../..');
 Logger.setup(false) // disable Cylon's logger for tests
 
 global.chai = chai;
