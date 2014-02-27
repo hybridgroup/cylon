@@ -57,7 +57,7 @@ Explain how to connect from the computer to the device here...
 
 In lieu of a formal styleguide, take care to maintain the existing coding style.
 Add unit tests for any new or changed functionality. Lint and test your code
-using [Grunt](http://gruntjs.com/).
+using `make test` and `make lint`.
 
 ## Release History
 
