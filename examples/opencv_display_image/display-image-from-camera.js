@@ -12,7 +12,7 @@ Cylon.robot({
     }, {
       name: 'camera',
       driver: 'camera',
-      camera: 1
+      camera: 0
     }
   ],
   work: function(my) {

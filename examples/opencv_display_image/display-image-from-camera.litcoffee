@@ -15,7 +15,7 @@ Let's define the connections and devices:
 
       devices: [
         { name: 'window', driver: 'window' }
-        { name: 'camera', driver: 'camera', camera: 1 }
+        { name: 'camera', driver: 'camera', camera: 0 }
       ]
 
 Now that Cylon knows about the necessary hardware we're going to be using, we'll
