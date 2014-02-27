@@ -6,7 +6,7 @@ Cylon.robot
 
   devices: [
     { name: 'window', driver: 'window' }
-    { name: 'camera', driver: 'camera', camera: 1 }
+    { name: 'camera', driver: 'camera', camera: 0 }
   ]
 
   work: (my) ->
