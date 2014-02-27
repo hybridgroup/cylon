@@ -99,8 +99,6 @@ Cylon.robot
 .start()
 ```
 
-**Note:** before running any examples in the `examples/` dir from source, make sure to compile using `grunt coffee` first.
-
 ## Hardware Support
 
 Cylon.js has a extensible system for connecting to hardware devices. The following robotics, physical computing, or software platforms are currently supported:
