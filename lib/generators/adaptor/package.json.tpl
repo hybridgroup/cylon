@@ -1,7 +1,7 @@
 {
   "name": "<%= adaptorName %>",
   "version": "0.1.0",
-  "main": "dist/<%= adaptorName %>.js",
+  "main": "lib/<%= adaptorName %>.js",
   "description": "Cylon module for <%= adaptorClassName %>",
   "homepage": "http://cylonjs.com",
   "bugs": "Your bug report URL here",
@@ -20,16 +20,11 @@
     }
   ],
   "devDependencies": {
-    "matchdep": "~0.1.1",
-    "grunt-contrib-jshint": "~0.6.0",
-    "grunt-contrib-watch": "~0.5.0",
-    "grunt-contrib-coffee": "~0.7.0",
-    "grunt-simple-mocha": "~0.4.0",
-    "grunt-contrib-clean": "~0.5.0",
-    "sinon-chai": "~2.4.0",
-    "chai": "~1.7.2",
-    "mocha": "~1.12.1",
-    "sinon": "~1.7.3"
+    "sinon-chai": "~2.5.0",
+    "chai": "~1.9.0",
+    "mocha": "~1.17.1",
+    "sinon": "~1.8.2",
+    "jshint": "~2.4.4"
   },
   "dependencies": {
     "node-namespace": "~1.0.0",
