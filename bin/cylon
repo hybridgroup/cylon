@@ -2,7 +2,7 @@
 
 var Program = require('commander'),
     Pkg = require('../package.json'),
-    CliCommands = require('../dist/cli/cli-commands'),
+    CliCommands = require('../lib/cli/cli-commands'),
     fs = require('fs');
 
 Program
@@ -12,7 +12,7 @@ Program
 Program
   .command("generate <name>")
   .description("Generates a new adaptor")
-  .action(function(name) { require('../src/generators/adaptor')(name) });
+  .action(function(name) { require('../lib/generators/adaptor')(name) });
 
 Program
   .command("scan <type>")
@@ -36,7 +36,7 @@ Program
       break;
     case 'connect':
       option = (option === null || option === undefined) ? '/dev/rfcomm0' : option;
-      CliCommands.connectToSerial(option, address);
+      CliCommands.bluetooth.connect(option, address);
       break;
     case 'scan':
       CliCommands.bluetooth.scan();
