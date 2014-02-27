@@ -1,9 +1,7 @@
 language: node_js
-script: "grunt test"
+script: "make"
 node_js:
   - '0.10'
-before_script:
-  - "npm install -g grunt-cli"
 branches:
   except:
     - cylonjs.com
