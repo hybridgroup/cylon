@@ -23,9 +23,7 @@ global.stub = sinon.stub
 // can be used by test modules to require production modules,
 // relative to the base path (where the Gruntfile.js also lives)
 global.source = function (src) {
-  console.log('source loading: ' +  src)
   var resource = path.normalize('../../lib/' + src);
-
   return require(resource);
 };
 
