@@ -31,7 +31,6 @@
     "cylon": "./bin/cylon"
   },
   "devDependencies": {
-    "matchdep": "~0.3.0",
     "sinon-chai": "~2.4.0",
     "chai": "~1.7.2",
     "mocha": "~1.12.1",
