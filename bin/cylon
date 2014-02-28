@@ -2,7 +2,6 @@
 
 var Program = require('commander'),
     Pkg = require('../package.json'),
-    fs = require('fs'),
     globule = require('globule'),
     CliCommands = require('../lib/cli/cli-commands');
 
