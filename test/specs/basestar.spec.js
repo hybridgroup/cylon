@@ -14,7 +14,7 @@ describe('Basestar', function() {
   describe('#proxyMethods', function() {
     var ProxyClass, TestClass, methods;
     methods = ['asString', 'toString', 'returnString'];
-    
+
     ProxyClass = (function() {
       function ProxyClass() {}
 
@@ -33,7 +33,7 @@ describe('Basestar', function() {
       return ProxyClass;
 
     })();
-    
+
     TestClass = (function(_super) {
       subclass(TestClass, _super);
 

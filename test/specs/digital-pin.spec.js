@@ -201,7 +201,7 @@ describe("DigitalPin", function() {
       return pin.digitalWrite.restore();
     });
   });
-  
+
   describe("#toggle", function() {
     context("when the pin is 'high'", function() {
       it("sets the pin to 'low'", function() {

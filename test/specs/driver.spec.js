@@ -43,7 +43,7 @@ describe("Driver", function() {
   it("saves the provided name in the @name variable", function() {
     expect(driver.name).to.be.eql("TestDriver");
   });
-  
+
   it("saves the provided device in the @device variable", function() {
     expect(driver.device).to.be.eql(device);
   });

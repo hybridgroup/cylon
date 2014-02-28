@@ -10,7 +10,7 @@ describe("Robot", function() {
   testWork = function() {
     return Logger.info("hi");
   };
-  
+
   whateverFunc = function() {
     return Logger.info("whatever!");
   };

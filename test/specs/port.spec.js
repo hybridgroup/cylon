@@ -30,7 +30,7 @@ describe("Port", function() {
   describe("local TCP port", function() {
     var port;
     port = new Cylon.Port("5678");
-    
+
     it("#port", function() {
       port.port.should.be.equal("5678");
     });
@@ -55,7 +55,7 @@ describe("Port", function() {
   describe("serial port", function() {
     var port;
     port = new Cylon.Port("/dev/tty.usb12345");
-    
+
     it("#port", function() {
       port.port.should.be.equal("/dev/tty.usb12345");
     });
@@ -80,7 +80,7 @@ describe("Port", function() {
   describe("portless", function() {
     var port;
     port = new Cylon.Port;
-    
+
     it("#port", function() {
       assert(port.port === void 0);
     });

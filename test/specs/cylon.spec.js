@@ -65,7 +65,7 @@ describe("Cylon", function() {
           robot.name.should.be.equal("caprica six");
         });
       });
-      
+
       describe("with an invalid robot name", function() {
         it("returns null", function() {
           var robot;
@@ -74,7 +74,7 @@ describe("Cylon", function() {
         });
       });
     });
-    
+
     describe("async", function() {
       describe("with a valid robot name", function() {
         it("passes the robot and an empty error to the callback", function() {
@@ -85,7 +85,7 @@ describe("Cylon", function() {
           });
         });
       });
-      
+
       describe("with an invalid robot name", function() {
         it("passes no robot and an error message to the callback", function() {
           return Cylon.findRobot("Tom Servo", function(error, robot) {
@@ -126,7 +126,7 @@ describe("Cylon", function() {
         });
       });
     });
-    
+
     describe("async", function() {
       describe("with a valid robot and device name", function() {
         it("passes the device and an empty error to the callback", function() {
@@ -149,7 +149,7 @@ describe("Cylon", function() {
       });
     });
   });
-  
+
   describe("#findRobotConnection", function() {
     var ultron;
     ultron = Cylon.robot({
@@ -159,7 +159,7 @@ describe("Cylon", function() {
         adaptor: 'loopback'
       }
     });
-    
+
     describe("synchronous", function() {
       describe("with a valid robot and connection name", function() {
         it("returns the connection", function() {
@@ -178,7 +178,7 @@ describe("Cylon", function() {
         });
       });
     });
-    
+
     describe("async", function() {
       describe("with a valid robot and connection name", function() {
         it("passes the connection and an empty error to the callback", function() {
@@ -189,7 +189,7 @@ describe("Cylon", function() {
           });
         });
       });
-      
+
       describe("with an invalid connection name", function() {
         it("passes no connection and an error message to the callback", function() {
           return Cylon.findRobotConnection("Ultron", "madethisup", function(err, conn) {
