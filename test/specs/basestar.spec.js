@@ -122,4 +122,68 @@ describe('Basestar', function() {
       assert(!updateSpy.calledWith('testevent', 'data'));
     });
   });
+
+  describe("#defineAdaptorEvent", function() {
+    var basestar;
+
+    before(function() {
+      basestar = new Cylon.Basestar();
+      basestar.connector = new EventEmitter();
+      basestar.connection = new EventEmitter();
+    });
+
+    it("proxies events between the connector and connection", function() {
+      var eventSpy = spy();
+
+      basestar.connection.on('testevent', eventSpy);
+      basestar.defineAdaptorEvent({ eventName: "testevent" });
+
+      basestar.connector.emit("testevent", "data");
+      assert(eventSpy.calledWith('data'));
+    });
+
+    context("when given a string", function() {
+      it("uses it as the eventName", function() {
+        var eventSpy = spy();
+
+        basestar.connection.on('testevent', eventSpy);
+        basestar.defineAdaptorEvent("testevent");
+
+        basestar.connector.emit("testevent", "data");
+        assert(eventSpy.calledWith('data'));
+      });
+    });
+  });
+
+  describe("#defineDriverEvent", function() {
+    var basestar;
+
+    before(function() {
+      basestar = new Cylon.Basestar();
+      basestar.connection = new EventEmitter();
+      basestar.device = new EventEmitter();
+    });
+
+    it("proxies events between the connection and device", function() {
+      var eventSpy = spy();
+
+      basestar.device.on('testevent', eventSpy);
+      basestar.defineDriverEvent({ eventName: "testevent" });
+
+      basestar.connection.emit("testevent", "data");
+      assert(eventSpy.calledWith('data'));
+    });
+
+    context("when given a string", function() {
+      it("uses it as the eventName", function() {
+        var eventSpy = spy();
+
+        basestar.device.on('testevent', eventSpy);
+        basestar.defineDriverEvent("testevent");
+
+        basestar.connection.emit("testevent", "data");
+        assert(eventSpy.calledWith('data'));
+      });
+    });
+  });
 });
