@@ -10,5 +10,24 @@
   "unused": true,
   "boss": true,
   "eqnull": true,
-  "node": true
+  "node": true,
+
+  "predef": [
+    "Adaptor",
+    "Cylon",
+    "CylonConfig",
+    "Driver",
+    "DigitalPin",
+    "Logger",
+    "BasicLogger",
+    "NullLogger",
+    "Loopback",
+    "Ping",
+    "Robot",
+    "TestDriver",
+    "sinon",
+    "subclass",
+    "proxyTestStubs",
+    "proxyFunctionsToObject"
+  ]
 }
