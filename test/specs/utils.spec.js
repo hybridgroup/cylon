@@ -102,4 +102,25 @@ describe("Utils", function() {
       expect(proxyTestStubs(methods, base)).to.be.eql(base);
     });
   });
+
+  describe("#bind", function() {
+    var me = { hello: "Hello World" };
+    var proxy = {
+      boundMethod: function() { return this.hello; }
+    };
+
+    it("binds the 'this' scope for the method", function() {
+      proxy.boundMethod = function() { return this.hello; };
+      proxy.boundMethod = bind(proxy.boundMethod, me);
+
+      expect(proxy.boundMethod()).to.eql("Hello World");
+    });
+
+    it("passes arguments along to bound functions", function() {
+      proxy.boundMethod = function(hello, world) { return [hello, world]; };
+      proxy.boundMethod = bind(proxy.boundMethod, me);
+
+      expect(proxy.boundMethod("Hello", "World")).to.eql(["Hello", "World"]);
+    })
+  });
 });
