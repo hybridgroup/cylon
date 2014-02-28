@@ -64,4 +64,62 @@ describe('Basestar', function() {
       expect(testclass.returnString("testString")).to.be.equal("testString");
     });
   });
+
+  describe("#defineEvent", function() {
+    var ProxyClass = (function(klass) {
+      subclass(ProxyClass, klass);
+      function ProxyClass() {}
+      return ProxyClass;
+    })(Cylon.Basestar);
+
+    var EmitterClass = (function(klass) {
+      subclass(EmitterClass, klass);
+
+      function EmitterClass(update) {
+        update || (update = false);
+        this.proxy = new ProxyClass();
+        this.defineEvent({
+          eventName: "testevent",
+          source: this,
+          target: this.proxy,
+          sendUpdate: update
+        });
+      }
+
+      return EmitterClass;
+    })(Cylon.Basestar);
+
+    it("proxies events from one class to another", function() {
+      var eventSpy = spy(),
+          testclass = new EmitterClass(),
+          proxy = testclass.proxy;
+
+      proxy.on('testevent', eventSpy);
+      testclass.emit('testevent', 'data');
+
+      assert(eventSpy.calledWith('data'))
+    });
+
+    it("emits an 'update' event if told to", function() {
+      var updateSpy = spy(),
+          testclass = new EmitterClass(true),
+          proxy = testclass.proxy;
+
+      proxy.on('update', updateSpy);
+      testclass.emit('testevent', 'data');
+
+      assert(updateSpy.calledWith('testevent', 'data'));
+    });
+
+    it("does not emit an 'update' event by default", function() {
+      var updateSpy = spy(),
+          testclass = new EmitterClass(),
+          proxy = testclass.proxy;
+
+      proxy.on('update', updateSpy);
+      testclass.emit('testevent', 'data');
+
+      assert(!updateSpy.calledWith('testevent', 'data'));
+    });
+  });
 });
