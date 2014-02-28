@@ -2,8 +2,7 @@
 
 var Program = require('commander'),
     Pkg = require('../package.json'),
-    CliCommands = require('../lib/cli/cli-commands'),
-    fs = require('fs');
+    CliCommands = require('../lib/cli/cli-commands');
 
 Program
   .version(Pkg.version)
@@ -50,30 +49,29 @@ Program
     }
   });
 
-var modules_path = process.cwd() + '/node_modules/';
+var globule = require('globule'),
+    cylonModules = globule.find('cylon-*', { srcBase: 'node_modules'} );
 
-if (fs.existsSync(modules_path)) {
-  // require all cylon-* modules
-  fs.readdirSync(modules_path).forEach(function(dir) {
-    if (dir.match(/^cylon-.*/) !== null) {
-      if (typeof require(dir).registerCommands === 'function') {
-        var Commands = require(dir).registerCommands();
-        for (name in Commands) {
-          var command = Commands[name];
+for (var i in cylonModules){
+  var cylonModule = require(cylonModules[i]);
+  if (typeof cylonModule.registerCommands === 'function') {
+    var name,
+        Commands = cylonModule.registerCommands();
 
-          // get subcommand arguments
-          var args = process.argv.slice(3);
+    for (name in Commands) {
+      var command = Commands[name];
 
-          Program
-            .command(name)
-            .description(command.description)
-            .action(function(){
-              command.command(args);
-            });
-        }
-      }
+      // get subcommand arguments
+      var args = process.argv.slice(3);
+
+      Program
+        .command(name)
+        .description(command.description)
+        .action(function(){
+          command.command(args);
+        });
     }
-  });
+  }
 }
 
 var argv = Program.parse(process.argv);
