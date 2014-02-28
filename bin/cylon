@@ -2,6 +2,8 @@
 
 var Program = require('commander'),
     Pkg = require('../package.json'),
+    fs = require('fs'),
+    globule = require('globule'),
     CliCommands = require('../lib/cli/cli-commands');
 
 Program
@@ -49,20 +51,21 @@ Program
     }
   });
 
-var globule = require('globule'),
-    cylonModules = globule.find('cylon-*', { srcBase: 'node_modules'} );
+var cylonModules = globule.find('cylon-*', { srcBase: 'node_modules'}),
+    cylonModule;
 
-for (var i in cylonModules){
-  var cylonModule = require(cylonModules[i]);
+cylonModules.forEach(function(moduleName){
+  cylonModule = require(moduleName);
+
   if (typeof cylonModule.registerCommands === 'function') {
     var name,
-        Commands = cylonModule.registerCommands();
+        command,
+        commands = cylonModule.registerCommands(),
+        // get subcommand arguments
+        args = process.argv.slice(3);
 
-    for (name in Commands) {
-      var command = Commands[name];
-
-      // get subcommand arguments
-      var args = process.argv.slice(3);
+    for (name in commands) {
+      command = commands[name];
 
       Program
         .command(name)
@@ -72,7 +75,7 @@ for (var i in cylonModules){
         });
     }
   }
-}
+});
 
 var argv = Program.parse(process.argv);
 
