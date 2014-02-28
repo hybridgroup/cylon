@@ -1,21 +1,21 @@
+"use strict";
+
 source('basestar');
 
 var EventEmitter = require('events').EventEmitter;
 
 describe('Basestar', function() {
   describe('constructor', function() {
-    return it('assigns @self to the instance of the Basestar class', function() {
-      var instance;
-      instance = new Cylon.Basestar;
-      return instance.self.should.be.eql(instance);
+    it('assigns @self to the instance of the Basestar class', function() {
+      var instance = new Cylon.Basestar();
+      expect(instance.self).to.be.eql(instance);
     });
   });
 
   describe('#proxyMethods', function() {
-    var ProxyClass, TestClass, methods;
-    methods = ['asString', 'toString', 'returnString'];
+    var methods = ['asString', 'toString', 'returnString'];
 
-    ProxyClass = (function() {
+    var ProxyClass = (function() {
       function ProxyClass() {}
 
       ProxyClass.prototype.asString = function() {
@@ -34,7 +34,7 @@ describe('Basestar', function() {
 
     })();
 
-    TestClass = (function(_super) {
+    var TestClass = (function(_super) {
       subclass(TestClass, _super);
 
       function TestClass() {
@@ -47,24 +47,21 @@ describe('Basestar', function() {
     })(Cylon.Basestar);
 
     it('can alias methods', function() {
-      var testclass;
-      testclass = new TestClass;
-      assert(typeof testclass.asString === 'function');
-      testclass.asString().should.be.equal("[object ProxyClass]");
+      var testclass = new TestClass;
+      expect(testclass.asString).to.be.a('function')
+      expect(testclass.asString()).to.be.equal("[object ProxyClass]");
     });
 
     it('can alias existing methods if forced to', function() {
-      var testclass;
-      testclass = new TestClass;
-      assert(typeof testclass.toString === 'function');
-      testclass.toString().should.be.equal("[object ProxyClass]");
+      var testclass = new TestClass;
+      expect(testclass.toString).to.be.a('function')
+      expect(testclass.toString()).to.be.equal("[object ProxyClass]");
     });
 
     it('can alias methods with arguments', function() {
-      var testclass;
-      testclass = new TestClass;
-      assert(typeof testclass.returnString === 'function');
-      testclass.returnString("testString").should.be.equal("testString");
+      var testclass = new TestClass;
+      expect(testclass.returnString).to.be.a('function')
+      expect(testclass.returnString("testString")).to.be.equal("testString");
     });
   });
 });
