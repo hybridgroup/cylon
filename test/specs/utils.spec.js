@@ -31,7 +31,7 @@ describe("Utils", function() {
   describe("#proxyFunctionsToObject", function() {
     var ProxyClass, TestClass, methods;
     methods = ['asString', 'toString', 'returnString'];
-    
+
     ProxyClass = (function() {
       function ProxyClass() {}
 

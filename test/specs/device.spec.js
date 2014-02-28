@@ -19,7 +19,7 @@ describe("Device", function() {
   });
 
   initDriver = sinon.stub(robot, 'initDriver').returns(driver);
-  
+
   device = new Cylon.Device({
     name: "devisive",
     driver: 'driving',
@@ -29,29 +29,29 @@ describe("Device", function() {
   it("belongs to a robot", function() {
     device.robot.name.should.be.equal('me');
   });
-  
+
   it("has a name", function() {
     device.name.should.be.equal('devisive');
   });
-  
+
   it("can init a driver", function() {
     initDriver.should.be.called;
   });
-  
+
   it("can start a driver", function() {
     var driverStart;
     driverStart = sinon.stub(driver, 'start').returns(true);
     device.start();
     driverStart.should.be.called;
   });
-  
+
   it("can stop a driver", function() {
     var driverStop;
     driverStop = sinon.stub(driver, 'stop').returns(true);
     device.stop();
     driverStop.should.be.called;
   });
-  
+
   it("should use default connection if none specified");
   it("should use connection if one is specified");
 });
