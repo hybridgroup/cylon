@@ -2,8 +2,7 @@
 
 var Program = require('commander'),
     Pkg = require('../package.json'),
-    CliCommands = require('../lib/cli/cli-commands'),
-    fs = require('fs');
+    CliCommands = require('../lib/cli/cli-commands');
 
 Program
   .version(Pkg.version)
@@ -49,36 +48,6 @@ Program
       console.log("4.- cylon bluetooth connect <address> [dev]\n");
     }
   });
-
-/*
-var modulesPath = process.cwd() + '/node_modules/';
-
-if (fs.existsSync(modulesPath)) {
-  // require all cylon-* modules
-  fs.readdirSync(modulesPath).forEach(function(dir) {
-    //if (dir.match(/^cylon-.+/) !== null) {
-      if (typeof require(dir).registerCommands === 'function') {
-        var name,
-            Commands = require(dir).registerCommands();
-
-        for (name in Commands) {
-          var command = Commands[name];
-
-          // get subcommand arguments
-          var args = process.argv.slice(3);
-
-          Program
-            .command(name)
-            .description(command.description)
-            .action(function(){
-              command.command(args);
-            });
-        }
-      }
-    }
-  });
-}
-*/
 
 var globule = require('globule'),
     cylonModules = globule.find('cylon-*', { srcBase: 'node_modules'} );
