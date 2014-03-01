@@ -57,4 +57,35 @@ describe("Robot", function() {
       robot.toString().should.be.equal("[Robot name='irobot']");
     });
   });
+
+  describe("#data", function() {
+    var dataBot = new Cylon.Robot({
+      connection: { name: 'loopback', adaptor: 'loopback' },
+      device: { name: 'ping', driver: 'ping' }
+    });
+
+    var data = dataBot.data();
+
+    it("returns an object", function() {
+      expect(data).to.be.a('object');
+    });
+
+    it("contains the robot's name", function() {
+      expect(data.name).to.eql(dataBot.name);
+    });
+
+    it("contains the robot's commands", function() {
+      expect(data.commands).to.eql(dataBot.commands);
+    });
+
+    it("contains the robot's devices", function() {
+      var deviceData = dataBot.devices.ping.data();
+      expect(data.devices).to.eql([deviceData]);
+    });
+
+    it("contains the robot's connections", function() {
+      var connectionData = dataBot.connections.loopback.data();
+      expect(data.connections).to.eql([connectionData]);
+    });
+  });
 });
