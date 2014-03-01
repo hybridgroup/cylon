@@ -47,7 +47,7 @@ robot.start();
 
 ##### CoffeeScript:
 
-```javascript
+```ruby
 Cylon = require "cylon"
 
 # Initialize the robot
@@ -84,7 +84,7 @@ Cylon.robot({
 ```
 ##### CoffeeScript:
 
-```javascript
+```ruby
 Cylon = require 'cylon'
 
 Cylon.robot
