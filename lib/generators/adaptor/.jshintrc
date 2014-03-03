@@ -10,5 +10,20 @@
   "unused": true,
   "boss": true,
   "eqnull": true,
-  "node": true
+  "node": true,
+  "predef": [
+    "Cylon",
+    "Logger",
+
+    "after",
+    "bind",
+    "constantly",
+    "every",
+    "hasProp",
+    "proxyFunctionsToObject",
+    "proxyTestStubs",
+    "sleep",
+    "slice",
+    "subclass"
+  ]
 }
