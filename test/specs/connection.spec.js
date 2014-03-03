@@ -53,4 +53,28 @@ describe("Connection", function() {
     connection.disconnect();
     adaptorDisconnect.should.be.called;
   });
+
+  describe("#data", function() {
+    var data = connection.data();
+
+    it("returns an object", function() {
+      expect(data).to.be.a('object');
+    });
+
+    it("contains the connection's name", function() {
+      expect(data.name).to.be.eql(connection.name);
+    });
+
+    it("contains the connection's port", function() {
+      expect(data.port).to.be.eql(connection.port.toString());
+    });
+
+    it("contains the connection's adaptor name", function() {
+      expect(data.adaptor).to.be.eql(connection.adaptor.constructor.name);
+    });
+
+    it("contains the connection's ID", function() {
+      expect(data.connection_id).to.be.eql(connection.connection_id);
+    });
+  });
 });
