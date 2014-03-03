@@ -11,12 +11,12 @@ Cylon.robot
   work: (my) ->
     Logger.info "connected..."
     
-    my.connections['skynet'].on 'message', (channel, data) ->
+    my.connections['skynet'].on 'message', (data) ->
       console.log(data)
-      if data.red is 'on'
+      if data.message.red is 'on'
         console.log("red on request received from skynet");
         my.led.turnOn()
-      else if data.red is 'off'
+      else if data.message.red is 'off'
         console.log("red off request received from skynet");
         my.led.turnOff()
 
