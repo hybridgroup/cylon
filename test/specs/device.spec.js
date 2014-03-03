@@ -1,58 +1,149 @@
-'use strict';
+"use strict";
+
 source("device");
 source("robot");
-source("driver");
-source("test/ping");
 
-describe("Device", function() {
-  var device, driver, initDriver, robot;
-  robot = new Cylon.Robot({
-    name: 'me'
+describe("Cylon.Device", function() {
+  var robot = new Cylon.Robot({
+    name: "TestingBot",
+    connection: { name: 'loopback', adaptor: 'loopback' }
   });
 
-  driver = new Cylon.Drivers.Ping({
-    name: 'driving',
-    device: {
-      connection: 'connect',
-      pin: 13
-    }
+  var connection = robot.connections.loopback;
+
+  var driver = new Cylon.Drivers.Ping({
+    name: 'driver',
+    device: { connection: connection, port: 13 }
+  })
+
+  var initDriver = stub(robot, 'initDriver').returns(driver);
+
+  var device = new Cylon.Device({
+    robot: robot,
+    name: "ping",
+    pin: 13,
+    connection: 'loopback'
   });
 
-  initDriver = sinon.stub(robot, 'initDriver').returns(driver);
+  describe("constructor", function() {
+    it("sets @self as a circular reference", function() {
+      expect(device.self).to.be.eql(device);
+    });
 
-  device = new Cylon.Device({
-    name: "devisive",
-    driver: 'driving',
-    robot: robot
+    it("sets @robot to the passed robot", function() {
+      expect(device.robot).to.be.eql(robot);
+    });
+
+    it("sets @name to the passed name", function() {
+      expect(device.name).to.be.eql('ping');
+    });
+
+    it("sets @pin to the passed pin", function() {
+      expect(device.pin).to.be.eql(13);
+    });
+
+    it("sets @connection to the specified connection on the Robot", function() {
+      expect(device.connection).to.be.eql(connection);
+    });
+
+    it("asks the Robot to init a driver", function() {
+      expect(device.driver).to.be.eql(driver);
+      expect(initDriver).to.be.calledOnce
+      initDriver.restore();
+    });
   });
 
-  it("belongs to a robot", function() {
-    device.robot.name.should.be.equal('me');
+  describe("#start", function() {
+    before(function() {
+      stub(driver, 'start').returns(true);
+    });
+
+    after(function() {
+      driver.start.restore();
+    });
+
+    it("starts the driver, passing along a callback", function() {
+      var callback = function() { };
+
+      device.start(callback);
+
+      expect(driver.start).to.be.calledWith(callback);
+    });
+
+    it("logs that it's starting the device", function() {
+      stub(Logger, 'info');
+      var message = "Starting device ping on pin 13";
+
+      device.start()
+
+      expect(Logger.info).to.be.calledWith(message);
+
+      Logger.info.restore();
+    });
   });
 
-  it("has a name", function() {
-    device.name.should.be.equal('devisive');
+  describe("#stop", function() {
+    before(function() {
+      stub(driver, 'stop').returns(true);
+    });
+
+    after(function() {
+      driver.stop.restore();
+    });
+
+    it("stops the driver", function() {
+      device.stop();
+      expect(driver.stop).to.be.called;
+    });
+
+    it("logs that it's stopping the device", function() {
+      var message = "Stopping device ping";
+      stub(Logger, 'info');
+
+      device.stop();
+
+      expect(Logger.info).to.be.calledWith(message);
+      Logger.info.restore();
+    });
   });
 
-  it("can init a driver", function() {
-    initDriver.should.be.called;
+  describe("#data", function() {
+    var data = device.data();
+
+    it("returns an object", function() {
+      expect(data).to.be.a('object');
+    });
+
+    it("contains the device's name", function() {
+      expect(data.name).to.be.eql(device.name);
+    });
+
+    it("contains the device's pin", function() {
+      expect(data.pin).to.be.eql(device.pin);
+    });
+
+    it("contains the device's driver name", function() {
+      expect(data.driver).to.be.eql('Ping');
+    });
+
+    it("contains the device's connection data", function() {
+      expect(data.connection).to.be.eql(device.connection.data());
+    });
+
+    it("contains the device's driver commands", function() {
+      expect(data.commands).to.be.eql(driver.commands());
+    });
   });
 
-  it("can start a driver", function() {
-    var driverStart;
-    driverStart = sinon.stub(driver, 'start').returns(true);
-    device.start();
-    driverStart.should.be.called;
+  describe("#determineConnection", function() {
+    it("returns the connection with the given name from the Robot", function() {
+      expect(device.determineConnection("loopback")).to.be.eql(connection);
+    });
   });
 
-  it("can stop a driver", function() {
-    var driverStop;
-    driverStop = sinon.stub(driver, 'stop').returns(true);
-    device.stop();
-    driverStop.should.be.called;
+  describe("#defaultConnection", function() {
+    it("returns the first connection found on the robot", function() {
+      expect(device.defaultConnection()).to.be.eql(connection);
+    });
   });
-
-  it("should use default connection if none specified");
-  it("should use connection if one is specified");
 });
-
