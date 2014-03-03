@@ -10,13 +10,13 @@ Cylon.robot({
 
   work: function(my) {
     Logger.info("connected...");
-    my.skynet.on('message', function(channel, data) {
+    my.skynet.on('message', function(data) {
       Logger.info(data);
       var data = JSON.parse(data);
-      if(data.red == 'on') {
+      if(data.message.red == 'on') {
         my.led.turnOn()
       }
-      else if(data.red == 'off') {
+      else if(data.message.red == 'off') {
         my.led.turnOff()
       }
     });
