@@ -2,7 +2,7 @@
  * <%= adaptorName %>
  * http://cylonjs.com
  *
- * Copyright (c) 2013 Your Name Here
+ * Copyright (c) 2014 Your Name Here
  * Your License Here
 */
 
