@@ -1,91 +1,302 @@
-'use strict';
+"use strict";
 
 source("robot");
-source("logger");
-Logger.setup(false);
 
-describe("Robot", function() {
-  var robot, testWork, whateverFunc;
+describe("Cylon.Robot", function() {
+  var work = spy();
+  var extraFunction = spy();
 
-  testWork = function() {
-    return Logger.info("hi");
-  };
+  var robot = new Cylon.Robot({
+    name: "Robby",
+    work: work,
 
-  whateverFunc = function() {
-    return Logger.info("whatever!");
-  };
+    extraFunction: extraFunction,
+    extraValue: "Hello World",
 
-  robot = new Cylon.Robot({
-    name: "irobot",
-    work: testWork,
-    whatever: whateverFunc
+    master: { master: true }
   });
 
-  it("has a name, if given", function() {
-    robot.name.should.be.equal('irobot');
-  });
+  describe("constructor", function() {
+    it("sets a @robot variable as a circular reference to the robot", function() {
+      expect(robot.robot).to.be.eql(robot);
+    });
 
-  it("has a random name, if not given", function() {
-    var r;
-    sinon.stub(Cylon.Robot, 'randomName').returns('Electra');
-    r = new Cylon.Robot;
-    r.name.should.be.equal('Electra');
-  });
+    describe("name", function() {
+      context("if provided", function() {
+        it("is set to the passed value", function() {
+          expect(robot.name).to.be.eql("Robby")
+        });
+      });
 
-  it("has work", function() {
-    robot.work.should.be.equal(testWork);
-  });
+      context("if not provided", function() {
+        before(function() {
+          stub(Cylon.Robot, 'randomName').returns("New Robot");
+        });
 
-  it("can start work", function() {
-    var startConnections, startDevices, work;
-    startConnections = sinon.spy(robot, 'startConnections');
-    startDevices = sinon.spy(robot, 'startDevices');
-    work = sinon.stub(robot, 'work');
-    robot.start();
-    startConnections.should.have.been.called;
-    startDevices.should.have.been.called;
-    work.should.have.been.called;
-  });
+        after(function() {
+          Cylon.Robot.randomName.restore();
+        });
 
-  it("has additional functions attached to the robot", function() {
-    Logger.info(robot);
-    robot.whatever.should.be.equal(whateverFunc);
-  });
+        it("is set to a random name", function() {
+          var bot = new Cylon.Robot({});
+          expect(bot.name).to.be.eql("New Robot");
+        });
+      });
+    });
 
-  describe('#toString', function() {
-    it('returns basic information about the robot', function() {
-      robot.toString().should.be.equal("[Robot name='irobot']");
+    it("sets @master to the passed Master object", function() {
+      expect(robot.master).to.be.eql({ master: true });
+    });
+
+    it("sets @connections to an empty object by default", function() {
+      expect(robot.connections).to.be.eql({});
+    });
+
+    it("sets @devices to an empty object by default", function() {
+      expect(robot.devices).to.be.eql({});
+    });
+
+    it("sets @adaptors to an object containing all adaptors the Robot knows of", function() {
+      expect(robot.adaptors).to.have.keys(["loopback", "test"]);
+    });
+
+    it("sets @drivers to an object containing all drivers the Robot knows of", function() {
+      expect(robot.drivers).to.have.keys(["ping", "test"]);
+    });
+
+    it("sets @work to the passed work function", function() {
+      expect(robot.work).to.be.eql(work);
+    });
+
+    it("sets other obj params as values on the robot", function() {
+      expect(robot.extraFunction).to.be.eql(extraFunction);
+      expect(robot.extraValue).to.be.eql("Hello World");
     });
   });
 
   describe("#data", function() {
-    var dataBot = new Cylon.Robot({
+    var bot = new Cylon.Robot({
       connection: { name: 'loopback', adaptor: 'loopback' },
       device: { name: 'ping', driver: 'ping' }
     });
 
-    var data = dataBot.data();
+    var data = bot.data();
 
     it("returns an object", function() {
       expect(data).to.be.a('object');
     });
 
     it("contains the robot's name", function() {
-      expect(data.name).to.eql(dataBot.name);
+      expect(data.name).to.eql(bot.name);
     });
 
     it("contains the robot's commands", function() {
-      expect(data.commands).to.eql(dataBot.commands);
+      expect(data.commands).to.eql(bot.commands);
     });
 
     it("contains the robot's devices", function() {
-      var deviceData = dataBot.devices.ping.data();
+      var deviceData = bot.devices.ping.data();
       expect(data.devices).to.eql([deviceData]);
     });
 
     it("contains the robot's connections", function() {
-      var connectionData = dataBot.connections.loopback.data();
+      var connectionData = bot.connections.loopback.data();
       expect(data.connections).to.eql([connectionData]);
+    });
+  });
+
+  describe("initConnections", function() {
+    context("when not passed anything", function() {
+      it("returns immediately", function() {
+        expect(robot.initConnections()).to.be.eql(undefined);
+      });
+    });
+
+    context("when passed a connection object", function() {
+      before(function() {
+        stub(Cylon, 'Connection').returns("new connection")
+      });
+
+      after(function() {
+        Cylon.Connection.restore();
+      });
+
+      it("instantiates a new connection with the provided object", function() {
+        var connection = { name: 'loopback', adaptor: 'loopback' };
+        robot.initConnections(connection);
+        expect(Cylon.Connection).to.be.calledWith(connection);
+        expect(Cylon.Connection).to.be.calledWithNew;
+      });
+    });
+
+    context("when passed an array of connection objects", function() {
+      before(function() {
+        stub(Cylon, 'Connection').returns("new connection")
+      });
+
+      after(function() {
+        Cylon.Connection.restore();
+      });
+
+      it("instantiates a new connection with each of the provided objects", function() {
+        var connections = [{ name: 'loopback', adaptor: 'loopback' }]
+        robot.initConnections(connections);
+        expect(Cylon.Connection).to.be.calledWith(connections[0]);
+        expect(Cylon.Connection).to.be.calledWithNew;
+      });
+    });
+  });
+
+  describe("initDevices", function() {
+    context("when not passed anything", function() {
+      it("returns immediately", function() {
+        expect(robot.initDevices()).to.be.eql(undefined);
+      });
+    });
+
+    context("when passed a connection object", function() {
+      before(function() {
+        stub(Cylon, 'Device').returns("new device")
+      });
+
+      after(function() {
+        Cylon.Device.restore();
+      });
+
+      it("instantiates a new connection with the provided object", function() {
+        var device = { name: 'ping', driver: 'ping' };
+        robot.initDevices(device);
+        expect(Cylon.Device).to.be.calledWith(device);
+        expect(Cylon.Device).to.be.calledWithNew;
+      });
+    });
+
+    context("when passed an array of device objects", function() {
+      before(function() {
+        stub(Cylon, 'Device').returns("new device")
+      });
+
+      after(function() {
+        Cylon.Device.restore();
+      });
+
+      it("instantiates a new device with each of the provided objects", function() {
+        var devices = [{ name: 'ping', driver: 'ping' }]
+        robot.initDevices(devices);
+        expect(Cylon.Device).to.be.calledWith(devices[0]);
+        expect(Cylon.Device).to.be.calledWithNew;
+      });
+    });
+  });
+
+  describe("#start", function() {
+    before(function() {
+      stub(robot, 'startConnections').callsArg(0);
+      stub(robot, 'startDevices').callsArg(0);
+      stub(robot, 'emit').returns(null);
+
+      robot.start();
+    });
+
+    after(function() {
+      robot.startConnections.restore();
+      robot.startDevices.restore();
+      robot.emit.restore();
+    });
+
+    it("starts the robot's connections", function() {
+      expect(robot.startConnections).to.be.called;
+    });
+
+    it("starts the robot's devices", function() {
+      expect(robot.startDevices).to.be.called;
+    });
+
+    it("starts the robot's work", function() {
+      expect(robot.work).to.be.called;
+    });
+
+    it("emits the 'working' event", function() {
+      expect(robot.emit).to.be.calledWith("working")
+    });
+  });
+
+  describe("#startConnections", function() {
+    var bot;
+
+    beforeEach(function() {
+      bot = new Cylon.Robot({
+        connections: [
+          { name: 'alpha', adaptor: 'loopback' },
+          { name: 'bravo', adaptor: 'loopback' }
+        ]
+      });
+
+      stub(bot.connections.alpha, 'connect').returns(true);
+      stub(bot.connections.bravo, 'connect').returns(true);
+    });
+
+    it("runs #connect on each connection", function() {
+      bot.startConnections();
+
+      expect(bot.connections.alpha.connect).to.be.called;
+      expect(bot.connections.bravo.connect).to.be.called;
+    });
+  });
+
+  describe("#startDevices", function() {
+    var bot;
+
+    beforeEach(function() {
+      bot = new Cylon.Robot({
+        devices: [
+          { name: 'alpha', driver: 'ping' },
+          { name: 'bravo', driver: 'ping' }
+        ]
+      });
+
+      stub(bot.devices.alpha, 'start').returns(true);
+      stub(bot.devices.bravo, 'start').returns(true);
+    });
+
+    it("runs #start on each device", function() {
+      bot.startDevices();
+
+      expect(bot.devices.alpha.start).to.be.called;
+      expect(bot.devices.bravo.start).to.be.called;
+    });
+  });
+
+  describe("#stop", function() {
+    var bot = new Cylon.Robot({
+      device: { name: 'ping', driver: 'ping' },
+      connection: { name: 'loopback', adaptor: 'loopback' }
+    });
+
+    var device = bot.devices.ping,
+        connection = bot.connections.loopback;
+
+    before(function() {
+      stub(device, 'stop').returns(true);
+      stub(connection, 'stop').returns(true);
+    });
+
+    after(function() {
+      device.stop.restore();
+      connection.stop.restore();
+    });
+
+    it("calls #stop on all devices and connections", function() {
+      bot.stop();
+
+      expect(device.stop).to.be.called;
+      expect(connection.stop).to.be.called;
+    });
+  });
+
+  describe("#toString", function() {
+    it("returns basic information about the robot", function() {
+      expect(robot.toString()).to.be.eql("[Robot name='Robby']");
     });
   });
 });
