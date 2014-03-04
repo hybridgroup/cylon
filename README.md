@@ -218,6 +218,8 @@ Thank you!
 
 ## Release History
 
+Version 0.11.0 - Refactor into pure JavaScript
+
 Version 0.10.4 - Add JS helper functions
 
 Version 0.10.3 - Fix dependency issue
