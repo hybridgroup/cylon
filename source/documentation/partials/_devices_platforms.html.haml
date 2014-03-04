@@ -53,6 +53,11 @@
   %a.device{href:"/documentation/platforms/pebble", title: "Pebble"}
     %img{src: "/images/devices/pebble.jpg"}
 
+- if current_page.data.rapiro_platform == true
+  /// Rapiro
+  %a.device{href:"/documentation/platforms/rapiro", title: "Rapiro"}
+    %img{src: "/images/devices/rapiro.jpg"}
+
 - if current_page.data.raspberry_platform == true
   /// Raspberry Pi
   %a.device{href:"/documentation/platforms/raspberry-pi", title: "Raspberry Pi"}
