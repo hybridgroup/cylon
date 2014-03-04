@@ -1,0 +1,102 @@
+---
+title: Cylon.js - Rapiro Driver
+author: The Hybrid Group
+page_title: Rapiro
+page_subtitle: Driver
+layout: documentation
+page_title_show: true
+subnav_driver: true
+
+rapiro_platform: true
+---
+
+%section.intro
+  =image_tag "/images/devices/rapiro.jpg", class: "display"
+  .info_intro
+    %p Allows user to interact with the Rapiro robot using Cylon.js.
+  .clear
+  
+%section.how-to#HowToConnect
+  %h2 How To Connect
+  %p
+    Connecting to the Rapiro uses a simple serial port protocol. You will need to know which serial port the Rapiro's board is connected to.
+
+    %h3 JavaScript
+    :markdown
+          :::javascript
+          var Cylon = require('cylon');
+
+          Cylon.robot({
+            connection: {name: 'rapiro', adaptor: 'rapiro', port: '/dev/ttyACM0'},
+
+            device: {name: 'rapiro', driver: 'rapiro'},
+          ...
+
+    %h3 CoffeeScript
+    :markdown
+          :::ruby
+          Cylon = require 'cylon'
+
+          Cylon.robot
+            connection:
+              name: 'rapiro', adaptor: 'rapiro', port: '/dev/ttyACM0'
+
+            device:
+              name: 'rapiro', driver: 'rapiro'
+            ...
+
+%section.how-to#HowToUse
+  %h2 How To Use
+  %p 
+    Example of a simple program that makes the Rapiro's LED blink.
+
+    %h3 JavaScript
+    :markdown
+          :::javascript
+
+          var Cylon = require('cylon');
+
+          Cylon.robot({
+            connection: { name: 'rapiro', adaptor: 'rapiro', port: '/dev/ttyUSB0' },
+            device: {name: 'rapiro', driver: 'rapiro'},
+
+            work: function(my) {
+              var on = false;
+              every((1).second(), function() {
+                if (on == true) {
+                  my.rapiro.led(0, 0, 0);
+                  on = false;
+                } else {
+                  my.rapiro.led(255, 0, 0);
+                  on = true;
+                }
+              });
+            }
+
+    %h3 CoffeeScript
+    :markdown
+          :::ruby
+
+          Cylon = require 'cylon'
+
+          Cylon.robot
+            connection: { name: 'rapiro', adaptor: 'rapiro', port: '/dev/ttyUSB0' }
+            device: {name: 'rapiro', driver: 'rapiro'}
+
+            work: (my) ->
+              on = false
+              every 1.second(), ->
+                if on is true
+                  my.rapiro.led(0, 0, 0)
+                  on = false
+                else
+                  my.rapiro.led(255, 0, 0)
+                  on = true
+
+          .start();
+
+%section.public-methods
+  .commands_api#Commands
+    = partial "/documentation/drivers/partials/rapiro/commands"
+  .commands_api#Events
+    = partial "/documentation/drivers/partials/rapiro/events"
