@@ -44,7 +44,7 @@ describe("Cylon", function() {
   describe("#robots", function() {
     it("returns an array of all robots", function() {
       var robot, robots, _i, _len, _results;
-      robots = Cylon.robots();
+      robots = Cylon.robots;
       assert(robots instanceof Array);
       _results = [];
       for (_i = 0, _len = robots.length; _i < _len; _i++) {
