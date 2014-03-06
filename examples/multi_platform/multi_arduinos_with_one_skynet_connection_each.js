@@ -44,19 +44,18 @@ SkynetBot = (function(){
   return SkynetBot;
 })();
 
-skynetBot1 = new SkynetBot();
-skynetBot1.name = 'skynet1';
-skynetBot1.port('/dev/ttyACM1');
-skynetBot1.creds("e8f942f1-a49c-11e3-9270-795e22e700d8","0lpxpyafz7z7u8frgvp44g8mbr7o80k9");
-console.log(skynetBot1.connections);
-Cylon.robot(skynetBot1);
-
 skynetBot0 = new SkynetBot();
 skynetBot0.name = 'skynet0';
-//console.log(skynetBot0.connections);
+skynetBot0.port('/dev/ttyACM1');
 skynetBot0.creds("96630051-a3dc-11e3-8442-5bf31d98c912", "2s67o7ek98pycik98f43reqr90t6s9k9");
-console.log(skynetBot0.connections);
-console.log("===========================================");
+
+skynetBot1 = new SkynetBot();
+skynetBot1.name = 'skynet1';
+skynetBot1.creds("e8f942f1-a49c-11e3-9270-795e22e700d8","0lpxpyafz7z7u8frgvp44g8mbr7o80k9");
+
 Cylon.robot(skynetBot0);
+Cylon.robot(skynetBot1);
 
 Cylon.start();
+
+
