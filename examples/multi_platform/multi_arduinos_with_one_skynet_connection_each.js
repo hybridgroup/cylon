@@ -57,5 +57,3 @@ Cylon.robot(skynetBot0);
 Cylon.robot(skynetBot1);
 
 Cylon.start();
-
-
