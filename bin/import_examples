@@ -6,10 +6,35 @@ Bundler.setup
 require 'git'
 require 'fileutils'
 
-REPO_URL = "https://github.com/hybridgroup/cylon.git"
-
-REPO_DIR = File.join __dir__, "../.cylon"
-SITE_DIR = File.join __dir__, "../source"
+if ARGV.any?
+  REPOS = ARGV.collect do |arg|
+    arg[/^([\w-]+\/[\w-]+)$/, 1] ? "https://github.com/#{arg}.git" : arg
+  end
+else
+  REPOS = %w(
+    https://github.com/hybridgroup/cylon.git
+    https://github.com/hybridgroup/cylon-ardrone.git
+    https://github.com/hybridgroup/cylon-beaglebone.git
+    https://github.com/hybridgroup/cylon-crazyflie.git
+    https://github.com/hybridgroup/cylon-digispark.git
+    https://github.com/hybridgroup/cylon-firmata.git
+    https://github.com/hybridgroup/cylon-force.git
+    https://github.com/hybridgroup/cylon-glass.git
+    https://github.com/hybridgroup/cylon-gpio.git
+    https://github.com/hybridgroup/cylon-i2c.git
+    https://github.com/hybridgroup/cylon-joystick.git
+    https://github.com/hybridgroup/cylon-keyboard.git
+    https://github.com/hybridgroup/cylon-leapmotion.git
+    https://github.com/hybridgroup/cylon-opencv.git
+    https://github.com/hybridgroup/cylon-pebble.git
+    https://github.com/hybridgroup/cylon-raspi.git
+    https://github.com/hybridgroup/cylon-rapiro.git
+    https://github.com/hybridgroup/cylon-skynet.git
+    https://github.com/hybridgroup/cylon-spark.git
+    https://github.com/hybridgroup/cylon-sphero.git
+    https://github.com/hybridgroup/cylon-tessel.git
+  )
+end
 
 INDENTED_CODE_REGEX = / # Match a MARKDOWN CODE section.
   (\r?\n)              # $1: CODE must be preceded by blank line
@@ -23,37 +48,22 @@ INDENTED_CODE_REGEX = / # Match a MARKDOWN CODE section.
   (?=\r?\n)?           # CODE folowed by blank line.
   /x
 
-@example_files = []
 
-def clone_repo
-  puts "Cloning down Cylon."
+class Example
+  attr_reader :path, :title, :name, :content, :js_content
 
-  FileUtils.rm_rf(REPO_DIR) if File.directory?(REPO_DIR)
-
-  Git.clone REPO_URL, REPO_DIR
-end
-
-def extract_example_files
-  puts "Extracting example files from Cylon repo."
-
-  Dir[REPO_DIR + "/examples/**/*.litcoffee"].each do |file|
-    content = File.read(file)
-    @example_files << {
-      :name => file[/\/([0-9A-Za-z_-]+)\.litcoffee$/, 1],
-      :content => content,
-      :title => content[/\A#\s+(.+)$/, 1],
-      :js_content => File.read(file.gsub(/litcoffee$/, 'js'))
-    }
+  def initialize(filename)
+    @path = filename
+    @content = File.read(filename)
+    @name = filename[/\/([0-9A-Za-z_-]+)\.litcoffee$/, 1]
+    @title = @content[/\A#\s+(.+)$/, 1]
+    @js_content = File.read(filename.gsub(/litcoffee$/, 'js'))
   end
-end
 
-def create_litcoffee_pages
-  puts "Creating pages from literate coffeescript examples:"
-  @example_files.each do |example|
-    puts "  - #{example[:title]}"
-    body = example[:content]
+  def literate_page
+    body = @content.dup
 
-    # mark all indented blocks as coffeescript
+    # mark all indented blocks for syntax highlighting
     body.gsub! INDENTED_CODE_REGEX do |code|
       code.gsub! /\A\n+/, "\n\n    :::ruby\n"
       code
@@ -68,31 +78,23 @@ def create_litcoffee_pages
     # indent by two spaces
     body.gsub! /^(.+)/, '  \1'
 
-    page_content = <<-EOS
+    <<-EOS
 ---
 layout: documentation
 page_title_show: true
-title: Cylon.JS Example - #{example[:title]}
-page_title: "Example: #{example[:title]}"
+title: Cylon.JS Example - #{@title}
+page_title: "Example: #{@title}"
 author: The Hybrid Group
 description: A Cylon.JS code example
-page_subtitle: "You can find more versions of this example <a href='https://github.com/hybridgroup/cylon/tree/master/examples' target='blank' class='repository'>here.</a>"
 ---
 
 :markdown
 #{body}
 EOS
-
-    filename = SITE_DIR + "/documentation/examples/coffee/#{example[:name]}.html.haml"
-    File.write filename, page_content
   end
-end
 
-def create_js_pages
-  puts "Creating pages from js examples:"
-  @example_files.each do |example|
-    puts "  - #{example[:title]}"
-    body = example[:js_content]
+  def js_page
+    body = @js_content.dup
 
     # change import path for cylon
     body.gsub! /\.\.\/\.\./, 'cylon'
@@ -104,11 +106,10 @@ def create_js_pages
 ---
 layout: documentation
 page_title_show: true
-title: Cylon.JS Example - #{example[:title]}
-page_title: "Example: #{example[:title]}"
+title: Cylon.JS Example - #{@title}
+page_title: "Example: #{@title}"
 author: The Hybrid Group
 description: A Cylon.JS code example
-page_subtitle: "You can find more versions of this example <a href='https://github.com/hybridgroup/cylon/tree/master/examples' target='blank' class='repository'>here.</a>"
 ---
 
 .example
@@ -117,68 +118,147 @@ page_subtitle: "You can find more versions of this example <a href='https://gith
 #{body}
 EOS
 
-    filename = SITE_DIR + "/documentation/examples/js/#{example[:name]}.html.haml"
-    File.write filename, page_content
   end
 end
 
-def create_index
-  puts "Creating index page."
+# Public: Gets the name of the repository from it's GitHub clone URI
+#
+# uri - string git clone URI to extract a name from
+#
+# Examples
+#
+#   get_repo_name "https://github.com/hybridgroup/cylon-ardrone.git"
+#   #=> "cylon-ardrone"
+#
+#   get_repo_name "git@github.com:hybridgroup/cylon.git"
+#   #=> "cylon"
+#
+#   get_repo_name ""
+#   #=> nil
+#
+# Returns a string or nil if it couldn't be parsed
+def get_repo_name(uri)
+  uri[/.*\/(.*).git/, 1]
+end
 
-  filename = SITE_DIR + "/documentation/examples/index.html.haml"
+# Public: Uses the git gem to clone down a remote git repository
+#
+# uri - string URI of remote git repo to clone down
+#
+# Returns an array containing the path to the cloned repository, and the Git
+# repository instance
+def clone_repo(uri)
+  name = get_repo_name(uri)
+  path = File.expand_path("#{__dir__}/../.examples/#{name}")
 
-  page_content = <<-EOS
----
-layout: documentation
-page_title_show: true
-title: Examples
-page_title: Examples
-author: The Hybrid Group
-description: Examples of using Cylon.JS with different hardware configurations
-page_subtitle: How you can get started.
----
+  FileUtils.rm_rf(path) if File.directory?(path)
 
-.examples
-  %table
-    %thead
-      %th Example
-      %th.links{:colspan => '2'} Links
-    %tbody
+  puts "  - Cloning #{name}."
+  repo = Git.clone(uri, path)
+
+  return [path, repo]
+end
+
+def extract_examples_from_repo(path)
+  examples = []
+
+  Dir.glob(path + "/examples/**/*.litcoffee") do |file|
+    examples << Example.new(file)
+  end
+
+  examples
+end
+
+def remove_existing_examples(name)
+  puts "  - Removing existing example pages."
+  path = File.expand_path("#{__dir__}/../source/documentation/examples/#{name}")
+  FileUtils.rm_rf path
+end
+
+def add_examples_to_site(name, examples)
+  return unless examples.any?
+  adaptor_name = name[/^cylon-(.*)$/, 1]
+  name = adaptor_name if adaptor_name
+
+  create_litcoffee_pages name, examples
+  create_js_pages name, examples
+  create_index_partial name, examples
+end
+
+def create_litcoffee_pages(name, examples)
+  examples.each do |example|
+    puts "  - #{example.title}"
+
+    examples_dir = "/source/documentation/examples"
+    filename = "/#{name}/coffee/#{example.name}.html.haml"
+
+    path = File.expand_path(__dir__ + "/../" + examples_dir + filename)
+    content = example.literate_page
+
+    FileUtils.mkdir_p(File.dirname(path)) unless File.directory?(path)
+    File.write(path, content)
+  end
+end
+
+def create_js_pages(name, examples)
+  examples.each do |example|
+    puts "  - #{example.title}"
+
+    examples_dir = "/source/documentation/examples"
+    filename = "/#{name}/js/#{example.name}.html.haml"
+
+    path = File.expand_path(__dir__ + "/../" + examples_dir + filename)
+    content = example.js_page
+
+    FileUtils.mkdir_p(File.dirname(path)) unless File.directory?(path)
+    File.write(path, content)
+  end
+end
+
+def create_index_partial(name, examples)
+  path = File.expand_path "#{__dir__}/../source/documentation/examples/partials"
+  filename = File.join(path, "/_#{name}.html.haml")
+
+  FileUtils.mkdir_p(path) unless File.directory?(path)
+
+  partial = <<-EOS
+
+%h2 \#{name}
+%table
+  %thead
+    %th Example
+    %th.links{:colspan => '2'} Links
+  %tbody
   EOS
 
-  @example_files.each do |example|
-    string = "      %tr\n"
-    string << "        %td #{example[:title]}\n"
-    string << "        %td.links= link_to 'Javascript', '/documentation/examples/js/#{example[:name]}'\n"
-    string << "        %td.links= link_to 'CoffeeScript', '/documentation/examples/coffee/#{example[:name]}'\n"
-    page_content << string
+  examples.each do |example|
+    string = "%tr\n"
+    string << "  %td #{example.title}\n"
+    string << "  %td.links= link_to 'Javascript', '/documentation/examples/#{name}/js/#{example.name}'\n"
+    string << "  %td.links= link_to 'CoffeeScript', '/documentation/examples/#{name}/coffee/#{example.name}'\n"
+    string.gsub! /^(.+)/, '    \1'
+    partial << string
   end
 
-  File.write filename, page_content
-end
-
-def remove_existing_pages
-  puts "Removing existing example pages."
-  `rm -rf #{SITE_DIR}/documentation/examples/js/*.html.haml`
-  `rm -rf #{SITE_DIR}/documentation/examples/coffee/*.html.haml`
-  `rm -rf #{SITE_DIR}/documentation/examples/index.html.haml`
-end
-
-def remove_local_repo
-  puts "Removing local copy of Cylon repo."
-  FileUtils.rm_rf REPO_DIR
+  File.write(filename, partial)
 end
 
 def main
-  clone_repo
-  extract_example_files
-  remove_existing_pages
-  create_litcoffee_pages
-  create_js_pages
-  create_index
-  remove_local_repo
+  REPOS.each do |repo|
+    name = get_repo_name(repo)
 
-  puts "Done."
+    puts "Importing examples from #{name}."
+
+    path, repo = clone_repo repo
+
+    remove_existing_examples(name)
+
+    examples = extract_examples_from_repo path
+
+    add_examples_to_site name, examples
+
+    FileUtils.rm_rf path
+  end
 end
 
 main
