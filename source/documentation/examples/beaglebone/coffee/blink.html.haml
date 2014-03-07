@@ -1,0 +1,46 @@
+---
+layout: documentation
+page_title_show: true
+title: Cylon.JS Example - Beaglebone Blink
+page_title: "Example: Beaglebone Blink"
+author: The Hybrid Group
+description: A Cylon.JS code example
+---
+
+:markdown
+  # Beaglebone Blink
+
+  First, let's import Cylon:
+
+      :::ruby
+      Cylon = require 'cylon'
+
+  Now that we have Cylon imported, we can start defining our robot
+
+      :::ruby
+      # Initialize the robot
+      Cylon.robot
+
+  Let's define the connections and devices:
+
+      :::ruby
+        connection:
+          name: 'beaglebone', adaptor: 'beaglebone'
+
+        device:
+          name: 'led', driver: 'led', pin: 'P9_12'
+
+  Now that Cylon knows about the necessary hardware we're going to be using, we'll
+  tell it what work we want to do:
+
+      :::ruby
+        work: (my) ->
+          # we do our thing here
+          every 1.second(), -> my.led.toggle()
+
+  Now that our robot knows what work to do, and the work it will be doing that
+  hardware with, we can start it:
+
+      :::ruby
+      .start()
+

@@ -1,0 +1,21 @@
+---
+layout: documentation
+page_title_show: true
+title: Cylon.JS Example - Hello
+page_title: "Example: Hello"
+author: The Hybrid Group
+description: A Cylon.JS code example
+---
+
+.example
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          work: function() {
+            every(1..second(), function() { console.log("Hello, human!"); });
+            after(10..seconds(), function() { console.log("Impressive."); });
+          }
+        }).start();
+

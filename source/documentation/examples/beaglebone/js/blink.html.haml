@@ -1,0 +1,31 @@
+---
+layout: documentation
+page_title_show: true
+title: Cylon.JS Example - Beaglebone Blink
+page_title: "Example: Beaglebone Blink"
+author: The Hybrid Group
+description: A Cylon.JS code example
+---
+
+.example
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: {
+            name: 'beaglebone',
+            adaptor: 'beaglebone'
+          },
+          device: {
+            name: 'led',
+            driver: 'led',
+            pin: 'P9_12'
+          },
+          work: function(my) {
+            return every(1..second(), function() {
+              return my.led.toggle();
+            });
+          }
+        }).start();
+
