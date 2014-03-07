@@ -15,6 +15,13 @@
           width: 100%;
       }
     }
+    .examples {
+      table {
+        tbody tr td:first-child, thead tr th:first-child {
+          width: 580px;
+        }
+      }
+    }
   }
 }
 
