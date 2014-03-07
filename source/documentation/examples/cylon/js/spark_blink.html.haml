@@ -1,0 +1,33 @@
+---
+layout: documentation
+page_title_show: true
+title: Cylon.JS Example - Spark - Blink
+page_title: "Example: Spark - Blink"
+author: The Hybrid Group
+description: A Cylon.JS code example
+---
+
+.example
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: {
+            name: 'spark',
+            adaptor: 'spark',
+            deviceId: '',
+            accessToken: ''
+          },
+
+          device: {
+            name: 'led',
+            driver: 'led',
+            pin: 'D7'
+          },
+
+          work: function(my) {
+            every(1..second(), function() { my.led.toggle(); });
+          }
+        }).start();
+

@@ -1,0 +1,75 @@
+---
+layout: documentation
+page_title_show: true
+title: Cylon.JS Example - Joystick - DualShock 3 Controller
+page_title: "Example: Joystick - DualShock 3 Controller"
+author: The Hybrid Group
+description: A Cylon.JS code example
+---
+
+:markdown
+  # Joystick - DualShock 3 Controller
+
+  For this Cylon example, we'll demonstrate how to get input from a DualShock
+  3 controller.
+
+  You can connect to the controller over Bluetooth, or plug it in via USB and
+  press the 'PS' button to connect it to your system.
+
+  Before we get started, make sure you've got `cylon-joystick` installed via NPM
+  so we can connect to the controller.
+
+  First, let's load up Cylon:
+
+      :::ruby
+      Cylon = require 'cylon'
+
+  With that done, we can start defining our new robot.
+
+      :::ruby
+      Cylon.robot
+
+  We'll be setting up a connection to our DualShock controller, and also setting
+  the controller up as a device the robot can talk to:
+
+      :::ruby
+        connection:
+          name: 'joystick'
+          adaptor: 'joystick'
+          controller: 'dualshock3'
+
+        device:
+          name: 'controller'
+          driver: 'dualshock3'
+
+  With our connection to the controller established, we'll tell it what to do:
+
+      :::ruby
+        work: (my) ->
+
+  Let's ask our robot to tell us when the face buttons on the controller (Square,
+  Circle, X, Triangle) are pressed and released:
+
+      :::ruby
+          ["square", "circle", "x", "triangle"].forEach (button) ->
+            my.controller.on "\#{button}:press", ->
+              console.log "Button \#{button} pressed."
+
+            my.controller.on "\#{button}:release", ->
+              console.log "Button \#{button} released."
+
+  Next up, when someone moves the left and right analog sticks, lets' print their
+  current positions.
+
+      :::ruby
+          my.controller.on "left:move", (pos) ->
+            console.log "Left Stick:", pos
+
+          my.controller.on "right:move", (pos) ->
+            console.log "Right Stick:", pos
+
+  And with our work defined, we can tell Cylon to start up our Robot:
+
+      :::ruby
+      Cylon.start()
+

@@ -1,0 +1,25 @@
+---
+layout: documentation
+page_title_show: true
+title: Cylon.JS Example - Sphero Color
+page_title: "Example: Sphero Color"
+author: The Hybrid Group
+description: A Cylon.JS code example
+---
+
+.example
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0' },
+          device: { name: 'sphero', driver: 'sphero' },
+
+          work: function(me) {
+            every((1).second(), function() {
+              me.sphero.setRGB(Math.floor(Math.random() * 100000));
+            });
+          }
+        }).start();
+

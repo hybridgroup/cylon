@@ -1,0 +1,30 @@
+---
+layout: documentation
+page_title_show: true
+title: Cylon.JS Example - Raspberry Pi - LED Brightness
+page_title: "Example: Raspberry Pi - LED Brightness"
+author: The Hybrid Group
+description: A Cylon.JS code example
+---
+
+.example
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'raspi', adaptor: 'raspi', port: '/dev/ttyACM0' },
+          device: { name: 'led', driver: 'led', pin: 11 },
+
+          work: function(my) {
+            var brightness = 0;
+            var fade = 5;
+
+            every(0.05.seconds(), function() {
+              brightness += fade;
+              my.led.brightness(brightness);
+              if ((brightness === 0) || (brightness === 255)) { fade = -fade; }
+            });
+          }
+        }).start();
+

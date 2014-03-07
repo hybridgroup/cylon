@@ -1,0 +1,37 @@
+---
+layout: documentation
+page_title_show: true
+title: Cylon.JS Example - Analog Sensor
+page_title: "Example: Analog Sensor"
+author: The Hybrid Group
+description: A Cylon.JS code example
+---
+
+.example
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+
+          device: {
+            name: 'sensor',
+            driver: 'analogSensor',
+            pin: 0,
+            upperLimit: 900,
+            lowerLimit: 100
+          },
+
+          work: function(my) {
+            my.sensor.on('upperLimit', function(val) {
+              console.log("Upper limit reached ===> " + val);
+            });
+
+            my.sensor.on('lowerLimit', function(val) {
+              console.log("Lower limit reached ===> " + val);
+            });
+          }
+
+        }).start();
+
