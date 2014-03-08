@@ -28,6 +28,9 @@
     "sinon",
     "subclass",
     "proxyTestStubs",
-    "proxyFunctionsToObject"
+    "proxyFunctionsToObject",
+    "every",
+    "hasProp",
+    "bind"
   ]
 }
