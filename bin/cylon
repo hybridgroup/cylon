@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
+require('../lib/cli/cli-commands');
+
 var Program = require('commander'),
     Pkg = require('../package.json'),
-    globule = require('globule'),
-    CliCommands = require('../lib/cli/cli-commands');
+    globule = require('globule');
 
 Program
   .version(Pkg.version)
@@ -18,28 +19,31 @@ Program
   .command("scan <type>")
   .description("Scans serial, bluetooth or usb (pass param <serial> | <bluetooth> | <usb>) for connected devices")
   .action(function(type) {
-    CliCommands.scan(type);
+    var scan = new Cylon.CLI.Scan();
+    scan.search(type);
   });
 
 Program
   .command("bluetooth <subcmd> [address] [option]")
   .description("Scan, pair, unpair bluetooth devices to/from the PC, establishes serial to bluetooth connection. Try 'cylon bluetooth help'")
   .action(function(subcmd, address, option){
+    var bluetooth = new Cylon.CLI.Bluetooth();
+
     switch(subcmd){
     case 'pair':
       option = (option === null || option === undefined) ? 'hci0' : option;
-      CliCommands.bluetooth.pair(option, address);
+      bluetooth.pair(option, address);
       break;
     case 'unpair':
       option = (option === null || option === undefined) ? 'hci0' : option;
-      CliCommands.bluetooth.unpair(option, address);
+      bluetooth.unpair(option, address);
       break;
     case 'connect':
       option = (option === null || option === undefined) ? '/dev/rfcomm0' : option;
-      CliCommands.bluetooth.connect(option, address);
+      bluetooth.connect(option, address);
       break;
     case 'scan':
-      CliCommands.bluetooth.scan();
+      bluetooth.scan();
       break;
     default:
       console.log("cylon bluetooth argument not recognized, try:\n");
