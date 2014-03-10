@@ -20,8 +20,8 @@ sphero_driver: true
 
     %h4 Where can I get a Sphero or find more info about it?
     %p
-      You can do it by following this link
-      = link_to "GoSphero.", "http://www.gosphero.com/"
+      Go to the Orbotix web site at 
+      = link_to "http://www.gosphero.com/", "http://www.gosphero.com/", :target => '_blank'
   .clear
   
 %section.how-to#HowToInstall
@@ -75,7 +75,10 @@ sphero_driver: true
 
   %p In order to allow Cylon.js running on your Mac to access the Sphero, go to "Bluetooth > Open Bluetooth Preferences > Sharing Setup" and make sure that "Bluetooth Sharing" is checked.
 
-  %p Thank you to [@kopipejst](https://github.com/kopipejst) for the above connnection info.
+  %p 
+    Thank you to 
+    = link_to "@kopipejst", "https://github.com/kopipejst", :target => '_blank' 
+    for the above connnection info.
 
   %h3 Ubuntu
 
@@ -84,17 +87,21 @@ sphero_driver: true
   %p Find the address of the Sphero, by using:
   :markdown
         :::bash
-        hcitool scan
+        cylon bluetooth scan
 
   %p Pair to Sphero using this command (substituting the actual address of your Sphero):
   :markdown
         :::bash
-        sudo bluez-simple-agent hci0 <address>
+        cylon bluetooth pair <address>
 
   %p Connect to the Sphero using this command (substituting the actual address of your Sphero):
   :markdown
         :::bash
-        sudo rfcomm connect /dev/rfcomm1 <address> 1
+        cylon bluetooth connect <address>
+
+  %h3 Windows
+
+  %p You should be able to simply pair your Sphero using your normal system tray applet for Bluetooth, and then connect to the COM port that is bound to the device, such as `COM3`.
 
   %h2 How To Calibrate Sphero
   
@@ -106,7 +113,7 @@ sphero_driver: true
 
 %section.drivers#Drivers
   %h2 Drivers
-  %p There is only one driver for the Sphero.
+  %p There is only one driver for the Sphero. Click on the image below: 
 
   .hardware
     .devices
