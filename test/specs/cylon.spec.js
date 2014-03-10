@@ -117,4 +117,65 @@ describe("Cylon", function() {
       });
     });
   });
+
+  describe("#findRobotDevice", function() {
+    var bot, device;
+
+    before(function() {
+      bot = cylon.robot({
+        name: "Ultron",
+        device: { name: "ping", driver: "ping" }
+      });
+
+      device = bot.devices.ping;
+    });
+
+    describe("async", function() {
+      context("looking for a valid robot/device", function() {
+        it("calls the callback with the device and no error message", function() {
+          var callback = spy();
+          cylon.findRobotDevice("Ultron", "ping", callback);
+          expect(callback).to.be.calledWith(undefined, device);
+        });
+      });
+
+      context("looking for a valid robot and invalid device", function() {
+        it("calls the callback with no device and an error message", function() {
+          var callback = spy();
+          cylon.findRobotDevice("Ultron", "nope", callback);
+          var error = { error: "No device found with the name nope." };
+          expect(callback).to.be.calledWith(error, null);
+        });
+      });
+
+      context("looking for an invalid robot", function() {
+        it("calls the callback with no device and an error message", function() {
+          var callback = spy();
+          cylon.findRobotDevice("Rob", "ping", callback);
+          var error = { error: "No Robot found with the name Rob" };
+          expect(callback).to.be.calledWith(error, null);
+        });
+      });
+    });
+
+    describe("synchronous", function() {
+      context("looking for a valid robot/device", function() {
+        it("returns the device", function() {
+          expect(cylon.findRobotDevice("Ultron", "ping")).to.be.eql(device);
+        });
+      });
+
+      context("looking for a valid robot and invalid device", function() {
+        it("returns null", function() {
+          expect(cylon.findRobotDevice("Ultron", "nope")).to.be.eql(null);
+        });
+      });
+
+      context("looking for an invalid robot", function() {
+        it("returns null", function() {
+          expect(cylon.findRobotDevice("Rob", "ping")).to.be.eql(null);
+        });
+      });
+    });
+  });
 });
