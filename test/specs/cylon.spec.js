@@ -1,206 +1,288 @@
-'use strict';
-var Connection, Cylon, Device, Driver, Robot,
-  __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+"use strict";
 
-Cylon = source("cylon");
-Robot = source('robot');
-Device = source('device');
-Driver = source('driver');
-Connection = source('connection');
+var cylon = source("cylon");
 
 describe("Cylon", function() {
-  it("should create a robot", function() {
-    var robot;
-    assert(__indexOf.call(Object.keys(Cylon), 'robot') >= 0);
-    robot = Cylon.robot({
-      name: 'caprica six'
+  describe("#constructor", function() {
+    it("sets @api_instance to null by default", function() {
+      expect(cylon.api_instance).to.be.eql(null);
     });
-    robot.name.should.be.eql('caprica six');
+
+    it("sets @api_config to an object containing host/port info", function() {
+      var config = cylon.api_config;
+
+      expect(config).to.be.an('object');
+      expect(config.host).to.be.eql('127.0.0.1');
+      expect(config.port).to.be.eql('3000');
+    });
+
+    it("sets @robots to an empty array by default", function() {
+      expect(cylon.robots).to.be.eql([]);
+    });
+
+    it("sets @this to an circular instance to the master instance", function() {
+      expect(cylon.self).to.be.eql(cylon);
+    });
   });
 
-  describe('#api', function() {
-    describe('without arguments', function() {
+  describe("#robot", function() {
+    after(function() {
+      cylon.robots = [];
+    });
+
+    it("uses passed options to create a new Robot", function() {
+      var opts = { name: "Ultron" };
+      var robot = cylon.robot(opts);
+
+      expect(robot.toString()).to.be.eql("[Robot name='Ultron']")
+      expect(cylon.robots.pop()).to.be.eql(robot);
+    });
+  });
+
+  describe("#api", function() {
+    afterEach(function() {
+      cylon.api_config = { host: "127.0.0.1", port: "3000" };
+    });
+
+    context("without arguments", function() {
       it("returns the current API configuration", function() {
-        var api_config;
-        api_config = Cylon.api();
-        assert(__indexOf.call(Object.keys(api_config), 'host') >= 0);
-        assert(__indexOf.call(Object.keys(api_config), 'port') >= 0);
+        cylon.api();
+        var config = cylon.api_config;
+        expect(config).to.be.eql({ host: "127.0.0.1", port: "3000" });
       });
     });
 
-    describe('with a host and port', function() {
-      it('sets the API configuration to what was specified', function() {
-        var api_config;
-        api_config = Cylon.api({
-          host: '0.0.0.0',
-          port: '8888'
-        });
-        api_config.host.should.be.eql("0.0.0.0");
-        api_config.port.should.be.eql("8888");
+    context("only specifying port", function() {
+      it("changes the port, but not the host", function() {
+        cylon.api({ port: "4000" });
+        var config = cylon.api_config;
+        expect(config).to.be.eql({ host: "127.0.0.1", port: "4000" });
       });
     });
-  });
 
-  describe("#robots", function() {
-    it("returns an array of all robots", function() {
-      var robot, robots, _i, _len, _results;
-      robots = Cylon.robots;
-      assert(robots instanceof Array);
-      _results = [];
-      for (_i = 0, _len = robots.length; _i < _len; _i++) {
-        robot = robots[_i];
-        _results.push(assert(robot instanceof Robot));
-      }
-      return _results;
+    context("only specifying host", function() {
+      it("changes the host, but not the port", function() {
+        cylon.api({ host: "0.0.0.0" });
+        var config = cylon.api_config;
+        expect(config).to.be.eql({ host: "0.0.0.0", port: "3000" });
+      });
+    });
+
+    context("specifying new host and port", function() {
+      it("changes both the host and port", function() {
+        cylon.api({ host: "0.0.0.0", port: "4000" });
+        var config = cylon.api_config;
+        expect(config).to.be.eql({ host: "0.0.0.0", port: "4000" });
+      });
     });
   });
 
   describe("#findRobot", function() {
-    describe("synchronous", function() {
-      describe("with a valid robot name", function() {
-        it("returns the robot", function() {
-          var robot;
-          robot = Cylon.findRobot("caprica six");
-          assert(robot instanceof Robot);
-          robot.name.should.be.equal("caprica six");
+    var bot;
+
+    before(function() {
+      bot = cylon.robot({ name: "Robby" })
+    });
+
+    describe("async", function() {
+      context("looking for a robot that exists", function() {
+        it("calls the callback with the robot", function() {
+          var callback = spy();
+          cylon.findRobot("Robby", callback);
+          expect(callback).to.be.calledWith(undefined, bot);
         });
       });
 
-      describe("with an invalid robot name", function() {
-        it("returns null", function() {
-          var robot;
-          robot = Cylon.findRobot("Tom Servo");
-          assert(robot === null);
+      context("looking for a robot that does not exist", function(){
+        it("calls the callback with no robot and an error message", function() {
+          var callback = spy();
+          cylon.findRobot("Ultron", callback);
+          var error = { error: "No Robot found with the name Ultron" };
+          expect(callback).to.be.calledWith(error, null);
         });
       });
     });
 
-    describe("async", function() {
-      describe("with a valid robot name", function() {
-        it("passes the robot and an empty error to the callback", function() {
-          return Cylon.findRobot("caprica six", function(error, robot) {
-            assert(error === void 0);
-            assert(robot instanceof Robot);
-            robot.name.should.be.equal("caprica six");
-          });
+    describe("sync", function() {
+      context("looking for a robot that exists", function() {
+        it("returns the robot", function() {
+          expect(cylon.findRobot("Robby")).to.be.eql(bot);
         });
       });
 
-      describe("with an invalid robot name", function() {
-        it("passes no robot and an error message to the callback", function() {
-          return Cylon.findRobot("Tom Servo", function(error, robot) {
-            assert(robot === null);
-            assert(typeof error === 'object');
-            error.error.should.be.eql("No Robot found with the name Tom Servo");
-          });
+      context("looking for a robot that does not exist", function(){
+        it("returns null", function() {
+          expect(cylon.findRobot("Ultron")).to.be.eql(null);
         });
       });
     });
   });
 
   describe("#findRobotDevice", function() {
-    var crow;
-    crow = Cylon.robot({
-      name: "Crow",
-      device: {
-        name: 'testDevice',
-        driver: 'ping'
-      }
-    });
+    var bot, device;
 
-    describe("synchronous", function() {
-      describe("with a valid robot and device name", function() {
-        it("returns the device", function() {
-          var device;
-          device = Cylon.findRobotDevice("Crow", "testDevice");
-          assert(device instanceof Device);
-          device.name.should.be.equal("testDevice");
-        });
+    before(function() {
+      bot = cylon.robot({
+        name: "Ultron",
+        device: { name: "ping", driver: "ping" }
       });
 
-      describe("with an invalid device name", function() {
-        it("returns null", function() {
-          var device;
-          device = Cylon.findRobotDevice("Crow", "madethisup");
-          assert(device === null);
-        });
-      });
+      device = bot.devices.ping;
     });
 
     describe("async", function() {
-      describe("with a valid robot and device name", function() {
-        it("passes the device and an empty error to the callback", function() {
-          return Cylon.findRobotDevice("Crow", "testDevice", function(error, device) {
-            assert(error === void 0);
-            assert(device instanceof Device);
-            device.name.should.be.equal("testDevice");
-          });
+      context("looking for a valid robot/device", function() {
+        it("calls the callback with the device and no error message", function() {
+          var callback = spy();
+          cylon.findRobotDevice("Ultron", "ping", callback);
+          expect(callback).to.be.calledWith(undefined, device);
         });
       });
 
-      describe("with an invalid device name", function() {
-        it("passes no device and an error message to the callback", function() {
-          return Cylon.findRobotDevice("Crow", "madethisup", function(err, device) {
-            assert(device === null);
-            assert(typeof err === 'object');
-            err.error.should.be.eql("No device found with the name madethisup.");
-          });
+      context("looking for a valid robot and invalid device", function() {
+        it("calls the callback with no device and an error message", function() {
+          var callback = spy();
+          cylon.findRobotDevice("Ultron", "nope", callback);
+          var error = { error: "No device found with the name nope." };
+          expect(callback).to.be.calledWith(error, null);
+        });
+      });
+
+      context("looking for an invalid robot", function() {
+        it("calls the callback with no device and an error message", function() {
+          var callback = spy();
+          cylon.findRobotDevice("Rob", "ping", callback);
+          var error = { error: "No Robot found with the name Rob" };
+          expect(callback).to.be.calledWith(error, null);
+        });
+      });
+    });
+
+    describe("synchronous", function() {
+      context("looking for a valid robot/device", function() {
+        it("returns the device", function() {
+          expect(cylon.findRobotDevice("Ultron", "ping")).to.be.eql(device);
+        });
+      });
+
+      context("looking for a valid robot and invalid device", function() {
+        it("returns null", function() {
+          expect(cylon.findRobotDevice("Ultron", "nope")).to.be.eql(null);
+        });
+      });
+
+      context("looking for an invalid robot", function() {
+        it("returns null", function() {
+          expect(cylon.findRobotDevice("Rob", "ping")).to.be.eql(null);
         });
       });
     });
   });
 
   describe("#findRobotConnection", function() {
-    var ultron;
-    ultron = Cylon.robot({
-      name: "Ultron",
-      connection: {
-        name: 'loopback',
-        adaptor: 'loopback'
-      }
-    });
+    var bot, conn;
 
-    describe("synchronous", function() {
-      describe("with a valid robot and connection name", function() {
-        it("returns the connection", function() {
-          var connection;
-          connection = Cylon.findRobotConnection("Ultron", "loopback");
-          assert(connection instanceof Connection);
-          connection.name.should.be.equal("loopback");
-        });
+    before(function() {
+      bot = cylon.robot({
+        name: "JARVIS",
+        connection: { name: "loopback", adaptor: "loopback" }
       });
 
-      describe("with an invalid connection name", function() {
-        it("returns null", function() {
-          var connection;
-          connection = Cylon.findRobotConnection("Ultron", "madethisup");
-          assert(connection === null);
-        });
-      });
+      conn = bot.connections.loopback;
     });
 
     describe("async", function() {
-      describe("with a valid robot and connection name", function() {
-        it("passes the connection and an empty error to the callback", function() {
-          return Cylon.findRobotConnection("Ultron", "loopback", function(error, conn) {
-            assert(error === void 0);
-            assert(conn instanceof Connection);
-            conn.name.should.be.equal("loopback");
-          });
+      context("looking for a valid robot/connection", function() {
+        it("calls the callback with the connection and no error message", function() {
+          var callback = spy();
+          cylon.findRobotConnection("JARVIS", "loopback", callback);
+          expect(callback).to.be.calledWith(undefined, conn);
         });
       });
 
-      describe("with an invalid connection name", function() {
-        it("passes no connection and an error message to the callback", function() {
-          return Cylon.findRobotConnection("Ultron", "madethisup", function(err, conn) {
-            var message;
-            assert(conn === null);
-            assert(typeof err === 'object');
-            message = "No connection found with the name madethisup.";
-            err.error.should.be.eql(message);
-          });
+      context("looking for a valid robot and invalid connection", function() {
+        it("calls the callback with no connection and an error message", function() {
+          var callback = spy();
+          cylon.findRobotConnection("JARVIS", "nope", callback);
+          var error = { error: "No connection found with the name nope." };
+          expect(callback).to.be.calledWith(error, null);
         });
       });
+
+      context("looking for an invalid robot", function() {
+        it("calls the callback with no connection and an error message", function() {
+          var callback = spy();
+          cylon.findRobotConnection("Rob", "loopback", callback);
+          var error = { error: "No Robot found with the name Rob" };
+          expect(callback).to.be.calledWith(error, null);
+        });
+      });
+    });
+
+    describe("synchronous", function() {
+      context("looking for a valid robot/connection", function() {
+        it("returns the connection", function() {
+          expect(cylon.findRobotConnection("JARVIS", "loopback")).to.be.eql(conn);
+        });
+      });
+
+      context("looking for a valid robot and invalid connection", function() {
+        it("returns null", function() {
+          expect(cylon.findRobotConnection("JARVIS", "nope")).to.be.eql(null);
+        });
+      });
+
+      context("looking for an invalid robot", function() {
+        it("returns null", function() {
+          expect(cylon.findRobotConnection("Rob", "loopback")).to.be.eql(null);
+        });
+      });
+    });
+  });
+
+  describe("#start", function() {
+    before(function() {
+      cylon.robots = [];
+      stub(cylon, 'startAPI').returns(true);
+    });
+
+    after(function() {
+      cylon.startAPI.restore();
+    });
+
+    it("starts the API", function() {
+      cylon.start();
+      expect(cylon.startAPI).to.be.called;
+    });
+
+    it("calls #start() on all robots", function() {
+      var bot1 = { start: spy() },
+          bot2 = { start: spy() };
+
+      cylon.robots = [bot1, bot2];
+
+      cylon.start();
+
+      expect(bot1.start).to.be.called;
+      expect(bot2.start).to.be.called;
+    });
+  });
+
+  describe("#stop", function() {
+    before(function() {
+      cylon.robots = [];
+    });
+
+    it("calls #stop() on all robots", function() {
+      var bot1 = { stop: spy() },
+          bot2 = { stop: spy() };
+
+      cylon.robots = [bot1, bot2];
+
+      cylon.stop();
+
+      expect(bot1.stop).to.be.called;
+      expect(bot2.stop).to.be.called;
     });
   });
 });
