@@ -1,80 +1,127 @@
-'use strict';
+"use strict";
 
 source("connection");
-source("adaptor");
 source("robot");
-source("test/loopback");
 
-describe("Connection", function() {
-  var adaptor, connection, initAdaptor, robot;
-
-  robot = new Cylon.Robot({
-    name: 'me'
+describe("Cylon.Connection", function() {
+  var robot = new Cylon.Robot({
+    name: "Robby",
+    connection: { name: 'loopback', adaptor: 'loopback', port: "/dev/null" }
   });
 
-  adaptor = new Cylon.Adaptors.Loopback({
-    name: 'loopy'
-  });
+  var connection = robot.connections.loopback;
 
-  initAdaptor = sinon.stub(robot, 'initAdaptor').returns(adaptor);
+  describe("#constructor", function() {
+    it("sets @self as a circular reference", function() {
+      expect(connection.self).to.be.eql(connection);
+    });
 
-  connection = new Cylon.Connection({
-    name: "connective",
-    adaptor: "loopback",
-    robot: robot
-  });
+    it("sets @robot to the passed robot", function() {
+      expect(connection.robot).to.be.eql(robot);
+    });
 
-  it("belongs to a robot", function() {
-    connection.robot.name.should.be.equal('me');
-  });
+    it("sets @name to the passed name", function() {
+      expect(connection.name).to.be.eql('loopback');
+    });
 
-  it("has a name", function() {
-    connection.name.should.be.equal('connective');
-  });
-
-  it("has an adaptor", function() {
-    connection.adaptor.name.should.be.equal('loopy');
-  });
-
-  it("can init an external adaptor module", function() {
-    initAdaptor.should.be.called;
-  });
-
-  it("can connect to adaptor", function() {
-    var adaptorConnect;
-    adaptorConnect = sinon.stub(adaptor, 'connect').returns(true);
-    connection.connect();
-    adaptorConnect.should.be.called;
-  });
-
-  it("can disconnect from adaptor", function() {
-    var adaptorDisconnect;
-    adaptorDisconnect = sinon.stub(adaptor, 'disconnect').returns(true);
-    connection.disconnect();
-    adaptorDisconnect.should.be.called;
+    it("sets @port to the passed port", function() {
+      expect(connection.port.toString()).to.be.eql("/dev/null");
+    });
   });
 
   describe("#data", function() {
     var data = connection.data();
 
     it("returns an object", function() {
-      expect(data).to.be.a('object');
+      expect(data).to.be.an('object');
     });
 
     it("contains the connection's name", function() {
-      expect(data.name).to.be.eql(connection.name);
+      expect(data.name).to.be.eql("loopback");
     });
 
     it("contains the connection's port", function() {
-      expect(data.port).to.be.eql(connection.port.toString());
+      expect(data.port).to.be.eql("/dev/null");
     });
 
     it("contains the connection's adaptor name", function() {
-      expect(data.adaptor).to.be.eql(connection.adaptor.constructor.name);
+      expect(data.adaptor).to.be.eql("Loopback");
     });
 
     it("contains the connection's ID", function() {
-      expect(data.connection_id).to.be.eql(connection.connection_id);
+      var id = connection.connection_id;
+      expect(data.connection_id).to.be.eql(id);
+    });
+  });
+
+  describe("#connect", function() {
+    var callback = function() { };
+
+    before(function() {
+      stub(Logger, 'info').returns(true);
+      stub(connection.adaptor, 'connect').returns(true);
+
+      connection.connect(callback);
+    });
+
+    after(function() {
+      connection.adaptor.connect.restore();
+      Logger.info.restore();
+    });
+
+    it("logs that it's connecting the device", function() {
+      var message = "Connecting to loopback on port /dev/null";
+      expect(Logger.info).to.be.calledWith(message);
+    });
+
+    it("calls the adaptor's connect method with the provided callback", function() {
+      expect(connection.adaptor.connect).to.be.calledWith(callback);
+    });
+  });
+
+  describe("#disconnect", function() {
+    before(function() {
+      stub(Logger, 'info').returns(true);
+      stub(connection.adaptor, 'disconnect').returns(true);
+
+      connection.disconnect();
+    });
+
+    after(function() {
+      connection.adaptor.disconnect.restore();
+      Logger.info.restore();
+    });
+
+    it("logs that it's disconnecting from the device", function() {
+      var message = "Disconnecting from loopback on port /dev/null";
+      expect(Logger.info).to.be.calledWith(message);
+    });
+
+    it("tells the adaptor to disconnect", function() {
+      expect(connection.adaptor.disconnect).to.be.called;
+    });
+  });
+
+  describe("#stop", function() {
+    before(function() {
+      stub(Logger, 'info').returns(true);
+      stub(connection, 'disconnect').returns(true);
+
+      connection.stop();
+    });
+
+    after(function() {
+      connection.disconnect.restore();
+      Logger.info.restore();
+    });
+
+    it("logs that it's stopping the adaptor", function() {
+      var message = "Stopping adaptor loopback on port /dev/null";
+      expect(Logger.info).to.be.calledWith(message);
+    });
+
+    it("tells the connection to disconnect", function() {
+      expect(connection.disconnect).to.be.called;
     });
   });
 });
