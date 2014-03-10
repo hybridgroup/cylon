@@ -267,4 +267,22 @@ describe("Cylon", function() {
       expect(bot2.start).to.be.called;
     });
   });
+
+  describe("#stop", function() {
+    before(function() {
+      cylon.robots = [];
+    });
+
+    it("calls #stop() on all robots", function() {
+      var bot1 = { stop: spy() },
+          bot2 = { stop: spy() };
+
+      cylon.robots = [bot1, bot2];
+
+      cylon.stop();
+
+      expect(bot1.stop).to.be.called;
+      expect(bot2.stop).to.be.called;
+    });
+  });
 });
