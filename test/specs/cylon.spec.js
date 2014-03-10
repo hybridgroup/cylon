@@ -239,4 +239,32 @@ describe("Cylon", function() {
       });
     });
   });
+
+  describe("#start", function() {
+    before(function() {
+      cylon.robots = [];
+      stub(cylon, 'startAPI').returns(true);
+    });
+
+    after(function() {
+      cylon.startAPI.restore();
+    });
+
+    it("starts the API", function() {
+      cylon.start();
+      expect(cylon.startAPI).to.be.called;
+    });
+
+    it("calls #start() on all robots", function() {
+      var bot1 = { start: spy() },
+          bot2 = { start: spy() };
+
+      cylon.robots = [bot1, bot2];
+
+      cylon.start();
+
+      expect(bot1.start).to.be.called;
+      expect(bot2.start).to.be.called;
+    });
+  });
 });
