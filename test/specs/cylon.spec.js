@@ -178,4 +178,65 @@ describe("Cylon", function() {
       });
     });
   });
+
+  describe("#findRobotConnection", function() {
+    var bot, conn;
+
+    before(function() {
+      bot = cylon.robot({
+        name: "JARVIS",
+        connection: { name: "loopback", adaptor: "loopback" }
+      });
+
+      conn = bot.connections.loopback;
+    });
+
+    describe("async", function() {
+      context("looking for a valid robot/connection", function() {
+        it("calls the callback with the connection and no error message", function() {
+          var callback = spy();
+          cylon.findRobotConnection("JARVIS", "loopback", callback);
+          expect(callback).to.be.calledWith(undefined, conn);
+        });
+      });
+
+      context("looking for a valid robot and invalid connection", function() {
+        it("calls the callback with no connection and an error message", function() {
+          var callback = spy();
+          cylon.findRobotConnection("JARVIS", "nope", callback);
+          var error = { error: "No connection found with the name nope." };
+          expect(callback).to.be.calledWith(error, null);
+        });
+      });
+
+      context("looking for an invalid robot", function() {
+        it("calls the callback with no connection and an error message", function() {
+          var callback = spy();
+          cylon.findRobotConnection("Rob", "loopback", callback);
+          var error = { error: "No Robot found with the name Rob" };
+          expect(callback).to.be.calledWith(error, null);
+        });
+      });
+    });
+
+    describe("synchronous", function() {
+      context("looking for a valid robot/connection", function() {
+        it("returns the connection", function() {
+          expect(cylon.findRobotConnection("JARVIS", "loopback")).to.be.eql(conn);
+        });
+      });
+
+      context("looking for a valid robot and invalid connection", function() {
+        it("returns null", function() {
+          expect(cylon.findRobotConnection("JARVIS", "nope")).to.be.eql(null);
+        });
+      });
+
+      context("looking for an invalid robot", function() {
+        it("returns null", function() {
+          expect(cylon.findRobotConnection("Rob", "loopback")).to.be.eql(null);
+        });
+      });
+    });
+  });
 });
