@@ -1,38 +1,148 @@
-'use strict';
-source("utils");
+"use strict";
+
+var utils = source("utils");
 
 describe("Utils", function() {
-  describe("Monkeypatches Number", function() {
-    it("adds seconds() method", function() {
-      5..seconds().should.be.equal(5000);
+  describe("Monkey-patches", function() {
+    describe("Number", function() {
+      describe("#seconds", function() {
+        it("allows for expressing time in seconds", function() {
+          expect((5).seconds()).to.be.eql(5000);
+        });
+      });
+
+      describe("#second", function() {
+        it("allows for expressing time in seconds", function() {
+          expect((1).second()).to.be.eql(1000);
+        });
+      });
+
+      describe("#fromScale", function() {
+        it("converts a value from one scale to 0-1 scale", function() {
+          expect((5).fromScale(0, 10)).to.be.eql(0.5);
+        });
+
+        it("converts floats", function() {
+          expect(2.5.fromScale(0, 10)).to.be.eql(0.25);
+        });
+      });
+
+      describe("#toScale", function() {
+        it("converts a value from 0-1 scale to another", function() {
+          expect((0.5).toScale(0, 10)).to.be.eql(5);
+        });
+
+        it("converts to floats", function() {
+          expect(0.25.toScale(0, 10)).to.be.eql(2.5);
+        });
+
+        it("can be chained with #fromScale", function() {
+          var num = (5).fromScale(0, 20).toScale(0, 10);
+          expect(num).to.be.eql(2.5);
+        });
+      });
+    });
+  });
+
+  describe("#every", function() {
+    before(function() {
+      this.clock = sinon.useFakeTimers();
     });
 
-    it("adds second() method", function() {
-      1..second().should.be.equal(1000);
+    after(function() {
+      this.clock.restore();
     });
 
-    it("scales an Integer", function() {
-      2..fromScale(1, 10).toScale(1, 20).should.be.equal(4);
+    it("sets a function to be called every time an interval passes", function() {
+      var func = spy();
+      utils.every(10, func);
+      this.clock.tick(25);
+      expect(func).to.be.calledTwice;
+    });
+  });
+
+  describe("#after", function() {
+    before(function() {
+      this.clock = sinon.useFakeTimers();
     });
 
-    it("scales a right angle", function() {
-      90..fromScale(1, 180).toScale(-90, 90).should.be.equal(0);
+    after(function() {
+      this.clock.restore();
     });
 
-    it("scales an acute angle", function() {
-      45..fromScale(1, 180).toScale(0, 90).should.be.equal(23);
+    it("sets a function to be called after time an interval passes", function() {
+      var func = spy();
+      utils.after(10, func);
+      this.clock.tick(15);
+      expect(func).to.be.called;
+    });
+  });
+
+  describe("constantly", function() {
+    before(function() {
+      stub(global, 'every').returns(0);
     });
 
-    it("scales a Float", function() {
-      2.5.fromScale(1, 10).toScale(1, 20).should.be.equal(5);
+    after(function() {
+      global.every.restore();
+    });
+
+    it("schedules a task to run continuously with #every", function() {
+      var func = function() {};
+      utils.constantly(func);
+
+      expect(global.every).to.be.calledWith(0, func);
+    });
+  });
+
+  describe("#slice", function() {
+    it("performs array slices", function() {
+      var arr = [1, 2, 3, 4, 5];
+      expect(slice.call(arr, 1)).to.be.eql([2, 3, 4, 5]);
+    });
+  });
+
+  describe("hasProp", function() {
+    it("checks objects have properties", function() {
+      var obj = { test: 'test' };
+      expect(hasProp.call(obj, 'test')).to.be.true;
+    });
+  });
+
+  describe("#subclass", function() {
+    var BaseClass = (function() {
+      function BaseClass(opts) {
+        this.greeting = opts.greeting;
+      };
+
+      BaseClass.prototype.sayHi = function() {
+        return "Hi!";
+      };
+
+      return BaseClass
+    })();
+
+    var SubClass = (function(klass) {
+      subclass(SubClass, klass);
+
+      function SubClass(opts) {
+        SubClass.__super__.constructor.apply(this, arguments);
+      };
+
+      return SubClass;
+    })(BaseClass);
+
+    it("adds inheritance to Javascript classes", function() {
+      var sub = new SubClass({greeting: "Hello World"});
+      expect(sub.greeting).to.be.eql("Hello World");
+      expect(sub.sayHi()).to.be.eql("Hi!");
     });
   });
 
   describe("#proxyFunctionsToObject", function() {
-    var ProxyClass, TestClass, methods;
-    methods = ['asString', 'toString', 'returnString'];
+    var methods = ['asString', 'toString', 'returnString'];
 
-    ProxyClass = (function() {
+    var ProxyClass = (function() {
       function ProxyClass() {}
 
       ProxyClass.prototype.asString = function() {
@@ -50,7 +160,7 @@ describe("Utils", function() {
       return ProxyClass;
     })();
 
-    TestClass = (function() {
+    var TestClass = (function() {
       function TestClass() {
         this.self = this;
         this.testInstance = new ProxyClass;
@@ -60,54 +170,41 @@ describe("Utils", function() {
       return TestClass;
     })();
 
+    var testclass = new TestClass();
+
     it('can alias methods', function() {
-      var testclass;
-      testclass = new TestClass;
-      assert(typeof testclass.asString === 'function');
-      testclass.asString().should.be.equal("[object ProxyClass]");
+      expect(testclass.asString()).to.be.eql("[object ProxyClass]");
     });
 
     it('can alias existing methods if forced to', function() {
-      var testclass;
-      testclass = new TestClass;
-      assert(typeof testclass.toString === 'function');
-      testclass.toString().should.be.equal("[object ProxyClass]");
+      expect(testclass.toString()).to.be.eql("[object ProxyClass]");
     });
 
     it('can alias methods with arguments', function() {
-      var testclass;
-      testclass = new TestClass;
-      assert(typeof testclass.returnString === 'function');
-      testclass.returnString("testString").should.be.equal("testString");
+      expect(testclass.returnString).to.be.a('function');
     });
   });
 
   describe("#proxyTestStubs", function() {
     it("proxies methods to an object's commandList", function() {
-      var base, methods;
-      methods = ["hello", "goodbye"];
-      base = {
-        commandList: []
-      };
+      var methods = ["hello", "goodbye"],
+          base = { commandList: [] };
+
       proxyTestStubs(methods, base);
       expect(base.commandList).to.be.eql(methods);
     });
 
     it("returns the object methods have been proxied to", function() {
-      var base, methods;
-      methods = ["hello", "goodbye"];
-      base = {
-        commandList: []
-      };
+      var methods = ["hello", "goodbye"],
+          base = { commandList: [] };
+
       expect(proxyTestStubs(methods, base)).to.be.eql(base);
     });
   });
 
   describe("#bind", function() {
-    var me = { hello: "Hello World" };
-    var proxy = {
-      boundMethod: function() { return this.hello; }
-    };
+    var me = { hello: "Hello World" },
+        proxy = { boundMethod: function() { return this.hello; } };
 
     it("binds the 'this' scope for the method", function() {
       proxy.boundMethod = function() { return this.hello; };
