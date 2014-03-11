@@ -82,25 +82,25 @@ describe("Cylon.Device", function() {
     });
   });
 
-  describe("#stop", function() {
+  describe("#halt", function() {
     before(function() {
-      stub(driver, 'stop').returns(true);
+      stub(driver, 'halt').returns(true);
     });
 
     after(function() {
-      driver.stop.restore();
+      driver.halt.restore();
     });
 
-    it("stops the driver", function() {
-      device.stop();
-      expect(driver.stop).to.be.called;
+    it("halts the driver", function() {
+      device.halt();
+      expect(driver.halt).to.be.called;
     });
 
-    it("logs that it's stopping the device", function() {
-      var message = "Stopping device ping";
+    it("logs that it's halt the device", function() {
+      var message = "Halting device ping";
       stub(Logger, 'info');
 
-      device.stop();
+      device.halt();
 
       expect(Logger.info).to.be.calledWith(message);
       Logger.info.restore();
