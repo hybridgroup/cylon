@@ -268,21 +268,21 @@ describe("Cylon", function() {
     });
   });
 
-  describe("#stop", function() {
+  describe("#halt", function() {
     before(function() {
       cylon.robots = [];
     });
 
-    it("calls #stop() on all robots", function() {
-      var bot1 = { stop: spy() },
-          bot2 = { stop: spy() };
+    it("calls #halt() on all robots", function() {
+      var bot1 = { halt: spy() },
+          bot2 = { halt: spy() };
 
       cylon.robots = [bot1, bot2];
 
-      cylon.stop();
+      cylon.halt();
 
-      expect(bot1.stop).to.be.called;
-      expect(bot2.stop).to.be.called;
+      expect(bot1.halt).to.be.called;
+      expect(bot2.halt).to.be.called;
     });
   });
 });

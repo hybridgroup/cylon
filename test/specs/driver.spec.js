@@ -32,8 +32,8 @@ describe("Driver", function() {
     spy.should.have.been.called;
   });
 
-  it("provides a 'stop' method", function() {
-    expect(driver.stop).to.be.a('function');
+  it("provides a 'halt' method", function() {
+    expect(driver.halt).to.be.a('function');
   });
 
   it("provides a default empty array of commands", function() {
