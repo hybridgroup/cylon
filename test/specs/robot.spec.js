@@ -267,7 +267,7 @@ describe("Cylon.Robot", function() {
     });
   });
 
-  describe("#stop", function() {
+  describe("#halt", function() {
     var bot = new Cylon.Robot({
       device: { name: 'ping', driver: 'ping' },
       connection: { name: 'loopback', adaptor: 'loopback' }
@@ -277,20 +277,20 @@ describe("Cylon.Robot", function() {
         connection = bot.connections.loopback;
 
     before(function() {
-      stub(device, 'stop').returns(true);
-      stub(connection, 'stop').returns(true);
+      stub(device, 'halt').returns(true);
+      stub(connection, 'halt').returns(true);
     });
 
     after(function() {
-      device.stop.restore();
-      connection.stop.restore();
+      device.halt.restore();
+      connection.halt.restore();
     });
 
-    it("calls #stop on all devices and connections", function() {
-      bot.stop();
+    it("calls #halt on all devices and connections", function() {
+      bot.halt();
 
-      expect(device.stop).to.be.called;
-      expect(connection.stop).to.be.called;
+      expect(device.halt).to.be.called;
+      expect(connection.halt).to.be.called;
     });
   });
 

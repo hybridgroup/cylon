@@ -102,12 +102,12 @@ describe("Cylon.Connection", function() {
     });
   });
 
-  describe("#stop", function() {
+  describe("#halt", function() {
     before(function() {
       stub(Logger, 'info').returns(true);
       stub(connection, 'disconnect').returns(true);
 
-      connection.stop();
+      connection.halt();
     });
 
     after(function() {
@@ -115,8 +115,8 @@ describe("Cylon.Connection", function() {
       Logger.info.restore();
     });
 
-    it("logs that it's stopping the adaptor", function() {
-      var message = "Stopping adaptor loopback on port /dev/null";
+    it("logs that it's halting the adaptor", function() {
+      var message = "Halting adaptor loopback on port /dev/null";
       expect(Logger.info).to.be.calledWith(message);
     });
 
