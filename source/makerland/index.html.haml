@@ -1,0 +1,144 @@
+---
+title: Cylon.js - Makerland
+author: The Hybrid Group
+page_title: Makerland
+page_subtitle: Workshop
+layout: documentation
+page_title_show: true
+---
+
+%section
+  %h2 Installation instructions
+  %p 
+    You will need 
+    =link_to "node.js","http://nodejs.org/download/"
+    as well as satisfying the dependencies listed 
+    =link_to "here","https://github.com/TooTallNate/node-gyp#installation"
+  %p 
+    Once you have the required dependencies met, you can install the required node modules with
+    :markdown
+      `$ npm install cylon cylon-gpio cylon-i2c cylon-firmata cylon-sphero cylon-leapmotion`
+  %p 
+    Install the 
+    =link_to "leap motion","https://www.leapmotion.com/setup"
+    software (and SDK too if you want, but the SDK is not needed for cylon.js)
+  
+  %h2 Arduino blink
+  %h3 JavaScript
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+          device: {name: 'led', driver: 'led', pin: 13},
+
+          work: function(my) {
+            every((1).seconds(), function() {my.led.toggle()});
+          }
+        }).start();
+
+  %h2 Makey button
+  %img{:src => "/documentation/drivers/breadboards/gpio/makey_button_bb.png", :alt => "", :style => "width:50%"}
+  %h3 Javascript
+  :markdown
+        :::javascript
+
+        //makey.js
+        var Cylon = require('cylon');
+         
+        Cylon.robot({
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+          devices: [
+            {name: 'led', driver: 'led', pin: 13},
+            { name: 'makey', driver: 'makey-button', pin: 2 }
+          ],
+         
+          work: function(my) {
+            my.makey.on('push', function() {
+              my.led.toggle();
+            });
+          }
+        }).start();
+
+  %h2 Sphero Color
+  %h3 Javascript
+  :markdown
+        :::javascript
+        //sphero_color.js
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0' },
+          device: { name: 'sphero', driver: 'sphero' },
+
+          work: function(me) {
+            every((1).second(), function() {
+              me.sphero.setRGB(Math.floor(Math.random() * 100000));
+            });
+          }
+        }).start();
+
+  %h2 Leap
+  %h3 Javascript
+  :markdown
+        :::javascript
+
+        //leap.js
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' },
+          device: { name: 'leapmotion', driver: 'leapmotion' },
+
+          work: function(my) {
+            my.leapmotion.on('connect', function() {
+              Logger.info("Connected");
+            });
+
+            my.leapmotion.on('start', function() {
+              Logger.info("Started");
+            });
+
+            my.leapmotion.on('frame', function(frame) {
+              Logger.info(frame.toString());
+            });
+
+            my.leapmotion.on('hand', function(hand) {
+              Logger.info(hand.toString());
+            });
+
+            my.leapmotion.on('pointable', function(pointable) {
+              Logger.info(pointable.toString());
+            });
+
+            my.leapmotion.on('gesture', function(gesture) {
+              Logger.info(gesture.toString());
+            });
+          }
+        }).start();
+
+  %h2 Leap sphero
+  %h3 Javascript
+  :markdown
+        :::javascript
+
+        //leap_sphero.js
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connections: [
+            { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' },
+            { name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0' }
+          ],
+          devices: [
+            { name: 'leapmotion', driver: 'leapmotion', connection: 'leapmotion' },
+            { name: 'sphero', driver: 'sphero', connection: 'sphero'}
+          ],
+          work: function(my) {
+            my.leapmotion.on('hand', function(hand) {
+              var r = hand.palmY.fromScale(100, 600).toScale(0, 255) | 0;
+              my.sphero.setRGB(r, 0, 0);
+            });
+          }
+        }).start();
