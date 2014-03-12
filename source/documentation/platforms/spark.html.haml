@@ -69,6 +69,12 @@ servo_driver: true
         .start()
 
 
+%section.public-methods#PublicMethods
+  .commands_api
+    = partial "/documentation/drivers/partials/spark/commands"
+  <br>
+  <strong>Note:</strong> In addition to the above methods, the Spark adaptor supports the full GPIO pin interface.
+
 %section.drivers#Drivers
   %h2 Drivers
   
@@ -78,4 +84,3 @@ servo_driver: true
     %h2 GPIO Drivers
     .devices
       = partial "documentation/partials/devices_gpio_drivers"
-
