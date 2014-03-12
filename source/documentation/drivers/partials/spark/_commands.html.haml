@@ -1,0 +1,43 @@
+:markdown
+  # Commands
+
+  ## command(commandName, args, callback)
+
+  Calls a function on the Spark Core via the API.
+
+  ##### Params
+
+  - **commandName** - string name of the function to call on the Spark
+  - **args** - array of arguments to pass to the function call
+  - **callback** - optional, callback to be triggered with the response_value from
+    Spark's API
+
+  ##### Returns
+
+  `null`
+
+  ## variable(variableName, callback)
+
+  Requests the value of a variable from the Spark Core via the API
+
+  ##### Params
+
+  - **variableName** - name of the variable to request from the Spark Core
+  - **callback** - callback to be triggered with the value from the Spark Core
+
+  ##### Returns
+
+  `null`
+
+  ## listenForEvents(events)
+
+  Listens to Server-Sent Events coming from the Spark Core, and emits the same
+  events.
+
+  ##### Params
+
+  - **events** - array of events to add listeners for
+
+  ##### Returns
+
+  `null`
