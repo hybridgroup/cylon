@@ -73,7 +73,30 @@ servo_driver: true
   .commands_api
     = partial "/documentation/drivers/partials/spark/commands"
   <br>
-  <strong>Note:</strong> In addition to the above methods, the Spark adaptor supports the full GPIO pin interface.
+  <strong>Note:</strong> In addition to the above methods, the Spark adaptor supports the full GPIO pin interface, as long as you are using Tinker, or a Tinker compatible program running on the Spark itself.
+
+%section.how-to#HowToConnect
+  %h2 Uploading
+  %h3 Uploading Code To Your Spark Core Using the Cylon CLI
+
+  :markdown
+        :::bash
+        $ cylon spark upload [access_token] [device_id] new_firmware.cpp
+
+  %p The <code>cylon spark upload</code> command can help if you want to upload new source code directly to your Spark Core.
+
+  %p 
+    For more information on how to program your Spark, please see
+    = link_to "Spark's examples", "http://docs.spark.io/#/examples", target: :blank
+
+  %p 
+    You'll need your <code>access_token</code> and <code>device_id</code> to push new software to your Spark, and you can get both of these from Spark's 
+    = link_to "Build tool", "https://spark.io/build", target: :blank    
+
+  %ul
+    %li <code>access_token:</code> In the Build tool, click on the Settings cog in the bottom-left corner to find your access token.
+    %li <code>device_id:</code> After you have your Spark Core registered to your account through the Tinker app, click on the Cores section (just above the Settings cog) on the Build tool. Then, click on the arrow next to your core's name to get its device ID.
+
 
 %section.drivers#Drivers
   %h2 Drivers
