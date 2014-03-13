@@ -9,34 +9,34 @@ page_title_show: true
 
 %section.makerland
   %h2 Installation
-  %ul 
+  %ul
     %li
       %p
-        First, install 
+        First, install
         =link_to "Node.js","http://nodejs.org/download/"
       %p
         If you already have Node.js installed, you can skip to the next step.
     %li
       %p
         Now, make sure you have all the dependencies listed here:
-        =link_to "here","https://github.com/TooTallNate/node-gyp#installation" 
+        =link_to "here","https://github.com/TooTallNate/node-gyp#installation"
       %p
         If you have already installed node-serialport, then you already have this, and can skip to the next step.
-    %li 
+    %li
       %p
         Install the Cylon.js node modules:
         :markdown
           `$ npm install cylon cylon-gpio cylon-i2c cylon-firmata cylon-sphero cylon-leapmotion`
-    %li 
+    %li
       %p
-        Install the 
+        Install the
         =link_to "Leap Motion","https://www.leapmotion.com/setup"
         software.
 
-    %li 
+    %li
       %p
         Install the Firmata software onto your Arduino board as follows...
-   
+
   %h2 Test Your Install - Arduino Blink
   %p You can now test your installation. Plug in your Arduino, and run the following code, that makes the built-in LED on your Arduino turn on/off every second:
 
@@ -57,7 +57,7 @@ page_title_show: true
 
   %p Please note that you might need to change the value for port. For example, on OSX it is probably XXX.
 
-%section.makerland-hide 
+%section.makerland-hide
   %h2 Makey button
   %img{:src => "/documentation/drivers/breadboards/gpio/makey_button_bb.png", :alt => "", :style => "width:50%"}
   %h3 Javascript
@@ -66,14 +66,14 @@ page_title_show: true
 
         //makey.js
         var Cylon = require('cylon');
-         
+
         Cylon.robot({
           connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
           devices: [
             {name: 'led', driver: 'led', pin: 13},
             { name: 'makey', driver: 'makey-button', pin: 2 }
           ],
-         
+
           work: function(my) {
             my.makey.on('push', function() {
               my.led.toggle();
