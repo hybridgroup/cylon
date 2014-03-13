@@ -18,15 +18,27 @@ page_title_show: true
         If you already have Node.js installed, you can skip to the next step.
     %li
       %p
-        Now, make sure you have all the dependencies listed here:
-        =link_to "here","https://github.com/TooTallNate/node-gyp#installation"
+        Now, make sure you have all the dependencies listed
+        =link_to "here.","https://github.com/TooTallNate/node-gyp#installation"
       %p
         If you have already installed node-serialport, then you already have this, and can skip to the next step.
     %li
       %p
-        Install the Cylon.js node modules:
+        Next up, install Cylon.js globally, so you can make use of the CLI commands it provides:
         :markdown
-          `$ npm install cylon cylon-gpio cylon-i2c cylon-firmata cylon-sphero cylon-leapmotion`
+              $ npm install -g cylon
+      %p
+        Once that's finished, you should be able to check if it's working by
+        opening another terminal window and entering this command, which should
+        give you a similar result:
+        :markdown
+              $ which cylon
+              /usr/local/bin/cylon
+    %li
+      %p
+        With that done, install the Cylon.js node modules into your working directory:
+        :markdown
+              $ npm install cylon cylon-gpio cylon-i2c cylon-firmata cylon-sphero cylon-leapmotion
     %li
       %p
         Install the
@@ -34,8 +46,37 @@ page_title_show: true
         software.
 
     %li
-      %p
-        Install the Firmata software onto your Arduino board as follows...
+      %p Install the Firmata software onto your Arduino board as follows:
+
+      %ul
+        %li
+          Use
+          %code cylon scan serial
+          to find your connection info and serial port address:
+          :markdown
+                  $ cylon scan serial
+
+        %li
+          Use
+          %code cylon firmata install
+          to install
+          %code avrdude
+          , which will let you upload Firmata to the Arduino.
+          :markdown
+                  $ cylon firmata install
+
+        %li
+          Once
+          %code avrdude
+          is installed, we can upload the Firmata protocol to the Arduino with
+          %code cylon firmata upload
+          \. Use the Arduino serial port you found when running
+          %code cylon scan serial
+          \. By default, it will attempt to upload to
+          %code /dev/ttyACM0
+          \.
+          :markdown
+                  $ cylon firmata upload /dev/ttyACM0
 
   %h2 Test Your Install - Arduino Blink
   %p You can now test your installation. Plug in your Arduino, and run the following code, that makes the built-in LED on your Arduino turn on/off every second:
@@ -55,7 +96,12 @@ page_title_show: true
           }
         }).start();
 
-  %p Please note that you might need to change the value for port. For example, on OSX it is probably XXX.
+  %p Please note that you might need to change the value for port.
+  %p
+    Use the same port you used earlier when uploading Firmata to your Arduino,
+    or find it again with
+    %code cylon scan serial
+    \.
 
 %section.makerland-hide
   %h2 Makey button
