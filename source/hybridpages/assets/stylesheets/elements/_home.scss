@@ -1,3 +1,29 @@
+.homepage_platform {
+  list-style: none !important;
+  margin: 0;
+  li {
+    float: left; 
+    width: 25%;
+    padding: 10px;
+    text-align: center;
+    .title {
+      background: $title-color;
+      padding:10px;
+      color: $hero-title-color;
+      a {
+        color: $hero-title-color;
+      }
+    }
+    .repo {
+      background: $hero-subtitle-color;
+      padding:10px;
+      a {
+        color: $hero-title-color;
+      }
+    }
+  }
+}
+
 .hero {
   margin: 15px 0 0 0;
   background: $hero-color;

@@ -106,152 +106,234 @@ getting_started_button: "<a href='/documentation/getting-started' class='cta'> G
   to help you get started.
 
 %h2 Platform Support
-%p
-  Cylon.js has a extensible system for connecting to hardware devices. The following robotics and physical computing system, and software platforms, are currently supported:
-  %ul
+%div
+  %p Cylon.js has a extensible system for connecting to hardware devices. The following robotics and physical computing system, and software platforms, are currently supported:
+
+  %ul.homepage_platform
     %li
-      = link_to "ARDrone", "http://ardrone2.parrot.com/", target:"_blank"  
-      &lt;==&gt;
-      = link_to "Adaptor/Drivers", "/documentation/platforms/ardrone"
-      (
-      = link_to "repo", "https://github.com/hybridgroup/cylon-ardrone", target:"_blank"
-      )
+      .title
+        = link_to "ARDrone", "http://ardrone2.parrot.com/", target:"_blank"  
+      %a{:href => "/documentation/platforms/ardrone"} 
+        %img{src: "/images/devices/ardrone.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-ardrone", target:"_blank"
     %li
-      = link_to "Arduino", "http://www.arduino.cc/", target:"_blank" 
-      &lt;==&gt;
-      = link_to "Adaptor", "/documentation/platforms/arduino"
-      (
-      = link_to "repo", "https://github.com/hybridgroup/cylon-firmata", target:"_blank"
-      )
-    %li
-      = link_to "Beaglebone Black", "http://beagleboard.org/Products/BeagleBone+Black/", target:"_blank" 
-      &lt;==&gt;
-      = link_to "Adaptor", "/documentation/platforms/beaglebone"
-      (
-      = link_to "repo", "https://github.com/hybridgroup/cylon-beaglebone", target:"_blank"
-      )
-    %li
-      = link_to "Crazyflie", "http://www.bitcraze.se/", target:"_blank" 
-      &lt;==&gt;
-      = link_to "Adaptor/Driver", "/documentation/platforms/crazyflie"
-      (
-      = link_to "repo", "https://github.com/hybridgroup/cylon-crazyflie", target:"_blank"
-      )
-    %li
-      = link_to "Digispark", "http://digistump.com/category/1", target:"_blank" 
-      &lt;==&gt;
-      = link_to "Adaptor", "/documentation/platforms/digispark"
-      (
-      = link_to "repo", "https://github.com/hybridgroup/cylon-digispark", target:"_blank"
-      )
-    %li
-      = link_to "Joystick", "http://en.wikipedia.org/wiki/Joystick", target:"_blank" 
-      &lt;==&gt;
-      = link_to "Adaptor/Driver", "/documentation/platforms/joystick"
-      (
-      = link_to "repo", "https://github.com/hybridgroup/cylon-joystick", target:"_blank"
-      )
-    %li
-      = link_to "Keyboard", "http://en.wikipedia.org/wiki/Computer_keyboard", target:"_blank" 
-      &lt;==&gt;
-      = link_to "Adaptor/Driver", "/documentation/platforms/keyboard"
-      (
-      = link_to "repo", "https://github.com/hybridgroup/cylon-keyboard", target:"_blank"
-      ) 
-    %li
-      = link_to "Leap Motion", "http://www.leapmotion.com/", target:"_blank" 
-      &lt;==&gt;
-      = link_to "Adaptor/Driver", "/documentation/platforms/leapmotion"
-      (
-      = link_to "repo", "https://github.com/hybridgroup/cylon-leapmotion", target:"_blank"
-      )
-    %li
-      = link_to "OpenCV", "http://opencv.org/", target:"_blank" 
-      &lt;==&gt;
-      = link_to "Adaptor", "/documentation/platforms/opencv"
-      (
-      = link_to "repo", "https://github.com/hybridgroup/cylon-opencv", target:"_blank"
-      )
-    %li
-      = link_to "Pebble", "https://getpebble.com/", target:"_blank" 
-      &lt;==&gt;
-      = link_to "Adaptor/Driver", "/documentation/platforms/pebble"
-      (
-      = link_to "repo", "https://github.com/hybridgroup/cylon-pebble", target:"_blank"
-      ) 
-    %li
-      = link_to "Rapiro", "http://www.rapiro.com/", target:"_blank" 
-      &lt;==&gt;
-      = link_to "Adaptor/Driver", "/documentation/platforms/rapiro"
-      (
-      = link_to "repo", "https://github.com/hybridgroup/cylon-raspi", target:"_blank"
-      )  
-    %li
-      = link_to "Raspberry Pi", "http://www.raspberrypi.org/", target:"_blank" 
-      &lt;==&gt;
-      = link_to "Adaptor", "/documentation/platforms/raspberry-pi"
-      (
-      = link_to "repo", "https://github.com/hybridgroup/cylon-raspi", target:"_blank"
-      )  
-    %li
-      = link_to "Salesforce", "http://www.force.com/", target:"_blank" 
-      &lt;==&gt;
-      = link_to "Adaptor/Driver", "/documentation/platforms/force"
-      (
-      = link_to "repo", "https://github.com/hybridgroup/cylon-force", target:"_blank"
-      )  
-    %li
-      = link_to "Skynet", "https://www.skynet.im/", target:"_blank" 
-      &lt;==&gt;
-      = link_to "Adaptor", "/documentation/platforms/skynet"
-      (
-      = link_to "repo", "https://github.com/hybridgroup/cylon-skynet", target:"_blank"
-      )
-    %li
-      = link_to "Spark", "https://www.spark.io/", target:"_blank" 
-      &lt;==&gt;
-      = link_to "Adaptor", "/documentation/platforms/spark"
-      (
-      = link_to "repo", "https://github.com/hybridgroup/cylon-spark", target:"_blank"
-      ) 
-    %li
-      = link_to "Sphero", "http://www.gosphero.com/", target:"_blank"  
-      &lt;==&gt;
-      = link_to "Adaptor/Driver", "/documentation/platforms/sphero"
-      (
-      = link_to "repo", "https://github.com/hybridgroup/cylon-sphero", target:"_blank"
-      ) 
+      .title
+        = link_to "Arduino", "http://www.arduino.cc/", target:"_blank" 
+      %a{:href => "/documentation/platforms/arduino"} 
+        %img{src: "/images/devices/arduino.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-firmata", target:"_blank"
       
+    %li
+      .title
+        = link_to "Beaglebone Black", "http://beagleboard.org/Products/BeagleBone+Black/", target:"_blank" 
+      %a{:href => "/documentation/platforms/beaglebone"} 
+        %img{src: "/images/devices/beaglebone.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-beaglebone", target:"_blank"
+      
+    %li
+      .title
+        = link_to "Crazyflie", "http://www.bitcraze.se/", target:"_blank" 
+      %a{:href => "/documentation/platforms/crazyflie"} 
+        %img{src: "/images/devices/crazyflie.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-crazyflie", target:"_blank"
+      
+    %li
+      .title
+        = link_to "Digispark", "http://digistump.com/category/1", target:"_blank" 
+      %a{:href => "/documentation/platforms/digispark"} 
+        %img{src: "/images/devices/digispark.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-digispark", target:"_blank"
+      
+    %li
+      .title
+        = link_to "Joystick", "http://en.wikipedia.org/wiki/Joystick", target:"_blank" 
+      %a{:href => "/documentation/platforms/joystick"} 
+        %img{src: "/images/devices/joystick.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-joystick", target:"_blank"
+      
+    %li
+      .title
+        = link_to "Keyboard", "http://en.wikipedia.org/wiki/Computer_keyboard", target:"_blank" 
+      %a{:href => "/documentation/platforms/keyboard"} 
+        %img{src: "/images/devices/keyboard.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-keyboard", target:"_blank"
+      
+    %li
+      .title
+        = link_to "Leap Motion", "http://www.leapmotion.com/", target:"_blank" 
+      %a{:href => "/documentation/platforms/leapmotion"} 
+        %img{src: "/images/devices/leap_motion.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-leapmotion", target:"_blank"
+      
+    %li
+      .title
+        = link_to "OpenCV", "http://opencv.org/", target:"_blank" 
+      %a{:href => "/documentation/platforms/opencv"} 
+        %img{src: "/images/devices/opencv.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-opencv", target:"_blank"
+      
+    %li
+      .title
+        = link_to "Pebble", "https://getpebble.com/", target:"_blank" 
+      %a{:href => "/documentation/platforms/pebble"} 
+        %img{src: "/images/devices/pebble.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-pebble", target:"_blank"
+    
+    %li
+      .title
+        = link_to "Rapiro", "http://www.rapiro.com/", target:"_blank" 
+      %a{:href => "/documentation/platforms/rapiro"} 
+        %img{src: "/images/devices/rapiro.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-raspi", target:"_blank"
+       
+    %li
+      .title
+        = link_to "Raspberry Pi", "http://www.raspberrypi.org/", target:"_blank" 
+      %a{:href => "/documentation/platforms/raspberry-pi"} 
+        %img{src: "/images/devices/raspi.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-raspi", target:"_blank"
+        
+    %li
+      .title
+        = link_to "Salesforce", "http://www.force.com/", target:"_blank" 
+      %a{:href => "/documentation/platforms/force"} 
+        %img{src: "/images/devices/force.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-force", target:"_blank"
+    
+    %li
+      .title
+        = link_to "Skynet", "https://www.skynet.im/", target:"_blank" 
+      %a{:href => "/documentation/platforms/skynet"} 
+        %img{src: "/images/devices/skynet.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-skynet", target:"_blank"
+      
+    %li
+      .title
+        = link_to "Spark", "https://www.spark.io/", target:"_blank" 
+      %a{:href => "/documentation/platforms/spark"} 
+        %img{src: "/images/devices/spark.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-spark", target:"_blank"
+      
+    %li
+      .title
+        = link_to "Sphero", "http://www.gosphero.com/", target:"_blank"  
+      %a{:href => "/documentation/platforms/sphero"} 
+        %img{src: "/images/devices/sphero.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-sphero", target:"_blank"
+       
+  .clear
+
 %p Support for many devices that use General Purpose Input/Output (GPIO) have a shared set of drivers provided using the cylon-gpio module:
-%ul
+%h4= link_to "GPIO", "https://en.wikipedia.org/wiki/General_Purpose_Input/Output" , target:"_blank" 
+%ul.homepage_platform
   %li
-    = link_to "GPIO", "https://en.wikipedia.org/wiki/General_Purpose_Input/Output" , target:"_blank" 
-    &lt;==&gt; Drivers (
-    = link_to "repo", "https://github.com/hybridgroup/cylon-gpio", target:"_blank"
-    )
-    %ul 
-      %li= link_to "Analog Sensor", "/documentation/drivers/analog-sensor", target:"_blank" 
-      %li= link_to "Button", "/documentation/drivers/button", target:"_blank"  
-      %li= link_to "Continuous Servo", "/documentation/drivers/continuous-servo", target:"_blank"   
-      %li= link_to "LED", "/documentation/drivers/continuous-servo", target:"_blank"  
-      %li= link_to "MakeyButton (high-resistance switch inspired by the MakeyMakey)", "/documentation/drivers/makey-button", target:"_blank" 
-      %li= link_to "Motor", "/documentation/drivers/motor", target:"_blank"   
-      %li= link_to "Maxbotix Ultrasonic Range Finder", "/documentation/drivers/maxbotix", target:"_blank"  
-      %li= link_to "Servo", "/documentation/drivers/servo", target:"_blank"   
+    .title
+      Analog Sensor
+    %a{:href => "/documentation/drivers/analog-sensor"} 
+      %img{src: "/images/devices/analog-sensor.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-gpio", target:"_blank"
+  %li
+    .title
+      Button 
+    %a{:href => "/documentation/drivers/button"} 
+      %img{src: "/images/devices/button.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-gpio", target:"_blank"
+  %li
+    .title
+      Continuous Servo
+    %a{:href => "/documentation/drivers/continuous-servo"} 
+      %img{src: "/images/devices/continuous-servo.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-gpio", target:"_blank"   
+  %li
+    .title
+      LED
+    %a{:href => "/documentation/drivers/led"} 
+      %img{src: "/images/devices/LED.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-gpio", target:"_blank"  
+  %li
+    .title
+      MakeyButton
+    %a{:href => "/documentation/drivers/makey-button"} 
+      %img{src: "/images/devices/makey-button.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-gpio", target:"_blank" 
+  %li
+    .title
+      Motor
+    %a{:href => "/documentation/drivers/motor"} 
+      %img{src: "/images/devices/motor.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-gpio", target:"_blank"   
+  %li
+    .title
+      Maxbotix
+    %a{:href => "/documentation/drivers/maxbotix"} 
+      %img{src: "/images/devices/maxbotix.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-gpio", target:"_blank"  
+  %li
+    .title
+      Servo
+    %a{:href => "/documentation/drivers/servo"} 
+      %img{src: "/images/devices/servo.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-gpio", target:"_blank"   
+  .clear
 
 %p Support for devices that use Inter-Integrated Circuit (I2C) have a shared set of drivers provded using the cylon-i2c module:
-%ul 
-  %li  
-    = link_to "I2C", "https://en.wikipedia.org/wiki/I%C2%B2C", target:"_blank" 
-    &lt;==&gt; Drivers (
-    = link_to "repo", "https://github.com/hybridgroup/cylon-i2c", target:"_blank"
-    )
-    %ul 
-      %li= link_to "BlinkM", "/documentation/drivers/blinkm", target:"_blank"  
-      %li= link_to "HMC6352 Digital Compass", "/documentation/drivers/hmc6352-compass", target:"_blank"   
-      %li= link_to "LCD", "/documentation/drivers/lcd", target:"_blank"   
-      %li= link_to "MPL115A2 Barometer/Thermometer", "/documentation/drivers/mpl115a2", target:"_blank"  
 
+%h4= link_to "I2C", "https://en.wikipedia.org/wiki/I%C2%B2C", target:"_blank" 
+%ul.homepage_platform 
+  %li  
+    .title
+      BlinkM
+    %a{:href => "/documentation/drivers/blinkm"} 
+      %img{src: "/images/devices/blinkm.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-i2c", target:"_blank"
+
+  %li
+    .title
+      HMC6352
+    %a{:href => "/documentation/drivers/hmc6352-compass"} 
+      %img{src: "/images/devices/hmc6352-compass.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-i2c", target:"_blank"   
+  %li
+    .title
+      LCD
+    %a{:href => "/documentation/drivers/lcd"} 
+      %img{src: "/images/devices/lcd.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-i2c", target:"_blank"   
+  %li
+    .title
+      MPL115A2
+    %a{:href => "/documentation/drivers/mpl115a2"} 
+      %img{src: "/images/devices/mpl115a2.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-i2c", target:"_blank"  
+  .clear
 %p More platforms and drivers are coming soon...
 
 %h2 CLI
