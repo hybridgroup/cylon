@@ -7,22 +7,26 @@ layout: documentation
 page_title_show: true
 ---
 
-%section
+%section.makerland
   %h2 Installation instructions
-  %p 
-    You will need 
-    =link_to "node.js","http://nodejs.org/download/"
-    as well as satisfying the dependencies listed 
-    =link_to "here","https://github.com/TooTallNate/node-gyp#installation"
-  %p 
-    Once you have the required dependencies met, you can install the required node modules with
-    :markdown
-      `$ npm install cylon cylon-gpio cylon-i2c cylon-firmata cylon-sphero cylon-leapmotion`
-  %p 
-    Install the 
-    =link_to "leap motion","https://www.leapmotion.com/setup"
-    software (and SDK too if you want, but the SDK is not needed for cylon.js)
-  
+  %ul 
+    %li
+      %p
+        You will need 
+        =link_to "node.js","http://nodejs.org/download/"
+        as well as satisfying the dependencies listed 
+        =link_to "here","https://github.com/TooTallNate/node-gyp#installation" 
+    %li 
+      %p
+        Once you have the required dependencies met, you can install the required node modules with
+        :markdown
+          `$ npm install cylon cylon-gpio cylon-i2c cylon-firmata cylon-sphero cylon-leapmotion`
+    %li 
+      %p
+        Install the 
+        =link_to "leap motion","https://www.leapmotion.com/setup"
+        software (and SDK too if you want, but the SDK is not needed for cylon.js)
+   
   %h2 Arduino blink
   %h3 JavaScript
   :markdown
@@ -38,6 +42,7 @@ page_title_show: true
           }
         }).start();
 
+%section.makerland-hide 
   %h2 Makey button
   %img{:src => "/documentation/drivers/breadboards/gpio/makey_button_bb.png", :alt => "", :style => "width:50%"}
   %h3 Javascript
