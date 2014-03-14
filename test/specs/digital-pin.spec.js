@@ -1,228 +1,528 @@
-'use strict';
-var fs;
+"use strict";
+
+var fs = require('fs');
 
 source('digital-pin');
 
-fs = require('fs');
+describe("Cylon.IO.DigitalPin", function() {
+  var pin = new Cylon.IO.DigitalPin({ pin: 4, mode: 'w' })
 
-describe("DigitalPin", function() {
-  var pin;
-  pin = new Cylon.IO.DigitalPin({
-    pin: '13',
-    mode: 'w'
-  });
-
-  describe("#constructor", function() {
-    it("assigns @pinNum to the passed pin", function() {
-      return expect(pin.pinNum).to.be.eql("13");
-    });
-
-    it("sets @mode to the passed mode", function() {
-      return expect(pin.mode).to.be.eql('w');
+  describe("constructor", function() {
+    it("sets @pinNum to the pin number passed in opts", function() {
+      expect(pin.pinNum).to.be.eql(4);
     });
 
     it("sets @status to 'low' by default", function() {
-      return expect(pin.status).to.be.eql("low");
+      expect(pin.status).to.be.eql("low");
     });
 
-    return it("sets @ready to false by default", function() {
-      return expect(pin.ready).to.be["false"];
+    it("sets @ready to false by default", function() {
+      expect(pin.ready).to.be.false;
+    });
+
+    it("sets @mode to the mode passed in opts", function() {
+      expect(pin.mode).to.be.eql("w");
     });
   });
 
   describe("#connect", function() {
-    it("sets @mode if it wasn't already set", function() {
-      sinon.stub(fs, 'exists').callsArgWith(1, true);
-      sinon.stub(pin, '_openPin').returns(true);
-      pin.mode = null;
-      pin.connect('w');
-      expect(pin.mode).to.be.eql('w');
-      fs.exists.restore();
-      return pin._openPin.restore();
+    var path = "/sys/class/gpio/gpio4";
+
+    context("if the GPIO file for the pin exists", function() {
+      before(function() {
+        stub(fs, 'exists').callsArgWith(1, true);
+        stub(pin, '_openPin');
+      });
+
+      after(function() {
+        fs.exists.restore();
+        pin._openPin.restore();
+      });
+
+      it("opens the pin", function() {
+        pin.connect(pin.mode);
+        expect(fs.exists).to.be.calledWith(path);
+        expect(pin._openPin).to.be.called;
+      });
     });
 
-    it("opens the pin if the pin exists", function() {
-      var spy;
-      sinon.stub(fs, 'exists').callsArgWith(1, true);
-      spy = sinon.stub(pin, '_openPin').returns(true);
-      pin.connect();
-      assert(spy.calledOnce);
-      fs.exists.restore();
-      return pin._openPin.restore();
-    });
+    context("if the GPIO file for the pin doesn't exist", function() {
+      before(function() {
+        stub(fs, 'exists').callsArgWith(1, false);
+        stub(pin, '_createGPIOPin');
+      });
 
-    it("creates a new GPIO pin if the pin doesn't exist", function() {
-      var spy;
-      sinon.stub(fs, 'exists').callsArgWith(1, false);
-      spy = sinon.stub(pin, '_createGPIOPin').returns(true);
-      pin.connect();
-      assert(spy.calledOnce);
-      fs.exists.restore();
-      return pin._createGPIOPin.restore();
+      after(function() {
+        fs.exists.restore();
+        pin._createGPIOPin.restore();
+      });
+
+      it("creates a new GPIO pin", function() {
+        pin.connect(pin.mode);
+        expect(fs.exists).to.be.calledWith(path);
+        expect(pin._createGPIOPin).to.be.called;
+      });
     });
   });
 
   describe("#close", function() {
-    it("writes to the unexport path and triggers the close callback", function() {
-      var callback, writeFile;
-      callback = sinon.stub(pin, '_closeCallback').returns(true);
-      writeFile = sinon.stub(fs, 'writeFile');
-      fs.writeFile.callsArgWith(2, "err").returns(true);
-      pin.close();
-      assert(writeFile.calledWith(pin._unexportPath(), pin.pinNum));
-      assert(callback.calledWith("err"));
+    var path = "/sys/class/gpio/unexport";
+
+    before(function() {
+      stub(fs, 'writeFile').callsArgWith(2, false);
+      stub(pin, '_closeCallback');
+    });
+
+    after(function() {
       fs.writeFile.restore();
-      return pin._closeCallback.restore();
+      pin._closeCallback.restore();
+    });
+
+    it("writes to the GPIO unexport path with the pin's value", function() {
+      pin.close();
+      expect(fs.writeFile).to.be.calledWith(path, '4');
+    });
+
+    it("calls the closeCallback", function() {
+      pin.close();
+      expect(pin._closeCallback).to.be.calledWith(false);
     });
   });
 
   describe("#closeSync", function() {
-    it("writes to the unexport path synchronously and calls the close callback", function() {
-      var writeFile;
-      writeFile = sinon.stub(fs, 'writeFileSync').returns(true);
+    var path = "/sys/class/gpio/unexport";
+
+    before(function() {
+      stub(fs, 'writeFileSync');
+      stub(pin, '_closeCallback');
+    });
+
+    after(function() {
+      fs.writeFileSync.restore();
+      pin._closeCallback.restore();
+    });
+
+    it("writes to the GPIO unexport path with the pin's value", function() {
       pin.closeSync();
-      assert(writeFile.calledWith(pin._unexportPath(), pin.pinNum));
-      return fs.writeFileSync.restore();
+      expect(fs.writeFileSync).to.be.calledWith(path, '4');
+    });
+
+    it("calls the closeCallback", function() {
+      pin.closeSync();
+      expect(pin._closeCallback).to.be.calledWith(false);
     });
   });
 
   describe("#digitalWrite", function() {
-    it("sets the pin mode to 'w' if it wasn't already", function() {
-      var setMode;
-      setMode = sinon.stub(pin, "_setMode").returns(true);
-      sinon.stub(fs, 'writeFile').returns(true);
-      pin.mode = 'r';
-      pin.digitalWrite(1);
-      assert(setMode.calledWith("w"));
-      fs.writeFile.restore();
-      return pin._setMode.restore();
+    var path = "/sys/class/gpio/gpio4/value";
+
+    context("if pin mode isn't 'w'", function() {
+      before(function() {
+        stub(fs, 'writeFile');
+        stub(pin, '_setMode');
+      });
+
+      after(function() {
+        fs.writeFile.restore();
+        pin._setMode.restore();
+      });
+
+      it("sets the pin mode to 'w'", function() {
+        pin.mode = 'r';
+        pin.digitalWrite(1);
+        expect(pin._setMode).to.be.calledWith('w');
+      });
     });
 
-    it("sets the status to the digital value being written", function() {
-      sinon.stub(fs, 'writeFile').returns(true);
-      pin.digitalWrite(1);
-      expect(pin.status).to.be.eql('high');
-      return fs.writeFile.restore();
+    context("when successful", function() {
+      before(function() {
+        pin.mode = 'w';
+        stub(fs, 'writeFile').callsArgWith(2, null);
+        stub(pin, 'emit');
+      });
+
+      after(function() {
+        fs.writeFile.restore();
+        pin.emit.restore();
+      });
+
+      it("emits a digitalWrite event with the written value", function()  {
+        pin.digitalWrite(1);
+        expect(fs.writeFile).to.be.calledWith(path, 1);
+        expect(pin.emit).to.be.calledWith('digitalWrite', 1);
+      });
+
+      it("returns the passed value", function() {
+        expect(pin.digitalWrite(1)).to.be.eql(1);
+      });
+
+      it("changes the pin's @status", function() {
+        pin.status = 'low';
+        pin.digitalWrite(1);
+        expect(pin.status).to.be.eql('high');
+      });
     });
 
-    it("writes to the pin and emits 'digitalWrite' on success", function() {
-      var emit;
-      sinon.stub(fs, 'writeFile').callsArgWith(2, null);
-      emit = sinon.stub(pin, "emit").returns(true);
-      pin.digitalWrite(1);
-      assert(emit.calledWith('digitalWrite'));
-      fs.writeFile.restore();
-      return pin.emit.restore();
-    });
+    context("when there is an error", function() {
+      before(function() {
+        pin.mode = 'w';
+        stub(fs, 'writeFile').callsArgWith(2, true);
+        stub(pin, 'emit');
+      });
 
-    it("writes to the pin and emits 'error' on failure", function() {
-      var emit;
-      sinon.stub(fs, 'writeFile').callsArgWith(2, "err");
-      emit = sinon.stub(pin, "emit").returns(true);
-      pin.digitalWrite(1);
-      assert(emit.calledWith('error'));
-      fs.writeFile.restore();
-      return pin.emit.restore();
+      after(function() {
+        fs.writeFile.restore();
+        pin.emit.restore();
+      });
+
+      it("emits an error message", function() {
+        pin.digitalWrite(1);
+        expect(pin.emit).to.be.calledWith('error');
+      });
     });
   });
 
   describe("#digitalRead", function() {
-    it("sets the mode to 'r' if it isn't already", function() {
-      var setMode;
-      sinon.stub(global, 'every');
-      setMode = sinon.stub(pin, "_setMode").returns(true);
-      pin.mode = 'w';
-      pin.digitalRead(1);
-      assert(setMode.calledWith("r"));
-      global.every.restore();
-      return pin._setMode.restore();
+    var path = "/sys/class/gpio/gpio4/value";
+
+    before(function() {
+      this.clock = sinon.useFakeTimers();
     });
 
-    it("runs readFile on an interval", function() {
-      var clock, readFile;
-      clock = sinon.useFakeTimers();
-      readFile = sinon.stub(fs, 'readFile').returns(true);
-      sinon.stub(pin, "_setMode").returns(true);
-      pin.digitalRead(250);
-      clock.tick(300);
-      assert(readFile.calledOnce);
-      fs.readFile.restore();
-      pin._setMode.restore();
-      return clock.restore();
+    after(function() {
+      this.clock.restore();
     });
 
-    it("emits 'digitalRead' with the data on success", function() {
-      var clock, emit;
-      clock = sinon.useFakeTimers();
-      sinon.stub(fs, 'readFile').callsArgWith(1, null, "1");
-      emit = sinon.stub(pin, 'emit').returns(true);
-      sinon.stub(pin, "_setMode").returns(true);
-      pin.digitalRead(250);
-      clock.tick(300);
-      assert(emit.calledWith('digitalRead', 1));
-      fs.readFile.restore();
-      pin.emit.restore();
-      pin._setMode.restore();
-      return clock.restore();
+    context("if the mode isn't 'r'", function() {
+      before(function() {
+        stub(global, 'every');
+        stub(pin, '_setMode');
+      });
+
+      after(function() {
+        global.every.restore();
+        pin._setMode.restore();
+      });
+
+      it("sets the pin mode to 'r'", function() {
+        pin.mode = 'w';
+        pin.digitalRead(500);
+        expect(pin._setMode).to.be.calledWith('r');
+      });
     });
 
-    it("emits 'error' with the on failure", function() {
-      var clock, emit;
-      clock = sinon.useFakeTimers();
-      sinon.stub(fs, 'readFile').callsArgWith(1, true, "1");
-      emit = sinon.stub(pin, 'emit').returns(true);
-      sinon.stub(pin, "_setMode").returns(true);
-      pin.digitalRead(250);
-      clock.tick(300);
-      assert(emit.calledWith('error'));
-      fs.readFile.restore();
-      pin.emit.restore();
-      pin._setMode.restore();
-      return clock.restore();
+    context("when successful", function() {
+      before(function() {
+        stub(fs, 'readFile').callsArgWith(1, null, 1);
+        stub(pin, 'emit');
+      });
+
+      after(function() {
+        fs.readFile.restore();
+        pin.emit.restore();
+      });
+
+      it("requests the pin value on the specified interval", function() {
+        pin.digitalRead(500);
+        this.clock.tick(510);
+
+        expect(fs.readFile).to.be.calledOnce;
+
+        this.clock.tick(500);
+        expect(fs.readFile).to.be.calledTwice;
+      });
+
+      it("emits a 'digitalRead' event with the data recieved", function() {
+        pin.digitalRead(500);
+        this.clock.tick(510);
+
+        expect(pin.emit).to.be.calledWith('digitalRead', 1);
+      });
+    });
+
+    context("when an error occurs", function() {
+      before(function() {
+        stub(fs, 'readFile').callsArgWith(1, true, null);
+        stub(pin, 'emit');
+      });
+
+      after(function() {
+        fs.readFile.restore();
+        pin.emit.restore();
+      });
+
+      it("emits an error message", function() {
+        pin.digitalRead(500);
+        this.clock.tick(500);
+
+        expect(pin.emit).to.be.calledWith('error');
+      });
     });
   });
 
   describe("#setHigh", function() {
-    it("calls digitalWrite, setting the pin to 'HIGH'", function() {
-      var write;
-      write = sinon.stub(pin, 'digitalWrite').returns(true);
+    before(function() {
+      stub(pin, 'digitalWrite');
+    });
+
+    after(function() {
+      pin.digitalWrite.restore();
+    });
+
+    it("calls #digitalWrite with a value of 1", function() {
       pin.setHigh();
-      assert(write.calledWith(1));
-      return pin.digitalWrite.restore();
+      expect(pin.digitalWrite).to.be.calledWith(1);
     });
   });
 
   describe("#setLow", function() {
-    it("calls digitalWrite, setting the pin to 'low'", function() {
-      var write;
-      write = sinon.stub(pin, 'digitalWrite').returns(true);
+    before(function() {
+      stub(pin, 'digitalWrite');
+    });
+
+    after(function() {
+      pin.digitalWrite.restore();
+    });
+
+    it("calls #digitalWrite with a value of 0", function() {
       pin.setLow();
-      assert(write.calledWith(0));
-      return pin.digitalWrite.restore();
+      expect(pin.digitalWrite).to.be.calledWith(0);
     });
   });
 
   describe("#toggle", function() {
-    context("when the pin is 'high'", function() {
-      it("sets the pin to 'low'", function() {
-        var set;
-        pin.status = 'high';
-        set = sinon.stub(pin, 'setLow').returns(true);
+    context("when @status is 'high'", function() {
+      before(function() {
+        stub(pin, 'setLow')
+        pin.status = "high";
+      });
+
+      after(function() {
+        pin.setLow.restore();
+      });
+
+      it("calls #setLow", function() {
         pin.toggle();
-        assert(set.calledOnce);
-        return pin.setLow.restore();
+        expect(pin.setLow).to.be.called;
       });
     });
 
-    context("when the pin is 'low'", function() {
-      it("sets the pin to 'high'", function() {
-        var set;
-        pin.status = 'low';
-        set = sinon.stub(pin, 'setHigh').returns(true);
-        pin.toggle();
-        assert(set.calledOnce);
-        return pin.setHigh.restore();
+    context("when @status is 'low'", function() {
+      before(function() {
+        stub(pin, 'setHigh')
+        pin.status = "low";
       });
+
+      after(function() {
+        pin.setHigh.restore();
+      });
+
+      it("calls #setHigh", function() {
+        pin.toggle();
+        expect(pin.setHigh).to.be.called;
+      });
+    });
+  });
+
+  describe("#_createGPIOPin", function() {
+    var path = "/sys/class/gpio/export";
+
+    context("when successful", function() {
+      before(function() {
+        stub(fs, 'writeFile').callsArgWith(2, null);
+        stub(pin, "_openPin");
+      });
+
+      after(function() {
+        fs.writeFile.restore();
+        pin._openPin.restore();
+      });
+
+      it("writes the pin number to the GPIO export path", function() {
+        pin._createGPIOPin();
+        expect(fs.writeFile).to.be.calledWith(path, "4")
+      })
+
+      it("calls #_openPin", function() {
+        pin._createGPIOPin();
+        expect(pin._openPin).to.be.called;
+      });
+    });
+
+    context("when an error occurs", function() {
+      before(function() {
+        stub(fs, 'writeFile').callsArgWith(2, true);
+        stub(pin, "emit");
+      });
+
+      after(function() {
+        fs.writeFile.restore();
+        pin.emit.restore();
+      });
+
+      it("emits an error", function() {
+        pin._createGPIOPin();
+        expect(pin.emit).to.be.calledWith('error');
+      });
+    });
+  })
+
+  describe("#_openPin", function() {
+    before(function() {
+      stub(pin, '_setMode');
+      stub(pin, 'emit');
+    });
+
+    after(function() {
+      pin._setMode.restore();
+      pin.emit.restore();
+    });
+
+    it("sets the pin's mode", function() {
+      pin._openPin();
+      expect(pin._setMode).to.be.calledWith(pin.mode);
+    });
+
+    it("emits the 'open' event", function() {
+      pin._openPin();
+      expect(pin.emit).to.be.calledWith('open');
+    });
+  });
+
+  describe("_closeCallback", function() {
+    context("if there is an error", function() {
+      before(function() {
+        stub(pin, 'emit');
+        pin._closeCallback(true);
+      });
+
+      after(function() {
+        pin.emit.restore();
+      });
+
+      it("emits an error", function() {
+        expect(pin.emit).to.be.calledWith('error');
+      });
+    });
+
+    context("if there is no error", function() {
+      before(function() {
+        stub(pin, 'emit');
+        pin._closeCallback(false);
+      });
+
+      after(function() {
+        pin.emit.restore();
+      });
+
+      it("emits a 'close' event with the pin number", function() {
+        expect(pin.emit).to.be.calledWith('close', 4);
+      })
+    });
+  });
+
+  describe("#_setMode", function() {
+    var path = "/sys/class/gpio/gpio4/direction";
+
+    before(function() {
+      stub(fs, 'writeFile').callsArgWith(2, 'error');
+      stub(pin, '_setModeCallback');
+    });
+
+    after(function() {
+      fs.writeFile.restore();
+      pin._setModeCallback.restore();
+    });
+
+    context("when mode is 'w'", function() {
+      it("writes to the pin's direction path with 'out'", function() {
+        pin._setMode('w');
+        expect(fs.writeFile).to.be.calledWith(path, 'out');
+      });
+
+      it("calls #_setModeCallback with any error message", function() {
+        pin._setMode('w', true);
+        expect(pin._setModeCallback).to.be.calledWith('error', true);
+      });
+    });
+
+    context("when mode is 'r'", function() {
+      it("writes to the pin's direction path with 'in'", function() {
+        pin._setMode('r');
+        expect(fs.writeFile).to.be.calledWith(path, 'in');
+      });
+    });
+  });
+
+  describe("#_setModeCallback", function() {
+    before(function() {
+      stub(pin, 'emit');
+    });
+
+    after(function() {
+      pin.emit.restore();
+    });
+
+    context("when successful", function() {
+      it("sets @ready to true", function() {
+        pin.ready = false;
+        pin._setModeCallback(false);
+        expect(pin.ready).to.be.eql(true);
+      });
+
+      context("when emitConnect is true", function() {
+        it("emits a 'connect' event with the pin's mode", function() {
+          pin._setModeCallback(false, true);
+          expect(pin.emit).to.be.calledWith('connect', pin.mode);
+        });
+      });
+    });
+
+    context("when passed an error", function() {
+      it('emits an error', function() {
+        pin._setModeCallback(true);
+        expect(pin.emit).to.be.calledWith('error');
+      });
+    });
+  });
+
+  describe("#_pinPath", function() {
+    var path = "/sys/class/gpio/gpio4";
+
+    it("returns the path to the GPIO pin", function() {
+      expect(pin._pinPath()).to.be.eql(path);
+    });
+  });
+
+  describe("#_directionPath", function() {
+    var path = "/sys/class/gpio/gpio4/direction";
+
+    it("returns the path to the GPIO pin's direction file", function() {
+      expect(pin._directionPath()).to.be.eql(path);
+    });
+  });
+
+  describe("#_valuePath", function() {
+    var path = "/sys/class/gpio/gpio4/value";
+
+    it("returns the path to the GPIO pin's value file", function() {
+      expect(pin._valuePath()).to.be.eql(path);
+    });
+  });
+
+  describe("#_exportPath", function() {
+    var path = "/sys/class/gpio/export";
+
+    it("returns the GPIO export path", function() {
+      expect(pin._exportPath()).to.be.eql(path);
+    });
+  });
+
+  describe("#_unexportPath", function() {
+    var path = "/sys/class/gpio/unexport";
+
+    it("returns the GPIO unexport path", function() {
+      expect(pin._unexportPath()).to.be.eql(path);
     });
   });
 });
