@@ -251,7 +251,7 @@ page_title_show: true
   %h4 cylon littlewire upload
   %p
     %b Description:
-    Uploads littlewire to the digispark (also installs the necessary udev-rules, only in linux systems).
+    Uploads littlewire to the digispark (also installs the necessary udev-rules, only in linux systems).<br />
     %b Notes:
     Do not connect the digispark until prompted to do so.
   :markdown
@@ -285,23 +285,32 @@ page_title_show: true
   :markdown
         $ cylon littlewire set-udev-rules
 
-  %h2 Uploading cylon-spark
-  %h3 Uploading Code To Your Spark Core Using the Cylon CLI
+  %h2 cylon-spark CLI commands
+
+  %h3 cylon spark &lt;subcommand&gt; [arguments]
+
+  %p
+    Uploading Code To Your Spark Core Using the Cylon CLI is pretty straight forward, we have an upload command that makes
+    pushing code to your spark a breeze.
+
+  %h4 cylon spark upload &lt;access_token&gt; &lt;device_id&gt; &lt;file_name.cpp&gt;
+  %p
+    %b Description:
+    lets you upload new source code directly to your Spark Core.<br />
+    %b Notes:
+    %ul
+      %li <code>access_token:</code> In the Build tool, click on the Settings cog in the bottom-left corner to find your access token.
+      %li <code>device_id:</code> After you have your Spark Core registered to your account through the Tinker app, click on the Cores section (just above the Settings cog) on the Build tool. Then, click on the arrow next to your core's name to get its device ID.
 
   :markdown
         :::bash
         $ cylon spark upload [access_token] [device_id] new_firmware.cpp
 
-  %p The <code>cylon spark upload</code> command can help if you want to upload new source code directly to your Spark Core.
-
-  %p 
+  %p
     For more information on how to program your Spark, please see
     = link_to "Spark's examples", "http://docs.spark.io/#/examples", target: :blank
 
-  %p 
+  %p
     You'll need your <code>access_token</code> and <code>device_id</code> to push new software to your Spark, and you can get both of these from Spark's 
-    = link_to "Build tool", "https://spark.io/build", target: :blank    
+    = link_to "Build tool", "https://spark.io/build", target: :blank
 
-  %ul
-    %li <code>access_token:</code> In the Build tool, click on the Settings cog in the bottom-left corner to find your access token.
-    %li <code>device_id:</code> After you have your Spark Core registered to your account through the Tinker app, click on the Cores section (just above the Settings cog) on the Build tool. Then, click on the arrow next to your core's name to get its device ID.
