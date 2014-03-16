@@ -103,7 +103,7 @@ page_title_show: true
     %code cylon scan serial
     \.
 
-%section.makerland-hide
+%section.makerland
   %h2 Makey button
   %img{:src => "/documentation/drivers/breadboards/gpio/makey_button_bb.png", :alt => "", :style => "width:50%"}
   %h3 Javascript
@@ -141,6 +141,57 @@ page_title_show: true
           work: function(me) {
             every((1).second(), function() {
               me.sphero.setRGB(Math.floor(Math.random() * 100000));
+            });
+          }
+        }).start();
+
+  %h2 Sphero Makey Button
+  %h3 Javascript
+  :markdown
+        :::javascript
+        //sphero_makey_button.js
+        var Cylon = require('cylon');
+ 
+        Cylon.robot({
+          connections: [
+            { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+            { name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0' }
+          ]
+          devices: [
+            { name: 'sphero', driver: 'sphero', connection: 'sphero'},
+            { name: 'forward', driver: 'makey-button', connection: 'arduino', pin: 2 },
+            { name: 'back', driver: 'makey-button', connection: 'arduino',pin: 3 },
+            { name: 'left', driver: 'makey-button', connection: 'arduino',pin: 4 },
+            { name: 'right', driver: 'makey-button', connection: 'arduino',pin: 5 }
+          ],
+         
+          work: function(my) {
+            my.forward.on('push', function() {
+              my.sphero.roll(0, 90)
+            });
+            my.forward.on('release', function() {
+              my.sphero.stop()
+            });
+         
+            my.back.on('push', function() {
+              my.sphero.roll(180, 90);
+            });
+            my.back.on('release', function() {
+              my.sphero.stop()
+            });
+         
+            my.right.on('push', function() {
+              my.sphero.roll(90, 90);
+            });
+            my.right.on('release', function() {
+              my.sphero.stop()
+            });
+         
+            my.left.on('push', function() {
+              my.sphero.roll(270, 90);
+            });
+            my.left.on('release', function() {
+              my.sphero.stop()
             });
           }
         }).start();
