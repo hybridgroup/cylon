@@ -76,13 +76,14 @@ page_title_show: true
   %h3 cylon generate &lt;name&gt;
   %h4 Description
   %p
-    Generates a new Cylon adaptor wireframe (adaptor, driver, device register), this way it is easy to add support for new devices in Cylon,
-    just create a new adaptor using this CLI command and start adding the code that matters.
+    Generates a wireframe for a new Cylon.js adaptor (adaptor, driver, etc).
+    This way, it's easy to add Cylon.js support for new devices. Just create a
+    new adaptor using this CLI command, and start adding your own adaptor code.
 
   :markdown
         :::bash
-        $cylon generate sphero2
-        Creating cylon-sphero2 adaptor.
+        $ cylon generate octobot
+        Creating cylon-octobot adaptor.
         Compiling templates.
 
   %h3 cylon scan &lt;type&gt;
