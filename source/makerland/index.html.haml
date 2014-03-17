@@ -26,7 +26,7 @@ page_title_show: true
       %p
         Next up, install Cylon.js globally, so you can make use of the CLI commands it provides:
         :markdown
-              $ npm install -g cylon
+              $ npm install -g cylon cylon-gpio cylon-i2c cylon-firmata cylon-sphero cylon-leapmotion
       %p
         Once that's finished, you should be able to check if it's working by
         opening another terminal window and entering this command, which should
@@ -36,47 +36,9 @@ page_title_show: true
               /usr/local/bin/cylon
     %li
       %p
-        With that done, install the Cylon.js node modules into your working directory:
-        :markdown
-              $ npm install cylon cylon-gpio cylon-i2c cylon-firmata cylon-sphero cylon-leapmotion
-    %li
-      %p
-        Install the
+        Finally, install the
         =link_to "Leap Motion","https://www.leapmotion.com/setup"
         software.
-
-    %li
-      %p Install the Firmata software onto your Arduino board as follows:
-
-      %ul
-        %li
-          Use
-          %code cylon scan serial
-          to find your connection info and serial port address:
-          :markdown
-                  $ cylon scan serial
-
-        %li
-          Use
-          %code cylon firmata install
-          to install
-          %code avrdude
-          , which will let you upload Firmata to the Arduino.
-          :markdown
-                  $ cylon firmata install
-
-        %li
-          Once
-          %code avrdude
-          is installed, we can upload the Firmata protocol to the Arduino with
-          %code cylon firmata upload
-          \. Use the Arduino serial port you found when running
-          %code cylon scan serial
-          \. By default, it will attempt to upload to
-          %code /dev/ttyACM0
-          \.
-          :markdown
-                  $ cylon firmata upload /dev/ttyACM0
 
   %h2 Test Your Install - Arduino Blink
   %p You can now test your installation. Plug in your Arduino, and run the following code, that makes the built-in LED on your Arduino turn on/off every second:
@@ -89,7 +51,7 @@ page_title_show: true
         Cylon.robot({
           // change the port below to match whatever your Arduino is actually plugged into
           connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
-          device: {name: 'led', driver: 'led', pin: 13},
+          device: { name: 'led', driver: 'led', pin: 13 },
 
           work: function(my) {
             every((1).seconds(), function() {my.led.toggle()});
@@ -97,11 +59,12 @@ page_title_show: true
         }).start();
 
   %p Please note that you might need to change the value for port.
-  %p
-    Use the same port you used earlier when uploading Firmata to your Arduino,
-    or find it again with
+  %p 
+    Use
     %code cylon scan serial
-    \.
+    to find your connection info and serial port address:
+    :markdown
+            $ cylon scan serial
 
 %section.makerland
   %h2 Makey button
@@ -116,7 +79,7 @@ page_title_show: true
         Cylon.robot({
           connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
           devices: [
-            {name: 'led', driver: 'led', pin: 13},
+            { name: 'led', driver: 'led', pin: 13 },
             { name: 'makey', driver: 'makey-button', pin: 2 }
           ],
 
@@ -151,47 +114,76 @@ page_title_show: true
         :::javascript
         //sphero_makey_button.js
         var Cylon = require('cylon');
- 
+        var time = 0;
+        var calibration = false;
+         
+         
         Cylon.robot({
           connections: [
             { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
             { name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0' }
-          ]
-          devices: [
-            { name: 'sphero', driver: 'sphero', connection: 'sphero'},
-            { name: 'forward', driver: 'makey-button', connection: 'arduino', pin: 2 },
-            { name: 'back', driver: 'makey-button', connection: 'arduino',pin: 3 },
-            { name: 'left', driver: 'makey-button', connection: 'arduino',pin: 4 },
-            { name: 'right', driver: 'makey-button', connection: 'arduino',pin: 5 }
           ],
-         
+          devices: [
+            { name: 'sphero', driver: 'sphero', connection: 'sphero' },
+            { name: 'forward', driver: 'makey-button', connection: 'arduino', pin: 2 },
+            { name: 'back', driver: 'makey-button', connection: 'arduino', pin: 3 },
+            { name: 'left', driver: 'makey-button', connection: 'arduino', pin: 4 },
+            { name: 'right', driver: 'makey-button', connection: 'arduino', pin: 5 }
+          ],
+          checkCalibration: (function(_this) {
+            return function(me) {
+              if (calibration === true) {
+                me.sphero.finishCalibration();
+                calibration = false;
+              }
+            };
+          })(this),
           work: function(my) {
+            my.checkCalibration(my);
+            my.sphero.setBackLED(255);
+         
             my.forward.on('push', function() {
-              my.sphero.roll(0, 90)
+              console.log("forward");
+              my.checkCalibration(my);
+              my.sphero.roll(90, 0);
             });
             my.forward.on('release', function() {
-              my.sphero.stop()
+              my.sphero.stop();
             });
          
             my.back.on('push', function() {
-              my.sphero.roll(180, 90);
+              console.log("back");
+              my.checkCalibration(my);
+              my.sphero.roll(90, 180);
             });
             my.back.on('release', function() {
-              my.sphero.stop()
+              my.sphero.stop();
             });
          
             my.right.on('push', function() {
-              my.sphero.roll(90, 90);
+              console.log("right");
+              var t = Date.now();
+              if ((t - time) < 400 ) {
+                console.log("Calibrating");
+                my.sphero.startCalibration();
+                calibration = true;
+              } else {
+                my.checkCalibration(my);
+                my.sphero.roll(90, 90);
+              }
+              time = t;
             });
             my.right.on('release', function() {
-              my.sphero.stop()
+              my.sphero.stop();
             });
          
             my.left.on('push', function() {
-              my.sphero.roll(270, 90);
+              console.log("left");
+              my.checkCalibration(my);
+              my.sphero.roll(90, 270);
             });
             my.left.on('release', function() {
-              my.sphero.stop()
+              my.sphero.stop();
             });
           }
         }).start();
@@ -250,7 +242,7 @@ page_title_show: true
           ],
           devices: [
             { name: 'leapmotion', driver: 'leapmotion', connection: 'leapmotion' },
-            { name: 'sphero', driver: 'sphero', connection: 'sphero'}
+            { name: 'sphero', driver: 'sphero', connection: 'sphero' }
           ],
           work: function(my) {
             my.leapmotion.on('hand', function(hand) {
