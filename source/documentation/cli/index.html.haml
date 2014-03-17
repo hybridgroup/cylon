@@ -73,6 +73,19 @@ page_title_show: true
     If you have only installed cylon, the list of available commands is the one printed in the section above,
     let's review them one by one.
 
+  %h3 cylon generate &lt;name&gt;
+  %h4 Description
+  %p
+    Generates a wireframe for a new Cylon.js adaptor (adaptor, driver, etc).
+    This way, it's easy to add Cylon.js support for new devices. Just create a
+    new adaptor using this CLI command, and start adding your own adaptor code.
+
+  :markdown
+        :::bash
+        $ cylon generate octobot
+        Creating cylon-octobot adaptor.
+        Compiling templates.
+
   %h3 cylon scan &lt;type&gt;
   %h4 Description
   %p
@@ -81,7 +94,6 @@ page_title_show: true
   :markdown
         :::bash
         $ cylon scan usb
-        $ ./node_modules/cylon/bin/cylon scan usb
         Bus 002 Device 002: ID 8087:8000 Intel Corp.
         Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
         Bus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
@@ -168,7 +180,6 @@ page_title_show: true
             -V, --version  output the version number
 
   %h2 cylon-firmata CLI commands
-
   %h3 cylon firmata &lt;subcommand&gt; [address]
   %p
     This command lets you install avrdude (needed to upload firmata to arduino)
@@ -233,7 +244,6 @@ page_title_show: true
         avrdude done.  Thank you.
 
   %h2 cylon-digispark CLI commands
-
   %h3 cylon littlewire &lt;subcommand&gt;
   %p
     In the same way that firmata lets you communicate with the arduino using CylonJS, littlewire lets you communicate
@@ -251,7 +261,7 @@ page_title_show: true
   %h4 cylon littlewire upload
   %p
     %b Description:
-    Uploads littlewire to the digispark (also installs the necessary udev-rules, only in linux systems).
+    Uploads littlewire to the digispark (also installs the necessary udev-rules, only in linux systems).<br />
     %b Notes:
     Do not connect the digispark until prompted to do so.
   :markdown
@@ -285,23 +295,30 @@ page_title_show: true
   :markdown
         $ cylon littlewire set-udev-rules
 
-  %h2 Uploading cylon-spark
-  %h3 Uploading Code To Your Spark Core Using the Cylon CLI
+  %h2 cylon-spark CLI commands
+  %h3 cylon spark &lt;subcommand&gt; [arguments]
+  %p
+    Uploading Code To Your Spark Core Using the Cylon CLI is pretty straight forward, we have an upload command that makes
+    pushing code to your spark a breeze.
+
+  %h4 cylon spark upload &lt;access_token&gt; &lt;device_id&gt; &lt;file_name.cpp&gt;
+  %p
+    %b Description:
+    lets you upload new source code directly to your Spark Core.<br />
+    %b Notes:
+    %ul
+      %li <code>access_token:</code> In the Build tool, click on the Settings cog in the bottom-left corner to find your access token.
+      %li <code>device_id:</code> After you have your Spark Core registered to your account through the Tinker app, click on the Cores section (just above the Settings cog) on the Build tool. Then, click on the arrow next to your core's name to get its device ID.
 
   :markdown
         :::bash
         $ cylon spark upload [access_token] [device_id] new_firmware.cpp
 
-  %p The <code>cylon spark upload</code> command can help if you want to upload new source code directly to your Spark Core.
-
-  %p 
+  %p
     For more information on how to program your Spark, please see
     = link_to "Spark's examples", "http://docs.spark.io/#/examples", target: :blank
 
-  %p 
+  %p
     You'll need your <code>access_token</code> and <code>device_id</code> to push new software to your Spark, and you can get both of these from Spark's 
-    = link_to "Build tool", "https://spark.io/build", target: :blank    
+    = link_to "Build tool", "https://spark.io/build", target: :blank
 
-  %ul
-    %li <code>access_token:</code> In the Build tool, click on the Settings cog in the bottom-left corner to find your access token.
-    %li <code>device_id:</code> After you have your Spark Core registered to your account through the Tinker app, click on the Cores section (just above the Settings cog) on the Build tool. Then, click on the arrow next to your core's name to get its device ID.
