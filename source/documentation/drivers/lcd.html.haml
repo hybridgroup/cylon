@@ -14,7 +14,7 @@ raspberry_platform: true
 ---
 %section.intro
   = image_tag "/images/devices/lcd.jpg", class: "display"
-  .info_intro
+  .info-intro
     %p Used for display characters.
   .clear
      
@@ -61,16 +61,16 @@ raspberry_platform: true
         coming soon
 
 %section.public-methods
-  .commands_api#Commands
+  .commands-api#Commands
     = partial "/documentation/drivers/partials/i2c/commands_lcd"
-  .commands_api#Events
+  .commands-api#Events
     = partial "/documentation/drivers/partials/i2c/events_lcd"
 
 %section.circuit#Circuit
   %h2 Circuit
-  .description_circuit
+  .description-circuit
     %p 
-  .image_circuit 
+  .image-circuit 
     %img{:src => "/documentation/drivers/breadboards/i2c/lcd_bb.png", :alt => ""}/ 
   .clear 
 

@@ -15,7 +15,7 @@ spark_platform: true
 
 %section.intro
   =image_tag "/images/devices/motor.jpg", class: "display"
-  .info_intro
+  .info-intro
     %p
       Provides motor manipulation tools for Cylon.js like on/off, speed modulation using PWM,
       use of bidirectional motors using forward/backward pins.
@@ -94,16 +94,16 @@ spark_platform: true
 
         .start()
 %section.public-methods
-  .commands_api#Commands
+  .commands-api#Commands
     = partial "/documentation/drivers/partials/gpio/commands_motor"
-  .commands_api#Events
+  .commands-api#Events
     = partial "/documentation/drivers/partials/gpio/events_motor"
 
 %section.circuit#Circuit
   %h2 Circuit
-  .description_circuit
+  .description-circuit
     %p  
-  .image_circuit 
+  .image-circuit 
     %img{:src => "/documentation/drivers/breadboards/gpio/motor_bb.png", :alt => ""}/ 
   .clear 
 

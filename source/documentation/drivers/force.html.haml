@@ -12,7 +12,7 @@ force_platform: true
 
 %section.intro
   = image_tag "/images/devices/force.jpg", class: "display"
-  .info_intro
+  .info-intro
     %p 
       -# I put this description but if you need to change it, no problem ;)  *************
       This module provides an adaptor and drivers for Force.com .It uses the nforce module 
@@ -132,9 +132,9 @@ force_platform: true
         .start()
 
 %section.public-methods
-  .commands_api#Commands
+  .commands-api#Commands
     = partial "/documentation/drivers/partials/force/commands"
-  .commands_api#Events
+  .commands-api#Events
     = partial "/documentation/drivers/partials/force/events"
 
 %section.compatibility.hardware#Compatibility
