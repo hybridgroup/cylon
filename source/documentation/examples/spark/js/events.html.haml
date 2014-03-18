@@ -1,8 +1,8 @@
 ---
 layout: documentation
 page_title_show: true
-title: Cylon.JS Example - Spark - Blink
-page_title: "Example: Spark - Blink"
+title: Cylon.JS Example - Spark Core - Events
+page_title: "Example: Spark Core - Events"
 author: The Hybrid Group
 description: A Cylon.JS code example
 ---
@@ -16,18 +16,16 @@ description: A Cylon.JS code example
           connection: {
             name: 'spark',
             adaptor: 'spark',
-            deviceId: '',
-            accessToken: ''
-          },
-
-          device: {
-            name: 'led',
-            driver: 'led',
-            pin: 'D7'
+            accessToken: '[YOUR_ACCESS_TOKEN]',
+            deviceId: '[YOUR_DEVICE_ID]'
           },
 
           work: function(my) {
-            every(1..second(), function() { my.led.toggle(); });
+            my.spark.listenForEvents(["testevent"]);
+
+            my.spark.on('testevent', function(data) {
+              console.log("Test Event Received. Data:", data);
+            });
           }
         }).start();
 
