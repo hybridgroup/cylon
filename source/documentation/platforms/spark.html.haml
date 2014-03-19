@@ -44,10 +44,10 @@ servo_driver: true
 
         Cylon.robot({
           connection: { name: 'spark', adaptor: 'spark', accessToken: 'XYZPDQ123', deviceId: '123ABC456' },
-          device: {name: 'led', driver: 'led', pin: 'D0'},
+          device: {name: 'led', driver: 'led', pin: 'D7'},
 
           work: function(my) {
-            every((1).second(), function() {my.led.toggle()});
+            every((3).second(), function() {my.led.toggle()});
           }
         }).start();
 
