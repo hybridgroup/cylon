@@ -12,7 +12,7 @@ layout: documentation
 
   ## every(interval, action)
 
-  Alias to Javascript's setInterval() function, combined with monkeypatches to
+  Alias to JavaScript's setInterval() function, combined with monkeypatches to
   Number detailed below.
 
   - **interval** - interval to run action on
@@ -28,7 +28,7 @@ layout: documentation
 
   ## after(interval, action)
 
-  Alias to Javascript's setTimeout() function, combined with monkeypatches to
+  Alias to JavaScript's setTimeout() function, combined with monkeypatches to
   Number detailed below.
 
   - **interval** - interval to run action after
@@ -76,7 +76,7 @@ layout: documentation
   A monkey-patch to Number that allows for using numbers to represent time in
   terms of seconds.
 
-  Note that while using this in Javascript, you have to use it in one of these
+  Note that while using this in JavaScript, you have to use it in one of these
   ways:
 
       :::javascript
@@ -84,7 +84,7 @@ layout: documentation
       // or
       (10).seconds()
 
-  Otherwise, the Javascript interpreter will get confused and think you're
+  Otherwise, the JavaScript interpreter will get confused and think you're
   trying to represent a float.
 
   In CoffeeScript you can use `10.seconds()`, as the compiler will turn it into 

@@ -234,7 +234,7 @@ def create_index_partial(name, examples)
   examples.each do |example|
     string = "%tr\n"
     string << "  %td #{example.title}\n"
-    string << "  %td.links= link_to 'Javascript', '/documentation/examples/#{name}/js/#{example.name}'\n"
+    string << "  %td.links= link_to 'JavaScript', '/documentation/examples/#{name}/js/#{example.name}'\n"
     string << "  %td.links= link_to 'CoffeeScript', '/documentation/examples/#{name}/coffee/#{example.name}'\n"
     string.gsub! /^(.+)/, '    \1'
     partial << string
