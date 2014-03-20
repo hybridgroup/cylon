@@ -16,11 +16,24 @@
     padding: 10px;
     text-align: center;
 
+    img {
+
+      &:hover {
+
+        opacity: .8;
+      }
+    }
+
     .title {
 
       background: $title-color;
       padding:10px;
       color: $hero-title-color;
+
+      &:hover {
+
+        background: darken($title-color, 5);
+      }
 
       a {
 
@@ -32,6 +45,11 @@
 
       background: $hero-subtitle-color;
       padding:10px;
+
+      &:hover {
+
+        background: darken($hero-subtitle-color, 5);
+      }
 
       a {
 
