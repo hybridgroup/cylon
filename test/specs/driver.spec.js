@@ -1,58 +1,94 @@
 'use strict';
 
-source("driver");
 var EventEmitter = require('events').EventEmitter;
 
+source("driver");
+
 describe("Driver", function() {
-  var device, driver;
-  device = new EventEmitter;
-  device.connection = 'connect';
-  driver = new Cylon.Driver({
-    name: 'TestDriver',
+  var device = {
+    connection: {},
+    emit: spy()
+  };
+  var driver = new Cylon.Driver({
+    name: 'driver',
     device: device
   });
 
-  it("provides a 'start' method that accepts a callback", function() {
-    var spy;
-    expect(driver.start).to.be.a('function');
-    spy = sinon.spy();
-    driver.start(function() {
-      return spy();
+  describe("#constructor", function() {
+    it("sets @self as a reference to the driver", function() {
+      expect(driver.self).to.be.eql(driver);
     });
-    spy.should.have.been.called;
-  });
 
-  it("tells the device to emit the 'start' event when started", function() {
-    var spy;
-    spy = sinon.spy();
-    driver.device.on('start', function() {
-      return spy();
+    it("sets @name to the provided name", function() {
+      expect(driver.name).to.be.eql('driver');
     });
-    driver.start(function() {});
-    spy.should.have.been.called;
+
+    it("sets @device to the provided device", function() {
+      expect(driver.device).to.be.eql(device);
+    });
+
+    it("sets @connection to the provided device's connection", function() {
+      expect(driver.connection).to.be.eql(device.connection);
+    });
+
+    it("sets @commandList to an empty array by default", function() {
+      expect(driver.commandList).to.be.eql([]);
+    });
   });
 
-  it("provides a 'halt' method", function() {
-    expect(driver.halt).to.be.a('function');
+  describe("#commands", function() {
+    var commands = ['list', 'of', 'commands']
+    before(function() {
+      driver.commandList = commands;
+    });
+
+    after(function() {
+      driver.commandList = [];
+    });
+
+    it("returns the driver's @commandList", function() {
+      expect(driver.commands()).to.be.eql(commands);
+    });
   });
 
-  it("provides a default empty array of commands", function() {
-    expect(driver.commands()).to.be.eql([]);
+  describe("#start", function() {
+    var callback = spy();
+
+    before(function() {
+      stub(Logger, 'info');
+      driver.start(callback);
+    });
+
+    after(function() {
+      Logger.info.restore();
+    });
+
+    it("logs that it's starting the driver", function() {
+      var string = "Driver driver started";
+      expect(Logger.info).to.be.calledWith(string);
+    });
+
+    it("triggers the provided callback", function() {
+      expect(callback).to.be.called;
+    });
+
+    it("tells the device to emit the 'start' event", function() {
+      expect(device.emit).to.be.calledWith('start');
+    });
   });
 
-  it("saves the provided name in the @name variable", function() {
-    expect(driver.name).to.be.eql("TestDriver");
-  });
+  describe("#halt", function() {
+    before(function() {
+      stub(Logger, 'info');
+      driver.halt();
+    });
 
-  it("saves the provided device in the @device variable", function() {
-    expect(driver.device).to.be.eql(device);
-  });
+    after(function() {
+      Logger.info.restore();
+    });
 
-  it("saves the provided device connection in the @device variable", function() {
-    expect(driver.connection).to.be.eql('connect');
-  });
-
-  it("contains a reference to itself in the @self variable", function() {
-    expect(driver.self).to.be.eql(driver);
+    it("logs that it's halting the driver", function() {
+      expect(Logger.info).to.be.calledWith("Driver driver halted")
+    });
   });
 });
