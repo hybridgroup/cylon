@@ -31,10 +31,10 @@
     "cylon": "./bin/cylon"
   },
   "devDependencies": {
-    "sinon-chai": "~2.4.0",
-    "chai": "~1.7.2",
-    "mocha": "~1.12.1",
-    "sinon": "~1.7.3",
+    "sinon-chai": "~2.5.0",
+    "chai": "~1.9.1",
+    "mocha": "~1.18.2",
+    "sinon": "~1.9.0",
     "jshint": "~2.4.4"
   },
   "dependencies": {
