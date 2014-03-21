@@ -13,7 +13,7 @@ sphero_platform: true
 
 %section.intro
   =image_tag "/images/devices/sphero.jpg", class: "display"
-  .info_intro
+  .info-intro
     %p Allows user to interact with the Sphero robotic sphero using Cylon.js.
   .clear
   
@@ -90,12 +90,12 @@ sphero_platform: true
           .start()
 
 %section.public-methods
-  .commands_api#Commands
+  .commands-api#Commands
     = partial "/documentation/drivers/partials/sphero/commands"
     %h5
       Note: for more information about the documentation of the Sphero driver click
       =link_to "here.", "https://github.com/orbotix/DeveloperResources/blob/master/docs/Sphero_API_1.50.pdf" 
-  .commands_api#Events
+  .commands-api#Events
     = partial "/documentation/drivers/partials/sphero/events"
 
 %section#SpheroColors
