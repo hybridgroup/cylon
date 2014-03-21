@@ -1,53 +1,87 @@
 'use strict';
 
-source("adaptor");
 var EventEmitter = require('events').EventEmitter;
 
+source("adaptor");
+
 describe("Adaptor", function() {
-  var adaptor, conn;
-  conn = new EventEmitter;
-  adaptor = new Cylon.Adaptor({
-    name: 'TestAdaptor',
-    connection: conn
-  });
+  var connection = new EventEmitter;
+  var adaptor = new Cylon.Adaptor({ name: 'adaptor', connection: connection });
 
-  it("provides a 'connect' method that accepts a callback", function() {
-    var spy;
-    expect(adaptor.connect).to.be.a('function');
-    spy = sinon.spy();
-    adaptor.connect(function() {
-      return spy();
+  describe("#constructor", function() {
+    it("sets @self as a reference to the adaptor", function() {
+      expect(adaptor.self).to.be.eql(adaptor);
     });
-    spy.should.have.been.called;
-  });
 
-  it("tells the connection to emit the 'connect' event when connected", function() {
-    var spy;
-    spy = sinon.spy();
-    adaptor.connection.on('connect', function() {
-      return spy();
+    it("sets @name to the provided name", function() {
+      expect(adaptor.name).to.be.eql('adaptor');
     });
-    adaptor.connect(function() {});
-    spy.should.have.been.called;
+
+    it("sets @connection to the provided connection", function() {
+      expect(adaptor.connection).to.be.eql(connection);
+    });
+
+    it("sets @commandList to an empty array by default", function() {
+      expect(adaptor.commandList).to.be.eql([]);
+    });
   });
 
-  it("provides a 'disconnect' method", function() {
-    expect(adaptor.disconnect).to.be.a('function');
+  describe("#commands", function() {
+    var commands = ['list', 'of', 'commands']
+    before(function() {
+      adaptor.commandList = commands;
+    });
+
+    after(function() {
+      adaptor.commandList = [];
+    });
+
+    it("returns the adaptor's @commandList", function() {
+      expect(adaptor.commands()).to.be.eql(commands);
+    });
   });
 
-  it("provides a default empty array of commands", function() {
-    expect(adaptor.commands()).to.be.eql([]);
+  describe("#connect", function() {
+    var callback = spy();
+
+    before(function() {
+      stub(connection, 'emit');
+      stub(Logger, 'info');
+      adaptor.connect(callback);
+    });
+
+    after(function() {
+      connection.emit.restore();
+      Logger.info.restore();
+    });
+
+    it("logs that it's connecting to the adaptor", function() {
+      var string = "Connecting to adaptor 'adaptor'...";
+      expect(Logger.info).to.be.calledWith(string);
+    });
+
+    it("triggers the provided callback", function() {
+      expect(callback).to.be.called;
+    });
+
+    it("tells the connection to emit the 'connect' event", function() {
+      expect(connection.emit).to.be.calledWith('connect');
+    });
   });
 
-  it("saves the provided name in the @name variable", function() {
-    expect(adaptor.name).to.be.eql("TestAdaptor");
-  });
+  describe("#disconnect", function() {
+    before(function() {
+      stub(Logger, 'info');
+      adaptor.disconnect();
+    });
 
-  it("saves the provided connection in the @connection variable", function() {
-    expect(adaptor.connection).to.be.eql(conn);
-  });
+    after(function() {
+      Logger.info.restore();
+    });
 
-  it("contains a reference to itself in the @self variable", function() {
-    expect(adaptor.self).to.be.eql(adaptor);
+    it("logs that it's disconnecting to the adaptor", function() {
+      var string = "Disconnecting from adaptor 'adaptor'...";
+      expect(Logger.info).to.be.calledWith(string);
+    });
   });
 });
