@@ -12,7 +12,7 @@ pebble_platform: true
 
 %section.intro
   =image_tag "/images/devices/pebble.jpg", class: "display"
-  .info_intro
+  .info-intro
     %p Allows user to interact with Cylon.js devices using a Pebble smart watch.
   .clear
   
@@ -126,9 +126,9 @@ pebble_platform: true
         Cylon.start()
 
 %section.public-methods
-  .commands_api#Commands
+  .commands-api#Commands
     = partial "/documentation/drivers/partials/pebble/commands"
-  .commands_api#Events
+  .commands-api#Events
     = partial "/documentation/drivers/partials/pebble/events"
 
 %section.compatability.hardware#Compatability

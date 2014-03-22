@@ -16,7 +16,7 @@ spark_platform: true
 ---
 %section.intro
   = image_tag "/images/devices/makey-button.jpg", class: "display"
-  .info_intro
+  .info-intro
     %p
       Inspired by the awesome MakeyMakey (<a href='http://makeymakey.com'>http://makeymakey.com</a>), this GPIO driver allows you to connect a 10 MOhm resistor to a digital pin on your Arduino or Raspberry Pi to control your robots with bananas, clay, or drawable circuitry.
   .clear
@@ -90,17 +90,17 @@ spark_platform: true
         .start()
 
 %section.public-methods
-  .commands_api#Commands
+  .commands-api#Commands
     = partial "/documentation/drivers/partials/gpio/commands_makey_button"
-  .commands_api#Events
+  .commands-api#Events
     = partial "/documentation/drivers/partials/gpio/events_makey_button"
 
 
 %section.circuit#Circuit
   %h2 Circuit
-  .description_circuit
+  .description-circuit
     %p  
-  .image_circuit
+  .image-circuit
     %img{:src => "/documentation/drivers/breadboards/gpio/makey_button_bb.png", :alt => ""}/ 
   .clear 
 

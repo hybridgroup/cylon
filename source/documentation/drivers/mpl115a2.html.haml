@@ -14,7 +14,7 @@ raspberry_platform: true
 ---
 %section.intro
   = image_tag "/images/devices/mpl115a2.jpg", class: "display"
-  .info_intro
+  .info-intro
     %p Used for measuring barometric pressure.
   .clear
    
@@ -61,17 +61,17 @@ raspberry_platform: true
         coming soon
 
 %section.public-methods
-  .commands_api#Commands
+  .commands-api#Commands
     = partial "/documentation/drivers/partials/i2c/commands_mpl115a2"
-  .commands_api#Events
+  .commands-api#Events
     = partial "/documentation/drivers/partials/i2c/events_mpl115a2"
 
 
 %section.circuit#Circuit
   %h2 Circuit
-  .description_circuit
+  .description-circuit
     %p 
-  .image_circuit 
+  .image-circuit 
     %img{:src => "/documentation/drivers/breadboards/i2c/mpl115a2_bb.png", :alt => ""}/ 
   .clear 
 

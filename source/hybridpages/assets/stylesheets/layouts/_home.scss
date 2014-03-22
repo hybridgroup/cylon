@@ -55,7 +55,7 @@
       }
     }
 
-    .video_index {
+    .video-index {
 
       @include span-columns(10);
 
@@ -118,7 +118,7 @@
 
   section.content {
 
-    .index_content {
+    .index-content {
     
       @include margin-not-last-child;
       @include span-columns(9);
