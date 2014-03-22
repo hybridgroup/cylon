@@ -10,6 +10,16 @@
       display: inline-block;
       width: 225px;
 
+      &:hover {
+
+        img {
+      
+          opacity: .9;
+        }
+
+        background: $hero-subtitle-color;
+      }
+
       img {
       
       	 width: 100%;

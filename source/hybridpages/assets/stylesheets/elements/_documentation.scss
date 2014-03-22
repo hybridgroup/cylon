@@ -29,7 +29,7 @@
 
       margin: 0 auto;
       @include span-columns(3 of 9.5);
-      background: #620020;
+      background: $cta-hover-color;
       height: 100px;
       margin-bottom: 20px;
       border-radius: 5px;
@@ -49,18 +49,18 @@
 
       &:hover {
 
-        background: darken(#620020, 5);
+        background: darken($cta-hover-color, 5);
       }
 
       .title {
 
-        color: #EFECE5;
+        color: $hero-title-color;
         font-weight: bold;
       }
 
       .description {
 
-        color: #b39f89;
+        color: $hero-subtitle-color;
       }
     }
   }
