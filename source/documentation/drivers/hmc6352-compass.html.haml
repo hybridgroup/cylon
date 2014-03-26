@@ -33,7 +33,7 @@ raspberry_platform: true
 
 %section.how-to#HowToUse
   %h2 How To Use
-  %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
+  %p To read the current compass heading, just use the `heading()` function:
   :markdown
         :::javascript
         coming soon
@@ -44,9 +44,9 @@ raspberry_platform: true
 
 %section.public-methods
   .commands-api#Commands
-    = partial "/documentation/drivers/partials/force/commands"
+    = partial "/documentation/drivers/partials/i2c/commands_hmc6352"
   .commands-api#Events
-    = partial "/documentation/drivers/partials/force/events"
+    = partial "/documentation/drivers/partials/i2c/events_hmc6352"
 
 %section.circuit#Circuit
   %h2 Circuit
