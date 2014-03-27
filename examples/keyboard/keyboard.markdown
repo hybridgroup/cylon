@@ -1,14 +1,28 @@
 # Keyboard
 
+For this Cylon example, we're going to quickly demonstrate getting keyboard
+input.
+
 First, let's import Cylon:
 
-		Cylon = require '../..'
+    var Cylon = require('../..');
 
-		Cylon.robot
-		  device: { name: 'keyboard', driver: 'keyboard' }
-		  connection: { name: 'keyboard', adaptor: 'keyboard' }
-		  work: (my) ->
-		    my.keyboard.on 'a', (key) ->
-		      console.log "A PRESSED!"
+With that done, let's define our robot:
 
-		.start()
+    Cylon.robot({
+
+It will have a single connection and device, both to the keyboard.
+
+      connection: { name: 'keyboard', adaptor: 'keyboard' },
+      device: { name: 'keyboard', driver: 'keyboard' },
+
+When we tell this robot to work, it's going to listen to the 'a' key on the
+keyboard and let us know when it's been pressed.
+
+      work: (my) function() {
+        my.keyboard.on('a', function(key) { console.log "A PRESSED!" });
+      }
+
+With that done, let's get started!
+
+    }).start();

@@ -1,31 +1,21 @@
 var Cylon = require('../..');
 
-var bots = [
-  { port: '/dev/cu.Sphero-RGB', name: 'Huey' },
-  { port: '/dev/cu.Sphero-GRB', name: 'Dewey' },
-  { port: '/dev/cu.Sphero-BRG', name: 'Louie' }
-];
+var bots = [ 'Huey', 'Dewey', 'Louie' ];
 
-var SpheroRobot = (function() {
-  function SpheroRobot() {}
+var MinionBot = (function() {
+  function MinionBot() {}
 
-  SpheroRobot.prototype.connection = { name: 'Sphero', adaptor: 'sphero' };
-
-  SpheroRobot.prototype.work = function(my) {
+  MinionBot.prototype.work = function(my) {
     console.log("Robot " + my.name + " is now working!");
   };
 
-  return SpheroRobot;
+  return MinionBot;
 
 })();
 
 for (var i = 0; i < bots.length; i++) {
-  var bot = bots[i];
-  var robot = new SpheroRobot;
-
-  robot.connection.port = bot.port;
-  robot.name = bot.name;
-
+  var robot = new MinionBot;
+  robot.name = bots[i];
   Cylon.robot(robot);
 }
 
