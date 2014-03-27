@@ -24,7 +24,7 @@
     "./": false,
     "async": true,
     "node-namespace": true,
-    "./lib": true,
+    "./lib": true
   },
   "devDependencies": {
     "sinon-chai": "~2.5.0",
