@@ -24,11 +24,7 @@
     "./": false,
     "async": true,
     "node-namespace": true,
-    "./lib": true,
-    "./lib/cli": false
-  },
-  "bin": {
-    "cylon": "./bin/cylon"
+    "./lib": true
   },
   "devDependencies": {
     "sinon-chai": "~2.5.0",
@@ -41,13 +37,6 @@
     "async": "~0.2.9",
     "node-namespace": "~1.0.0",
     "express.io": "~1.1.13",
-
-    "wrench": "~1.5.4",
-    "glob": "~3.2.7",
-    "ejs": "~0.8.5",
-    "commander": "~2.1.0",
-    "globule": "~0.2.0",
-
     "robeaux": ">= 0.0.4"
   }
 }
