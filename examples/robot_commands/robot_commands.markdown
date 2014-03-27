@@ -12,46 +12,54 @@ http://localhost:8080/robots/frankie/commands/relax
 
 First, let's make sure to load up Cylon:
 
-    Cylon = require '../..'
+    var Cylon = require('../..');
 
 Now that we've got that, let's set up a custom API port:
 
-    Cylon.api host: '0.0.0.0', port: '8080'
+    Cylon.api({ host: '0.0.0.0', port: '8080' });
 
 And with that done let's define our robot. We'll make a class to contain this
 robot's logic:
 
-    class MyRobot
+    var MyRobot = (function() {
+      function MyRobot() {}
 
 To let the API know what commands this robot has, we need to provide a `commands` array.
 
-      commands: ["relax"]
+      MyRobot.prototype.commands = ["relax"];
 
 And with that done, we can now define the method. The result of this method will
 be returned to the HTTP client as part of a JSON object.
 
-      relax: ->
-        "#{this.name} says relax"
+      MyRobot.prototype.relax = function() {
+        return "" + this.name + " says relax";
+      };
 
 Since we don't really care what actual work this robot does, but need to keep it
 busy, we'll just tell it to print it's name every second.
 
-      work: (me) ->
-        every 1.seconds(), ->
-          console.log me.name
+      MyRobot.prototype.work = function(me) {
+        every((1).seconds(), function() {
+          console.log(me.name);
+        });
+      };
+
+      return MyRobot;
+
+    })();
 
 And with that all done, we can now instantiate our robot:
 
-    robot = new MyRobot
+    var robot = new MyRobot;
 
 Now we can just give it a name and send it off to Cylon.
 
-    robot.name = "frankie"
-    Cylon.robot robot
+    robot.name = "frankie";
+    Cylon.robot(robot);
 
 And now that all the pieces are in place, we can start up Cylon:
 
-    Cylon.start()
+    Cylon.start();
 
 Now the robot will print it's name to the console, and Cylon will serve an API
 to `localhost:8080`. Check it out!.
