@@ -1,5 +1,3 @@
-var ConwayRobot, Cylon, Green, Red, bot, bots, robot, _i, _len;
-
 var Cylon = require('../..');
 
 var bots = [
@@ -22,30 +20,26 @@ var ConwayRobot = (function() {
     this.contacts = 0;
     this.age = 0;
     this.life();
-    return this.move();
+    this.move();
   };
 
   ConwayRobot.prototype.move = function() {
-    return this.sphero.roll(60, Math.floor(Math.random() * 360));
+    this.sphero.roll(60, Math.floor(Math.random() * 360));
   };
 
   ConwayRobot.prototype.life = function() {
     this.alive = true;
-    return this.sphero.setRGB(Green);
+    this.sphero.setRGB(Green);
   };
 
   ConwayRobot.prototype.death = function() {
     this.alive = false;
     this.sphero.setRGB(Red);
-    return this.sphero.stop();
+    this.sphero.stop();
   };
 
   ConwayRobot.prototype.enoughContacts = function() {
-    if (this.contacts >= 2 && this.contacts < 7) {
-      return true;
-    } else {
-      return false;
-    }
+    return (this.contacts >= 2 && this.contacts < 7);
   };
 
   ConwayRobot.prototype.birthday = function() {
@@ -58,22 +52,23 @@ var ConwayRobot = (function() {
     } else {
       this.death();
     }
-    return this.contacts = 0;
+
+    this.contacts = 0;
   };
 
   ConwayRobot.prototype.work = function(me) {
     me.born();
 
     me.sphero.on('collision', function() {
-      return this.contacts += 1;
+      this.contacts += 1;
     });
 
     every((3).seconds(), function() {
-      if (me.alive != null) { return me.move(); }
+      if (me.alive != null) { me.move(); }
     });
 
-    return every((10).seconds(), function() {
-      if (me.alive != null) { return me.birthday(); }
+    every((10).seconds(), function() {
+      if (me.alive != null) { me.birthday(); }
     });
   };
 
