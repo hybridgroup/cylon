@@ -54,10 +54,11 @@ class Example
 
   def initialize(filename)
     @path = filename
+    @repo = filename[/\.examples\/([a-zA-Z-]+)\//, 1]
     @content = File.read(filename)
-    @name = filename[/\/([0-9A-Za-z_-]+)\.litcoffee$/, 1]
+    @name = filename[/\/([0-9A-Za-z_-]+)\.markdown$/, 1]
     @title = @content[/\A#\s+(.+)$/, 1]
-    @js_content = File.read(filename.gsub(/litcoffee$/, 'js'))
+    @js_content = File.read(filename.gsub(/markdown$/, 'js'))
   end
 
   def literate_page
@@ -65,7 +66,7 @@ class Example
 
     # mark all indented blocks for syntax highlighting
     body.gsub! INDENTED_CODE_REGEX do |code|
-      code.gsub! /\A\n+/, "\n\n    :::ruby\n"
+      code.gsub! /\A\n+/, "\n\n    :::javascript\n"
       code
     end
 
@@ -86,6 +87,7 @@ title: Cylon.JS Example - #{@title}
 page_title: "Example: #{@title}"
 author: The Hybrid Group
 description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/#{@repo}/tree/master/examples/#{@name}' target='_blank'>View In Repo</a>"
 ---
 
 :markdown
@@ -110,6 +112,7 @@ title: Cylon.JS Example - #{@title}
 page_title: "Example: #{@title}"
 author: The Hybrid Group
 description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/#{@repo}/tree/master/examples/#{@name}' target='_blank'>View In Repo</a>"
 ---
 
 .example
@@ -162,7 +165,7 @@ end
 def extract_examples_from_repo(path)
   examples = []
 
-  Dir.glob(path + "/examples/**/*.litcoffee") do |file|
+  Dir.glob(path + "/examples/**/*.markdown") do |file|
     examples << Example.new(file)
   end
 
@@ -180,17 +183,17 @@ def add_examples_to_site(name, examples)
   adaptor_name = name[/^cylon-(.*)$/, 1]
   name = adaptor_name if adaptor_name
 
-  create_litcoffee_pages name, examples
+  create_markdown_pages name, examples
   create_js_pages name, examples
   create_index_partial name, examples
 end
 
-def create_litcoffee_pages(name, examples)
+def create_markdown_pages(name, examples)
   examples.each do |example|
     puts "  - #{example.title}"
 
     examples_dir = "/source/documentation/examples"
-    filename = "/#{name}/coffee/#{example.name}.html.haml"
+    filename = "/#{name}/annotated/#{example.name}.html.haml"
 
     path = File.expand_path(__dir__ + "/../" + examples_dir + filename)
     content = example.literate_page
@@ -234,8 +237,8 @@ def create_index_partial(name, examples)
   examples.each do |example|
     string = "%tr\n"
     string << "  %td #{example.title}\n"
-    string << "  %td.links= link_to 'JavaScript', '/documentation/examples/#{name}/js/#{example.name}'\n"
-    string << "  %td.links= link_to 'CoffeeScript', '/documentation/examples/#{name}/coffee/#{example.name}'\n"
+    string << "  %td.links= link_to 'Code', '/documentation/examples/#{name}/js/#{example.name}'\n"
+    string << "  %td.links= link_to 'Annotated Code', '/documentation/examples/#{name}/annotated/#{example.name}'\n"
     string.gsub! /^(.+)/, '    \1'
     partial << string
   end
