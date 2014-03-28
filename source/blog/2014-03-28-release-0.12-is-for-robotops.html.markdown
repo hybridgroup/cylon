@@ -1,0 +1,16 @@
+---
+page_title_show: true
+title: Release 0.12 Is For RobotOps
+page_title: Blog
+date: 2014-03-28
+tags: robots
+author: Ron Evans
+---
+
+The sun never sets (or rises maybe?) here on Team <a href="http://cylonjs.com/" target="blank">Cylon.js</a>. After many more lessons learned from you, our dear users, and especially after our great experience at <a href="http://cylonjs.com/blog/2014/03/24/making-waves-at-makerland/" target="blank">Makerland</a>, we've just released version 0.12 of our JavaScript framework for open source robotics, physical computing, and the Internet of Things. 
+
+You might have heard us talking about "RobotOps" or "DevOps for Robotics". We've completely rewritten our Command Line Interface (CLI), and it is now better faster and stronger than ever. First of all, we've put it into its <a href="https://github.com/hybridgroup/cylon-cli" target="blank">own node module and repository</a>. This makes it easier to use the Cylon.js CLI tools to flash Firmata on a few dozen Arduinos, scan serial interfaces for bluetooth devices, and much more. Even if you are not using Cylon.js for anything else, this is really useful!
+
+We've also greatly improved our examples, with both plain and annotated versions. Many of the demos that we show in our road tour can be found here, and lots more besides. We think Cylon.js os the most powerful, flexible, and easy to use JavaScript framework for Node.js robotics. Our examples help show how you can be using it right now.
+
+Please make sure to follow us on Twitter at [@cylonjs](http://twitter.com/cylonjs) for the latest updates. We hope you find our new release 0.12 really useful for helping handle your robotOps needs, and making cool and useful things!
