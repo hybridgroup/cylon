@@ -8,7 +8,7 @@ This example involves two Spheros, so before you start make sure you have the
 
 First, let's import Cylon:
 
-    Cylon = require('../..');
+    var Cylon = require('../..');
 
 Next up, we'll configure the API Cylon will serve, telling it to serve on port
 `8080`.
