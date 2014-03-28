@@ -218,6 +218,8 @@ Thank you!
 
 ## Release History
 
+Version 0.12.0 - Extraction of CLI tooling
+
 Version 0.11.2 - bugfixes
 
 Version 0.11.0 - Refactor into pure JavaScript
