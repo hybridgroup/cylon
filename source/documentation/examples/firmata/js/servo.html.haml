@@ -5,6 +5,7 @@ title: Cylon.JS Example - Servo
 page_title: "Example: Servo"
 author: The Hybrid Group
 description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-firmata/tree/master/examples/servo' target='_blank'>View In Repo</a>"
 ---
 
 .example
@@ -20,7 +21,7 @@ description: A Cylon.JS code example
             var angle = 30;
             var increment = 40;
 
-            every(1..seconds(), function() {
+            every((1).seconds(), function() {
               angle += increment;
               my.servo.angle(angle);
 

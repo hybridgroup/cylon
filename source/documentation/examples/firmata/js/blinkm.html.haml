@@ -5,6 +5,7 @@ title: Cylon.JS Example - BlinkM
 page_title: "Example: BlinkM"
 author: The Hybrid Group
 description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-firmata/tree/master/examples/blinkm' target='_blank'>View In Repo</a>"
 ---
 
 .example
@@ -30,7 +31,7 @@ description: A Cylon.JS code example
                 console.log("Starting Color: ", data)
               });
 
-              every((2).second(), function() {
+              every((2).seconds(), function() {
                 my.blinkm.getRGBColor(function(data){
                   console.log("Current Color: ", data);
                 });

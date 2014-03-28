@@ -1,0 +1,64 @@
+---
+layout: documentation
+page_title_show: true
+title: Cylon.JS Example - LED Brightness
+page_title: "Example: LED Brightness"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-firmata/tree/master/examples/led_brightness' target='_blank'>View In Repo</a>"
+---
+
+:markdown
+  # LED Brightness
+
+  For this example, we'll be using an LED on an Arduino board, and modifying it's
+  brightness to make it fade in and out. Before we start, make sure you've got the
+  `cylon-arduino` module installed.
+
+  Let's start by importing Cylon:
+
+      :::javascript
+      var Cylon = require('cylon');
+
+  Once we've got that, we can start defining our robot:
+
+      :::javascript
+      Cylon.robot({
+
+  We'll be using an Arduino, and communicating over the Firmata protocol. As well,
+  we'll let our robot know about the LED we'll be modifying, on pin #3 of the
+  Arduino.
+
+      :::javascript
+        connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+        device: { name: 'led', driver: 'led', pin: 3 },
+
+  Next up, we'll define our robot's work:
+
+      :::javascript
+        work: function(my) {
+
+  We'll set some variables here: brightness will represent the LED's brightness,
+  from 1-255, and 'fade' will be the brightness change on each tick.
+
+      :::javascript
+          var brightness = 0,
+              fade = 5;
+
+  Every 50 milliseconds, we'll be incrementing the brightness by `fade`'s value,
+  setting the LED to that brightness, and reversing `fade`'s value if brightness
+  hits 0 or 255.
+
+      :::javascript
+          every(0.05.seconds(), function() {
+            brightness += fade;
+            my.led.brightness(brightness);
+            if ((brightness === 0) || (brightness === 255)) { fade = -fade; }
+          });
+        }
+
+  And with that done, we can now start our robot.
+
+      :::javascript
+      }).start();
+

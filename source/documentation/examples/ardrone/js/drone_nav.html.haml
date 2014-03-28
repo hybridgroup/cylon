@@ -5,6 +5,7 @@ title: Cylon.JS Example - Drone Navigation
 page_title: "Example: Drone Navigation"
 author: The Hybrid Group
 description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-ardrone/tree/master/examples/drone_nav' target='_blank'>View In Repo</a>"
 ---
 
 .example
@@ -21,7 +22,7 @@ description: A Cylon.JS code example
 
           work: function(my) {
             my.drone.config('general:navdata_demo', 'TRUE');
-            my.nav.on('update', function(data) { console.log(data); });
+            my.nav.on('update', console.log);
           }
         }).start();
 

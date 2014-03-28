@@ -5,6 +5,7 @@ title: Cylon.JS Example - Motor
 page_title: "Example: Motor"
 author: The Hybrid Group
 description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-firmata/tree/master/examples/motor' target='_blank'>View In Repo</a>"
 ---
 
 .example
@@ -17,8 +18,8 @@ description: A Cylon.JS code example
           device: { name: 'motor', driver: 'motor', pin: 3 },
 
           work: function(my) {
-            var speed = 0;
-            var increment = 5;
+            var speed = 0,
+                increment = 5;
 
             every(0.05.seconds(), function() {
               speed += increment;
