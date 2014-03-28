@@ -42,7 +42,6 @@ lcd_driver: true
 %section.how_to#HowToUse
   %h2 How To Use
   %p This small program lets you push a button on the arduino board to turn a LED on or off. In less than 10 lines of code using Cylon.js.
-  %h3 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -57,25 +56,6 @@ lcd_driver: true
           }
         }).start();
 
-  %h3 CoffeeScript
-  :markdown
-        :::ruby
-        Cylon = require('cylon')
-
-        Cylon.robot
-          connection:
-            name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
-
-          devices:
-            [
-              {name: 'led', driver: 'led', pin: 13},
-              {name: 'button', driver: 'button', pin: 2}
-            ]
-
-          work: (my) ->
-            my.button.on 'push', -> my.led.toggle()
-
-          .start()
 
 %section.how-to#HowToConnect
   %h2 How To Connect

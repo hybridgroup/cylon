@@ -27,7 +27,6 @@ force_platform: true
   
 %section.how_to#HowToConnect
   %h2 How To Connect
-  %h3 JavaScript
   -#here we need the connection and device in JS(coming soon ..)  *************
   :markdown
         :::javascript
@@ -44,25 +43,10 @@ force_platform: true
           }
           ...
 
-  %h3 CoffeeScript
-  -#here we need the connection and device in Coffee(coming soon ..)  *************
-  :markdown
-        :::ruby
-          Cylon = require('cylon')
-
-          Cylon.robot
-            connection:
-              name: 'sfcon', adaptor: 'force'
-
-            device:
-              name: 'salesforce', driver: 'force'
-           ...
-  
 
 %section.how-to#HowToUse
   %h2 How To Use
   %p This example uses the sphero with cylonjs-force
-  %h3 JavaScript
   -# here the code of the example in JS(coming soon..)*************
   :markdown
         :::javascript
@@ -95,41 +79,6 @@ force_platform: true
             return me.salesforce.push('SpheroController', 'POST', toSend);
           }
         }).start();
-
-  %h3 CoffeeScript
-  -# here the code of the example in Coffee(coming soon..)*************
-  
-  :markdown
-        :::ruby
-
-        Cylon = require('cylon')
-
-        Cylon.robot
-          connection:
-            name: 'sfcon',
-            adaptor: 'force',
-            sfuser: process.env.SF_USERNAME,
-            sfpass: process.env.SF_SECURITY_TOKEN,
-            orgCreds: {
-              clientId: process.env.SF_CLIENT_ID,
-              clientSecret: process.env.SF_CLIENT_SECRET,
-              redirectUri: 'http://localhost:3000/oauth/_callback'
-            }
-
-          device:
-            name: 'salesforce', driver: 'force'
-
-          work: (me) ->
-
-            me.salesforce.on('start', () ->
-              me.salesforce.subscribe('/topic/SpheroMsgOutbound', (data) ->
-                Logger.info "Sphero: \#{ data.sobject.Sphero_Name__c }, data Content: \#{ data.sobject.Content__c }, SM_Id: \#{ data.sobject.Id }"
-              )
-            )
-
-            toSend = "{ \"identifier\" :\"\#{ me.name }\", \"msg\": \"\#{ 'Salesforce Bot #2' }\" }"
-            me.salesforce.push('SpheroController', 'POST', toSend)
-        .start()
 
 %section.public-methods
   .commands-api#Commands

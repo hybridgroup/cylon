@@ -20,7 +20,6 @@ crazyflie_platform: true
   %h2 How To Connect
   %p
     Communication with the Crazyflie's flight control interface takes place using a 2.4GHz radio connection. The Crazyflie is controlled from your computer using a Crazyradio, which is a custom USB 2.4GHz radio device. 
-  %h3 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -30,25 +29,11 @@ crazyflie_platform: true
           device: {name: 'drone', driver: 'crazyflie'},
         ...
 
-  %h3 CoffeeScript
-  :markdown
-        :::ruby
-        Cylon = require 'cylon'
-
-        Cylon.robot
-          connection:
-            name: 'crazyflie', adaptor: 'crazyflie'
-
-          device:
-            name: 'drone', driver: 'crazyflie'
-        ...
-
 
 %section.how-to#HowToUse
   %h2 How To Use
   %h3 Examples
   %p This small program causes the Crazyflie to takeoff for 10 seconds.
-  %h3 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -70,27 +55,6 @@ crazyflie_platform: true
           }
         }).start();
 
-  %h3 CoffeeScript
-  :markdown
-        :::ruby
-        Cylon = require 'cylon'
-
-        Cylon.robot
-          connection:
-            name: 'crazyflie', adaptor: 'crazyflie', port: "radio://1/10/250KPS"
-
-          device:
-            name: 'drone', driver: 'crazyflie'
-
-          work: (my) ->
-            my.drone.on 'start', ->
-              my.drone.takeoff()
-              after 10.seconds(), ->
-                my.drone.land()
-              after 15.seconds(), ->
-                my.drone.stop()
-
-        .start()
 
 %section.public-methods
   .commands-api#Commands

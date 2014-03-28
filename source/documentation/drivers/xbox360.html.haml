@@ -17,7 +17,6 @@ joystick_platform: true
   
 %section.how-to#HowToConnect
   %h2 How To Connect
-  %h3 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -27,23 +26,10 @@ joystick_platform: true
           device: {name: 'joystick', driver: 'xbox360'}
         ..
 
-  %h3 CoffeeScript
-  :markdown
-        :::ruby
-        Cylon = require 'cylon'
-
-        Cylon.robot
-          connection:
-            name: 'joystick', adaptor: 'joystick'
-
-          device:
-            name: 'joystick', driver: 'xbox360'
-        ...
 
 %section.how-to#HowToUse
   %h2 How To Use
   %p Example receiving button events from XBox360 controller joystick.
-  %h3 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -58,24 +44,6 @@ joystick_platform: true
             });
           }
         }).start();
-
-  %h3 CoffeeScript
-  :markdown
-        :::ruby
-        Cylon = require 'cylon'
-
-        Cylon.robot
-          connection:
-            name: 'joystick', adaptor: 'joystick'
-
-          device:
-            name: 'joystick', driver: 'xbox360'
-
-          work: (my) ->
-            my.joystick.on "left:move", (position) ->
-              console.log position
-
-        .start()
 
 %section.public-methods
   .commands-api#Commands

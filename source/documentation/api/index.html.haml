@@ -16,17 +16,13 @@ page_title_show: true
 
     To run your script, use one of the following commands:
 
-    #### JavaScript
+   
 
         node robotfilename.js
 
-    #### CoffeeScript
-
-        coffee robotfilename.coffee
 
     Both of the following code examples will spin up an API server.
 
-    #### JavaScript
         :::javascript
         var Cylon = require('..');
 
@@ -40,19 +36,8 @@ page_title_show: true
 
         Cylon.start();
 
-    #### CoffeeScript
 
-        :::javascript
-        Cylon = require('cylon')
-
-        Cylon.robot
-          work: ->
-            every 1.second(), ->
-              console.log "Hello, human!"
-
-        Cylon.start()
-
-    `Cylon.start()` automatically starts up the API server.
+    `Cylon.start();` automatically starts up the API server.
 
     ## How To Configure
 

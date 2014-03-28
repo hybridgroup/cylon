@@ -50,7 +50,6 @@ crazyflie_flight_driver: true
 %section.how-to#HowToUse
   %h2 How To Use
   %p This small program causes the Crazyflie to takeoff for 10 seconds.
-  %h3 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -72,28 +71,6 @@ crazyflie_flight_driver: true
           }
         }).start();
 
-  %h3 CoffeeScript
-  :markdown
-        :::ruby
-        Cylon = require 'cylon'
-
-        Cylon.robot
-          connection:
-            name: 'crazyflie', adaptor: 'crazyflie', port: "radio://1/10/250KPS"
-
-          device:
-            name: 'drone', driver: 'crazyflie'
-
-          work: (my) ->
-            my.drone.on 'start', ->
-              my.drone.takeoff()
-              after 10.seconds(), ->
-                my.drone.land()
-              after 15.seconds(), ->
-                my.drone.stop()
-
-        .start()
-  
   %h2 Hover Mode
   :markdown
         :::javascript

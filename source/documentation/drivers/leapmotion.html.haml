@@ -19,7 +19,6 @@ leapmotion_platform: true
   
 %section.how-to#HowToConnect
   %h2 How To Connect
-  %h3 JavaScript
   :markdown
         :::javascript
         Cylon = require('cylon');
@@ -35,21 +34,11 @@ leapmotion_platform: true
             driver: 'leapmotion'
           },
          ... 
-  %h3 CoffeeScript
-  :markdown
-        :::ruby
-        Cylon = require 'cylon'
-
-        Cylon.robot
-          connection: { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' }
-          device: { name: 'leapmotion', driver: 'leapmotion' }
-        ...
 
 
 %section.how-to#HowToUse
   %h2 How To Use
   %p Example receiving hand gesture events from a Leap Motion.
-  %h3 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -73,20 +62,6 @@ leapmotion_platform: true
           }
         }).start();
 
-  %h3 CoffeeScript
-  :markdown
-        :::ruby
-        Cylon = require 'cylon'
-
-        Cylon.robot
-          connection: { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' }
-          device: { name: 'leapmotion', driver: 'leapmotion' }
-
-          work: (my) ->
-            my.leapmotion.on 'hand', (payload) ->
-              Logger.info payload.toString()
-
-        .start()
 
 %section.public-methods
   .commands-api#Events

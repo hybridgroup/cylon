@@ -21,7 +21,6 @@ rapiro_platform: true
   %p
     Connecting to the Rapiro uses a simple serial port protocol. You will need to know which serial port the Rapiro's board is connected to.
 
-    %h3 JavaScript
     :markdown
           :::javascript
           var Cylon = require('cylon');
@@ -32,25 +31,12 @@ rapiro_platform: true
             device: {name: 'rapiro', driver: 'rapiro'},
           ...
 
-    %h3 CoffeeScript
-    :markdown
-          :::ruby
-          Cylon = require 'cylon'
-
-          Cylon.robot
-            connection:
-              name: 'rapiro', adaptor: 'rapiro', port: '/dev/ttyACM0'
-
-            device:
-              name: 'rapiro', driver: 'rapiro'
-            ...
 
 %section.how-to#HowToUse
   %h2 How To Use
   %p 
     Example of a simple program that makes the Rapiro's LED blink.
 
-    %h3 JavaScript
     :markdown
           :::javascript
 
@@ -73,27 +59,6 @@ rapiro_platform: true
               });
             }
 
-    %h3 CoffeeScript
-    :markdown
-          :::ruby
-
-          Cylon = require 'cylon'
-
-          Cylon.robot
-            connection: { name: 'rapiro', adaptor: 'rapiro', port: '/dev/ttyUSB0' }
-            device: {name: 'rapiro', driver: 'rapiro'}
-
-            work: (my) ->
-              on = false
-              every 1.second(), ->
-                if on is true
-                  my.rapiro.led(0, 0, 0)
-                  on = false
-                else
-                  my.rapiro.led(255, 0, 0)
-                  on = true
-
-          .start();
 
 %section.public-methods
   .commands-api#Commands

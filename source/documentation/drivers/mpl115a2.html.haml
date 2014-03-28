@@ -20,7 +20,6 @@ raspberry_platform: true
    
 %section.how_to#HowToConnect
   %h2 How To Connect
-  %h3 JavaScript
   :markdown
         :::javascript
 
@@ -32,32 +31,11 @@ raspberry_platform: true
           device: {name: 'mpl115a2', driver: 'mpl115a2', pin: 2},
           ...
 
-  %h3 CoffeeScript
-  :markdown
-        :::ruby
-        Cylon = require 'cylon'
-
-        Cylon.robot
-          connection:
-            name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
-
-          device:
-            name: 'mpl115a2', driver: 'mpl115a2', pin: 2
-          ...
-
-
 %section.how-to#HowToUse
   %h2 How To Use
-  %p 
 
-  %h3 JavaScript    
   :markdown
         :::javascript
-        coming soon
-
-  %h3 CoffeeScript
-  :markdown
-        :::ruby
         coming soon
 
 %section.public-methods

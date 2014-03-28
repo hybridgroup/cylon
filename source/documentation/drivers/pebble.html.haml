@@ -18,7 +18,6 @@ pebble_platform: true
   
 %section.how-to#HowToConnect
   %h2 How To Connect
-  %h3 JavaScript
   :markdown
         :::javascript
         Cylon = require('cylon');
@@ -32,24 +31,11 @@ pebble_platform: true
             name: 'pebble',
             driver: 'pebble'
           },
-  %h3 CoffeeScript
-  :markdown
-        :::ruby
-        Cylon = require('cylon')
-
-        robot = 
-          connection:
-            name: 'pebble', adaptor: 'pebble'
-
-          device:
-            name: 'pebble', driver: 'pebble'
         ...
-
-
+  
 %section.how-to#HowToUse
   %h2 How To Use
   %h3 Example receiving message queue from a Pebble smart watch.
-  %h3 JavaScript
   :markdown
         :::javascript
         Cylon = require('cylon');
@@ -97,33 +83,6 @@ pebble_platform: true
 
         Cylon.start();
 
-  %h3 CoffeeScript
-  :markdown
-        :::ruby
-        Cylon = require('cylon')
-
-        Cylon.api host: '0.0.0.0', port: '8080'
-
-        class PebbleRobot
-          connection:
-            name: 'pebble', adaptor: 'pebble'
-
-          device:
-            name: 'pebble', driver: 'pebble'
-
-          work: (self) ->
-            c = 100
-            every 1.second(), ->
-              c++
-              str = "c: \#{c}"
-              self.pebble.message_queue().push(str)
-              console.log(self.pebble.last_message())
-
-        bot = new PebbleRobot()
-        bot.name = 'pebble'
-        Cylon.robot bot
-
-        Cylon.start()
 
 %section.public-methods
   .commands-api#Commands

@@ -18,7 +18,6 @@ keyboard_platform: true
   
 %section.how-to#HowToConnect
   %h2 How To Connect
-  %h3 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -28,20 +27,9 @@ keyboard_platform: true
           device: {name: 'keyboard', driver: 'keyboard'}
         ...
 
-  %h3 CoffeeScript
-  :markdown
-        :::ruby
-        Cylon = require 'cylon'
-
-        Cylon.robot
-          device: { name: 'keyboard', driver: 'keyboard' }
-          connection: { name: 'keyboard', adaptor: 'keyboard' }
-        ...
-
 %section.how-to#HowToUse
   %h2 How To Use
   %p Example receiving button events from a generic joystick.
-  %h3 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -56,20 +44,7 @@ keyboard_platform: true
             });
           }
         }).start();
-  %h3 CoffeeScript
-  :markdown
-        :::ruby
-        Cylon = require 'cylon'
-
-        Cylon.robot
-          device: { name: 'keyboard', driver: 'keyboard' }
-          connection: { name: 'keyboard', adaptor: 'keyboard' }
-          work: (my) ->
-            my.keyboard.on 'a', (key) ->
-              console.log "A PRESSED!"
-
-        .start()
-
+ 
 %section.public-methods
   .commands-api#Events
     = partial "/documentation/drivers/partials/keyboard/events"

@@ -35,7 +35,6 @@ sphero_driver: true
   %h2 How To Use
   %p Example of a simple program that makes the Sphero roll.
 
-  %h3 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -50,24 +49,6 @@ sphero_driver: true
             });
           }
         }).start();
-
-  %h3 CoffeeScript
-  :markdown
-        :::ruby
-        Cylon = require('cylon')
-
-        Cylon.robot
-          connection:
-            name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'
-
-          device:
-            name: 'sphero', driver: 'sphero'
-
-          work: (my) ->
-            every 1.second(), ->
-              my.sphero.roll 60, Math.floor(Math.random() * 360)
-
-        .start()
 
 %section.how-to#HowToConnect
   %h2 How To Connect
@@ -101,15 +82,21 @@ sphero_driver: true
 
   %h3 Windows
 
-  %p You should be able to simply pair your Sphero using your normal system tray applet for Bluetooth, and then connect to the COM port that is bound to the device, such as `COM3`.
+  %p  
+    :markdown
+      You should be able to simply pair your Sphero using your normal system tray applet for Bluetooth, and then connect to the COM port that is bound to the device, such as `COM3`.
 
   %h2 How To Calibrate Sphero
   
   %p You might want to calibrate the orientation of the Sphero so that it is pointed 'forward'. There are 2 functions that have been added to the Sphero driver to help with this.
 
-  %p Call `startCalibration()` to put the Sphero into 'calibration mode' by turning on the tail LED and turning off the auto-stablization. You can now manually turn the Sphero to so the tail LED is pointed to the rear of the direction in which you want the Sphero to go.
+  %p 
+    :markdown
+      Call `startCalibration()` to put the Sphero into 'calibration mode' by turning on the tail LED and turning off the auto-stablization. You can now manually turn the Sphero to so the tail LED is pointed to the rear of the direction in which you want the Sphero to go.
 
-  %p Call `finishCalibration()` to turn off 'calibration mode' by turning off the tail LED and turning back on the auto-stablization. Whichever direction that the tail LED was pointed, is now the rear direction for the Sphero.
+  %p 
+    :markdown 
+      Call `finishCalibration()` to turn off 'calibration mode' by turning off the tail LED and turning back on the auto-stablization. Whichever direction that the tail LED was pointed, is now the rear direction for the Sphero.
 
 %section.drivers#Drivers
   %h2 Drivers

@@ -36,7 +36,6 @@ leapmotion_driver: true
 %section.how-to#HowToUse
   %h2 How To Use
   %p This small program uses a Leap Motion to detect the user's hand position
-  %h3 JavaScript
   :markdown
         :::javascript
         Cylon = require('cylon');
@@ -58,20 +57,6 @@ leapmotion_driver: true
           }
         }).start();
 
-  %h3 CoffeeScript
-  :markdown
-        :::ruby
-        Cylon = require 'cylon'
-
-        Cylon.robot
-          connection: { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' }
-          device: { name: 'leapmotion', driver: 'leapmotion' }
-
-          work: (my) ->
-            my.leapmotion.on 'hand', (hand) ->
-              Logger.info "\#{hand.palmX},\#{hand.palmY},\#{hand.palmZ}"
-
-        .start()
 
 %section.how-to#HowToConnect
   %h2 How To Connect

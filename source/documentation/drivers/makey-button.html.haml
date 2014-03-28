@@ -24,7 +24,6 @@ spark_platform: true
 
 %section.how_to#HowToConnect
   %h2 How To Connect
-  %h3 JavaScript
   :markdown
         :::javascript
 
@@ -36,25 +35,8 @@ spark_platform: true
           device: {name: 'makey-button', driver: 'makey-button', pin: 2},
           ...
 
-  %h3 CoffeeScript
-  :markdown
-        :::ruby
-        Cylon = require 'cylon'
-
-        Cylon.robot
-          connection:
-            name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
-
-          device:
-            name: 'makey-button', driver: 'makey-button', pin: 2
-          ...
-
-
 %section.how-to#HowToUse
   %h2 How To Use
-  %p 
-
-  %h3 JavaScript    
   :markdown
         :::javascript
 
@@ -71,23 +53,6 @@ spark_platform: true
             });
           }
         }).start();
-
-  %h3 CoffeeScript
-  :markdown
-        :::ruby
-        Cylon = require 'cylon'
-
-        Cylon.robot
-          connection:
-            name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
-
-          device:
-            name: 'button', driver: 'makey-button', pin: 2
-
-          work: (my) ->
-            my.button.on 'push', -> Logger.info "Button pushed!"
-
-        .start()
 
 %section.public-methods
   .commands-api#Commands

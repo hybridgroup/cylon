@@ -36,7 +36,6 @@ makey_driver: true
 %section.how-to#HowToUse
   %h2 How To Use
   %p This small program causes an LED and a button.
-  %h3 JavaScript
   :markdown
         :::javascript
         Cylon = require('cylon');
@@ -64,25 +63,6 @@ makey_driver: true
           }
         }).start();
 
-  %h3 CoffeeScript
-  :markdown
-        :::ruby
-        Cylon = require('cylon')
-
-        Cylon.robot
-          connection:
-            name: 'beaglebone', adaptor: 'beaglebone'
-
-          devices:
-            [
-              {name: 'led', driver: 'led', pin: 'P9_12'},
-              {name: 'button', driver: 'button', pin: 'P9_14'}
-            ]
-
-          work: (my) ->
-            my.button.on 'push', () -> my.led.toggle()
-
-        .start()
 
 %section.drivers#Drivers
   %h2 Drivers

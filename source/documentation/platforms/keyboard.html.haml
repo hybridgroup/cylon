@@ -32,9 +32,7 @@ keyboard_driver: true
 
 %section.how-to#HowToUse
   %h2 How To Use
-  
-  %h3 JavaScript
-  
+    
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -50,20 +48,6 @@ keyboard_driver: true
           }
         }).start();
   
-  %h3 CoffeeScript
-
-  :markdown
-        :::ruby
-        Cylon = require 'cylon'
-
-        Cylon.robot
-          device: { name: 'keyboard', driver: 'keyboard' }
-          connection: { name: 'keyboard', adaptor: 'keyboard' }
-          work: (my) ->
-            my.keyboard.on 'a', (key) ->
-              console.log "A PRESSED!"
-
-        .start()
 
 %section.drivers#Drivers
   %h2 Drivers

@@ -21,7 +21,6 @@ ardrone_platform: true
   %p
     Communication with the ARDrone's flight control interface takes place using a WiFi connection. The ARDrone is a WiFi access point, so it normally can be the only device you connect to, without some additional effort to reconfigure the drone itself to put it into infrastructure mode.
   
-  %h3 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -32,18 +31,6 @@ ardrone_platform: true
           device: {name: 'ardrone', driver: 'ardrone'},
         ...
 
-  %h3 CoffeeScript
-  :markdown
-        :::ruby
-        Cylon = require 'cylon'
-
-        Cylon.robot
-          connection:
-            name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1'
-
-          device:
-            name: 'ardrone', driver: 'ardrone'
-        ...
 
 
 %section.how-to#HowToUse
@@ -51,7 +38,6 @@ ardrone_platform: true
   %p 
     This example controls an ARDrone to take off, and then land.
 
-  %h3 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -72,28 +58,6 @@ ardrone_platform: true
           }
         }).start();
 
-  %h3 CoffeeScript
-  :markdown
-        :::ruby
-        Cylon = require 'cylon'
-
-        Cylon.robot
-          connection:
-            name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1'
-
-          device:
-            name: 'drone', driver: 'ardrone'
-
-          work: (my) ->
-            my.drone.takeoff()
-
-            after 10.seconds(), ->
-              my.drone.land()
-
-            after 15.seconds(), ->
-              my.drone.stop()
-
-        .start()
 
 %section.public-methods
   .commands-api#Commands

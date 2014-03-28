@@ -37,7 +37,6 @@ motor_driver: true
 %section.how-to#HowToUse
   %h2 How To Use
   %p This small program causes an LED to blink.
-  %h3 JavaScript
   :markdown
         :::javascript
         Cylon = require('..');
@@ -58,23 +57,6 @@ motor_driver: true
             });
           }
         }).start();
-
-  %h3 CoffeeScript
-  :markdown
-        :::ruby
-        Cylon = require('cylon')
-
-        Cylon.robot
-          connection:
-            name: 'raspi', adaptor: 'raspi'
-
-          device:
-            name: 'led', driver: 'led', pin: 11
-
-          work: (my) ->
-            every 1.second(), -> my.led.toggle()
-
-        .start()
   
 
 %section.how-to#HowToConnect

@@ -23,7 +23,6 @@ digispark_platform: true
   %h2 How To Connect
   :markdown
     Install the module with `npm install cylon-i2c`
-  %h3 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -33,23 +32,10 @@ digispark_platform: true
           device: {name: 'led', driver: 'led', pin: 13},
           ...
 
-  %h3 CoffeeScript
-  :markdown
-        :::ruby
-        Cylon = require('cylon')
-
-        Cylon.robot
-          connection:
-            name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
-
-          device:
-            name: 'led', driver: 'led', pin: 13
-          ...
 
 %section.how-to#HowToUse
   %h2 How To Use
   %p Example using a BlinkM.
-  %h3 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -63,23 +49,6 @@ digispark_platform: true
           }
         }).start();
 
-  %h3 CoffeeScript
-  :markdown
-        :::ruby
-        Cylon = require('cylon')
-
-        Cylon.robot
-          connection:
-            name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
-
-          device:
-            name: 'led', driver: 'led', pin: 13
-
-          work: (my) ->
-            # we do our thing here
-            every 1.second(), -> my.led.toggle()
-
-        .start()
 
 %section.public-methods
   .commands-api#Commands

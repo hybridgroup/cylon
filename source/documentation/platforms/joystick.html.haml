@@ -38,7 +38,6 @@ dualshock_driver: true
 %section.how-to#HowToUse
   %h2 How To Use
   %p This small program receives joystick and button press events from an XBox 360 game controller.
-  %h3 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -54,23 +53,6 @@ dualshock_driver: true
           }
         }).start();
 
-  %h3 CoffeeScript
-  :markdown
-        :::ruby
-        Cylon = require 'cylon'
-
-        Cylon.robot
-          connection:
-            name: 'joystick', adaptor: 'joystick'
-
-          device:
-            name: 'joystick', driver: 'xbox360'
-
-          work: (my) ->
-            my.joystick.on "left:move", (position) ->
-              console.log position
-
-        .start()
 
 %section.how-to#HowToConnect
   %h2 How To Connect
