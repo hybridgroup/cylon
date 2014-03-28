@@ -5,6 +5,7 @@ title: Cylon.JS Example - Blink
 page_title: "Example: Blink"
 author: The Hybrid Group
 description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-firmata/tree/master/examples/blink' target='_blank'>View In Repo</a>"
 ---
 
 .example
@@ -17,7 +18,7 @@ description: A Cylon.JS code example
           device: {name: 'led', driver: 'led', pin: 13},
 
           work: function(my) {
-            every((1).seconds(), function() {my.led.toggle()});
+            every((1).second(), my.led.toggle);
           }
         }).start();
 

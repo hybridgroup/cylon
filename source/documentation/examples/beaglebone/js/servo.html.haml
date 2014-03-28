@@ -5,6 +5,7 @@ title: Cylon.JS Example - Beaglebone Servo
 page_title: "Example: Beaglebone Servo"
 author: The Hybrid Group
 description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-beaglebone/tree/master/examples/servo' target='_blank'>View In Repo</a>"
 ---
 
 .example
@@ -17,17 +18,31 @@ description: A Cylon.JS code example
           device: { name: 'servo', driver: 'servo', pin: 'P9_14' },
 
           work: function(my) {
-            var angle, increment;
-            angle = 30;
-            increment = 40;
-            every(1..seconds(), function() {
+            // Be carefull with your servo angles or you might DAMAGE the servo!
+            // Cylon uses a 50hz/s (20ms period) frequency and a Duty Cycle
+            // of 0.5ms to 2.5ms to control the servo angle movement.
+            //
+            // This means:
+            // 1. 0.5ms == 0 degrees
+            // 2. 1.5ms == 90 degrees
+            // 3. 2.5ms == 180 degrees
+            // (It is usually safe to start with a 90 degree angle, 1.5ms duty
+            // cycle in most servos)
+            //
+            // Please review your servo datasheet to make sure of correct
+            // angle range and the Freq/MS Duty cycle it requires.
+            // If more servo support is needed leave us a comment, raise an
+            // issue or help us add more support.
+
+            var angle = 30;
+            var increment = 40;
+
+            every((1).seconds(), function() {
               angle += increment;
               my.servo.angle(angle);
-              console.log("Current Angle: " + (my.servo.currentAngle()));
+              console.log("Current Angle: " + my.servo.currentAngle());
 
-              if ((angle === 30) || (angle === 150)) {
-                increment = -increment;
-              }
+              if ((angle === 30) || (angle === 150)) { increment = -increment; }
             });
           }
         }).start();

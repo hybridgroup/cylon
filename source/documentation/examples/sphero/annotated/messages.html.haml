@@ -1,0 +1,95 @@
+---
+layout: documentation
+page_title_show: true
+title: Cylon.JS Example - Sphero Messages
+page_title: "Example: Sphero Messages"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-sphero/tree/master/examples/messages' target='_blank'>View In Repo</a>"
+---
+
+:markdown
+  # Sphero Messages
+
+  For this Cylon example, we're going to hook up to a Sphero, and respond to
+  a number of events the Sphero adaptor is capable of emitting. Before we get
+  started, make sure you've got the `cylon-sphero` module installed.
+
+  To get started, let's import the Cylon module:
+
+      :::javascript
+      var Cylon = require('cylon');
+
+  With that set up, we can start defining our robot:
+
+      :::javascript
+      Cylon.robot({
+
+  As with other Sphero examples, we'll have one connection and one device, both
+  the same Sphero.
+
+      :::javascript
+        connection: { name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0' },
+        device: { name: 'sphero', driver: 'sphero' },
+
+  And now we can start defining our robot's work.
+
+      :::javascript
+        work: function(me) {
+
+  When the Sphero's connected, we want to set up collision detection and change
+  it's color.
+
+      :::javascript
+          me.sphero.on('connect', function() {
+            console.log("Setting up Collision Detection...");
+            me.sphero.detectCollisions();
+            me.sphero.setRGB(0x00FF00);
+          });
+
+  When the Sphero emits an 'update' event, we want to log the data it's provided
+  to us:
+
+      :::javascript
+          me.sphero.on('update', function(data) {
+            console.log("Update event eventName: " + data + " ");
+            console.log("Update event args: ");
+            console.log(data);
+          });
+
+  Similarly, when we get a message from the Sphero, we want to log the data, but
+  we'll also change it's color while we're at it.
+
+      :::javascript
+          me.sphero.on('message', function(data) {
+            me.sphero.setRGB(0x0000FF);
+            console.log("Message:");
+            console.log(data);
+          });
+
+  In the event of a collision, we want to change the color of the Sphero again, as
+  well as logging the data provided by the collision event.
+
+      :::javascript
+          me.sphero.on('collision', function(data) {
+            me.sphero.setRGB(0xFF0000);
+            console.log("Collision:");
+            console.log(data);
+          });
+
+  And, last but not least, when we get a notification event we want to record it's
+  data and change the color.
+
+      :::javascript
+          me.sphero.on('notification', function(data) {
+            me.sphero.setRGB(0xFF0000);
+            console.log("Notification:");
+            console.log(data);
+          });
+        }
+
+  And with all that done, we can finally start the robot.
+
+      :::javascript
+      }).start();
+

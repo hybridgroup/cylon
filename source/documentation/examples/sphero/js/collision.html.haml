@@ -5,6 +5,7 @@ title: Cylon.JS Example - Sphero Collisions
 page_title: "Example: Sphero Collisions"
 author: The Hybrid Group
 description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-sphero/tree/master/examples/collision' target='_blank'>View In Repo</a>"
 ---
 
 .example
@@ -17,8 +18,8 @@ description: A Cylon.JS code example
           device: { name: 'sphero', driver: 'sphero' },
 
           work: function(me) {
-            var color = 0x00FF00;
-            var bitFilter = 0xFFFF00;
+            var color = 0x00FF00,
+                bitFilter = 0xFFFF00;
 
             me.sphero.on('connect', function() {
               console.log("Setting up Collision Detection...");

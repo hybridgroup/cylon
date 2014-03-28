@@ -1,0 +1,50 @@
+---
+layout: documentation
+page_title_show: true
+title: Cylon.JS Example - MPL115A2
+page_title: "Example: MPL115A2"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-firmata/tree/master/examples/mpl115a2' target='_blank'>View In Repo</a>"
+---
+
+:markdown
+  # MPL115A2
+
+  First, let's import Cylon:
+
+      :::javascript
+      var Cylon = require('cylon');
+
+  Now that we have Cylon imported, we can start defining our robot
+
+      :::javascript
+      Cylon.robot({
+
+  Let's define the connections and devices:
+
+      :::javascript
+        connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+        device: { name: 'mpl115a2', driver: 'mpl115a2' },
+
+  Now that Cylon knows about the necessary hardware we're going to be using, we'll
+  tell it what work we want to do:
+
+      :::javascript
+        work: function(my) {
+          my.mpl115a2.on('start', function() {
+            my.mpl115a2.getTemperature(function(data) {
+              var temp = data['temperature'],
+                  pressure = data['pressure'];
+
+              Logger.info("temperature " + temp  + " pressure " + pressure);
+            });
+          });
+        }
+
+  Now that our robot knows what work to do, and the work it will be doing that
+  hardware with, we can start it:
+
+      :::javascript
+      }).start();
+

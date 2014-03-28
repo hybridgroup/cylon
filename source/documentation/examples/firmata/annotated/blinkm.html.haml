@@ -1,0 +1,89 @@
+---
+layout: documentation
+page_title_show: true
+title: Cylon.JS Example - BlinkM
+page_title: "Example: BlinkM"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-firmata/tree/master/examples/blinkm' target='_blank'>View In Repo</a>"
+---
+
+:markdown
+  # BlinkM
+
+  For this example, we're going to use the `cylon-firmata` module to blink a light
+  using BlinkM.
+
+  Before we start, make sure you've got the `cylon-firmata` module installed.
+
+  First, let's import Cylon:
+
+      :::javascript
+      var Cylon = require('cylon');
+
+  With Cylon imported, we can start defining our robot.
+
+      :::javascript
+      Cylon.robot({
+
+  Our robot will be using an Arduino, and communicating over the Firmata protocol
+
+      :::javascript
+        connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+
+  And we'll have one device, a BlinkM led.
+
+      :::javascript
+        device: { name: 'blinkm', driver: 'blinkm' },
+
+  We'll now set up our robot's work.
+
+      :::javascript
+        work: function(my) {
+
+  When the BlinkM sends the 'start' event, we'll set up our events
+
+      :::javascript
+          my.blinkm.on('start', function() {
+
+  We stop the default BlinkM's light script
+
+      :::javascript
+            my.blinkm.stopScript();
+
+  We'll request the BlinkM's version, and print that to the console
+
+      :::javascript
+            my.blinkm.getFirmware(function(version) {
+              Logger.info("Started BlinkM version " + version);
+            });
+
+  By default, we'll turn the LED off
+
+      :::javascript
+            my.blinkm.goToRGB(0,0,0);
+
+  We print the default starting color (in this case 0,0,0 since we turned the led off)
+
+      :::javascript
+            my.blinkm.getRGBColor(function(data){
+              console.log("Starting Color: ", data)
+            });
+
+  Now, every 2 seconds, we'll change the LED color to a random value:
+
+      :::javascript
+            every((2).seconds(), function() {
+              my.blinkm.getRGBColor(function(data){
+                console.log("Current Color: ", data);
+              });
+              my.blinkm.fadeToRandomRGB(128, 128, 128);
+            });
+          });
+        }
+
+  Now that our robot knows what to do, let's get started:
+
+      :::javascript
+      }).start();
+
