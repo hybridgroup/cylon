@@ -1,0 +1,81 @@
+---
+title: Neurosky with Cylon.js
+author: The Hybrid Group
+page_title: Neurosky
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-neurosky' target='_blank' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-neurosky/issues' target='_blank'>Issues</a>"
+layout: documentation
+page_title_show: true
+subnav_platform: true
+
+neurosky_driver: true
+---
+
+%section.intro
+  = image_tag "/images/devices/neurosky.jpg", class: "display"
+  .info-intro
+    %p NeuroSky delivers fully integrated, single chip EEG biosensors. NeuroSky enables its partners and developers to bring their brainwave application ideas to market with the shortest amount of time, and lowest end consumer price.
+
+    %p
+      For more info about the Neurosky platform click
+      = succeed "." do
+        = link_to "here", "http://neurosky.com/products-markets/eeg-biosensors/hardware/", target: :blank
+  .clear
+  
+%section.how-to#HowToInstall
+  %h2 How To Install
+  %p Installing cylon.js with Neurosky support is pretty easy.
+  :markdown
+        :::javascript
+        npm install cylon-neurosky
+
+%section.how-to#HowToUse
+  %h2 How To Use
+  %p This small program let you connect the Neurosky an load data.
+    
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection:
+            {name: 'neurosky', adaptor: 'neurosky', port: '/dev/rfcomm0'},
+
+          device:
+            {name: 'headset', driver: 'neurosky'},
+
+          work: function(my) {
+            my.headset.on('packet', function(data) {
+              Logger.info(data);
+            });
+          }
+        });
+
+        Cylon.start();
+  
+
+%section.how-to#HowToConnect
+  %h2 How To Connect
+  %p This example let you connect with the Neurosky.
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'neurosky', adaptor: 'neurosky' },
+          device: {name: 'neurosky', driver: 'neurosky'},
+
+          work: function(my) {
+            // provide an example of your module here
+          }
+        }).start();
+
+  %p More Info coming soon.
+
+%section.drivers#Drivers
+  %h2 Drivers
+  %p Available drivers for the keyboard platform are listed below. 
+
+  .hardware
+    .devices
+      // TODO: Update drivers list at the top of the page.
+      = partial "documentation/partials/devices_neurosky_drivers"
