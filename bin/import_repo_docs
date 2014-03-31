@@ -37,6 +37,7 @@ else
     https://github.com/hybridgroup/cylon-sphero.git
     https://github.com/hybridgroup/cylon-tessel-example.git
     https://github.com/hybridgroup/cylon-tessel.git
+    https://github.com/hybridgroup/cylon-neurosky.git
   )
 end
 
