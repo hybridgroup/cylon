@@ -55,21 +55,34 @@ neurosky_driver: true
 
 %section.how-to#HowToConnect
   %h2 How To Connect
-  %p This example let you connect with the Neurosky.
+  %h3 OSX
+
+  %p In order to allow Cylon.js running on your Mac to access the Mindwave, go to "Bluetooth > Open Bluetooth Preferences > Sharing Setup" and make sure that "Bluetooth Sharing" is checked.
+
+  %h3  Ubuntu
+
+  %p Connecting to the Mindwave from Ubuntu or any other Linux-based OS can be done entirely from the command line using CylonJS CLI commands. Here are the steps.
+
+  %p Find the address of the Mindwave, by using:
   :markdown
-        :::javascript
-        var Cylon = require('cylon');
+        :::bash
+        cylon scan bluetooth
 
-        Cylon.robot({
-          connection: { name: 'neurosky', adaptor: 'neurosky' },
-          device: {name: 'neurosky', driver: 'neurosky'},
+  %p Pair to Mindwave using this command (substituting the actual address of your Mindwave):
+  :markdown
+        :::bash
+        cylon bluetooth pair <address>
 
-          work: function(my) {
-            // provide an example of your module here
-          }
-        }).start();
+  %p Connect to the Mindwave using this command (substituting the actual address of your Mindwave):
+  :markdown
+        :::bash
+        cylon bluetooth connect <address>
+  
 
-  %p More Info coming soon.
+  %h3  Windows
+
+  %p You should be able to pair your Mindwave using your normal system tray applet for Bluetooth, and then connect to the COM port that is bound to the device, such as `COM3`.
+
 
 %section.drivers#Drivers
   %h2 Drivers
