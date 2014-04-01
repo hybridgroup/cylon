@@ -1,6 +1,18 @@
 :markdown
   #Events
 
+  ## on('analogRead', function(value){ });
+
+  The analogRead event callback gets passed a value that represents an integer value that represents the analog read from the sensor.
+
+  ## on('range', function(range){ });
+
+  Gets passed a 'range' which represents distance, in inches, between the sensor and the reflective object.
+
+  ## on('rangecm', function(range){ });
+
+  Gets passed a 'range' which represents distance, in centimeters, between the sensor and the reflective object.
+
   ## start 
 
   Sent when the device has been started and is ready to use.

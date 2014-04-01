@@ -13,6 +13,11 @@
   %a.device{href: "/documentation/drivers/continuous-servo", title: "Continuous Servo"}
     %img{src: "/images/devices/continuous-servo.jpg"}
 
+-if current_page.data.ir_range_finder == true  
+  /// Continuos Servo
+  %a.device{href: "/documentation/drivers/ir-range-finder", title: "Continuous Servo"}
+    %img{src: "/images/devices/ir-range-finder.jpg"}
+
 -if current_page.data.led_driver == true
   /// LED
   %a.device{href: "/documentation/drivers/led", title: "LED"}
