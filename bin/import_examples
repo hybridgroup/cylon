@@ -1,5 +1,10 @@
 #!/usr/bin/env ruby
 
+# Change project details here
+Project = Struct
+  .new(:name, :pretty_name, :language, :extension)
+  .new('cylon', 'Cylon.JS', 'javascript', 'js')
+
 require 'bundler'
 Bundler.setup
 
@@ -48,33 +53,47 @@ INDENTED_CODE_REGEX = / # Match a MARKDOWN CODE section.
   (?=\r?\n)?           # CODE folowed by blank line.
   /x
 
-
 class Example
-  attr_reader :path, :title, :name, :content, :js_content
+  attr_reader :path, :name, :content, :markdown_content
 
   def initialize(filename)
     @path = filename
     @repo = filename[/\.examples\/([a-zA-Z-]+)\//, 1]
+    @name = File.basename(filename, ".#{Project.extension}")
     @content = File.read(filename)
-    @name = filename[/\/([0-9A-Za-z_-]+)\.markdown$/, 1]
-    @title = @content[/\A#\s+(.+)$/, 1]
-    @js_content = File.read(filename.gsub(/markdown$/, 'js'))
+
+    if File.exists? filename.gsub(/#{Project.extension}$/, 'markdown')
+      @markdown_content = File.read(filename.gsub(/#{Project.extension}$/, 'markdown'))
+    end
   end
 
-  def literate_page
-    body = @content.dup
+  def markdown_version?
+    !@markdown_content.nil?
+  end
+
+  def title
+    if markdown_version?
+      @markdown_content[/\A#\s+(.+)$/, 1]
+    else
+      @name
+    end
+  end
+
+  def annotated_page
+    return unless markdown_version?
+    body = @markdown_content.dup
 
     # mark all indented blocks for syntax highlighting
     body.gsub! INDENTED_CODE_REGEX do |code|
-      code.gsub! /\A\n+/, "\n\n    :::javascript\n"
+      code.gsub! /\A\n+/, "\n\n    :::#{Project.language}\n"
       code
     end
 
     # escape interpolation as to not confuse HAML
     body.gsub! /(#\{)/, "\\\#{"
 
-    # change import path for cylon
-    body.gsub! /\.\.\/\.\./, 'cylon'
+    # change import path
+    body.gsub! /\.\.\/\.\./, Project.name
 
     # indent by two spaces
     body.gsub! /^(.+)/, '  \1'
@@ -83,10 +102,10 @@ class Example
 ---
 layout: documentation
 page_title_show: true
-title: Cylon.JS Example - #{@title}
-page_title: "Example: #{@title}"
+title: "#{Project.pretty_name} Example - #{title}"
+page_title: "Example: #{title}"
 author: The Hybrid Group
-description: A Cylon.JS code example
+description: A #{Project.pretty_name} code example
 page_subtitle: "<a href='https://github.com/hybridgroup/#{@repo}/tree/master/examples/#{@name}' target='_blank'>View In Repo</a>"
 ---
 
@@ -95,11 +114,11 @@ page_subtitle: "<a href='https://github.com/hybridgroup/#{@repo}/tree/master/exa
 EOS
   end
 
-  def js_page
-    body = @js_content.dup
+  def code_page
+    body = @content.dup
 
-    # change import path for cylon
-    body.gsub! /\.\.\/\.\./, 'cylon'
+    # change import path
+    body.gsub! /\.\.\/\.\./, Project.name
 
     # indent by eight spaces
     body.gsub! /^(.+)/, '        \1'
@@ -108,16 +127,16 @@ EOS
 ---
 layout: documentation
 page_title_show: true
-title: Cylon.JS Example - #{@title}
-page_title: "Example: #{@title}"
+title: "#{Project.pretty_name} Example - #{title}"
+page_title: "Example: #{title}"
 author: The Hybrid Group
-description: A Cylon.JS code example
+description: A #{Project.pretty_name} code example
 page_subtitle: "<a href='https://github.com/hybridgroup/#{@repo}/tree/master/examples/#{@name}' target='_blank'>View In Repo</a>"
 ---
 
 .example
   :markdown
-        :::javascript
+        :::#{Project.language}
 #{body}
 EOS
 
@@ -165,53 +184,57 @@ end
 def extract_examples_from_repo(path)
   examples = []
 
-  Dir.glob(path + "/examples/**/*.markdown") do |file|
+  Dir.glob(path + "/examples/*/*.#{Project.extension}") do |file|
     examples << Example.new(file)
   end
 
   examples
 end
 
-def remove_existing_examples(name)
+def remove_existing_examples
   puts "  - Removing existing example pages."
-  path = File.expand_path("#{__dir__}/../source/documentation/examples/#{name}")
-  FileUtils.rm_rf path
+  Dir.glob("#{__dir__}/../source/documentation/examples/*") do |path|
+    if File.directory?(path)
+      FileUtils.rm_rf(path)
+    end
+  end
 end
 
 def add_examples_to_site(name, examples)
   return unless examples.any?
-  adaptor_name = name[/^cylon-(.*)$/, 1]
+  adaptor_name = name[/^#{Project.name}-(.*)$/, 1]
   name = adaptor_name if adaptor_name
 
-  create_markdown_pages name, examples
-  create_js_pages name, examples
+  create_code_pages name, examples
+  create_annotated_pages name, examples
   create_index_partial name, examples
 end
 
-def create_markdown_pages(name, examples)
+def create_annotated_pages(name, examples)
   examples.each do |example|
+    next unless example.markdown_version?
     puts "  - #{example.title}"
 
     examples_dir = "/source/documentation/examples"
     filename = "/#{name}/annotated/#{example.name}.html.haml"
 
     path = File.expand_path(__dir__ + "/../" + examples_dir + filename)
-    content = example.literate_page
+    content = example.annotated_page
 
     FileUtils.mkdir_p(File.dirname(path)) unless File.directory?(path)
     File.write(path, content)
   end
 end
 
-def create_js_pages(name, examples)
+def create_code_pages(name, examples)
   examples.each do |example|
     puts "  - #{example.title}"
 
     examples_dir = "/source/documentation/examples"
-    filename = "/#{name}/js/#{example.name}.html.haml"
+    filename = "/#{name}/#{Project.extension}/#{example.name}.html.haml"
 
     path = File.expand_path(__dir__ + "/../" + examples_dir + filename)
-    content = example.js_page
+    content = example.code_page
 
     FileUtils.mkdir_p(File.dirname(path)) unless File.directory?(path)
     File.write(path, content)
@@ -237,8 +260,12 @@ def create_index_partial(name, examples)
   examples.each do |example|
     string = "%tr\n"
     string << "  %td #{example.title}\n"
-    string << "  %td.links= link_to 'Code', '/documentation/examples/#{name}/js/#{example.name}'\n"
-    string << "  %td.links= link_to 'Annotated Code', '/documentation/examples/#{name}/annotated/#{example.name}'\n"
+    string << "  %td.links= link_to 'Code', '/documentation/examples/#{name}/#{Project.extension}/#{example.name}'\n"
+    if example.markdown_version?
+      string << "  %td.links= link_to 'Annotated Code', '/documentation/examples/#{name}/annotated/#{example.name}'\n"
+    else
+      string << "  %td.links\n"
+    end
     string.gsub! /^(.+)/, '    \1'
     partial << string
   end
@@ -247,14 +274,14 @@ def create_index_partial(name, examples)
 end
 
 def main
+  remove_existing_examples
+
   REPOS.each do |repo|
     name = get_repo_name(repo)
 
     puts "Importing examples from #{name}."
 
     path, repo = clone_repo repo
-
-    remove_existing_examples(name)
 
     examples = extract_examples_from_repo path
 
