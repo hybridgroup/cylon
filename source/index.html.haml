@@ -175,6 +175,14 @@ getting_started_button: "<a href='/documentation/getting-started' class='cta'> G
       
     %li
       .title
+        = link_to "Neurosky", "http://store.neurosky.com/products/mindwave-mobile", target:"_blank" 
+      %a{:href => "/documentation/platforms/neurosky"} 
+        %img{src: "/images/devices/neurosky.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-neurosky", target:"_blank"
+
+    %li
+      .title
         = link_to "OpenCV", "http://opencv.org/", target:"_blank" 
       %a{:href => "/documentation/platforms/opencv"} 
         %img{src: "/images/devices/opencv.jpg", style: "width: 90%"}  
