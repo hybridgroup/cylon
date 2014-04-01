@@ -1,0 +1,37 @@
+---
+layout: documentation
+page_title_show: true
+title: "Cylon.JS Example - rapiro_servo"
+page_title: "Example: rapiro_servo"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon/tree/master/examples/rapiro_servo' target='_blank'>View In Repo</a>"
+---
+
+.example
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyUSB0' },
+          devices: [{name: 'led', driver: 'led', pin: 17},
+                    { name: 'servo', driver: 'servo', pin: 2, range: { min: 30, max: 150 } }],
+
+          work: function(my) {
+            my.led.turnOn();
+
+            var angle = 30;
+            var increment = 40;
+
+            every(1..seconds(), function() {
+              angle += increment;
+              my.servo.angle(angle);
+
+              console.log("Current Angle: " + (my.servo.currentAngle()));
+
+              if ((angle === 30) || (angle === 150)) { increment = -increment; }
+            });
+          }
+        }).start();
+
