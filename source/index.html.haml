@@ -18,19 +18,25 @@ getting_started_button: "<a href='/documentation/getting-started' class='cta'> G
 
 ---
 
-%h2 About
+.index-content
+  %h2 About
+
+  %p Cylon.js is a JavaScript framework for robotics, physical computing, and the Internet of Things using Node.js.
+
+  %p It provides a simple, yet powerful way to create solutions that incorporate multiple, different hardware devices at the same time.
+
+  %p 
+    Want to use Ruby on robots? Check out our sister project Artoo
+    =link_to "(http://artoo.io)", "http://artoo.io", target: :blank
+
+  %p 
+    Want to use the Go programming language to power your robots? Check out our sister project Gobot 
+    =link_to "(http://gobot.io)", "http://gobot.io", target: :blank      
   
-%p Cylon.js is a JavaScript framework for robotics, physical computing, and the Internet of Things using Node.js.
+.aside.right
+  = current_page.data.img_character
 
-%p It provides a simple, yet powerful way to create solutions that incorporate multiple, different hardware devices at the same time.
-
-%p 
-  Want to use Ruby on robots? Check out our sister project Artoo
-  =link_to "(http://artoo.io)", "http://artoo.io", target: :blank
-
-%p 
-  Want to use the Go programming language to power your robots? Check out our sister project Gobot 
-  =link_to "(http://gobot.io)", "http://gobot.io", target: :blank
+.clear
 
 %h2 Meet The Code
 
@@ -108,6 +114,9 @@ getting_started_button: "<a href='/documentation/getting-started' class='cta'> G
 %h2 Platform Support
 %div
   %p Cylon.js has a extensible system for connecting to hardware devices. The following robotics and physical computing system, and software platforms, are currently supported:
+  
+  %p.important-title 
+    17 Platforms
 
   %ul.homepage-platform
     %li
@@ -172,7 +181,7 @@ getting_started_button: "<a href='/documentation/getting-started' class='cta'> G
         %img{src: "/images/devices/leap_motion.jpg", style: "width: 90%"}  
       .repo
         = link_to "repo", "https://github.com/hybridgroup/cylon-leapmotion", target:"_blank"
-      
+
     %li
       .title
         = link_to "Neurosky", "http://store.neurosky.com/products/mindwave-mobile", target:"_blank" 
@@ -248,7 +257,12 @@ getting_started_button: "<a href='/documentation/getting-started' class='cta'> G
   .clear
 
 %p Support for many devices that use General Purpose Input/Output (GPIO) have a shared set of drivers provided using the cylon-gpio module:
-%h4= link_to "GPIO", "https://en.wikipedia.org/wiki/General_Purpose_Input/Output" , target:"_blank" 
+
+%p.important-title 
+  9
+  = link_to "GPIO", "https://en.wikipedia.org/wiki/General_Purpose_Input/Output" , target:"_blank" 
+  drivers
+
 %ul.homepage-platform
   %li
     .title
@@ -317,7 +331,11 @@ getting_started_button: "<a href='/documentation/getting-started' class='cta'> G
 
 %p Support for devices that use Inter-Integrated Circuit (I2C) have a shared set of drivers provded using the cylon-i2c module:
 
-%h4= link_to "I2C", "https://en.wikipedia.org/wiki/I%C2%B2C", target:"_blank" 
+%p.important-title 
+  4
+  = link_to "I2C", "https://en.wikipedia.org/wiki/I%C2%B2C", target:"_blank" 
+  drivers
+
 %ul.homepage-platform 
   %li  
     .title
@@ -349,6 +367,11 @@ getting_started_button: "<a href='/documentation/getting-started' class='cta'> G
     .repo
       = link_to "repo", "https://github.com/hybridgroup/cylon-i2c", target:"_blank"  
   .clear
+
+%p.important-title 
+  See more drivers 
+  = link_to "here", "/documentation/drivers"
+
 %p More platforms and drivers are coming soon...
 
 %h2 CLI
