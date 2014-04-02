@@ -1,0 +1,105 @@
+---
+title: Cylon.js - BMP180 Driver
+author: The Hybrid Group
+page_title: BMP180
+page_subtitle: Driver
+layout: documentation
+page_title_show: true
+subnav_driver: true
+subnav_circuit_driver: true
+
+arduino_platform: true
+beaglebone_platform: true
+raspberry_platform: true
+spark_platform: true
+digispark_platform: true
+---
+%section.intro
+  = image_tag "/images/devices/bmp180.jpg", class: "display"
+  .info-intro
+    %p
+      This is a breakout board for the Bosch BMP180 high-precision, low-power digital barometer. The BMP180 offers a pressure measuring range of 300 to 1100 hPa with an accuracy down to 0.02 hPa in advanced resolution mode. It's based on piezo-resistive technology for high accuracy, ruggedness and long term stability. 
+    
+  .clear
+  
+%section.how_to#HowToConnect
+  %h2 How To Connect
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+            connection:{name:'raspi', adaptor:'raspi'},
+            device:{name:'bmp180', driver:'bmp180'},
+        ...
+
+          
+%section.how-to#HowToUse
+  %h2 How To Use
+  %p 
+    This example let you get the temperature, pressure and altitude.
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+            connection:{name:'raspi', adaptor:'raspi'},
+            device:{name:'bmp180', driver:'bmp180'},
+
+            work: function(my) {
+                my.bmp180.getTemperature(function(err, val) {
+                    if(err) console.log(err);
+                    else {
+                        console.log("getTemperature call:");
+                        console.log("\tTemp: " + val.temp + " C");
+                    }
+                });
+
+                after(1..seconds(), function() {
+                    my.bmp180.getPressure(1, function(err, val) {
+                        if(err) console.log(err);
+                        else {
+                            console.log("getPressure call:");
+                            console.log("\tTemperature: " + val.temp + " C");
+                            console.log("\tPressure: " + val.press + " Pa");
+                        }
+                    });
+                });
+
+                after(2..seconds(), function() {
+                    my.bmp180.getAltitude(1, null, function(err, val) {
+                        if(err) console.log(err);
+                        else {
+                            console.log("getAltitude call:");
+                            console.log("\tTemperature: " + val.temp + " C");
+                            console.log("\tPressure: " + val.press + " Pa");
+                            console.log("\tAltitude: " + val.alt + " m");
+                        }
+                    });
+                });
+
+            }
+        }).start();
+
+
+%section.public-methods
+  .commands-api#Commands
+    = partial "/documentation/drivers/partials/i2c/commands_bmp180"
+  .commands-api#Events
+    = partial "/documentation/drivers/partials/i2c/events_bmp180"
+
+%section.circuit#Circuit
+  %h2 Circuit 
+  .description-circuit
+    %p
+  .image-circuit
+    %p  coming soon
+    -#%img{:src => "/documentation/drivers/breadboards/gpio/analog_sensor_bb.png", :alt => ""}/ 
+  .clear 
+  
+    
+%section.compatibility.hardware#Compatability
+  %h2 Compatibility
+  =# TODO: Update platform list with all that work with this driver in Cylon.js.
+  .devices
+    = partial "documentation/partials/devices_platforms"
