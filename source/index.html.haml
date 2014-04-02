@@ -332,7 +332,7 @@ getting_started_button: "<a href='/documentation/getting-started' class='cta'> G
 %p Support for devices that use Inter-Integrated Circuit (I2C) have a shared set of drivers provded using the cylon-i2c module:
 
 %p.important-title 
-  4
+  5
   = link_to "I2C", "https://en.wikipedia.org/wiki/I%C2%B2C", target:"_blank" 
   drivers
 
@@ -342,6 +342,14 @@ getting_started_button: "<a href='/documentation/getting-started' class='cta'> G
       = link_to "BlinkM", "/documentation/drivers/blinkm" 
     %a{:href => "/documentation/drivers/blinkm"} 
       %img{src: "/images/devices/blinkm.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-i2c", target:"_blank"
+
+  %li  
+    .title
+      = link_to "BMP180", "/documentation/drivers/bmp180" 
+    %a{:href => "/documentation/drivers/bmp180"} 
+      %img{src: "/images/devices/bmp180.jpg", style: "width: 90%"}  
     .repo
       = link_to "repo", "https://github.com/hybridgroup/cylon-i2c", target:"_blank"
 
