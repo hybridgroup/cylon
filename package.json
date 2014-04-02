@@ -1,6 +1,6 @@
 {
   "name": "cylon",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "main": "lib/cylon.js",
   "description": "A JavaScript robotics framework using Node.js",
   "homepage": "http://cylonjs.com",
