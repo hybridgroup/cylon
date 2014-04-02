@@ -5,19 +5,21 @@ page_title: Crazyflie
 page_subtitle: Driver
 layout: documentation
 page_title_show: true
+subnav_driver: true
 
 crazyflie_platform: true
 ---
 %section.intro
   =image_tag "/images/devices/crazyflie-flight.jpg", class: "display"
-  %p
-    Allows user to send flight control commands to a Crazyflie micro-quadcopter. Flight control commands are those used to tell the Crazyflie to take off, land, and or any number of other autonomous flight manuvers.
-
-%section.how-to
-  %h2 How to establish a connection and setup the driver
+  .info-intro
+    %p
+      Allows user to send flight control commands to a Crazyflie micro-quadcopter. Flight control commands are those used to tell the Crazyflie to take off, land, and or any number of other autonomous flight manuvers.
+  .clear
+  
+%section.how-to#HowToConnect
+  %h2 How To Connect
   %p
     Communication with the Crazyflie's flight control interface takes place using a 2.4GHz radio connection. The Crazyflie is controlled from your computer using a Crazyradio, which is a custom USB 2.4GHz radio device. 
-  %h3 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -27,25 +29,11 @@ crazyflie_platform: true
           device: {name: 'drone', driver: 'crazyflie'},
         ...
 
-  %h3 CoffeeScript
-  :markdown
-        :::javascript
-        Cylon = require 'cylon'
 
-        Cylon.robot
-          connection:
-            name: 'crazyflie', adaptor: 'crazyflie'
-
-          device:
-            name: 'drone', driver: 'crazyflie'
-        ...
-
-
-%section.how-to
-  %h2 How to use
+%section.how-to#HowToUse
+  %h2 How To Use
   %h3 Examples
   %p This small program causes the Crazyflie to takeoff for 10 seconds.
-  %h3 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -67,35 +55,14 @@ crazyflie_platform: true
           }
         }).start();
 
-  %h3 CoffeeScript
-  :markdown
-        :::javascript
-        Cylon = require 'cylon'
-
-        Cylon.robot
-          connection:
-            name: 'crazyflie', adaptor: 'crazyflie', port: "radio://1/10/250KPS"
-
-          device:
-            name: 'drone', driver: 'crazyflie'
-
-          work: (my) ->
-            my.drone.on 'start', ->
-              my.drone.takeoff()
-              after 10.seconds(), ->
-                my.drone.land()
-              after 15.seconds(), ->
-                my.drone.stop()
-
-        .start()
 
 %section.public-methods
-  .commands_api
+  .commands-api#Commands
     = partial "/documentation/drivers/partials/crazyflie/commands"
-  .commands_api
+  .commands-api#Events
     = partial "/documentation/drivers/partials/crazyflie/events"
 
-%section.compatability.hardware
-  %h2 Works with:
+%section.compatability.hardware#Compatability
+  %h2 Compatibility
   .devices
     = partial "documentation/partials/devices_platforms"

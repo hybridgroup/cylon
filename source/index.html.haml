@@ -5,11 +5,11 @@ catcher: true
 
 title: CylonJS
 author: The Hybrid Group
-description: Cylon.js is a JavaScript framework for robotics and physical computing using Node.js. It provides a simple, but powerful DSL (domain-specific language) for robots and physical computing.
+description: Cylon.js is a JavaScript framework for robotics, physical computing, and the Internet of Things using Node.js. It provides a simple, yet powerful way to create solutions that incorporate multiple, different hardware devices at the same time.
 layout: home
 
 hero_title: "JavaScript Robotics, By Your Command"
-hero_subtitle: "Cylon.js makes robotics  <a href='/documentation/getting-started'>Simple</a> and <a href='/documentation/platforms'>Extensible</a>"
+hero_subtitle: "Next generation robotics framework with support for <a href='#platforms'>17 different platforms</a>"
 
 img_character: "<img src='images/elements/cylon.png'>"
 
@@ -18,47 +18,49 @@ getting_started_button: "<a href='/documentation/getting-started' class='cta'> G
 
 ---
 
-%h2 About
+.index-content
+  %h2 About
+
+  %p Cylon.js is a JavaScript framework for robotics, physical computing, and the Internet of Things using Node.js.
+
+  %p It provides a simple, yet powerful way to create solutions that incorporate multiple, different hardware devices at the same time.
+
+  %p 
+    Want to use Ruby on robots? Check out our sister project Artoo
+    =link_to "(http://artoo.io)", "http://artoo.io", target: :blank
+
+  %p 
+    Want to use the Go programming language to power your robots? Check out our sister project Gobot 
+    =link_to "(http://gobot.io)", "http://gobot.io", target: :blank      
   
-%p Cylon.js is a JavaScript framework for robotics and physical computing using Node.js.
+.aside.right
+  = current_page.data.img_character
 
-%p It provides a simple, yet powerful way to create solutions that incorporate multiple, different hardware devices at the same time.
-
-%p 
-  Want to use Ruby on robots? Check out our sister project Artoo
-  =link_to "(http://artoo.io)", "http://artoo.io", target: :blank
-
-%p 
-  Want to use the Go programming language to power your robots? Check out our sister project Gobot 
-  =link_to "(http://gobot.io)", "http://gobot.io", target: :blank
+.clear
 
 %h2 Meet The Code
 
-%p Cylon.js’s makes commanding robots incredibly simple and fun.
+%p Cylon.js makes it incredibly simple and fun to command robots.
 
-%p All you need to get started is the `cylon` module:
+%p All you need to get started is the `cylon` npm module:
 
 :markdown
       :::javascript
       npm install cylon
 
-%p Then install modules for whatever hardware support you want to use from your robot. For the example below, an Arduino using the Firmata protocol:
+%p Then install modules for whatever hardware support you want to use from your robot.
+
+%h2 Examples
+
+%h3 Arduino:
+
+%p Install modules for whatever hardware support you want to use from your robot. For the example below, an Arduino using the Firmata protocol:
 
 :markdown
       :::javascript
       npm install cylon-firmata
 
-%h2 Examples
-%p The example below connects to an Arduino, and every second turns the LED either on, or off.
-:markdown
-  The example requires that the Arduino has the Firmata sketch installed, and that it is connected on the port `/dev/ttyACM0`. You need to install Firmata on your Arduino, and to change the `port` parameter to match the port that your system is actually using.
-%p Make sure to upload the "Standard Firmata" sketch or an equivalent Firmata sketch to your Arduino first. Without Firmata running on the Arduino, the Aruduino board can't communicate with Cylon running on your computer. You can do this by running these 2 commands:
-:markdown
-      :::javascript
-      cylon firmata install
-      cylon firmata upload ttyACM0
-%p Now here is the Cylon.js code:
-%h3 JavaScript:
+%p This example connects to an Arduino, and every second turns the LED either on, or off.
 :markdown
       :::javascript
       var Cylon = require("cylon");
@@ -77,157 +79,327 @@ getting_started_button: "<a href='/documentation/getting-started' class='cta'> G
 
       // start working
       robot.start();
-%h3 CoffeeScript:
+
+%h3 ARDrone:
+
+%p For this example, you need to install the module with the adaptor and drivers for the ARDrone from Parrot:
+
 :markdown
       :::javascript
-      Cylon = require "cylon"
+      npm install cylon-ardrone
 
-      # Initialize the robot
-      robot = Cylon.robot
-        connection:
-          name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
+%p This example connects to an ARDrone, and then simply takes off, and lands.
+:markdown
+      :::javascript
+      var Cylon = require('cylon');
 
-        device:
-          name: 'led', driver: 'led', pin: 13
+      Cylon.robot({
+        connection: { name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1' },
+        device: { name: 'drone', driver: 'ardrone' },
 
-        work: (my) ->
-          # we do our thing here
-          every 1.second(), -> my.led.toggle()
+        work: function(my) {
+          my.drone.takeoff();
+          after(10..seconds(), function() { my.drone.land(); });
+          after(15..seconds(), function() { my.drone.stop(); });
+        }
+      }).start();
 
-      robot.start()
-  
-  Note: before running any examples in the `examples/` dir from source, make sure to compile using `grunt coffee` first.
-
-%h2 Getting Started
+%h3 More Examples
 
 %p 
-  Ready to build JavaScript robots with Cylon.js? 
-  = link_to "Get Started Here!", "/documentation/getting-started"
+  We've got 
+  = link_to "lots more examples here", "/documentation/examples"
+  to help you get started.
 
-%h2 Hardware Support
-%p
-  Cylon.js has a extensible system for connecting to hardware devices. The following robotics and physical computing platforms are currently supported:
-  %ul
+%h2#platforms Platform Support
+%div
+  %p Cylon.js has a extensible system for connecting to hardware devices. The following robotics and physical computing system, and software platforms, are currently supported:
+  
+  %p.important-title 
+    18 Platforms
+
+  %ul.homepage-platform
     %li
-      = link_to "Ardrone", "http://ardrone2.parrot.com/", target:"_blank"  
-      &lt;==&gt;
-      = link_to "Adaptor/Drivers", "https://github.com/hybridgroup/cylon-ardrone", target:"_blank" 
+      .title
+        = link_to "ARDrone", "http://ardrone2.parrot.com/", target:"_blank"  
+      %a{:href => "/documentation/platforms/ardrone"} 
+        %img{src: "/images/devices/ardrone.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-ardrone", target:"_blank"
     %li
-      = link_to "Arduino", "http://www.arduino.cc/", target:"_blank" 
-      &lt;==&gt;
-      = link_to "Adaptor", "https://github.com/hybridgroup/cylon-firmata", target:"_blank" 
+      .title
+        = link_to "Arduino", "http://www.arduino.cc/", target:"_blank" 
+      %a{:href => "/documentation/platforms/arduino"} 
+        %img{src: "/images/devices/arduino.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-firmata", target:"_blank"
+      
     %li
-      = link_to "Beaglebone Black", "http://beagleboard.org/Products/BeagleBone+Black/", target:"_blank" 
-      &lt;==&gt;
-      = link_to "Adaptor", "https://github.com/hybridgroup/cylon-beaglebone", target:"_blank" 
+      .title
+        = link_to "Beaglebone Black", "http://beagleboard.org/Products/BeagleBone+Black/", target:"_blank" 
+      %a{:href => "/documentation/platforms/beaglebone"} 
+        %img{src: "/images/devices/beaglebone.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-beaglebone", target:"_blank"
+      
     %li
-      = link_to "Crazyflie", "http://www.bitcraze.se/", target:"_blank" 
-      &lt;==&gt;
-      = link_to "Adaptor/Driver", "https://github.com/hybridgroup/cylon-crazyflie", target:"_blank" 
+      .title
+        = link_to "Crazyflie", "http://www.bitcraze.se/", target:"_blank" 
+      %a{:href => "/documentation/platforms/crazyflie"} 
+        %img{src: "/images/devices/crazyflie.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-crazyflie", target:"_blank"
+      
     %li
-      = link_to "Joystick", "http://en.wikipedia.org/wiki/Joystick", target:"_blank" 
-      &lt;==&gt;
-      = link_to "Adaptor/Driver", "https://github.com/hybridgroup/cylon-joystick", target:"_blank" 
+      .title
+        = link_to "Digispark", "http://digistump.com/category/1", target:"_blank" 
+      %a{:href => "/documentation/platforms/digispark"} 
+        %img{src: "/images/devices/digispark.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-digispark", target:"_blank"
+      
     %li
-      = link_to "Keyboard", "http://en.wikipedia.org/wiki/Computer_keyboard", target:"_blank" 
-      &lt;==&gt;
-      = link_to "Adaptor/Driver", "https://github.com/hybridgroup/cylon-keyboard" , target:"_blank" 
+      .title
+        = link_to "Joystick", "http://en.wikipedia.org/wiki/Joystick", target:"_blank" 
+      %a{:href => "/documentation/platforms/joystick"} 
+        %img{src: "/images/devices/joystick.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-joystick", target:"_blank"
+      
     %li
-      = link_to "Leap Motion", "http://www.leapmotion.com/", target:"_blank" 
-      &lt;==&gt;
-      = link_to "Adaptor/Driver", "https://github.com/hybridgroup/cylon-leapmotion", target:"_blank" 
+      .title
+        = link_to "Keyboard", "http://en.wikipedia.org/wiki/Computer_keyboard", target:"_blank" 
+      %a{:href => "/documentation/platforms/keyboard"} 
+        %img{src: "/images/devices/keyboard.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-keyboard", target:"_blank"
+      
     %li
-      = link_to "OpenCV", "http://opencv.org/", target:"_blank" 
-      &lt;==&gt;
-      = link_to "Adaptor", "https://github.com/hybridgroup/cylon-opencv"
+      .title
+        = link_to "Leap Motion", "http://www.leapmotion.com/", target:"_blank" 
+      %a{:href => "/documentation/platforms/leapmotion"} 
+        %img{src: "/images/devices/leap_motion.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-leapmotion", target:"_blank"
+
     %li
-      = link_to "Pebble", "https://getpebble.com/", target:"_blank" 
-      &lt;==&gt;
-      = link_to "Adaptor/Driver", "https://github.com/hybridgroup/cylon-pebble", target:"_blank" 
+      .title
+        = link_to "Neurosky", "http://store.neurosky.com/products/mindwave-mobile", target:"_blank" 
+      %a{:href => "/documentation/platforms/neurosky"} 
+        %img{src: "/images/devices/neurosky.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-neurosky", target:"_blank"
+
     %li
-      = link_to "Raspberry Pi", "http://www.raspberrypi.org/", target:"_blank" 
-      &lt;==&gt;
-      = link_to "Adaptor", "https://github.com/hybridgroup/cylon-raspi", target:"_blank" 
+      .title
+        = link_to "OpenCV", "http://opencv.org/", target:"_blank" 
+      %a{:href => "/documentation/platforms/opencv"} 
+        %img{src: "/images/devices/opencv.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-opencv", target:"_blank"
+      
     %li
-      = link_to "Salesforce", "http://www.force.com/", target:"_blank" 
-      &lt;==&gt;
-      = link_to "Adaptor/Driver", "https://github.com/hybridgroup/cylon-force", target:"_blank" 
+      .title
+        = link_to "Pebble", "https://getpebble.com/", target:"_blank" 
+      %a{:href => "/documentation/platforms/pebble"} 
+        %img{src: "/images/devices/pebble.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-pebble", target:"_blank"
+    
     %li
-      = link_to "Spark", "https://www.spark.io/", target:"_blank" 
-      &lt;==&gt;
-      = link_to "Adaptor", "https://github.com/hybridgroup/cylon-spark", target:"_blank" 
+      .title
+        = link_to "Rapiro", "http://www.rapiro.com/", target:"_blank" 
+      %a{:href => "/documentation/platforms/rapiro"} 
+        %img{src: "/images/devices/rapiro.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-raspi", target:"_blank"
+       
     %li
-      = link_to "Sphero", "http://www.gosphero.com/", target:"_blank"  
-      &lt;==&gt;
-      = link_to "Adaptor/Driver", "https://github.com/hybridgroup/cylon-sphero", target:"_blank" 
+      .title
+        = link_to "Raspberry Pi", "http://www.raspberrypi.org/", target:"_blank" 
+      %a{:href => "/documentation/platforms/raspberry-pi"} 
+        %img{src: "/images/devices/raspi.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-raspi", target:"_blank"
+        
+    %li
+      .title
+        = link_to "Salesforce", "http://www.force.com/", target:"_blank" 
+      %a{:href => "/documentation/platforms/force"} 
+        %img{src: "/images/devices/force.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-force", target:"_blank"
+    
+    %li
+      .title
+        = link_to "Skynet", "https://www.skynet.im/", target:"_blank" 
+      %a{:href => "/documentation/platforms/skynet"} 
+        %img{src: "/images/devices/skynet.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-skynet", target:"_blank"
+      
+    %li
+      .title
+        = link_to "Spark", "https://www.spark.io/", target:"_blank" 
+      %a{:href => "/documentation/platforms/spark"} 
+        %img{src: "/images/devices/spark.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-spark", target:"_blank"
+      
+    %li
+      .title
+        = link_to "Sphero", "http://www.gosphero.com/", target:"_blank"  
+      %a{:href => "/documentation/platforms/sphero"} 
+        %img{src: "/images/devices/sphero.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-sphero", target:"_blank"
+
+    %li
+      .title
+        = link_to "Tessel", "https://tessel.io/", target:"_blank"  
+      %a{:href => "/documentation/platforms/tessel"} 
+        %img{src: "/images/devices/tessel.jpg", style: "width: 90%"}  
+      .repo
+        = link_to "repo", "https://github.com/hybridgroup/cylon-tessel", target:"_blank"
+       
+  .clear
+
 %p Support for many devices that use General Purpose Input/Output (GPIO) have a shared set of drivers provided using the cylon-gpio module:
-%ul
+
+%p.important-title
+  9
+  = link_to "GPIO", "https://en.wikipedia.org/wiki/General_Purpose_Input/Output" , target:"_blank" 
+  drivers
+
+%ul.homepage-platform
   %li
-    = link_to "GPIO", "https://en.wikipedia.org/wiki/General_Purpose_Input/Output" , target:"_blank" 
-    &lt;==&gt;
-    = link_to "Drivers", "https://github.com/hybridgroup/cylon-gpio" , target:"_blank"
-    %ul 
-      %li Analog Sensor
-      %li Button
-      %li Continuous Servo
-      %li LED
-      %li MakeyButton (high-resistance switch inspired by the MakeyMakey)
-      %li Motor
-      %li Maxbotix Ultrasonic Range Finder
-      %li Servo 
+    .title
+      = link_to "Analog Sensor", "/documentation/drivers/analog-sensor" 
+    %a{:href => "/documentation/drivers/analog-sensor"} 
+      %img{src: "/images/devices/analog-sensor.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-gpio", target:"_blank"
+  %li
+    .title
+      = link_to "Button", "/documentation/drivers/button" 
+    %a{:href => "/documentation/drivers/button"} 
+      %img{src: "/images/devices/button.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-gpio", target:"_blank"
+  %li
+    .title
+      = link_to "Continuous Servo", "/documentation/drivers/continuous-servo" 
+    %a{:href => "/documentation/drivers/continuous-servo"} 
+      %img{src: "/images/devices/continuous-servo.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-gpio", target:"_blank"   
+  %li
+    .title
+      = link_to "IR Rangefinder", "/documentation/drivers/ir-range-finder" 
+    %a{:href => "/documentation/drivers/ir-range-finder"} 
+      %img{src: "/images/devices/ir-range-finder.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-gpio", target:"_blank"   
+  %li
+    .title
+      = link_to "LED", "/documentation/drivers/led" 
+    %a{:href => "/documentation/drivers/led"} 
+      %img{src: "/images/devices/LED.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-gpio", target:"_blank"  
+  %li
+    .title
+      = link_to "MakeyButton", "/documentation/drivers/makey-button" 
+    %a{:href => "/documentation/drivers/makey-button"} 
+      %img{src: "/images/devices/makey-button.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-gpio", target:"_blank" 
+  %li
+    .title
+      = link_to "Motor", "/documentation/drivers/motor" 
+    %a{:href => "/documentation/drivers/motor"} 
+      %img{src: "/images/devices/motor.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-gpio", target:"_blank"   
+  %li
+    .title
+      = link_to "Maxbotix", "/documentation/drivers/maxbotix" 
+    %a{:href => "/documentation/drivers/maxbotix"} 
+      %img{src: "/images/devices/maxbotix.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-gpio", target:"_blank"  
+  %li
+    .title
+      = link_to "Servo", "/documentation/drivers/servo" 
+    %a{:href => "/documentation/drivers/servo"} 
+      %img{src: "/images/devices/servo.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-gpio", target:"_blank"   
+  .clear
 
 %p Support for devices that use Inter-Integrated Circuit (I2C) have a shared set of drivers provded using the cylon-i2c module:
-%ul 
+
+%p.important-title 
+  5
+  = link_to "I2C", "https://en.wikipedia.org/wiki/I%C2%B2C", target:"_blank" 
+  drivers
+
+%ul.homepage-platform 
   %li  
-    = link_to "I2C", "https://en.wikipedia.org/wiki/I%C2%B2C", target:"_blank" 
-    &lt;==&gt;
-    = link_to "Drivers", "https://github.com/hybridgroup/cylon-i2c", target:"_blank"  
-    %ul 
-      %li BlinkM
-      %li HMC6352 Digital Compass
-      %li LCD
-      %li MPL115A2 Barometer/Thermometer
+    .title
+      = link_to "BlinkM", "/documentation/drivers/blinkm" 
+    %a{:href => "/documentation/drivers/blinkm"} 
+      %img{src: "/images/devices/blinkm.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-i2c", target:"_blank"
+
+  %li  
+    .title
+      = link_to "BMP180", "/documentation/drivers/bmp180" 
+    %a{:href => "/documentation/drivers/bmp180"} 
+      %img{src: "/images/devices/bmp180.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-i2c", target:"_blank"
+
+  %li
+    .title
+      = link_to "HMC6352", "/documentation/drivers/hmc6352-compass" 
+    %a{:href => "/documentation/drivers/hmc6352-compass"} 
+      %img{src: "/images/devices/hmc6352-compass.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-i2c", target:"_blank"   
+  %li
+    .title
+      = link_to "LCD", "/documentation/drivers/lcd" 
+    %a{:href => "/documentation/drivers/lcd"} 
+      %img{src: "/images/devices/lcd.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-i2c", target:"_blank"   
+  %li
+    .title
+      = link_to "MPL115A2", "/documentation/drivers/mpl115a2" 
+    %a{:href => "/documentation/drivers/mpl115a2"} 
+      %img{src: "/images/devices/mpl115a2.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-i2c", target:"_blank"  
+  .clear
+
+%p.important-title 
+  See more drivers 
+  = link_to "here", "/documentation/drivers"
 
 %p More platforms and drivers are coming soon...
 
 %h2 CLI
-%p Cylon has a Command Line Interface (CLI) so you can access important features right from the command line.
-:markdown
-      :::bash
-      Usage: cylon [command] [options]
+%p Cylon has a Command Line Interface (CLI) so you can access important features right from the command line. We call it "RobotOps", aka "DevOps For Robotics". You can scan, connect, update device firmware, generate new adaptors and more!
 
-      Commands:
+%script{type:"text/javascript", src:"https://asciinema.org/a/8517.js", id:"asciicast-8517", async:'t'}
 
-        generate <name>        Generates a new adaptor
-        scan <type>            Scans serial, bluetooth or usb (pass param <serial> | <bluetooth> | <usb>) for connected devices
-        bluetooth <subcmd> <address> [option] Connect bluetooth device to PC (pairs) or establishes serial to bluetooth connection
-
-      Options:
-
-        -h, --help     output usage information
-        -V, --version  output the version number
-
-%h2 Generator
-
-%p Want to integrate a hardware device we don't have Cylon support for yet? There's a generator for that!
-%p You can easily generate a new skeleton Cylon adaptor to help you get started. Simply run the cylon generate command, and the generator will create a new directory with all of the files in place for your new adaptor module.
-:markdown
-      :::bash
-      $ cylon generate awesome_device
-      Creating cylon-awesome_device adaptor.
-      Compiling templates.
-
-      $ ls ./cylon-awesome_device
-      Gruntfile.js
-      LICENSE
-      README.md
-      dist/
-      package.json
-      src/
-      test/
+%p <a href="/documentation/cli">Check out our CLI docs here</a>.
 
 %h2  Be Part Of The Robot Evolution
 :markdown
   - Code on Github:   [https://github.com/hybridgroup/cylon](https://github.com/hybridgroup/cylon)
+  - Follow us on Twitter:   [@cylonjs](http://twitter.com/cylonjs)
   - Join us on IRC:   `#cylon @ irc.freenode.net`
   - Join us on our [Trello Board](https://trello.com/b/l1aEuqMU/cylon).

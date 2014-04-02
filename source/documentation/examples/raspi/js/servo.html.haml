@@ -1,0 +1,33 @@
+---
+layout: documentation
+page_title_show: true
+title: "Cylon.JS Example - Raspberry Pi - Servo"
+page_title: "Example: Raspberry Pi - Servo"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-raspi/tree/master/examples/servo' target='_blank'>View In Repo</a>"
+---
+
+.example
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'raspi', adaptor: 'raspi', port: '/dev/ttyACM0' },
+          device: { name: 'servo', driver: 'servo', pin: 11 },
+
+          work: function(my) {
+            var angle = 30,
+                increment = 40;
+
+            every((1).seconds(), function() {
+              angle += increment;
+              my.servo.angle(angle);
+              console.log("Current Angle: " + (my.servo.currentAngle()));
+
+              if ((angle === 30) || (angle === 150)) { increment = -increment; }
+            });
+          }
+        }).start();
+

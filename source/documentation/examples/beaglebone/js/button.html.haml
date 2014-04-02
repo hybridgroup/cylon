@@ -1,0 +1,27 @@
+---
+layout: documentation
+page_title_show: true
+title: "Cylon.JS Example - Beaglebone Button"
+page_title: "Example: Beaglebone Button"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-beaglebone/tree/master/examples/button' target='_blank'>View In Repo</a>"
+---
+
+.example
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'beaglebone', adaptor: 'beaglebone' },
+          devices: [
+            { name: 'led', driver: 'led', pin: 'P9_12' },
+            { name: 'button', driver: 'button', pin: 'P9_14' }
+          ],
+
+          work: function(my) {
+            my.button.on('push', my.led.toggle);
+          }
+        }).start();
+

@@ -5,6 +5,7 @@ page_title: Digispark
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-digispark' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-digispark/issues'>Issues</a>"
 layout: documentation
 page_title_show: true
+subnav_platform: true
 
 led_driver: true
 servo_driver: true
@@ -16,23 +17,25 @@ lcd_driver: true
 
 %section.intro
   = image_tag "/images/devices/digispark.jpg", class: "display"
+  .info-intro
+    %p The Digispark is an Attiny85 based microcontroller development board similar to the Arduino line, only cheaper, smaller, and a bit less powerful. With a whole host of shields to extend its functionality and the ability to use the familiar Arduino IDE the Digispark is a great way to jump into electronics, or perfect for when an Arduino is too big or too much.
 
-  %p The Digispark is an Attiny85 based microcontroller development board similar to the Arduino line, only cheaper, smaller, and a bit less powerful. With a whole host of shields to extend its functionality and the ability to use the familiar Arduino IDE the Digispark is a great way to jump into electronics, or perfect for when an Arduino is too big or too much.
-
-  %p
-    For more info about the Digispark platform click
-    = succeed "." do
-      = link_to "here", "http://digistump.com/category/1", target: :blank
-
-%section.how-to
-  %h2 How to install
+    %p
+      For more info about the Digispark platform click
+      = succeed "." do
+        = link_to "here", "http://digistump.com/category/1", target: :blank
+  .clear
+  
+%section.how-to#HowToInstall
+  %h2 How To Install
   %p Installing Cylon.js with digispark support is pretty easy.
   :markdown
         :::bash
         npm install cylon-digispark
-  %h2 How to use
+
+%section.how-to#HowToUse
+  %h2 How To Use
   %p This small program lets you toggle an LED on and off.
-  %h3 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -46,21 +49,9 @@ lcd_driver: true
           }
         }).start();
 
-  %h3 CoffeeScript
-  :markdown
-        :::javascript
-        Cylon = require 'cylon'
 
-        Cylon.robot
-          connection: { name: 'digispark', adaptor: 'digispark'}
-          device: { name: 'led', driver: 'led', pin: 2 }
-
-          work: (my) ->
-            every 1.second(), -> my.led.toggle()
-
-        .start()
-
-  %h2 How to connect
+%section.how-to#HowToConnect
+  %h2 How To Connect
   %p
     It is very easy to setup and connect to the Digispark using cylon CLI commands.
   %p
@@ -151,7 +142,7 @@ lcd_driver: true
     for the help with udev rules used when uploading littlewire to the digispark!
     =link_to "(https://github.com/Bluebie/micronucleus-t85/wiki/Ubuntu-Linux)", "https://github.com/Bluebie/micronucleus-t85/wiki/Ubuntu-Linux"
 
-%section.drivers
+%section.drivers#Drivers
   %h2 Drivers
   %p
     Thanks to

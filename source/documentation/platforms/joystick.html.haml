@@ -5,17 +5,26 @@ page_title: Joysticks
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-joystick' class='repository' target='blank'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-joystick/issues'  target='blank'>Issues</a>"
 layout: documentation
 page_title_show: true
+subnav_platform: true
 
 xbox360_driver: true
+dualshock_driver: true
 ---
 
 %section.intro
   = image_tag "/images/devices/joystick.jpg", class: "display"
+  .info-intro
+    %p A joystick is an input device consisting of a stick that pivots on a base and reports its angle or direction to the device it is controlling.
+    %p You can use Cylon.js with an Xbox 360 game controller. The goal is to also support any other joysticks and game controllers that are HID devices.
+    %p
+      For more info about the Joystick platform click
+      = succeed "." do
+        = link_to "here", "http://en.wikipedia.org/wiki/Joystick", target: :blank
+  
+  .clear
 
-  %p You can use Cylon.js with an Xbox 360 game controller. The goal is to also support any other joysticks and game controllers that are HID devices.
-
-%section.how-to
-  %h2 How to install
+%section.how_to#HowToInstall
+  %h2 How To Install
   %p Installing Cylon.js with Joystick support is pretty easy.
   :markdown
         :::bash
@@ -26,9 +35,9 @@ xbox360_driver: true
     = link_to "http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller/OsxDriver", "http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller/OsxDriver" , target: :blank
     if you want to use it.
 
-  %h2 How to use
+%section.how-to#HowToUse
+  %h2 How To Use
   %p This small program receives joystick and button press events from an XBox 360 game controller.
-  %h3 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -44,28 +53,12 @@ xbox360_driver: true
           }
         }).start();
 
-  %h3 CoffeeScript
-  :markdown
-        :::javascript
-        Cylon = require 'cylon'
 
-        Cylon.robot
-          connection:
-            name: 'joystick', adaptor: 'joystick'
-
-          device:
-            name: 'joystick', driver: 'xbox360'
-
-          work: (my) ->
-            my.joystick.on "left:move", (position) ->
-              console.log position
-
-        .start()
-
-  %h2 How to connect
+%section.how-to#HowToConnect
+  %h2 How To Connect
   %p Plug your USB joystick or game controller into your USB port.
 
-%section.drivers
+%section.drivers#Drivers
   %h2 Drivers
   %p Available drivers for the joystick platform are listed below:
   -#%p There are 3 driver for different joysticks, as listed below:

@@ -5,42 +5,31 @@ page_title: XBox360 Controller
 page_subtitle: Driver
 layout: documentation
 page_title_show: true
+subnav_driver: true
 
 joystick_platform: true
 ---
 %section.intro
   =image_tag "/images/devices/xbox360.jpg", class: "display"
-  %p Allows user to interact with Cylon.js devices using a XBox360 game controller.
+  .info-intro
+    %p Allows user to interact with Cylon.js devices using a XBox360 game controller.
+  .clear
+  
+%section.how-to#HowToConnect
+  %h2 How To Connect
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
 
-  %section.how-to
-    %h2 How to establish a connection and setup the driver
-    %h3 JavaScript
-    :markdown
-          :::javascript
-          var Cylon = require('cylon');
+        Cylon.robot({
+          connection: { name: 'joystick', adaptor: 'joystick' },
+          device: {name: 'joystick', driver: 'xbox360'}
+        ..
 
-          Cylon.robot({
-            connection: { name: 'joystick', adaptor: 'joystick' },
-            device: {name: 'joystick', driver: 'xbox360'}
-          ..
 
-    %h3 CoffeeScript
-    :markdown
-          :::javascript
-          Cylon = require 'cylon'
-
-          Cylon.robot
-            connection:
-              name: 'joystick', adaptor: 'joystick'
-
-            device:
-              name: 'joystick', driver: 'xbox360'
-          ...
-
-%section.how-to
-  %h2 How to use
+%section.how-to#HowToUse
+  %h2 How To Use
   %p Example receiving button events from XBox360 controller joystick.
-  %h3 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -56,31 +45,13 @@ joystick_platform: true
           }
         }).start();
 
-  %h3 CoffeeScript
-  :markdown
-        :::javascript
-        Cylon = require 'cylon'
-
-        Cylon.robot
-          connection:
-            name: 'joystick', adaptor: 'joystick'
-
-          device:
-            name: 'joystick', driver: 'xbox360'
-
-          work: (my) ->
-            my.joystick.on "left:move", (position) ->
-              console.log position
-
-        .start()
-
 %section.public-methods
-  .commands_api
+  .commands-api#Commands
     = partial "/documentation/drivers/partials/joystick/commands_xbox360"
-  .commands_api
+  .commands-api#Events
     = partial "/documentation/drivers/partials/joystick/events_xbox360"
 
-%section.compatability.hardware
-  %h2 Works with:
+%section.compatability.hardware#Compatability
+  %h2 Compatibility
   .devices
     = partial "documentation/partials/devices_platforms"

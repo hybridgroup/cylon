@@ -1,0 +1,24 @@
+---
+layout: documentation
+page_title_show: true
+title: "Cylon.JS Example - Raspberry Pi - Blink"
+page_title: "Example: Raspberry Pi - Blink"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-raspi/tree/master/examples/blink' target='_blank'>View In Repo</a>"
+---
+
+.example
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'raspi', adaptor: 'raspi' },
+          device: { name: 'led', driver: 'led', pin: 11 },
+
+          work: function(my) {
+            every((1).second(), my.led.toggle);
+          }
+        }).start();
+

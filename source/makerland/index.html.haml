@@ -1,0 +1,259 @@
+---
+title: Cylon.js - Makerland
+author: The Hybrid Group
+page_title: Makerland
+page_subtitle: Workshop
+layout: documentation
+page_title_show: true
+---
+
+%section.makerland
+  %h2 Installation
+  %ul
+    %li
+      %p
+        First, install
+        =link_to "Node.js","http://nodejs.org/download/"
+      %p
+        If you already have Node.js installed, you can skip to the next step.
+    %li
+      %p
+        Now, make sure you have all the dependencies listed
+        =link_to "here.","https://github.com/TooTallNate/node-gyp#installation"
+      %p
+        If you have already installed node-serialport, then you already have this, and can skip to the next step.
+    %li
+      %p
+        Next up, install Cylon.js globally, so you can make use of the CLI commands it provides:
+        :markdown
+              $ npm install -g cylon cylon-gpio cylon-i2c cylon-firmata cylon-sphero cylon-leapmotion && npm install cylon cylon-gpio cylon-i2c cylon-firmata cylon-sphero cylon-leapmotion
+      %p
+        Once that's finished, you should be able to check if it's working by
+        opening another terminal window and entering this command, which should
+        give you a similar result:
+        :markdown
+              $ which cylon
+              /usr/local/bin/cylon
+    %li
+      %p
+        Finally, install the
+        =link_to "Leap Motion","https://www.leapmotion.com/setup"
+        software.
+
+  %h2 Test Your Install - Arduino Blink
+  %p You can now test your installation. Plug in your Arduino, and run the following code, that makes the built-in LED on your Arduino turn on/off every second:
+
+  %h3 JavaScript
+  :markdown
+        :::javascript
+        //blink.js
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          // change the port below to match whatever your Arduino is actually plugged into
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+          device: { name: 'led', driver: 'led', pin: 13 },
+
+          work: function(my) {
+            every((1).seconds(), function() {my.led.toggle()});
+          }
+        }).start();
+
+  %p Please note that you might need to change the value for port.
+  %p 
+    Use
+    %code cylon scan serial
+    to find your connection info and serial port address:
+    :markdown
+            $ cylon scan serial
+
+%section.makerland
+  %h2 Makey button
+  %img{:src => "/documentation/drivers/breadboards/gpio/makey_button_bb.png", :alt => "", :style => "width:50%"}
+  %h3 JavaScript
+  :markdown
+        :::javascript
+
+        //makey.js
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+          devices: [
+            { name: 'led', driver: 'led', pin: 13 },
+            { name: 'makey', driver: 'makey-button', pin: 2 }
+          ],
+
+          work: function(my) {
+            my.makey.on('push', function() {
+              my.led.toggle();
+            });
+          }
+        }).start();
+
+  %h2 Connect To Sphero
+  %p 
+    Connect to your Sphero using Bluetooth. Here are instructions on
+    = link_to "how to connect", "https://github.com/hybridgroup/cylon-sphero#how-to-connect"
+
+  %h2 Sphero Color
+  %h3 JavaScript
+  :markdown
+        :::javascript
+        //sphero_color.js
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0' },
+          device: { name: 'sphero', driver: 'sphero' },
+
+          work: function(me) {
+            every((1).second(), function() {
+              me.sphero.setRGB(Math.floor(Math.random() * 100000));
+            });
+          }
+        }).start();
+
+  %h2 Sphero Makey Button
+  %h3 JavaScript
+  :markdown
+        :::javascript
+        //sphero_makey_button.js
+        var Cylon = require('cylon');
+        var time = 0;
+        var calibration = false;
+         
+         
+        Cylon.robot({
+          connections: [
+            { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+            { name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0' }
+          ],
+          devices: [
+            { name: 'sphero', driver: 'sphero', connection: 'sphero' },
+            { name: 'forward', driver: 'makey-button', connection: 'arduino', pin: 2 },
+            { name: 'back', driver: 'makey-button', connection: 'arduino', pin: 3 },
+            { name: 'left', driver: 'makey-button', connection: 'arduino', pin: 4 },
+            { name: 'right', driver: 'makey-button', connection: 'arduino', pin: 5 }
+          ],
+          checkCalibration: (function(_this) {
+            return function(me) {
+              if (calibration === true) {
+                me.sphero.finishCalibration();
+                calibration = false;
+              }
+            };
+          })(this),
+          work: function(my) {
+            my.checkCalibration(my);
+            my.sphero.setBackLED(255);
+         
+            my.forward.on('push', function() {
+              console.log("forward");
+              my.checkCalibration(my);
+              my.sphero.roll(90, 0);
+            });
+            my.forward.on('release', function() {
+              my.sphero.stop();
+            });
+         
+            my.back.on('push', function() {
+              console.log("back");
+              my.checkCalibration(my);
+              my.sphero.roll(90, 180);
+            });
+            my.back.on('release', function() {
+              my.sphero.stop();
+            });
+         
+            my.right.on('push', function() {
+              console.log("right");
+              var t = Date.now();
+              if ((t - time) < 400 ) {
+                console.log("Calibrating");
+                my.sphero.startCalibration();
+                calibration = true;
+              } else {
+                my.checkCalibration(my);
+                my.sphero.roll(90, 90);
+              }
+              time = t;
+            });
+            my.right.on('release', function() {
+              my.sphero.stop();
+            });
+         
+            my.left.on('push', function() {
+              console.log("left");
+              my.checkCalibration(my);
+              my.sphero.roll(90, 270);
+            });
+            my.left.on('release', function() {
+              my.sphero.stop();
+            });
+          }
+        }).start();
+
+  %h2 Leap Motion
+  %h3 JavaScript
+  :markdown
+        :::javascript
+
+        //leap.js
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' },
+          device: { name: 'leapmotion', driver: 'leapmotion' },
+
+          work: function(my) {
+            my.leapmotion.on('connect', function() {
+              Logger.info("Connected");
+            });
+
+            my.leapmotion.on('start', function() {
+              Logger.info("Started");
+            });
+
+            my.leapmotion.on('frame', function(frame) {
+              Logger.info(frame.toString());
+            });
+
+            my.leapmotion.on('hand', function(hand) {
+              Logger.info(hand.toString());
+            });
+
+            my.leapmotion.on('pointable', function(pointable) {
+              Logger.info(pointable.toString());
+            });
+
+            my.leapmotion.on('gesture', function(gesture) {
+              Logger.info(gesture.toString());
+            });
+          }
+        }).start();
+
+  %h2 Leap Motion Sphero
+  %h3 JavaScript
+  :markdown
+        :::javascript
+
+        //leap_sphero.js
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connections: [
+            { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' },
+            { name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0' }
+          ],
+          devices: [
+            { name: 'leapmotion', driver: 'leapmotion', connection: 'leapmotion' },
+            { name: 'sphero', driver: 'sphero', connection: 'sphero' }
+          ],
+          work: function(my) {
+            my.leapmotion.on('hand', function(hand) {
+              var r = hand.palmY.fromScale(100, 600).toScale(0, 255) | 0;
+              my.sphero.setRGB(r, 0, 0);
+            });
+          }
+        }).start();

@@ -5,21 +5,24 @@ page_title: Sphero
 page_subtitle: Driver
 layout: documentation
 page_title_show: true
+subnav_driver: true
+sphero_colors_driver: true
 
 sphero_platform: true
 ---
 
 %section.intro
   =image_tag "/images/devices/sphero.jpg", class: "display"
-  %p Allows user to interact with the Sphero robotic sphero using Cylon.js.
-
-%section.how-to
-  %h2 How to establish a connection and setup the driver
+  .info-intro
+    %p Allows user to interact with the Sphero robotic sphero using Cylon.js.
+  .clear
+  
+%section.how-to#HowToConnect
+  %h2 How To Connect
   %p
     That is pretty simple once the Sphero is ready (connected and listening), you just need three lines of code and you are set,
     Cylon.js and the Sphero driver take care of the rest.
 
-    %h3 JavaScript
     :markdown
           :::javascript
           var Cylon = require('cylon');
@@ -30,25 +33,11 @@ sphero_platform: true
             device: {name: 'sphero', driver: 'sphero'},
           ...
 
-    %h3 CoffeeScript
-    :markdown
-          :::javascript
-          Cylon = require 'cylon'
-
-          Cylon.robot
-            connection:
-              name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'
-
-            device:
-              name: 'sphero', driver: 'sphero'
-            ...
-
-%section.how-to
-  %h2 How to use
+%section.how-to#HowToUse
+  %h2 How To Use
   %p 
     This example rolls the sphero in a random direction and change direction every second.
 
-    %h3 JavaScript
     :markdown
           :::javascript
 
@@ -66,35 +55,16 @@ sphero_platform: true
             }
           }).start();
 
-    %h3 CoffeeScript
-    :markdown
-          :::javascript
-
-          Cylon = require('..')
-
-          Cylon.robot
-            connection:
-              name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0'
-
-            device:
-              name: 'sphero', driver: 'sphero'
-
-            work: (me) ->
-              every 1.second(), ->
-                me.sphero.roll 60, Math.floor(Math.random() * 360)
-
-          .start()
-
 %section.public-methods
-  .commands_api
+  .commands-api#Commands
     = partial "/documentation/drivers/partials/sphero/commands"
     %h5
       Note: for more information about the documentation of the Sphero driver click
       =link_to "here.", "https://github.com/orbotix/DeveloperResources/blob/master/docs/Sphero_API_1.50.pdf" 
-  .commands_api
+  .commands-api#Events
     = partial "/documentation/drivers/partials/sphero/events"
 
-%section 
+%section#SpheroColors
   %h2 Sphero Colors 
 
   %table.commands 
@@ -877,8 +847,8 @@ sphero_platform: true
       %td 0x9ACD32
 
 
-%section.compatability.hardware
-  %h2 Works with:
+%section.compatability.hardware#Compatability
+  %h2 Compatibility
   =# TODO: Update platform list with all that work with this driver in Cylon.js.
   .devices
     = partial "documentation/partials/devices_platforms"

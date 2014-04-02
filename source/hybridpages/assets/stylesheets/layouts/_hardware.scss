@@ -1,11 +1,27 @@
 .hardware {
+
   .devices {
+
   	@include outer-container;
     text-align: center;
+
     .device {
+
       display: inline-block;
-      width: 300px;
+      width: 225px;
+
+      &:hover {
+
+        img {
+      
+          opacity: .9;
+        }
+
+        background: $hero-subtitle-color;
+      }
+
       img {
+      
       	 width: 100%;
       }
     }   

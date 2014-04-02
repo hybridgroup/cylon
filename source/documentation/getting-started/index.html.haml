@@ -64,17 +64,10 @@ layout: page
         :::javascript
         node robotfilename.js
 
-  %p or
-  
-  :markdown
-        :::javascript
-        coffee robotfilename.coffee
-
 %section.app-code
   %h2 Cylon.js Code Examples
 
   %h3 Example: Hello
-  %h4 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -87,22 +80,10 @@ layout: page
           }
         }).start();
 
-  %h4 CoffeeScript
-  :markdown
-        :::javascript
-        Cylon = require 'cylon'
-
-        Cylon.robot
-          work: ->
-            every 1.second(), ->
-              Logger.info("Hello, human!")
-
-        .start()
 
   %h3 Example: Arduino with LED and a button
   :markdown
     To use this example, you must first run `npm install cylon-firmata`
-  %h4 JavaScript
   :markdown
         :::javascript
        
@@ -118,30 +99,9 @@ layout: page
           }
         }).start();
 
-  %h4 CoffeeScript
-  :markdown
-        :::javascript
-        Cylon = require 'cylon'
-
-        Cylon.robot
-          connection:
-            name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
-
-          devices:
-            [
-              {name: 'led', driver: 'led', pin: 13},
-              {name: 'button', driver: 'button', pin: 2}
-            ]
-
-          work: (my) ->
-            my.button.on 'push', -> my.led.toggle()
-
-        .start()
-
   %h3 Parrot ARDrone 2.0
   :markdown
     To use this example, you must first run `npm install cylon-ardrone`
-  %h4 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -162,29 +122,6 @@ layout: page
           }
         }).start();
 
-  %h4 CoffeeScript 
-  :markdown
-        :::javascript
-        Cylon = require 'cylon'
-
-        Cylon.robot
-          connection:
-            name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1'
-
-          device:
-            name: 'drone', driver: 'ardrone'
-
-          work: (my) ->
-            my.drone.takeoff()
-
-            after 10.seconds(), ->
-              my.drone.land()
-
-            after 15.seconds(), ->
-              my.drone.stop()
-
-        .start()
-
 %h2 CLI
 
 %p Cylon has a Command Line Interface (CLI) so you can access important features right from the command line.
@@ -192,33 +129,28 @@ layout: page
       :::bash
       Usage: cylon [command] [options]
 
-      Commands:
+        Commands: 
+           arduino [subcommand] [opts]
+              Install avrdude, and upload sketches to your Arduino
 
-        generate <name>        Generates a new adaptor
+           bluetooth [pair|unpair|connect]
+              Scan, pair, unpair bluetooth devices. Establishes serial to Bluetooth connection.
 
-      Options:
+           crazyflie [subcommand] [opts]
+              Set udev rules for Crazyflie
 
-        -h, --help     output usage information
-        -V, --version  output the version number
+           digispark [subcommand]
+              Set udev rules, and upload the Littlewire protocol to your Digispark
 
-%h2 Generator
+           help
+              Prints help for using the Cylon-CLI commands.
 
-%p Want to integrate a hardware device we don't have Cylon support for yet? There's a generator for that!
-%p You can easily generate a new skeleton Cylon adaptor to help you get started. Simply run the cylon generate command, and the generator will create a new directory with all of the files in place for your new adaptor module.
-:markdown
-      :::bash
-      $ cylon generate awesome_device
-      Creating cylon-awesome_device adaptor.
-      Compiling templates.
+           scan [type]
+              Scans serial, Bluetooth, or USB for connected devices
 
-      $ ls ./cylon-awesome_device
-      Gruntfile.js
-      LICENSE
-      README.md
-      dist/
-      package.json
-      src/
-      test/
+           spark upload [access_token] [device_id] [firmware_file]
+              Upload new firmare to your Spark Core
+
 
 %section.contributing
   %h2 Contributing

@@ -1,0 +1,67 @@
+---
+title: Cylon.js Test Driven Robotics
+author: The Hybrid Group
+page_title: Test Driven Robotics
+page_subtitle: "Test-driven robotics: develop hardware/software solutions guided by tests."
+layout: documentation
+page_title_show: true
+---
+.test
+  %p Test-driven robotics is our name for applying the principles of test-driven development to hardware/software solutions. Cylon.js as an example of a modern robotics development framework has test-driven robotics built right in.
+
+  %p Here is an example using Mocha, Sinon, & Chai:
+  :markdown
+        :::javascript
+        "use strict";
+
+        // tell Cylon.js to stub connections to adaptors/devices
+        process.env['CYLON_TEST'] = true;
+
+        // setup tests
+        var chai = require("chai");
+        var sinon = require("sinon");
+        var sinonChai = require("sinon-chai");
+        chai.should();
+        chai.use(sinonChai);
+        var clock = sinon.useFakeTimers();
+
+        // load robot in test mode
+        var Cylon = require('cylon');
+        require("./robot.js");
+
+        describe("robot", function () {
+          var robot = Cylon.findRobot("testor");
+
+          it("should have work", function () {
+            return robot.work.should.be.a('function');
+          });
+
+          it("should toggle the led after 1 second", function (done) {
+            var led = robot.devices['led'];
+            var toggle = sinon.stub(led, 'toggle');
+            clock.tick((1).second());
+            toggle.should.have.been.called;
+            done();
+          });
+        });
+
+  %p to test the following robot code:
+  :markdown
+        :::javascript
+        var Cylon = require("cylon");
+
+        var robot = Cylon.robot({
+          name: 'testor',
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+          device: { name: 'led', driver: 'led', pin: 13 },
+
+          work: function(my) {
+            my.led.toggle();
+
+            every((1).second(), function() { my.led.toggle(); });
+          }
+        });
+
+        robot.start();
+
+  

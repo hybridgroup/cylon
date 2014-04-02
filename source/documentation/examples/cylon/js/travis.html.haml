@@ -1,0 +1,52 @@
+---
+layout: documentation
+page_title_show: true
+title: "Cylon.JS Example - Cylon and Travis"
+page_title: "Example: Cylon and Travis"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon/tree/master/examples/travis' target='_blank'>View In Repo</a>"
+---
+
+.example
+  :markdown
+        :::javascript
+        var Cylon = require('cylon'),
+            Travis = require('travis-ci');
+
+        var travis = new Travis({version: '2.0.0'});
+
+        Cylon.robot({
+          connection: { name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0' },
+          device: {name: 'sphero', driver: 'sphero' },
+
+          work: function(my) {
+            var user = "hybridgroup",
+                name = "cylon";
+
+            var checkTravis = function() {
+              console.log("Checking repo " + user + "/" + name);
+              my.sphero.setColor('blue', true);
+
+              travis.repos({ owner_name: user, name: name }, function(err, res) {
+                if (res.repo === undefined) { my.sphero.setColor('blue', true); }
+
+                switch (res.repo.last_build_state) {
+                  case 'passed':
+                    my.sphero.setColor('green', true);
+                    break;
+                  case 'failed':
+                    my.sphero.setColor('red', true);
+                    break;
+                  default:
+                    my.sphero.setColor('blue', true);
+                }
+              });
+            }
+
+            checkTravis();
+
+            every((10).seconds(), checkTravis);
+          }
+        }).start();
+

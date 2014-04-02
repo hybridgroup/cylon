@@ -1,0 +1,39 @@
+---
+layout: documentation
+page_title_show: true
+title: "Cylon.JS Example - ir_sensor_range_events"
+page_title: "Example: ir_sensor_range_events"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-firmata/tree/master/examples/ir_sensor_range_events' target='_blank'>View In Repo</a>"
+---
+
+.example
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM1' },
+
+          device: {
+            name: 'sensor',
+            driver: 'ir-range-sensor',
+            pin: 0,
+            upperLimit: 400,
+            lowerLimit: 100,
+            model: 'gp2y0a41sk0f'
+          },
+
+          work: function(my) {
+            my.sensor.on('range', function(range){
+              console.log('Range in inches ===>', range);
+            });
+
+            my.sensor.on('rangeCm', function(range){
+              console.log('Range in cm ===>', range);
+            });
+          }
+
+        }).start();
+

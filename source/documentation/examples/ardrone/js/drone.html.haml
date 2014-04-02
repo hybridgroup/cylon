@@ -1,0 +1,26 @@
+---
+layout: documentation
+page_title_show: true
+title: "Cylon.JS Example - Drone"
+page_title: "Example: Drone"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-ardrone/tree/master/examples/drone' target='_blank'>View In Repo</a>"
+---
+
+.example
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1' },
+          device: { name: 'drone', driver: 'ardrone' },
+
+          work: function(my) {
+            my.drone.takeoff();
+            after((10).seconds(), my.drone.land);
+            after((15).seconds(), my.drone.stop);
+          }
+        }).start();
+

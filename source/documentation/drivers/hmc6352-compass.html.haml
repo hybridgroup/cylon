@@ -5,6 +5,8 @@ page_title: HMC6352 Digital Compass
 page_subtitle: Driver
 layout: documentation
 page_title_show: true
+subnav_driver: true
+subnav_circuit_driver: true
 
 arduino_platform: true
 beaglebone_platform: true
@@ -13,25 +15,19 @@ raspberry_platform: true
 
 %section.intro
   =image_tag "/images/devices/hmc6352-compass.jpg", class: "display"
-  %p
-    Allows user to read heading from HMC6352 Digital Compass via i2c interface
-
-%section.how-to
-  %h2 How to establish a connection and setup the driver
-  %h3 JavaScript
-  :markdown
-        :::javascript
-        coming soon
-  %h3 CoffeeScript
+  .info-intro  
+    %p Allows user to read heading from HMC6352 Digital Compass via i2c interface
+  .clear
+  
+%section.how-to#HowToConnect
+  %h2 How To Connect
   :markdown
         :::javascript
         coming soon
 
-
-%section.how-to
-  %h2 How to use
-  %h3 How to use events and call them on your drivers
-  %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
+%section.how-to#HowToUse
+  %h2 How To Use
+  %p To read the current compass heading, just use the `heading()` function:
   :markdown
         :::javascript
         coming soon
@@ -41,18 +37,21 @@ raspberry_platform: true
         coming soon
 
 %section.public-methods
-  .commands_api
-    = partial "/documentation/drivers/partials/force/commands"
-  .commands_api
-    = partial "/documentation/drivers/partials/force/events"
+  .commands-api#Commands
+    = partial "/documentation/drivers/partials/i2c/commands_hmc6352"
+  .commands-api#Events
+    = partial "/documentation/drivers/partials/i2c/events_hmc6352"
 
-%section.circuit
-  %h2 Circuit and Schematic
-  %p
-    Coming soon...
+%section.circuit#Circuit
+  %h2 Circuit
+  .description-circuit
+    %p 
+  .image-circuit 
+    %img{:src => "/documentation/drivers/breadboards/i2c/hmc6352_bb.png", :alt => ""}/ 
+  .clear 
 
-%section.compatability.hardware
-  %h2 Works with:
+%section.compatability.hardware#Compatability
+  %h2 Compatibility
   .devices
     = partial "documentation/partials/devices_platforms"
    

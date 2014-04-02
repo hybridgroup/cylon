@@ -1,0 +1,41 @@
+:markdown
+  # Commands
+
+  ## getTemperature
+
+  Gets the value of the temperature in degrees Celsius.  Returns it as an object:
+
+  ##### Return
+
+  `object`
+
+  {
+      temp: 19.9
+  }
+
+  ## getPressure
+
+  Gets the value of the pressure in Pascals.  Since temperature is also calculated to determine pressure, it returns the temperature as well:
+
+  ##### Return
+
+  `object`
+
+  {
+      temp: 19.9
+      press: 84862
+  }
+
+  ## getAltitude
+
+  Calculates the altitude from the pressure and temperature.  Since temperature and pressure are calculated to determine altitude, it returns all three.
+
+  ##### Return
+
+  `object`
+
+  {
+      temp: 19.9
+      press: 84862
+      alt: 1470.81
+  }

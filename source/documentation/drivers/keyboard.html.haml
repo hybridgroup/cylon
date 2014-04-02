@@ -5,17 +5,19 @@ page_title: Keyboard
 page_subtitle: Driver
 layout: documentation
 page_title_show: true
+subnav_driver: true
 
 keyboard_platform: true
 ---
 
 %section.intro
   =image_tag "/images/devices/keyboard.jpg", class: "display"
-  %p The Cylon adaptor for keyboard input.
-
-%section.how-to
-  %h2 How to establish a connection and setup the driver
-  %h3 Javascript
+  .info-intro
+    %p The Cylon adaptor for keyboard input.
+  .clear
+  
+%section.how-to#HowToConnect
+  %h2 How To Connect
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -25,20 +27,9 @@ keyboard_platform: true
           device: {name: 'keyboard', driver: 'keyboard'}
         ...
 
-  %h3 CoffeeScript
-  :markdown
-        :::javascript
-        Cylon = require 'cylon'
-
-        Cylon.robot
-          device: { name: 'keyboard', driver: 'keyboard' }
-          connection: { name: 'keyboard', adaptor: 'keyboard' }
-        ...
-
-%section.how-to
-  %h2 How to use
+%section.how-to#HowToUse
+  %h2 How To Use
   %p Example receiving button events from a generic joystick.
-  %h3 Javascript
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -53,25 +44,12 @@ keyboard_platform: true
             });
           }
         }).start();
-  %h3 CoffeeScript
-  :markdown
-        :::javascript
-        Cylon = require 'cylon'
-
-        Cylon.robot
-          device: { name: 'keyboard', driver: 'keyboard' }
-          connection: { name: 'keyboard', adaptor: 'keyboard' }
-          work: (my) ->
-            my.keyboard.on 'a', (key) ->
-              console.log "A PRESSED!"
-
-        .start()
-
+ 
 %section.public-methods
-  .commands_api
+  .commands-api#Events
     = partial "/documentation/drivers/partials/keyboard/events"
 
-%section.compatability.hardware
-  %h2 Works with:
+%section.compatability.hardware#Compatability
+  %h2 Compatibility
   .devices
     = partial "documentation/partials/devices_platforms"

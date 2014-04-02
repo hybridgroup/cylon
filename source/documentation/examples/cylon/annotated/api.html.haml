@@ -1,0 +1,97 @@
+---
+layout: documentation
+page_title_show: true
+title: "Cylon.JS Example - API"
+page_title: "Example: API"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon/tree/master/examples/api' target='_blank'>View In Repo</a>"
+---
+
+:markdown
+  # API
+
+  In this Cylon example, we'll be demonstrating the HTTP API that Cylon spins up
+  when it starts.
+
+  This example involves two Spheros, so before you start make sure you have the
+  `cylon-sphero` module installed.
+
+  First, let's import Cylon:
+
+      :::javascript
+      var Cylon = require('cylon');
+
+  Next up, we'll configure the API Cylon will serve, telling it to serve on port
+  `8080`.
+
+      :::javascript
+      Cylon.api({host: '0.0.0.0', port: '8080'});
+
+  Since we're making two very similar robots (Spheros, in this case), let's put
+  the different parts of each robot in objects so we can initialize them later.
+  The only differences between the bots are their names and the port they'll be
+  using.
+
+      :::javascript
+      var bots = [
+        { port: '/dev/rfcomm0', name: 'Thelma' },
+        { port: '/dev/rfcomm1', name: 'Louise' }
+      ];
+
+  Now we can define the basic robot both of our Sphero robots will be based on.
+
+      :::javascript
+      var SpheroRobot = {
+
+  Both robots will be connecting to Spheros, and so using the cylon-sphero
+  adaptor:
+
+      :::javascript
+        connection: { name: 'Sphero', adaptor: 'sphero' },
+
+  And both will be connecting to the same kind of device (you guessed it,
+  a Sphero).
+
+      :::javascript
+        device: { name: 'sphero', driver: 'sphero' },
+
+  Both robots will be performing the same kind of work as well.  Every second,
+  they'll print their name to the console, set themselves to a random color, and
+  roll in a random direction.
+
+      :::javascript
+        work: function(my) {
+          every((1).seconds(), function() {
+            console.log(my.name);
+            my.sphero.setRandomColor();
+            my.sphero.roll(60, Math.floor(Math.random() * 360));
+          });
+        }
+      };
+
+  Now that we know what hardware the robots have and what work they'll be doing,
+  let's create them! We'll iterate through our earlier `bots` array, creating
+  a new Robot, assigning it it's unique characteristics, then passing it off to
+  Cylon so it can keep track of it.
+
+      :::javascript
+      for (var i = 0; i < bots.length; i++) {
+        var bot = bots[i];
+        var robot = Object.create(SpheroRobot);
+
+        robot.connection.port = bot.port;
+        robot.name = bot.name;
+
+        Cylon.robot(robot);
+      }
+
+  And now that Cylon has all the robots we're intending to give it, let's get
+  started!
+
+      :::javascript
+      Cylon.start();
+
+  Now Cylon will start up the robots and their devices, as well as an API server
+  listening on `0.0.0.0:8080`.
+

@@ -5,6 +5,8 @@ page_title: BlinkM
 page_subtitle: Driver
 layout: documentation
 page_title_show: true
+subnav_driver: true
+subnav_circuit_driver: true
 
 arduino_platform: true
 beaglebone_platform: true
@@ -13,14 +15,14 @@ digispark_platform: true
 ---
 %section.intro
   =image_tag "/images/devices/blinkm.jpg", class: "display"
-  %p
-    Allows user to control BlinkM RGB LED via i2c interface.
-
-%section.how-to
-  %h2 How to establish a connection and setup the driver
+  .info-intro
+    %p Allows user to control BlinkM RGB LED via i2c interface.
+  .clear
+  
+%section.how-to#HowToConnect
+  %h2 How To Connect
   :markdown
     Install the module with `npm install cylon-i2c`
-  %h3 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -30,23 +32,10 @@ digispark_platform: true
           device: {name: 'led', driver: 'led', pin: 13},
           ...
 
-  %h3 CoffeeScript
-  :markdown
-        :::javascript
-        Cylon = require('cylon')
 
-        Cylon.robot
-          connection:
-            name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
-
-          device:
-            name: 'led', driver: 'led', pin: 13
-          ...
-
-%section.how-to
-  %h2 How to use
+%section.how-to#HowToUse
+  %h2 How To Use
   %p Example using a BlinkM.
-  %h3 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -60,37 +49,23 @@ digispark_platform: true
           }
         }).start();
 
-  %h3 CoffeeScript
-  :markdown
-        :::javascript
-        Cylon = require('cylon')
-
-        Cylon.robot
-          connection:
-            name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
-
-          device:
-            name: 'led', driver: 'led', pin: 13
-
-          work: (my) ->
-            # we do our thing here
-            every 1.second(), -> my.led.toggle()
-
-        .start()
 
 %section.public-methods
-  .commands_api
+  .commands-api#Commands
     = partial "/documentation/drivers/partials/i2c/commands_blinkm"
-  .commands_api
+  .commands-api#Events
     = partial "/documentation/drivers/partials/i2c/events_blinkm"
 
-%section.circuit
-  %h2 Circuit and Schematic
-  %p
-    Coming soon...
+%section.circuit#Circuit
+  %h2 Circuit 
+  .description-circuit
+    %p
+  .image-circuit 
+    %img{:src => "/documentation/drivers/breadboards/i2c/blinkm_bb.png", :alt => ""}/ 
+  .clear 
 
-%section.compatability.hardware
-  %h2 Works with:
+%section.compatability.hardware#Compatability
+  %h2 Compatibility
   .devices
     = partial "documentation/partials/devices_platforms"
     

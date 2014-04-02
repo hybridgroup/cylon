@@ -1,0 +1,329 @@
+---
+title: Cylon.js CLI
+author: The Hybrid Group
+page_title: CLI
+page_subtitle: "Cylon CLI (Command Line Interface) provides several tools to make RobotOps easier."
+layout: documentation
+page_title_show: true
+---
+.cli
+  %h2 What is it?
+  %p
+    Cylon CLI is a powerful command line interface tool that provides several tools to make RobotOps and
+    setting up your devices to work with cylon a lot easier.
+
+  %h2 How to install
+  %p
+    For the commands to be available everywhere the cylon module needs to be installed globally.
+    Here's how to do it.
+
+  :markdown
+        :::bash
+        $ sudo npm install -g cylon-cli
+
+  %h2 How can I use it?
+  %p
+    :markdown
+      The Cylon.JS CLI tools are easy to use, designed to be intuitive, and offer contextual help regarding the commands you're using. Once you have the `cylon-cli` module installed globally, the toolkit will be available at all times. To find all available commands, just run `cylon help`.
+
+  %h3 Printing a list of available commands
+  :markdown
+        :::bash
+        $ cylon
+
+        Usage: cylon [command] [options]
+
+        Commands:
+          arduino [subcommand] [opts]
+              Install avrdude, and upload sketches to your Arduino
+
+          bluetooth [pair|unpair|connect]
+              Scan, pair, unpair bluetooth devices. Establishes serial to Bluetooth connection.
+
+          crazyflie [subcommand] [opts]
+              Set udev rules for Crazyflie
+
+          digispark [subcommand]
+              Set udev rules, and upload the Littlewire protocol to your Digispark
+
+          generate [module|driver] [name]
+              Generate new Cylon components or modules
+
+          help
+              Prints help for using the Cylon-CLI commands.
+
+          scan [type]
+              Scans serial, Bluetooth, or USB for connected devices
+
+          spark upload [access_token] [device_id] [firmware_file]
+              Upload new firmare to your Spark Core
+
+
+  %h3 Scanning serial port for connected devices
+  :markdown
+        :::bash
+        $ cylon scan serial
+
+
+  %h3 Important note about Cylon CLI commands.
+  %p
+    :markdown
+      To use the commands as described here you need to install cylon as a global module by running `sudo npm install -g cylon-cli`.
+
+  %p
+    :markdown
+      If you choose to install locally, using just local path, and you cannot call the commands, you might need to use the full path to the cylon command file, or add `./node_modules/cylon/bin` directory to the $PATH.
+    :markdown
+          :::bash
+          $ cylon scan serial
+
+  %h2 What Cylon CLI commands are available?
+  %p
+    If you have only installed cylon, the list of available commands is the one printed in the section above,
+    let's review them one by one.
+
+  %h2 cylon arduino [subcommand] [opts]
+  %h4 Description
+  %p
+    Install avrdude, and upload sketches to your Arduino.
+  :markdown
+        :::bash
+        $ cylon arduino
+        Usage:
+        cylon arduino install                                  # installs avrdude to allow uploading of sketches to Arduino
+        cylon arduino upload firmata [port]                    # uploads Firmata sketch to Arduino
+        cylon arduino upload rapiro [port]                     # uploads Rapiro sketch to Arduino
+        cylon arduino upload [custom-firmware-filename] [port] # uploads a custom sketch to Arduino
+
+  %b
+    Notes:
+    :markdown
+      You must run `cylon arduino install` first.
+      The serial port must have the correct permissions for your
+      user to read and write, or run it as root (sudo it).
+  :markdown
+        :::bash
+        $ cylon arduino upload ttyACM0
+
+        avrdude: AVR device initialized and ready to accept instructions
+
+        Reading | ################################################## | 100% 0.00s
+
+        avrdude: Device signature = 0x1e950f
+        avrdude: reading input file "/home/myuser/workspace/cylon-cmds/node_modules/cylon-firmata/src/cli/hex/StandardFirmata.cpp.hex"
+        avrdude: writing flash (11452 bytes):
+
+        Writing | ################################################## | 100% 1.84s
+
+        avrdude: 11452 bytes of flash written
+        avrdude: verifying flash memory against /home/myuser/workspace/cylon-cmds/node_modules/cylon-firmata/src/cli/hex/StandardFirmata.cpp.hex:
+        avrdude: load data flash data from input file /home/myuser/workspace/cylon-cmds/node_modules/cylon-firmata/src/cli/hex/StandardFirmata.cpp.hex:
+        avrdude: input file /home/myuser/workspace/cylon-cmds/node_modules/cylon-firmata/src/cli/hex/StandardFirmata.cpp.hex contains 11452 bytes
+        avrdude: reading on-chip flash data:
+
+        Reading | ################################################## | 100% 1.47s
+
+        avrdude: verifying ...
+        avrdude: 11452 bytes of flash verified
+
+        avrdude: safemode: Fuses OK
+
+        avrdude done.  Thank you.
+
+
+
+
+  %h2 cylon bluetooth [pair|unpair|connect]
+  %h4 Description
+  %p
+    :markdown
+      Lets you pair, unpair and connect to bluetooth devices by specifying one of three subcommands, the avilable options for the subcommand are `pair`, `unpair` or `connect`.
+
+  %h4 cylon bluetooth pair <address>
+  %b Description
+  %p
+    Pairs a bluetooth device to the computer.
+  %b
+    Notes:
+    :markdown
+      when prompted, answer `yes` to confirm pairing pin.
+
+  :markdown
+        :::bash
+        $ cylon bluetooth pair 00:06:66:4A:23:C3
+        RequestConfirmation (/org/bluez/630/hci0/dev_00_06_66_4A_23_C3, 135070)
+        Confirm passkey (yes/no): yes
+        Release
+        New device (/org/bluez/630/hci0/dev_00_06_66_4A_23_C3)
+
+  %h4 cylon bluetooth unpair <address>
+  %b Description
+  %p
+    Unpairs a bluetooth device.
+  %b
+    Notes:
+    :markdown
+      when prompted answer `no` to deny pairing pin.
+
+  :markdown
+        :::bash
+        $ cylon bluetooth unpair 00:06:66:4A:23:C3
+        RequestConfirmation (/org/bluez/630/hci0/dev_00_06_66_4A_23_C3, 761422)
+        Confirm passkey (yes/no): no
+        Creating device failed: org.bluez.Error.AuthenticationFailed: Authentication Failed
+
+  %h4 cylon bluetooth connect <address>
+  %b Description
+  %p
+    connects a bluetooth device to a serial port to enable communication with CylonJS.
+
+  :markdown
+        :::bash
+        $ cylon bluetooth connect 00:06:66:4A:23:C3
+        Connected /dev/rfcomm0 to 00:06:66:4A:23:C3 on channel 1
+        Press CTRL-C for hangup
+
+  %h2 cylon crazyflie [subcommand] [opts]
+  %h4 Description
+  %p Set udev rules for Crazyflie.
+  :markdown
+        :::bash
+        $ cylon crazyflie
+        Usage:
+        cylon crazyflie set-udev-rules
+
+  %h2 cylon digispark [subcommand]
+  %h4 Description
+  %p Set udev rules, and upload the Littlewire protocol to your Digispark.
+  :markdown
+        :::bash
+        $ cylon digispark
+        Usage:
+          cylon digispark set-udev-rules
+          cylon digispark upload
+
+  %h2 cylon generate [module|driver] [name]
+  %h4 Description
+  %p Generates a new Cylon component or adaptor module.
+
+  :markdown
+        :::bash
+        $ cylon generate module octobot
+        Creating cylon-octobot adaptor.
+        Compiling templates.
+
+        $ cylon generate driver octobot
+        $ cat lib/octobot.js
+        "use strict";
+
+        var namespace = require('node-namespace');
+
+        namespace("Cylon.Drivers", function() {
+          this.Octobot = (function(klass) {
+            subclass(Octobot, klass);
+
+            function Octobot(opts) {
+              Octobot.__super__.constructor.apply(this, arguments);
+            }
+
+            Octobot.prototype.commands = function() {
+              return [];
+            };
+
+            Octobot.prototype.start = function() {
+              Octobot.__super__.start.apply(this, arguments);
+            };
+
+            return Octobot;
+
+          })(Cylon.Driver);
+        });
+
+        module.exports = Cylon.Drivers.Octobot;
+
+  %h2 cylon help
+  %h4 Description
+  %p Prints help for using the Cylon-CLI commands.
+  :markdown
+        :::bash
+        $ cylon help
+        Usage: cylon [command] [options]
+
+        Commands:
+           arduino [subcommand] [opts]
+              Install avrdude, and upload sketches to your Arduino
+
+           bluetooth [pair|unpair|connect]
+              Scan, pair, unpair bluetooth devices. Establishes serial to Bluetooth connection.
+
+           crazyflie [subcommand] [opts]
+              Set udev rules for Crazyflie
+
+           digispark [subcommand]
+              Set udev rules, and upload the Littlewire protocol to your Digispark
+
+           help
+              Prints help for using the Cylon-CLI commands.
+
+           scan [type]
+              Scans serial, Bluetooth, or USB for connected devices
+
+           spark upload [access_token] [device_id] [firmware_file]
+              Upload new firmare to your Spark Core
+
+  %h2 cylon scan [type]
+  %h4 Description
+  %p
+    :markdown
+      Scans different types of devices connected to your computer. The available options for the type param are `serial`, `bluetooth` or `usb`.
+
+
+  :markdown
+        :::bash
+        $ cylon scan usb
+        Bus 002 Device 002: ID 8087:8000 Intel Corp.
+        Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+        Bus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+        Bus 003 Device 007: ID 08bb:2702 Texas Instruments Speakers
+        Bus 003 Device 012: ID 1781:0c9f Multiple Vendors USBtiny
+        Bus 003 Device 013: ID 2341:0043 Arduino SA Uno R3 (CDC ACM)
+
+  :markdown
+        :::bash
+        $ cylon scan bluetooth
+        Scanning ...
+          00:06:66:4A:23:C3        Sphero-RPB
+
+
+  %h2 cylon spark upload [access_token] [device_id] [firmware_file]
+  %h4 Description
+  %p
+    %b Description:
+    lets you upload new source code directly to your Spark Core.<br />
+    %b Notes:
+    %ul
+      %li <code>access_token:</code> In the Build tool, click on the Settings cog in the bottom-left corner to find your access token.
+      %li <code>device_id:</code> After you have your Spark Core registered to your account through the Tinker app, click on the Cores section (just above the Settings cog) on the Build tool. Then, click on the arrow next to your core's name to get its device ID.
+
+  :markdown
+        :::bash
+        $ cylon spark upload [access_token] [device_id] new_firmware.cpp
+  %p Necessary arguments :
+  :markdown
+        :::bash
+        $ cylon spark upload
+
+        Necessary arguments:
+        - [access_token] # your Spark access token
+        - [device_id]    # your Spark Core's device ID
+        - [filename]     # filename of app you'd like to upload
+
+
+  %p
+    For more information on how to program your Spark, please see
+    = link_to "Spark's examples", "http://docs.spark.io/#/examples", target: :blank
+
+  %p
+    You'll need your <code>access_token</code> and <code>device_id</code> to push new software to your Spark, and you can get both of these from Spark's
+    = link_to "Build tool", "https://spark.io/build", target: :blank
+

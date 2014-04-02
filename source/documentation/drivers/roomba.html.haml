@@ -5,15 +5,18 @@ page_title: Roomba
 page_subtitle: Driver
 layout: documentation
 page_title_show: true
+subnav_driver: true
+
 
 roomba_platform: true
 ---
 
 %section.intro
   =image_tag "/images/devices/roomba.jpg", class: "display"
-  %p
-    Allows user to control a Roomba iRobot Create using Cylon.js.
-
+  .info-intro  
+    %p Allows user to control a Roomba iRobot Create using Cylon.js.
+  .clear
+  
 %section.how-to
   %h2 How to establish a connection and setup the driver
   :markdown
@@ -28,9 +31,9 @@ roomba_platform: true
         ...
 
 %section.public-methods
-  .commands_api
+  .commands-api
     = #partial "/documentation/drivers/partials/roomba/commands"
-  .commands_api
+  .commands-api
     = #partial "/documentation/drivers/partials/roomba/events"
 
 %section.compatability.hardware

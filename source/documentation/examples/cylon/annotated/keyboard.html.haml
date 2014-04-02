@@ -1,0 +1,45 @@
+---
+layout: documentation
+page_title_show: true
+title: "Cylon.JS Example - Keyboard"
+page_title: "Example: Keyboard"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon/tree/master/examples/keyboard' target='_blank'>View In Repo</a>"
+---
+
+:markdown
+  # Keyboard
+
+  For this Cylon example, we're going to quickly demonstrate getting keyboard
+  input.
+
+  First, let's import Cylon:
+
+      :::javascript
+      var Cylon = require('cylon');
+
+  With that done, let's define our robot:
+
+      :::javascript
+      Cylon.robot({
+
+  It will have a single connection and device, both to the keyboard.
+
+      :::javascript
+        connection: { name: 'keyboard', adaptor: 'keyboard' },
+        device: { name: 'keyboard', driver: 'keyboard' },
+
+  When we tell this robot to work, it's going to listen to the 'a' key on the
+  keyboard and let us know when it's been pressed.
+
+      :::javascript
+        work: (my) function() {
+          my.keyboard.on('a', function(key) { console.log "A PRESSED!" });
+        }
+
+  With that done, let's get started!
+
+      :::javascript
+      }).start();
+

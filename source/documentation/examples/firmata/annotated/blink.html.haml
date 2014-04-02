@@ -1,0 +1,50 @@
+---
+layout: documentation
+page_title_show: true
+title: "Cylon.JS Example - Blink"
+page_title: "Example: Blink"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-firmata/tree/master/examples/blink' target='_blank'>View In Repo</a>"
+---
+
+:markdown
+  # Blink
+
+  For this very basic Cylon example, we're just going to hook up to an Arduino and
+  blink an LED on it with a one-second interval.
+
+  To get started, let's load up Cylon:
+
+      :::javascript
+      var Cylon = require('cylon');
+
+  With Cylon loaded, we can now define our basic robot.
+
+      :::javascript
+      Cylon.robot({
+
+  Our robot has one connection, to an Arduino using the `cylon-firmata` adaptor:
+
+      :::javascript
+        connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+
+  Our robot also only has one device (or at least only one we're concerned about),
+  an LED on pin 13.
+
+      :::javascript
+        device: { name: 'led', driver: 'led', pin: 13 },
+
+  Next, we'll define the robot's work, which will be toggling the LED every
+  second:
+
+      :::javascript
+        work: function(my) {
+          every((1).second(), my.led.toggle);
+        }
+
+  And that's all the parts of our robot. All that's left is to start it.
+
+      :::javascript
+      }).start();
+

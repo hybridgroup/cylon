@@ -5,18 +5,19 @@ page_title: Pebble
 page_subtitle: Driver
 layout: documentation
 page_title_show: true
+subnav_driver: true
 
 pebble_platform: true
 ---
 
 %section.intro
   =image_tag "/images/devices/pebble.jpg", class: "display"
-  %p
-    Allows user to interact with Cylon.js devices using a Pebble smart watch.
-
-%section.how-to
-  %h2 How to establish a connection and setup the driver
-  %h3 JavaScript
+  .info-intro
+    %p Allows user to interact with Cylon.js devices using a Pebble smart watch.
+  .clear
+  
+%section.how-to#HowToConnect
+  %h2 How To Connect
   :markdown
         :::javascript
         Cylon = require('cylon');
@@ -30,24 +31,11 @@ pebble_platform: true
             name: 'pebble',
             driver: 'pebble'
           },
-  %h3 CoffeeScript
-  :markdown
-        :::javascript
-        Cylon = require('cylon')
-
-        robot = 
-          connection:
-            name: 'pebble', adaptor: 'pebble'
-
-          device:
-            name: 'pebble', driver: 'pebble'
         ...
-
-
-%section.how-to
-  %h2 How to use
+  
+%section.how-to#HowToUse
+  %h2 How To Use
   %h3 Example receiving message queue from a Pebble smart watch.
-  %h3 JavaScript
   :markdown
         :::javascript
         Cylon = require('cylon');
@@ -95,41 +83,14 @@ pebble_platform: true
 
         Cylon.start();
 
-  %h3 CoffeeScript
-  :markdown
-        :::javascript
-        Cylon = require('cylon')
-
-        Cylon.api host: '0.0.0.0', port: '8080'
-
-        class PebbleRobot
-          connection:
-            name: 'pebble', adaptor: 'pebble'
-
-          device:
-            name: 'pebble', driver: 'pebble'
-
-          work: (self) ->
-            c = 100
-            every 1.second(), ->
-              c++
-              str = "c: \#{c}"
-              self.pebble.message_queue().push(str)
-              console.log(self.pebble.last_message())
-
-        bot = new PebbleRobot()
-        bot.name = 'pebble'
-        Cylon.robot bot
-
-        Cylon.start()
 
 %section.public-methods
-  .commands_api
+  .commands-api#Commands
     = partial "/documentation/drivers/partials/pebble/commands"
-  .commands_api
+  .commands-api#Events
     = partial "/documentation/drivers/partials/pebble/events"
 
-%section.compatability.hardware
-  %h2 Works with:
+%section.compatability.hardware#Compatability
+  %h2 Compatibility
   .devices
     = partial "documentation/partials/devices_platforms"

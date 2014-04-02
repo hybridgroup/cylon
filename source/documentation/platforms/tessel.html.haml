@@ -5,83 +5,70 @@ page_title: Tessel
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-tessel' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-tessel/issues'>Issues</a>"
 layout: documentation
 page_title_show: true
+subnav_platform: true
 
 led_driver: true
+button_driver: true
+blinkm_driver: true
 ---
-.documentation
-  %section.intro
-    = image_tag "/images/tessel.jpg", class: "display"
 
+%section.intro
+  = image_tag "/images/tessel.jpg", class: "display"
+  .info-intro
     %p Tessel runs JavaScript—no server necessary. Just like web or mobile development, use your own IDE and libraries to program physical applications.
 
-    :markdown 
-      Tessel supports packages from `npm` to leverage the growing Node.js community and capabilities. That's HTTP, Twitter, web server, color, and async support right out of the box. Uploading new code is as easy as `tessel push`!
+  :markdown 
+    Tessel supports packages from `npm` to leverage the growing Node.js community and capabilities. That's HTTP, Twitter, web server, color, and async support right out of the box. Uploading new code is as easy as `tessel push`!
 
-    %p
-      For more info about the Tessel platform click
-      = succeed "." do
-        = link_to "here", "http://tessel.io/", target: :blank
+  %p
+    For more info about the Tessel platform click
+    = succeed "." do
+      = link_to "here", "http://tessel.io/", target: :blank
+  
+  .clear
 
-  %section.how-to
-    %h2 How to install
-    %p Installing cylon.js with Tessel support is pretty easy.
-    :markdown
-          :::javascript
-          npm install cylon-tessel
 
-    %h2 How to use
-    %p This small program lets you toggle an LED on and off.
-    
-    %h3 Javascript
-    
-    :markdown
-          :::javascript
-          var Cylon = require('cylon');
+%section.how-to#HowToInstall
+  %h2 How to install
+  %p Installing cylon.js with Tessel support is pretty easy.
+  :markdown
+        :::javascript
+        npm install cylon-tessel
 
-          Cylon.robot({
-            connection: { name: 'tessel', adaptor: 'tessel'},
-            device: {name: 'led', driver: 'led', pin: 1},
 
-            work: function(my) {
-              every((1).seconds(), function() {my.led.toggle()});
-            }
-          }).start();
-              
-    %h3 CoffeeScript
+%section.how-to#HowToUse
+  %h2 How to use
+  %p This small program lets you toggle an LED on and off.
+  
+  
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
 
-    :markdown
-          :::javascript
-          Cylon = require("cylon")
-          
-          Cylon.robot(
-            connection:
-              name: "tessel"
-              adaptor: "tessel"
+        Cylon.robot({
+          connection: { name: 'tessel', adaptor: 'tessel'},
+          device: {name: 'led', driver: 'led', pin: 1},
 
-            device:
-              name: "led"
-              driver: "led"
-              pin: 1
+          work: function(my) {
+            every((1).seconds(), function() {my.led.toggle()});
+          }
+        }).start();
+            
+  
+%section.how-to#HowToConnect
+  -#%h2 How to connect
+  -#%p The ARDrone is a WiFi device, so there is no additional work to establish a connection to a single drone. However, in order to connect to multiple drones, you need to perform some configuration steps on each drone via SSH.
 
-            work: (my) ->
-              every (1).seconds(), ->
-                my.led.toggle()
+  
+%section.drivers#Drivers
+  %h2 Drivers
+  %p Available drivers for the Tessel platform are listed below. 
 
-          ).start()
-
-    -#%h2 How to connect
-    -#%p The ARDrone is a WiFi device, so there is no additional work to establish a connection to a single drone. However, in order to connect to multiple drones, you need to perform some configuration steps on each drone via SSH.
-
-    
-  %section.drivers
-    %h2 Drivers
-    %p Available drivers for the Tessel platform are listed below. 
-
-    .hardware
-      // TODO: Update drivers list at the top of the page.
-      %h2 GPIO Drivers
-      .devices
-        = partial "documentation/partials/devices_gpio_drivers"
-      -#%h2 i2c Drivers
-      .devices
-        =# partial "documentation/partials/devices_i2c_drivers"
+  .hardware
+    // TODO: Update drivers list at the top of the page.
+    %h2 GPIO Drivers
+    .devices
+      = partial "documentation/partials/devices_gpio_drivers"
+    %h2 i2c Drivers
+    .devices
+      = partial "documentation/partials/devices_i2c_drivers"

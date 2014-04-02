@@ -1,0 +1,55 @@
+---
+layout: documentation
+page_title_show: true
+title: "Cylon.JS Example - Drone Navigation"
+page_title: "Example: Drone Navigation"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-ardrone/tree/master/examples/drone_nav' target='_blank'>View In Repo</a>"
+---
+
+:markdown
+  # Drone Navigation
+
+  For this Cylon example, we'll be using an ARDrone again, this time getting data
+  from it's navigation board. When the board emits an 'update' event, we'll log
+  the data it's collected to the console.
+
+  Before we get started, make sure you've got the `cylon-ardrone` module
+  installed. First, let's start by loading up Cylon:
+
+      :::javascript
+      var Cylon = require('cylon');
+
+  After we've got that loaded up, let's start defining our robot.
+
+      :::javascript
+      Cylon.robot({
+
+  Our robot will, as with the basic ARDrone example, have a connection to an
+  ARDrone over an IP address, and a `drone` device to control the drone itself.
+  Except this time, we're also adding a `nav` device that will bind to the
+  ARDrone's navigation board.
+
+      :::javascript
+        connection: { name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1' },
+        devices: [
+          { name: 'drone', driver: 'ardrone' },
+          { name: 'nav', driver: 'ardroneNav' }
+        ],
+
+  For our robot's work, it's going to enable the nav board's demo mode in the
+  drone's config, and log data to the console whenever the nav board emits the
+  'update' event.
+
+      :::javascript
+        work: function(my) {
+          my.drone.config('general:navdata_demo', 'TRUE');
+          my.nav.on('update', console.log);
+        }
+
+  Simple enough. Now all that's left is to start the robot:
+
+      :::javascript
+      }).start();
+

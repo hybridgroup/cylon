@@ -1,0 +1,25 @@
+---
+layout: documentation
+page_title_show: true
+title: "Cylon.JS Example - Keyboard"
+page_title: "Example: Keyboard"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon/tree/master/examples/keyboard' target='_blank'>View In Repo</a>"
+---
+
+.example
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'keyboard', adaptor: 'keyboard' },
+          device: {name: 'keyboard', driver: 'keyboard'},
+
+          work: function(my) {
+            my.keyboard.on('a', function(key) { 
+              console.log("A PRESSED!");
+            });
+          }
+        }).start();

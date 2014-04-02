@@ -5,20 +5,24 @@ page_title: Opencv
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-opencv' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-opencv/issues'>Issues</a>"
 layout: documentation
 page_title_show: true
+subnav_platform: true
 ---
 
 %section.intro
   = image_tag "/images/devices/opencv.jpg", class: "display"
+  .info-intro
+    %p OpenCV is a real-time computer vision library.
+    %p OpenCV (Open Source Computer Vision Library) is an open source computer vision and machine learning software library. OpenCV was built to provide a common infrastructure for computer vision applications and to accelerate the use of machine perception in the commercial products. Being a BSD-licensed product, OpenCV makes it easy for businesses to utilize and modify the code.
 
-  %p OpenCV is a real-time computer vision library.
+    %p
+      For more info about OpenCV click 
+      = succeed "." do
+        = link_to "here", "http://opencv.org/", target: :blank
 
-  %p
-    For more info about OpenCV click 
-    = succeed "." do
-      = link_to "here", "http://opencv.org/", target: :blank
-
-%section.how-to
-  %h2 How to install
+  .clear
+  
+%section.how-to#HowToInstall
+  %h2 How To Install
   %p Installing Cylon.js with Opencv support is pretty easy.
   :markdown
         :::bash
@@ -70,47 +74,53 @@ page_title_show: true
         make
         sudo make install
 
-  %h2 How to use
+%section.how-to#HowToUse
+  %h2 How To Use
   %p Example using face detection.
-  %h3 CoffeeScript
   :markdown
         :::javascript
-        Cylon = require('cylon')
+        var Cylon = require('cylon');
 
-        Cylon.robot
-          connection:
-            name: 'opencv', adaptor: 'opencv'
-
+        Cylon.robot({
+          connection: { name: 'opencv', adaptor: 'opencv' },
           devices: [
-            { name: 'window', driver: 'window' }
+            { name: 'window', driver: 'window' },
             {
               name: 'camera',
               driver: 'camera',
               camera: 1,
-              haarcascade: "\#{ __dirname }/haarcascade_frontalface_alt.xml"
+              haarcascade: __dirname + "/haarcascade_frontalface_alt.xml"
             }
-          ]
+          ],
 
-          work: (my) ->
-            my.camera.once('cameraReady', ->
-              console.log('The camera is ready!')
+          work: function(my) {
+            my.camera.once('cameraReady', function() {
+              console.log('The camera is ready!');
 
-              my.camera.on('facesDetected', (err, im, faces) ->
-                for face in faces
-                  im.rectangle([face.x, face.y], [face.x + face.width, face.y + face.height], [0,255,0], 2)
-                my.window.show(im, 40)
+              my.camera.on('facesDetected', function(err, im, faces) {
+                for (var i = 0; i < faces.length; i++) {
+                  var face = faces[i];
+                  im.rectangle(
+                    [face.x, face.y],
+                    [face.x + face.width, face.y + face.height],
+                    [0, 255, 0],
+                    2
+                  );
+                }
 
-                my.camera.readFrame()
-              )
+                my.window.show(im, 40);
 
-              my.camera.on('frameReady', (err, im) ->
-                my.camera.detectFaces(im)
-              )
+                my.camera.readFrame();
+              });
 
-              my.camera.readFrame()
-            )
+              my.camera.on('frameReady', function(err, im) {
+                my.camera.detectFaces(im);
+              });
 
-        .start()
+              my.camera.readFrame();
+            });
+          }
+        }).start();
 
 				      
 				  

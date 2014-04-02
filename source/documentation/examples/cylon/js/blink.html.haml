@@ -1,0 +1,31 @@
+---
+layout: documentation
+page_title_show: true
+title: "Cylon.JS Example - Digispark Blink"
+page_title: "Example: Digispark Blink"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon/tree/master/examples/blink' target='_blank'>View In Repo</a>"
+---
+
+.example
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: {
+            name: 'digispark',
+            adaptor: 'digispark'
+          },
+          device: {
+            name: 'led',
+            driver: 'led',
+            pin: 1
+          },
+          work: function(my) {
+            return every(1..second(), function() {
+              return my.led.toggle();
+            });
+          }
+        }).start();

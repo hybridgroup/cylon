@@ -5,6 +5,7 @@ page_title: Raspberry Pi
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-raspi' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-raspi/issues'>Issues</a>"
 layout: documentation
 page_title_show: true
+subnav_platform: true
 
 button_driver: true
 continuous_servo_driver: true        
@@ -15,24 +16,27 @@ motor_driver: true
 
 %section.intro
   = image_tag "/images/devices/raspi.jpg", class: "display"
+  .info-intro
+    %p The Raspberry Pi is an inexpensive and popular ARM based single board computer with digital & PWM GPIO, and i2c interfaces built in.
 
-  %p The Raspberry Pi is an inexpensive and popular ARM based single board computer with digital & PWM GPIO, and i2c interfaces built in.
+    %p The Raspberry Pi is a credit-card-sized single-board computer developed in the UK by the Raspberry Pi Foundation with the intention of promoting the teaching of basic computer science in schools
 
-  %p
-    For more info about the Raspberry Pi platform go to
-    = succeed "." do
-      = link_to "http://www.raspberrypi.org/", "http://www.raspberrypi.org/", target: :blank
-
-%section.how-to
-  %h2 How to install
+    %p
+      For more info about the Raspberry Pi platform go to
+      = succeed "." do
+        = link_to "http://www.raspberrypi.org/", "http://www.raspberrypi.org/", target: :blank
+  .clear
+  
+%section.how-to#HowToInstall
+  %h2 How To Install
   %p Installing cylon.js with raspberri-pi support is pretty easy.
   :markdown
         :::bash
         npm install cylon-raspi
 
-  %h2 How to use
+%section.how-to#HowToUse
+  %h2 How To Use
   %p This small program causes an LED to blink.
-  %h3 JavaScript
   :markdown
         :::javascript
         Cylon = require('..');
@@ -53,26 +57,10 @@ motor_driver: true
             });
           }
         }).start();
-
-  %h3 CoffeeScript
-  :markdown
-        :::javascript
-        Cylon = require('cylon')
-
-        Cylon.robot
-          connection:
-            name: 'raspi', adaptor: 'raspi'
-
-          device:
-            name: 'led', driver: 'led', pin: 11
-
-          work: (my) ->
-            every 1.second(), -> my.led.toggle()
-
-        .start()
   
 
-  %h2 How to connect
+%section.how-to#HowToConnect
+  %h2 How To Connect
   %h3 Connecting to Raspberry Pi GPIO
   %p This module only works on a real Raspberry Pi. Do not bother trying on any other kind of computer it will not work. Also note you will need to connect actual circuits to the Raspberry Pi's GPIO pins.
 
@@ -99,7 +87,7 @@ motor_driver: true
 
   =link_to "https://github.com/hybridgroup/pi-blaster" , "https://github.com/hybridgroup/pi-blaster"
 
-%section.drivers
+%section.drivers#Drivers
   %h2 Drivers
   %p All Cylon.js digital and PWM GPIO drivers listed below should work with the Raspberry Pi:
 

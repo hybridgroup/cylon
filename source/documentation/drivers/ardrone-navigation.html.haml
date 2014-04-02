@@ -5,21 +5,24 @@ page_title: ARDrone Navigation
 page_subtitle: Driver
 layout: documentation
 page_title_show: true
+subnav_driver: true
 
 ardrone_platform: true
 ---
 
 %section.intro
   =image_tag "/images/devices/ardrone-navigation.jpg", class: "display"
-  %p
-    Allows user to receive in-flight navgation data from an ARDrone. Navigation data includes such information as the ARDrone's current pitch and yaw, along with many other data elements.
-
-%section.how-to
-  %h2 How to establish a connection and setup the driver
+  .info-intro
+    %p
+      Allows user to receive in-flight navgation data from an ARDrone. Navigation data includes such information as the ARDrone's current pitch and yaw, along with many other data elements.
+      
+  .clear
+  
+%section.how-to#HowToConnect
+  %h2 How To Connect
   %p
     Communication with the ARDrone's navigation data interface takes place using a WiFi connection. The ARDrone is a WiFi access point, so it normally can be the only device you connect to, without some additional effort to reconfigure the drone itself to put it into infrastructure mode.
 
-  %h3 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon')
@@ -32,27 +35,11 @@ ardrone_platform: true
             {name: 'nav', driver: 'ardroneNav'}]
         ...
 
-  %h3 CoffeeScript
-  :markdown
-        :::javascript
-        Cylon = require 'cylon'
 
-        Cylon.robot
-          connection:
-            name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1'
-
-          devices:
-            [
-              {name: 'drone', driver: 'ardrone'},
-              {name: 'nav', driver: 'ardroneNav'}
-            ]
-        ...
-
-%section.how-to
-  %h2 How to use events and call them on your drivers
+%section.how-to#HowToUse
+  %h2 How To Use
   %p Once the connection and the devices have been setup (as explained above) you can receive navigation events on them as follows:
 
-  %h3 JavaScript
   :markdown
         :::javascript
         var Cylon = require('cylon')
@@ -73,34 +60,12 @@ ardrone_platform: true
           }
         }).start();
 
-  %h3 CoffeeScript
-  :markdown
-        :::javascript
-        Cylon = require 'cylon'
-
-        Cylon.robot
-          connection:
-            name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1'
-
-          devices:
-            [
-              {name: 'drone', driver: 'ardrone'},
-              {name: 'nav', driver: 'ardroneNav'}
-            ]
-
-          work: (my) ->
-            my.drone.config 'general:navdata_demo', 'TRUE'
-
-            my.nav.on 'update', (data) ->
-              Logger.info data
-
-        .start()
 
 %section.public-methods
-  .commands_api
+  .commands-api#Events
     = partial "/documentation/drivers/partials/ardrone/events_nav"
 
-%section.compatability.hardware
-  %h2 Works with:
+%section.compatability.hardware#Compatability
+  %h2 Compatibility
   .devices
     = partial "documentation/partials/devices_platforms"

@@ -2,54 +2,54 @@
 
 // Custom
 .app-logo {
+
   a {
+
     @extend .hidden-text;
     margin-top: 10px;
   }
 }
 
 .content {
+
   .documentation {
+
     .api {
+
       img {
+
           width: 100%;
+      }
+    }
+
+    .examples {
+
+      table {
+
+        tbody tr td:first-child, thead tr th:first-child {
+
+          width: 580px;
+        }
       }
     }
   }
 }
 
-.documentation {
-  .index {
-    @include outer-container;
-    padding-left: 30px;
+.makerland {
 
-    section {
-      margin: 0 auto;
-      @include span-columns(3 of 9.5);
-      background: #620020;
-      height: 100px;
-      margin-bottom: 20px;
-      border-radius: 5px;
+  ul {
 
-      a {
-        width: 100%;
-        height: 100%;
-        padding: 10px;
-        display: block;
-      }
+    li {
 
-      &:hover {
-        background: darken(#620020, 5);
-      }
+      p {
 
-      .title {
-        color: #EFECE5;
-        font-weight: bold;
-      }
-
-      .description {
-        color: #b39f89;
+        font-size: 16pt;
       }
     }
   }
+}
+
+.makerland-hide {
+
+  display:none;
 }

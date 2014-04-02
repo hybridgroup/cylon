@@ -5,31 +5,36 @@ page_title: Pebble
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-pebble' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-pebble/issues'>Issues</a>"
 layout: documentation
 page_title_show: true
+subnav_platform: true
 
 pebble_driver: true
 ---
 
 %section.intro
   = image_tag "/images/devices/pebble.jpg", class: "display"
+  .info-intro
+    %p The Pebble is a smart watch, that connects via bluetooth.
 
-  %p The Pebble is a smart watch, that connects via bluetooth.
+    %p Pebble puts critical apps and notifications on your wrist, giving you immediate access to what's most important.
 
-  %p
-    For more info about the Pebble platform click
-    = succeed "." do
-      = link_to "here", "http://getpebble.com/", target: :blank
-
-%section.how-to
-  %h2 How to install
+    %p
+      For more info about the Pebble platform click
+      = succeed "." do
+        = link_to "here", "http://getpebble.com/", target: :blank
+  .clear
+  
+%section.how-to#HowToInstall
+  %h2 How To Install
   %p
     Installing Cylon.js with pebble support is pretty easy.
 
   :markdown
         :::bash
         npm install cylon-pebble
-  %h2 How to use
+
+%section.how-to#HowToUse
+  %h2 How To Use
   %p This small program receives message queue events from a Pebble smart watch.
-  %h3 JavaScript
   :markdown
         :::javascript
         Cylon = require('cylon');
@@ -77,35 +82,9 @@ pebble_driver: true
 
         Cylon.start();
 
-  %h3 CoffeeScript
-  :markdown
-        :::javascript
-        Cylon = require('cylon')
 
-        Cylon.api host: '0.0.0.0', port: '8080'
-
-        class PebbleRobot
-          connection:
-            name: 'pebble', adaptor: 'pebble'
-
-          device:
-            name: 'pebble', driver: 'pebble'
-
-          work: (self) ->
-            c = 100
-            every 1.second(), ->
-              c++
-              str = "c: \#{c}"
-              self.pebble.message_queue().push(str)
-              console.log(self.pebble.last_message())
-
-        bot = new PebbleRobot()
-        bot.name = 'pebble'
-        Cylon.robot bot
-
-        Cylon.start()
-
-  %h2 How to connect
+%section.how-to#HowToConnect
+  %h2 How To Connect
   %p This software requires version 1.12.0 of the Pebble watch firmware.
 
   %h3 OSX
@@ -157,7 +136,7 @@ pebble_driver: true
         -#:::bash
         -#Cylon.js connect socat pebble 4567
 
-%section.drivers
+%section.drivers#Drivers
   %h2 Drivers
   %p There is only one driver for the Pebble platform, as listed below.
 
