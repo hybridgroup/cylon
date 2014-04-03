@@ -1,0 +1,154 @@
+---
+page_title_show: true
+title: "Functional Robots With Wisp"
+page_title: Blog
+date: 2014-04-02
+tags: robots
+author: Andrew Stewart
+---
+
+:markdown
+  [Wisp][] is a really cool project for compiling a subset of Clojure syntax to
+  JavaScript, without having to go through all the hoops that [ClojureScript][]
+  forces you through.
+
+  Wisp also compiles to plain JavaScript, without setting up a number of data
+  structures and language idioms the way ClojureScript or other [lang]-to-JS
+  compilers sometimes do. This lets you write Clojure with a fairly good idea of
+  how it'll map to the resulting JavaScript.
+
+  For an example, I decided to convert the [Cylon.JS][] [cat toy][] example to it,
+  just to get a feel for the process.
+
+  The example robot I'm converting hooks up to a Digispark with a couple servos
+  and a Leap Motion. The robot uses hand positions picked up by the Leap Motion
+  to control the servos. Simple enough.
+
+  It's pretty straight-forward JavaScript, so it shouldn't be too hard to convert.
+  Now let's write an analogue in Clojure.
+
+  [Wisp]: https://github.com/Gozala/wisp
+  [ClojureScript]: https://github.com/clojure/clojurescript
+  [Cylon.js]: https://cylonjs.com
+  [cat toy]: http://cylonjs.com/documentation/examples/cylon/js/cattoy/
+
+      :::clojure
+      (def Cylon (require "cylon"))
+
+      ; We're re-writing how the -> special form works here to allow for method
+      ; chaining later on.
+      (defmacro ->
+        [& operations]
+        (reduce
+        (fn [form operation]
+          (cons (first operation)
+                (cons form (rest operation))))
+        (first operations)
+        (rest operations)))
+
+      (def robot {
+        connections [
+          { :name "digispark" :adaptor "digispark" }
+          { :name "leapmotion" :adaptor "leapmotion" :port "127.0.0.:16437" }]
+
+        devices [
+          { :name "servo1" :driver "servo" :pin 0 :connection "digispark" }
+          { :name "servo2" :driver "servo" :pin 1 :connection "digispark" }
+          { :name "leapmotion" :driver "leapmotion" :connection "leapmotion" }]
+
+        work (fn [my]
+          (let [x 90
+                z 90]
+            (my.leapmotion.on
+              :hand
+              (fn [hand]
+                ; wisp gives us this set! form to let us change variables,
+                ; and also using the redefined -> macro we wrote earlier
+                (set! x (-> hand.palmX (.fromScale -300 300) (.toScale 30 150)))
+                (set! y (-> hand.palmY (.fromScale -300 300) (.toScale 30 150)))))
+
+            (every
+              100
+              (fn []
+                (my.servo1.angle x)
+                (my.servo2.angle z)
+                (console.log
+                  "Current Angle:"
+                  (my.servo1.currentAngle)
+                  ","
+                  (my.servo2.currentAngle))))))})
+
+      (.start (Cylon.Robot robot))
+
+  It still looks a fair bit like the original example, but it's clear we're not in
+  Kansas anymore. We even had to write a macro to get method chaining working
+  properly, but that's another cool thing: we wrote a macro, and it works.
+
+  The `wisp` binary has a couple modes; it can run files directly (`wisp
+  robot.wisp`), or will print a compiled version of code passed to `STDIN`.
+
+  Running this with `cat robot.wisp | wisp > robot.js`, we get a fairly decent
+  approximation of the original, which even comes with a generated sourcemap to
+  help with debugging.
+
+      :::javascript
+      var Cylon = exports.Cylon = require('cylon');
+      void 0;
+      var robot = exports.robot = {
+              connections: [
+                  {
+                      'name': 'digispark',
+                      'adaptor': 'digispark'
+                  },
+                  {
+                      'name': 'leapmotion',
+                      'adaptor': 'leapmotion',
+                      'port': '127.0.0.:16437'
+                  }
+              ],
+              devices: [
+                  {
+                      'name': 'servo1',
+                      'driver': 'servo',
+                      'pin': 0,
+                      'connection': 'digispark'
+                  },
+                  {
+                      'name': 'servo2',
+                      'driver': 'servo',
+                      'pin': 1,
+                      'connection': 'digispark'
+                  },
+                  {
+                      'name': 'leapmotion',
+                      'driver': 'leapmotion',
+                      'connection': 'leapmotion'
+                  }
+              ],
+              work: function (my) {
+                  return function () {
+                      var xø1 = 90;
+                      var zø1 = 90;
+                      my.leapmotion.on('hand', function (hand) {
+                          xø1 = hand.palmX.fromScale(-300, 300).toScale(30, 150);
+                          return zø1 = hand.palmY.fromScale(-300, 300).toScale(30, 150);
+                      });
+                      return every(100, function () {
+                          my.servo1.angle(xø1);
+                          my.servo2.angle(zø1);
+                          return console.log('Current Angle:', my.servo1.currentAngle(), ',', my.servo2.currentAngle());
+                      });
+                  }.call(this);
+              }
+          };
+      Cylon.Robot(robot).start();
+      // [source map removed for formatting reasons]
+
+  I don't know if it's something I'd use in day-to-day yet, but Wisp seems like
+  a really cool project for trying out some functional programming ideas in
+  JavaScript.
+
+  I also think this could be a great learning tool for people who want to learn
+  Clojure without getting a full JVM set up. It's easy enough to setup (installs
+  through NPM), and generates clear results in a familiar language, allowing users
+  to clearly see what their Clojure source is doing.
