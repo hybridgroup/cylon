@@ -1,0 +1,75 @@
+---
+title: Cylon.js - MPU6050 Driver
+author: The Hybrid Group
+page_title: MPU6050
+page_subtitle: Driver
+layout: documentation
+page_title_show: true
+subnav_driver: true
+subnav_circuit_driver: true
+
+arduino_platform: true
+digispark_platform: true
+raspberry_platform: true
+---
+%section.intro
+  = image_tag "/images/devices/mpu6050.jpg", class: "display"
+  .info-intro
+    %p The MPU-6050 is a serious little piece of motion processing tech! By combining a MEMS 3-axis gyroscope and a 3-axis accelerometer on the same silicon die together with an onboard Digital Motion Processor™ (DMP™) capable of processing complex 9-axis MotionFusion algorithms, the MPU-6050 does away with the cross-axis alignment problems that can creep up on discrete parts.
+  .clear
+   
+%section.how_to#HowToConnect
+  %h2 How To Connect
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/tty.usbmodem1421' },
+          device: { name: 'mpu6050', driver: 'mpu6050' },
+        ...
+
+%section.how-to#HowToUse
+  %h2 How To Use
+
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/tty.usbmodem1421' },
+          device: { name: 'mpu6050', driver: 'mpu6050' },
+
+          work: function(my) {
+            every((1).seconds(), function() {
+              my.mpu6050.getMotion6(function(data) {
+                Logger.info(data);
+              });
+              
+            });
+          }
+        }).start();
+
+
+%section.public-methods
+  .commands-api#Commands
+    = partial "/documentation/drivers/partials/i2c/commands_mpu6050"
+  .commands-api#Events
+    = partial "/documentation/drivers/partials/i2c/events_mpu6050"
+
+
+%section.circuit#Circuit
+  %h2 Circuit
+  .description-circuit
+    %p 
+  .image-circuit 
+    %p coming soon
+    -#%img{:src => "/documentation/drivers/breadboards/i2c/mpl115a2_bb.png", :alt => ""}/ 
+  .clear 
+
+%section.compatability.hardware#Compatability
+  %h2 Compatibility
+  =# TODO: Update platform list with all that work with this driver in Cylon.js.
+  .devices
+    = partial "documentation/partials/devices_platforms"
+    

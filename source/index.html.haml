@@ -340,7 +340,7 @@ getting_started_button: "<a href='/documentation/getting-started' class='cta'> G
 %p Support for devices that use Inter-Integrated Circuit (I2C) have a shared set of drivers provded using the cylon-i2c module:
 
 %p.important-title 
-  5
+  6
   = link_to "I2C", "https://en.wikipedia.org/wiki/I%C2%B2C", target:"_blank" 
   drivers
 
@@ -381,7 +381,16 @@ getting_started_button: "<a href='/documentation/getting-started' class='cta'> G
     %a{:href => "/documentation/drivers/mpl115a2"} 
       %img{src: "/images/devices/mpl115a2.jpg", style: "width: 90%"}  
     .repo
-      = link_to "repo", "https://github.com/hybridgroup/cylon-i2c", target:"_blank"  
+      = link_to "repo", "https://github.com/hybridgroup/cylon-i2c", target:"_blank" 
+
+  %li
+    .title
+      = link_to "MPU6050", "/documentation/drivers/mpu6050" 
+    %a{:href => "/documentation/drivers/mpu6050"} 
+      %img{src: "/images/devices/mpu6050.jpg", style: "width: 90%"}  
+    .repo
+      = link_to "repo", "https://github.com/hybridgroup/cylon-i2c", target:"_blank" 
+
   .clear
 
 %p.important-title 
