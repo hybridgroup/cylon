@@ -24,7 +24,6 @@ The example requires that the Arduino has the Firmata sketch installed, and that
 
 Make sure to upload the "Standard Firmata" sketch or an equivalent Firmata sketch to your Arduino first. Without that code running on the Arduino, Firmata can't communicate with Cylon. You can find the example sketch in your Arduino software under "Examples > Firmata > StandardFirmata".
 
-##### JavaScript:
 
 ```javascript
 var Cylon = require("cylon");
@@ -45,28 +44,7 @@ var robot = Cylon.robot({
 robot.start();
 ```
 
-##### CoffeeScript:
-
-```ruby
-Cylon = require "cylon"
-
-# Initialize the robot
-robot = Cylon.robot
-  connection:
-    name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'
-
-  device:
-    name: 'led', driver: 'led', pin: 13
-
-  work: (my) ->
-    # we do our thing here
-    every 1.second(), -> my.led.toggle()
-
-robot.start()
-```
 #### Parrot ARDrone 2.0
-
-##### JavaScript:
 
 ```javascript
 var Cylon = require('cylon');
@@ -82,22 +60,7 @@ Cylon.robot({
   }
 }).start();
 ```
-##### CoffeeScript:
 
-```ruby
-Cylon = require 'cylon'
-
-Cylon.robot
-  connection: { name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1' }
-  device: { name: 'drone', driver: 'ardrone' }
-
-  work: (my) ->
-    my.drone.takeoff()
-    after 10.seconds(), -> my.drone.land()
-    after 15.seconds(), -> my.drone.stop()
-
-.start()
-```
 
 ## Hardware Support
 
@@ -111,13 +74,16 @@ Cylon.js has a extensible system for connecting to hardware devices. The followi
 - [Joystick](http://en.wikipedia.org/wiki/Joystick) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-joystick)
 - [Keyboard](http://en.wikipedia.org/wiki/Computer_keyboard) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-keyboard)
 - [Leap Motion](https://www.leapmotion.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-leapmotion)
+- [Neurosky](http://store.neurosky.com/products/mindwave-mobile) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-neurosky)
 - [OpenCV](http://opencv.org/) <==> [Adaptor/Drivers](https://github.com/hybridgroup/cylon-opencv)
 - [Pebble](http://www.getpebble.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-pebble)
+- [Rapiro](http://www.rapiro.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-rapiro)
 - [Raspberry Pi](http://www.raspberrypi.org/) <==> [Adaptor](https://github.com/hybridgroup/cylon-raspi)
 - [Salesforce](http://www.force.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-force)
 - [Skynet](http://skynet.im/) <==> [Adaptor](https://github.com/hybridgroup/cylon-skynet)
 - [Spark](http://www.spark.io/) <==> [Adaptor](https://github.com/hybridgroup/cylon-spark)
 - [Sphero](http://www.gosphero.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-sphero)
+- [Tessel](https://tessel.io/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-tessel)
 
 Support for many devices that use General Purpose Input/Output (GPIO) have
 a shared set of drivers provided using the cylon-gpio module:
@@ -126,6 +92,7 @@ a shared set of drivers provided using the cylon-gpio module:
     - Analog Sensor
     - Button
     - Continuous Servo
+    - IR Rangefinder
     - LED
     - MakeyButton
     - Motor
@@ -137,9 +104,11 @@ drivers provided using the cylon-i2c module:
 
   - [I2C](https://en.wikipedia.org/wiki/I%C2%B2C) <=> [Drivers](https://github.com/hybridgroup/cylon-i2c)
     - BlinkM
+    - BMP180
     - HMC6352 Digital Compass
     - LCD
     - MPL115A2 Barometer/Thermometer
+    - MPU6050
 
 More platforms and drivers are coming soon... follow us on Twitter [@cylonjs](http://twitter.com/cylonjs) for latest updates.
 
