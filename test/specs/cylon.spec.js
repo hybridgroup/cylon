@@ -40,40 +40,67 @@ describe("Cylon", function() {
   });
 
   describe("#api", function() {
-    afterEach(function() {
-      cylon.api_config = { host: "127.0.0.1", port: "3000" };
-    });
+    var expectedConfig;
+
+    beforeEach(function() {
+      expectedConfig = {
+        host: '127.0.0.1',
+        port: '3000',
+        cert: null,
+        key: null
+      };
+
+      // this is the shortest, cheapest way to dup an object in JS.
+      // I don't like it either.
+      cylon.api_config = JSON.parse(JSON.stringify(expectedConfig));
+    })
 
     context("without arguments", function() {
       it("returns the current API configuration", function() {
         cylon.api();
-        var config = cylon.api_config;
-        expect(config).to.be.eql({ host: "127.0.0.1", port: "3000" });
+        expect(cylon.api_config).to.be.eql(expectedConfig);
       });
     });
 
     context("only specifying port", function() {
       it("changes the port, but not the host", function() {
+        expectedConfig.port = "4000";
+
         cylon.api({ port: "4000" });
-        var config = cylon.api_config;
-        expect(config).to.be.eql({ host: "127.0.0.1", port: "4000" });
+
+        expect(cylon.api_config).to.be.eql(expectedConfig);
       });
     });
 
     context("only specifying host", function() {
       it("changes the host, but not the port", function() {
+        expectedConfig.host = "0.0.0.0";
         cylon.api({ host: "0.0.0.0" });
-        var config = cylon.api_config;
-        expect(config).to.be.eql({ host: "0.0.0.0", port: "3000" });
+
+        expect(cylon.api_config).to.be.eql(expectedConfig);
       });
     });
 
     context("specifying new host and port", function() {
       it("changes both the host and port", function() {
+        expectedConfig.host = "0.0.0.0";
+        expectedConfig.port = "4000";
+
         cylon.api({ host: "0.0.0.0", port: "4000" });
-        var config = cylon.api_config;
-        expect(config).to.be.eql({ host: "0.0.0.0", port: "4000" });
+
+        expect(cylon.api_config).to.be.eql(expectedConfig);
       });
+    });
+
+    context("specifiying new SSL key and cert", function() {
+      it("changes the SSL key and cert", function() {
+        expectedConfig.cert = "/path/to/cert/file";
+        expectedConfig.key = "/path/to/key/file";
+
+        cylon.api({ cert: "/path/to/cert/file", key: "/path/to/key/file" });
+
+        expect(cylon.api_config).to.be.eql(expectedConfig);
+      })
     });
   });
 
