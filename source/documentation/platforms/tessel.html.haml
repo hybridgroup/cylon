@@ -54,14 +54,13 @@ blinkm_driver: true
         var Cylon = require('cylon');
 
         Cylon.robot({
-          connection: { name: 'tessel', adaptor: 'tessel'},
-          device: {name: 'led', driver: 'led', pin: 1},
+          connection: { name: 'tessel', adaptor: 'tessel', port: 'LED' },
+          device: { name: 'led', driver: 'led', pin: 2 },
 
           work: function(my) {
-            every((1).seconds(), function() {my.led.toggle()});
+            every((1).seconds(), my.led.toggle);
           }
         }).start();
-            
   
 %section.how-to#HowToConnect
   -#%h2 How to connect
