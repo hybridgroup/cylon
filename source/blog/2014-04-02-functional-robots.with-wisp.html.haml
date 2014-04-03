@@ -49,7 +49,7 @@ author: Andrew Stewart
       (def robot {
         connections [
           { :name "digispark" :adaptor "digispark" }
-          { :name "leapmotion" :adaptor "leapmotion" :port "127.0.0.:16437" }]
+          { :name "leapmotion" :adaptor "leapmotion" :port "127.0.0.1:6437" }]
 
         devices [
           { :name "servo1" :driver "servo" :pin 0 :connection "digispark" }
@@ -103,7 +103,7 @@ author: Andrew Stewart
                   {
                       'name': 'leapmotion',
                       'adaptor': 'leapmotion',
-                      'port': '127.0.0.:16437'
+                      'port': '127.0.0.1:6437'
                   }
               ],
               devices: [
