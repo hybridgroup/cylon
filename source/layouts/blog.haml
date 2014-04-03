@@ -9,10 +9,11 @@
         - else 
           = yield
     .side-colum
-      
       .titles
         %h4 Posts
-        = yield_content :posts
+        %ul 
+          = partial "blog/posts", {locals: { article: current_article } }
+
       .categories
         %h4 Tags
         = yield_content :tags
