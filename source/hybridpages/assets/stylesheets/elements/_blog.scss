@@ -118,7 +118,7 @@
 }
 
 
-.side-colum {
+.side-column {
   @include span-columns(3);
 
   @media only screen and (max-width: $medium-screen) {
