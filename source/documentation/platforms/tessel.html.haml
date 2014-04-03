@@ -31,10 +31,18 @@ blinkm_driver: true
 %section.how-to#HowToInstall
   %h2 How to install
   %p Installing cylon.js with Tessel support is pretty easy.
+  %p
+    Follow the installation instructions detailed 
+    = link_to "here", "https://tessel.io/install/"
   :markdown
         :::javascript
-        npm install cylon-tessel
-
+        sudo npm install -g cylon-cli
+        cylon generate tessel my-tessel-project
+        cd my-tessel-project
+        npm install
+        tessel push blink.js
+  
+  %p If the blue light starts to blink, then you're all set!
 
 %section.how-to#HowToUse
   %h2 How to use
