@@ -12,8 +12,7 @@
       .titles
         %h4 Posts
         %ul 
-          = partial "blog/posts", {locals: { article: current_article } }
-
+          = partial "blog/sidebar_links", {locals: { article: current_article } }
       .categories
         %h4 Tags
         = yield_content :tags
