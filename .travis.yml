@@ -8,3 +8,4 @@ before_script:
 branches:
   except:
     - cylonjs.com
+    - /^cylon-.*$/
