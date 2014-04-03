@@ -129,7 +129,7 @@
   .categories, .network, .tweets, .titles {
 
     vertical-align: top;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     
     a {
 
@@ -176,6 +176,13 @@
     }    
   }
 
+  .network {
+
+    img {
+
+      width: 30px;
+    }
+  }
   .categories {
 
     ul {
@@ -186,6 +193,7 @@
       a {
 
         color: black;
+        font-size: .9em;
 
         &:hover {
 
