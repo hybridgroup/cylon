@@ -1,3 +1,18 @@
+#THG-logo {
+
+  img {
+
+    margin-bottom: -15px;
+    width: 150px;
+    padding: 5px;
+
+    &:hover {
+
+      background: darken($hero-color, 5);
+    }
+  }
+}
+
 .container, .w {
 
   width: $big-screen;
