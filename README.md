@@ -187,6 +187,8 @@ Thank you!
 
 ## Release History
 
+Version 0.13.1 - Add API authentication and HTTPS support
+
 Version 0.13.0 - Set minimum Node version to 0.10.20, add utils to global namespace and improve initialization routines
 
 Version 0.12.0 - Extraction of CLI tooling
