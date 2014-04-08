@@ -39,7 +39,7 @@
   "dependencies": {
     "async": "~0.2.9",
     "node-namespace": "~1.0.0",
-    "express.io": "~1.1.13",
+    "express": "~3.5.1",
     "robeaux": ">= 0.0.4"
   }
 }
