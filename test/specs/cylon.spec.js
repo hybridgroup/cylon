@@ -48,7 +48,8 @@ describe("Cylon", function() {
         port: '3000',
         cert: null,
         key: null,
-        auth: {}
+        auth: {},
+        CORS: null
       };
 
       // this is the shortest, cheapest way to dup an object in JS.
@@ -109,6 +110,16 @@ describe("Cylon", function() {
         var auth = { type: 'basic', user: 'user', pass: 'pass'}
         expectedConfig.auth = auth;
         cylon.api({ auth: auth })
+
+        expect(cylon.api_config).to.be.eql(expectedConfig);
+      });
+    });
+
+    context("specifying CORS restrictions", function() {
+      it("changes the CORS restrictions", function() {
+        var CORS = "https://localhost:4000";
+        expectedConfig.CORS = CORS;
+        cylon.api({ CORS: CORS })
 
         expect(cylon.api_config).to.be.eql(expectedConfig);
       });
