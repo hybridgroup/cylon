@@ -87,6 +87,38 @@ motor_driver: true
 
   =link_to "https://github.com/hybridgroup/pi-blaster" , "https://github.com/hybridgroup/pi-blaster"
 
+  %h3 Available PINS
+  :markdown
+        :::bash
+        PINS = {
+          3: {
+            rev1: 0,
+            rev2: 2
+          },
+          5: {
+            rev1: 1,
+            rev2: 3
+          },
+          7: 4,
+          8: 14,
+          10: 15,
+          11: 17,
+          12: 18,
+          13: {
+            rev1: 21,
+            rev2: 27
+          },
+          15: 22,
+          16: 23,
+          18: 24,
+          19: 10,
+          21: 9,
+          22: 25,
+          23: 11,
+          24: 8,
+          26: 7
+        };
+
 %section.drivers#Drivers
   %h2 Drivers
   %p All Cylon.js digital and PWM GPIO drivers listed below should work with the Raspberry Pi:
