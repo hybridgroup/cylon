@@ -16,14 +16,27 @@ raspberry_platform: true
 %section.intro
   =image_tag "/images/devices/hmc6352-compass.jpg", class: "display"
   .info-intro  
-    %p Allows user to read heading from HMC6352 Digital Compass via i2c interface
+    %p Allows user to read heading from HMC6352 Digital Compass via i2c interface.
+    %p 
+      For more information click
+      = link_to "here.", "https://www.sparkfun.com/products/7915", target: "_blank"
   .clear
   
 %section.how-to#HowToConnect
   %h2 How To Connect
   :markdown
         :::javascript
-        coming soon
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: {
+            name: 'arduino',
+            adaptor: 'firmata'
+          },
+          device: {
+            name: 'hmc6352',
+            driver: 'hmc6352',
+        ...
 
 %section.how-to#HowToUse
   %h2 How To Use
