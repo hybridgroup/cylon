@@ -22,9 +22,10 @@ layout: documentation
 
   ### Examples:
 
-      :::coffeescript
-      every 5.seconds(), ->
-        console.log "Hello world! (and again in 5 seconds)"
+      :::javascript
+      every(5..seconds(), function() {
+        return console.log("Hello world! (and again in 5 seconds)");
+      });
 
   ## after(interval, action)
 
@@ -38,9 +39,10 @@ layout: documentation
 
   ### Examples:
 
-      :::coffeescript
-      after 10.seconds(), ->
-        console.log "Hello world!"
+      :::javascript
+      after(10..seconds(), function() {
+        return console.log("Hello world!");
+      });
 
   ## proxyFunctionsToObject(methods, target, base = this, force = false)
 
@@ -57,19 +59,33 @@ layout: documentation
 
   ### Examples:
 
-      :::coffeescript
-      class ProxyClass
-        reverse: (string) ->
-          string.split('').reverse().join('')
+      :::javascript
+      var BaseClass, ProxyClass, klass;
 
-      class BaseClass
-        constructor: ->
-          @proxy = new ProxyClass
-          proxyFunctionsToObject ['reverse'], @proxy
+      ProxyClass = (function() {
+        function ProxyClass() {}
 
-      klass = new BaseClass
-      klass.reverse("Hello, World!")
-      #=> !dlroW ,olleH
+        ProxyClass.prototype.reverse = function(string) {
+          return string.split('').reverse().join('');
+        };
+
+        return ProxyClass;
+
+      })();
+
+      BaseClass = (function() {
+        function BaseClass() {
+          this.proxy = new ProxyClass;
+          proxyFunctionsToObject(['reverse'], this.proxy);
+        }
+
+        return BaseClass;
+
+      })();
+
+      klass = new BaseClass;
+
+      klass.reverse("Hello, World!");
 
   ## Number::seconds
 
@@ -94,9 +110,8 @@ layout: documentation
 
   ### Examples:
 
-      :::coffeescript
-      10.seconds()
-      #=> 10000
+      :::javascript
+      10..seconds();
 
   ## Number::second
 
@@ -106,9 +121,8 @@ layout: documentation
 
   ### Examples:
 
-      :::coffeescript
-      1.second()
-      #=> 1000
+      :::javascript
+      1..second();
 
 
   ## Number::fromScale(start, end)
@@ -123,12 +137,10 @@ layout: documentation
 
   ### Examples:
 
-      :::coffeescript
-      150.fromScale(0, 200)
-      #=> 0.75
+      :::javascript
+      150..fromScale(0, 200);
 
-      5.fromScale(0, 10)
-      #=> 0.5
+      5..fromScale(0, 10);
 
   ## Number::toScale(start, end)
 
@@ -141,17 +153,14 @@ layout: documentation
   This can be chained together with `Number::fromScale` to quickly and handily
   convert numbers between scales. e.g
 
-      :::coffeescript
-      100.fromScale(0, 200).toScale(0, 100)
-      #=> 50
+      :::javascript
+      100..fromScale(0, 200).toScale(0, 100);
 
   Returns a number representing the scaled value.
 
   ### Examples:
 
-      :::coffeescript
-      0.75.toScale(0, 200)
-      #=> 150
+      :::javascript
+      0.75.toScale(0, 200);
 
-      0.5.toScale(0, 10)
-      #=> 5
+      0.5.toScale(0, 10);
