@@ -38,6 +38,8 @@ else
     https://github.com/hybridgroup/cylon-spark.git
     https://github.com/hybridgroup/cylon-sphero.git
     https://github.com/hybridgroup/cylon-tessel.git
+    https://github.com/hybridgroup/cylon-neurosky.git
+    https://github.com/hybridgroup/cylon-glass.git
   )
 end
 
