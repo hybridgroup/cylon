@@ -25,7 +25,7 @@ lcd_driver: true
       = succeed "." do
         = link_to "here", "http://digistump.com/category/1", target: :blank
   .clear
-  
+
 %section.how-to#HowToInstall
   %h2 How To Install
   %p Installing Cylon.js with digispark support is pretty easy.
@@ -81,12 +81,12 @@ lcd_driver: true
     upload littlewire to the digispark, plug it to a USB port when prompted:
   :markdown
         :::bash
-        $ cylon littlewire upload
+        $ cylon digispark upload
 
   %p Once plugged in, use the `cylon scan usb` command to verify your connection info:
   :markdown
         :::bash
-        $ cylon scan usb
+        $ cylon digispark scan
 
   %p
     Now use the `ID` info returned to find the `product` and `vendor` ID's required
