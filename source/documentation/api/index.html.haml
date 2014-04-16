@@ -10,7 +10,8 @@ page_title_show: true
   :markdown
     ## How To Connect
 
-    Now you're ready to write code that will let you access your robots on a Cylon.js API server.
+    Cylon comes with a built-in API server so you can view details about your
+    robots and control them from anywhere.
 
     ### Running your robot:
 
@@ -62,216 +63,334 @@ page_title_show: true
 
     ## Routes
 
+    For this example, we'll be using a basic Cylon robot, hooked up to an Arduino
+    and a Leap Motion:
+
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          name: "TestBot",
+
+          connections: [
+            { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' },
+            { name: 'arduino', adaptor: 'firmata', port: '/dev/tty.usbmodem1421' }
+          ],
+
+          devices: [
+            { name: 'leapmotion', driver: 'leapmotion', connection: 'leapmotion' },
+            { name: 'led', driver: 'led', pin: 13, connection: 'arduino' }
+          ],
+
+          commands: ["hello"],
+
+          work: function(my) {
+            every((10).seconds(), my.led.toggle);
+          },
+
+          hello: function(greeting) {
+            return greeting + " world";
+          }
+        });
+
+        Cylon.start();
+
+    With this setup, Cylon will serve the API at https://localhost:3000. Now, lets
+    run through the routes.
+
     ### GET /
 
-    This route will serve up the Angular app bundled with Cylon, which can be used
-    to view and control your robots and devices.
+    This route will serve up a copy of [Robeaux][], hooked up to the API and
+    allowing you to control your robots and devices.
 
-    <a href="/images/screenshots/api-ng-app.png" target="_blank">
-      <img alt="Angular App Screenshot" src="/images/screenshots/api-ng-app.png">
+    [Robeaux]: https://github.com/hybridgroup/robeaux
+
+    <a href="/images/screenshots/api-robeaux.png" target="_blank">
+      <img alt="Angular App Screenshot" src="/images/screenshots/api-robeaux.png">
     </a>
 
     ### GET /robots
 
-    Our first route returns all the Robots the master class knows about in JSON
-    format.
+    Returns a JSON array containing information on all robots:
 
+        :::javascript
+        // GET /robots
         [
           {
-            "name": "SpheroBot",
+            "name": "TestBot",
             "connections": [
               {
-                "name": "sphero",
-                "port": "/dev/rfcomm0",
-                "adaptor": "Sphero",
-                "connection_id": 2778
+                "name": "leapmotion",
+                "port": "127.0.0.1:6437",
+                "adaptor": "LeapMotion",
+                "connection_id": 9835
+              },
+              {
+                "name": "arduino",
+                "port": "/dev/tty.usbmodem1421",
+                "adaptor": "Firmata",
+                "connection_id": 1234
               }
             ],
             "devices": [
               {
-                "name": "sphero",
-                "driver": "Sphero",
-                "pin": null,
+                "name": "leapmotion",
+                "driver": "LeapMotion",
                 "connection": {
-                  "name": "sphero",
-                  "port": "/dev/rfcomm0",
-                  "adaptor": "Sphero",
-                  "connection_id": 2778
+                  "name": "leapmotion",
+                  "port": "127.0.0.1:6437",
+                  "adaptor": "LeapMotion",
+                  "connection_id": 9835
+                },
+                "commands": []
+              },
+              {
+                "name": "led",
+                "driver": "Led",
+                "pin": 13,
+                "connection": {
+                  "name": "arduino",
+                  "port": "/dev/tty.usbmodem1421",
+                  "adaptor": "Firmata",
+                  "connection_id": 1234
                 },
                 "commands": [
-                  "detectCollisions",
-                  "roll",
-                  "setColor",
-                  "setRGB",
-                  "stop"
+                  "isOn",
+                  "turnOn",
+                  "turnOff",
+                  "toggle",
+                  "brightness"
                 ]
               }
+            ],
+            "commands": [
+              "hello"
             ]
           }
         ]
 
-    ### GET /robots/:robotname
+    ### GET /robots/:robot
 
-    Given a robot's name, returns JSON information about the requested Robot:
+    Returns more details about a specific robot:
 
+        :::javascript
+        // GET /robots/TestBot
         {
-          "name": "SpheroBot",
+          "name": "TestBot",
           "connections": [
             {
-              "name": "sphero",
-              "port": "/dev/rfcomm0",
-              "adaptor": "Sphero",
-              "connection_id": 2778
+              "name": "leapmotion",
+              "port": "127.0.0.1:6437",
+              "adaptor": "LeapMotion",
+              "connection_id": 9835
+            },
+            {
+              "name": "arduino",
+              "port": "/dev/tty.usbmodem1421",
+              "adaptor": "Firmata",
+              "connection_id": 1234
             }
           ],
           "devices": [
             {
-              "name": "sphero",
-              "driver": "Sphero",
-              "pin": null,
+              "name": "leapmotion",
+              "driver": "LeapMotion",
               "connection": {
-                "name": "sphero",
-                "port": "/dev/rfcomm0",
-                "adaptor": "Sphero",
-                "connection_id": 2778
+                "name": "leapmotion",
+                "port": "127.0.0.1:6437",
+                "adaptor": "LeapMotion",
+                "connection_id": 9835
+              },
+              "commands": []
+            },
+            {
+              "name": "led",
+              "driver": "Led",
+              "pin": 13,
+              "connection": {
+                "name": "arduino",
+                "port": "/dev/tty.usbmodem1421",
+                "adaptor": "Firmata",
+                "connection_id": 1234
               },
               "commands": [
-                "detectCollisions",
-                "roll",
-                "setColor",
-                "setRGB",
-                "stop"
+                "isOn",
+                "turnOn",
+                "turnOff",
+                "toggle",
+                "brightness"
               ]
             }
+          ],
+          "commands": [
+            "hello"
           ]
         }
 
-    ### GET /robots/:robotname/commands
+    ### GET /robots/:robot/commands
 
-    Given a robot's name, returns JSON information about the commands belonging to
-    the requested Robot:
+    Returns a JSON array of commands the robot has defined:
 
+        :::javascript
+        // GET /robots/TestBot/commands
         [
-          "detectCollisions",
-          "roll",
-          "setColor",
-          "setRGB",
-          "stop"
+          "hello"
         ]
 
-    ### POST /robots/:robotname/commands/:commandname
+    ### ALL /robots/:robot/commands/:command
 
-    Given a robot name, commands, and command name, executes a robot's command
-    and returns the result.
+    Executes a robot's command. Commands can be supplied as query params or
+    (preferably) a JSON object in a POST body.
 
+    Returns a JSON object, the 'result' key is the return value of the command.
+
+        :::javascript
+        // GET /robots/TestBot/commands/hello?greeting=hello
         {
-          result: "successful"
+          "result": "hello world"
         }
 
-    ### GET /robots/:robotname/devices
+        // POST /robots/TestBot/commands/hello
+        // { greeting: "Hello," }
+        {
+          "result": "Hello, world"
+        }
 
-    Given a robot's name, returns JSON information about the devices belonging to
-    the requested Robot:
+    ### GET /robots/:robot/devices
 
+    Returns an array of the robot's devices.
+
+        :::javascript
+        // GET /robots/TestBot/devices
         [
           {
-            "name": "sphero",
-            "driver": "Sphero",
-            "pin": null,
+            "name": "leapmotion",
+            "driver": "LeapMotion",
             "connection": {
-              "name": "sphero",
-              "port": "/dev/rfcomm0",
-              "adaptor": "Sphero",
-              "connection_id": 2778
+              "name": "leapmotion",
+              "port": "127.0.0.1:6437",
+              "adaptor": "LeapMotion",
+              "connection_id": 9835
+            },
+            "commands": []
+          },
+          {
+            "name": "led",
+            "driver": "Led",
+            "pin": 13,
+            "connection": {
+              "name": "arduino",
+              "port": "/dev/tty.usbmodem1421",
+              "adaptor": "Firmata",
+              "connection_id": 1234
             },
             "commands": [
-              "detectCollisions",
-              "roll",
-              "setColor",
-              "setRGB",
-              "stop"
+              "isOn",
+              "turnOn",
+              "turnOff",
+              "toggle",
+              "brightness"
             ]
           }
         ]
 
-    ### GET /robots/:robotname/devices/:devicename
+    ### GET /robots/:robot/devices/:device
 
-    Given the names of a device and the robot it belongs to, returns data on the
-    specified device.
+    Returns a JSON object containing specific information about a particular device.
 
+        :::javascript
+        // GET /robots/TestBot/devices/led
         {
-          "name": "sphero",
-          "driver": "Sphero",
-          "pin": null,
+          "name": "led",
+          "driver": "Led",
+          "pin": 13,
           "connection": {
-            "name": "sphero",
-            "port": "/dev/rfcomm0",
-            "adaptor": "Sphero",
-            "connection_id": 2778
+            "name": "arduino",
+            "port": "/dev/tty.usbmodem1421",
+            "adaptor": "Firmata",
+            "connection_id": 1234
           },
           "commands": [
-            "detectCollisions",
-            "roll",
-            "setColor",
-            "setRGB",
-            "stop"
+            "isOn",
+            "turnOn",
+            "turnOff",
+            "toggle",
+            "brightness"
           ]
         }
 
-    ### GET /robots/:robotname/devices/:devicename/commands
+    ### GET /robots/:robot/devices/:device/commands
 
-    Given the names of a device and the robot it belongs to, returns all commands
-    available for the specified device.
+    Returns a JSON array of the commands the device has registered.
 
+        :::javascript
+        // GET /robots/TestBot/devices/led/commands
         [
-          "detectCollisions",
-          "roll",
-          "setColor",
-          "setRGB",
-          "stop"
+          "isOn",
+          "turnOn",
+          "turnOff",
+          "toggle",
+          "brightness"
         ]
 
-    ### POST /robots/:robotname/devices/:devicename/commands/:commandname
+    ### ALL /robots/:robot/devices/:device/commands/:command
 
-    Given a robot name, device name, and command name, executes a robot's command
-    and returns the result.
+    Executes a command on the robot's device. Params can be passed via query params
+    or (preferably) as a JSON object in the POST body.
 
-        {
-          result: "successful"
-        }
+    Returns a JSON object. If the method returns anything, the result will be in the
+    'result' field.
 
-    ### GET /robots/:robotname/connections
+        :::javascript
+        // GET /robots/TestBot/devices/led/commands/turnOn
+        {}
 
-    Given a robot's name, returns JSON information about the connections belonging
-    to the requested Robot:
+    ### GET /robots/:robot/devices/:device/events/:event
 
+    Opens a long-held Server-Sent Events connection that will stream event data as
+    it comes in from the device. This can be hooked up in a browser by using
+    [EventSource](https://developer.mozilla.org/en-US/docs/Web/API/EventSource).
+
+    Once the connection is opened, event data is emitted as it's received as a JSON
+    string.
+
+        :::javascript
+        // GET /robots/TestBot/devices/leapmotion/events/hand
+        data: "{ /* data in JSON format here */ }"
+
+        data: "{ /* data in JSON format here */ }"
+
+    ### GET /robots/:robot/connections
+
+    Returns a JSON array containing information on all the connections the robot
+    has.
+
+        :::javascript
+        // GET /robots/TestBot/connections
         [
           {
-            "name": "sphero",
-            "port": "/dev/rfcomm0",
-            "adaptor": "Sphero",
-            "connection_id": 2778
+            "name": "leapmotion",
+            "port": "127.0.0.1:6437",
+            "adaptor": "LeapMotion",
+            "connection_id": 4190
+          },
+          {
+            "name": "arduino",
+            "port": "/dev/tty.usbmodem1421",
+            "adaptor": "Firmata",
+            "connection_id": 8366
           }
         ]
 
-    ### GET /robots/:robotname/connections/:connectionname
+    ### GET /robots/:robot/connections/:connection
 
-    Given a robot's name, returns JSON information about the connections belonging
-    to the requested Robot:
+    Returns a JSON object containing information on a specific robot's connection.
 
+        :::javascript
+        // GET /robots/TestBot/connections/leapmotion
         {
-          "name": "sphero",
-          "port": "/dev/rfcomm0",
-          "adaptor": "Sphero",
-          "connection_id": 2778
+          "name": "leapmotion",
+          "port": "127.0.0.1:6437",
+          "adaptor": "LeapMotion",
+          "connection_id": 4190
         }
-
-    ### GET /robots/:robotname/devices/:devicename/events
-
-    Routes to a Socket.IO route to handle WebSockets connections requesting updates
-    on device events.
-
-    ### WS_GET /events
-
-    A Socket.IO route to handle updating clients whenever a device sends
-    an 'update' event.
