@@ -16,11 +16,11 @@ crazyflie_flight_driver: true
   .info-intro
     %p You can use Cylon.js with the Crazyflie micro-quadcopter.
 
-    %p 
-      This module provides an adaptor and drivers for the Crazyflie nanocopter 
-      =link_to "(http://www.bitcraze.se/)", "http://www.bitcraze.se/", target: :_blank 
-      \. It uses the Aerogel node module 
-      =link_to "(https://github.com/ceejbot/aerogel)", "https://github.com/ceejbot/aerogel", target: :_blank 
+    %p
+      This module provides an adaptor and drivers for the Crazyflie nanocopter
+      =link_to "(http://www.bitcraze.se/)", "http://www.bitcraze.se/", target: :_blank
+      \. It uses the Aerogel node module
+      =link_to "(https://github.com/ceejbot/aerogel)", "https://github.com/ceejbot/aerogel", target: :_blank
       created by @ceejbot thank you!
   .clear
 
@@ -31,8 +31,8 @@ crazyflie_flight_driver: true
         :::bash
         npm install cylon-crazyflie
 
-  %p 
-    You will also need to install the latest beta of firmware to the Crazyflie itself to use the 'hover' mode from 
+  %p
+    You will also need to install the latest beta of firmware to the Crazyflie itself to use the 'hover' mode from
     =link_to "https://bitbucket.org/bitcraze/crazyflie-firmware/downloads/Crazyflie_2013.11-beta1.bin", "https://bitbucket.org/bitcraze/crazyflie-firmware/downloads/Crazyflie_2013.11-beta1.bin", target: :blank
 
   %h3 Ubuntu
@@ -61,10 +61,10 @@ crazyflie_flight_driver: true
           work: function(my) {
             my.drone.on('start', function() {
               my.drone.takeoff();
-              after((10).seconds(), function() { 
+              after((10).seconds(), function() {
                 my.drone.land();
               });
-              after((15).seconds(), function() { 
+              after((15).seconds(), function() {
                 my.drone.stop();
               });
             });
@@ -85,7 +85,14 @@ crazyflie_flight_driver: true
     %br
     %a{ href: "http://stackoverflow.com/questions/17204253/crazyflie-usb-3-0-incompability"} http://stackoverflow.com/questions/17204253/crazyflie-usb-3-0-incompability
 
-  
+  %h3 Ubuntu
+  %p
+    You need to install some udev-rules to be able to communicate with the crazyflie,
+    it is a good thing that we have a cylon-cli command that does just that:
+
+  :markdown
+        :::bash
+        $ cylon crazyflie set-udev-rules
 
 %section.drivers#Drivers
   %h2 Drivers

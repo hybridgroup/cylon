@@ -1,0 +1,53 @@
+---
+layout: documentation
+page_title_show: true
+title: "Cylon.JS Example - bmp180"
+page_title: "Example: bmp180"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-firmata/tree/master/examples/bmp180' target='_blank'>View In Repo</a>"
+---
+
+.example
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+            connection:{name:'raspi', adaptor:'raspi'},
+            device:{name:'bmp180', driver:'bmp180'},
+
+            work: function(my) {
+                my.bmp180.getTemperature(function(err, val) {
+                    if(err) console.log(err);
+                    else {
+                        console.log("getTemperature call:");
+                        console.log("\tTemp: " + val.temp + " C");
+                    }
+                });
+
+                after(1..seconds(), function() {
+                    my.bmp180.getPressure(1, function(err, val) {
+                        if(err) console.log(err);
+                        else {
+                            console.log("getPressure call:");
+                            console.log("\tTemperature: " + val.temp + " C");
+                            console.log("\tPressure: " + val.press + " Pa");
+                        }
+                    });
+                });
+
+                after(2..seconds(), function() {
+                    my.bmp180.getAltitude(1, null, function(err, val) {
+                        if(err) console.log(err);
+                        else {
+                            console.log("getAltitude call:");
+                            console.log("\tTemperature: " + val.temp + " C");
+                            console.log("\tPressure: " + val.press + " Pa");
+                            console.log("\tAltitude: " + val.alt + " m");
+                        }
+                    });
+                });
+
+            }
+        }).start();

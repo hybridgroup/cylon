@@ -67,6 +67,13 @@ page_title_show: true
 
   %h3 Important note about Cylon CLI commands.
   %p
+    Parameters described between
+    %b &lt;required_param&gt;
+    are required, parameters between
+    %b [optional_param]
+    are optional.
+
+  %p
     :markdown
       To use the commands as described here you need to install cylon as a global module by running `sudo npm install -g cylon-cli`.
 
@@ -90,6 +97,7 @@ page_title_show: true
         :::bash
         $ cylon arduino
         Usage:
+        cylon arduino scan                                     # scans serialports for Arduino boards
         cylon arduino install                                  # installs avrdude to allow uploading of sketches to Arduino
         cylon arduino upload firmata [port]                    # uploads Firmata sketch to Arduino
         cylon arduino upload rapiro [port]                     # uploads Rapiro sketch to Arduino
@@ -98,7 +106,8 @@ page_title_show: true
   %b
     Notes:
     :markdown
-      You must run `cylon arduino install` first.
+      To be able to run the upload command
+      you must run `cylon arduino install` first.
       The serial port must have the correct permissions for your
       user to read and write, or run it as root (sudo it).
   :markdown
@@ -133,20 +142,33 @@ page_title_show: true
 
 
 
-  %h2 cylon bluetooth [pair|unpair|connect]
+  %h2 cylon bluetooth [scan|pair|unpair|connect]
   %h4 Description
   %p
     :markdown
-      Lets you pair, unpair and connect to bluetooth devices by specifying one of three subcommands, the avilable options for the subcommand are `pair`, `unpair` or `connect`.
+      Lets you pair, unpair and connect to bluetooth devices by specifying one
+      of three subcommands, the avilable options for the subcommand are `pair`,
+      `unpair` or `connect`.
 
-  %h4 cylon bluetooth pair <address>
+  %h4 cylon bluetooth scan
+  %b Description
+  %p
+    Scans for bluetooth devices
+
+  :markdown
+        :::bash
+        $ cylon scan bluetooth
+        Scanning ...
+          00:06:66:4A:23:C3        Sphero-RPB
+
+  %h4 cylon bluetooth pair &lt;address&gt; [hciX]
   %b Description
   %p
     Pairs a bluetooth device to the computer.
   %b
     Notes:
     :markdown
-      when prompted, answer `yes` to confirm pairing pin.
+      when prompted, answer `yes` or enter any `1234` to confirm pairing pin.
 
   :markdown
         :::bash
@@ -156,7 +178,7 @@ page_title_show: true
         Release
         New device (/org/bluez/630/hci0/dev_00_06_66_4A_23_C3)
 
-  %h4 cylon bluetooth unpair <address>
+  %h4 cylon bluetooth unpair &lt;address&gt; [hciX]
   %b Description
   %p
     Unpairs a bluetooth device.
@@ -172,7 +194,7 @@ page_title_show: true
         Confirm passkey (yes/no): no
         Creating device failed: org.bluez.Error.AuthenticationFailed: Authentication Failed
 
-  %h4 cylon bluetooth connect <address>
+  %h4 cylon bluetooth connect &lt;address&gt; [rfcommX]
   %b Description
   %p
     connects a bluetooth device to a serial port to enable communication with CylonJS.
@@ -183,7 +205,7 @@ page_title_show: true
         Connected /dev/rfcomm0 to 00:06:66:4A:23:C3 on channel 1
         Press CTRL-C for hangup
 
-  %h2 cylon crazyflie [subcommand] [opts]
+  %h2 cylon crazyflie &lt;subcommand&gt;
   %h4 Description
   %p Set udev rules for Crazyflie.
   :markdown
@@ -192,17 +214,18 @@ page_title_show: true
         Usage:
         cylon crazyflie set-udev-rules
 
-  %h2 cylon digispark [subcommand]
+  %h2 cylon digispark &lt;subcommand&gt;
   %h4 Description
   %p Set udev rules, and upload the Littlewire protocol to your Digispark.
   :markdown
         :::bash
         $ cylon digispark
         Usage:
-          cylon digispark set-udev-rules
+          cylon digispark scan
           cylon digispark upload
+          cylon digispark set-udev-rules
 
-  %h2 cylon generate [module|driver] [name]
+  %h2 cylon generate &lt;module|driver&gt; &lt;name&gt;
   %h4 Description
   %p Generates a new Cylon component or adaptor module.
 
@@ -271,7 +294,7 @@ page_title_show: true
            spark upload [access_token] [device_id] [firmware_file]
               Upload new firmare to your Spark Core
 
-  %h2 cylon scan [type]
+  %h2 cylon scan &lt;type&gt;
   %h4 Description
   %p
     :markdown
@@ -295,7 +318,7 @@ page_title_show: true
           00:06:66:4A:23:C3        Sphero-RPB
 
 
-  %h2 cylon spark upload [access_token] [device_id] [firmware_file]
+  %h2 cylon spark upload &lt;access_token&gt; &lt;device_id&gt; &lt;firmware_file&gt;
   %h4 Description
   %p
     %b Description:
