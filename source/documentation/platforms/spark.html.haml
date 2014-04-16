@@ -9,11 +9,11 @@ subnav_platform: true
 
 analog_sensor_driver: true
 button_driver: true
-continuous_servo_driver: true        
+continuous_servo_driver: true
 led_driver: true
 maxbotix_driver: true
 motor_driver: true
-servo_driver: true 
+servo_driver: true
 ---
 
 %section.intro
@@ -26,7 +26,7 @@ servo_driver: true
       = succeed "." do
         = link_to "https://www.spark.io/", "https://www.spark.io/", target: :blank
   .clear
-  
+
 %section.how-to#HowToInstall
   %h2 How To Install
   %p Installing Cylon.js with Spark support is pretty easy.
@@ -67,13 +67,13 @@ servo_driver: true
 
   %p The <code>cylon spark upload</code> command can help if you want to upload new source code directly to your Spark Core.
 
-  %p 
+  %p
     For more information on how to program your Spark, please see
     = link_to "Spark's examples", "http://docs.spark.io/#/examples", target: :blank
 
-  %p 
-    You'll need your <code>access_token</code> and <code>device_id</code> to push new software to your Spark, and you can get both of these from Spark's 
-    = link_to "Build tool", "https://spark.io/build", target: :blank    
+  %p
+    You'll need your <code>access_token</code> and <code>device_id</code> to push new software to your Spark, and you can get both of these from Spark's
+    = link_to "Build tool", "https://spark.io/build", target: :blank
 
   %ul
     %li <code>access_token:</code> In the Build tool, click on the Settings cog in the bottom-left corner to find your access token.
@@ -81,10 +81,19 @@ servo_driver: true
 
 %section.how-to#HowToConnect
   %h2 How to Connect
+  %p
+    You don't actually need to setup anything in your computer to be able to connect to the Spark,
+    just make sure you have a working internet connection and go through the process of setting up
+    you board, by following the Getting started guide in the
+    %a{ href: "www.spark.io" } Spark.io
+    site, that way you'll be able to obtain your token and device id, needed to connect Cylon.js to
+    the Spark. You can follow the instructiona to acoomplish this by clicking in the link below.
+
+  %a{ href: "After the board has rebooted, we log back in and execute the following commands" } Spark: Getting Started
 
 %section.drivers#Drivers
   %h2 Drivers
-  
+
   %p Available drivers for the spark platform are listed below, the drivers contain detailed documentation and examples of what kinds of physical computing (using Cylon.js and Node.js) you can be doing:
 
   .hardware
