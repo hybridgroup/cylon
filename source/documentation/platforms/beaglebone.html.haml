@@ -8,10 +8,10 @@ page_title_show: true
 subnav_platform: true
 
 button_driver: true
-continuous_servo_driver: true        
+continuous_servo_driver: true
 led_driver: true
 motor_driver: true
-servo_driver: true 
+servo_driver: true
 makey_driver: true
 
 ---
@@ -63,8 +63,183 @@ makey_driver: true
           }
         }).start();
 
+
+%section.how-to#HowToConnect
+  %h2 How to Setup the beaglebone clack
+  %h3 Installing Beaglebone Black drivers.
+  %p
+    For OSX and Windows some drivers need to be installed, for Linux you only need to setup some udev-rules.
+    You can find all driver related docs in the beaglebone site:
+  %a{href: "http://beagleboard.org/Getting+Started#step2"} Beaglebone Driver Docs
+
+  %h3 Finding the SD card disk name
+  %ul
+    %li Insert your SD card into your host computer
+    %li Determine the name of your SD card, ie /dev/sdb
+
+  %p
+    On OS X, you can use the diskutil command to help figure out the name of your card.
+  :markdown
+        :::bash
+        $ diskutil list
+        /dev/disk0
+           #:                       TYPE NAME                    SIZE       IDENTIFIER
+           0:      GUID_partition_scheme                        *500.3 GB   disk0
+           1:                        EFI EFI                     209.7 MB   disk0s1
+           2:                  Apple_HFS Macintosh HD            499.4 GB   disk0s2
+           3:                 Apple_Boot Recovery HD             650.0 MB   disk0s3
+        /dev/disk1
+           #:                       TYPE NAME                    SIZE       IDENTIFIER
+           0:     FDisk_partition_scheme                        *15.9 GB    disk1
+           1:                 DOS_FAT_32 UNTITLED                15.9 GB    disk1s1
+  %p
+    In this case, our disk's name is /dev/disk1. Before you proceed, make sure to eject the mounted volume with diskutil unmount /dev/disk1s1.
+  %p
+    On most Linux distros, you should be able to use the `df -h` command to help you find what the name of your disk is.
+
+  %h3 Downloading the Linux image and flashing the SD card
+
+  %p
+    Once the host computer drivers (udev-rules in the Linux case) have been installed, we need to flash the Linux image (our OS runing in the
+    Beaglebone Black) to the SD card, we are using an ubuntu based distro for our current Beaglebone Black dev env. Steps to acomplish this are as follows.
+
+  %ol
+    %li Download current Beaglebone Black Linux image
+    %li Uncompress Linux image
+    %li Flash Linux image to SD card
+
+  %h4 Downloading the Linux image
+  %p Pretty straight forward when you have a direct link to download, here it is:
+
+  %a{href: "https://s3.amazonaws.com/artoo-images/beaglebone/robot-ubuntu_13.10-armv7-1394437089.img.tar.xz"} Beaglebone Black Linux image
+
+  %p If you preffer to use the terminal (we know you do :-) ):
+  :markdown
+        $ curl -O https://s3.amazonaws.com/artoo-images/beaglebone/robot-ubuntu_13.10-armv7-1394437089.img.tar.xz
+
+  %h4 Uncompressing the image file
+  %p
+    Once the image has finished downloading, uncompress it to your working folder using your favorite tool, or once again
+    use your favorite command line interface and run this command.
+
+  :markdown
+        $ tar -xJf robot-ubuntu_13.10-armv7-1394437089.img.tar.xz
+
+  %h4 Flashing the SD card
+  %p
+    The final step in setting up the SD card is to actually flashing the image we just downloaded and uncompressed into the sd card. You
+    can accomplish just that by running the following command.
+
+  :markdown
+        $ sudo dd bs=1M count=3950 if=./robot-ubuntu_13.10-armv7-1394437089.img of=/dev/sdb && sudo sync
+
+  %h4 Download, uncompress and flash Linux image in three commands
+  %p
+    A recap of the commands used in the steps above, in case you just want to see what was done to have
+    a working Beaglebone Black OS flashed to the SD card.
+
+  :markdown
+        $ curl -O https://s3.amazonaws.com/artoo-images/beaglebone/robot-ubuntu_13.10-armv7-1394437089.img.tar.xz
+        $ tar -xJf robot-ubuntu_13.10-armv7-1394437089.img.tar.xz
+        $ sudo dd bs=1M count=3950 if=./robot-ubuntu_13.10-armv7-1394437089.img of=/dev/sdb && sudo sync
+
+
 %section.how-to#HowToConnect
   %h2 How to Connect
+  %p
+    Connecting to the Beaglebone Black is quite simple when you have everything setup, you can connect using SSH
+    and share the internet connection of your host computer (the computer the BBB is connected to).
+
+  %h4 How to connect on Linux
+  %p
+    Save the following script as bbb_sh.sh (or whatever name you preffer) and use this script to ssh into your Beaglebone Black.
+
+  :markdown
+        #!/bin/bash
+        sudo -- sh -c 'echo 1 > /proc/sys/net/ipv4/ip_forward'
+        sudo iptables -A POSTROUTING -t nat -j MASQUERADE
+        ssh ubuntu@192.168.7.2
+
+  %p After the script is saved in your computer it is pretty easy to connect by just running it.
+
+  :markdown
+        $ sudo sh bbb_ssh.sh
+
+  %h4 How to connect on OSX
+  %p Just SSH into the beaglebone black, the IP address is 192.168.1.2
+
+  :markdown
+        $ ssh ubuntu@192.168.1.2
+
+  %h4 How to connect on Windows
+  %p The process in Windows requires more steps to setup, but when done should be equaly easy to connect to the board.
+
+  %ol
+    %li
+      First follow this guide for setting up internet sharing on your windows computer,
+      %a{ href: "http://lanceme.blogspot.com/2013/06/windows-7-internet-sharing-for.html" } Windows Internet Sharing
+      , Only follow the sections titled "On the Windows 7 computer".
+    %li
+      You need to instal putty (or your preffered SSH client) to SSH into the Beaglebone Black,
+      %a{ href: "http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html" } download Putty.
+    %li Finally, you can ssh into the Beaglebone Black using Putty (or the SSH client you installed) in the same way we do it in OSX, The Beaglebone Black's IP address is 192.168.7.2
+
+  :markdown
+        $ ssh ubuntu@192.168.1.2
+
+  %h4 Login Credentials
+  %p After all the previous work and connecting through SSH you are going to need some credentials to login to the Beaglebone Black OS, the creds are as follows:
+  %ul
+    %li User: ubuntu
+    %li Password: robot
+
+  %h4 (Optional) VNC connection
+  %p
+    The Beaglebone Black has been preloaded with vnc and the xfce desktop environment. You may start vnc by logging into the Beaglebone Black and executing
+  :markdown
+        $ sh ~/start_vnc.sh
+
+  %p
+    The Beaglebone Black now has an active vnc session on 192.168.7.2:1 with the password robotvnc
+
+  %p
+    I'll admint that was a bit long for a setup process (let me tell you a secret, we are not done yet :-S ... ), but hopefully not too complicated,
+    just a bit on the long side, now you have a full Linux system running in you Beaglebone Black! Congrats... now on to the next
+    and final part, resising the SD card partition.
+
+  %h4 Resising the SD Card partition
+  %p
+    We now have our full Ubuntu Linux OS setup, ready and working in our Beaglebone Black, and we are able to connect using SSH, so what's next? well we need
+    some space in that SD card partition to do all of our work and install all of our code, thankfully that is quite simple, all that we require is to run
+    some commands and reboot the board a couple of times, so let's dive into it.
+
+  %p First login to the board using SSH and run the following commands
+  :markdown
+        $ fdisk /dev/mmcblk0
+        d
+        2
+        n
+        p
+        2
+
+
+        w
+        $ shutdown -r now
+
+  %p After the board has rebooted, we log back in and execute the following commands
+  :markdown
+        $ resize2fs /dev/mmcblk0p2
+        $ shutdown -r now
+
+  %p
+    Once again we wait for the board to reboot and log back in to make sure the
+    partition has been resised successfully by running
+  :markdown
+        $ df -h
+
+  %p
+    The /dev/root partition should be the size of the entire SD card, and with this
+    we are finally done to start running Cylon directly on the Beaglebone Black.
 
 %section.drivers#Drivers
   %h2 Drivers
@@ -74,4 +249,3 @@ makey_driver: true
     %h2 GPIO Drivers
     .devices
       = partial "documentation/partials/devices_gpio_drivers"
-  
