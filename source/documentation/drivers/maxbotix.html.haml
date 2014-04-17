@@ -15,27 +15,43 @@ spark_platform: true
 %section.intro
   =image_tag "/images/devices/maxbotix.jpg", class: "display"
   .info-intro
-    %p Provides tools to use maxbotix sonar (range finder).
+    %p Provides tools to use maxbotix sonar (range finder), easy to use ultrasonic distance sensors that provide stable range readings. Our ultrasonic sensors have been designed into a wide range of solutions. 
+    %p 
+      For more information click
+      = link_to "here.", "http://www.maxbotix.com/?gclid=CI7VpM791r0CFenm7AodOSoAjA", target: "_blank"
   .clear
   
 %section.how-to#HowToConnect
   %h2 How To Connect
   :markdown
         :::javascript
-        coming soon
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+          device: { name: 'maxbotix', driver: 'maxbotix' },
+        ...
 
 
 %section.how-to#HowToUse
-  %h3 How To Use
-  %p Pretty simple, when the connection and the driver have been setup (as explained above) you can call events on them as follows:
+  %h2 How To Use
+  %p 
   :markdown
         :::javascript
-        comming soon
+        var Cylon = require('cylon');
 
-  %h2 Examples
-  :markdown
-        :::javascript
-        comming soon
+        Cylon.robot({
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+          device: { name: 'maxbotix', driver: 'maxbotix' },
+
+          work: function(my) {
+            every((1).seconds(), function() {
+              my.maxbotix.range(function(data) {
+                Logger.info("range: " + data);
+              });
+            });
+          }
+        }).start();
 
 %section.public-methods
   .commands-api#Commands
