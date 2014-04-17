@@ -28,13 +28,8 @@ spark_platform: true
         var Cylon = require('cylon');
 
         Cylon.robot({
-          connection: {
-            name: 'arduino',
-            adaptor: 'firmata'
-          },
-          device: {
-            name: 'maxbotix',
-            driver: 'maxbotix',
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+          device: { name: 'maxbotix', driver: 'maxbotix' },
         ...
 
 
@@ -43,7 +38,20 @@ spark_platform: true
   %p 
   :markdown
         :::javascript
-        comming soon
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+          device: { name: 'maxbotix', driver: 'maxbotix' },
+
+          work: function(my) {
+            every((1).seconds(), function() {
+              my.maxbotix.range(function(data) {
+                Logger.info("range: " + data);
+              });
+            });
+          }
+        }).start();
 
 %section.public-methods
   .commands-api#Commands
