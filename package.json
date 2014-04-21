@@ -45,7 +45,7 @@
   },
 
   "dependencies": {
-    "async":          "0.2.9",
+    "async":          "0.7.0",
     "node-namespace": "1.0.0",
     "express":        "3.5.1",
     "robeaux":        ">= 0.0.4"
