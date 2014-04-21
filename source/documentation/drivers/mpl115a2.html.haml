@@ -16,27 +16,44 @@ raspberry_platform: true
   = image_tag "/images/devices/mpl115a2.jpg", class: "display"
   .info-intro
     %p Used for measuring barometric pressure.
+    %p 
+      For more information click
+      = link_to "here.", "https://www.adafruit.com/products/992", target: "_blank"
   .clear
    
 %section.how_to#HowToConnect
   %h2 How To Connect
   :markdown
         :::javascript
-
         var Cylon = require('cylon');
 
         Cylon.robot({
-          connection: {name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0'},
-
-          device: {name: 'mpl115a2', driver: 'mpl115a2', pin: 2},
-          ...
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+          device: { name: 'mpl115a2', driver: 'mpl115a2' },
+        ...
 
 %section.how-to#HowToUse
   %h2 How To Use
-
+  %p Example of the mpl115a2 driver with the Arduino.
   :markdown
         :::javascript
-        coming soon
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+          device: { name: 'mpl115a2', driver: 'mpl115a2' },
+
+          work: function(my) {
+            my.mpl115a2.on('start', function() {
+              my.mpl115a2.getTemperature(function(data) {
+                var temp = data['temperature'],
+                    pressure = data['pressure'];
+
+                Logger.info("temperature " + temp  + " pressure " + pressure);
+              });
+            });
+          }
+        }).start();
 
 %section.public-methods
   .commands-api#Commands

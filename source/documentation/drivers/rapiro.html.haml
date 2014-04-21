@@ -14,6 +14,9 @@ rapiro_platform: true
   =image_tag "/images/devices/rapiro.jpg", class: "display"
   .info-intro
     %p Allows user to interact with the Rapiro robot using Cylon.js.
+    %p
+      For more information click
+      = link_to "here", "http://www.rapiro.com/", target: "_blank"
   .clear
   
 %section.how-to#HowToConnect
@@ -66,8 +69,8 @@ rapiro_platform: true
   .commands-api#Events
     = partial "/documentation/drivers/partials/rapiro/events"
 
-%section.compatability.hardware
-  %h2 Works with:
+%section.compatability.hardware#Compatability
+  %h2 Compatibility
   .devices
     = partial "documentation/partials/devices_platforms"
 

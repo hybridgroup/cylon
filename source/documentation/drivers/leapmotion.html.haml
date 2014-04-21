@@ -15,6 +15,9 @@ leapmotion_platform: true
   .info-intro
     %p
       Allows user to interact with Cylon.js devices using a Leap Motion controller. The Leap Motion uses its built in cameras to track the user's hand motions, and translations those to events that Cylon.js can use to trigger actions or control hardware.
+    %p
+      For more information click
+      = link_to "here", "https://www.leapmotion.com/", target: "_blank"
   .clear
   
 %section.how-to#HowToConnect
@@ -64,6 +67,9 @@ leapmotion_platform: true
 
 
 %section.public-methods
+  .commands-api#Commands
+    %h1 Commands
+    %p no commands
   .commands-api#Events
     = partial "/documentation/drivers/partials/leapmotion/events"
 

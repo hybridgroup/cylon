@@ -17,14 +17,14 @@ blinkm_driver: true
   .info-intro
     %p Tessel runs JavaScript—no server necessary. Just like web or mobile development, use your own IDE and libraries to program physical applications.
 
-  :markdown 
+  :markdown
     Tessel supports packages from `npm` to leverage the growing Node.js community and capabilities. That's HTTP, Twitter, web server, color, and async support right out of the box. Uploading new code is as easy as `tessel push`!
 
   %p
     For more info about the Tessel platform click
     = succeed "." do
       = link_to "here", "http://tessel.io/", target: :blank
-  
+
   .clear
 
 
@@ -32,7 +32,7 @@ blinkm_driver: true
   %h2 How to install
   %p Installing cylon.js with Tessel support is pretty easy.
   %p
-    Follow the installation instructions detailed 
+    Follow the installation instructions detailed
     = link_to "here", "https://tessel.io/install/"
   :markdown
         :::javascript
@@ -41,14 +41,14 @@ blinkm_driver: true
         cd my-tessel-project
         npm install
         tessel push blink.js
-  
+
   %p If the blue light starts to blink, then you're all set!
 
 %section.how-to#HowToUse
   %h2 How to use
   %p This small program lets you toggle an LED on and off.
-  
-  
+
+
   :markdown
         :::javascript
         var Cylon = require('cylon');
@@ -61,15 +61,23 @@ blinkm_driver: true
             every((1).seconds(), my.led.toggle);
           }
         }).start();
-  
-%section.how-to#HowToConnect
-  -#%h2 How to connect
-  -#%p The ARDrone is a WiFi device, so there is no additional work to establish a connection to a single drone. However, in order to connect to multiple drones, you need to perform some configuration steps on each drone via SSH.
 
-  
+%section.how-to#HowToConnect
+  %h2 How to Connect
+  %p
+    As mentioned in the section above (How to install) connecting to the Tessel is easy,
+    you just need to follow the detailed instructions provided in the tessel site:
+  %a{ href: "https://tessel.io/install/" } https://tessel.io/install/
+  %p
+    If you followed the instructions in the previous two sections, your Tessel should be already connected,
+    and ready to run Cylon.js, you can skip ahead and start coding, if you skipped on the Tessel site instructions,
+    follow the link provided
+    %a{ href: "https://tessel.io/install/" } here
+    and complete all appropiate steps for your OS.
+
 %section.drivers#Drivers
   %h2 Drivers
-  %p Available drivers for the Tessel platform are listed below. 
+  %p Available drivers for the Tessel platform are listed below.
 
   .hardware
     // TODO: Update drivers list at the top of the page.

@@ -15,6 +15,9 @@ ardrone_platform: true
   .info-intro
     %p
       Allows user to receive in-flight navgation data from an ARDrone. Navigation data includes such information as the ARDrone's current pitch and yaw, along with many other data elements.
+    %p
+      For more information click
+      = link_to "here", "http://ardrone2.parrot.com/", target: "_blank"
       
   .clear
   
@@ -62,6 +65,9 @@ ardrone_platform: true
 
 
 %section.public-methods
+  .commands-api#Commands
+    %h1 Commands
+    %p no commands
   .commands-api#Events
     = partial "/documentation/drivers/partials/ardrone/events_nav"
 
