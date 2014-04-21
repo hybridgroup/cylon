@@ -68,11 +68,13 @@ skynet_driver: true
         :::bash
         => {"name":"arduino","led":"off","uuid":"8220cff0-2939-11e3-88cd-0b8e5fdfd7d4","timestamp":1380481272431,"token":"1yw0nfc54okcsor2tfqqsuvnrcf2yb9","online":false,"_id":"524878f8cc12f0877f000003"}
 
-%section.public-methods
-  .commands-api
-    = partial "/documentation/drivers/partials/skynet/commands"
-  .commands-api
-    = partial "/documentation/drivers/partials/skynet/events"
+%section.drivers#Drivers
+  %h2 Drivers
+  %p Available drivers for the Skynet platform are listed below. 
 
+  .hardware
+    .devices
+      // TODO: Update drivers list at the top of the page.
+      = partial "documentation/partials/devices_skynet_drivers"
 
   
