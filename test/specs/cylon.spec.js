@@ -19,10 +19,6 @@ describe("Cylon", function() {
     it("sets @robots to an empty array by default", function() {
       expect(cylon.robots).to.be.eql([]);
     });
-
-    it("sets @this to an circular instance to the master instance", function() {
-      expect(cylon.self).to.be.eql(cylon);
-    });
   });
 
   describe("#robot", function() {
