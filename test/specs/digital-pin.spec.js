@@ -5,11 +5,11 @@ var fs = require('fs');
 source('digital-pin');
 
 describe("Cylon.IO.DigitalPin", function() {
-  var pin = new Cylon.IO.DigitalPin({ pin: 4, mode: 'w' })
+  var pin = new Cylon.IO.DigitalPin({ pin: '4', mode: 'w' })
 
   describe("constructor", function() {
     it("sets @pinNum to the pin number passed in opts", function() {
-      expect(pin.pinNum).to.be.eql(4);
+      expect(pin.pinNum).to.be.eql('4');
     });
 
     it("sets @status to 'low' by default", function() {
@@ -416,7 +416,7 @@ describe("Cylon.IO.DigitalPin", function() {
       });
 
       it("emits a 'close' event with the pin number", function() {
-        expect(pin.emit).to.be.calledWith('close', 4);
+        expect(pin.emit).to.be.calledWith('close', '4');
       })
     });
   });
