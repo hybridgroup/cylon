@@ -5,20 +5,25 @@
   "description": "A JavaScript robotics framework using Node.js",
   "homepage": "http://cylonjs.com",
   "bugs": "https://github.com/hybridgroup/cylon/issues",
-  "author": {
-    "name": "Ron Evans, Andrew Stewart, Edgar Silva, Mario 'Kuroir' Ricalde, Gize Bonilla, Adrian Zankich",
-    "email": "cylonjs@hybridgroup.com",
-    "url": "http://hybridgroup.com"
-  },
+
+  "author": "The Hybrid Group <cylonjs@hybridgroup.com>",
+
+  "contributors": [
+    "Ron Evans <ron@hybridgroup.com>",
+    "Andrew Stewart <andrew@hybridgroup.com>",
+    "Edgar Silva <edgar@hybridgroup.com>",
+    "Mario 'Kuroir' Ricalde <mario@hybridgroup.com>",
+    "Gize Bonilla <gize@hybridgroup.com>",
+    "Adrian Zankich <adrian@hybridgroup.com>"
+  ],
+
   "repository": {
     "type": "git",
     "url": "https://github.com/hybridgroup/cylon"
   },
-  "licenses": [
-    {
-      "type": "Apache 2.0"
-    }
-  ],
+
+  "license": "Apache 2.0",
+
   "hardware": {
     "*": false,
     "./": false,
@@ -26,20 +31,23 @@
     "node-namespace": true,
     "./lib": true
   },
+
   "engines" : {
     "node" : ">= 0.10.20"
   },
+
   "devDependencies": {
-    "sinon-chai": "~2.5.0",
-    "chai": "~1.9.1",
-    "mocha": "~1.18.2",
-    "sinon": "~1.9.0",
-    "jshint": "~2.4.4"
+    "sinon-chai": "2.5.0",
+    "chai":       "1.9.1",
+    "mocha":      "1.18.2",
+    "sinon":      "1.9.1",
+    "jshint":     "2.5.0"
   },
+
   "dependencies": {
-    "async": "~0.2.9",
-    "node-namespace": "~1.0.0",
-    "express": "~3.5.1",
-    "robeaux": ">= 0.0.4"
+    "async":          "0.2.9",
+    "node-namespace": "1.0.0",
+    "express":        "3.5.1",
+    "robeaux":        ">= 0.0.4"
   }
 }
