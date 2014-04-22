@@ -1,0 +1,68 @@
+---
+layout: documentation
+page_title_show: true
+title: "Cylon.JS Example - Leap Motion"
+page_title: "Example: Leap Motion"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-leapmotion/tree/master/examples/leap' target='_blank'>View In Repo</a>"
+---
+
+:markdown
+  # Leap Motion
+
+  In this quick example, we're going to walk through the basic events the Leap
+  Motion is capable of emitting.
+
+  We'll start off by loading up Cylon:
+
+      :::javascript
+      var Cylon = require('cylon');
+
+  With that done, we can start defining our robot:
+
+      :::javascript
+      Cylon.robot({
+
+  We have a single connection + device combo for this bot, which will connect to
+  the Leap Motion using the `leapd` daemon over WebSockets.
+
+      :::javascript
+        connection: { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' },
+        device: { name: 'leapmotion', driver: 'leapmotion' },
+
+  Easy as can be. For our work, we're going to log a simplified version of the
+  data we get from the device.
+
+      :::javascript
+        work: function(my) {
+          my.leapmotion.on('connect', function() {
+            console.log("Connected to Leap Motion.");
+          });
+
+          my.leapmotion.on('start', function() {
+            console.log("Leap Motion has started.");
+          });
+
+          my.leapmotion.on('frame', function(frame) {
+            console.log(frame.toString());
+          });
+
+          my.leapmotion.on('hand', function(hand) {
+            console.log(hand.toString());
+          });
+
+          my.leapmotion.on('pointable', function(pointable) {
+            console.log(pointable.toString());
+          });
+
+          my.leapmotion.on('gesture', function(gesture) {
+            console.log(gesture.toString());
+          });
+        }
+
+  And with that all done, we can start:
+
+      :::javascript
+      }).start();
+

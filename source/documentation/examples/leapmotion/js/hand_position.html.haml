@@ -1,0 +1,26 @@
+---
+layout: documentation
+page_title_show: true
+title: "Cylon.JS Example - Hand Position"
+page_title: "Example: Hand Position"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-leapmotion/tree/master/examples/hand_position' target='_blank'>View In Repo</a>"
+---
+
+.example
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' },
+          device: { name: 'leapmotion', driver: 'leapmotion' },
+
+          work: function(my) {
+            my.leapmotion.on('hand', function(hand) {
+              console.log(hand.palmX + "," + hand.palmY + "," + hand.palmZ);
+            });
+          }
+        }).start();
+
