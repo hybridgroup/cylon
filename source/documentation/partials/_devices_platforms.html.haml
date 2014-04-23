@@ -19,20 +19,27 @@
 - if current_page.data.crazyflie_platform == true
   /// Crazylie
   %a.device{href:"/documentation/platforms/crazyflie", title: "Crazyflie"}
-    %img{src: "/images/devices/crazyflie.jpg"}  
+    %img{src: "/images/devices/crazyflie.jpg"} 
+
+- if current_page.data.digispark_platform == true
+  /// Digispark
+  %a.device{href:"/documentation/platforms/digispark", title: "Digispark"}
+    %img{src: "/images/devices/digispark.jpg"}
+
+- if current_page.data.galileo_platform == true
+  /// Galileo
+  %a.device{href:"/documentation/platforms/galileo", title: "Galileo"}
+    %img{src: "/images/devices/galileo.jpg"}  
 
 - if current_page.data.joystick_platform == true
   ///Joystick  
   %a.device{href:"/documentation/platforms/joystick", title: "AR Drone"}
     %img{src: "/images/devices/joystick.jpg"} 
+
 - if current_page.data.keyboard_platform == true 
   ///Keyboard  
   %a.device{href:"/documentation/platforms/keyboard", title: "AR Drone"}
     %img{src: "/images/devices/keyboard.jpg"}
-- if current_page.data.digispark_platform == true
-  /// Analog Sensor
-  %a.device{href:"/documentation/platforms/digispark", title: "Digispark"}
-    %img{src: "/images/devices/digispark.jpg"}
 
 - if current_page.data.force_platform == true
   //Force

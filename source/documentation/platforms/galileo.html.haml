@@ -1,0 +1,173 @@
+---
+title: Galileo with Cylon.js
+author: The Hybrid Group
+page_title: Intel Galileo
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-galileo' target='_blank' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-galileo/issues' target='_blank'>Issues</a>"
+layout: documentation
+page_title_show: true
+subnav_platform: true
+
+button_driver: true
+continuous_servo_driver: true
+led_driver: true
+makey_driver: true
+maxbotix_driver: true
+motor_driver: true
+servo_driver: true
+blinkm_driver: true
+hmc6352_compass_driver: true
+mpl115a2_driver: true
+lcd_driver: true
+
+---
+
+%section.intro
+  = image_tag "/images/devices/galileo.jpg", class: "display"
+  .info-intro
+    %p The Intel® Galileo board is a microcontroller board based on the Intel® Quark SoC X1000 application processor, a 32-bit Intel® Pentium® brand system on a chip (SoC). It is the first board based on Intel® architecture designed to be hardware and software pin-compatible with shields designed for the Arduino Uno* R3..
+    %p
+      For more info about the Galileo platform click
+      = succeed "." do
+        = link_to "here", "http://www.intel.com/content/www/us/en/do-it-yourself/galileo-maker-quark-board.html", target: :blank
+  .clear
+
+%section.how-to#HowToInstall
+  %h2 How To Install
+  %p Install the module with: 
+  :markdown
+        :::bash
+        npm install cylon-galileo
+
+
+%section.how-to#HowToUse
+  %h2 How To Use
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+        	connection: { name: 'galileo', adaptor: 'galileo' },
+        	device: {name: 'galileo', driver: 'galileo'},
+
+        	work: function(my) {
+        		// provide an example of your module here
+        	}
+        }).start();
+
+
+%section.how-to#HowToConnect
+  %h2 How To Connect
+  %h3 Setting up the Galileo bigger Linux image, connecting and updating node.js.
+  %p Setting up Intel's Galileo board takes a bit of work, but luckily you only have to do it once (we hope :-)... )
+  %p The first step is to install the bigger linux image into an SD card and boot the Galileo from it, you can accomplish this by following the instructions on the galileo getting started page here:
+  %p https://learn.sparkfun.com/tutorials/galileo-getting-started-guide/bigger-linux-image
+  %p Please feel free to read through the getting started page, so you can get familiar with the board features.
+  %p Once we have the bigger linux image in the sd card, and the galileo booting up from it, we need to connect and enable networking (turned off by default in the Galieleo bigger linux image).
+  %p We can accomplish this by using a serialport to terminal program, you can read more about it in the getting started page here:
+
+  %p https://learn.sparkfun.com/tutorials/galileo-getting-started-guide/using-the-terminal
+
+  %p When you have connected successfully to the Galileo run this command to enable networking (make sure to connect the board to the network using an ethernet cable first):
+  :markdown
+        :::bash
+        $ /etc/init.d/networking start
+  %p This will allow us to connect using SSH, substitute the ip address with the one assigned to your Galileo:
+  :markdown
+        :::bash
+        $ ssh root@192.168.0.5
+  %p The final step of the setup is to update the node.js version included in the galileo bigger linux image, you can download a more up to date package from  here:
+
+  %p https://communities.intel.com/servlet/JiveServlet/download/221298-75632/nodejs_0.10.25-r0_i586.ipk.zip
+
+  %p Then we need to uncompress the file in the host computer:
+  :markdown
+        :::bash
+        $ unzip nodejs_0.10.25-r0_i586.ipk.zip
+  %p And copy the IPK package to the board, since the Galileo is already connected to the network (and we have an active session open that we can use) we can SCP the ipk package to update node.js to the galileo:
+  :markdown
+        :::bash
+        $ scp nodejs_0.10.25-r0_i586.ipk root@192.168.0.5:/home/root/
+  %p We then move to the Galileo terminal session and upgrade the installed node.js package by running the following command:
+  :markdown
+        :::bash
+        opkg upgrade /tmp/nodejs_0.10.25-r0_i586.ipk
+	
+    Let's confirm node.js version by running `node -v`
+	
+
+  :markdown
+        :::bash
+    		$ node -v
+    		v0.10.25
+
+  %p Nice! We are good to go! With this we are pretty much setup to use Cylon.js in the Galileo.
+  %p More details regarding updating node.js can be found here:
+
+  %p https://communities.intel.com/thread/48416
+
+  :markdown
+    Install the module with: `npm install cylon-galileo`
+
+  %h3 How to push code to your Galileo
+
+  %p The Galileo is a special case (compared to Beaglebone black and Raspberry Pi) since it lacks dev tools in the biggel Linux image, so at this time we do not have a different distribution to run in the sd card that does contain dev tools, so we'll have to make it work with what we have.
+
+  %p You'll need to write your code and install npm modules on your computer, at very least setup your project folder and install NPM modules, all of this using the 32bit version of both node.js and NPM modules.
+
+  %p First we need to download the 32bit version of Node.js:
+
+  %p http://nodejs.org/dist/v0.10.26/node-v0.10.26-linux-x86.tar.gz
+
+  %p You'll need to uncompress and run node and npm from that directory, I recommend creating links to the bin/node and bin/npm files in your home folder, that way you can easily install npm libraries using the 32bit version (needed by Galileo) and maintain your current global node instalation without messing with your path.
+
+  :markdown
+        :::bash
+        $ ln  ~/node-v0.10.26-linux-x86/bin/node ~/nodex86
+        $ ln  ~/node-v0.10.26-linux-x86/bin/npm ~/npmx86
+
+    Now, how to actually push code and run it in the Galileo, let's say we have a project folder called `galileo-blink`, we change directory intothe project folder, then we can either write our code there, in this case blink.js, or setup the project folder with all nedded NPM modules and work directly in the galileo board, of course all of this using the 32bit version of node.js we just installed:
+
+  :markdown
+        :::bash
+        $ cd galileo-blink
+        $ ~/npmx86 install cylon
+        $ ~/npmx86 install cylon-galileo
+        $ ~/npmx86 install cylon-gpio
+
+    This will create the `./node_modules/` folder in our project containing all the necessary modules that will run in the Galileo, so from here we can either work on our project and push the code later just for testing in the galileo, or push the modules and work directly in the Galileo, let's do the latter since makes development easier and quicker than having to push everytime we do a small change:
+
+  :markdown
+        :::bash
+        # From our project root folder run
+        $ cd ../
+        $ tar -cf galileo-blink.tar ./galileo-blink
+        $ scp galileo-blink.tar root@192.168.0.5:/home/root/
+
+  %p Once the project package finishes copying we go to our galileo session, and in the terminal we run the following:
+
+  :markdown
+        :::bash
+        $ cd ~ 
+        $ tar -xf galileo-blink.tar
+        $ cd galileo-blink
+        $ vi blink.js
+
+  %p We now have our environment ready to run the examples in the galileo, just copy paste the blink example (found in the examples section below), save it and run it.
+
+  :markdown
+        :::bash
+        # From project root folder
+        $ node blink.js
+
+
+%section.drivers#Drivers
+  %h2 Drivers
+  %p Available drivers for the Skynet platform are listed below. 
+
+  .hardware
+    %h2 GPIO Drivers
+    .devices
+      = partial "documentation/partials/devices_gpio_drivers"
+
+  
+
