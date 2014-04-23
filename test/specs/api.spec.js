@@ -13,7 +13,8 @@ describe("API", function() {
     stub(https, 'createServer').returns({ listen: spy() });
 
     opts = {
-      master: { name: 'master' }
+      master: { name: 'master' },
+      ssl: true
     }
 
     api = new API(opts);
