@@ -5,6 +5,7 @@ page_title: Blog
 date: 2014-03-04
 tags: robots
 author: Ron Evans
+active_menu_blog: true
 ---
 
 Immediately after our <a href="http://cylonjs.com/blog/2014/02/24/tipping-scale12x" target="blank">SCaLE 12x talk</a>, Team <a href="http://cylonjs.com/" target="blank">Cylon.js</a> made a big push forward, and we've released version 0.11 of our JavaScript framework for open source robotics and the Internet of Things. The major focus of this release has been refactoring the core into pure JavaScript, away from the CoffeeScript that we had previously been using. 

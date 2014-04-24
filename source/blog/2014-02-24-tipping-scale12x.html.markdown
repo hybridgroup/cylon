@@ -5,6 +5,7 @@ page_title: Blog
 date: 2014-02-24
 tags: events
 author: Ron Evans
+active_menu_blog: true
 ---
 
 We were really pleased to present <a href="http://cylonjs.com/" target="blank">Cylon.js</a> at the venerable <a href="https://www.socallinuxexpo.org/scale12x" target="blank">Southern California Linux Expo (SCaLE 12x)</a> now in its 12th year! SCaLE is one of the biggest regional open source conferences, and we were delighted to be on the same bill as of open source's biggest advocates, <a href="http://www.lessig.org/" target="blank">Lawrence Lessig</a>, who gave the <a href="https://www.youtube.com/watch?v=D3O1MC1AqvM" target="blank">opening keynote</a>.
