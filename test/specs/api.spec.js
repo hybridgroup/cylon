@@ -12,10 +12,7 @@ describe("API", function() {
   beforeEach(function() {
     stub(https, 'createServer').returns({ listen: spy() });
 
-    opts = {
-      master: { name: 'master' },
-      ssl: true
-    }
+    opts = { master: { name: 'master' } }
 
     api = new API(opts);
   });
