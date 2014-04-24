@@ -5,6 +5,7 @@ page_title: Blog
 date: 2014-02-06
 tags: robots
 author: Ron Evans
+active_menu_blog: true
 ---
 
 We've been hard at work since [ng-conf](http://ng-conf.org/) last month here on Team Cylon.js, and we've just released version 0.10 of our JavaScript framework for robotics and the Internet of Things. We've added many powerful new features, as well as support for ever more hardware.

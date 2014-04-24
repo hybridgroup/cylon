@@ -5,6 +5,7 @@ page_title: Blog
 date: 2013-12-12
 tags: robots
 author: Ron Evans
+active_menu_blog: true
 ---
 
 Team <a href="http://cylonjs.com/" target="blank">Cylon.js</a> got back a few days ago from the first ever <a href="http://www.robotsconf.com/" target="blank">RobotsConf</a> last week. The brainchild of the influential Chris Williams aka <a href="https://twitter.com/voodootikigod" target="blank">@VoodooTikiGod</a> of <a href="http://www.jsconf.com/" target="blank">JSConf</a> renown, RobotsConf was planned to be the first conference to bring open source software developers in and have them leave as new hardware makers.

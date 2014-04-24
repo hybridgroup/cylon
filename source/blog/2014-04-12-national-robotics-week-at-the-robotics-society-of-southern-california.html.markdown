@@ -5,6 +5,7 @@ page_title: Blog
 date: 2014-04-12
 tags: events
 author: Ron Evans
+active_menu_blog: true
 ---
 
 Wrapping up our [National Robotics Week](http://nationalroboticsweek.org) robot road show, we brought Cylon.js ([http://cylonjs.com](http://cylonjs.com)) back to SoCal to speak to the [Robotics Society of Southern California](http://www.rssc.org/). The venerable organization was established in 1989, and we were honored to be able to bring our JavaScript powered robots into the halls of academia.

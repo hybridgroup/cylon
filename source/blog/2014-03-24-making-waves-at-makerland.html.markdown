@@ -5,6 +5,7 @@ page_title: Blog
 date: 2014-03-24
 tags: events
 author: Ron Evans
+active_menu_blog: true
 ---
 
 Team <a href="http://cylonjs.com/" target="blank">Cylon.js</a> has just returned from a remarkable trip to <a href="http://makerland.org" target="blank">Makerland</a> in Poland. Billed as a "theme park for makers", the really fun and informative 3 day conference lived up to its name. Held in Warsaw, Poland, at the ultra-modern <a href="http://www.kopernik.org.pl/en/" target="blank">Copernicus Science Center</a>, Makerland packed in many kinds of robots, 3D printers, drones, submarines, and in our case, popsicle sticks.

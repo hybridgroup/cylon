@@ -5,6 +5,7 @@ page_title: Blog
 date: 2013-11-26
 tags: robots
 author: Ron Evans
+active_menu_blog: true
 ---
 
 As mentioned in our last blog post, we had a team demonstrating <a href="http://cylonjs.com/" target="blank">Cylon.js</a> at the <a href="http://www.salesforce.com/dreamforce/DF13/" target="blank">Dreamforce</a> conference in San Francisco last week. At over 130,000 people registered, it is one of the largest tech conferences in the world! We had received a special invitation to be part of the first <a href="http://blogs.developerforce.com/developer-relations/2013/10/every-internet-of-things-thing-at-dreamforce-2013.html" target="blank">Connected Device Lab</a> which was a unique location within the conference dedicated to important companies in the emerging "Internet of Things".
