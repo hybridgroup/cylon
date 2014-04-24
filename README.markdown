@@ -1,50 +1,53 @@
 [![Cylon.js](https://raw.github.com/hybridgroup/cylon/gh-pages/images/elements/logo.png)](http://cylonjs.com)
 
-http://cylonjs.com
+Cylon.js is a JavaScript framework for robotics and physical computing built on
+top of Node.js.
 
-Cylon.js is a JavaScript framework for robotics and physical computing using Node.js.
+It provides a simple, but powerful way to create solutions that incorporate
+multiple, different hardware devices concurrently.
 
-It provides a simple, yet powerful way to create solutions that incorporate multiple, different hardware devices at the same time.
+Want to use Ruby on robots? Check out our sister project, [Artoo][].
 
-Want to use Ruby on robots? Check out our sister project Artoo (http://artoo.io).
+Want to use Golang to power your robots? Check out our sister project,
+[Gobot][].
 
-Want to use the Go programming language to power your robots? Check out our sister project Gobot (http://gobot.io).
+[Artoo]: http://artoo.io
+[Gobot]: http://gobot.io
+
+## Build Status:
 
 [![Build Status](https://secure.travis-ci.org/hybridgroup/cylon.png?branch=master)](http://travis-ci.org/hybridgroup/cylon)
 
-## Examples:
+## Examples
 
-### Basic
+### Arduino + LED
 
-#### Arduino with an LED, using the Firmata protocol.
+The below example connects to an Arduino over a serial connection, and blinks an
+LED once per second.
 
-The example below connects to an Arduino, and every second turns the LED either on, or off. 
-
-The example requires that the Arduino has the Firmata sketch installed, and that it is connected on the port `/dev/ttyACM0`. You need to install Firmata on your Arduino, and to change the `port` parameter to match the port that your system is actually using.
-
-Make sure to upload the "Standard Firmata" sketch or an equivalent Firmata sketch to your Arduino first. Without that code running on the Arduino, Firmata can't communicate with Cylon. You can find the example sketch in your Arduino software under "Examples > Firmata > StandardFirmata".
-
+The example requires that the Arduino have the Firmata sketch installed; which
+can be obtained either through the Ardunio IDE or the `cylon arduino upload
+firmata` command available in [cylon-cli][].
 
 ```javascript
-var Cylon = require("cylon");
+var Cylon = require('cylon');
 
-// Initialize the robot
+// define the robot
 var robot = Cylon.robot({
-  // Change the port to the correct port for your Arduino.
+  // change the port to the correct one for your Arduino
   connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
   device: { name: 'led', driver: 'led', pin: 13 },
 
   work: function(my) {
-    // we do our thing here
-    every((1).second(), function() { my.led.toggle(); });
+    every((1).second(), my.led.toggle);
   }
 });
 
-// start working
+// connect to the Arduino and start working
 robot.start();
 ```
 
-#### Parrot ARDrone 2.0
+### Parrot ARDrone 2.0
 
 ```javascript
 var Cylon = require('cylon');
@@ -55,16 +58,95 @@ Cylon.robot({
 
   work: function(my) {
     my.drone.takeoff();
-    after(10..seconds(), function() { my.drone.land(); });
-    after(15..seconds(), function() { my.drone.stop(); });
+    after((10).seconds(), my.drone.land);
+    after((15).seconds(), my.drone.stop);
   }
 }).start();
 ```
 
+### Cat Toy (Leap Motion + Digispark + Servos)
+
+```javascript
+var Cylon = require('../..');
+
+Cylon.robot({
+  connections: [
+    { name: 'digispark', adaptor: 'digispark'},
+    { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' }
+  ],
+
+  devices: [
+    {name: 'servo1', driver: 'servo', pin: 0, connection: 'digispark'},
+    {name: 'servo2', driver: 'servo', pin: 1, connection: 'digispark'},
+    {name: 'leapmotion', driver: 'leapmotion', connection: 'leapmotion'}
+  ],
+
+  work: function(my) {
+    my['x'] = 90;
+    my['z'] = 90;
+
+    my.leapmotion.on('hand', function(hand) {
+      my['x'] = hand.palmX.fromScale(-300, 300).toScale(30, 150);
+      my['z'] = hand.palmZ.fromScale(-300, 300).toScale(30, 150);
+    });
+
+    every(100, function() {
+      my.servo1.angle(my['x']);
+      my.servo2.angle(my['z']);
+
+      console.log("Current Angle: " + my.servo1.currentAngle() + ", " + my.servo2.currentAngle());
+    });
+  }
+}).start();
+```
+
+### Multiple Spheros + API Server
+
+```javascript
+var Cylon = require('cylon');
+
+// tell the API server to listen for requests at
+// https://localhost:4000
+Cylon.api({ port: 4000 });
+
+var bots = [
+  { port: '/dev/rfcomm0', name: 'Thelma' },
+  { port: '/dev/rfcomm1', name: 'Louise' }
+];
+
+var SpheroBot = function() {};
+
+SpheroBot.prototype.connection = { name: "sphero", adaptor: "sphero" };
+SpheroBot.prototype.device = { name: "sphero", driver: "sphero" };
+
+SpheroBot.prototype.work = function(my) {
+  every((1).second(), function() {
+    console.log(my.name);
+    my.sphero.setRandomColor();
+    my.sphero.roll(60, Math.floor(Math.random() * 360));
+  });
+};
+
+for (var i = 0; i < bots.length; i++) {
+  var bot = bots[i];
+  var robot = new SpheroBot();
+
+  robot.connection.port = bot.port;
+  robot.name = bot.name;
+
+  Cylon.robot(robot);
+}
+
+// start up all robots at once
+Cylon.start();
+```
+
+[cylon-cli]: https://github.com/hybridgroup/cylon-cli
 
 ## Hardware Support
 
-Cylon.js has a extensible system for connecting to hardware devices. The following robotics, physical computing, or software platforms are currently supported:
+Cylon.js has an extensible syntax for connecting to multiple, different hardware
+devices. The following platforms are currently supported:
 
 - [Ardrone](http://ardrone2.parrot.com/) <==> [Adaptor/Drivers](https://github.com/hybridgroup/cylon-ardrone)
 - [Arduino](http://www.arduino.cc/) <==> [Adaptor](https://github.com/hybridgroup/cylon-firmata)
@@ -85,8 +167,8 @@ Cylon.js has a extensible system for connecting to hardware devices. The followi
 - [Sphero](http://www.gosphero.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-sphero)
 - [Tessel](https://tessel.io/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-tessel)
 
-Support for many devices that use General Purpose Input/Output (GPIO) have
-a shared set of drivers provided using the cylon-gpio module:
+Our implementation of GPIO (General Purpose Input/Output) allows for a shared
+set of drivers supporting a number of devices:
 
   - [GPIO](https://en.wikipedia.org/wiki/General_Purpose_Input/Output) <=> [Drivers](https://github.com/hybridgroup/cylon-gpio)
     - Analog Sensor
@@ -99,8 +181,8 @@ a shared set of drivers provided using the cylon-gpio module:
     - Maxbotix Ultrasonic Range Finder
     - Servo
 
-Support for devices that use Inter-Integrated Circuit (I2C) have a shared set of
-drivers provided using the cylon-i2c module:
+Additionally, we also support a number of I2C (Inter-Integrated Circuit) devices
+through a shared `cylon-i2c` module:
 
   - [I2C](https://en.wikipedia.org/wiki/I%C2%B2C) <=> [Drivers](https://github.com/hybridgroup/cylon-i2c)
     - BlinkM
@@ -110,66 +192,41 @@ drivers provided using the cylon-i2c module:
     - MPL115A2 Barometer/Thermometer
     - MPU6050
 
-More platforms and drivers are coming soon... follow us on Twitter [@cylonjs](http://twitter.com/cylonjs) for latest updates.
+We'll also have many more platforms and drivers coming soon, [follow us on
+Twitter][Twitter] for updates.
+
+[Twitter]: https://twitter.com/cylonjs
 
 ## Getting Started
 
 ### Installation
 
-All you need to get started is the `cylon` module:
+All you need to get started on a new robot is the `cylon` module:
 
     npm install cylon
 
-Then install modules for whatever hardware support you want to use from your robot. For the example below, an Arduino using the Firmata protocol:
+With the core module installed, now install the modules for whatever hardware
+support you need. For the Arduino + LED blink example, we'll need the 'firmata',
+'gpio', and 'i2c' modules:
 
-    npm install cylon-firmata
+    npm install cylon-firmata cylon-gpio cylon-i2c
 
 ## CLI
 
-Cylon has a Command Line Interface (CLI) so you can access important features
-right from the command line.
-
-    Usage: cylon [command] [options]
-
-    Commands:
-
-      generate <name>        Generates a new adaptor
-
-    Options:
-
-      -h, --help     output usage information
-      -V, --version  output the version number
-
-### Generator
-
-Want to integrate a hardware device we don't have Cylon support for yet? There's
-a generator for that!
-
-You can easily generate a new skeleton Cylon adaptor to
-help you get started. Simply run the `cylon generate` command, and the
-generator will create a new directory with all of the files in place for your
-new adaptor module.
-
-    $ cylon generate awesome_device
-    Creating cylon-awesome_device adaptor.
-    Compiling templates.
-
-    $ ls ./cylon-awesome_device
-    Gruntfile.js
-    LICENSE
-    README.md
-    dist/
-    package.json
-    src/
-    test/
+Cylon has a Command-Line Interface counterpart in [cylon-cli][]. This tool lets
+you access important features from the command line, and isn't dependent on
+Cylon itself. Check it out at https://github.com/hybridgroup/cylon-cli.
 
 ## Documentation
 
-We're busy adding documentation to our web site at http://cylonjs.com/ please check there as we continue to work on Cylon.js
+We're busy adding documentation to our website, check it out at
+[cylonjs.com/documentation][docs].
 
-If you want to help us with some documentation on the site, you can go to [cylonjs.com branch](https://github.com/hybridgroup/cylon/tree/cylonjs.com) and then, follow the instructions.
+If you want to help with documentation, you can find some helpful instructions
+on the [cylonjs.com branch][cylonjs-branch].
 
-Thank you!
+[docs]: http://cylonjs.com/documentation
+[cylonjs-branch]: https://github.com/hybridgroup/cylon/tree/cylonjs.com
 
 ## Contributing
 
@@ -179,7 +236,7 @@ Thank you!
 * We will look at the patch, test it out, and give you feedback.
 * Avoid doing minor whitespace changes, renamings, etc. along with merged content. These will be done by the maintainers from time to time but they can complicate merges and should be done seperately.
 * Take care to maintain the existing coding style.
-* Add unit tests for any new or changed functionality & Lint and test your code using [Grunt](http://gruntjs.com/).
+* Add unit tests for any new or changed functionality & lint and test your code using `make test` and `make lint`.
 * All pull requests should be "fast forward"
   * If there are commits after yours use “git rebase -i <new_head_branch>”
   * If you have local changes you may need to use “git stash”
