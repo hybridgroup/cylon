@@ -42,10 +42,9 @@ describe("Cylon", function() {
       expectedConfig = {
         host: '127.0.0.1',
         port: '3000',
-        cert: null,
-        key: null,
         auth: {},
-        CORS: null
+        CORS: null,
+        ssl: {}
       };
 
       // this is the shortest, cheapest way to dup an object in JS.
@@ -90,12 +89,15 @@ describe("Cylon", function() {
       });
     });
 
-    context("specifiying new SSL key and cert", function() {
+    context("specifiying SSL key and cert", function() {
       it("changes the SSL key and cert", function() {
-        expectedConfig.cert = "/path/to/cert/file";
-        expectedConfig.key = "/path/to/key/file";
+        expectedConfig.ssl.cert = "/path/to/cert/file";
+        expectedConfig.ssl.key  = "/path/to/key/file";
 
-        cylon.api({ cert: "/path/to/cert/file", key: "/path/to/key/file" });
+        cylon.api({ ssl: {
+          cert: "/path/to/cert/file",
+          key: "/path/to/key/file" }
+        });
 
         expect(cylon.api_config).to.be.eql(expectedConfig);
       })
