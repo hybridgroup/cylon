@@ -9,21 +9,20 @@ var API = source('api');
 describe("API", function() {
   var api, opts;
 
-  beforeEach(function() {
-    stub(https, 'createServer').returns({ listen: spy() });
-
-    opts = {
-      master: { name: 'master' }
-    }
-
-    api = new API(opts);
-  });
-
-  afterEach(function() {
-    https.createServer.restore();
-  });
-
   describe("constructor", function() {
+
+    beforeEach(function() {
+      stub(https, 'createServer').returns({ listen: spy() });
+
+      opts = { master: { name: 'master' }, ssl: {} }
+
+      api = new API(opts);
+    });
+
+    afterEach(function() {
+      https.createServer.restore();
+    });
+
     it("sets @opts to the passed opts object", function() {
       expect(api.opts).to.be.eql(opts);
     });
@@ -58,6 +57,28 @@ describe("API", function() {
       var title = api.server.get('title');
       expect(title).to.be.eql("Cylon API Server");
     });
+
+  });
+
+
+  describe("ssl disabled", function () {
+
+    beforeEach(function() {
+      stub(https, 'createServer').returns({ listen: spy() });
+
+      opts = { ssl: false }
+
+      api = new API(opts);
+    });
+
+    afterEach(function() {
+      https.createServer.restore();
+    });
+
+    it("doesn't create https server", function() {
+      expect(https.createServer).not.to.be.calledWith();
+    });
+
   });
 
   describe("#configureRoutes", function() {
