@@ -94,13 +94,15 @@ describe("Cylon", function() {
         expectedConfig.ssl.cert = "/path/to/cert/file";
         expectedConfig.ssl.key  = "/path/to/key/file";
 
-        cylon.api({ ssl: {
-          cert: "/path/to/cert/file",
-          key: "/path/to/key/file" }
+        cylon.api({
+          ssl: {
+            cert: "/path/to/cert/file",
+            key: "/path/to/key/file"
+          }
         });
 
         expect(cylon.api_config).to.be.eql(expectedConfig);
-      })
+      });
     });
 
     context("specifying an auth strategy", function() {
