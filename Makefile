@@ -1,5 +1,5 @@
 BIN := ./node_modules/.bin
-TEST_FILES := test/support/globals.js $(shell find test/specs -type f -name "*.js")
+TEST_FILES := test/support.js $(shell find test/specs -type f -name "*.js")
 
 VERSION := $(shell node -e "console.log(require('./package.json').version)")
 
