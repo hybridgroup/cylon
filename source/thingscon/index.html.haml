@@ -63,7 +63,9 @@ page_title_show: true
           work: function(my) {
             every((1).seconds(), function() {my.led.toggle()});
           }
-        }).start();
+        });
+
+        Cylon.start();
 
   %p Please note that you might need to change the value for port.
   %p 
@@ -95,7 +97,9 @@ page_title_show: true
               my.led.toggle();
             });
           }
-        }).start();
+        });
+
+        Cylon.start();
 
   %h2 Connect To Sphero
   %p 
@@ -118,7 +122,9 @@ page_title_show: true
               me.sphero.setRGB(Math.floor(Math.random() * 100000));
             });
           }
-        }).start();
+        });
+
+        Cylon.start();
 
   %h2 Sphero Makey Button
   %h3 JavaScript
@@ -198,7 +204,9 @@ page_title_show: true
               my.sphero.stop();
             });
           }
-        }).start();
+        });
+
+        Cylon.start();
 
   %h2 Leap Motion
   %h3 JavaScript
@@ -237,7 +245,9 @@ page_title_show: true
               Logger.info(gesture.toString());
             });
           }
-        }).start();
+        });
+
+        Cylon.start();
 
   %h2 Leap Motion Sphero
   %h3 JavaScript
@@ -262,4 +272,6 @@ page_title_show: true
               my.sphero.setRGB(r, 0, 0);
             });
           }
-        }).start();
+        })
+
+        Cylon.start();
