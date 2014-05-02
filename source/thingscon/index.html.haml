@@ -129,7 +129,32 @@ page_title_show: true
         Cylon.start();
 
   %h2 Connect To Sphero
-  %p 
+  %h3 OSX
+  %p
+    In order to allow Cylon.js running on your Mac to access the Sphero, go to "Bluetooth > Open Bluetooth Preferences > Sharing Setup" and make sure that "Bluetooth Sharing" is checked.
+
+
+  %h3 Ubuntu
+  %p
+    Connecting to the Sphero from Ubuntu or any other Linux-based OS can be done entirely from the command line using CylonJS CLI commands. Here are the steps.
+  %p
+    Find the address of the Sphero, by using:
+
+    :markdown
+            $ cylon bluetooth scan
+
+  %p
+    Pair to Sphero using this command (substituting the actual address of your Sphero):
+
+    :markdown
+            $ cylon bluetooth pair <address>
+
+  %p
+    Connect to the Sphero using this command (substituting the actual address of your Sphero):
+
+    :markdown
+            $ cylon bluetooth connect <address>
+
     Connect to your Sphero using Bluetooth. Here are instructions on
     = link_to "how to connect", "https://github.com/hybridgroup/cylon-sphero#how-to-connect"
 
