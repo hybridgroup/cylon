@@ -96,11 +96,15 @@ page_title_show: true
       %li Right click on "Computer"
       %li Click on "Properties"
       %li Open "Device Manager" on the "Properties" tab
-      %li Note the port listed next to the Arduino.
+      %li Expand the tree controller listed in the "Device Manager" labeled "Ports (COM & LPT)"
+      %li Note the port listed next to the "Arduino" entry. For example, "Arduino Uno (COM4)"
 
 %section.thingscon
   %h2 Makey Button
-  %img{:src => "/documentation/drivers/breadboards/gpio/makey_button_bb.png", :alt => "", :style => "width:50%"}
+  %p
+    You will need to use your "Makey Button" kit to wire up your wearable controller. Here is an image of what the breadboard will end up looking like:
+
+  %img{:src => "/documentation/drivers/breadboards/gpio/makey_controller.png", :alt => "", :style => "width:50%"}
   %h3 JavaScript
   :markdown
         :::javascript
