@@ -30,15 +30,29 @@ page_title_show: true
         opening another terminal window and entering this command, which should
         give you a similar result:
         :markdown
-              $ which cylon
-              /usr/local/bin/cylon
+              $ cylon version
+              0.4.0
+
     %li
       %p
-        Now, install Cylon.js in the local directory that you want to use for your code:
+        Now, create a local working directory that you want to use for the workshop:
+        :markdown
+              $ mkdir thingscon
+              $ cd thingscon
+
+    %li
+      %p
+        Install Cylon.js in the local working directory that you just created:
         :markdown
               $ npm install cylon cylon-gpio cylon-i2c cylon-firmata cylon-sphero cylon-leapmotion
       %p
         This command will install Cylon.js and all of the plugins you will need for the workshop.
+
+    %li
+      %p
+        To connect your Arduino to your computer, you will need to install the drivers which are part of the
+        =link_to "Arduino IDE", "http://arduino.cc/en/main/software#toc2"
+        software.
 
     %li
       %p
@@ -69,14 +83,23 @@ page_title_show: true
 
   %p Please note that you might need to change the value for port.
   %p 
-    Use
+    On OSX or Linux, use
     %code cylon scan serial
     to find your connection info and serial port address:
     :markdown
             $ cylon scan serial
 
+  %p 
+    On Windows, follow the following procedure:
+    %ul
+      %li Go to the "Start" menu
+      %li Right click on "Computer"
+      %li Click on "Properties"
+      %li Open "Device Manager" on the "Properties" tab
+      %li Note the port listed next to the Arduino.
+
 %section.thingscon
-  %h2 Makey button
+  %h2 Makey Button
   %img{:src => "/documentation/drivers/breadboards/gpio/makey_button_bb.png", :alt => "", :style => "width:50%"}
   %h3 JavaScript
   :markdown
