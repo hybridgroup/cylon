@@ -1,13 +1,13 @@
 "use strict";
 
-source('basestar');
+var Basestar = source('basestar');
 
 var EventEmitter = require('events').EventEmitter;
 
 describe('Basestar', function() {
   describe('constructor', function() {
     it('assigns @self to the instance of the Basestar class', function() {
-      var instance = new Cylon.Basestar();
+      var instance = new Basestar();
       expect(instance.self).to.be.eql(instance);
     });
   });
@@ -15,36 +15,26 @@ describe('Basestar', function() {
   describe('#proxyMethods', function() {
     var methods = ['asString', 'toString', 'returnString'];
 
-    var ProxyClass = (function() {
-      function ProxyClass() {}
+    var ProxyClass = function ProxyClass() {}
 
-      ProxyClass.prototype.asString = function() {
-        return "[object ProxyClass]";
-      };
+    ProxyClass.prototype.asString = function() {
+      return "[object ProxyClass]";
+    };
 
-      ProxyClass.prototype.toString = function() {
-        return "[object ProxyClass]";
-      };
+    ProxyClass.prototype.toString = function() {
+      return "[object ProxyClass]";
+    };
 
-      ProxyClass.prototype.returnString = function(string) {
-        return string;
-      };
+    ProxyClass.prototype.returnString = function(string) {
+      return string;
+    };
 
-      return ProxyClass;
+    var TestClass = function TestClass() {
+      this.testInstance = new ProxyClass;
+      this.proxyMethods(methods, this.testInstance, this, true);
+    }
 
-    })();
-
-    var TestClass = (function(_super) {
-      subclass(TestClass, _super);
-
-      function TestClass() {
-        this.testInstance = new ProxyClass;
-        this.proxyMethods(methods, this.testInstance, this, true);
-      }
-
-      return TestClass;
-
-    })(Cylon.Basestar);
+    subclass(TestClass, Basestar);
 
     it('can alias methods', function() {
       var testclass = new TestClass;
@@ -66,28 +56,22 @@ describe('Basestar', function() {
   });
 
   describe("#defineEvent", function() {
-    var ProxyClass = (function(klass) {
-      subclass(ProxyClass, klass);
-      function ProxyClass() {}
-      return ProxyClass;
-    })(Cylon.Basestar);
 
-    var EmitterClass = (function(klass) {
-      subclass(EmitterClass, klass);
+    var ProxyClass = function ProxyClass() {};
 
-      function EmitterClass(update) {
-        update || (update = false);
-        this.proxy = new ProxyClass();
-        this.defineEvent({
-          eventName: "testevent",
-          source: this,
-          target: this.proxy,
-          sendUpdate: update
-        });
-      }
+    var EmitterClass = function EmitterClass(update) {
+      update || (update = false);
+      this.proxy = new ProxyClass();
+      this.defineEvent({
+        eventName: "testevent",
+        source: this,
+        target: this.proxy,
+        sendUpdate: update
+      });
+    }
 
-      return EmitterClass;
-    })(Cylon.Basestar);
+    subclass(ProxyClass, Basestar);
+    subclass(EmitterClass, Basestar);
 
     it("proxies events from one class to another", function() {
       var eventSpy = spy(),
@@ -127,7 +111,7 @@ describe('Basestar', function() {
     var basestar;
 
     before(function() {
-      basestar = new Cylon.Basestar();
+      basestar = new Basestar();
       basestar.connector = new EventEmitter();
       basestar.connection = new EventEmitter();
     });
@@ -159,7 +143,7 @@ describe('Basestar', function() {
     var basestar;
 
     before(function() {
-      basestar = new Cylon.Basestar();
+      basestar = new Basestar();
       basestar.connection = new EventEmitter();
       basestar.device = new EventEmitter();
     });
