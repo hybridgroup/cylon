@@ -8,11 +8,14 @@ page_title_show: true
 subnav_driver: true
 subnav_circuit_driver: true
 active_menu_docs: true
+breadcrumbs: "<li><a href=''>HMC6252 Digital Compass</a></li>"
 
 arduino_platform: true
 beaglebone_platform: true
 raspberry_platform: true
 ---
+-content_for :bredcrumbs do
+  = partial "/documentation/drivers/breadcrumbs"
 
 %section.intro
   =image_tag "/images/devices/hmc6352-compass.jpg", class: "display"

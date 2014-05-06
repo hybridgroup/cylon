@@ -110,7 +110,10 @@ author: The Hybrid Group
 description: A #{Project.pretty_name} code example
 page_subtitle: "<a href='https://github.com/hybridgroup/#{@repo}/tree/master/examples/#{@name}' target='_blank'>View In Repo</a>"
 active_menu_docs: true
+breadcrumbs: "<li><a href='#'>#{title}</a></li>"
 ---
+-content_for :bredcrumbs do
+  = partial "/documentation/examples/breadcrumbs"
 
 :markdown
 #{body}
@@ -136,7 +139,10 @@ author: The Hybrid Group
 description: A #{Project.pretty_name} code example
 page_subtitle: "<a href='https://github.com/hybridgroup/#{@repo}/tree/master/examples/#{@name}' target='_blank'>View In Repo</a>"
 active_menu_docs: true
+breadcrumbs: "<li><a href='#'>#{title}</a></li>"
 ---
+-content_for :bredcrumbs do
+  = partial "/documentation/examples/breadcrumbs"
 
 .example
   :markdown

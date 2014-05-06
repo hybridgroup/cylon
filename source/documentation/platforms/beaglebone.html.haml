@@ -7,6 +7,7 @@ layout: documentation
 page_title_show: true
 subnav_platform: true
 active_menu_platforms: true
+breadcrumbs: "<li><a href=''>Beaglebone</a></li>"
 
 button_driver: true
 continuous_servo_driver: true
@@ -16,6 +17,8 @@ servo_driver: true
 makey_driver: true
 
 ---
+-content_for :bredcrumbs do
+  = partial "/documentation/platforms/breadcrumbs"
 
 %section.intro
   = image_tag "/images/devices/beaglebone.jpg", class: "display"

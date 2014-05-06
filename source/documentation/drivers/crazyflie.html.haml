@@ -7,9 +7,13 @@ layout: documentation
 page_title_show: true
 subnav_driver: true
 active_menu_docs: true
+breadcrumbs: "<li><a href=''>Crazyflie Flight</a></li>"
 
 crazyflie_platform: true
 ---
+-content_for :bredcrumbs do
+  = partial "/documentation/drivers/breadcrumbs"
+
 %section.intro
   =image_tag "/images/devices/crazyflie-flight.jpg", class: "display"
   .info-intro
