@@ -7,9 +7,12 @@ layout: documentation
 page_title_show: true
 subnav_driver: true
 active_menu_docs: true
+breadcrumbs: "<li><a href=''>Ardrone Navigation</a></li>"
 
 ardrone_platform: true
 ---
+-content_for :bredcrumbs do
+  = partial "/documentation/drivers/breadcrumbs"
 
 %section.intro
   =image_tag "/images/devices/ardrone-navigation.jpg", class: "display"

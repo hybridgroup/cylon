@@ -7,11 +7,14 @@ layout: documentation
 page_title_show: true
 subnav_platform: true
 active_menu_platforms: true
+breadcrumbs: "<li><a href=''>Tessel</a></li>"
 
 led_driver: true
 button_driver: true
 blinkm_driver: true
 ---
+-content_for :bredcrumbs do
+  = partial "/documentation/platforms/breadcrumbs"
 
 %section.intro
   = image_tag "/images/tessel.jpg", class: "display"

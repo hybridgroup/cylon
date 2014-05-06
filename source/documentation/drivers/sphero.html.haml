@@ -8,9 +8,12 @@ page_title_show: true
 subnav_driver: true
 sphero_colors_driver: true
 active_menu_docs: true
+breadcrumbs: "<li><a href=''>Sphero</a></li>"
 
 sphero_platform: true
 ---
+-content_for :bredcrumbs do
+  = partial "/documentation/drivers/breadcrumbs"
 
 %section.intro
   =image_tag "/images/devices/sphero.jpg", class: "display"

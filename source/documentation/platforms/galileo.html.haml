@@ -7,6 +7,7 @@ layout: documentation
 page_title_show: true
 subnav_platform: true
 active_menu_platforms: true
+breadcrumbs: "<li><a href=''>Galileo</a></li>"
 
 button_driver: true
 continuous_servo_driver: true
@@ -21,6 +22,8 @@ mpl115a2_driver: true
 lcd_driver: true
 
 ---
+-content_for :bredcrumbs do
+  = partial "/documentation/platforms/breadcrumbs"
 
 %section.intro
   = image_tag "/images/devices/galileo.jpg", class: "display"

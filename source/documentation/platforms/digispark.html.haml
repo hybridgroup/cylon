@@ -7,6 +7,7 @@ layout: documentation
 page_title_show: true
 subnav_platform: true
 active_menu_platforms: true
+breadcrumbs: "<li><a href=''>Digispark</a></li>"
 
 led_driver: true
 servo_driver: true
@@ -15,6 +16,8 @@ makey_driver: true
 mpl115a2_driver: true
 lcd_driver: true
 ---
+-content_for :bredcrumbs do
+  = partial "/documentation/platforms/breadcrumbs"
 
 %section.intro
   = image_tag "/images/devices/digispark.jpg", class: "display"

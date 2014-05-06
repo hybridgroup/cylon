@@ -1,16 +1,19 @@
 ---
 title: Joysticks with Cylon.js
 author: The Hybrid Group
-page_title: Joysticks
+page_title: Joystick
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon-joystick' class='repository' target='blank'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-joystick/issues'  target='blank'>Issues</a>"
 layout: documentation
 page_title_show: true
 subnav_platform: true
 active_menu_platforms: true
+breadcrumbs: "<li><a href=''>Joystick</a></li>"
 
 xbox360_driver: true
 dualshock_driver: true
 ---
+-content_for :bredcrumbs do
+  = partial "/documentation/platforms/breadcrumbs"
 
 %section.intro
   = image_tag "/images/devices/joystick.jpg", class: "display"

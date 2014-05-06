@@ -7,9 +7,12 @@ layout: documentation
 page_title_show: true
 subnav_driver: true
 active_menu_docs: true
+breadcrumbs: "<li><a href=''>Dualshock</a></li>"
 
 joystick_platform: true
 ---
+-content_for :bredcrumbs do
+  = partial "/documentation/drivers/breadcrumbs"
 
 %section.intro
   =image_tag "/images/devices/dualshock.jpg", class: "display"

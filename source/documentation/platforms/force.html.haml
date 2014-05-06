@@ -7,9 +7,12 @@ layout: documentation
 page_title_show: true
 subnav_platform: true
 active_menu_platforms: true
+breadcrumbs: "<li><a href=''>Force</a></li>"
 
 force_drivers: true
 ---
+-content_for :bredcrumbs do
+  = partial "/documentation/platforms/breadcrumbs"
 
 %section.intro
   = image_tag "/images/devices/force.jpg", class: "display"
