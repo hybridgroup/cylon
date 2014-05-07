@@ -1,5 +1,7 @@
 "use strict";
 
+var Device = source('device');
+
 source("robot");
 
 describe("Cylon.Robot", function() {
@@ -155,36 +157,23 @@ describe("Cylon.Robot", function() {
     });
 
     context("when passed a connection object", function() {
-      before(function() {
-        stub(Cylon, 'Device').returns("new device")
-      });
+      afterEach(function() { robot.devices = {}; });
 
-      after(function() {
-        Cylon.Device.restore();
-      });
-
-      it("instantiates a new connection with the provided object", function() {
+      it("instantiates a new device with the provided object", function() {
         var device = { name: 'ping', driver: 'ping' };
         robot.initDevices(device);
-        expect(Cylon.Device).to.be.calledWith(device);
-        expect(Cylon.Device).to.be.calledWithNew;
+        expect(robot.devices['ping']).to.be.a('object');
       });
     });
 
     context("when passed an array of device objects", function() {
-      before(function() {
-        stub(Cylon, 'Device').returns("new device")
-      });
-
-      after(function() {
-        Cylon.Device.restore();
-      });
+      afterEach(function() { robot.devices = {}; });
 
       it("instantiates a new device with each of the provided objects", function() {
         var devices = [{ name: 'ping', driver: 'ping' }]
         robot.initDevices(devices);
-        expect(Cylon.Device).to.be.calledWith(devices[0]);
-        expect(Cylon.Device).to.be.calledWithNew;
+
+        expect(robot.devices['ping']).to.be.a('object');
       });
     });
   });
