@@ -1,6 +1,7 @@
 "use strict";
 
 var Device = source('device');
+var Connection = source('connection');
 
 source("robot");
 
@@ -115,36 +116,18 @@ describe("Cylon.Robot", function() {
     });
 
     context("when passed a connection object", function() {
-      before(function() {
-        stub(Cylon, 'Connection').returns("new connection")
-      });
-
-      after(function() {
-        Cylon.Connection.restore();
-      });
-
       it("instantiates a new connection with the provided object", function() {
         var connection = { name: 'loopback', adaptor: 'loopback' };
         robot.initConnections(connection);
-        expect(Cylon.Connection).to.be.calledWith(connection);
-        expect(Cylon.Connection).to.be.calledWithNew;
+        expect(robot.connections['loopback']).to.be.instanceOf(Connection);
       });
     });
 
     context("when passed an array of connection objects", function() {
-      before(function() {
-        stub(Cylon, 'Connection').returns("new connection")
-      });
-
-      after(function() {
-        Cylon.Connection.restore();
-      });
-
       it("instantiates a new connection with each of the provided objects", function() {
         var connections = [{ name: 'loopback', adaptor: 'loopback' }]
         robot.initConnections(connections);
-        expect(Cylon.Connection).to.be.calledWith(connections[0]);
-        expect(Cylon.Connection).to.be.calledWithNew;
+        expect(robot.connections['loopback']).to.be.instanceOf(Connection);
       });
     });
   });
@@ -162,7 +145,7 @@ describe("Cylon.Robot", function() {
       it("instantiates a new device with the provided object", function() {
         var device = { name: 'ping', driver: 'ping' };
         robot.initDevices(device);
-        expect(robot.devices['ping']).to.be.a('object');
+        expect(robot.devices['ping']).to.be.instanceOf(Device);
       });
     });
 
@@ -173,7 +156,7 @@ describe("Cylon.Robot", function() {
         var devices = [{ name: 'ping', driver: 'ping' }]
         robot.initDevices(devices);
 
-        expect(robot.devices['ping']).to.be.a('object');
+        expect(robot.devices['ping']).to.be.instanceOf(Device);
       });
     });
   });
