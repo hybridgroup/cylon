@@ -2,14 +2,15 @@
 
 var EventEmitter = require('events').EventEmitter;
 
-source("driver");
+var Driver = source("driver");
 
 describe("Driver", function() {
   var device = {
     connection: {},
     emit: spy()
   };
-  var driver = new Cylon.Driver({
+
+  var driver = new Driver({
     name: 'driver',
     device: device
   });
