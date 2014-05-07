@@ -2,7 +2,7 @@
 
 var Ping = source('test/ping');
 
-source("device");
+var Device = source("device");
 source("robot");
 
 describe("Cylon.Device", function() {
@@ -20,7 +20,7 @@ describe("Cylon.Device", function() {
 
   var initDriver = stub(robot, 'initDriver').returns(driver);
 
-  var device = new Cylon.Device({
+  var device = new Device({
     robot: robot,
     name: "ping",
     pin: 13,
