@@ -1,5 +1,7 @@
 "use strict";
 
+var Ping = source('test/ping');
+
 source("device");
 source("robot");
 
@@ -11,7 +13,7 @@ describe("Cylon.Device", function() {
 
   var connection = robot.connections.loopback;
 
-  var driver = new Cylon.Drivers.Ping({
+  var driver = new Ping({
     name: 'driver',
     device: { connection: connection, port: 13 }
   })
