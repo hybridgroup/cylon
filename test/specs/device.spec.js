@@ -1,12 +1,11 @@
 "use strict";
 
-var Ping = source('test/ping');
-
-var Device = source("device");
-source("robot");
+var Ping = source('test/ping'),
+    Device = source("device"),
+    Robot = source("robot");
 
 describe("Cylon.Device", function() {
-  var robot = new Cylon.Robot({
+  var robot = new Robot({
     name: "TestingBot",
     connection: { name: 'loopback', adaptor: 'loopback' }
   });

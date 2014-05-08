@@ -1,15 +1,14 @@
 "use strict";
 
-var Device = source('device');
-var Connection = source('connection');
+var Device = source('device'),
+    Connection = source('connection'),
+    Robot = source("robot");
 
-source("robot");
-
-describe("Cylon.Robot", function() {
+describe("Robot", function() {
   var work = spy();
   var extraFunction = spy();
 
-  var robot = new Cylon.Robot({
+  var robot = new Robot({
     name: "Robby",
     work: work,
 
@@ -33,15 +32,15 @@ describe("Cylon.Robot", function() {
 
       context("if not provided", function() {
         before(function() {
-          stub(Cylon.Robot, 'randomName').returns("New Robot");
+          stub(Robot, 'randomName').returns("New Robot");
         });
 
         after(function() {
-          Cylon.Robot.randomName.restore();
+          Robot.randomName.restore();
         });
 
         it("is set to a random name", function() {
-          var bot = new Cylon.Robot({});
+          var bot = new Robot({});
           expect(bot.name).to.be.eql("New Robot");
         });
       });
@@ -78,7 +77,7 @@ describe("Cylon.Robot", function() {
   });
 
   describe("#data", function() {
-    var bot = new Cylon.Robot({
+    var bot = new Robot({
       connection: { name: 'loopback', adaptor: 'loopback' },
       device: { name: 'ping', driver: 'ping' }
     });
@@ -197,7 +196,7 @@ describe("Cylon.Robot", function() {
     var bot;
 
     beforeEach(function() {
-      bot = new Cylon.Robot({
+      bot = new Robot({
         connections: [
           { name: 'alpha', adaptor: 'loopback' },
           { name: 'bravo', adaptor: 'loopback' }
@@ -220,7 +219,7 @@ describe("Cylon.Robot", function() {
     var bot;
 
     beforeEach(function() {
-      bot = new Cylon.Robot({
+      bot = new Robot({
         devices: [
           { name: 'alpha', driver: 'ping' },
           { name: 'bravo', driver: 'ping' }
@@ -240,7 +239,7 @@ describe("Cylon.Robot", function() {
   });
 
   describe("#halt", function() {
-    var bot = new Cylon.Robot({
+    var bot = new Robot({
       device: { name: 'ping', driver: 'ping' },
       connection: { name: 'loopback', adaptor: 'loopback' }
     });
