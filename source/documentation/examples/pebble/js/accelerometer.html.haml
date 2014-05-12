@@ -1,0 +1,45 @@
+---
+layout: documentation
+page_title_show: true
+title: "Cylon.JS Example - accelerometer"
+page_title: "Example: accelerometer"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-pebble/tree/master/examples/accelerometer' target='_blank'>View In Repo</a>"
+---
+
+.example
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.api({
+          host: '0.0.0.0',
+          port: '8080',
+          ssl:  false
+        });
+
+        pebbleRobot = {
+          name: 'pebble',
+
+          connection: {
+            name: 'pebble',
+            adaptor: 'pebble'
+          },
+
+          device: {
+            name: 'pebble',
+            driver: 'pebble'
+          },
+
+          work: function(my) {
+            my.pebble.on('accel', function(data) {
+              console.log(data);
+            });
+          }
+
+        }
+
+        Cylon.robot(pebbleRobot);
+        Cylon.start();
+

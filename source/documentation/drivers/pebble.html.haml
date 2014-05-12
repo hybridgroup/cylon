@@ -23,13 +23,22 @@ pebble_platform: true
   %h2 How To Connect
   :markdown
         :::javascript
-        Cylon = require('cylon');
+        var Cylon = require('cylon');
 
-        robot = {
+        Cylon.api({
+          host: '0.0.0.0',
+          port: '8080',
+          ssl:  false
+        });
+
+        pebbleRobot = {
+          name: 'pebble',
+
           connection: {
             name: 'pebble',
             adaptor: 'pebble'
           },
+
           device: {
             name: 'pebble',
             driver: 'pebble'
@@ -41,49 +50,38 @@ pebble_platform: true
   %h3 Example receiving message queue from a Pebble smart watch.
   :markdown
         :::javascript
-        Cylon = require('cylon');
+        var Cylon = require('cylon');
 
         Cylon.api({
           host: '0.0.0.0',
-          port: '8080'
+          port: '8080',
+          ssl:  false
         });
 
-        PebbleRobot = (function() {
+        pebbleRobot = {
+          name: 'pebble',
 
-          function PebbleRobot() {}
-
-          PebbleRobot.prototype.connection = {
+          connection: {
             name: 'pebble',
             adaptor: 'pebble'
-          };
+          },
 
-          PebbleRobot.prototype.device = {
+          device: {
             name: 'pebble',
             driver: 'pebble'
-          };
+          },
 
-          PebbleRobot.prototype.work = function(self) {
-            var c;
-            c = 100;
-            return every(1..second(), function() {
-              var str;
-              c++;
-              str = "c: " + c;
-              self.pebble.message_queue().push(str);
-              return console.log(self.pebble.last_message());
+          work: function(my) {
+            my.pebble.send_notification("Hello Pebble!");
+
+            my.pebble.on('button', function(data) {
+              console.log("Button pushed: " + data);
             });
-          };
+          }
 
-          return PebbleRobot;
+        }
 
-        })();
-
-        bot = new PebbleRobot();
-
-        bot.name = 'pebble';
-
-        Cylon.robot(bot);
-
+        Cylon.robot(pebbleRobot);
         Cylon.start();
 
 

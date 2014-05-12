@@ -1,0 +1,47 @@
+---
+layout: documentation
+page_title_show: true
+title: "Cylon.JS Example - hello_pebble"
+page_title: "Example: hello_pebble"
+author: The Hybrid Group
+description: A Cylon.JS code example
+page_subtitle: "<a href='https://github.com/hybridgroup/cylon-pebble/tree/master/examples/hello_pebble' target='_blank'>View In Repo</a>"
+---
+
+.example
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.api({
+          host: '0.0.0.0',
+          port: '8080',
+          ssl:  false
+        });
+
+        pebbleRobot = {
+          name: 'pebble',
+
+          connection: {
+            name: 'pebble',
+            adaptor: 'pebble'
+          },
+
+          device: {
+            name: 'pebble',
+            driver: 'pebble'
+          },
+
+          work: function(my) {
+            my.pebble.send_notification("Hello Pebble!");
+
+            my.pebble.on('button', function(data) {
+              console.log("Button pushed: " + data);
+            });
+          }
+
+        }
+
+        Cylon.robot(pebbleRobot);
+        Cylon.start();
+
