@@ -5,6 +5,7 @@ page_title: Blog
 date: 2013-11-15
 tags: robots
 author: Ron Evans
+active_menu_blog: true
 ---
 
 We're really excited because next week is <a href="http://www.salesforce.com/dreamforce/DF13/" target="blank">Dreamforce</a>, and Team Cylon will be there in "full force" as it were! We have a workspace in the Developer Zone at the <a href="http://blogs.developerforce.com/developer-relations/2013/10/every-internet-of-things-thing-at-dreamforce-2013.html" target="blank">Connected Device Lab</a> on the second floor of Moscone West, and we're also <a href="https://dreamevent.my.salesforce.com/apex/ActivityList#a093000000XfGjrAAF" target="blank">leading a workshop</a> on the opening day of the conference. Both will include lots of <a href="http://gosphero.com/" target="blank">Sphero</a> fun thanks to our friends at Orbotix. We will have a bunch of great giveaways too! 

@@ -5,6 +5,7 @@ page_title: Blog
 date: 2014-01-15
 tags: robots
 author: Ron Evans
+active_menu_blog: true
 ---
 
 Our team is kicking off our first release of 2014, with the brand new version 0.9.0 of Cylon.js (<a href="http://cylonjs.com" target="blank">http://cylonjs.com</a>), the powerful JavaScript robotics framework based on <a href="http://nodejs.org/" target="blank">Node.js</a>. This release adds a web-based UI to our API, support for 3 more platforms, and a big upgrade to our command line tools.

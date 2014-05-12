@@ -5,6 +5,7 @@ page_title: Blog
 date: 2014-03-28
 tags: robots
 author: Ron Evans
+active_menu_blog: true
 ---
 
 The sun never sets (or rises maybe?) here on Team <a href="http://cylonjs.com/" target="blank">Cylon.js</a>. After many more lessons learned from you, our dear users, and especially after our great experience at <a href="http://cylonjs.com/blog/2014/03/24/making-waves-at-makerland/" target="blank">Makerland</a>, we've just released version 0.12 of our JavaScript framework for open source robotics, physical computing, and the Internet of Things. 

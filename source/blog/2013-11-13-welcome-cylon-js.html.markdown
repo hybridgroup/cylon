@@ -5,6 +5,7 @@ page_title: Blog
 date: 2013-11-13
 tags: robots
 author: Ron Evans
+active_menu_blog: true
 ---
 
 Welcome to the next era of open source robotics! This blog is where we will discuss new and interesting developments on Cylon.js (<a href="http://cylonjs.com" target="blank">http://cylonjs.com</a>) the new JavaScript robotics framework based on <a href="http://nodejs.org/" target="blank">Node.js</a>, as well as anything else interesting to the robot community at large.

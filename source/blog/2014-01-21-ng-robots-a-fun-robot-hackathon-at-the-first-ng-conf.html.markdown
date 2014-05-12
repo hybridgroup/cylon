@@ -5,6 +5,7 @@ page_title: Blog
 date: 2014-01-21
 tags: robots
 author: Ron Evans
+active_menu_blog: true
 ---
 
 We conducted the official robot hackathon at <a href="http://ng-conf.org" target="blank">ng-conf</a>, the first conference dedicated to <a href="http://angularjs.org/" target="blank">AngularJS</a>, that took place last week in Salt Lake City, Utah. It was perfect timing, given that the release of 0.9.0 of Cylon.js (<a href="http://cylonjs.com" target="blank">http://cylonjs.com</a>) our JavaScript open source robotics framework, had just added a AngularJS-based web UI to our API.
