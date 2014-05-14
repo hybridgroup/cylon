@@ -30,10 +30,10 @@ Now that Cylon knows about the necessary hardware we're going to be using, we'll
 tell it what work we want to do:
 
       work: function(my) {
-        Logger.info("Skynet is listening...");
+        console.log("Skynet is listening...");
 
         my.skynet.on('message', function(data) {
-          Logger.info(data);
+          console.log(data);
           var data = JSON.parse(data);
           if(data.message.red == 'on') {
             my.led13.turnOn()
