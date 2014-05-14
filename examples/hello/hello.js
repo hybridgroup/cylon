@@ -1,8 +1,18 @@
 var Cylon = require('../..');
 
 Cylon.robot({
+  connection: { name: 'loopback', adaptor: 'loopback' },
+  device: { name: 'ping', driver: 'ping' },
+
+  commands: ['test'],
+
+  test: function(greeting) {
+    return greeting + " world";
+  },
+
   work: function() {
-    every(1..second(), function() { console.log("Hello, human!"); });
-    after(10..seconds(), function() { console.log("Impressive."); });
+    every((60).seconds(), console.log);
   }
-}).start();
+});
+
+Cylon.start();
