@@ -28,7 +28,6 @@
     "*": false,
     "./": false,
     "async": true,
-    "node-namespace": true,
     "./lib": true
   },
 
@@ -46,7 +45,6 @@
 
   "dependencies": {
     "async":          "0.7.0",
-    "node-namespace": "1.0.0",
     "express":        "3.5.1",
     "robeaux":        ">= 0.1.0"
   }
