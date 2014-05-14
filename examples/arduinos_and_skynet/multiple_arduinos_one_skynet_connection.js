@@ -22,7 +22,7 @@ skynet = {
   ],
 
   work: function(my) {
-    Logger.info("Skynet is listening...");
+    console.log("Skynet is listening...");
 
     my.skynet.on('message', function(data) {
       console.log(data);

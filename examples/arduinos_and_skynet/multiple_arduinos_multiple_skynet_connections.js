@@ -38,7 +38,7 @@ SkynetBot = (function(){
       }
     });
 
-    Logger.info("Skynet instance `" + my.name + "` is listening ...");
+    console.log("Skynet instance `" + my.name + "` is listening ...");
   };
 
   return SkynetBot;
