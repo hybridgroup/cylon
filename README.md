@@ -1,6 +1,6 @@
 ## Cylon Website
 
-This site is build using [Middleman](http://middlemanapp.com/getting-started/)  
+This site is build using [Middleman](http://middlemanapp.com/basics/getting-started/)  
   
 To run locally:  
 
