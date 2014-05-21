@@ -8,7 +8,7 @@ author: Ron Evans
 active_menu_blog: true
 ---
 
-We said farewell to Germany after [NextBerlin 2014](), then headed off to that learned city Edinburgh, Scotland for [Scotland.js](). Taking place in the remarkable museum [Dynamic Earth](), the conference featured excellent speakers, and a very interactive format with a question track taking place immediately after each of the talks.
+We said farewell to Germany after [NextBerlin 2014](http://nextberlin.eu/), then headed off to that learned city Edinburgh, Scotland for [Scotland.js](http://scotlandjs.com/). Taking place in the remarkable museum [Dynamic Earth](http://www.dynamicearth.co.uk/), the conference featured excellent speakers, and a very interactive format with a question track taking place immediately after each of the talks.
 
 <img src="/images/blog/scotland-js-2014.png" alt="Scotland.js 2014" style="margin: 10px 0;">
 
