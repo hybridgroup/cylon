@@ -30,9 +30,9 @@
       margin: 0 auto;
       @include span-columns(3 of 9.5);
       background: $cta-hover-color;
-      height: 100px;
+      height: 130px;
       margin-bottom: 20px;
-      border-radius: 5px;
+      border-radius: 2px;
 
       @media only screen and (max-width: $medium-screen) {
 
@@ -43,7 +43,6 @@
 
         width: 100%;
         height: 100%;
-        padding: 10px;
         display: block;
       }
 
@@ -56,11 +55,14 @@
 
         color: $hero-title-color;
         font-weight: bold;
+        background: darken($blog-title-color, 4);
+        padding: 5px 10px;
       }
 
       .description {
 
         color: $hero-subtitle-color;
+        font-size: 10pt;
       }
     }
   }

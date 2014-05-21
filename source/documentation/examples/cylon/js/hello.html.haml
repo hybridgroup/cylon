@@ -8,6 +8,10 @@ description: A Cylon.JS code example
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon/tree/master/examples/hello' target='_blank'>View In Repo</a>"
 active_menu_docs: true
 ---
+-content_for :js_accordeon do
+  :javascript
+    $("#example-panel").addClass("active-panel");
+    $(".accordion-docs dt:nth-child(13) a:nth-child(2) img").addClass("rotate");
 
 .example
   :markdown
@@ -15,9 +19,19 @@ active_menu_docs: true
         var Cylon = require('cylon');
 
         Cylon.robot({
+          connection: { name: 'loopback', adaptor: 'loopback' },
+          device: { name: 'ping', driver: 'ping' },
+
+          commands: ['test'],
+
+          test: function(greeting) {
+            return greeting + " world";
+          },
+
           work: function() {
-            every(1..second(), function() { console.log("Hello, human!"); });
-            after(10..seconds(), function() { console.log("Impressive."); });
+            every((60).seconds(), console.log);
           }
-        }).start();
+        });
+
+        Cylon.start();
 

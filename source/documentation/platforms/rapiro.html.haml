@@ -1,16 +1,24 @@
 ---
 title: Rapiro with Cylon.js
 author: The Hybrid Group
-page_title: Rapiro
-page_subtitle: "<a href='https://github.com/hybridgroup/cylon-rapiro' target='blank' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-rapiro/issues' target='blank' >Issues</a>"
+page_title: Platforms
+page_subtitle: Cylon has a extensible system for connecting to hardware devices.
+page_title_docs: Rapiro
+page_subtitle_docs: "<a href='https://github.com/hybridgroup/cylon-rapiro' target='blank' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-rapiro/issues' target='blank' >Issues</a>"
 layout: documentation
 page_title_show: true
 subnav_platform: true
 active_menu_platforms: true
+subnavjs: true
 
 rapiro_driver: true
 
 ---
+-content_for :js_accordeon do
+  :javascript
+    $("#platform-panel").addClass("active-panel");
+    $("#platform-panel ul li:nth-child(14)").addClass("active-link");
+    $(".accordion-docs dt:nth-child(7) a:nth-child(2) img").addClass("rotate");
 
 %section.intro
   =image_tag "/images/devices/rapiro.jpg", class: "display"

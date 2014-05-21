@@ -1,14 +1,22 @@
 ---
 title: Opencv with Cylon.js
 author: The Hybrid Group
-page_title: Opencv
-page_subtitle: "<a href='https://github.com/hybridgroup/cylon-opencv' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-opencv/issues'>Issues</a>"
+page_title: Platforms
+page_subtitle: Cylon has a extensible system for connecting to hardware devices.
+page_title_docs: Opencv
+page_subtitle_docs: "<a href='https://github.com/hybridgroup/cylon-opencv' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-opencv/issues'>Issues</a>"
 layout: documentation
 page_title_show: true
 subnav_nodriver_platform: true
 active_menu_platforms: true
+subnavjs: true
 
 ---
+-content_for :js_accordeon do
+  :javascript
+    $("#platform-panel").addClass("active-panel");
+    $("#platform-panel ul li:nth-child(12)").addClass("active-link");
+    $(".accordion-docs dt:nth-child(7) a:nth-child(2) img").addClass("rotate");
 
 %section.intro
   = image_tag "/images/devices/opencv.jpg", class: "display"
