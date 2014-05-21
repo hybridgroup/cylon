@@ -1,12 +1,15 @@
 ---
 title: Arduino with Cylon.js
 author: The Hybrid Group
-page_title: Arduino
-page_subtitle: "<a href='https://github.com/hybridgroup/cylon-firmata' target='_blank' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-firmata/issues' target='_blank'>Issues</a>"
+page_title: Platforms
+page_subtitle: Cylon has a extensible system for connecting to hardware devices.
+page_title_docs: Arduino
+page_subtitle_docs: "<a href='https://github.com/hybridgroup/cylon-firmata' target='_blank' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-firmata/issues' target='_blank'>Issues</a>"
 layout: documentation
 page_title_show: true
 subnav_platform: true
 active_menu_platforms: true
+subnavjs: true
 
 analog_sensor_driver: true
 button_driver: true
@@ -21,6 +24,11 @@ hmc6352_compass_driver: true
 mpl115a2_driver: true
 lcd_driver: true
 ---
+-content_for :js_accordeon do
+  :javascript
+    $("#platform-panel").addClass("active-panel");
+    $("#platform-panel ul li:nth-child(2)").addClass("active-link");
+    $(".accordion-docs dt:nth-child(7) a:nth-child(2) img").addClass("rotate");
 
 %section.intro
   = image_tag "/images/devices/arduino.jpg", class: "display"

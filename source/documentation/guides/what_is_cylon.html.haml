@@ -1,0 +1,21 @@
+---
+page_title_show: true
+title: Cylon Platforms
+author: The Hybrid Group
+description: Cylon Platforms
+layout: documentation
+active_menu_docs: true
+
+page_title: Guides
+page_subtitle: A Guide by Humans, for Humanscurrently running robots.
+platforms: true
+---
+-content_for :js_accordeon do
+  :javascript
+    $("#guides-panel").addClass("active-panel");
+    $("#guides-panel ul li:nth-child(1)").addClass("active-link");
+    $(".accordion-docs dt:nth-child(5) a:nth-child(2) img").addClass("rotate");
+
+%h1 What is Cylon.js?
+%p Cylon.js is a JavaScript framework for robotics and physical computing using Node.js.
+%p It provides a simple, yet powerful way to create solutions that incorporate multiple, different hardware devices at the same time.

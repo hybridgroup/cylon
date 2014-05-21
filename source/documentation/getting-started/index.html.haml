@@ -5,15 +5,18 @@ author: The Hybrid Group
 description: Cylon.js Getting Started
 page_title: Getting Started
 page_subtitle: A Guide by Humans, for Humans.
-layout: page
+layout: documentation
 active_menu_docs: true
 ---
 
-%section.intro
-
-  = partial "../what_is"
+-content_for :js_accordeon do
+  :javascript
+    $("#getting-panel").addClass("active-panel");
+    $("#getting-panel ul li:nth-child(1)").addClass("active-link");
+    $(".accordion-docs dt:nth-child(3) a:nth-child(2) img").addClass("rotate");
 
 %section.how-to
+  %h1 Setup your environment.
   %h2 How to Install Node.js
   %h3 OSX
   %p 

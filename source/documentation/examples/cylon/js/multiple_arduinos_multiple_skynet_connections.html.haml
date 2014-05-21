@@ -8,6 +8,10 @@ description: A Cylon.JS code example
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon/tree/master/examples/multiple_arduinos_multiple_skynet_connections' target='_blank'>View In Repo</a>"
 active_menu_docs: true
 ---
+-content_for :js_accordeon do
+  :javascript
+    $("#example-panel").addClass("active-panel");
+    $(".accordion-docs dt:nth-child(13) a:nth-child(2) img").addClass("rotate");
 
 .example
   :markdown
@@ -52,7 +56,7 @@ active_menu_docs: true
               }
             });
 
-            Logger.info("Skynet instance `" + my.name + "` is listening ...");
+            console.log("Skynet instance `" + my.name + "` is listening ...");
           };
 
           return SkynetBot;

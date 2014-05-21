@@ -1,17 +1,26 @@
 ---
 title: Cylon.js - Sharp IR Proximity Sensor Driver
 author: The Hybrid Group
-page_title: Sharp IR Proximity Sensor
-page_subtitle: Driver
+page_title: Drivers
+page_subtitle: Cylon has a extensible system for connecting to hardware devices.
+page_title_docs: Sharp IR Proximity Sensor
+page_subtitle_docs: Driver
 layout: documentation
 page_title_show: true
 subnav_driver: true
 subnav_circuit_driver: true
 active_menu_docs: true
+subnavjs: true
 
 arduino_platform: true
 spark_platform: true
 ---
+-content_for :js_accordeon do
+  :javascript
+    $("#driver-panel").addClass("active-panel");
+    $("#gpio li:nth-child(4)").addClass("active-link");
+    $(".accordion-docs dt:nth-child(9) a:nth-child(2) img").addClass("rotate");
+
 %section.intro
   = image_tag "/images/devices/ir-range-finder.jpg", class: "display"
   .info-intro

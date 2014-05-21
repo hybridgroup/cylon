@@ -8,6 +8,10 @@ description: A Cylon.JS code example
 page_subtitle: "<a href='https://github.com/hybridgroup/cylon/tree/master/examples/skynet-blink' target='_blank'>View In Repo</a>"
 active_menu_docs: true
 ---
+-content_for :js_accordeon do
+  :javascript
+    $("#example-panel").addClass("active-panel");
+    $(".accordion-docs dt:nth-child(13) a:nth-child(2) img").addClass("rotate");
 
 .example
   :markdown
@@ -24,10 +28,10 @@ active_menu_docs: true
           device: { name: 'led13', driver: 'led', pin: 13, connection: 'arduino' },
 
           work: function(my) {
-            Logger.info("Skynet is listening...");
+            console.log("Skynet is listening...");
 
             my.skynet.on('message', function(data) {
-              Logger.info(data);
+              console.log(data);
               var data = JSON.parse(data);
               if(data.message.red == 'on') {
                 my.led13.turnOn()

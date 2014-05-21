@@ -1,15 +1,21 @@
 ---
 title: Cylon.js API
 author: The Hybrid Group
-page_title: API
-page_subtitle: "The Cylon API provides an interface for retrieving information and communicating with the currently running robots."
+page_title: Guides
+page_subtitle: A Guide by Humans, for Humanscurrently running robots.
 layout: documentation
 page_title_show: true
 active_menu_docs: true
 ---
+-content_for :js_accordeon do
+  :javascript
+    $("#guides-panel").addClass("active-panel");
+    $("#guides-panel ul li:nth-child(2)").addClass("active-link");
+    $(".accordion-docs dt:nth-child(5) a:nth-child(2) img").addClass("rotate");
+
 .api
   :markdown
-    ## How To Connect
+    # How To Connect with the API
 
     Cylon comes with a built-in API server so you can view details about your
     robots and control them from anywhere.

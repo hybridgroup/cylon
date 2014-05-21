@@ -1,17 +1,25 @@
 ---
 title: Cylon.js - Maxbotix Driver
 author: The Hybrid Group
-page_title: Maxbotix
-page_subtitle: Driver
+page_title: Drivers
+page_subtitle: Cylon has a extensible system for connecting to hardware devices.
+page_title_docs: Maxbotix
+page_subtitle_docs: Driver
 layout: documentation
 page_title_show: true
 subnav_driver: true
 subnav_circuit_driver: true
 active_menu_docs: true
+subnavjs: trues
 
 arduino_platform: true
 spark_platform: true
 ---
+-content_for :js_accordeon do
+  :javascript
+    $("#driver-panel").addClass("active-panel");
+    $("#gpio li:nth-child(7)").addClass("active-link");
+    $(".accordion-docs dt:nth-child(9) a:nth-child(2) img").addClass("rotate");
 
 %section.intro
   =image_tag "/images/devices/maxbotix.jpg", class: "display"
