@@ -1,16 +1,24 @@
 ---
 title: Ardrone with Cylon.js
 author: The Hybrid Group
-page_title: Ardrone
-page_subtitle: "<a href='https://github.com/hybridgroup/cylon-ardrone' target='_blank' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-ardrone/issues' target='_blank'>Issues</a>"
+page_title: Platforms
+page_subtitle: Cylon has a extensible system for connecting to hardware devices.
+page_title_docs: Ardrone
+page_subtitle_docs: "<a href='https://github.com/hybridgroup/cylon-ardrone' target='_blank' class='repository'>Repository</a> <a class+'issues' href='https://github.com/hybridgroup/cylon-ardrone/issues' target='_blank'>Issues</a>"
 layout: documentation
 page_title_show: true
 subnav_platform: true
 active_menu_platforms: true
+subnavjs: true
 
 ardrone_flight_driver: true
 ardrone_nav_driver: true
 ---
+-content_for :js_accordeon do
+  :javascript
+    $("#platform-panel").addClass("active-panel");
+    $("#platform-panel ul li:nth-child(1)").addClass("active-link");
+    $(".accordion-docs dt:nth-child(7) a:nth-child(2) img").addClass("rotate");
 
 %section.intro
   = image_tag "/images/devices/ardrone.jpg", class: "display"

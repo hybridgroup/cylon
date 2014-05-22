@@ -1,15 +1,24 @@
 ---
 title: Cylon.js - Skynet Driver
 author: The Hybrid Group
-page_title: Skynet 
-page_subtitle: Driver
+page_title: Drivers
+page_subtitle: Cylon has a extensible system for connecting to hardware devices.
+page_title_docs: Skynet 
+page_subtitle_docs: Driver
 layout: documentation
 page_title_show: true
 subnav_driver: true
 active_menu_docs: true
+subnavjs: true
 
 skynet_platform: true
 ---
+-content_for :js_accordeon do
+  :javascript
+    $("#driver-panel").addClass("active-panel");
+    $("#others li:nth-child(6)").addClass("active-link");
+    $(".accordion-docs dt:nth-child(9) a:nth-child(2) img").addClass("rotate");
+
 %section.intro
   = image_tag "/images/devices/skynet.jpg", class: "display"
   .info-intro

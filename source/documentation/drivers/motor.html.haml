@@ -1,18 +1,26 @@
 ---
 title: Cylon.js - Motor Driver
 author: The Hybrid Group
-page_title: Motor
-page_subtitle: Driver
+page_title: Drivers
+page_subtitle: Cylon has a extensible system for connecting to hardware devices.
+page_title_docs: Motor
+page_subtitle_docs: Driver
 layout: documentation
 page_title_show: true
 subnav_driver: true
 subnav_circuit_driver: true
 active_menu_docs: true
+subnavjs: trues
 
 arduino_platform: true
 raspberry_platform: true
 spark_platform: true
 ---
+-content_for :js_accordeon do
+  :javascript
+    $("#driver-panel").addClass("active-panel");
+    $("#gpio li:nth-child(8)").addClass("active-link");
+    $(".accordion-docs dt:nth-child(9) a:nth-child(2) img").addClass("rotate");
 
 %section.intro
   =image_tag "/images/devices/motor.jpg", class: "display"

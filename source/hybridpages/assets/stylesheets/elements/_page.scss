@@ -1,3 +1,23 @@
+.page-title-docs {
+  
+  .w {
+
+    .title {
+
+      font-size: 35pt !important;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+
+      a {
+      
+        color: $blog-title-color;
+      }
+    }
+  }
+}
+
 .page-title {
 
   background: $hero-color;
@@ -42,6 +62,39 @@
   position: fixed;
   top: 0;
   z-index: 99;
+  padding: 0 !important;
+
+  .app-logo {
+
+    display: inline-block !important;
+  }
+
+  .container-subnav {
+
+    width: $big-screen;
+    margin: 0 auto;
+
+    @include medium-screen($medium-screen, "") {
+
+      padding: 0 15px;
+    }
+
+    @include small-screen(100%, "") {
+
+      padding: 0 15px;
+    }
+  }
+
+  nav {
+  
+    float: left;
+    margin: 20px 0;
+  }
+
+  a {
+
+    margin: 20px 10px !important;
+  }
 }
 
 .marginTopSubnav {
@@ -61,13 +114,30 @@
      display: none;
   }
 
+  .app-logo {
+
+      color: $blog-title-color;
+      font-size: 2em;
+      float: left;
+      font-family: "Russo One", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      margin-top: 5px;
+      display: none;
+  }
+
   nav {
+
 
     a {
 
       padding: 5px 10px;
-      margin: 20px 10px;
+      margin: 20px 2px;
       color: $color-text-subnav-drivers;
+      font-size: .9em;
+
+      @media only screen and (min-width: $medium-screen) and (max-width: $big-screen) {
+
+        font-size: .7em;
+      }
 
       &:hover {
 
@@ -80,6 +150,14 @@
     
       color: white;
       background: $color-text-subnav-drivers;
+    }
+
+    a:last-child {
+
+      &:hover {
+
+        background: none;
+      }
     }
   }
 }
