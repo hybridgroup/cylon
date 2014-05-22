@@ -12,7 +12,7 @@ After our wonderful experiences at [Scotland.js](http://scotlandjs.com/) and a c
 
 <img src="/images/blog/cylonjs-makerfaire-2014.jpg" alt="MakerFaire 2014" style="margin: 10px 0;">
 
-It was incredibly exciting to speak at MakerFaire's 9th year, after having attended it so many times. The crowd was really energetic, and we were ready for our close-up after having been on the road. 
+It was incredibly exciting to speak at MakerFaire's 9th year, after having attended it so many times. The crowd was really energetic, and we were ready for our close-up after having been on the road. We demoed [Arduino](http://www.arduino.cc/), [Tessel](https://tessel.io/), [Beaglebone Black](http://beagleboard.org/), [Sphero](http://www.gosphero.com/sphero-2-0/), [ARDrone](http://ardrone2.parrot.com/), & [OpenCV](http://opencv.org/).
 
 We even were able to have family meet up with us to go around and enjoy the rest of the experience. Here is the youngest member of our crew getting ready to go on.
 
