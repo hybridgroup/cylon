@@ -12,7 +12,7 @@ Our next stop on the robot world tour was [NextBerlin 2014](http://nextberlin.eu
 
 Team Cylon.js had a special place to demo our JavaScript robots, and we spoke to many people while demoing a [Leap Motion](https://www.leapmotion.com/) connection to a [Sphero](http://www.gosphero.com/sphero-2-0/). Everyone wanted to play with it, and we were happy to spark a sense of fun and wonder to the business oriented crowd. Of course, it also happed to showcase the power of the platform too!
 
-<img src="/images/blog/next-berlin-2014.jpg" alt="thingscon" style="margin: 10px 0;"><small>(Image Courtesy of [Heisenberg Media](http://www.heisenbergmedia.com/))</small>
+<a href="https://www.flickr.com/photos/nextconference/14113381585/in/set-72157644475528516/"><img src="/images/blog/next-berlin-2014.jpg" alt="NextBerlin 2014 - Image by Dan Taylor/Heisenberg Media" style="margin: 10px 0;"></a>
 
 Over the 2 days of the conference, we met many people, gave a few interviews, and learned a lot about the European technology scene.
 
