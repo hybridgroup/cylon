@@ -14,7 +14,7 @@ The conference opened up with a keynote from the insightful [Brady Forrest](http
 
 <img src="/images/blog/thingscon-2014.png" alt="thingscon 2014" style="margin: 10px 0;">
 
-Team Cylon.js closed the first day with a fantastic workshop. We brought our usual giant flight cases of gear, and with Spheros, Arduinos, and Leap Motion gestural controllers, we showed everyone how easy it is to control devices using JavaScript.
+Team Cylon.js closed the first day with a fantastic workshop. We brought our usual giant flight cases of gear, and with [Spheros](http://www.gosphero.com/sphero-2-0/), [Arduinos](http://www.arduino.cc/), and [Leap Motion](https://www.leapmotion.com/) gestural controllers, we showed everyone how easy it is to control devices using JavaScript.
 
 Thank you to the conference origanizers and the enthusiastic attendees for bringing us to Berlin! 
 
