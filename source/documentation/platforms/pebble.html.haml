@@ -83,56 +83,14 @@ pebble_driver: true
 
 %section.how-to#HowToConnect
   %h2 How To Connect
-  %p This software requires version 1.12.0 of the Pebble watch firmware.
-
-  %h3 OSX
+  %p This software requires version 2.X of the Pebble watch firmware.
 
   %p The main steps are:
-
   %ul
-    %li Pair your computer and the Pebble
-    %li Use a socket to serial connection to map a TCP socket to the local port
-    %li Connect to the device via Cylon.js
-    -#%li To figure out which port your pebble is connected to, use the Cylon.js connect scan command:
-
-  -#:markdown
-        -#:::bash
-        -#$ Cylon.js connect scan
-
-  -#%p Now you are ready to connect to the Sphero using the socket, in this example port 4567:
-
-  -#:markdown
-        -#:::bash
-        -#Cylon.js connect serial 4567 pebble
-
-  %h3 Ubuntu
-
-  %p The main steps are:
-
-  %ul
-    %li Pair your computer and the Pebble
-    %li Map your device to a port
-    %li Use a socket to serial connection to map a TCP socket to the local port
-    %li Connect to the device via Cylon.js
-    %li You will need to pair with the Pebble, entering any needed password.
-
-  -#%p Then you can find the Bluetooth address, for example 00:18:33:86:37:8B, by using the Cylon.js connect scan command:
-
-  -#:markdown
-        -#:::bash
-        -#$ Cylon.js connect scan
-
-  -#%p Once you know the address, you can use the Cylon.js connect bind command to map a port to the device:
-
-  -#:markdown
-        -#:::bash
-        -#Cylon.js connect bind 00:18:33:86:37:8B pebble
-
-  -#%p Now you are ready to connect to the Pebble using a socket, in this example port 4567:
-
-  -#:markdown
-        -#:::bash
-        -#Cylon.js connect socat pebble 4567
+    %li Install Pebble 2.0 iOS or Android app. (If you haven't already)
+    %li= link_to "Install chomps by following this instructions", "https://github.com/hybridgroup/chomps/raw/master/README.md"
+    %li After app is installed, click on "Settings" and configure robot name, robot api host, and robot api port
+    %li Configuration settings must match with your program, in this example, api host would be your computer IP, robot name is 'pebble', and robot api port is 8080
 
 %section.drivers#Drivers
   %h2 Drivers
