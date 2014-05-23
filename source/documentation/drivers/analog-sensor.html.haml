@@ -61,11 +61,22 @@ spark_platform: true
           device: {name: 'sensor', driver: 'analogSensor', pin: 0, lowerLimit: 100, upperLimit: 900},
 
           work: function(my) {
-            my.sensor.on('lowerLimit', function() {
-              Logger.info("Lower limit reached!");
+
+            var analogValue = 0;
+
+            every((1).second(), function() {
+              analogValue = my.sensor.analogRead();
+              Logger.info('Analog value => ', analogValue);
             });
-            my.sensor.on('upperLimit', function() {
+
+            my.sensor.on('lowerLimit', function(val) {
+              Logger.info("Lower limit reached!");
+              Logger.info('Analog value => ', val);
+            });
+
+            my.sensor.on('upperLimit', function(val) {
               Logger.info("Upper limit reached!");
+              Logger.info('Analog value => ', val);
             });
           }
         }).start();
