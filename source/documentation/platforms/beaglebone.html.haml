@@ -136,8 +136,7 @@ makey_driver: true
 
   %h4 Flashing the SD card
   %p
-    The final step in setting up the SD card is to actually flashing the image we just downloaded and uncompressed into the sd card. You
-    can accomplish just that by running the following command.
+    The final step in setting up the SD card is to actually flashing the image we just downloaded and uncompressed into the sd card. You can accomplish just that by running the following command(make sure to specify the appropiate `/dev/sdX` device that represents your SD Card).
 
   :markdown
         $ sudo dd bs=1M count=3950 if=./robot-ubuntu_13.10-armv7-1394437089.img of=/dev/sdb && sudo sync
