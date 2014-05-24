@@ -2,7 +2,8 @@
 
 var EventEmitter = require('events').EventEmitter;
 
-var Driver = source("driver");
+var Driver = source("driver"),
+    Logger = source('logger');
 
 describe("Driver", function() {
   var device = {
