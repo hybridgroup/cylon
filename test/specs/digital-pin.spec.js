@@ -2,10 +2,10 @@
 
 var fs = require('fs');
 
-source('digital-pin');
+var DigitalPin = source('io/digital-pin');
 
 describe("Cylon.IO.DigitalPin", function() {
-  var pin = new Cylon.IO.DigitalPin({ pin: '4', mode: 'w' })
+  var pin = new DigitalPin({ pin: '4', mode: 'w' })
 
   describe("constructor", function() {
     it("sets @pinNum to the pin number passed in opts", function() {

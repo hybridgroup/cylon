@@ -1,24 +1,25 @@
 "use strict";
 
-source("device");
-source("robot");
+var Ping = source('test/ping'),
+    Device = source("device"),
+    Robot = source("robot");
 
 describe("Cylon.Device", function() {
-  var robot = new Cylon.Robot({
+  var robot = new Robot({
     name: "TestingBot",
     connection: { name: 'loopback', adaptor: 'loopback' }
   });
 
   var connection = robot.connections.loopback;
 
-  var driver = new Cylon.Drivers.Ping({
+  var driver = new Ping({
     name: 'driver',
     device: { connection: connection, port: 13 }
   })
 
   var initDriver = stub(robot, 'initDriver').returns(driver);
 
-  var device = new Cylon.Device({
+  var device = new Device({
     robot: robot,
     name: "ping",
     pin: 13,
