@@ -3,26 +3,20 @@ TEST_FILES := test/support.js $(shell find test/specs -type f -name "*.js")
 
 VERSION := $(shell node -e "console.log(require('./package.json').version)")
 
-# Our 'phony' make targets (don't involve any file changes)
 .PHONY: cover test bdd lint release
 
-# Run Mocha, with coverage.
-cover:
-	@$(BIN)/istanbul cover $(BIN)/_mocha $(TEST_FILES) --report lcovonly -- -R spec
-
-# Run Mocha, with standard reporter.
 test:
 	@$(BIN)/mocha --colors $(TEST_FILES)
 
-# Run Mocha, with more verbose BDD reporter.
+cover:
+	@$(BIN)/istanbul cover $(BIN)/_mocha $(TEST_FILES) --report lcovonly -- -R spec
+
 bdd:
 	@$(BIN)/mocha --colors -R spec $(TEST_FILES)
 
-# Run JSHint
 lint:
 	@$(BIN)/jshint ./lib
 
-# Cuts/publishes a new release
 release:
 	@git tag -m "$(VERSION)" v$(VERSION)
 	@git push --tags
