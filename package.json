@@ -5,7 +5,9 @@
   "description": "A JavaScript robotics framework using Node.js",
   "homepage": "http://cylonjs.com",
   "bugs": "https://github.com/hybridgroup/cylon/issues",
+
   "author": "The Hybrid Group <cylonjs@hybridgroup.com>",
+
   "contributors": [
     "Ron Evans <ron@hybridgroup.com>",
     "Andrew Stewart <andrew@hybridgroup.com>",
@@ -14,33 +16,37 @@
     "Gize Bonilla <gize@hybridgroup.com>",
     "Adrian Zankich <adrian@hybridgroup.com>"
   ],
+
   "repository": {
     "type": "git",
     "url": "https://github.com/hybridgroup/cylon"
   },
+
   "license": "Apache 2.0",
+
   "hardware": {
     "*": false,
     "./": false,
     "async": true,
-    "node-namespace": true,
     "./lib": true
   },
-  "engines": {
-    "node": ">= 0.10.20"
+
+  "engines" : {
+    "node" : ">= 0.10.20"
   },
+
   "devDependencies": {
     "sinon-chai": "2.5.0",
-    "chai": "1.9.1",
-    "mocha": "1.18.2",
-    "sinon": "1.9.1",
-    "jshint": "2.5.0",
-    "istanbul": "0.2.10"
+    "chai":       "1.9.1",
+    "mocha":      "1.18.2",
+    "sinon":      "1.9.1",
+    "jshint":     "2.5.0",
+    "istanbul":   "0.2.10"
   },
+
   "dependencies": {
-    "async": "0.7.0",
-    "express": "3.5.1",
-    "node-namespace": "1.0.0",
-    "robeaux": ">= 0.1.0"
+    "async":          "0.7.0",
+    "express":        "3.5.1",
+    "robeaux":        ">= 0.1.0"
   }
 }

@@ -2,11 +2,11 @@
 
 var EventEmitter = require('events').EventEmitter;
 
-source("adaptor");
+var Adaptor = source("adaptor");
 
 describe("Adaptor", function() {
   var connection = new EventEmitter;
-  var adaptor = new Cylon.Adaptor({ name: 'adaptor', connection: connection });
+  var adaptor = new Adaptor({ name: 'adaptor', connection: connection });
 
   describe("#constructor", function() {
     it("sets @self as a reference to the adaptor", function() {

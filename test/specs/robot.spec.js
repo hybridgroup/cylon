@@ -1,12 +1,14 @@
 "use strict";
 
-source("robot");
+var Device = source('device'),
+    Connection = source('connection'),
+    Robot = source("robot");
 
-describe("Cylon.Robot", function() {
+describe("Robot", function() {
   var work = spy();
   var extraFunction = spy();
 
-  var robot = new Cylon.Robot({
+  var robot = new Robot({
     name: "Robby",
     work: work,
 
@@ -30,15 +32,15 @@ describe("Cylon.Robot", function() {
 
       context("if not provided", function() {
         before(function() {
-          stub(Cylon.Robot, 'randomName').returns("New Robot");
+          stub(Robot, 'randomName').returns("New Robot");
         });
 
         after(function() {
-          Cylon.Robot.randomName.restore();
+          Robot.randomName.restore();
         });
 
         it("is set to a random name", function() {
-          var bot = new Cylon.Robot({});
+          var bot = new Robot({});
           expect(bot.name).to.be.eql("New Robot");
         });
       });
@@ -75,7 +77,7 @@ describe("Cylon.Robot", function() {
   });
 
   describe("#data", function() {
-    var bot = new Cylon.Robot({
+    var bot = new Robot({
       connection: { name: 'loopback', adaptor: 'loopback' },
       device: { name: 'ping', driver: 'ping' }
     });
@@ -113,36 +115,18 @@ describe("Cylon.Robot", function() {
     });
 
     context("when passed a connection object", function() {
-      before(function() {
-        stub(Cylon, 'Connection').returns("new connection")
-      });
-
-      after(function() {
-        Cylon.Connection.restore();
-      });
-
       it("instantiates a new connection with the provided object", function() {
         var connection = { name: 'loopback', adaptor: 'loopback' };
         robot.initConnections(connection);
-        expect(Cylon.Connection).to.be.calledWith(connection);
-        expect(Cylon.Connection).to.be.calledWithNew;
+        expect(robot.connections['loopback']).to.be.instanceOf(Connection);
       });
     });
 
     context("when passed an array of connection objects", function() {
-      before(function() {
-        stub(Cylon, 'Connection').returns("new connection")
-      });
-
-      after(function() {
-        Cylon.Connection.restore();
-      });
-
       it("instantiates a new connection with each of the provided objects", function() {
         var connections = [{ name: 'loopback', adaptor: 'loopback' }]
         robot.initConnections(connections);
-        expect(Cylon.Connection).to.be.calledWith(connections[0]);
-        expect(Cylon.Connection).to.be.calledWithNew;
+        expect(robot.connections['loopback']).to.be.instanceOf(Connection);
       });
     });
   });
@@ -155,36 +139,23 @@ describe("Cylon.Robot", function() {
     });
 
     context("when passed a connection object", function() {
-      before(function() {
-        stub(Cylon, 'Device').returns("new device")
-      });
+      afterEach(function() { robot.devices = {}; });
 
-      after(function() {
-        Cylon.Device.restore();
-      });
-
-      it("instantiates a new connection with the provided object", function() {
+      it("instantiates a new device with the provided object", function() {
         var device = { name: 'ping', driver: 'ping' };
         robot.initDevices(device);
-        expect(Cylon.Device).to.be.calledWith(device);
-        expect(Cylon.Device).to.be.calledWithNew;
+        expect(robot.devices['ping']).to.be.instanceOf(Device);
       });
     });
 
     context("when passed an array of device objects", function() {
-      before(function() {
-        stub(Cylon, 'Device').returns("new device")
-      });
-
-      after(function() {
-        Cylon.Device.restore();
-      });
+      afterEach(function() { robot.devices = {}; });
 
       it("instantiates a new device with each of the provided objects", function() {
         var devices = [{ name: 'ping', driver: 'ping' }]
         robot.initDevices(devices);
-        expect(Cylon.Device).to.be.calledWith(devices[0]);
-        expect(Cylon.Device).to.be.calledWithNew;
+
+        expect(robot.devices['ping']).to.be.instanceOf(Device);
       });
     });
   });
@@ -225,7 +196,7 @@ describe("Cylon.Robot", function() {
     var bot;
 
     beforeEach(function() {
-      bot = new Cylon.Robot({
+      bot = new Robot({
         connections: [
           { name: 'alpha', adaptor: 'loopback' },
           { name: 'bravo', adaptor: 'loopback' }
@@ -248,7 +219,7 @@ describe("Cylon.Robot", function() {
     var bot;
 
     beforeEach(function() {
-      bot = new Cylon.Robot({
+      bot = new Robot({
         devices: [
           { name: 'alpha', driver: 'ping' },
           { name: 'bravo', driver: 'ping' }
@@ -268,7 +239,7 @@ describe("Cylon.Robot", function() {
   });
 
   describe("#halt", function() {
-    var bot = new Cylon.Robot({
+    var bot = new Robot({
       device: { name: 'ping', driver: 'ping' },
       connection: { name: 'loopback', adaptor: 'loopback' }
     });

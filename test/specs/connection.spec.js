@@ -1,10 +1,9 @@
 "use strict";
 
-source("connection");
-source("robot");
+var Robot = source("robot");
 
 describe("Cylon.Connection", function() {
-  var robot = new Cylon.Robot({
+  var robot = new Robot({
     name: "Robby",
     connection: { name: 'loopback', adaptor: 'loopback', port: "/dev/null" }
   });
