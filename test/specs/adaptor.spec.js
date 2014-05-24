@@ -2,7 +2,8 @@
 
 var EventEmitter = require('events').EventEmitter;
 
-var Adaptor = source("adaptor");
+var Adaptor = source("adaptor"),
+    Logger = source('logger');
 
 describe("Adaptor", function() {
   var connection = new EventEmitter;
