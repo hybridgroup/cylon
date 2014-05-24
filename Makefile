@@ -4,7 +4,11 @@ TEST_FILES := test/support.js $(shell find test/specs -type f -name "*.js")
 VERSION := $(shell node -e "console.log(require('./package.json').version)")
 
 # Our 'phony' make targets (don't involve any file changes)
-.PHONY: test bdd lint release
+.PHONY: cover test bdd lint release
+
+# Run Mocha, with coverage.
+cover:
+	@$(BIN)/istanbul cover $(BIN)/_mocha $(TEST_FILES) --report lcovonly -- -R spec
 
 # Run Mocha, with standard reporter.
 test:
