@@ -1,0 +1,332 @@
+---
+title: Cylon.js - JSConf 2014
+author: The Hybrid Group
+page_title: JSConf 2014
+page_subtitle: Workshop
+layout: documentation
+page_title_show: true
+---
+
+%section.thingscon
+  %h2 Installation
+  %ul
+    %li
+      %p
+        First, install
+        =link_to "Node.js","http://nodejs.org/download/"
+      %p
+        If you are on Linux, follow 
+        =link_to "these instructions", "https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager"
+      %p
+        If you already have Node.js installed, you can skip to the next step.
+    %li
+      %p
+        Next up, install the Cylon.js Command Line Interface (CLI) globally, so you can make use of the CLI commands it provides. You might need to use the "sudo" command if you are on OSX or Linux.
+        :markdown
+              $ npm install -g cylon-cli
+      %p
+        You might need to use the "sudo" command if you are on OSX or Linux.
+        :markdown
+              $ sudo npm install -g cylon-cli
+      %p
+        Once that's finished, you should be able to check if it's working by
+        opening another terminal window and entering this command, which should
+        give you a similar result:
+        :markdown
+              $ cylon version
+              0.4.0
+
+    %li
+      %p
+        Now, create a local working directory that you want to use for the workshop:
+        :markdown
+              $ mkdir thingscon
+              $ cd thingscon
+
+    %li
+      %p
+        Install Cylon.js in the local working directory that you just created:
+        :markdown
+              $ npm install cylon cylon-gpio cylon-i2c cylon-firmata cylon-sphero cylon-leapmotion
+      %p
+        This command will install Cylon.js and all of the plugins you will need for the workshop.
+
+    %li
+      %p
+        To connect your Arduino to your computer, you will need to install the drivers which are part of the
+        =link_to "Arduino IDE", "http://arduino.cc/en/main/software#toc2"
+        software.
+
+    %li
+      %p
+        Finally, install the
+        =link_to "Leap Motion","https://www.leapmotion.com/setup"
+        software. You do not need to signup for their "app store", you only need to install the drivers.
+
+  %h2 Arduino Blink
+  %p You can now test out your installation. Plug in your Arduino, and run the following code on your local computer. Cylon.js will communicate from your computer to the Arduino, and will make the built-in LED on your Arduino turn on/off every second:
+
+  %h3 JavaScript
+  :markdown
+        :::javascript
+        //blink.js
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          // change the port below to match whatever your Arduino is actually plugged into
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+          device: { name: 'led', driver: 'led', pin: 13 },
+
+          work: function(my) {
+            every((1).seconds(), function() {my.led.toggle()});
+          }
+        });
+
+        Cylon.start();
+
+  %p Please note that you might need to change the value for port.
+  %p 
+    On OSX or Linux, use
+    %code cylon scan serial
+    to find your connection info and serial port address:
+    :markdown
+            $ cylon scan serial
+
+  %p 
+    On Windows, follow the following procedure:
+    %ul
+      %li Go to the "Start" menu
+      %li Right click on "Computer"
+      %li Click on "Properties"
+      %li Open "Device Manager" on the "Properties" tab
+      %li Expand the tree controller listed in the "Device Manager" labeled "Ports (COM & LPT)"
+      %li Note the port listed next to the "Arduino" entry. For example, "Arduino Uno (COM4)"
+
+%section.thingscon
+  %h2 Makey Button
+  %p
+    You will need to use your "Makey Button" kit to wire up your wearable controller. Here is an image of what the breadboard will end up looking like:
+
+  %img{:src => "/documentation/drivers/breadboards/gpio/makey_controller.png", :alt => "", :style => "width:50%"}
+  %h3 JavaScript
+  :markdown
+        :::javascript
+
+        //makey.js
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+          devices: [
+            { name: 'led', driver: 'led', pin: 13 },
+            { name: 'makey', driver: 'makey-button', pin: 2 }
+          ],
+
+          work: function(my) {
+            my.makey.on('push', function() {
+              my.led.toggle();
+            });
+          }
+        });
+
+        Cylon.start();
+
+  %h2 Connect To Sphero
+  %h3 OSX
+  %p
+    In order to allow Cylon.js running on your Mac to access the Sphero, go to "Bluetooth > Open Bluetooth Preferences > Sharing Setup" and make sure that "Bluetooth Sharing" is checked.
+
+
+  %h3 Ubuntu
+  %p
+    Connecting to the Sphero from Ubuntu or any other Linux-based OS can be done entirely from the command line using CylonJS CLI commands. Here are the steps.
+  %p
+    Find the address of the Sphero, by using:
+
+    :markdown
+            $ cylon bluetooth scan
+
+  %p
+    Pair to Sphero using this command (substituting the actual address of your Sphero):
+
+    :markdown
+            $ cylon bluetooth pair <address>
+
+  %p
+    Connect to the Sphero using this command (substituting the actual address of your Sphero):
+
+    :markdown
+            $ cylon bluetooth connect <address>
+
+    Connect to your Sphero using Bluetooth. Here are instructions on
+    = link_to "how to connect", "https://github.com/hybridgroup/cylon-sphero#how-to-connect"
+
+  %h2 Sphero Color
+  %h3 JavaScript
+  :markdown
+        :::javascript
+        //sphero_color.js
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0' },
+          device: { name: 'sphero', driver: 'sphero' },
+
+          work: function(me) {
+            every((1).second(), function() {
+              me.sphero.setRGB(Math.floor(Math.random() * 100000));
+            });
+          }
+        });
+
+        Cylon.start();
+
+  %h2 Sphero Makey Button
+  %h3 JavaScript
+  :markdown
+        :::javascript
+        //sphero_makey_button.js
+        var Cylon = require('cylon');
+        var time = 0;
+        var calibration = false;
+         
+         
+        Cylon.robot({
+          connections: [
+            { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+            { name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0' }
+          ],
+          devices: [
+            { name: 'sphero', driver: 'sphero', connection: 'sphero' },
+            { name: 'forward', driver: 'makey-button', connection: 'arduino', pin: 2 },
+            { name: 'back', driver: 'makey-button', connection: 'arduino', pin: 3 },
+            { name: 'left', driver: 'makey-button', connection: 'arduino', pin: 4 },
+            { name: 'right', driver: 'makey-button', connection: 'arduino', pin: 5 }
+          ],
+          checkCalibration: (function(_this) {
+            return function(me) {
+              if (calibration === true) {
+                me.sphero.finishCalibration();
+                calibration = false;
+              }
+            };
+          })(this),
+          work: function(my) {
+            my.checkCalibration(my);
+            my.sphero.setBackLED(255);
+         
+            my.forward.on('push', function() {
+              console.log("forward");
+              my.checkCalibration(my);
+              my.sphero.roll(90, 0);
+            });
+            my.forward.on('release', function() {
+              my.sphero.stop();
+            });
+         
+            my.back.on('push', function() {
+              console.log("back");
+              my.checkCalibration(my);
+              my.sphero.roll(90, 180);
+            });
+            my.back.on('release', function() {
+              my.sphero.stop();
+            });
+         
+            my.right.on('push', function() {
+              console.log("right");
+              var t = Date.now();
+              if ((t - time) < 400 ) {
+                console.log("Calibrating");
+                my.sphero.startCalibration();
+                calibration = true;
+              } else {
+                my.checkCalibration(my);
+                my.sphero.roll(90, 90);
+              }
+              time = t;
+            });
+            my.right.on('release', function() {
+              my.sphero.stop();
+            });
+         
+            my.left.on('push', function() {
+              console.log("left");
+              my.checkCalibration(my);
+              my.sphero.roll(90, 270);
+            });
+            my.left.on('release', function() {
+              my.sphero.stop();
+            });
+          }
+        });
+
+        Cylon.start();
+
+  %h2 Leap Motion
+  %h3 JavaScript
+  :markdown
+        :::javascript
+
+        //leap.js
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' },
+          device: { name: 'leapmotion', driver: 'leapmotion' },
+
+          work: function(my) {
+            my.leapmotion.on('connect', function() {
+              Logger.info("Connected");
+            });
+
+            my.leapmotion.on('start', function() {
+              Logger.info("Started");
+            });
+
+            my.leapmotion.on('frame', function(frame) {
+              Logger.info(frame.toString());
+            });
+
+            my.leapmotion.on('hand', function(hand) {
+              Logger.info(hand.toString());
+            });
+
+            my.leapmotion.on('pointable', function(pointable) {
+              Logger.info(pointable.toString());
+            });
+
+            my.leapmotion.on('gesture', function(gesture) {
+              Logger.info(gesture.toString());
+            });
+          }
+        });
+
+        Cylon.start();
+
+  %h2 Leap Motion Sphero
+  %h3 JavaScript
+  :markdown
+        :::javascript
+
+        //leap_sphero.js
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connections: [
+            { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' },
+            { name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0' }
+          ],
+          devices: [
+            { name: 'leapmotion', driver: 'leapmotion', connection: 'leapmotion' },
+            { name: 'sphero', driver: 'sphero', connection: 'sphero' }
+          ],
+          work: function(my) {
+            my.leapmotion.on('hand', function(hand) {
+              var r = hand.palmY.fromScale(100, 600).toScale(0, 255) | 0;
+              my.sphero.setRGB(r, 0, 0);
+            });
+          }
+        })
+
+        Cylon.start();
