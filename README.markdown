@@ -244,6 +244,8 @@ on the [cylonjs.com branch][cylonjs-branch].
 
 ## Release History
 
+Version 0.14.0 - Removal of node-namespace and misc. cleanup
+
 Version 0.13.3 - Fixes bug with disconnect functions not being called.
 
 Version 0.13.2 - Use pure Express, adds server-sent-events, upd API.
