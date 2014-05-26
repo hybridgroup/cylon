@@ -1,0 +1,60 @@
+---
+title: Cylon.js - BlinkM Driver
+author: The Hybrid Group
+page_title: Drivers
+page_subtitle: Cylon has a extensible system for connecting to hardware devices.
+page_title_docs: BlinkM
+page_subtitle_docs: Driver
+layout: documentation
+page_title_show: true
+subnav_driver: true
+active_menu_docs: true
+subnavjs: true
+
+arduino_platform: true
+beaglebone_platform: true
+spark_platform: true
+digispark_platform: true
+---
+-content_for :js_accordeon do
+  :javascript
+    $("#driver-panel").addClass("active-panel");
+    $("#gpio li:nth-child(4)").addClass("active-link");
+    $(".accordion-docs dt:nth-child(9) a:nth-child(2) img").addClass("rotate");
+
+%section.intro
+  =image_tag "/images/devices/direct-pin.jpg", class: "display"
+  .info-intro
+    %p This a prototyping driver.
+  .clear
+  
+%section.how-to#HowToConnect
+  %h2 How To Connect
+  :markdown
+    Install the module with `npm install cylon-i2c`
+  :markdown
+        :::javascript
+        
+
+
+%section.how-to#HowToUse
+  %h2 How To Use
+  %p Example using a BlinkM.
+  :markdown
+        :::javascript
+        
+
+
+%section.public-methods
+  .commands-api#Commands
+    = #partial "/documentation/drivers/partials/i2c/commands_blinkm"
+  .commands-api#Events
+    = #partial "/documentation/drivers/partials/i2c/events_blinkm"
+
+
+%section.compatability.hardware#Compatability
+  %h2 Compatibility
+  .devices
+    = partial "documentation/partials/devices_platforms"
+    
+
