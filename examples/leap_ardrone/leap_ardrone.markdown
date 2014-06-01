@@ -1,5 +1,7 @@
 # Leapmotion Ardrone 2.0
 
+This example illustrates how to use Leap Motion and the keyboard to control an ARDrone. We basically use one hand to drive the drone (takeoff, land, up, down, etc) and the arrow keys to perform some cool stunts (flips).
+
 First, let's import Cylon:
 
     var Cylon = require('../..');
@@ -65,7 +67,7 @@ In case we turn our hand to the right or left we want the drone to rotate clockw
       }
 ``` 
 
-In case we raise our hand up or lower it down we tell the drone to got up or down respectively:
+In case we raise our hand up or lower it down we tell the drone to go up or down respectively:
 
 ``` 
       if (hand.s>1.5 && Math.abs(hand.palmPosition[1]-handStartPosition[1]) > UP_CONTROL_THRESHOLD) {    
@@ -114,13 +116,33 @@ Whenever we close our hand we tell the drone no stop:
       if (hand.s<=1.5 && lastS > 1.5) { // closed hand
         my.drone.stop();
       }
+
+    });// end hand
 ```
 
+And finally lets use the arrow keys to tell the drone to do some cool stunts:
 
+```
+    my.keyboard.on('right', function(key) { 
+      my.drone.rightFlip();
+    });
 
-      } //end work
+    my.keyboard.on('left', function(key) { 
+      my.drone.leftFlip();
+    });
+
+    my.keyboard.on('up', function(key) { 
+      my.drone.frontFlip();
+    });
+
+    my.keyboard.on('down', function(key) { 
+      my.drone.backFlip();
+    });
+```
+
+  } //end work
 
 Now that our robot knows what work to do, and the work it will be doing that
 hardware with, we can start it:
 
-    }).start();
+}).start();
