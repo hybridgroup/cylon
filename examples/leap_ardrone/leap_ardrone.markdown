@@ -138,11 +138,13 @@ And finally lets use the arrow keys to tell the drone to do some cool stunts:
     my.keyboard.on('down', function(key) { 
       my.drone.backFlip();
     });
-```
 
-  } //end work
+} //end work
+```
 
 Now that our robot knows what work to do, and the work it will be doing that
 hardware with, we can start it:
 
+```
 }).start();
+```
