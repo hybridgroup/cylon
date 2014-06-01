@@ -83,7 +83,7 @@ In case we raise our hand up or lower it down we tell the drone to go up or down
         }
       }
 ```
-In order to move the drone forward, backward, directly left or right we detect the hand inclination - so that we just need to lean it in the direction we want to move.
+In order to move the drone forward, backward, left or right we need to detect the hand inclination. Imagine your hand is the drone and lean it towards the direction we want it to move.
 
 ```
       if (hand.s>1.5 && (Math.abs(hand.palmNormal[2])>DIRECTION_THRESHOLD)) {
