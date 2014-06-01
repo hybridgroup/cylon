@@ -28,9 +28,97 @@ Now that Cylon knows about the necessary hardware we're going to be using, we'll
 tell it what work we want to do:
 
       work: function(my) {
-        // TODO
-      
+
+Lets use the circle gesture to take off and land : two rounds clockwise will trigger the takeoff() and counter clockwise will tell the drone to land: 
+
+```
+    my.leapmotion.on('gesture', function(gesture) {
+      if (gesture.type=='circle' && gesture.state=='stop' && gesture.progress > CIRCLE_THRESHOLD ){
+        if (gesture.normal[2] < 0) {
+          my.drone.takeoff();
+        };
+
+        if (gesture.normal[2] > 0) {
+          my.drone.land();
+        }
       }
+    });
+```
+
+Whenever we get a 'hand' gesture event from Leap Motion we need to tell ARDrone what to do. 
+
+    my.leapmotion.on('hand', function(hand) {
+
+In case we turn our hand to the right or left we want the drone to rotate clockwise or counter clockwise respectively:
+
+``` 
+      if(hand.s>1.5 && Math.abs(handStartDirection[0]-hand.direction[0]) > TURN_TRESHOLD ) {
+        var signal = handStartDirection[0]-hand.direction[0];
+        var value = (Math.abs(handStartDirection[0]-hand.direction[0])-TURN_TRESHOLD) * TURN_SPEED_FACTOR;
+        if (signal>0){
+          my.drone.counterClockwise(value);
+        }
+
+        if (signal<0){
+          my.drone.clockwise(value);
+        }      
+      }
+``` 
+
+In case we raise our hand up or lower it down we tell the drone to got up or down respectively:
+
+``` 
+      if (hand.s>1.5 && Math.abs(hand.palmPosition[1]-handStartPosition[1]) > UP_CONTROL_THRESHOLD) {    
+        var signal = (hand.palmPosition[1]-handStartPosition[1]) >= 0 ? 1 : -1;
+        var value = Math.round(Math.abs((hand.palmPosition[1]-handStartPosition[1]))-UP_CONTROL_THRESHOLD) * UP_SPEED_FACTOR;
+    
+        if (signal>0) {
+          my.drone.up(value);
+        };
+
+        if (signal<0) {
+            my.drone.down(value);
+        }
+      }
+```
+In order to move the drone forward, backward, directly left or right we detect the hand inclination - so that we just need to lean it in the direction we want to move.
+
+```
+      if (hand.s>1.5 && (Math.abs(hand.palmNormal[2])>DIRECTION_THRESHOLD)) {
+        if (hand.palmNormal[2]>0) {
+            var value = Math.abs(Math.round( hand.palmNormal[2] * 10 + DIRECTION_THRESHOLD ) * DIRECTION_SPEED_FACTOR);
+            my.drone.forward( value );
+        };
+        
+        if (hand.palmNormal[2]<0) {
+            var value = Math.abs(Math.round( hand.palmNormal[2] * 10 - DIRECTION_THRESHOLD ) * DIRECTION_SPEED_FACTOR);
+            my.drone.back( value );
+        };
+      } 
+
+      if (hand.s>1.5 && (Math.abs(hand.palmNormal[0])>DIRECTION_THRESHOLD)) {
+        if (hand.palmNormal[0]>0) {
+            var value = Math.abs(Math.round( hand.palmNormal[0] * 10 + DIRECTION_THRESHOLD ) * DIRECTION_SPEED_FACTOR);
+            my.drone.left( value );
+        };
+        
+        if (hand.palmNormal[0]<0) {
+            var value = Math.abs(Math.round( hand.palmNormal[0] * 10 - DIRECTION_THRESHOLD ) * DIRECTION_SPEED_FACTOR);
+            my.drone.right( value );
+        };
+      }
+```
+Whenever we close our hand we tell the drone no stop:
+
+```
+      if (hand.s<=1.5 && lastS > 1.5) { // closed hand
+        my.drone.stop();
+      }
+```
+
+
+
+      } //end work
 
 Now that our robot knows what work to do, and the work it will be doing that
 hardware with, we can start it:
