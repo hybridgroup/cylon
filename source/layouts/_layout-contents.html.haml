@@ -16,9 +16,9 @@
     = link_to "Platforms", "", (menu_item("documentation/platforms"))
   
   - if current_page.data.active_menu_videos == true
-    = #link_to "Videos", "/videos", (menu_item("videos")), class: "active"
+    = link_to "Videos", "/videos", (menu_item("videos")), class: "active"
   -else
-    = #link_to "Videos", "", (menu_item("videos"))
+    = link_to "Videos", "", (menu_item("videos"))
   
   - if current_page.data.active_menu_blog == true
     = link_to "Blog", "/blog", (menu_item("blog")), class: "active"
