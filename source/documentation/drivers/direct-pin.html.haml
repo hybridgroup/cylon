@@ -31,18 +31,36 @@ digispark_platform: true
 %section.how-to#HowToConnect
   %h2 How To Connect
   :markdown
-    Install the module with `npm install cylon-i2c`
+    Install the module with `npm install cylon-gpio`
   :markdown
         :::javascript
-        coming soon..      
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+          device: { name: 'pin', driver: 'direct-pin', pin: 13 },
+        ...          
   
 
 %section.how-to#HowToUse
   %h2 How To Use
-  %p Example using a BlinkM.
+  %p Example using a Direct Pin.
   :markdown
         :::javascript
-        coming soon.. 
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+          device: { name: 'pin', driver: 'direct-pin', pin: 13 },
+
+          work: function(my) {
+            var value = 0;
+            every((1).second(), function() {
+              my.pin.digitalWrite(value);
+              value = (value == 0) ? 1 : 0;
+            });
+          }
+        }).start(); 
         
 
 
