@@ -13,9 +13,14 @@
   %a.device{href: "/documentation/drivers/continuous-servo", title: "Continuous Servo"}
     %img{src: "/images/devices/continuous-servo.jpg"}
 
--if current_page.data.ir_range_finder == true  
+-if current_page.data.direct_pin_driver == true  
   /// Continuos Servo
-  %a.device{href: "/documentation/drivers/ir-range-finder", title: "Continuous Servo"}
+  %a.device{href: "/documentation/drivers/direct-pin", title: "Direct Pin"}
+    %img{src: "/images/devices/direct-pin.jpg"}
+
+-if current_page.data.ir_range_finder == true  
+  /// Ir Range Finder
+  %a.device{href: "/documentation/drivers/ir-range-finder", title: "Ir Range Finder"}
     %img{src: "/images/devices/ir-range-finder.jpg"}
 
 -if current_page.data.led_driver == true

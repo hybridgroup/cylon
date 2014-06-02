@@ -1,26 +1,22 @@
 :markdown
   # Commands
 
-  ## message() 
+  ## send_notification
 
-  The message for the pebble driver.
+  Used to send a notification to pebble watch
 
-  ##### Returns 
+  ## pending_message
 
-  `nil`
+  Used from watchbot app to get pending notification message. DIRECT USE IS NOT RECOMMENDED.
 
-  ## message_queue()
+  ##### Returns
 
-  The queue of messages that are being passed in via calls from the Pebble watch app.
+  `String` with the last message on the queue.
 
-  ##### Returns 
+  ## publish_event
 
-  `nil`
+  Used from watchbot app to publish "Button" events. DIRECT USE IS NOT RECOMMENDED.
 
-  ## last_message()
+  ##### Returns
 
-  The last message in the queue of messages passed in via calls from the Pebble watch app.
-
-  ##### Returns 
-
-  `nil`
+  `boolean` operation result

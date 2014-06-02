@@ -1,0 +1,79 @@
+---
+title: Cylon.js - Direct Pin Driver
+author: The Hybrid Group
+page_title: Drivers
+page_subtitle: Cylon has a extensible system for connecting to hardware devices.
+page_title_docs: Direct Pin
+page_subtitle_docs: Driver
+layout: documentation
+page_title_show: true
+subnav_driver: true
+active_menu_docs: true
+subnavjs: true
+
+arduino_platform: true
+beaglebone_platform: true
+spark_platform: true
+digispark_platform: true
+---
+-content_for :js_accordeon do
+  :javascript
+    $("#driver-panel").addClass("active-panel");
+    $("#gpio li:nth-child(4)").addClass("active-link");
+    $(".accordion-docs dt:nth-child(9) a:nth-child(2) img").addClass("rotate");
+
+%section.intro
+  =image_tag "/images/devices/direct-pin.jpg", class: "display"
+  .info-intro
+    %p This a prototyping driver.
+  .clear
+  
+%section.how-to#HowToConnect
+  %h2 How To Connect
+  :markdown
+    Install the module with `npm install cylon-gpio`
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+          device: { name: 'pin', driver: 'direct-pin', pin: 13 },
+        ...          
+  
+
+%section.how-to#HowToUse
+  %h2 How To Use
+  %p Example using a Direct Pin.
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        Cylon.robot({
+          connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+          device: { name: 'pin', driver: 'direct-pin', pin: 13 },
+
+          work: function(my) {
+            var value = 0;
+            every((1).second(), function() {
+              my.pin.digitalWrite(value);
+              value = (value == 0) ? 1 : 0;
+            });
+          }
+        }).start(); 
+        
+
+
+%section.public-methods
+  .commands-api#Commands
+    = partial "/documentation/drivers/partials/gpio/commands_direct_pin"
+  .commands-api#Events
+    = partial "/documentation/drivers/partials/gpio/events_direct_pin"
+
+
+%section.compatability.hardware#Compatability
+  %h2 Compatibility
+  .devices
+    = partial "documentation/partials/devices_platforms"
+    
+
