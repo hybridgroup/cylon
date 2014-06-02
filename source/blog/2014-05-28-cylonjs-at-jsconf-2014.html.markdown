@@ -8,7 +8,9 @@ author: Ron Evans
 active_menu_blog: true
 ---
 
-We had just enough time to recharge a few batteries from [MakerFaire 2014](http://makerfaire.com), when we packed up Team Cylon.js and headed to [JSConf 2014](http://2014.jsconf.us/) in Florida. JSConf is one of the centers of innovation (and fun!) in the JavaScript world, and thanks to organizer [Chris Williams](https://twitter.com/voodootikigod) and the ongoing efforts of the [Nodebots](http://nodebots.io/) team, there is already a well-established tradition of hardware hacking that has been going on. This means lots of cool people ready to take a look at what Cylon.js can offer to the community.
+We had just enough time to recharge a few batteries from [MakerFaire 2014](http://makerfaire.com), when we packed up Team Cylon.js and headed to [JSConf 2014](http://2014.jsconf.us/) in sunny Florida. JSConf is one of the centers of innovation (and fun!) in the JavaScript world. 
+
+Thanks to organizer [Chris Williams](https://twitter.com/voodootikigod) and the ongoing efforts of the [Nodebots](http://nodebots.io/) team, there is already a well-established tradition of hardware hacking that has been going on. This means lots of cool people ready to take a look at what Cylon.js can offer to the community.
 
 <a href="https://m.flickr.com/#/photos/matthewbergman/14117245499/in/set-72157644963162553/"><img src="/images/blog/cylonjs-noderockets-jsconf-2014.jpg" alt="Cylon.js Noderockets JSConf 2014" style="margin: 10px 0;"></a>
 
