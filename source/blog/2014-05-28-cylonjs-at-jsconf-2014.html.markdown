@@ -20,6 +20,8 @@ We gave our talk on Cylon.js the next morning, where we demoed [Arduino](http://
 
 <a href="https://m.flickr.com/#/photos/matthewbergman/14302013242/in/set-72157644963162553/"><img src="/images/blog/cylonjs-jsconf-2014-nodebots.jpg" alt="Cylon.js JSConf 2014 Nodebots" style="margin: 10px 0;"></a>
 
+<img src="/images/blog/cylonjs-jsconf-2014-kids.jpg" alt="Cylon.js JSConf 2014 Kids" style="margin: 10px 0;">
+
 The activity day was the day after our talk, and attendees were able to build either Nodebots, Nodeboats, Nodecopter, or Noderockets. There were people milling around everything having a great time hacking on their preferred typo of robotic device. We know of several teams that used Cylon.js, for example the Nodecopter team that placed second approached us with great excitment, telling us of their experience.
 
 Thank you very much to the JSConf organizers and staff for having us be a part of the fun. We appreciate it, and look forward to next year.
