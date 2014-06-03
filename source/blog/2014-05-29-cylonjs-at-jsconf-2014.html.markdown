@@ -14,7 +14,7 @@ Thanks to organizer [Chris Williams](https://twitter.com/voodootikigod) and the 
 
 <a href="https://m.flickr.com/#/photos/matthewbergman/14117245499/in/set-72157644963162553/"><img src="/images/blog/cylonjs-noderockets-jsconf-2014.jpg" alt="Cylon.js Noderockets JSConf 2014" style="margin: 10px 0;"></a>
 
-When we arrived for the makerspace setup day, we were astonished to find out that the amazing new [NodeRockets](http://www.noderockets.com/) project had already been built almost entirely on top of Cylon.js, from the ground controller to the capsule. Amazing! More on this incredibly cool project in a future post. The launcher was built using jonnny-five, as was pointed out by [Raquel Vélez](https://twitter.com/rockbot) via Twitter.
+When we arrived for the makerspace setup day, we were astonished to find out that the amazing new [NodeRockets](http://www.noderockets.com/) project had already been built using Cylon.js, with our framework software controlling the capsule. Amazing! More on this incredibly cool project in a future post. 
 
 We gave our talk on Cylon.js the next morning, where we demoed [Arduino](http://www.arduino.cc/), [Tessel](https://tessel.io/), [Beaglebone Black](http://beagleboard.org/), [Sphero](http://www.gosphero.com/sphero-2-0/), [ARDrone](http://ardrone2.parrot.com/), [OpenCV](http://opencv.org/), [Digispark](http://digistump.com/products/1) & [Neurosky](http://store.neurosky.com/products/mindwave-1). That was a lot to pack in!
 
@@ -27,3 +27,5 @@ The activity day was the day after our talk, and attendees were able to build ei
 Thank you very much to the JSConf organizers and staff for having us be a part of the fun. We appreciate it, and look forward to next year.
 
 You can follow along with our ongoing adventures on Twitter at [@cylonjs](http://twitter.com/cylonjs).
+
+CORRECTION: The [capsule control software](https://github.com/noderockets/noderocket-rocket) of the rocket was written using Cylon.js. The [launcher](https://github.com/noderockets/noderocket-launcher) part was built using [Jonnny-Five](https://github.com/rwaldron/johnny-five), as was pointed out by [Raquel Vélez](https://twitter.com/rockbot) via Twitter.
