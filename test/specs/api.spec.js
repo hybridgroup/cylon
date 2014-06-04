@@ -14,8 +14,6 @@ describe("API", function() {
     beforeEach(function() {
       stub(https, 'createServer').returns({ listen: spy() });
 
-      opts = { master: { name: 'master' }, ssl: {} }
-
       api = new API(opts);
     });
 
@@ -33,10 +31,6 @@ describe("API", function() {
 
     it("sets @post to 3000 by default", function() {
       expect(api.port).to.be.eql("3000")
-    });
-
-    it("sets @master to the passed master", function() {
-      expect(api.master).to.be.eql(opts.master)
     });
 
     it("sets @server to an Express server instance", function() {
