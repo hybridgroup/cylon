@@ -2,7 +2,8 @@
 
 var Cylon = source("cylon");
 
-var Logger = source('logger'),
+var API = source('api'),
+    Logger = source('logger'),
     Adaptor = source('adaptor'),
     Driver = source('driver');
 
@@ -25,14 +26,6 @@ describe("Cylon", function() {
     expect(Cylon.api_instance).to.be.eql(null);
   });
 
-  it("sets @api_config to an object containing host/port info", function() {
-    var config = Cylon.api_config;
-
-    expect(config).to.be.an('object');
-    expect(config.host).to.be.eql('127.0.0.1');
-    expect(config.port).to.be.eql('3000');
-  });
-
   it("sets @robots to an empty array by default", function() {
     expect(Cylon.robots).to.be.eql([]);
   });
@@ -52,94 +45,23 @@ describe("Cylon", function() {
   });
 
   describe("#api", function() {
-    var expectedConfig;
-
     beforeEach(function() {
-      expectedConfig = {
-        host: '127.0.0.1',
-        port: '3000',
-        auth: {},
-        CORS: null,
-        ssl: {}
-      };
+      stub(API.prototype, 'listen');
+    });
 
-      // this is the shortest, cheapest way to dup an object in JS.
-      // I don't like it either.
-      Cylon.api_config = JSON.parse(JSON.stringify(expectedConfig));
+    afterEach(function() {
+      API.prototype.listen.restore();
+    });
+
+    it('creates a new API instance', function() {
+      Cylon.api();
+      expect(Cylon.api_instance).to.be.an.instanceOf(API);
+    });
+
+    it('passes arguments to the API constructor', function() {
+      Cylon.api({ port: '1234' });
+      expect(Cylon.api_instance.port).to.be.eql('1234');
     })
-
-    context("without arguments", function() {
-      it("returns the current API configuration", function() {
-        Cylon.api();
-        expect(Cylon.api_config).to.be.eql(expectedConfig);
-      });
-    });
-
-    context("only specifying port", function() {
-      it("changes the port, but not the host", function() {
-        expectedConfig.port = "4000";
-
-        Cylon.api({ port: "4000" });
-
-        expect(Cylon.api_config).to.be.eql(expectedConfig);
-      });
-    });
-
-    context("only specifying host", function() {
-      it("changes the host, but not the port", function() {
-        expectedConfig.host = "0.0.0.0";
-        Cylon.api({ host: "0.0.0.0" });
-
-        expect(Cylon.api_config).to.be.eql(expectedConfig);
-      });
-    });
-
-    context("specifying new host and port", function() {
-      it("changes both the host and port", function() {
-        expectedConfig.host = "0.0.0.0";
-        expectedConfig.port = "4000";
-
-        Cylon.api({ host: "0.0.0.0", port: "4000" });
-
-        expect(Cylon.api_config).to.be.eql(expectedConfig);
-      });
-    });
-
-    context("specifiying SSL key and cert", function() {
-      it("changes the SSL key and cert", function() {
-        expectedConfig.ssl.cert = "/path/to/cert/file";
-        expectedConfig.ssl.key  = "/path/to/key/file";
-
-        Cylon.api({
-          ssl: {
-            cert: "/path/to/cert/file",
-            key: "/path/to/key/file"
-          }
-        });
-
-        expect(Cylon.api_config).to.be.eql(expectedConfig);
-      });
-    });
-
-    context("specifying an auth strategy", function() {
-      it("changes the auth strategy", function() {
-        var auth = { type: 'basic', user: 'user', pass: 'pass'}
-        expectedConfig.auth = auth;
-        Cylon.api({ auth: auth })
-
-        expect(Cylon.api_config).to.be.eql(expectedConfig);
-      });
-    });
-
-    context("specifying CORS restrictions", function() {
-      it("changes the CORS restrictions", function() {
-        var CORS = "https://localhost:4000";
-        expectedConfig.CORS = CORS;
-        Cylon.api({ CORS: CORS })
-
-        expect(Cylon.api_config).to.be.eql(expectedConfig);
-      });
-    });
   });
 
   describe("#findRobot", function() {
@@ -308,16 +230,6 @@ describe("Cylon", function() {
   describe("#start", function() {
     before(function() {
       Cylon.robots = [];
-      stub(Cylon, 'startAPI').returns(true);
-    });
-
-    after(function() {
-      Cylon.startAPI.restore();
-    });
-
-    it("starts the API", function() {
-      Cylon.start();
-      expect(Cylon.startAPI).to.be.called;
     });
 
     it("calls #start() on all robots", function() {
