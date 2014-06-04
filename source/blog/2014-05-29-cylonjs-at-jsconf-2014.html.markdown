@@ -28,4 +28,4 @@ Thank you very much to the JSConf organizers and staff for having us be a part o
 
 You can follow along with our ongoing adventures on Twitter at [@cylonjs](http://twitter.com/cylonjs).
 
-CORRECTION: The [capsule control software](https://github.com/noderockets/noderocket-rocket) of the rocket was written using Cylon.js. The [launcher](https://github.com/noderockets/noderocket-launcher) part was built using [Jonnny-Five](https://github.com/rwaldron/johnny-five), as was pointed out by [Raquel Vélez](https://twitter.com/rockbot) via Twitter.
+CORRECTION: The [capsule control software](https://github.com/noderockets/noderocket-rocket) of the rocket was written using Cylon.js. The [launcher](https://github.com/noderockets/noderocket-launcher) part was built using [Johnny-Five](https://github.com/rwaldron/johnny-five), as was pointed out by [Raquel Vélez](https://twitter.com/rockbot) via Twitter.
