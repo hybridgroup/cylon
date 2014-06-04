@@ -76,6 +76,18 @@ describe("Robot", function() {
     });
   });
 
+  describe("all work and no play", function() {
+    var play = spy();
+
+    var playBot = new Robot({
+      play: play
+    });
+
+    it('makes Jack a dull boy', function() {
+      expect(playBot.work).to.be.eql(play);
+    })
+  })
+
   describe("#data", function() {
     var bot = new Robot({
       connection: { name: 'loopback', adaptor: 'loopback' },
