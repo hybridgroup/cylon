@@ -4,7 +4,8 @@ var express = require('express'),
     https = require('https'),
     fs = require('fs');
 
-var API = source('api');
+var API = source('api'),
+    Utils = source('utils');
 
 describe("API", function() {
   var api, opts;
