@@ -1,6 +1,7 @@
 "use strict";
 
-var Cylon = source("cylon");
+var Cylon = source("cylon"),
+    Utils = source('utils');
 
 var API = source('api'),
     Logger = source('logger'),
