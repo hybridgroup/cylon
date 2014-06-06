@@ -30,28 +30,28 @@ describe("Cylon.Connection", function() {
     });
   });
 
-  describe("#data", function() {
-    var data = connection.data();
+  describe("#toJSON", function() {
+    var json = connection.toJSON();
 
     it("returns an object", function() {
-      expect(data).to.be.an('object');
+      expect(json).to.be.an('object');
     });
 
     it("contains the connection's name", function() {
-      expect(data.name).to.be.eql("loopback");
+      expect(json.name).to.be.eql("loopback");
     });
 
     it("contains the connection's port", function() {
-      expect(data.port).to.be.eql("/dev/null");
+      expect(json.port).to.be.eql("/dev/null");
     });
 
     it("contains the connection's adaptor name", function() {
-      expect(data.adaptor).to.be.eql("Loopback");
+      expect(json.adaptor).to.be.eql("Loopback");
     });
 
     it("contains the connection's ID", function() {
       var id = connection.connection_id;
-      expect(data.connection_id).to.be.eql(id);
+      expect(json.connection_id).to.be.eql(id);
     });
   });
 

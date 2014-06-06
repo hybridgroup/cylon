@@ -89,34 +89,34 @@ describe("Robot", function() {
     })
   })
 
-  describe("#data", function() {
+  describe("#toJSON", function() {
     var bot = new Robot({
       connection: { name: 'loopback', adaptor: 'loopback' },
       device: { name: 'ping', driver: 'ping' }
     });
 
-    var data = bot.data();
+    var json = bot.toJSON();
 
     it("returns an object", function() {
-      expect(data).to.be.a('object');
+      expect(json).to.be.a('object');
     });
 
     it("contains the robot's name", function() {
-      expect(data.name).to.eql(bot.name);
+      expect(json.name).to.eql(bot.name);
     });
 
     it("contains the robot's commands", function() {
-      expect(data.commands).to.eql(bot.commands);
+      expect(json.commands).to.eql(bot.commands);
     });
 
     it("contains the robot's devices", function() {
-      var deviceData = bot.devices.ping.data();
-      expect(data.devices).to.eql([deviceData]);
+      var deviceJSON = bot.devices.ping.toJSON();
+      expect(json.devices).to.eql([deviceJSON]);
     });
 
     it("contains the robot's connections", function() {
-      var connectionData = bot.connections.loopback.data();
-      expect(data.connections).to.eql([connectionData]);
+      var connectionJSON = bot.connections.loopback.toJSON();
+      expect(json.connections).to.eql([connectionJSON]);
     });
   });
 
