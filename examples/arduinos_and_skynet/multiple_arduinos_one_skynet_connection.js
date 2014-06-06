@@ -28,16 +28,16 @@ skynet = {
       console.log(data);
       if (data.payload != null){
         var robot,
+            bot,
             robots = data.payload.robots;
         for(var index in robots){
           robot = robots[index];
           console.log(robot);
-          my.master.findRobot(robot.name, function(err, bot){
-            if (robot.cmd == 'on')
-              bot.devices[robot.device].turnOn();
-            else
-              bot.devices[robot.device].turnOff();
-          });
+          bot = Cylon.robots[robot.name];
+          if (robot.cmd == 'on')
+            bot.devices[robot.device].turnOn();
+          else
+            bot.devices[robot.device].turnOff();
         }
       }
     });
