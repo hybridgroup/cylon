@@ -36,7 +36,7 @@ lcd_driver: true
     %p Arduino is an open-source electronics prototyping platform based on flexible, easy-to-use hardware and software. It's intended for artists, designers, hobbyists and anyone interested in creating interactive objects or environments.
 
     %p
-      For more info about the arduino platform click
+      For more info about the Arduino platform click
       = succeed "." do
         = link_to "here", "http://arduino.cc/", target: :blank
   .clear
@@ -157,9 +157,17 @@ lcd_driver: true
 
   %h3 Windows
 
-  %p We are currently working on docs and instructions for Windows. Please check back soon!
+  %p To connect your Arduino to your computer, you will need to install the system drivers which are part of the <a href="http://arduino.cc/en/main/software#toc2">Arduino IDE</a> software.
 
-  %p Coming soon.
+  %p 
+    Once you have done this, to find which port your Arduino is connected to, follow the following procedure:
+    %ul
+      %li Go to the "Start" menu
+      %li Right click on "Computer"
+      %li Click on "Properties"
+      %li Open "Device Manager" on the "Properties" tab
+      %li Expand the tree controller listed in the "Device Manager" labeled "Ports (COM & LPT)"
+      %li Note the port listed next to the "Arduino" entry. For example, "Arduino Uno (COM4)", you would use the value "COM4" as the port in your Cylon.js code.
 
 %section.drivers#Drivers
   %h2 Drivers
