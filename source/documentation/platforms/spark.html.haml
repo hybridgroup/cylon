@@ -43,30 +43,21 @@ servo_driver: true
         :::ruby
         npm install cylon-spark
 
-%section.how-to#HowToUse
-  %h2 How To Use
-  %p This small program lets you turn on or off a LED for every 1 sec.
-  :markdown
-        :::javascript
-        var Cylon = require('cylon');
+  %p
+    You'll need your <code>access_token</code> and <code>device_id</code> to push new software to your Spark, and you can get both of these from Spark's
+    = link_to "Build tool", "https://spark.io/build", target: :blank
 
-        Cylon.robot({
-          connection: { name: 'spark', adaptor: 'spark', accessToken: 'XYZPDQ123', deviceId: '123ABC456' },
-          device: {name: 'led', driver: 'led', pin: 'D7'},
-
-          work: function(my) {
-            every((3).second(), function() {my.led.toggle()});
-          }
-        }).start();
-
-
-%section.public-methods#PublicMethods
-  .commands-api
-    = partial "/documentation/drivers/partials/spark/commands"
-  <br>
-  <strong>Note:</strong> In addition to the above methods, the Spark adaptor supports the full GPIO pin interface, as long as you are using Tinker, or a Tinker compatible program running on the Spark itself.
-
-%section.how-to#HowToConnect
+  %ul
+    %li <code>access_token:</code> In the Build tool, click on the Settings cog in the bottom-left corner to find your access token.
+    %li <code>device_id:</code> After you have your Spark Core registered to your account through the Tinker app, click on the Cores section (just above the Settings cog) on the Build tool. Then, click on the arrow next to your core's name to get its device ID.
+  
+  %h2 Installing Firmware On Your Spark Core
+  %p You will need to install the appropriate firmware on your Spark Core to use it from Cylon.js.
+  %p 
+    One option is to use the Tinker software, which has the same API as the "default.cpp" code that is included with the Gort CLI 
+    = link_to "(http://gort.io).", "http://gort.io" 
+    This routes all of your calls thru the Spark cloud, with is appropriate for communicating with Spark devices in a remote location.
+  %p Another option is to use the VoodooSpark firmware, which has its own binary API. This discovers your device thru the Spark cloud, and then routes all of your calls directly to the Spark Core device. This is appropriate for communicating with Spark devices on the same local subnet as the computer that you wish to control them from.
   %h2 Uploading
   %h3 Uploading Code To Your Spark Core Using the Cylon CLI
 
@@ -79,14 +70,43 @@ servo_driver: true
   %p
     For more information on how to program your Spark, please see
     = link_to "Spark's examples", "http://docs.spark.io/#/examples", target: :blank
+%section.how-to#HowToUse
+  %h2 How To Use
+  %h3 Spark using Tinker API:
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
 
-  %p
-    You'll need your <code>access_token</code> and <code>device_id</code> to push new software to your Spark, and you can get both of these from Spark's
-    = link_to "Build tool", "https://spark.io/build", target: :blank
+        // Initialize the robot
+        Cylon.robot({
+          connection: { name: 'spark', adaptor: 'spark', accessToken: 'XYZPDQ123', deviceId: '123ABC456' },
+          device: {name: 'led', driver: 'led', pin: 'D0'},
 
-  %ul
-    %li <code>access_token:</code> In the Build tool, click on the Settings cog in the bottom-left corner to find your access token.
-    %li <code>device_id:</code> After you have your Spark Core registered to your account through the Tinker app, click on the Cores section (just above the Settings cog) on the Build tool. Then, click on the arrow next to your core's name to get its device ID.
+          work: function(my) {
+            every((1).second(), function() {my.led.toggle()});
+          }
+        }).start();
+  %h3 Spark using VoodooSpark API:
+  :markdown
+        :::javascript
+        var Cylon = require('cylon');
+
+        // Initialize the robot
+        Cylon.robot({
+          connection: { name: 'voodoospark', adaptor: 'voodoospark', accessToken: 'XYZPDQ123', deviceId: '123ABC456', module: 'spark' },
+          device: {name: 'led', driver: 'led', pin: 'D0'},
+
+          work: function(my) {
+            every((1).second(), function() {my.led.toggle()});
+          }
+        }).start();
+
+%section.public-methods#PublicMethods
+  .commands-api
+    = partial "/documentation/drivers/partials/spark/commands"
+  <br>
+  <strong>Note:</strong> In addition to the above methods, the Spark adaptor supports the full GPIO pin interface, as long as you are using Tinker, or a Tinker compatible program running on the Spark itself.
+
 
 %section.how-to#HowToConnect
   %h2 How to Connect

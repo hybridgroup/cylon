@@ -1,6 +1,74 @@
 :markdown
   # Commands
 
+  ## digitalRead(pin, callback)
+
+  Reads a value using digital write to a pin.
+
+  ##### Params
+
+  - **pin** - the value of the pin
+  - **callback** - params for the pin value
+
+  ##### Returns
+
+  `callback integer` 
+
+  ## digitalWrite(pin, value)
+
+  Writes a value using digital write to a pin.
+
+  ##### Params
+
+  - **pin** - the value of the pin
+  - **value** - paramas for the pin value 
+
+  ##### Returns
+
+  `null`
+
+  ## analogRead(pin, callback)
+
+  Reads a value using analog write to a pin.
+
+  ##### Params
+
+  - **pin** - pin data 
+  - **callback** - callback data
+
+  ##### Returns
+
+  `callback integer` 
+
+  ## analogWrite(pin, value)
+
+  Writes a value using analog write to a pin.
+
+  ##### Params
+
+  - **pin** - the value of the pin
+  - **value** - paramas for the pin value 
+
+  ##### Returns
+
+  `null`
+
+  ## pwmWrite()
+
+  Writes the pwm value.(analogWrite)
+
+  ##### Returns
+
+  `null`
+
+  ## servoWrite()
+
+  Writes the servo value.(analogWrite)
+
+  ##### Returns
+
+  `null`
+
   ## command(commandName, args, callback)
 
   Calls a function on the Spark Core via the API.
