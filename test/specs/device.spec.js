@@ -3,7 +3,8 @@
 var Ping = source('test/ping'),
     Device = source("device"),
     Robot = source("robot"),
-    Logger = source('logger');
+    Logger = source('logger'),
+    Utils = source('utils');
 
 describe("Cylon.Device", function() {
   var robot = new Robot({

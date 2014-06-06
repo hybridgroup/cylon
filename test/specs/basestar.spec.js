@@ -1,6 +1,7 @@
 "use strict";
 
-var Basestar = source('basestar');
+var Basestar = source('basestar'),
+    Utils = source('utils');
 
 var EventEmitter = require('events').EventEmitter;
 
@@ -34,7 +35,7 @@ describe('Basestar', function() {
       this.proxyMethods(methods, this.testInstance, this, true);
     }
 
-    subclass(TestClass, Basestar);
+    Utils.subclass(TestClass, Basestar);
 
     it('can alias methods', function() {
       var testclass = new TestClass;
@@ -70,8 +71,8 @@ describe('Basestar', function() {
       });
     }
 
-    subclass(ProxyClass, Basestar);
-    subclass(EmitterClass, Basestar);
+    Utils.subclass(ProxyClass, Basestar);
+    Utils.subclass(EmitterClass, Basestar);
 
     it("proxies events from one class to another", function() {
       var eventSpy = spy(),

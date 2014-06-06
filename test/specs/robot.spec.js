@@ -2,7 +2,8 @@
 
 var Device = source('device'),
     Connection = source('connection'),
-    Robot = source("robot");
+    Robot = source("robot"),
+    Utils = source('utils');
 
 describe("Robot", function() {
   var work = spy();

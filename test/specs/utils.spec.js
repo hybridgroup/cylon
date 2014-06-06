@@ -95,20 +95,6 @@ describe("Utils", function() {
     });
   });
 
-  describe("#slice", function() {
-    it("performs array slices", function() {
-      var arr = [1, 2, 3, 4, 5];
-      expect(slice.call(arr, 1)).to.be.eql([2, 3, 4, 5]);
-    });
-  });
-
-  describe("hasProp", function() {
-    it("checks objects have properties", function() {
-      var obj = { test: 'test' };
-      expect(hasProp.call(obj, 'test')).to.be.true;
-    });
-  });
-
   describe("#subclass", function() {
     var BaseClass = (function() {
       function BaseClass(opts) {
@@ -123,7 +109,7 @@ describe("Utils", function() {
     })();
 
     var SubClass = (function(klass) {
-      subclass(SubClass, klass);
+      utils.subclass(SubClass, klass);
 
       function SubClass(opts) {
         SubClass.__super__.constructor.apply(this, arguments);
@@ -164,7 +150,7 @@ describe("Utils", function() {
       function TestClass() {
         this.self = this;
         this.testInstance = new ProxyClass;
-        proxyFunctionsToObject(methods, this.testInstance, this.self, true);
+        utils.proxyFunctionsToObject(methods, this.testInstance, this.self, true);
       }
 
       return TestClass;
@@ -190,7 +176,7 @@ describe("Utils", function() {
       var methods = ["hello", "goodbye"],
           base = { commandList: [] };
 
-      proxyTestStubs(methods, base);
+      utils.proxyTestStubs(methods, base);
       expect(base.commandList).to.be.eql(methods);
     });
 
@@ -198,7 +184,7 @@ describe("Utils", function() {
       var methods = ["hello", "goodbye"],
           base = { commandList: [] };
 
-      expect(proxyTestStubs(methods, base)).to.be.eql(base);
+      expect(utils.proxyTestStubs(methods, base)).to.be.eql(base);
     });
   });
 
@@ -208,14 +194,14 @@ describe("Utils", function() {
 
     it("binds the 'this' scope for the method", function() {
       proxy.boundMethod = function() { return this.hello; };
-      proxy.boundMethod = bind(proxy.boundMethod, me);
+      proxy.boundMethod = utils.bind(proxy.boundMethod, me);
 
       expect(proxy.boundMethod()).to.eql("Hello World");
     });
 
     it("passes arguments along to bound functions", function() {
       proxy.boundMethod = function(hello, world) { return [hello, world]; };
-      proxy.boundMethod = bind(proxy.boundMethod, me);
+      proxy.boundMethod = utils.bind(proxy.boundMethod, me);
 
       expect(proxy.boundMethod("Hello", "World")).to.eql(["Hello", "World"]);
     })

@@ -1,7 +1,8 @@
 "use strict";
 
 var Robot = source("robot"),
-    Logger = source('logger');
+    Logger = source('logger'),
+    Utils = source('utils');
 
 describe("Cylon.Connection", function() {
   var robot = new Robot({
