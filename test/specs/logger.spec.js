@@ -1,6 +1,7 @@
 'use strict';
 
-var Logger = source('logger');
+var Logger = source('logger'),
+    Utils = source('utils');
 
 describe('Logger', function() {
   after(function() {
