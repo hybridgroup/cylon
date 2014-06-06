@@ -19,8 +19,8 @@ It will have a single connection and device, both to the keyboard.
 When we tell this robot to work, it's going to listen to the 'a' key on the
 keyboard and let us know when it's been pressed.
 
-      work: (my) function() {
-        my.keyboard.on('a', function(key) { console.log "A PRESSED!" });
+      work: function(my) {
+        my.keyboard.on('a', function(key) { console.log("A PRESSED!") });
       }
 
 With that done, let's get started!
