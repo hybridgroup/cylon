@@ -29,9 +29,8 @@ var SalesforceRobot = (function() {
         msg += "Bucks: " + data.sobject.Bucks__c + ",";
         msg += "SM_Id: " + data.sobject.Id;
         console.log(msg);
-        me.master.findRobot(data.sobject.Sphero_Name__c, function(err, spheroBot) {
-          spheroBot.react(spheroBot.devices.sphero);
-        });
+        var spheroBot = Cylon.robots[data.sobject.Sphero_Name__c];
+        spheroBot.react(spheroBot.devices.sphero);
       });
     });
   };
@@ -70,9 +69,8 @@ var SpheroRobot = (function() {
         spheroName: "" + me.name,
         bucks: "" + (me.totalBucks++)
       });
-      me.master.findRobot('salesforce', function(err, sf) {
-        sf.devices.salesforce.push('SpheroController', 'POST', data);
-      });
+      var sf = Cylon.robots['salesforce'];
+      sf.devices.salesforce.push('SpheroController', 'POST', data);
     });
   };
 
