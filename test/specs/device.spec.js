@@ -110,31 +110,31 @@ describe("Cylon.Device", function() {
     });
   });
 
-  describe("#data", function() {
-    var data = device.data();
+  describe("#toJSON", function() {
+    var json = device.toJSON();
 
     it("returns an object", function() {
-      expect(data).to.be.a('object');
+      expect(json).to.be.a('object');
     });
 
     it("contains the device's name", function() {
-      expect(data.name).to.be.eql(device.name);
+      expect(json.name).to.be.eql(device.name);
     });
 
     it("contains the device's pin", function() {
-      expect(data.pin).to.be.eql(device.pin);
+      expect(json.pin).to.be.eql(device.pin);
     });
 
     it("contains the device's driver name", function() {
-      expect(data.driver).to.be.eql('Ping');
+      expect(json.driver).to.be.eql('Ping');
     });
 
-    it("contains the device's connection data", function() {
-      expect(data.connection).to.be.eql(device.connection.data());
+    it("contains the device's connection json", function() {
+      expect(json.connection).to.be.eql(device.connection.toJSON());
     });
 
     it("contains the device's driver commands", function() {
-      expect(data.commands).to.be.eql(driver.commands());
+      expect(json.commands).to.be.eql(driver.commands());
     });
   });
 
