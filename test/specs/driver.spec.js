@@ -34,23 +34,8 @@ describe("Driver", function() {
       expect(driver.connection).to.be.eql(device.connection);
     });
 
-    it("sets @commandList to an empty array by default", function() {
-      expect(driver.commandList).to.be.eql([]);
-    });
-  });
-
-  describe("#commands", function() {
-    var commands = ['list', 'of', 'commands']
-    before(function() {
-      driver.commandList = commands;
-    });
-
-    after(function() {
-      driver.commandList = [];
-    });
-
-    it("returns the driver's @commandList", function() {
-      expect(driver.commands()).to.be.eql(commands);
+    it("sets @commands to an empty array by default", function() {
+      expect(driver.commands).to.be.eql([]);
     });
   });
 
