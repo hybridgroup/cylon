@@ -134,7 +134,7 @@ describe("Device", function() {
     });
 
     it("contains the device's driver commands", function() {
-      expect(json.commands).to.be.eql(driver.commands());
+      expect(json.commands).to.be.eql(driver.commands);
     });
   });
 
