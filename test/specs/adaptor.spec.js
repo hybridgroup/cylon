@@ -56,7 +56,7 @@ describe("Adaptor", function() {
     });
 
     it("logs that it's connecting to the adaptor", function() {
-      var string = "Connecting to adaptor 'adaptor'...";
+      var string = "Connecting to adaptor 'adaptor'.";
       expect(Logger.info).to.be.calledWith(string);
     });
 
@@ -76,7 +76,7 @@ describe("Adaptor", function() {
     });
 
     it("logs that it's disconnecting to the adaptor", function() {
-      var string = "Disconnecting from adaptor 'adaptor'...";
+      var string = "Disconnecting from adaptor 'adaptor'.";
       expect(Logger.info).to.be.calledWith(string);
     });
   });
