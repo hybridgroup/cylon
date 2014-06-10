@@ -20,10 +20,6 @@ describe("Robot", function() {
   });
 
   describe("constructor", function() {
-    it("sets a @robot variable as a circular reference to the robot", function() {
-      expect(robot.robot).to.be.eql(robot);
-    });
-
     describe("name", function() {
       context("if provided", function() {
         it("is set to the passed value", function() {
