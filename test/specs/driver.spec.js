@@ -74,10 +74,6 @@ describe("Driver", function() {
     it("triggers the provided callback", function() {
       expect(callback).to.be.called;
     });
-
-    it("tells the device to emit the 'start' event", function() {
-      expect(device.emit).to.be.calledWith('start');
-    });
   });
 
   describe("#halt", function() {
