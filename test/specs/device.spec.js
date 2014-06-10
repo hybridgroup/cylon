@@ -6,7 +6,7 @@ var Ping = source('test/ping'),
     Logger = source('logger'),
     Utils = source('utils');
 
-describe("Cylon.Device", function() {
+describe("Device", function() {
   var robot = new Robot({
     name: "TestingBot",
     connection: { name: 'loopback', adaptor: 'loopback' }
@@ -75,7 +75,7 @@ describe("Cylon.Device", function() {
 
     it("logs that it's starting the device", function() {
       stub(Logger, 'info');
-      var message = "Starting device ping on pin 13";
+      var message = "Starting device 'ping' on pin 13.";
 
       device.start()
 
@@ -100,7 +100,7 @@ describe("Cylon.Device", function() {
     });
 
     it("logs that it's halt the device", function() {
-      var message = "Halting device ping";
+      var message = "Halting device 'ping'.";
       stub(Logger, 'info');
 
       device.halt();

@@ -4,7 +4,7 @@ var Robot = source("robot"),
     Logger = source('logger'),
     Utils = source('utils');
 
-describe("Cylon.Connection", function() {
+describe("Connection", function() {
   var robot = new Robot({
     name: "Robby",
     connection: { name: 'loopback', adaptor: 'loopback', port: "/dev/null" }
@@ -71,7 +71,7 @@ describe("Cylon.Connection", function() {
     });
 
     it("logs that it's connecting the device", function() {
-      var message = "Connecting to loopback on port /dev/null";
+      var message = "Connecting to 'loopback' on port /dev/null.";
       expect(Logger.info).to.be.calledWith(message);
     });
 
@@ -94,7 +94,7 @@ describe("Cylon.Connection", function() {
     });
 
     it("logs that it's disconnecting from the device", function() {
-      var message = "Disconnecting from loopback on port /dev/null";
+      var message = "Disconnecting from 'loopback' on port /dev/null.";
       expect(Logger.info).to.be.calledWith(message);
     });
 

@@ -67,7 +67,7 @@ describe("Driver", function() {
     });
 
     it("logs that it's starting the driver", function() {
-      var string = "Driver driver started";
+      var string = "Driver driver started.";
       expect(Logger.info).to.be.calledWith(string);
     });
 
@@ -87,7 +87,7 @@ describe("Driver", function() {
     });
 
     it("logs that it's halting the driver", function() {
-      expect(Logger.info).to.be.calledWith("Driver driver halted")
+      expect(Logger.info).to.be.calledWith("Driver driver halted.")
     });
   });
 });
