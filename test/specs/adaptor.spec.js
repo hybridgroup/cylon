@@ -47,13 +47,11 @@ describe("Adaptor", function() {
     var callback = spy();
 
     before(function() {
-      stub(connection, 'emit');
       stub(Logger, 'info');
       adaptor.connect(callback);
     });
 
     after(function() {
-      connection.emit.restore();
       Logger.info.restore();
     });
 
@@ -64,10 +62,6 @@ describe("Adaptor", function() {
 
     it("triggers the provided callback", function() {
       expect(callback).to.be.called;
-    });
-
-    it("tells the connection to emit the 'connect' event", function() {
-      expect(connection.emit).to.be.calledWith('connect');
     });
   });
 
