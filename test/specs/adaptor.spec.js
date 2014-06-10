@@ -23,23 +23,8 @@ describe("Adaptor", function() {
       expect(adaptor.connection).to.be.eql(connection);
     });
 
-    it("sets @commandList to an empty array by default", function() {
-      expect(adaptor.commandList).to.be.eql([]);
-    });
-  });
-
-  describe("#commands", function() {
-    var commands = ['list', 'of', 'commands']
-    before(function() {
-      adaptor.commandList = commands;
-    });
-
-    after(function() {
-      adaptor.commandList = [];
-    });
-
-    it("returns the adaptor's @commandList", function() {
-      expect(adaptor.commands()).to.be.eql(commands);
+    it("sets @commands to an empty array by default", function() {
+      expect(adaptor.commands).to.be.eql([]);
     });
   });
 
