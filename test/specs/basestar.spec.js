@@ -6,13 +6,6 @@ var Basestar = source('basestar'),
 var EventEmitter = require('events').EventEmitter;
 
 describe('Basestar', function() {
-  describe('constructor', function() {
-    it('assigns @self to the instance of the Basestar class', function() {
-      var instance = new Basestar();
-      expect(instance.self).to.be.eql(instance);
-    });
-  });
-
   describe('#proxyMethods', function() {
     var methods = ['asString', 'toString', 'returnString'];
 
