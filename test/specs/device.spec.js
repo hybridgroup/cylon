@@ -29,10 +29,6 @@ describe("Device", function() {
   });
 
   describe("constructor", function() {
-    it("sets @self as a circular reference", function() {
-      expect(device.self).to.be.eql(device);
-    });
-
     it("sets @robot to the passed robot", function() {
       expect(device.robot).to.be.eql(robot);
     });
