@@ -25,11 +25,27 @@ describe("Utils", function() {
         it("converts floats", function() {
           expect(2.5.fromScale(0, 10)).to.be.eql(0.25);
         });
+
+        it("should return 1 if the number goes above the top of the scale", function() {
+          expect((15).fromScale(0, 10)).to.be.eql(1);
+        });
+
+        it("should return 0 if the number goes below the bottom of the scale", function() {
+          expect((5).fromScale(10, 20)).to.be.eql(0);
+        });
       });
 
       describe("#toScale", function() {
         it("converts a value from 0-1 scale to another", function() {
           expect((0.5).toScale(0, 10)).to.be.eql(5);
+        });
+
+        it("bottom of scale should be returned when value goes below it", function() {
+          expect((-5).toScale(0, 10)).to.be.eql(0);
+        });
+
+        it("top of scale should be returned when value goes above it", function() {
+          expect((15).toScale(0, 10)).to.be.eql(10);
         });
 
         it("converts to floats", function() {
