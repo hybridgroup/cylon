@@ -1,4 +1,4 @@
-[![Cylon.js](https://raw.github.com/hybridgroup/cylon/gh-pages/images/elements/logo.png)](http://cylonjs.com)
+[![Cylon.js](https://cdn.rawgit.com/hybridgroup/cylon/cylonjs.com/source/images/elements/cylon.png)](http://cylonjs.com)
 
 Cylon.js is a JavaScript framework for robotics and physical computing built on
 top of Node.js.
