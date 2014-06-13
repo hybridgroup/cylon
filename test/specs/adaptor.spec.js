@@ -51,9 +51,12 @@ describe("Adaptor", function() {
   });
 
   describe("#disconnect", function() {
+    var callback;
+
     before(function() {
       stub(Logger, 'info');
-      adaptor.disconnect();
+      callback = spy();
+      adaptor.disconnect(callback);
     });
 
     after(function() {
@@ -64,5 +67,9 @@ describe("Adaptor", function() {
       var string = "Disconnecting from adaptor 'adaptor'.";
       expect(Logger.info).to.be.calledWith(string);
     });
+
+    it("triggers the callback", function() {
+      expect(callback).to.be.called;
+    })
   });
 });

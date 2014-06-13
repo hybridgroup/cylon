@@ -62,9 +62,12 @@ describe("Driver", function() {
   });
 
   describe("#halt", function() {
+    var callback;
+
     before(function() {
       stub(Logger, 'info');
-      driver.halt();
+      callback = spy();
+      driver.halt(callback);
     });
 
     after(function() {
@@ -74,5 +77,9 @@ describe("Driver", function() {
     it("logs that it's halting the driver", function() {
       expect(Logger.info).to.be.calledWith("Driver driver halted.")
     });
+
+    it("triggers the callback", function() {
+      expect(callback).to.be.called;
+    })
   });
 });
