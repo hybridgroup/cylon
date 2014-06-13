@@ -10,6 +10,9 @@ Cylon.js exists thanks to the efforts of these hardworking humans:
 - Adrian Zankich ([@zankich](https://github.com/zankich))
 - Javier Cervantes ([@solojavier](https://github.com/solojavier))
 - Chris Mattheiu ([@chrismatthieu](https://github.com/chrismatthieu))
+- Fábio Franco Uechi ([@fabito](https://github.com/fabito))
+- Andrew Nesbitt ([@andrew](https://github.com/andrew))
+- Chris Boette ([@chrisbodhi](https://github.com/chrisbodhi))
 
 Thank you!
 
