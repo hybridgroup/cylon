@@ -222,11 +222,11 @@ Cylon itself. Check it out at https://github.com/hybridgroup/cylon-cli.
 We're busy adding documentation to our website, check it out at
 [cylonjs.com/documentation][docs].
 
-If you want to help with documentation, you can find some helpful instructions
-on the [cylonjs.com branch][cylonjs-branch].
+If you want to help with documentation, you can find the code for our website at
+on the [https://github.com/hybridgroup/cylon-site](https://github.com/hybridgroup/cylon-site).
 
 [docs]: http://cylonjs.com/documentation
-[cylonjs-branch]: https://github.com/hybridgroup/cylon/tree/cylonjs.com
+[docs site]: https://github.com/hybridgroup/cylon-site
 
 ## Contributing
 
