@@ -244,6 +244,9 @@ on the [https://github.com/hybridgroup/cylon-site](https://github.com/hybridgrou
 
 ## Release History
 
+Version 0.15.0 - Better halting, cleaner startup, removed 'connect' and 'start'
+                 events, and misc other cleanups/refactors.
+
 Version 0.14.0 - Removal of node-namespace and misc. cleanup
 
 Version 0.13.3 - Fixes bug with disconnect functions not being called.
