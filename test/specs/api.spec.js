@@ -34,13 +34,13 @@ describe("API", function() {
       expect(api.port).to.be.eql("3000")
     });
 
-    it("sets @server to an Express server instance", function() {
-      expect(api.server).to.be.a('function');
+    it("sets @express to an Express server instance", function() {
+      expect(api.express).to.be.a('function');
 
       var methods = ['get', 'post', 'put', 'delete'];
 
       for (var i = 0; i < methods.length; i++) {
-        expect(api.server[methods[i]]).to.be.a('function');
+        expect(api.express[methods[i]]).to.be.a('function');
       }
     });
 
@@ -49,7 +49,7 @@ describe("API", function() {
     });
 
     it("sets the server's title", function() {
-      var title = api.server.get('title');
+      var title = api.express.get('title');
       expect(title).to.be.eql("Cylon API Server");
     });
 
