@@ -204,25 +204,6 @@ describe("Utils", function() {
     });
   });
 
-  describe("#bind", function() {
-    var me = { hello: "Hello World" },
-        proxy = { boundMethod: function() { return this.hello; } };
-
-    it("binds the 'this' scope for the method", function() {
-      proxy.boundMethod = function() { return this.hello; };
-      proxy.boundMethod = utils.bind(proxy.boundMethod, me);
-
-      expect(proxy.boundMethod()).to.eql("Hello World");
-    });
-
-    it("passes arguments along to bound functions", function() {
-      proxy.boundMethod = function(hello, world) { return [hello, world]; };
-      proxy.boundMethod = utils.bind(proxy.boundMethod, me);
-
-      expect(proxy.boundMethod("Hello", "World")).to.eql(["Hello", "World"]);
-    })
-  });
-
   describe("#fetch", function() {
     var fetch = utils.fetch,
         obj = { property: 'hello world', 'false': false, 'null': null };
