@@ -18,10 +18,6 @@ describe("Driver", function() {
   });
 
   describe("#constructor", function() {
-    it("sets @self as a reference to the driver", function() {
-      expect(driver.self).to.be.eql(driver);
-    });
-
     it("sets @name to the provided name", function() {
       expect(driver.name).to.be.eql('driver');
     });
