@@ -244,6 +244,8 @@ on the [https://github.com/hybridgroup/cylon-site](https://github.com/hybridgrou
 
 ## Release History
 
+Version 0.15.1 - Fixed issue with the API on Tessel
+
 Version 0.15.0 - Better halting, cleaner startup, removed 'connect' and 'start'
                  events, and misc other cleanups/refactors.
 
