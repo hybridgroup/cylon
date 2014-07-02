@@ -2,7 +2,8 @@
 
 var fs = require('fs');
 
-var DigitalPin = source('io/digital-pin');
+var DigitalPin = source('io/digital-pin'),
+    Utils = source('utils');
 
 describe("Cylon.IO.DigitalPin", function() {
   var pin = new DigitalPin({ pin: '4', mode: 'w' })
@@ -195,12 +196,12 @@ describe("Cylon.IO.DigitalPin", function() {
 
     context("if the mode isn't 'r'", function() {
       before(function() {
-        stub(global, 'every');
+        stub(Utils, 'every');
         stub(pin, '_setMode');
       });
 
       after(function() {
-        global.every.restore();
+        Utils.every.restore();
         pin._setMode.restore();
       });
 

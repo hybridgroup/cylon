@@ -1,17 +1,11 @@
 "use strict";
 
-var Basestar = source('basestar');
+var Basestar = source('basestar'),
+    Utils = source('utils');
 
 var EventEmitter = require('events').EventEmitter;
 
 describe('Basestar', function() {
-  describe('constructor', function() {
-    it('assigns @self to the instance of the Basestar class', function() {
-      var instance = new Basestar();
-      expect(instance.self).to.be.eql(instance);
-    });
-  });
-
   describe('#proxyMethods', function() {
     var methods = ['asString', 'toString', 'returnString'];
 
@@ -34,7 +28,7 @@ describe('Basestar', function() {
       this.proxyMethods(methods, this.testInstance, this, true);
     }
 
-    subclass(TestClass, Basestar);
+    Utils.subclass(TestClass, Basestar);
 
     it('can alias methods', function() {
       var testclass = new TestClass;
@@ -70,8 +64,8 @@ describe('Basestar', function() {
       });
     }
 
-    subclass(ProxyClass, Basestar);
-    subclass(EmitterClass, Basestar);
+    Utils.subclass(ProxyClass, Basestar);
+    Utils.subclass(EmitterClass, Basestar);
 
     it("proxies events from one class to another", function() {
       var eventSpy = spy(),

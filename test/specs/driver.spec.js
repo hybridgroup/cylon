@@ -3,7 +3,8 @@
 var EventEmitter = require('events').EventEmitter;
 
 var Driver = source("driver"),
-    Logger = source('logger');
+    Logger = source('logger'),
+    Utils = source('utils');
 
 describe("Driver", function() {
   var device = {
@@ -33,23 +34,8 @@ describe("Driver", function() {
       expect(driver.connection).to.be.eql(device.connection);
     });
 
-    it("sets @commandList to an empty array by default", function() {
-      expect(driver.commandList).to.be.eql([]);
-    });
-  });
-
-  describe("#commands", function() {
-    var commands = ['list', 'of', 'commands']
-    before(function() {
-      driver.commandList = commands;
-    });
-
-    after(function() {
-      driver.commandList = [];
-    });
-
-    it("returns the driver's @commandList", function() {
-      expect(driver.commands()).to.be.eql(commands);
+    it("sets @commands to an empty array by default", function() {
+      expect(driver.commands).to.be.eql([]);
     });
   });
 
@@ -66,23 +52,22 @@ describe("Driver", function() {
     });
 
     it("logs that it's starting the driver", function() {
-      var string = "Driver driver started";
+      var string = "Driver driver started.";
       expect(Logger.info).to.be.calledWith(string);
     });
 
     it("triggers the provided callback", function() {
       expect(callback).to.be.called;
     });
-
-    it("tells the device to emit the 'start' event", function() {
-      expect(device.emit).to.be.calledWith('start');
-    });
   });
 
   describe("#halt", function() {
+    var callback;
+
     before(function() {
       stub(Logger, 'info');
-      driver.halt();
+      callback = spy();
+      driver.halt(callback);
     });
 
     after(function() {
@@ -90,7 +75,11 @@ describe("Driver", function() {
     });
 
     it("logs that it's halting the driver", function() {
-      expect(Logger.info).to.be.calledWith("Driver driver halted")
+      expect(Logger.info).to.be.calledWith("Driver driver halted.")
     });
+
+    it("triggers the callback", function() {
+      expect(callback).to.be.called;
+    })
   });
 });

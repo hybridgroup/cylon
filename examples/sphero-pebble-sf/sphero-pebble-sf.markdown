@@ -78,9 +78,8 @@ Tell it what work we want to do:
 
             console.log(msg);
 
-            me.master.findRobot(name, function(err, spheroBot) {
-              spheroBot.react(spheroBot.devices.sphero);
-            });
+            var spheroBot = Cylon.robots[name];
+            spheroBot.react(spheroBot.devices.sphero);
 
             me.spheroReport[name] = bucks;
             toPebble = "";
@@ -92,9 +91,8 @@ Tell it what work we want to do:
               toPebble += "" + key + ": $" + val + "\n";
             }
 
-            me.master.findRobot('pebble', function(error, pebbleBot) {
-              pebbleBot.message(pebbleBot.devices.pebble, toPebble);
-            });
+            var pebbleBot = Cylon.robots['pebble'];
+            pebbleBot.message(pebbleBot.devices.pebble, toPebble);
           });
         });
       };
@@ -166,9 +164,8 @@ Tell it what work we want to do:
             bucks: "" + (me.totalBucks++)
           });
 
-          me.master.findRobot('salesforce', function(err, sf) {
-            sf.devices.salesforce.push("SpheroController", "POST", data);
-          });
+          var sf = Cylon.robots['salesforce'];
+          sf.devices.salesforce.push("SpheroController", "POST", data);
         });
       };
 

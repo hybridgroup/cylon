@@ -8,14 +8,14 @@ VERSION := $(shell node -e "console.log(require('./package.json').version)")
 test:
 	@$(BIN)/mocha --colors $(TEST_FILES)
 
-cover:
-	@$(BIN)/istanbul cover $(BIN)/_mocha $(TEST_FILES) --report lcovonly -- -R spec
-
 bdd:
 	@$(BIN)/mocha --colors -R spec $(TEST_FILES)
 
+cover:
+	@istanbul cover $(BIN)/_mocha $(TEST_FILES) --report lcovonly -- -R spec
+
 lint:
-	@$(BIN)/jshint ./lib
+	@jshint ./lib
 
 release:
 	@git tag -m "$(VERSION)" v$(VERSION)

@@ -3,7 +3,8 @@
 var EventEmitter = require('events').EventEmitter;
 
 var Adaptor = source("adaptor"),
-    Logger = source('logger');
+    Logger = source('logger'),
+    Utils = source('utils');
 
 describe("Adaptor", function() {
   var connection = new EventEmitter;
@@ -22,23 +23,8 @@ describe("Adaptor", function() {
       expect(adaptor.connection).to.be.eql(connection);
     });
 
-    it("sets @commandList to an empty array by default", function() {
-      expect(adaptor.commandList).to.be.eql([]);
-    });
-  });
-
-  describe("#commands", function() {
-    var commands = ['list', 'of', 'commands']
-    before(function() {
-      adaptor.commandList = commands;
-    });
-
-    after(function() {
-      adaptor.commandList = [];
-    });
-
-    it("returns the adaptor's @commandList", function() {
-      expect(adaptor.commands()).to.be.eql(commands);
+    it("sets @commands to an empty array by default", function() {
+      expect(adaptor.commands).to.be.eql([]);
     });
   });
 
@@ -46,34 +32,31 @@ describe("Adaptor", function() {
     var callback = spy();
 
     before(function() {
-      stub(connection, 'emit');
       stub(Logger, 'info');
       adaptor.connect(callback);
     });
 
     after(function() {
-      connection.emit.restore();
       Logger.info.restore();
     });
 
     it("logs that it's connecting to the adaptor", function() {
-      var string = "Connecting to adaptor 'adaptor'...";
+      var string = "Connecting to adaptor 'adaptor'.";
       expect(Logger.info).to.be.calledWith(string);
     });
 
     it("triggers the provided callback", function() {
       expect(callback).to.be.called;
     });
-
-    it("tells the connection to emit the 'connect' event", function() {
-      expect(connection.emit).to.be.calledWith('connect');
-    });
   });
 
   describe("#disconnect", function() {
+    var callback;
+
     before(function() {
       stub(Logger, 'info');
-      adaptor.disconnect();
+      callback = spy();
+      adaptor.disconnect(callback);
     });
 
     after(function() {
@@ -81,8 +64,12 @@ describe("Adaptor", function() {
     });
 
     it("logs that it's disconnecting to the adaptor", function() {
-      var string = "Disconnecting from adaptor 'adaptor'...";
+      var string = "Disconnecting from adaptor 'adaptor'.";
       expect(Logger.info).to.be.calledWith(string);
     });
+
+    it("triggers the callback", function() {
+      expect(callback).to.be.called;
+    })
   });
 });

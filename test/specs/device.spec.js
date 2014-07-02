@@ -3,9 +3,10 @@
 var Ping = source('test/ping'),
     Device = source("device"),
     Robot = source("robot"),
-    Logger = source('logger');
+    Logger = source('logger'),
+    Utils = source('utils');
 
-describe("Cylon.Device", function() {
+describe("Device", function() {
   var robot = new Robot({
     name: "TestingBot",
     connection: { name: 'loopback', adaptor: 'loopback' }
@@ -28,10 +29,6 @@ describe("Cylon.Device", function() {
   });
 
   describe("constructor", function() {
-    it("sets @self as a circular reference", function() {
-      expect(device.self).to.be.eql(device);
-    });
-
     it("sets @robot to the passed robot", function() {
       expect(device.robot).to.be.eql(robot);
     });
@@ -74,7 +71,7 @@ describe("Cylon.Device", function() {
 
     it("logs that it's starting the device", function() {
       stub(Logger, 'info');
-      var message = "Starting device ping on pin 13";
+      var message = "Starting device 'ping' on pin 13.";
 
       device.start()
 
@@ -99,7 +96,7 @@ describe("Cylon.Device", function() {
     });
 
     it("logs that it's halt the device", function() {
-      var message = "Halting device ping";
+      var message = "Halting device 'ping'.";
       stub(Logger, 'info');
 
       device.halt();
@@ -109,31 +106,31 @@ describe("Cylon.Device", function() {
     });
   });
 
-  describe("#data", function() {
-    var data = device.data();
+  describe("#toJSON", function() {
+    var json = device.toJSON();
 
     it("returns an object", function() {
-      expect(data).to.be.a('object');
+      expect(json).to.be.a('object');
     });
 
     it("contains the device's name", function() {
-      expect(data.name).to.be.eql(device.name);
+      expect(json.name).to.be.eql(device.name);
     });
 
     it("contains the device's pin", function() {
-      expect(data.pin).to.be.eql(device.pin);
+      expect(json.pin).to.be.eql(device.pin);
     });
 
     it("contains the device's driver name", function() {
-      expect(data.driver).to.be.eql('Ping');
+      expect(json.driver).to.be.eql('Ping');
     });
 
-    it("contains the device's connection data", function() {
-      expect(data.connection).to.be.eql(device.connection.data());
+    it("contains the device's connection json", function() {
+      expect(json.connection).to.be.eql(device.connection.toJSON());
     });
 
     it("contains the device's driver commands", function() {
-      expect(data.commands).to.be.eql(driver.commands());
+      expect(json.commands).to.be.eql(driver.commands);
     });
   });
 

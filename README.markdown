@@ -1,4 +1,4 @@
-[![Cylon.js](https://raw.github.com/hybridgroup/cylon/gh-pages/images/elements/logo.png)](http://cylonjs.com)
+[![Cylon.js](https://cdn.rawgit.com/hybridgroup/cylon-site/master/source/images/elements/cylon.png)](http://cylonjs.com)
 
 Cylon.js is a JavaScript framework for robotics and physical computing built on
 top of Node.js.
@@ -16,7 +16,7 @@ Want to use Golang to power your robots? Check out our sister project,
 
 ## Build Status:
 
-[![Build Status](https://secure.travis-ci.org/hybridgroup/cylon.png?branch=master)](http://travis-ci.org/hybridgroup/cylon) [![Code Climate](https://codeclimate.com/github/hybridgroup/cylon/coverage.png)](https://codeclimate.com/github/hybridgroup/cylon)
+[![Build Status](https://secure.travis-ci.org/hybridgroup/cylon.png?branch=master)](http://travis-ci.org/hybridgroup/cylon) [![Code Climate](https://codeclimate.com/github/hybridgroup/cylon.png)](https://codeclimate.com/github/hybridgroup/cylon) [![Code Climate](https://codeclimate.com/github/hybridgroup/cylon/coverage.png)](https://codeclimate.com/github/hybridgroup/cylon)
 
 ## Examples
 
@@ -222,11 +222,11 @@ Cylon itself. Check it out at https://github.com/hybridgroup/cylon-cli.
 We're busy adding documentation to our website, check it out at
 [cylonjs.com/documentation][docs].
 
-If you want to help with documentation, you can find some helpful instructions
-on the [cylonjs.com branch][cylonjs-branch].
+If you want to help with documentation, you can find the code for our website at
+on the [https://github.com/hybridgroup/cylon-site](https://github.com/hybridgroup/cylon-site).
 
 [docs]: http://cylonjs.com/documentation
-[cylonjs-branch]: https://github.com/hybridgroup/cylon/tree/cylonjs.com
+[docs site]: https://github.com/hybridgroup/cylon-site
 
 ## Contributing
 
@@ -243,6 +243,11 @@ on the [cylonjs.com branch][cylonjs-branch].
   * For git help see [progit](http://git-scm.com/book) which is an awesome (and free) book on git
 
 ## Release History
+
+Version 0.15.1 - Fixed issue with the API on Tessel
+
+Version 0.15.0 - Better halting, cleaner startup, removed 'connect' and 'start'
+                 events, and misc other cleanups/refactors.
 
 Version 0.14.0 - Removal of node-namespace and misc. cleanup
 
