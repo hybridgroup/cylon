@@ -11,10 +11,6 @@ describe("Adaptor", function() {
   var adaptor = new Adaptor({ name: 'adaptor', connection: connection });
 
   describe("#constructor", function() {
-    it("sets @self as a reference to the adaptor", function() {
-      expect(adaptor.self).to.be.eql(adaptor);
-    });
-
     it("sets @name to the provided name", function() {
       expect(adaptor.name).to.be.eql('adaptor');
     });

@@ -164,9 +164,8 @@ describe("Utils", function() {
 
     var TestClass = (function() {
       function TestClass() {
-        this.self = this;
         this.testInstance = new ProxyClass;
-        utils.proxyFunctionsToObject(methods, this.testInstance, this.self, true);
+        utils.proxyFunctionsToObject(methods, this.testInstance, this, true);
       }
 
       return TestClass;
@@ -204,22 +203,51 @@ describe("Utils", function() {
     });
   });
 
-  describe("#bind", function() {
-    var me = { hello: "Hello World" },
-        proxy = { boundMethod: function() { return this.hello; } };
+  describe("#fetch", function() {
+    var fetch = utils.fetch,
+        obj = { property: 'hello world', 'false': false, 'null': null };
 
-    it("binds the 'this' scope for the method", function() {
-      proxy.boundMethod = function() { return this.hello; };
-      proxy.boundMethod = utils.bind(proxy.boundMethod, me);
-
-      expect(proxy.boundMethod()).to.eql("Hello World");
+    context("if the property exists on the object", function() {
+      it("returns the value", function() {
+        expect(fetch(obj, 'property')).to.be.eql('hello world');
+        expect(fetch(obj, 'false')).to.be.eql(false);
+        expect(fetch(obj, 'null')).to.be.eql(null);
+      });
     });
 
-    it("passes arguments along to bound functions", function() {
-      proxy.boundMethod = function(hello, world) { return [hello, world]; };
-      proxy.boundMethod = utils.bind(proxy.boundMethod, me);
+    context("if the property doesn't exist on the object", function() {
+      context("and no fallback value has been provided", function() {
+        it("throws an Error", function() {
+          var fn = function() { return fetch(obj, "notaproperty"); };
+          expect(fn).to.throw(Error, 'key not found: "notaproperty"');
+        });
+      });
 
-      expect(proxy.boundMethod("Hello", "World")).to.eql(["Hello", "World"]);
-    })
+      context("and a fallback value has been provided", function() {
+        it('returns the fallback value', function() {
+          expect(fetch(obj, 'notakey', 'fallback')).to.be.eql('fallback');
+        });
+      });
+
+      context("and a fallback function has been provided", function() {
+        context("if the function has no return value", function() {
+          it("throws an Error", function() {
+            var fn = function() { fetch(obj, 'notakey', function() {}); },
+                str = 'no return value from provided fallback function';
+
+            expect(fn).to.throw(Error, str);
+          });
+        });
+
+        context("if the function returns a value", function() {
+          it("returns the value returned by the fallback function", function() {
+            var fn = function(key) { return "Couldn't find " + key },
+                value = "Couldn't find notakey";
+
+            expect(fetch(obj, 'notakey', fn)).to.be.eql(value);
+          });
+        });
+      });
+    });
   });
 });
