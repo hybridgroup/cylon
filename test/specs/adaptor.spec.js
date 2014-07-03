@@ -73,7 +73,6 @@ describe("Adaptor", function() {
     var hello;
 
     before(function() {
-      adaptor = new Adaptor
       adaptor.commands = ["hello"];
       hello = adaptor.hello = spy();
     });
