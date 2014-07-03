@@ -164,9 +164,8 @@ describe("Utils", function() {
 
     var TestClass = (function() {
       function TestClass() {
-        this.self = this;
         this.testInstance = new ProxyClass;
-        utils.proxyFunctionsToObject(methods, this.testInstance, this.self, true);
+        utils.proxyFunctionsToObject(methods, this.testInstance, this, true);
       }
 
       return TestClass;

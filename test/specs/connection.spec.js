@@ -13,10 +13,6 @@ describe("Connection", function() {
   var connection = robot.connections.loopback;
 
   describe("#constructor", function() {
-    it("sets @self as a circular reference", function() {
-      expect(connection.self).to.be.eql(connection);
-    });
-
     it("sets @robot to the passed robot", function() {
       expect(connection.robot).to.be.eql(robot);
     });
