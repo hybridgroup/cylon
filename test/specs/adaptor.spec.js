@@ -74,18 +74,21 @@ describe("Adaptor", function() {
   });
 
   describe("#_noop", function() {
+    var hello;
+
     before(function() {
-      adaptor.commands = ['write', 'read'];
-      adaptor._noop();
-      adaptor.write = spy();
-      adaptor.read = spy();
+      adaptor = new Adaptor
+      adaptor.commands = ["hello"];
+      hello = adaptor.hello = spy();
     });
 
-    it("adaptor commands return null", function() {
-      var string = "Disconnecting from adaptor 'adaptor'.";
+    it("sets all adaptor commands to no-op functions", function() {
+      expect(adaptor.hello).to.be.eql(hello);
 
-      expect(adaptor.write).to.have.returned(null);
-      expect(adaptor.read).to.have.returned(null);
+      adaptor._noop();
+
+      adaptor.hello();
+      expect(hello).to.not.be.called;
     });
   });
 });
