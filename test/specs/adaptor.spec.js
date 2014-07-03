@@ -72,4 +72,20 @@ describe("Adaptor", function() {
       expect(callback).to.be.called;
     })
   });
+
+  describe("#_noop", function() {
+    before(function() {
+      adaptor.commands = ['write', 'read'];
+      adaptor._noop();
+      adaptor.write = spy();
+      adaptor.read = spy();
+    });
+
+    it("adaptor commands return null", function() {
+      var string = "Disconnecting from adaptor 'adaptor'.";
+
+      expect(adaptor.write).to.have.returned(null);
+      expect(adaptor.read).to.have.returned(null);
+    });
+  });
 });
