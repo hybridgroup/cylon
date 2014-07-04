@@ -28,11 +28,11 @@ describe("Robot", function() {
       });
 
       context("if not provided", function() {
-        before(function() {
+        beforeEach(function() {
           stub(Robot, 'randomName').returns("New Robot");
         });
 
-        after(function() {
+        afterEach(function() {
           Robot.randomName.restore();
         });
 
@@ -170,7 +170,7 @@ describe("Robot", function() {
   });
 
   describe("#start", function() {
-    before(function() {
+    beforeEach(function() {
       stub(robot, 'startConnections').callsArg(0);
       stub(robot, 'startDevices').callsArg(0);
       stub(robot, 'emit').returns(null);
@@ -178,7 +178,7 @@ describe("Robot", function() {
       robot.start();
     });
 
-    after(function() {
+    afterEach(function() {
       robot.startConnections.restore();
       robot.startDevices.restore();
       robot.emit.restore();
@@ -248,20 +248,22 @@ describe("Robot", function() {
   });
 
   describe("#halt", function() {
-    var bot = new Robot({
-      device: { name: 'ping', driver: 'ping' },
-      connection: { name: 'loopback', adaptor: 'loopback' }
-    });
+    var bot, device, connection;
 
-    var device = bot.devices.ping,
-        connection = bot.connections.loopback;
+    beforeEach(function() {
+      bot = new Robot({
+        device: { name: 'ping', driver: 'ping' },
+        connection: { name: 'loopback', adaptor: 'loopback' }
+      });
 
-    before(function() {
+      device = bot.devices.ping;
+      connection = bot.connections.loopback;
+
       stub(device, 'halt').returns(true);
       stub(connection, 'halt').returns(true);
     });
 
-    after(function() {
+    afterEach(function() {
       device.halt.restore();
       connection.halt.restore();
     });

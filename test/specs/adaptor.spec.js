@@ -25,14 +25,15 @@ describe("Adaptor", function() {
   });
 
   describe("#connect", function() {
-    var callback = spy();
+    var callback;
 
-    before(function() {
+    beforeEach(function() {
+      callback =  spy();
       stub(Logger, 'info');
       adaptor.connect(callback);
     });
 
-    after(function() {
+    afterEach(function() {
       Logger.info.restore();
     });
 
@@ -49,13 +50,13 @@ describe("Adaptor", function() {
   describe("#disconnect", function() {
     var callback;
 
-    before(function() {
-      stub(Logger, 'info');
+    beforeEach(function() {
       callback = spy();
+      stub(Logger, 'info');
       adaptor.disconnect(callback);
     });
 
-    after(function() {
+    afterEach(function() {
       Logger.info.restore();
     });
 
@@ -72,7 +73,7 @@ describe("Adaptor", function() {
   describe("#_noop", function() {
     var hello;
 
-    before(function() {
+    beforeEach(function() {
       adaptor.commands = ["hello"];
       hello = adaptor.hello = spy();
     });

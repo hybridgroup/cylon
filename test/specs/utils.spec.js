@@ -61,11 +61,11 @@ describe("Utils", function() {
   });
 
   describe("#every", function() {
-    before(function() {
+    beforeEach(function() {
       this.clock = sinon.useFakeTimers();
     });
 
-    after(function() {
+    afterEach(function() {
       this.clock.restore();
     });
 
@@ -78,11 +78,11 @@ describe("Utils", function() {
   });
 
   describe("#after", function() {
-    before(function() {
+    beforeEach(function() {
       this.clock = sinon.useFakeTimers();
     });
 
-    after(function() {
+    afterEach(function() {
       this.clock.restore();
     });
 
@@ -95,11 +95,11 @@ describe("Utils", function() {
   });
 
   describe("constantly", function() {
-    before(function() {
+    beforeEach(function() {
       stub(global, 'every').returns(0);
     });
 
-    after(function() {
+    afterEach(function() {
       global.every.restore();
     });
 

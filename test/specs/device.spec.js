@@ -53,11 +53,11 @@ describe("Device", function() {
   });
 
   describe("#start", function() {
-    before(function() {
+    beforeEach(function() {
       stub(driver, 'start').returns(true);
     });
 
-    after(function() {
+    afterEach(function() {
       driver.start.restore();
     });
 
@@ -82,11 +82,11 @@ describe("Device", function() {
   });
 
   describe("#halt", function() {
-    before(function() {
+    beforeEach(function() {
       stub(driver, 'halt').returns(true);
     });
 
-    after(function() {
+    afterEach(function() {
       driver.halt.restore();
     });
 

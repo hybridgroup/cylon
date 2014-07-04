@@ -36,14 +36,15 @@ describe("Driver", function() {
   });
 
   describe("#start", function() {
-    var callback = spy();
+    var callback;
 
-    before(function() {
+    beforeEach(function() {
+      callback = spy();
       stub(Logger, 'info');
       driver.start(callback);
     });
 
-    after(function() {
+    afterEach(function() {
       Logger.info.restore();
     });
 
@@ -60,13 +61,13 @@ describe("Driver", function() {
   describe("#halt", function() {
     var callback;
 
-    before(function() {
-      stub(Logger, 'info');
+    beforeEach(function() {
       callback = spy();
+      stub(Logger, 'info');
       driver.halt(callback);
     });
 
-    after(function() {
+    afterEach(function() {
       Logger.info.restore();
     });
 

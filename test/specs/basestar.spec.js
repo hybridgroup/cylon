@@ -104,7 +104,7 @@ describe('Basestar', function() {
   describe("#defineAdaptorEvent", function() {
     var basestar;
 
-    before(function() {
+    beforeEach(function() {
       basestar = new Basestar();
       basestar.connector = new EventEmitter();
       basestar.connection = new EventEmitter();
@@ -136,7 +136,7 @@ describe('Basestar', function() {
   describe("#defineDriverEvent", function() {
     var basestar;
 
-    before(function() {
+    beforeEach(function() {
       basestar = new Basestar();
       basestar.connection = new EventEmitter();
       basestar.device = new EventEmitter();

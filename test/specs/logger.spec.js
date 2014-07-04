@@ -4,7 +4,7 @@ var Logger = source('logger'),
     Utils = source('utils');
 
 describe('Logger', function() {
-  after(function() {
+  afterEach(function() {
     Logger.setup(false); // to be friendly to other specs
   });
 
@@ -33,15 +33,17 @@ describe('Logger', function() {
   });
 
   describe("proxies", function() {
-    var logger = {
-      debug: spy(),
-      info: spy(),
-      warn: spy(),
-      error: spy(),
-      fatal: spy()
-    };
+    var logger;
 
-    before(function() {
+    beforeEach(function() {
+      logger = {
+        debug: spy(),
+        info: spy(),
+        warn: spy(),
+        error: spy(),
+        fatal: spy()
+      };
+
       Logger.setup(logger);
     });
 

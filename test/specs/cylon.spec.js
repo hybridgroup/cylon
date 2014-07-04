@@ -32,7 +32,7 @@ describe("Cylon", function() {
   });
 
   describe("#robot", function() {
-    after(function() {
+    afterEach(function() {
       Cylon.robots = {};
     });
 

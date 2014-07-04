@@ -54,14 +54,14 @@ describe("Connection", function() {
   describe("#connect", function() {
     var callback = function() { };
 
-    before(function() {
+    beforeEach(function() {
       stub(Logger, 'info').returns(true);
       stub(connection.adaptor, 'connect').returns(true);
 
       connection.connect(callback);
     });
 
-    after(function() {
+    afterEach(function() {
       connection.adaptor.connect.restore();
       Logger.info.restore();
     });
@@ -77,14 +77,14 @@ describe("Connection", function() {
   });
 
   describe("#disconnect", function() {
-    before(function() {
+    beforeEach(function() {
       stub(Logger, 'info').returns(true);
       stub(connection.adaptor, 'disconnect').returns(true);
 
       connection.disconnect();
     });
 
-    after(function() {
+    afterEach(function() {
       connection.adaptor.disconnect.restore();
       Logger.info.restore();
     });
@@ -100,14 +100,14 @@ describe("Connection", function() {
   });
 
   describe("#halt", function() {
-    before(function() {
+    beforeEach(function() {
       stub(Logger, 'info').returns(true);
       stub(connection, 'disconnect').returns(true);
 
       connection.halt();
     });
 
-    after(function() {
+    afterEach(function() {
       connection.disconnect.restore();
       Logger.info.restore();
     });
