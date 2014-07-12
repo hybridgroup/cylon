@@ -113,7 +113,7 @@ describe("Connection", function() {
     });
 
     it("logs that it's halting the adaptor", function() {
-      var message = "Halting adaptor loopback on port /dev/null";
+      var message = "Halting adaptor 'loopback' on port /dev/null.";
       expect(Logger.info).to.be.calledWith(message);
     });
 
