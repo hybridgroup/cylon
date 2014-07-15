@@ -44,11 +44,6 @@ describe("Connection", function() {
     it("contains the connection's adaptor name", function() {
       expect(json.adaptor).to.be.eql("Loopback");
     });
-
-    it("contains the connection's ID", function() {
-      var id = connection.connection_id;
-      expect(json.connection_id).to.be.eql(id);
-    });
   });
 
   describe("#connect", function() {
