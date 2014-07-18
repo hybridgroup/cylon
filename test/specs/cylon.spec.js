@@ -21,14 +21,18 @@ describe("Cylon", function() {
     it("sets Driver to the Driver module", function() {
       expect(Cylon.Driver).to.be.eql(Driver);
     });
-  });
 
-  it("sets @api_instance to null by default", function() {
-    expect(Cylon.api_instance).to.be.eql(null);
-  });
+    it("sets @api_instance to null by default", function() {
+      expect(Cylon.api_instance).to.be.eql(null);
+    });
 
-  it("sets @robots to an empty object by default", function() {
-    expect(Cylon.robots).to.be.eql({});
+    it("sets @robots to an empty object by default", function() {
+      expect(Cylon.robots).to.be.eql({});
+    });
+
+    it("sets @robots to an empty object by default", function() {
+      expect(Cylon.commands).to.be.eql({});
+    });
   });
 
   describe("#robot", function() {
@@ -97,5 +101,27 @@ describe("Cylon", function() {
       expect(bot1.halt).to.be.called;
       expect(bot2.halt).to.be.called;
     });
+  });
+
+  describe("#toJSON", function() {
+    var json, bot1, bot2, echo;
+
+    beforeEach(function() {
+      bot1 = {};
+      bot2 = {};
+
+      Cylon.robots = { 'bot1': bot1, 'bot2': bot2 };
+      Cylon.commands.echo = echo = function(arg) { return arg; };
+
+      json = Cylon.toJSON();
+    });
+
+    it("contains all robots the MCP knows about", function() {
+      expect(json.robots).to.be.eql([bot1, bot2]);
+    });
+
+    it("contains an array of MCP commands", function() {
+      expect(json.commands).to.be.eql(['echo']);
+    })
   });
 });
