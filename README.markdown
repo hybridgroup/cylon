@@ -214,9 +214,9 @@ support you need. For the Arduino + LED blink example, we'll need the 'firmata',
 
 ## CLI
 
-Cylon has a Command-Line Interface counterpart in [cylon-cli][]. This tool lets
-you access important features from the command line, and isn't dependent on
-Cylon itself. Check it out at https://github.com/hybridgroup/cylon-cli.
+Cylon uses the Gort [http://gort.io](http://gort.io) Command Line Interface (CLI) so you can access important features right from the command line. We call it "RobotOps", aka "DevOps For Robotics". You can scan, connect, update device firmware, and more!
+
+Cylon also has its own CLI to generate new robots, adaptors, and drivers. You can check it out at [https://github.com/hybridgroup/cylon-cli][https://github.com/hybridgroup/cylon-cli].
 
 ## Documentation
 
