@@ -148,6 +148,7 @@ devices. The following 21 platforms are currently supported:
 
 - [Ardrone](http://ardrone2.parrot.com/) <==> [Adaptor/Drivers](https://github.com/hybridgroup/cylon-ardrone)
 - [Arduino](http://www.arduino.cc/) <==> [Adaptor](https://github.com/hybridgroup/cylon-firmata)
+- [Arduino YUN](http://arduino.cc/en/Main/ArduinoBoardYun?from=Products.ArduinoYUN) <==> [Adaptor](https://github.com/hybridgroup/cylon-firmata)
 - [Beaglebone Black](http://beagleboard.org/Products/BeagleBone+Black/) <==> [Adaptor](https://github.com/hybridgroup/cylon-beaglebone)
 - [Crazyflie](http://www.bitcraze.se/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-crazyflie)
 - [Digispark](http://digistump.com/products/1) <==> [Adaptor](https://github.com/hybridgroup/cylon-digispark)
