@@ -118,7 +118,7 @@ describe("Device", function() {
     });
 
     it("contains the device's pin", function() {
-      expect(json.pin).to.be.eql(device.pin);
+      expect(json.details.pin).to.be.eql(device.pin);
     });
 
     it("contains the device's driver name", function() {

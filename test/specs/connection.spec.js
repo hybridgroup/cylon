@@ -38,7 +38,7 @@ describe("Connection", function() {
     });
 
     it("contains the connection's port", function() {
-      expect(json.port).to.be.eql("/dev/null");
+      expect(json.details.port).to.be.eql("/dev/null");
     });
 
     it("contains the connection's adaptor name", function() {
