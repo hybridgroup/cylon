@@ -67,7 +67,7 @@ Cylon.robot({
 ### Cat Toy (Leap Motion + Digispark + Servos)
 
 ```javascript
-var Cylon = require('../..');
+var Cylon = require('cylon');
 
 Cylon.robot({
   connections: [
@@ -141,24 +141,25 @@ for (var i = 0; i < bots.length; i++) {
 Cylon.start();
 ```
 
-[cylon-cli]: https://github.com/hybridgroup/cylon-cli
-
 ## Hardware Support
 
 Cylon.js has an extensible syntax for connecting to multiple, different hardware
-devices. The following platforms are currently supported:
+devices. The following 21 platforms are currently supported:
 
 - [Ardrone](http://ardrone2.parrot.com/) <==> [Adaptor/Drivers](https://github.com/hybridgroup/cylon-ardrone)
 - [Arduino](http://www.arduino.cc/) <==> [Adaptor](https://github.com/hybridgroup/cylon-firmata)
+- [Arduino YUN](http://arduino.cc/en/Main/ArduinoBoardYun?from=Products.ArduinoYUN) <==> [Adaptor](https://github.com/hybridgroup/cylon-firmata)
 - [Beaglebone Black](http://beagleboard.org/Products/BeagleBone+Black/) <==> [Adaptor](https://github.com/hybridgroup/cylon-beaglebone)
 - [Crazyflie](http://www.bitcraze.se/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-crazyflie)
 - [Digispark](http://digistump.com/products/1) <==> [Adaptor](https://github.com/hybridgroup/cylon-digispark)
 - [Joystick](http://en.wikipedia.org/wiki/Joystick) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-joystick)
 - [Keyboard](http://en.wikipedia.org/wiki/Computer_keyboard) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-keyboard)
 - [Leap Motion](https://www.leapmotion.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-leapmotion)
+- [Nest](http://nest.com/) <==> [Adaptor/Drivers](https://github.com/hybridgroup/cylon-nest)
 - [Neurosky](http://store.neurosky.com/products/mindwave-mobile) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-neurosky)
 - [OpenCV](http://opencv.org/) <==> [Adaptor/Drivers](https://github.com/hybridgroup/cylon-opencv)
 - [Pebble](http://www.getpebble.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-pebble)
+- [Pinoccio](https://pinocc.io) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-pinoccio)
 - [Rapiro](http://www.rapiro.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-rapiro)
 - [Raspberry Pi](http://www.raspberrypi.org/) <==> [Adaptor](https://github.com/hybridgroup/cylon-raspi)
 - [Salesforce](http://www.force.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-force)
@@ -174,6 +175,7 @@ set of drivers supporting a number of devices:
     - Analog Sensor
     - Button
     - Continuous Servo
+    - Direct Pin
     - IR Rangefinder
     - LED
     - MakeyButton
@@ -188,7 +190,7 @@ through a shared `cylon-i2c` module:
     - BlinkM
     - BMP180
     - HMC6352 Digital Compass
-    - LCD
+    - LCD Display
     - MPL115A2 Barometer/Thermometer
     - MPU6050
 
@@ -213,9 +215,9 @@ support you need. For the Arduino + LED blink example, we'll need the 'firmata',
 
 ## CLI
 
-Cylon has a Command-Line Interface counterpart in [cylon-cli][]. This tool lets
-you access important features from the command line, and isn't dependent on
-Cylon itself. Check it out at https://github.com/hybridgroup/cylon-cli.
+Cylon uses the Gort [http://gort.io](http://gort.io) Command Line Interface (CLI) so you can access important features right from the command line. We call it "RobotOps", aka "DevOps For Robotics". You can scan, connect, update device firmware, and more!
+
+Cylon also has its own CLI to generate new robots, adaptors, and drivers. You can check it out at [https://github.com/hybridgroup/cylon-cli](https://github.com/hybridgroup/cylon-cli).
 
 ## Documentation
 
