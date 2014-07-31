@@ -4,15 +4,17 @@ Cylon.robot({
   connection: { name: 'loopback', adaptor: 'loopback' },
   device: { name: 'ping', driver: 'ping' },
 
-  commands: ['test'],
-
-  test: function(greeting) {
-    return greeting + " world";
-  },
-
   work: function() {
-    every((60).seconds(), console.log);
+    every((1).seconds(), function(){
+      console.log("Hello, human!")
+    });
+
+    after((5).seconds(), function(){
+      console.log("I've been at your command for 5 seconds now.")
+    });
   }
 });
+
+//Cylon.api({host: '0.0.0.0', port: '3005'})
 
 Cylon.start();
