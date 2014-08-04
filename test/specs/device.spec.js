@@ -41,7 +41,7 @@ describe("Device", function() {
       expect(device.pin).to.be.eql(13);
     });
 
-    it("sets @connection to the specified connection on the Robot", function() {
+    it("sets @connection to the name of the specified connection on the Robot", function() {
       expect(device.connection).to.be.eql(connection);
     });
 
@@ -118,15 +118,15 @@ describe("Device", function() {
     });
 
     it("contains the device's pin", function() {
-      expect(json.pin).to.be.eql(device.pin);
+      expect(json.details.pin).to.be.eql(device.pin);
     });
 
     it("contains the device's driver name", function() {
       expect(json.driver).to.be.eql('Ping');
     });
 
-    it("contains the device's connection json", function() {
-      expect(json.connection).to.be.eql(device.connection.toJSON());
+    it("contains the device's connection name", function() {
+      expect(json.connection).to.be.eql('loopback');
     });
 
     it("contains the device's driver commands", function() {

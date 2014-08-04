@@ -71,6 +71,19 @@ describe("Robot", function() {
       expect(robot.extraFunction).to.be.eql(extraFunction);
       expect(robot.extraValue).to.be.eql("Hello World");
     });
+
+    context("if there are devices but no connections", function() {
+      it('throws an error', function() {
+        var fn = function() {
+          return new Robot({
+            name: 'BrokenBot',
+            device: { name: 'ping', driver: 'ping' }
+          });
+        };
+
+        expect(fn).to.throw(Error, "No connections specified");
+      });
+    });
   });
 
   describe("all work and no play", function() {
@@ -106,13 +119,11 @@ describe("Robot", function() {
     });
 
     it("contains the robot's devices", function() {
-      var deviceJSON = bot.devices.ping.toJSON();
-      expect(json.devices).to.eql([deviceJSON]);
+      expect(json.devices).to.eql([bot.devices.ping]);
     });
 
     it("contains the robot's connections", function() {
-      var connectionJSON = bot.connections.loopback.toJSON();
-      expect(json.connections).to.eql([connectionJSON]);
+      expect(json.connections).to.eql([bot.connections.loopback]);
     });
   });
 
@@ -229,6 +240,7 @@ describe("Robot", function() {
 
     beforeEach(function() {
       bot = new Robot({
+        connection: [{ name: 'loopback', adaptor: 'loopback' }],
         devices: [
           { name: 'alpha', driver: 'ping' },
           { name: 'bravo', driver: 'ping' }
