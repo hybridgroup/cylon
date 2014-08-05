@@ -20,8 +20,9 @@ message after ten seconds have elapsed.
           console.log("Hello, human!")
         });
 
-        after((10).seconds(), function() {
-          console.log "Impressive."
+        // This will happen only one time at the 5th second
+        after((5).seconds(), function() {
+          console.log("I've been at your command for 5 seconds now.")
         });
       }
 

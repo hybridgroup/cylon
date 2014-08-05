@@ -246,6 +246,8 @@ on the [https://github.com/hybridgroup/cylon-site](https://github.com/hybridgrou
 
 ## Release History
 
+Version 0.17.0 - Updates to API to match CPPP-IO spec
+
 Version 0.16.0 - New IO Utils, removal of Utils#bind, add Adaptor#_noop method.
 
 Version 0.15.1 - Fixed issue with the API on Tessel
