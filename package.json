@@ -39,7 +39,8 @@
     "sinon-chai": "2.5.0",
     "chai":       "1.9.1",
     "mocha":      "1.18.2",
-    "sinon":      "1.9.1"
+    "sinon":      "1.9.1",
+    "supertest":  "0.13.0"
   },
 
   "dependencies": {
