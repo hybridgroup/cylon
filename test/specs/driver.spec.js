@@ -31,7 +31,7 @@ describe("Driver", function() {
     });
 
     it("sets @commands to an empty array by default", function() {
-      expect(driver.commands).to.be.eql([]);
+      expect(driver.commands).to.be.eql({});
     });
   });
 

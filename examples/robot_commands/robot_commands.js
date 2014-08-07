@@ -1,29 +1,25 @@
 var Cylon = require('../..');
 
-Cylon.api({ host: '0.0.0.0', port: '8080' });
+Cylon.api();
 
-var MyRobot = (function() {
-  function MyRobot() {}
+Cylon.robot({
+  name: 'Frankie',
 
-  MyRobot.prototype.commands = ["relax"];
+  sayRelax: function() {
+    return this.name + " says relax";
+  },
 
-  MyRobot.prototype.relax = function() {
-    return "" + this.name + " says relax";
-  };
-
-  MyRobot.prototype.work = function(me) {
-    every((1).seconds(), function() {
-      console.log(me.name);
+  work: function(my) {
+    every((5).seconds(), function() {
+      console.log(my.sayRelax());
     });
-  };
+  },
 
-  return MyRobot;
-
-})();
-
-var robot = new MyRobot;
-robot.name = "frankie";
-
-Cylon.robot(robot);
+  commands: function() {
+    return {
+      say_relax: this.sayRelax
+    };
+  }
+});
 
 Cylon.start();
