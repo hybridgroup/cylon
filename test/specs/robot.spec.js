@@ -84,6 +84,83 @@ describe("Robot", function() {
         expect(fn).to.throw(Error, "No connections specified");
       });
     });
+
+    context("if no commands are provided", function() {
+      var robot;
+
+      beforeEach(function() {
+        robot = new Robot({
+          name: 'NewBot',
+          otherThings: { more: 'details' },
+          sayHello: function() { return "Hello!" }
+        });
+      });
+
+      it("sets #commands to the additionally provided functions", function() {
+        expect(robot.commands).to.be.eql({ sayHello: robot.sayHello });
+      });
+    });
+
+    context("if a commands function is provided", function() {
+      var robot;
+
+      beforeEach(function() {
+        robot = new Robot({
+          name: 'NewBot',
+
+          sayHello: function() { return this.name + " says hello" },
+
+          commands: function() {
+            return {
+              say_hello: this.sayHello
+            }
+          }
+        });
+      });
+
+      it("sets #commands to the returned object", function() {
+        expect(robot.commands.say_hello).to.be.eql(robot.sayHello);
+      });
+
+      context("if the function doesn't return an object", function() {
+        var fn;
+        beforeEach(function() {
+          fn = function() {
+            new Robot({
+              name: 'NewBot',
+
+              commands: function() {
+                return [];
+              }
+            });
+          }
+        });
+
+        it("throws an error", function() {
+          expect(fn).to.throw(Error, "commands must be an object or a function that returns an object");
+        });
+      })
+    });
+
+    context("if a commands object is provided", function() {
+      var robot;
+
+      beforeEach(function() {
+        robot = new Robot({
+          name: 'NewBot',
+
+          sayHello: function() { return this.name + " says hello" },
+
+          commands: {
+           say_hello: function() {}
+          }
+        });
+      });
+
+      it("sets #commands to the provided object", function() {
+        expect(robot.commands.say_hello).to.be.a('function');
+      });
+    });
   });
 
   describe("all work and no play", function() {
@@ -96,7 +173,7 @@ describe("Robot", function() {
     it('makes Jack a dull boy', function() {
       expect(playBot.work).to.be.eql(play);
     })
-  })
+  });
 
   describe("#toJSON", function() {
     var bot = new Robot({
@@ -115,7 +192,7 @@ describe("Robot", function() {
     });
 
     it("contains the robot's commands", function() {
-      expect(json.commands).to.eql(bot.commands);
+      expect(json.commands).to.eql(Object.keys(bot.commands));
     });
 
     it("contains the robot's devices", function() {

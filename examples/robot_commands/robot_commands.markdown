@@ -14,48 +14,40 @@ First, let's make sure to load up Cylon:
 
     var Cylon = require('../..');
 
-Now that we've got that, let's set up a custom API port:
+Now that we've got that, let's set up the api:
 
-    Cylon.api({ host: '0.0.0.0', port: '8080' });
+    Cylon.api();
 
-And with that done let's define our robot. We'll make a class to contain this
-robot's logic:
+And with that done let's define our robot:
 
-    var MyRobot = (function() {
-      function MyRobot() {}
+    Cylon.robot({
+      name: 'Frankie',
 
-To let the API know what commands this robot has, we need to provide a `commands` array.
+The result of this method will be returned to the HTTP client as part of a JSON
+object.
 
-      MyRobot.prototype.commands = ["relax"];
-
-And with that done, we can now define the method. The result of this method will
-be returned to the HTTP client as part of a JSON object.
-
-      MyRobot.prototype.relax = function() {
-        return "" + this.name + " says relax";
-      };
+      sayRelax: function() {
+        return this.name + " says relax");
+      },
 
 Since we don't really care what actual work this robot does, but need to keep it
-busy, we'll just tell it to print it's name every second.
+busy, we'll just tell it to print it's name every five seconds.
 
-      MyRobot.prototype.work = function(me) {
-        every((1).seconds(), function() {
-          console.log(me.name);
+      work: function(my) {
+        every((5).seconds(), function() {
+          console.log(my.sayRelax());
         });
-      };
+      },
 
-      return MyRobot;
+We'll then set up the `commands` object, which tells the API which commands the
+Robot has should be publically accessible:
 
-    })();
-
-And with that all done, we can now instantiate our robot:
-
-    var robot = new MyRobot;
-
-Now we can just give it a name and send it off to Cylon.
-
-    robot.name = "frankie";
-    Cylon.robot(robot);
+      commands: function() {
+        return {
+          say_relax: this.sayRelax
+        };
+      }
+    });
 
 And now that all the pieces are in place, we can start up Cylon:
 
