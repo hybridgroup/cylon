@@ -58,8 +58,7 @@ describe("Driver", function() {
         var cmd = commands[i],
             snake = snake_case[i];
 
-        driver.commands[snake]();
-        expect(driver[cmd]).to.be.called;
+        expect(driver.commands[snake]).to.be.eql(driver[cmd]);
       }
     });
 
