@@ -7,14 +7,18 @@ var Driver = source("driver"),
     Utils = source('utils');
 
 describe("Driver", function() {
-  var device = {
-    connection: {},
-    emit: spy()
-  };
+  var device, driver;
 
-  var driver = new Driver({
-    name: 'driver',
-    device: device
+  beforeEach(function() {
+    device = {
+      connection: {},
+      emit: spy()
+    };
+
+    driver = new Driver({
+      name: 'driver',
+      device: device
+    });
   });
 
   describe("#constructor", function() {
@@ -30,8 +34,46 @@ describe("Driver", function() {
       expect(driver.connection).to.be.eql(device.connection);
     });
 
-    it("sets @commands to an empty array by default", function() {
+    it("sets @commands to an empty object by default", function() {
       expect(driver.commands).to.be.eql({});
+    });
+  });
+
+  describe("#setupCommands", function() {
+    beforeEach(function() {
+      driver.proxyMethods = spy();
+    });
+
+    it("snake_cases and proxies methods to @commands for the API", function() {
+      var commands = ["helloWorld", "otherTestCommand"],
+          snake_case = ["hello_world", "other_test_command"];
+
+      commands.forEach(function(cmd) {
+        driver[cmd] = spy();
+      });
+
+      driver.setupCommands(commands);
+
+      for (var i = 0; i < commands.length; i++) {
+        var cmd = commands[i],
+            snake = snake_case[i];
+
+        driver.commands[snake]();
+        expect(driver[cmd]).to.be.called;
+      }
+    });
+
+    it("handles edge cases", function() {
+      var commands = ["HelloWorld", "getPNGStream", "getHSetting"],
+          snake_case = ["hello_world", "get_png_stream", "get_h_setting"];
+
+      commands.forEach(function(cmd) {
+        driver[cmd] = function() {};
+      });
+
+      driver.setupCommands(commands);
+
+      expect(Object.keys(driver.commands)).to.be.eql(snake_case);
     });
   });
 
