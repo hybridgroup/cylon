@@ -7,25 +7,33 @@ var Ping = source('test/ping'),
     Utils = source('utils');
 
 describe("Device", function() {
-  var robot = new Robot({
-    name: "TestingBot",
-    connection: { name: 'loopback', adaptor: 'loopback' }
-  });
+  var robot, connection, driver, device, initDriver;
 
-  var connection = robot.connections.loopback;
+  beforeEach(function() {
+    robot = new Robot({
+      name: "TestingBot",
+      connection: { name: 'loopback', adaptor: 'loopback' }
+    });
 
-  var driver = new Ping({
-    name: 'driver',
-    device: { connection: connection, port: 13 }
-  })
+    connection = robot.connections.loopback;
 
-  var initDriver = stub(robot, 'initDriver').returns(driver);
+    driver = new Ping({
+      name: 'driver',
+      device: { connection: connection, port: 13 }
+    });
 
-  var device = new Device({
-    robot: robot,
-    name: "ping",
-    pin: 13,
-    connection: 'loopback'
+    driver.cmd = spy();
+    driver.string = "";
+    driver.robot = spy();
+
+    initDriver = stub(robot, 'initDriver').returns(driver);
+
+    device = new Device({
+      robot: robot,
+      name: "ping",
+      pin: 13,
+      connection: 'loopback'
+    });
   });
 
   describe("constructor", function() {
@@ -49,6 +57,16 @@ describe("Device", function() {
       expect(device.driver).to.be.eql(driver);
       expect(initDriver).to.be.calledOnce
       initDriver.restore();
+    });
+
+    it("binds driver methods to the device", function() {
+      expect(device.string).to.be.eql(undefined);
+      device.cmd();
+      expect(driver.cmd).to.be.called;
+    });
+
+    it("does not override existing functions", function() {
+      expect(device.robot).to.not.be.a('function');
     });
   });
 
@@ -107,7 +125,11 @@ describe("Device", function() {
   });
 
   describe("#toJSON", function() {
-    var json = device.toJSON();
+    var json;
+
+    beforeEach(function() {
+      json = device.toJSON();
+    });
 
     it("returns an object", function() {
       expect(json).to.be.a('object');
