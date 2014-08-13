@@ -186,23 +186,6 @@ describe("Utils", function() {
     });
   });
 
-  describe("#proxyTestStubs", function() {
-    it("proxies methods to an object's commands", function() {
-      var methods = ["hello", "goodbye"],
-          base = { commands: [] };
-
-      utils.proxyTestStubs(methods, base);
-      expect(base.commands).to.be.eql(methods);
-    });
-
-    it("returns the object methods have been proxied to", function() {
-      var methods = ["hello", "goodbye"],
-          base = { commands: [] };
-
-      expect(utils.proxyTestStubs(methods, base)).to.be.eql(base);
-    });
-  });
-
   describe("#fetch", function() {
     var fetch = utils.fetch,
         obj = { property: 'hello world', 'false': false, 'null': null };
