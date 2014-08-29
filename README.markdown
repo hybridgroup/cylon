@@ -58,6 +58,7 @@ Cylon.robot({
 
   work: function(my) {
     my.drone.takeoff();
+
     after((10).seconds(), my.drone.land);
     after((15).seconds(), my.drone.stop);
   }
@@ -76,23 +77,23 @@ Cylon.robot({
   ],
 
   devices: [
-    {name: 'servo1', driver: 'servo', pin: 0, connection: 'digispark'},
-    {name: 'servo2', driver: 'servo', pin: 1, connection: 'digispark'},
-    {name: 'leapmotion', driver: 'leapmotion', connection: 'leapmotion'}
+    { name: 'servo1', driver: 'servo', pin: 0, connection: 'digispark' },
+    { name: 'servo2', driver: 'servo', pin: 1, connection: 'digispark' },
+    { name: 'leapmotion', driver: 'leapmotion', connection: 'leapmotion' }
   ],
 
   work: function(my) {
-    my['x'] = 90;
-    my['z'] = 90;
+    my.x = 90;
+    my.z = 90;
 
     my.leapmotion.on('hand', function(hand) {
-      my['x'] = hand.palmX.fromScale(-300, 300).toScale(30, 150);
-      my['z'] = hand.palmZ.fromScale(-300, 300).toScale(30, 150);
+      my.x = hand.palmX.fromScale(-300, 300).toScale(30, 150);
+      my.z = hand.palmZ.fromScale(-300, 300).toScale(30, 150);
     });
 
     every(100, function() {
-      my.servo1.angle(my['x']);
-      my.servo2.angle(my['z']);
+      my.servo1.angle(my.x);
+      my.servo2.angle(my.z);
 
       console.log("Current Angle: " + my.servo1.currentAngle() + ", " + my.servo2.currentAngle());
     });
@@ -114,28 +115,22 @@ var bots = [
   { port: '/dev/rfcomm1', name: 'Louise' }
 ];
 
-var SpheroBot = function() {};
+bots.forEach(function(bot) {
+  Cylon.robot({
+    name: bot.name,
 
-SpheroBot.prototype.connection = { name: "sphero", adaptor: "sphero" };
-SpheroBot.prototype.device = { name: "sphero", driver: "sphero" };
+    connection: { name: "sphero", adaptor: "sphero", port: bot.port },
+    device: { name: "sphero", driver: "sphero" },
 
-SpheroBot.prototype.work = function(my) {
-  every((1).second(), function() {
-    console.log(my.name);
-    my.sphero.setRandomColor();
-    my.sphero.roll(60, Math.floor(Math.random() * 360));
+    work: function(my) {
+      every((1).second(), function() {
+        console.log(my.name);
+        my.sphero.setRandomColor();
+        my.sphero.roll(60, Math.floor(Math.random() * 360));
+      });
+    }
   });
-};
-
-for (var i = 0; i < bots.length; i++) {
-  var bot = bots[i];
-  var robot = new SpheroBot();
-
-  robot.connection.port = bot.port;
-  robot.name = bot.name;
-
-  Cylon.robot(robot);
-}
+});
 
 // start up all robots at once
 Cylon.start();
