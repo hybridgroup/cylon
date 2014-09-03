@@ -93,27 +93,4 @@ describe("Connection", function() {
       expect(connection.adaptor.disconnect).to.be.called;
     });
   });
-
-  describe("#halt", function() {
-    beforeEach(function() {
-      stub(Logger, 'info').returns(true);
-      stub(connection, 'disconnect').returns(true);
-
-      connection.halt();
-    });
-
-    afterEach(function() {
-      connection.disconnect.restore();
-      Logger.info.restore();
-    });
-
-    it("logs that it's halting the adaptor", function() {
-      var message = "Halting adaptor 'loopback' on port /dev/null.";
-      expect(Logger.info).to.be.calledWith(message);
-    });
-
-    it("tells the connection to disconnect", function() {
-      expect(connection.disconnect).to.be.called;
-    });
-  });
 });

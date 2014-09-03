@@ -349,19 +349,19 @@ describe("Robot", function() {
       connection = bot.connections.loopback;
 
       stub(device, 'halt').returns(true);
-      stub(connection, 'halt').returns(true);
+      stub(connection, 'disconnect').returns(true);
     });
 
     afterEach(function() {
       device.halt.restore();
-      connection.halt.restore();
+      connection.disconnect.restore();
     });
 
     it("calls #halt on all devices and connections", function() {
       bot.halt();
 
       expect(device.halt).to.be.called;
-      expect(connection.halt).to.be.called;
+      expect(connection.disconnect).to.be.called;
     });
   });
 
