@@ -6,7 +6,8 @@ var Cylon = source("cylon"),
 var API = source('api'),
     Logger = source('logger'),
     Adaptor = source('adaptor'),
-    Driver = source('driver');
+    Driver = source('driver'),
+    Config = source('config');
 
 describe("Cylon", function() {
   describe("exports", function() {
@@ -84,6 +85,40 @@ describe("Cylon", function() {
       expect(bot1.start).to.be.called;
       expect(bot2.start).to.be.called;
     });
+  });
+
+  describe("#setConfig", function() {
+    beforeEach(function() {
+      for (var c in Config) {
+        delete Config[c];
+      }
+    });
+
+    it("sets config variables", function() {
+      Cylon.setConfig({ a: 1, b: 2 });
+      expect(Config.a).to.be.eql(1);
+      expect(Config.b).to.be.eql(2);
+    });
+
+    it("updates existing config", function() {
+      Cylon.setConfig({ a: 1, b: 2 });
+      Cylon.setConfig({ a: 3 });
+      expect(Config.a).to.be.eql(3);
+      expect(Config.b).to.be.eql(2);
+    });
+
+    it("returns updated config", function() {
+      var config = Cylon.setConfig({ a: 1, b: 2 });
+      expect(Config).to.be.eql(config);
+    });
+  });
+
+  describe("#config", function() {
+    it("returns a value from the Config object", function() {
+      Config.a = "hello world";
+      expect(Cylon.config("a")).to.be.eql("hello world");
+      delete Config.a;
+    })
   });
 
   describe("#halt", function() {
