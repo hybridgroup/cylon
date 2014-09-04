@@ -348,8 +348,8 @@ describe("Robot", function() {
       device = bot.devices.ping;
       connection = bot.connections.loopback;
 
-      stub(device, 'halt').returns(true);
-      stub(connection, 'disconnect').returns(true);
+      stub(device, 'halt').yields(true);
+      stub(connection, 'disconnect').yields(true);
     });
 
     afterEach(function() {
