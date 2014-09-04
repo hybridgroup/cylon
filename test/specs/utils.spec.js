@@ -60,6 +60,23 @@ describe("Utils", function() {
     });
   });
 
+  describe("#makeUnique", function() {
+    it("returns the original name if it's not a conflict", function() {
+      var res = utils.makeUnique("hello", ["world"]);
+      expect(res).to.be.eql("hello");
+    });
+
+    it("generates a unique name if it does collide", function() {
+      var res = utils.makeUnique("hello", ["hello"]);
+      expect(res).to.be.eql("hello-1");
+    });
+
+    it("will ignore existing duplicates", function() {
+      var res = utils.makeUnique("hello", ["hello", "hello-1", "hello-2"]);
+      expect(res).to.be.eql("hello-3");
+    });
+  });
+
   describe("#every", function() {
     beforeEach(function() {
       this.clock = sinon.useFakeTimers();

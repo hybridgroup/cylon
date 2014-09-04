@@ -205,54 +205,86 @@ describe("Robot", function() {
   });
 
   describe("initConnections", function() {
+    var bot;
+
+    beforeEach(function() {
+      bot = new Robot();
+    });
+
     context("when not passed anything", function() {
       it("returns immediately", function() {
-        expect(robot.initConnections()).to.be.eql(undefined);
+        expect(bot.initConnections()).to.be.eql(undefined);
       });
     });
 
     context("when passed a connection object", function() {
       it("instantiates a new connection with the provided object", function() {
         var connection = { name: 'loopback', adaptor: 'loopback' };
-        robot.initConnections(connection);
-        expect(robot.connections['loopback']).to.be.instanceOf(Connection);
+        bot.initConnections(connection);
+        expect(bot.connections['loopback']).to.be.instanceOf(Connection);
       });
     });
 
     context("when passed an array of connection objects", function() {
       it("instantiates a new connection with each of the provided objects", function() {
         var connections = [{ name: 'loopback', adaptor: 'loopback' }]
-        robot.initConnections(connections);
-        expect(robot.connections['loopback']).to.be.instanceOf(Connection);
+        bot.initConnections(connections);
+        expect(bot.connections['loopback']).to.be.instanceOf(Connection);
+      });
+
+      it("avoids name collisions collisions", function() {
+        bot.initConnections([
+          { name: 'loopback', adaptor: 'loopback' },
+          { name: 'loopback', adaptor: 'loopback' }
+        ]);
+
+        var keys = Object.keys(bot.connections);
+        expect(keys).to.be.eql(["loopback", "loopback-1"]);
       });
     });
   });
 
   describe("initDevices", function() {
+    var bot;
+
+    beforeEach(function() {
+      bot = new Robot();
+    });
+
     context("when not passed anything", function() {
       it("returns immediately", function() {
-        expect(robot.initDevices()).to.be.eql(undefined);
+        expect(bot.initDevices()).to.be.eql(undefined);
       });
     });
 
     context("when passed a connection object", function() {
-      afterEach(function() { robot.devices = {}; });
+      afterEach(function() { bot.devices = {}; });
 
       it("instantiates a new device with the provided object", function() {
         var device = { name: 'ping', driver: 'ping' };
-        robot.initDevices(device);
-        expect(robot.devices['ping']).to.be.instanceOf(Device);
+        bot.initDevices(device);
+        expect(bot.devices['ping']).to.be.instanceOf(Device);
       });
     });
 
     context("when passed an array of device objects", function() {
-      afterEach(function() { robot.devices = {}; });
+      afterEach(function() { bot.devices = {}; });
 
       it("instantiates a new device with each of the provided objects", function() {
         var devices = [{ name: 'ping', driver: 'ping' }]
-        robot.initDevices(devices);
+        bot.initDevices(devices);
 
-        expect(robot.devices['ping']).to.be.instanceOf(Device);
+        expect(bot.devices['ping']).to.be.instanceOf(Device);
+      });
+
+      it("avoids name collisions collisions", function() {
+        bot.initDevices([
+          { name: 'ping', driver: 'ping' },
+          { name: 'ping', driver: 'ping' }
+        ]);
+
+        var keys = Object.keys(bot.devices);
+        expect(keys).to.be.eql(["ping", "ping-1"]);
       });
     });
   });

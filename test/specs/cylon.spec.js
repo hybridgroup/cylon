@@ -48,6 +48,14 @@ describe("Cylon", function() {
       expect(robot.toString()).to.be.eql("[Robot name='Ultron']")
       expect(Cylon.robots['Ultron']).to.be.eql(robot);
     });
+
+    it("avoids duplicating names", function() {
+      Cylon.robot({ name: "Ultron" })
+      Cylon.robot({ name: "Ultron" })
+
+      var bots = Object.keys(Cylon.robots);
+      expect(bots).to.be.eql(["Ultron", "Ultron-1"])
+    });
   });
 
   describe("#api", function() {
