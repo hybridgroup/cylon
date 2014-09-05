@@ -52,17 +52,7 @@ describe("Adaptor", function() {
 
     beforeEach(function() {
       callback = spy();
-      stub(Logger, 'info');
       adaptor.disconnect(callback);
-    });
-
-    afterEach(function() {
-      Logger.info.restore();
-    });
-
-    it("logs that it's disconnecting to the adaptor", function() {
-      var string = "Disconnecting from adaptor 'adaptor'.";
-      expect(Logger.info).to.be.calledWith(string);
     });
 
     it("triggers the callback", function() {

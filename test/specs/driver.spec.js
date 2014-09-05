@@ -104,16 +104,7 @@ describe("Driver", function() {
 
     beforeEach(function() {
       callback = spy();
-      stub(Logger, 'info');
       driver.halt(callback);
-    });
-
-    afterEach(function() {
-      Logger.info.restore();
-    });
-
-    it("logs that it's halting the driver", function() {
-      expect(Logger.info).to.be.calledWith("Driver driver halted.")
     });
 
     it("triggers the callback", function() {

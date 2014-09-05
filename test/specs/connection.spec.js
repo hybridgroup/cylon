@@ -75,12 +75,14 @@ describe("Connection", function() {
     beforeEach(function() {
       stub(Logger, 'info').returns(true);
       stub(connection.adaptor, 'disconnect').returns(true);
+      stub(connection, 'removeAllListeners');
 
       connection.disconnect();
     });
 
     afterEach(function() {
       connection.adaptor.disconnect.restore();
+      connection.removeAllListeners.restore();
       Logger.info.restore();
     });
 
@@ -91,6 +93,10 @@ describe("Connection", function() {
 
     it("tells the adaptor to disconnect", function() {
       expect(connection.adaptor.disconnect).to.be.called;
+    });
+
+    it("disconnects all event listeners", function() {
+      expect(connection.removeAllListeners).to.be.called;
     });
   });
 });
