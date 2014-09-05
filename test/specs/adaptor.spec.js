@@ -47,29 +47,6 @@ describe("Adaptor", function() {
     });
   });
 
-  describe("#disconnect", function() {
-    var callback;
-
-    beforeEach(function() {
-      callback = spy();
-      stub(Logger, 'info');
-      adaptor.disconnect(callback);
-    });
-
-    afterEach(function() {
-      Logger.info.restore();
-    });
-
-    it("logs that it's disconnecting to the adaptor", function() {
-      var string = "Disconnecting from adaptor 'adaptor'.";
-      expect(Logger.info).to.be.calledWith(string);
-    });
-
-    it("triggers the callback", function() {
-      expect(callback).to.be.called;
-    })
-  });
-
   describe("#_noop", function() {
     var hello;
 

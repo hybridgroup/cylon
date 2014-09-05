@@ -101,26 +101,30 @@ describe("Device", function() {
 
   describe("#halt", function() {
     beforeEach(function() {
-      stub(driver, 'halt').returns(true);
+      stub(Logger, 'info');
+
+      driver.halt = stub().returns(true);
+      device.removeAllListeners = spy();
+
+      device.halt();
     });
 
     afterEach(function() {
-      driver.halt.restore();
+      Logger.info.restore();
     });
 
     it("halts the driver", function() {
-      device.halt();
       expect(driver.halt).to.be.called;
     });
 
     it("logs that it's halt the device", function() {
       var message = "Halting device 'ping'.";
-      stub(Logger, 'info');
-
-      device.halt();
 
       expect(Logger.info).to.be.calledWith(message);
-      Logger.info.restore();
+    });
+
+    it("disconnects all event listeners", function() {
+      expect(device.removeAllListeners).to.be.called;
     });
   });
 
