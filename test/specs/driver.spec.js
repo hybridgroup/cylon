@@ -98,17 +98,4 @@ describe("Driver", function() {
       expect(callback).to.be.called;
     });
   });
-
-  describe("#halt", function() {
-    var callback;
-
-    beforeEach(function() {
-      callback = spy();
-      driver.halt(callback);
-    });
-
-    it("triggers the callback", function() {
-      expect(callback).to.be.called;
-    })
-  });
 });

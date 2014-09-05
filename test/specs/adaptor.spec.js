@@ -47,19 +47,6 @@ describe("Adaptor", function() {
     });
   });
 
-  describe("#disconnect", function() {
-    var callback;
-
-    beforeEach(function() {
-      callback = spy();
-      adaptor.disconnect(callback);
-    });
-
-    it("triggers the callback", function() {
-      expect(callback).to.be.called;
-    })
-  });
-
   describe("#_noop", function() {
     var hello;
 
