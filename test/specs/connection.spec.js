@@ -74,14 +74,14 @@ describe("Connection", function() {
   describe("#disconnect", function() {
     beforeEach(function() {
       stub(Logger, 'info').returns(true);
-      stub(connection.adaptor, 'disconnect').returns(true);
       stub(connection, 'removeAllListeners');
+
+      connection.adaptor.disconnect = stub().returns(true);
 
       connection.disconnect();
     });
 
     afterEach(function() {
-      connection.adaptor.disconnect.restore();
       connection.removeAllListeners.restore();
       Logger.info.restore();
     });
