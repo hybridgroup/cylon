@@ -319,6 +319,10 @@ describe("Robot", function() {
     it("emits the 'work' event", function() {
       expect(robot.emit).to.be.calledWith("work")
     });
+
+    it("returns the robot", function() {
+      expect(robot.start()).to.be.eql(robot);
+    });
   });
 
   describe("#startConnections", function() {
