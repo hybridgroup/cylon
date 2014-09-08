@@ -72,11 +72,7 @@ describe("Device", function() {
 
   describe("#start", function() {
     beforeEach(function() {
-      stub(driver, 'start').returns(true);
-    });
-
-    afterEach(function() {
-      driver.start.restore();
+      driver.start = stub().returns(true);
     });
 
     it("starts the driver, passing along a callback", function() {

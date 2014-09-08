@@ -75,27 +75,4 @@ describe("Driver", function() {
       expect(Object.keys(driver.commands)).to.be.eql(snake_case);
     });
   });
-
-  describe("#start", function() {
-    var callback;
-
-    beforeEach(function() {
-      callback = spy();
-      stub(Logger, 'info');
-      driver.start(callback);
-    });
-
-    afterEach(function() {
-      Logger.info.restore();
-    });
-
-    it("logs that it's starting the driver", function() {
-      var string = "Driver driver started.";
-      expect(Logger.info).to.be.calledWith(string);
-    });
-
-    it("triggers the provided callback", function() {
-      expect(callback).to.be.called;
-    });
-  });
 });
