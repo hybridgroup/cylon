@@ -51,13 +51,12 @@ describe("Connection", function() {
 
     beforeEach(function() {
       stub(Logger, 'info').returns(true);
-      stub(connection.adaptor, 'connect').returns(true);
+      connection.adaptor.connect = stub().returns(true);
 
       connection.connect(callback);
     });
 
     afterEach(function() {
-      connection.adaptor.connect.restore();
       Logger.info.restore();
     });
 
