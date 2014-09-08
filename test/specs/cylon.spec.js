@@ -96,6 +96,24 @@ describe("Cylon", function() {
   });
 
   describe("#setConfig", function() {
+    var originalConfig = {};
+
+    before(function() {
+      for (var c in Config) {
+        originalConfig[c] = Config[c];
+      }
+    });
+
+    after(function() {
+      for (var c in Config) {
+        delete Config[c];
+      }
+
+      for (var c in originalConfig) {
+        Config[c] = originalConfig[c];
+      }
+    });
+
     beforeEach(function() {
       for (var c in Config) {
         delete Config[c];
