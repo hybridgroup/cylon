@@ -37,6 +37,12 @@ describe("Driver", function() {
     it("sets @commands to an empty object by default", function() {
       expect(driver.commands).to.be.eql({});
     });
+
+    it("sets @interval to 10ms by default, or the provided value", function() {
+      expect(driver.interval).to.be.eql(10);
+      driver = new Driver({ name: 'driver', device: device, interval: 2000 });
+      expect(driver.interval).to.be.eql(2000);
+    });
   });
 
   describe("#setupCommands", function() {
