@@ -40,7 +40,13 @@ describe("Driver", function() {
 
     it("sets @interval to 10ms by default, or the provided value", function() {
       expect(driver.interval).to.be.eql(10);
-      driver = new Driver({ name: 'driver', device: device, interval: 2000 });
+      driver = new Driver({
+        name: 'driver',
+        device: device,
+        extraParams: {
+          interval: 2000
+        }
+      });
       expect(driver.interval).to.be.eql(2000);
     });
   });
