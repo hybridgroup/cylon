@@ -72,8 +72,9 @@ describe("Cylon", function() {
       expect(Cylon.api_instance).to.be.an.instanceOf(API);
     });
 
-    it('passes arguments to the API constructor', function() {
-      Cylon.api({ port: '1234' });
+    it('passes configuration to the API constructor', function() {
+      Cylon.config({ api: { port: '1234' }});
+      Cylon.api();
       expect(Cylon.api_instance.port).to.be.eql('1234');
     })
   });

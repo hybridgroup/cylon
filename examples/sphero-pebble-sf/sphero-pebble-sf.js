@@ -4,7 +4,11 @@ var __bind = function(fn, me) {
 
 var Cylon = require('../..');
 
-Cylon.api({ host: '0.0.0.0', port: '8080' });
+Cylon.config({
+  api: { host: '0.0.0.0', port: '8080' }
+});
+
+Cylon.api();
 
 var PebbleRobot = (function() {
   function PebbleRobot() { this.message = __bind(this.message, this); } 
