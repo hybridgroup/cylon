@@ -27,4 +27,9 @@ global.source = function(module) {
 };
 
 var Cylon = source('cylon');
+
+Cylon.config({
+  mode: "manual"
+});
+
 Cylon.Logger.setup(false);

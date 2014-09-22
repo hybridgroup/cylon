@@ -316,8 +316,12 @@ describe("Robot", function() {
       expect(robot.work).to.be.called;
     });
 
-    it("emits the 'working' event", function() {
-      expect(robot.emit).to.be.calledWith("working")
+    it("emits the 'work' event", function() {
+      expect(robot.emit).to.be.calledWith("work")
+    });
+
+    it("returns the robot", function() {
+      expect(robot.start()).to.be.eql(robot);
     });
   });
 
