@@ -1,6 +1,7 @@
 'use strict';
 
 process.env.NODE_ENV = 'test';
+global.CYLON_TEST = true;
 
 var path = require('path');
 
@@ -29,7 +30,7 @@ global.source = function(module) {
 var Cylon = source('cylon');
 
 Cylon.config({
-  mode: "manual"
+  mode: "manual",
 });
 
 Cylon.Logger.setup(false);
