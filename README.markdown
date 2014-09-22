@@ -139,14 +139,18 @@ Cylon.start();
 ## Hardware Support
 
 Cylon.js has an extensible syntax for connecting to multiple, different hardware
-devices. The following 21 platforms are currently supported:
+devices. The following 26 platforms are currently supported:
 
 - [Ardrone](http://ardrone2.parrot.com/) <==> [Adaptor/Drivers](https://github.com/hybridgroup/cylon-ardrone)
 - [Arduino](http://www.arduino.cc/) <==> [Adaptor](https://github.com/hybridgroup/cylon-firmata)
 - [Arduino YUN](http://arduino.cc/en/Main/ArduinoBoardYun?from=Products.ArduinoYUN) <==> [Adaptor](https://github.com/hybridgroup/cylon-firmata)
+- [AT&T M2X](https://m2x.att.com) <==> [Adaptor/Drivers](https://github.com/hybridgroup/cylon-m2x)
+- [Audio]() <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-audio)
 - [Beaglebone Black](http://beagleboard.org/Products/BeagleBone+Black/) <==> [Adaptor](https://github.com/hybridgroup/cylon-beaglebone)
 - [Crazyflie](http://www.bitcraze.se/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-crazyflie)
 - [Digispark](http://digistump.com/products/1) <==> [Adaptor](https://github.com/hybridgroup/cylon-digispark)
+- [Intel Edison](http://www.intel.com/content/www/us/en/do-it-yourself/edison.html) <==> [Adaptor](https://github.com/hybridgroup/cylon-intel-iot)
+- [Intel Galileo](http://www.intel.com/content/www/us/en/do-it-yourself/galileo-maker-quark-board.html) <==> [Adaptor](https://github.com/hybridgroup/cylon-intel-iot)
 - [Joystick](http://en.wikipedia.org/wiki/Joystick) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-joystick)
 - [Keyboard](http://en.wikipedia.org/wiki/Computer_keyboard) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-keyboard)
 - [Leap Motion](https://www.leapmotion.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-leapmotion)
@@ -160,6 +164,7 @@ devices. The following 21 platforms are currently supported:
 - [Salesforce](http://www.force.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-force)
 - [Skynet](http://skynet.im/) <==> [Adaptor](https://github.com/hybridgroup/cylon-skynet)
 - [Spark](http://www.spark.io/) <==> [Adaptor](https://github.com/hybridgroup/cylon-spark)
+- [Speech]() <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-speech)
 - [Sphero](http://www.gosphero.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-sphero)
 - [Tessel](https://tessel.io/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-tessel)
 

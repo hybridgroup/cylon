@@ -23,22 +23,4 @@ describe("Adaptor", function() {
       expect(adaptor.commands).to.be.eql([]);
     });
   });
-
-  describe("#_noop", function() {
-    var hello;
-
-    beforeEach(function() {
-      adaptor.commands = ["hello"];
-      hello = adaptor.hello = spy();
-    });
-
-    it("sets all adaptor commands to no-op functions", function() {
-      expect(adaptor.hello).to.be.eql(hello);
-
-      adaptor._noop();
-
-      adaptor.hello();
-      expect(hello).to.not.be.called;
-    });
-  });
 });

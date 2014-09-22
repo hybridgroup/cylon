@@ -28,7 +28,7 @@ global.source = function(module) {
 
 var Cylon = source('cylon');
 
-Cylon.setConfig({
+Cylon.config({
   auto_start: false
 });
 

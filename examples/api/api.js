@@ -1,6 +1,10 @@
 var Cylon = require('../..');
 
-Cylon.api({ host: '0.0.0.0', port: '8080' });
+Cylon.config({
+  api: { host: '0.0.0.0', port: '8080' }
+});
+
+Cylon.api();
 
 var bots = [
   { port: '/dev/rfcomm0', name: 'Thelma' },

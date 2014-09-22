@@ -72,8 +72,9 @@ describe("Cylon", function() {
       expect(Cylon.api_instance).to.be.an.instanceOf(API);
     });
 
-    it('passes arguments to the API constructor', function() {
-      Cylon.api({ port: '1234' });
+    it('passes configuration to the API constructor', function() {
+      Cylon.config({ api: { port: '1234' }});
+      Cylon.api();
       expect(Cylon.api_instance.port).to.be.eql('1234');
     })
   });
@@ -95,25 +96,7 @@ describe("Cylon", function() {
     });
   });
 
-  describe("#setConfig", function() {
-    var originalConfig = {};
-
-    before(function() {
-      for (var c in Config) {
-        originalConfig[c] = Config[c];
-      }
-    });
-
-    after(function() {
-      for (var c in Config) {
-        delete Config[c];
-      }
-
-      for (var c in originalConfig) {
-        Config[c] = originalConfig[c];
-      }
-    });
-
+  describe("#config", function() {
     beforeEach(function() {
       for (var c in Config) {
         delete Config[c];
@@ -121,30 +104,29 @@ describe("Cylon", function() {
     });
 
     it("sets config variables", function() {
-      Cylon.setConfig({ a: 1, b: 2 });
+      Cylon.config({ a: 1, b: 2 });
       expect(Config.a).to.be.eql(1);
       expect(Config.b).to.be.eql(2);
     });
 
     it("updates existing config", function() {
-      Cylon.setConfig({ a: 1, b: 2 });
-      Cylon.setConfig({ a: 3 });
+      Cylon.config({ a: 1, b: 2 });
+      Cylon.config({ a: 3 });
       expect(Config.a).to.be.eql(3);
       expect(Config.b).to.be.eql(2);
     });
 
     it("returns updated config", function() {
-      var config = Cylon.setConfig({ a: 1, b: 2 });
+      var config = Cylon.config({ a: 1, b: 2 });
       expect(Config).to.be.eql(config);
     });
-  });
 
-  describe("#config", function() {
-    it("returns a value from the Config object", function() {
-      Config.a = "hello world";
-      expect(Cylon.config("a")).to.be.eql("hello world");
-      delete Config.a;
-    })
+    it("doesn't ignores non-object arguments", function() {
+      var config = Cylon.config({ a: 1, b: 2 });
+      Cylon.config(["a", 1, "b", 2]);
+      Cylon.config("hello world");
+      expect(Config).to.be.eql(config);
+    });
   });
 
   describe("#halt", function() {

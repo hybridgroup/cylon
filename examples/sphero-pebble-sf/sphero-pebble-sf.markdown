@@ -7,7 +7,11 @@ First, let's import Cylon:
 Next up, we'll configure the API Cylon will serve, telling it to serve on port
 `8080`.
 
-    Cylon.api({ host: '0.0.0.0', port: '8080' });
+    Cylon.config({
+      api: { host: '0.0.0.0', port: '8080' }
+    });
+
+    Cylon.api();
 
 We'll also setup a convenince function for some binding we'll need to do later:
 
