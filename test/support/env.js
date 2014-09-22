@@ -29,7 +29,7 @@ global.source = function(module) {
 var Cylon = source('cylon');
 
 Cylon.config({
-  auto_start: false
+  mode: "manual"
 });
 
 Cylon.Logger.setup(false);
