@@ -34,6 +34,10 @@ describe("Driver", function() {
       expect(driver.connection).to.be.eql(device.connection);
     });
 
+    it("sets @connection to the device's connection adaptor", function() {
+      expect(driver.adaptor).to.be.eql(device.connection.adaptor);
+    });
+
     it("sets @commands to an empty object by default", function() {
       expect(driver.commands).to.be.eql({});
     });
