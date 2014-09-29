@@ -18,9 +18,5 @@ describe("Adaptor", function() {
     it("sets @connection to the provided connection", function() {
       expect(adaptor.connection).to.be.eql(connection);
     });
-
-    it("sets @commands to an empty array by default", function() {
-      expect(adaptor.commands).to.be.eql([]);
-    });
   });
 });
