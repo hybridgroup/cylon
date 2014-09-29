@@ -1,16 +1,22 @@
 "use strict";
 
-var Robot = source("robot"),
+var Loopback = source('test/loopback'),
+    Robot = source("robot"),
     Logger = source('logger'),
     Utils = source('utils');
 
 describe("Connection", function() {
-  var robot = new Robot({
-    name: "Robby",
-    connection: { name: 'loopback', adaptor: 'loopback', port: "/dev/null" }
+  var robot, connection;
+
+  beforeEach(function() {
+    robot = new Robot({
+      name: "Robby",
+      connection: { name: 'loopback', adaptor: 'loopback', port: "/dev/null" }
+    });
+
+    connection = robot.connections.loopback;
   });
 
-  var connection = robot.connections.loopback;
 
   describe("#constructor", function() {
     it("sets @robot to the passed robot", function() {
@@ -24,10 +30,29 @@ describe("Connection", function() {
     it("sets @port to the passed port", function() {
       expect(connection.port.toString()).to.be.eql("/dev/null");
     });
+
+    it("proxies methods from the Adaptor", function() {
+      Loopback.prototype.test = function() { return "Test" };
+
+      robot = new Robot({
+        name: "Robby",
+        connection: { name: 'loopback', adaptor: 'loopback', port: "/dev/null" }
+      });
+
+      connection = robot.connections.loopback;
+
+      expect(connection.test()).to.be.eql("Test");
+
+      delete Loopback.prototype.test;
+    })
   });
 
   describe("#toJSON", function() {
-    var json = connection.toJSON();
+    var json;
+
+    beforeEach(function() {
+      json = connection.toJSON();
+    });
 
     it("returns an object", function() {
       expect(json).to.be.an('object');
