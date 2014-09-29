@@ -6,33 +6,28 @@ Cylon.config({
 
 Cylon.api();
 
-var bots = [
-  { port: '/dev/rfcomm0', name: 'Thelma' },
-  { port: '/dev/rfcomm1', name: 'Louise' }
-];
-
-var SpheroRobot = {
-  connection: { name: 'Sphero', adaptor: 'sphero' },
-
-  device: { name: 'sphero', driver: 'sphero' },
-
-  work: function(my) {
-    every((1).seconds(), function() {
-      console.log(my.name);
-      my.sphero.setRandomColor();
-      my.sphero.roll(60, Math.floor(Math.random() * 360));
-    });
-  }
+var bots = {
+  'Thelma': '/dev/rfcomm0',
+  'Louise': '/dev/rfcomm1'
 };
 
-for (var i = 0; i < bots.length; i++) {
-  var bot = bots[i];
-  var robot = Object.create(SpheroRobot);
+Object.keys(bots).forEach(function(name) {
+  var port = bots[name];
 
-  robot.connection.port = bot.port;
-  robot.name = bot.name;
+  Cylon.robot({
+    name: name,
 
-  Cylon.robot(robot);
-}
+    connection: { name: 'sphero', adaptor: 'sphero', port: port },
+    device: { name: 'sphero', driver: 'sphero' },
+
+    work: function(my) {
+      every((1).seconds(), function() {
+        console.log(my.name);
+        my.sphero.setRandomColor();
+        my.sphero.roll(60, Math.floor(Math.random() * 360));
+      });
+    }
+  });
+});
 
 Cylon.start();
