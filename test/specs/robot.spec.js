@@ -316,8 +316,8 @@ describe("Robot", function() {
       expect(robot.work).to.be.called;
     });
 
-    it("emits the 'work' event", function() {
-      expect(robot.emit).to.be.calledWith("work")
+    it("emits the 'ready' event", function() {
+      expect(robot.emit).to.be.calledWith("ready", robot)
     });
 
     it("returns the robot", function() {
