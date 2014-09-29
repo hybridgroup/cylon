@@ -1,89 +1,86 @@
-var Cylon = require('../..');
+var Cylon = require("../..");
 
-var bots = [
-  { port: '/dev/rfcomm0', name: 'Thelma' },
-  { port: '/dev/rfcomm1', name: 'Louise' },
-  { port: '/dev/rfcomm2', name: 'Grace' },
-  { port: '/dev/rfcomm3', name: 'Ada' }
-];
+var Green = 0x0000FF,
+    Red = 0xFF0000;
 
-var Green = 0x0000FF;
-var Red = 0xFF0000;
+var bots = {
+  'Thelma': '/dev/rfcomm0',
+  'Louise': '/dev/rfcomm1',
+  'Grace':  '/dev/rfcomm2',
+  'Ada':    '/dev/rfcomm3'
+};
 
-var ConwayRobot = (function() {
-  function ConwayRobot() {}
+Object.keys(bots).forEach(function(name) {
+  var port = bots[name];
 
-  ConwayRobot.prototype.connection = { name: 'Sphero', adaptor: 'sphero' };
-  ConwayRobot.prototype.device = { name: 'sphero', driver: 'sphero' };
+  Cylon.robot({
+    name: name,
 
-  ConwayRobot.prototype.born = function() {
-    this.contacts = 0;
-    this.age = 0;
-    this.life();
-    this.move();
-  };
+    connection: { name: 'sphero', adaptor: 'sphero', port: port },
+    device: { name: 'sphero', driver: 'sphero' },
 
-  ConwayRobot.prototype.move = function() {
-    this.sphero.roll(60, Math.floor(Math.random() * 360));
-  };
+    work: function(my) {
+      my.born();
 
-  ConwayRobot.prototype.life = function() {
-    this.alive = true;
-    this.sphero.setRGB(Green);
-  };
+      my.sphero.on('collision', function() {
+        my.contacts += 1;
+      });
 
-  ConwayRobot.prototype.death = function() {
-    this.alive = false;
-    this.sphero.setRGB(Red);
-    this.sphero.stop();
-  };
+      every((3).seconds(), function() {
+        if (my.alive) {
+          my.move();
+        }
+      });
 
-  ConwayRobot.prototype.enoughContacts = function() {
-    return (this.contacts >= 2 && this.contacts < 7);
-  };
+      every((10).seconds(), function() {
+        my.birthday();
+      });
+    },
 
-  ConwayRobot.prototype.birthday = function() {
-    this.age += 1;
+    move: function() {
+      this.sphero.roll(60, Math.floor(Math.random() * 360));
+    },
 
-    console.log("Happy birthday, " + this.name + ". You are " + this.age + " and had " + this.contacts + " contacts.");
+    born: function() {
+      this.contacts = 0;
+      this.age = 0;
+      this.life();
+      this.move();
+    },
 
-    if (this.enoughContacts()) {
-      if (this.alive == null) { this.rebirth(); }
-    } else {
-      this.death();
+    life: function() {
+      this.alive = true;
+      this.sphero.setRGB(Green);
+    },
+
+    death: function() {
+      this.alive = false;
+      this.sphero.setRGB(Red);
+      this.sphero.stop();
+    },
+
+    enoughContacts: function() {
+      return this.contacts >= 2 && this.contacts < 7;
+    },
+
+    birthday: function() {
+      this.age += 1;
+
+      if (this.alive) {
+        console.log("Happy birthday, " + this.name + ". You are " + this.age + " and had " + this.contacts + " contacts.");
+      }
+
+      if (this.enoughContacts()) {
+        if (!this.alive) {
+          this.born();
+        }
+      } else {
+        this.death();
+      }
+
+      this.contacts = 0;
     }
-
-    this.contacts = 0;
-  };
-
-  ConwayRobot.prototype.work = function(me) {
-    me.born();
-
-    me.sphero.on('collision', function() {
-      this.contacts += 1;
-    });
-
-    every((3).seconds(), function() {
-      if (me.alive != null) { me.move(); }
-    });
-
-    every((10).seconds(), function() {
-      if (me.alive != null) { me.birthday(); }
-    });
-  };
-
-  return ConwayRobot;
-
-})();
-
-for (var i = 0; i < bots.length; i++) {
-  var bot = bots[i];
-  var robot = new ConwayRobot;
-
-  robot.connection.port = bot.port;
-  robot.name = bot.name;
-
-  Cylon.robot(robot);
-}
+  });
+});
 
 Cylon.start();
