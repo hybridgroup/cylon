@@ -20,64 +20,64 @@ Object.keys(bots).forEach(function(name) {
   });
 
   robot.move = function() {
-    this.sphero.roll(60, Math.floor(Math.random() * 360));
+    robot.sphero.roll(60, Math.floor(Math.random() * 360));
   };
 
   robot.born = function() {
-    this.contacts = 0;
-    this.age = 0;
-    this.life();
-    this.move();
+    robot.contacts = 0;
+    robot.age = 0;
+    robot.life();
+    robot.move();
   };
 
   robot.life = function() {
-    this.alive = true;
-    this.sphero.setRGB(Green);
+    robot.alive = true;
+    robot.sphero.setRGB(Green);
   };
 
   robot.death = function() {
-    this.alive = false;
-    this.sphero.setRGB(Red);
-    this.sphero.stop();
+    robot.alive = false;
+    robot.sphero.setRGB(Red);
+    robot.sphero.stop();
   };
 
   robot.enoughContacts = function() {
-    return this.contacts >= 2 && this.contacts < 7;
+    return robot.contacts >= 2 && robot.contacts < 7;
   };
 
   robot.birthday = function() {
-    this.age += 1;
+    robot.age += 1;
 
-    if (this.alive) {
-      console.log("Happy birthday, " + this.name + ". You are " + this.age + " and had " + this.contacts + " contacts.");
+    if (robot.alive) {
+      console.log("Happy birthday, " + robot.name + ". You are " + robot.age + " and had " + robot.contacts + " contacts.");
     }
 
-    if (this.enoughContacts()) {
-      if (!this.alive) {
-        this.born();
+    if (robot.enoughContacts()) {
+      if (!robot.alive) {
+        robot.born();
       }
     } else {
-      this.death();
+      robot.death();
     }
 
-    this.contacts = 0;
+    robot.contacts = 0;
   };
 
-  robot.on('ready', function(my) {
-    my.born();
+  robot.on('ready', function() {
+    robot.born();
 
-    my.sphero.on('collision', function() {
-      my.contacts += 1;
+    robot.sphero.on('collision', function() {
+      robot.contacts += 1;
     });
 
     every((3).seconds(), function() {
-      if (my.alive) {
-        my.move();
+      if (robot.alive) {
+        robot.move();
       }
     });
 
     every((10).seconds(), function() {
-      my.birthday();
+      robot.birthday();
     });
   });
 });
