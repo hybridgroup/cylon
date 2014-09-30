@@ -6,17 +6,21 @@ var Device = source('device'),
     Utils = source('utils');
 
 describe("Robot", function() {
-  var work = spy();
-  var extraFunction = spy();
+  var work, extraFunction, robot;
 
-  var robot = new Robot({
-    name: "Robby",
-    work: work,
+  beforeEach(function() {
+    work = spy();
+    extraFunction = spy();
 
-    extraFunction: extraFunction,
-    extraValue: "Hello World",
+    robot = new Robot({
+      name: "Robby",
+      work: work,
 
-    master: { master: true }
+      extraFunction: extraFunction,
+      extraValue: "Hello World",
+
+      master: { master: true }
+    });
   });
 
   describe("constructor", function() {
