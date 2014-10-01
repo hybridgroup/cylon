@@ -246,6 +246,8 @@ on the [https://github.com/hybridgroup/cylon-site](https://github.com/hybridgrou
 
 ## Release History
 
+Version 0.19.0 - Fluent syntax, improved start/halt, various other updates
+
 Version 0.18.0 - Updates Robot and Driver commands structure
 
 Version 0.17.0 - Updates to API to match CPPP-IO spec
