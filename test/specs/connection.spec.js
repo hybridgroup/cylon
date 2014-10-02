@@ -31,20 +31,6 @@ describe("Connection", function() {
       expect(connection.port.toString()).to.be.eql("/dev/null");
     });
 
-    it("proxies methods from the Adaptor", function() {
-      Loopback.prototype.test = function() { return "Test" };
-
-      robot = new Robot({
-        name: "Robby",
-        connection: { name: 'loopback', adaptor: 'loopback', port: "/dev/null" }
-      });
-
-      connection = robot.connections.loopback;
-
-      expect(connection.test()).to.be.eql("Test");
-
-      delete Loopback.prototype.test;
-    })
   });
 
   describe("#toJSON", function() {
@@ -72,27 +58,38 @@ describe("Connection", function() {
   });
 
   describe("#connect", function() {
-    var callback = function() { };
+    var callback;
 
     beforeEach(function() {
+      callback = spy();
+      Loopback.prototype.test = function() { return "Test" };
+
       stub(Logger, 'info').returns(true);
-      connection.adaptor.connect = stub().returns(true);
+      connection.adaptor.connect = stub();
 
       connection.connect(callback);
     });
 
     afterEach(function() {
       Logger.info.restore();
-    });
+      delete Loopback.prototype.test;
+    })
 
     it("logs that it's connecting the device", function() {
       var message = "Connecting to 'loopback' on port /dev/null.";
       expect(Logger.info).to.be.calledWith(message);
     });
 
-    it("calls the adaptor's connect method with the provided callback", function() {
-      expect(connection.adaptor.connect).to.be.calledWith(callback);
+    it("triggers the provided callback after the adaptor finishes connecting", function() {
+      expect(callback).to.not.be.called;
+      connection.adaptor.connect.yield();
+      expect(callback).to.be.called;
     });
+
+    it("proxies methods from the Adaptor", function() {
+      connection.adaptor.connect.yield();
+      expect(connection.test()).to.be.eql("Test");
+    })
   });
 
   describe("#disconnect", function() {

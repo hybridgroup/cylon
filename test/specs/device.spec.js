@@ -59,39 +59,42 @@ describe("Device", function() {
       initDriver.restore();
     });
 
-    it("binds driver methods to the device", function() {
-      expect(device.string).to.be.eql(undefined);
-      device.cmd();
-      expect(driver.cmd).to.be.called;
-    });
-
     it("does not override existing functions", function() {
       expect(device.robot).to.not.be.a('function');
     });
   });
 
   describe("#start", function() {
-    beforeEach(function() {
-      driver.start = stub().returns(true);
-    });
+    var callback;
 
-    it("starts the driver, passing along a callback", function() {
-      var callback = function() { };
+    beforeEach(function() {
+      callback = spy();
+
+      stub(Logger, 'info');
+      driver.start = stub();
 
       device.start(callback);
+    });
 
-      expect(driver.start).to.be.calledWith(callback);
+    afterEach(function() {
+      Logger.info.restore();
     });
 
     it("logs that it's starting the device", function() {
-      stub(Logger, 'info');
       var message = "Starting device 'ping' on pin 13.";
-
-      device.start()
-
       expect(Logger.info).to.be.calledWith(message);
+    });
 
-      Logger.info.restore();
+    it("triggers the provided callback after the adaptor finishes connecting", function() {
+      expect(callback).to.not.be.called;
+      driver.start.yield();
+      expect(callback).to.be.called;
+    });
+
+    it("binds driver methods to the device", function() {
+      driver.start.yield();
+      device.cmd();
+      expect(driver.cmd).to.be.called;
     });
   });
 
