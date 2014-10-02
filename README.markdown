@@ -157,6 +157,7 @@ devices. The following 26 platforms are currently supported:
 - [Nest](http://nest.com/) <==> [Adaptor/Drivers](https://github.com/hybridgroup/cylon-nest)
 - [Neurosky](http://store.neurosky.com/products/mindwave-mobile) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-neurosky)
 - [OpenCV](http://opencv.org/) <==> [Adaptor/Drivers](https://github.com/hybridgroup/cylon-opencv)
+- [Phillips Hue](http://www2.meethue.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-hue)
 - [Pebble](http://www.getpebble.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-pebble)
 - [Pinoccio](https://pinocc.io) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-pinoccio)
 - [Rapiro](http://www.rapiro.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-rapiro)
