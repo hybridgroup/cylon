@@ -139,7 +139,7 @@ Cylon.start();
 ## Hardware Support
 
 Cylon.js has an extensible syntax for connecting to multiple, different hardware
-devices. The following 26 platforms are currently supported:
+devices. The following 27 platforms are currently supported:
 
 - [Ardrone](http://ardrone2.parrot.com/) <==> [Adaptor/Drivers](https://github.com/hybridgroup/cylon-ardrone)
 - [Arduino](http://www.arduino.cc/) <==> [Adaptor](https://github.com/hybridgroup/cylon-firmata)
@@ -157,6 +157,7 @@ devices. The following 26 platforms are currently supported:
 - [Nest](http://nest.com/) <==> [Adaptor/Drivers](https://github.com/hybridgroup/cylon-nest)
 - [Neurosky](http://store.neurosky.com/products/mindwave-mobile) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-neurosky)
 - [OpenCV](http://opencv.org/) <==> [Adaptor/Drivers](https://github.com/hybridgroup/cylon-opencv)
+- [Phillips Hue](http://www2.meethue.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-hue)
 - [Pebble](http://www.getpebble.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-pebble)
 - [Pinoccio](https://pinocc.io) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-pinoccio)
 - [Rapiro](http://www.rapiro.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-rapiro)
