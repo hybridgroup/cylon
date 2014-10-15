@@ -136,6 +136,29 @@ bots.forEach(function(bot) {
 Cylon.start();
 ```
 
+## Fluent Syntax
+
+For those more familiar with jQuery, D3, or other fluent-style JavaScript
+libraries, Cylon.JS also supports a fluent syntax:
+
+
+```javascript
+var cylon = require('cylon');
+
+cylon.robot({
+  connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
+  device: { name: 'led', driver: 'led', pin: 13 }
+})
+
+.on('ready', function(bot) {
+  setInterval(function() {
+    bot.led.toggle();
+  }, 1000);
+})
+
+.start();
+```
+
 ## Hardware Support
 
 Cylon.js has an extensible syntax for connecting to multiple, different hardware
