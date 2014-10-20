@@ -36,16 +36,16 @@
   },
 
   "devDependencies": {
-    "sinon-chai": "2.5.0",
-    "chai":       "1.9.1",
-    "mocha":      "1.18.2",
-    "sinon":      "1.9.1"
+    "sinon-chai": "2.6.0",
+    "chai":       "1.9.2",
+    "mocha":      "1.21.5",
+    "sinon":      "1.10.3"
   },
 
   "dependencies": {
-    "async":       "0.7.0",
-    "express":     "4.4.1",
-    "body-parser": "1.3.0",
+    "async":       "0.9.0",
+    "express":     "4.9.8",
+    "body-parser": "1.9.0",
     "robeaux":     "0.2.0"
   }
 }
