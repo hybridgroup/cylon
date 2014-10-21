@@ -159,6 +159,34 @@ cylon.robot({
 .start();
 ```
 
+## Browser Support
+
+As of 0.20.0, Cylon can be run directly in-browser, using the `browserify` NPM module.
+
+With the `browserify` tool installed, you can compile examples like this for the
+browser easily:
+
+```javascript
+var Cylon = require('cylon');
+
+Cylon.robot({
+  connection: { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' },
+  device: { name: 'leapmotion', driver: 'leapmotion' },
+
+  work: function(my) {
+    my.leapmotion.on('hand', function(hand) {
+      console.log(hand.palmPosition.join(','));
+    });
+  }
+}).start();
+```
+
+To compile it, use the `browserify` tool as so:
+
+    $ browserify script.js -r cylon-leapmotion > browser_script.js
+
+For more info on browser support, and for help with different configurations, you can find more info [on our website](http://cylonjs.com/documentation/browser-support).
+
 ## Hardware Support
 
 Cylon.js has an extensible syntax for connecting to multiple, different hardware
