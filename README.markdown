@@ -18,6 +18,19 @@ Want to use Golang to power your robots? Check out our sister project,
 
 [![Build Status](https://secure.travis-ci.org/hybridgroup/cylon.png?branch=master)](http://travis-ci.org/hybridgroup/cylon) [![Code Climate](https://codeclimate.com/github/hybridgroup/cylon.png)](https://codeclimate.com/github/hybridgroup/cylon) [![Code Climate](https://codeclimate.com/github/hybridgroup/cylon/coverage.png)](https://codeclimate.com/github/hybridgroup/cylon)
 
+## Getting Started
+
+### Installation
+
+All you need to get started on a new robot is the `cylon` module:
+
+    npm install cylon
+
+With the core module installed, now install the modules for whatever hardware
+support you need. For the Arduino + LED blink example, we'll need the 'firmata' module:
+
+    npm install cylon-firmata
+
 ## Examples
 
 ### Arduino + LED
@@ -27,7 +40,7 @@ LED once per second.
 
 The example requires that the Arduino have the Firmata sketch installed; which
 can be obtained either through the Ardunio IDE or the `cylon arduino upload
-firmata` command available in [cylon-cli][].
+firmata` command available in [cylon-cli](#cli).
 
 ```javascript
 var Cylon = require('cylon');
@@ -251,19 +264,7 @@ Twitter][Twitter] for updates.
 
 [Twitter]: https://twitter.com/cylonjs
 
-## Getting Started
 
-### Installation
-
-All you need to get started on a new robot is the `cylon` module:
-
-    npm install cylon
-
-With the core module installed, now install the modules for whatever hardware
-support you need. For the Arduino + LED blink example, we'll need the 'firmata',
-'gpio', and 'i2c' modules:
-
-    npm install cylon-firmata cylon-gpio cylon-i2c
 
 ## CLI
 
