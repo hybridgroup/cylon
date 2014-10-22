@@ -108,7 +108,7 @@ Cylon.robot({
       my.servo1.angle(my.x);
       my.servo2.angle(my.z);
 
-      console.log("Current Angle: " + my.servo1.currentAngle() + ", " + my.servo2.currentAngle());
+      console.log(my.servo1.currentAngle() + ", " + my.servo2.currentAngle());
     });
   }
 }).start();
