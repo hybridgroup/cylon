@@ -1,12 +1,11 @@
 'use strict';
 
-var BasicLogger = source('logger/basic_logger');
+var logger = source('logger/basic_logger');
 
 var date = new Date(0).toISOString();
 
 describe('BasicLogger', function() {
-  var logger = new BasicLogger(),
-      clock;
+  var clock;
 
   beforeEach(function() {
     stub(console, 'log');
