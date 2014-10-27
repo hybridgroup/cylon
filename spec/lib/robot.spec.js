@@ -141,7 +141,7 @@ describe("Robot", function() {
         });
 
         it("throws an error", function() {
-          expect(fn).to.throw(Error, "commands must be an object or a function that returns an object");
+          expect(fn).to.throw(Error, "#commands function must return an object");
         });
       })
     });
@@ -163,6 +163,31 @@ describe("Robot", function() {
 
       it("sets #commands to the provided object", function() {
         expect(robot.commands.say_hello).to.be.a('function');
+      });
+    });
+
+    context("arbitrary arguments", function() {
+      beforeEach(function() {
+        robot = new Robot({
+          name: 'NewBot',
+
+          hiThere: 'hi there',
+
+          sayHi: function() {
+            return 'hi';
+          },
+
+          start: "start"
+        })
+      });
+
+      it("passes them through if they don't conflict with built-ins", function() {
+        expect(robot.hiThere).to.be.eql("hi there");
+        expect(robot.sayHi()).to.be.eql("hi");
+      });
+
+      it("doesn't work if they conflict with built-in properties", function() {
+        expect(robot.start).to.be.a('function');
       });
     });
   });
