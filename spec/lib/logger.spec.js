@@ -82,4 +82,38 @@ describe('Logger', function() {
       });
     });
   });
+
+  describe("log levels", function() {
+    var logger;
+
+    beforeEach(function() {
+      logger = {
+        debug: spy(),
+        info: spy(),
+        warn: spy(),
+        error: spy(),
+        fatal: spy()
+      };
+
+      Logger.setup(logger, 'warn');
+    });
+
+    it("prevents logging of anything below the specified log level", function() {
+      Logger.debug("debug message");
+      Logger.info("info message");
+
+      expect(logger.debug).to.not.be.called;
+      expect(logger.info).to.not.be.called;
+    });
+
+    it("still logs anything equal or greater than the specified log level", function() {
+      Logger.warn("warn message");
+      Logger.error("error message");
+      Logger.fatal("fatal message");
+
+      expect(logger.warn).to.be.calledWith('warn message');
+      expect(logger.error).to.be.calledWith('error message');
+      expect(logger.fatal).to.be.calledWith('fatal message');
+    });
+  });
 });
