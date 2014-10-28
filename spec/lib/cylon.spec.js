@@ -101,6 +101,12 @@ describe("Cylon", function() {
       for (var c in Config) {
         delete Config[c];
       }
+
+      stub(Logger, 'setup');
+    });
+
+    afterEach(function() {
+      Logger.setup.restore();
     });
 
     it("sets config variables", function() {
@@ -127,6 +133,14 @@ describe("Cylon", function() {
       Cylon.config("hello world");
       expect(Config).to.be.eql(config);
     });
+
+    it("updates the Logger setup if that changed", function() {
+      Cylon.config({ a: 1 });
+      expect(Logger.setup).to.not.be.called;
+
+      Cylon.config({ a: 1, logging: { logger: false } });
+      expect(Logger.setup).to.be.called;
+    })
   });
 
   describe("#halt", function() {

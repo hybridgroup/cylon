@@ -31,6 +31,9 @@ var Cylon = source('cylon');
 
 Cylon.config({
   mode: "manual",
+  logging: {
+    logger: false
+  }
 });
 
-Cylon.Logger.setup(false);
+Cylon.Logger.setup();

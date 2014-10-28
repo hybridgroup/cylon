@@ -1,16 +1,20 @@
 'use strict';
 
 var Logger = source('logger'),
+    Config = source('config'),
     Utils = source('utils');
 
 describe('Logger', function() {
   afterEach(function() {
-    Logger.setup(false); // to be friendly to other specs
+    // to be friendly to other specs
+    Config.logging = { logger: false, level: 'debug' };
+    Logger.setup();
   });
 
   describe("#setup", function() {
     context("with no arguments", function() {
       it("sets up a BasicLogger", function() {
+        Config.logging = {};
         Logger.setup();
         expect(Logger.toString()).to.be.eql("BasicLogger");
       });
@@ -18,7 +22,8 @@ describe('Logger', function() {
 
     context("with false", function() {
       it("sets up a NullLogger", function() {
-        Logger.setup(false);
+        Config.logging = { logger: false };
+        Logger.setup();
         expect(Logger.toString()).to.be.eql("NullLogger");
       });
     });
@@ -26,7 +31,8 @@ describe('Logger', function() {
     context("with a custom logger", function() {
       it("uses the custom logger", function() {
         var logger = { toString: function() { return "custom"; } };
-        Logger.setup(logger);
+        Config.logging = { logger: logger };
+        Logger.setup();
         expect(Logger.toString()).to.be.eql("custom");
       });
     });
@@ -36,7 +42,7 @@ describe('Logger', function() {
     var logger;
 
     beforeEach(function() {
-      logger = {
+      logger = Config.logging.logger = {
         debug: spy(),
         info: spy(),
         warn: spy(),
@@ -44,7 +50,7 @@ describe('Logger', function() {
         fatal: spy()
       };
 
-      Logger.setup(logger);
+      Logger.setup();
     });
 
     describe("#debug", function() {
@@ -95,7 +101,12 @@ describe('Logger', function() {
         fatal: spy()
       };
 
-      Logger.setup(logger, 'warn');
+      Config.logging = {
+        logger: logger,
+        level: 'warn'
+      }
+
+      Logger.setup();
     });
 
     it("prevents logging of anything below the specified log level", function() {
@@ -115,5 +126,16 @@ describe('Logger', function() {
       expect(logger.error).to.be.calledWith('error message');
       expect(logger.fatal).to.be.calledWith('fatal message');
     });
+
+    it("defaults to 'info' level", function() {
+      delete Config.logging.level;
+      Logger.setup();
+
+      Logger.debug("debug message");
+      Logger.info("info message");
+
+      expect(logger.debug).to.not.be.called;
+      expect(logger.info).to.be.calledWith('info message');
+    })
   });
 });
