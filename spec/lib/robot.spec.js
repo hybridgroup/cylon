@@ -59,14 +59,6 @@ describe("Robot", function() {
       expect(robot.devices).to.be.eql({});
     });
 
-    it("sets @adaptors to an object containing all adaptors the Robot knows of", function() {
-      expect(robot.adaptors).to.have.keys(["loopback", "test"]);
-    });
-
-    it("sets @drivers to an object containing all drivers the Robot knows of", function() {
-      expect(robot.drivers).to.have.keys(["ping", "test"]);
-    });
-
     it("sets @work to the passed work function", function() {
       expect(robot.work).to.be.eql(work);
     });

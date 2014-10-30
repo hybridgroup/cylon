@@ -7,13 +7,24 @@ var path = './../spec/support/mock_module.js';
 var module = require('./../support/mock_module.js')
 
 describe("Repository", function() {
+  var original;
+
+  beforeEach(function() {
+    original = Repository.data;
+    Repository.data = {};
+  });
+
+  afterEach(function() {
+    Repository.data = original;
+  })
+
   describe("#register", function() {
     it("adds the supplied module to the Registry", function() {
-      expect(Repository._data).to.be.eql({});
+      expect(Repository.data).to.be.eql({});
 
       Repository.register(path);
 
-      expect(Repository._data).to.be.eql({
+      expect(Repository.data).to.be.eql({
         "./../spec/support/mock_module.js": {
           module: module,
           drivers: ['test-driver'],

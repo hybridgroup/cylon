@@ -26,7 +26,7 @@ describe("Device", function() {
     driver.string = "";
     driver.robot = spy();
 
-    initDriver = stub(robot, 'initDriver').returns(driver);
+    initDriver = stub(Device.prototype, 'initDriver').returns(driver);
 
     device = new Device({
       robot: robot,
@@ -34,6 +34,10 @@ describe("Device", function() {
       pin: 13,
       connection: 'loopback'
     });
+  });
+
+  afterEach(function() {
+    initDriver.restore();
   });
 
   describe("constructor", function() {
@@ -56,7 +60,6 @@ describe("Device", function() {
     it("asks the Robot to init a driver", function() {
       expect(device.driver).to.be.eql(driver);
       expect(initDriver).to.be.calledOnce
-      initDriver.restore();
     });
 
     it("does not override existing functions", function() {
