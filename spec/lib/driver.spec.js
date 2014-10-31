@@ -53,7 +53,7 @@ describe("Driver", function() {
       driver = new Driver({
         name: 'driver',
         device: device,
-        extraParams: { interval: 2000 },
+        interval: 2000,
         connection: { }
       });
 
