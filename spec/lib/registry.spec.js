@@ -1,30 +1,30 @@
 "use strict";
 
-var Repository = source('repository');
+var Registry = source('registry');
 
 var path = './../spec/support/mock_module.js';
 
 var module = require('./../support/mock_module.js')
 
-describe("Repository", function() {
+describe("Registry", function() {
   var original;
 
   beforeEach(function() {
-    original = Repository.data;
-    Repository.data = {};
+    original = Registry.data;
+    Registry.data = {};
   });
 
   afterEach(function() {
-    Repository.data = original;
+    Registry.data = original;
   })
 
   describe("#register", function() {
     it("adds the supplied module to the Registry", function() {
-      expect(Repository.data).to.be.eql({});
+      expect(Registry.data).to.be.eql({});
 
-      Repository.register(path);
+      Registry.register(path);
 
-      expect(Repository.data).to.be.eql({
+      expect(Registry.data).to.be.eql({
         "./../spec/support/mock_module.js": {
           module: module,
           drivers: ['test-driver'],
@@ -36,21 +36,21 @@ describe("Repository", function() {
 
   describe("#findByAdaptor", function() {
     beforeEach(function() {
-      Repository.register(path)
+      Registry.register(path)
     });
 
     it("finds the appropriate module containing the adaptor", function() {
-      expect(Repository.findByAdaptor('test-adaptor')).to.be.eql(module);
+      expect(Registry.findByAdaptor('test-adaptor')).to.be.eql(module);
     });
   });
 
   describe("#findByDriver", function() {
     beforeEach(function() {
-      Repository.register(path)
+      Registry.register(path)
     });
 
     it("finds the appropriate module containing the driver", function() {
-      expect(Repository.findByDriver('test-driver')).to.be.eql(module);
+      expect(Registry.findByDriver('test-driver')).to.be.eql(module);
     });
   });
 });
