@@ -7,17 +7,22 @@ var Driver = source("driver"),
     Utils = source('utils');
 
 describe("Driver", function() {
-  var device, driver;
+  var connection, device, driver;
 
   beforeEach(function() {
+    connection = {
+      adaptor: 'adaptor'
+    };
+
     device = {
-      connection: {},
+      connection: connection,
       emit: spy()
     };
 
     driver = new Driver({
       name: 'driver',
-      device: device
+      device: device,
+      connection: connection
     });
   });
 
@@ -44,13 +49,14 @@ describe("Driver", function() {
 
     it("sets @interval to 10ms by default, or the provided value", function() {
       expect(driver.interval).to.be.eql(10);
+
       driver = new Driver({
         name: 'driver',
         device: device,
-        extraParams: {
-          interval: 2000
-        }
+        extraParams: { interval: 2000 },
+        connection: { }
       });
+
       expect(driver.interval).to.be.eql(2000);
     });
   });

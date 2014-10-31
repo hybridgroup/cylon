@@ -19,7 +19,8 @@ describe("Device", function() {
 
     driver = new Ping({
       name: 'driver',
-      device: { connection: connection, port: 13 }
+      device: { connection: connection, pin: 13 },
+      connection: connection
     });
 
     driver.cmd = spy();
@@ -32,7 +33,7 @@ describe("Device", function() {
       robot: robot,
       name: "ping",
       pin: 13,
-      connection: 'loopback'
+      connection: connection
     });
   });
 
@@ -159,18 +160,6 @@ describe("Device", function() {
 
     it("contains the device's driver commands", function() {
       expect(json.commands).to.be.eql(Object.keys(driver.commands));
-    });
-  });
-
-  describe("#determineConnection", function() {
-    it("returns the connection with the given name from the Robot", function() {
-      expect(device.determineConnection("loopback")).to.be.eql(connection);
-    });
-  });
-
-  describe("#defaultConnection", function() {
-    it("returns the first connection found on the robot", function() {
-      expect(device.defaultConnection()).to.be.eql(connection);
     });
   });
 });

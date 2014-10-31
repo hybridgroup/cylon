@@ -269,7 +269,9 @@ describe("Robot", function() {
     var bot;
 
     beforeEach(function() {
-      bot = new Robot();
+      bot = new Robot({
+        connection: { name: 'loopback', adaptor: 'loopback' }
+      });
     });
 
     context("when not passed anything", function() {
