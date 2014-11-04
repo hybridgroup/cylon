@@ -19,21 +19,26 @@ describe("Device", function() {
 
     driver = new Ping({
       name: 'driver',
-      device: { connection: connection, port: 13 }
+      device: { connection: connection, pin: 13 },
+      connection: connection
     });
 
     driver.cmd = spy();
     driver.string = "";
     driver.robot = spy();
 
-    initDriver = stub(robot, 'initDriver').returns(driver);
+    initDriver = stub(Device.prototype, 'initDriver').returns(driver);
 
     device = new Device({
       robot: robot,
       name: "ping",
       pin: 13,
-      connection: 'loopback'
+      connection: connection
     });
+  });
+
+  afterEach(function() {
+    initDriver.restore();
   });
 
   describe("constructor", function() {
@@ -56,7 +61,6 @@ describe("Device", function() {
     it("asks the Robot to init a driver", function() {
       expect(device.driver).to.be.eql(driver);
       expect(initDriver).to.be.calledOnce
-      initDriver.restore();
     });
 
     it("does not override existing functions", function() {
@@ -156,18 +160,6 @@ describe("Device", function() {
 
     it("contains the device's driver commands", function() {
       expect(json.commands).to.be.eql(Object.keys(driver.commands));
-    });
-  });
-
-  describe("#determineConnection", function() {
-    it("returns the connection with the given name from the Robot", function() {
-      expect(device.determineConnection("loopback")).to.be.eql(connection);
-    });
-  });
-
-  describe("#defaultConnection", function() {
-    it("returns the first connection found on the robot", function() {
-      expect(device.defaultConnection()).to.be.eql(connection);
     });
   });
 });
