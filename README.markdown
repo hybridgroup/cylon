@@ -304,6 +304,9 @@ on the [https://github.com/hybridgroup/cylon-site](https://github.com/hybridgrou
 
 ## Release History
 
+Version 0.20.0 - Browser support, new module loading, log level support, misc.
+                 development changes
+
 Version 0.19.1 - Correct issue with dynamic method proxying
 
 Version 0.19.0 - Fluent syntax, improved start/halt, various other updates
