@@ -196,9 +196,14 @@ Cylon.robot({
 
 To compile it, use the `browserify` tool as so:
 
-    $ browserify script.js -r cylon-leapmotion > browser_script.js
+    $ browserify script.js -r cylon-leapmotion -o browser_script.js
 
-For more info on browser support, and for help with different configurations, you can find more info [on our website](http://cylonjs.com/documentation/browser-support).
+
+It works out of the box for platforms that use HTTP to communicate with devices (Spark, Pebble, LeapMotion, AR-Drone, etc) or you could create a Chrome app to get access to serial port as shown in this [Cylon chrome example](https://github.com/hybridgroup/cylon-example-chrome).
+
+Finally it can also be used in combination with [phonegap](http://phonegap.com) to run inside your phone. Check out [Phonegap cylon spark repository](https://github.com/hybridgroup/phonegap-cylon-spark) for a complete example.
+
+For more info on browser support, and for help with different configurations, you can find more info [on our website](http://cylonjs.com/documentation/guides/browser_support).
 
 ## Hardware Support
 
