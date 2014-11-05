@@ -28,7 +28,8 @@ describe("Registry", function() {
         "./../spec/support/mock_module.js": {
           module: module,
           drivers: ['test-driver'],
-          adaptors: ['test-adaptor']
+          adaptors: ['test-adaptor'],
+          dependencies: []
         }
       });
     });
