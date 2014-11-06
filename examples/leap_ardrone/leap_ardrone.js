@@ -26,7 +26,7 @@ var handWasClosedInLastFrame = false;
 
 Cylon.robot({
   connections: [
-    { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' },
+    { name: 'leapmotion', adaptor: 'leapmotion' },
     { name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1' },
     { name: 'keyboard', adaptor: 'keyboard' }
   ],

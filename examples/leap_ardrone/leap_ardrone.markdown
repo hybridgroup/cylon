@@ -13,7 +13,7 @@ Now that we have Cylon imported, we can start defining our robot
 Let's define the connections and devices:
 
     connections: [
-        { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' },
+        { name: 'leapmotion', adaptor: 'leapmotion' },
         { name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1' },
         { name: 'keyboard', adaptor: 'keyboard' }
     ],

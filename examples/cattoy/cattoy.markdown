@@ -12,7 +12,7 @@ Let's define the connections and devices:
 
       connections: [
         { name: 'digispark', adaptor: 'digispark'},
-        { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' }
+        { name: 'leapmotion', adaptor: 'leapmotion' }
       ],
 
       devices: [

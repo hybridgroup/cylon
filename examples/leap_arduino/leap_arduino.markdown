@@ -11,7 +11,7 @@ Now that we have Cylon imported, we can start defining our robot
 Let's define the connections and devices:
 
       connections: [
-        { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' },
+        { name: 'leapmotion', adaptor: 'leapmotion' },
         { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' }
       ],
 

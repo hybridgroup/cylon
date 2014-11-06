@@ -1,7 +1,7 @@
 var Cylon = require('../..');
 
 Cylon.robot({
-  connections: [{ name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' },
+  connections: [{ name: 'leapmotion', adaptor: 'leapmotion' },
     { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' }],
 
   devices: [{ name: 'leapmotion', driver: 'leapmotion', connection: 'leapmotion' },
