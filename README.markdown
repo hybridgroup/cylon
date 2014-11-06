@@ -290,6 +290,8 @@ on the [https://github.com/hybridgroup/cylon-site](https://github.com/hybridgrou
 
 ## Release History
 
+Version 0.20.2 - Correct API issues, possible issue with test setups
+
 Version 0.20.1 - Revert accidental scrict handling of param in driver initializer
 
 Version 0.20.0 - Browser support, new module loading, log level support, misc.
