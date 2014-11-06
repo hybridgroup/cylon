@@ -172,39 +172,6 @@ cylon.robot({
 .start();
 ```
 
-## Browser Support
-
-As of 0.20.0, Cylon can be run directly in-browser, using the `browserify` NPM module.
-
-With the `browserify` tool installed, you can compile examples like this for the
-browser easily:
-
-```javascript
-var Cylon = require('cylon');
-
-Cylon.robot({
-  connection: { name: 'leapmotion', adaptor: 'leapmotion', port: '127.0.0.1:6437' },
-  device: { name: 'leapmotion', driver: 'leapmotion' },
-
-  work: function(my) {
-    my.leapmotion.on('hand', function(hand) {
-      console.log(hand.palmPosition.join(','));
-    });
-  }
-}).start();
-```
-
-To compile it, use the `browserify` tool as so:
-
-    $ browserify script.js -r cylon-leapmotion -o browser_script.js
-
-
-It works out of the box for platforms that use HTTP to communicate with devices (Spark, Pebble, LeapMotion, AR-Drone, etc) or you could create a Chrome app to get access to serial port as shown in this [Cylon chrome example](https://github.com/hybridgroup/cylon-example-chrome).
-
-Finally it can also be used in combination with [phonegap](http://phonegap.com) to run inside your phone. Check out [Phonegap cylon spark repository](https://github.com/hybridgroup/phonegap-cylon-spark) for a complete example.
-
-For more info on browser support, and for help with different configurations, you can find more info [on our website](http://cylonjs.com/documentation/guides/browser_support).
-
 ## Hardware Support
 
 Cylon.js has an extensible syntax for connecting to multiple, different hardware
@@ -269,7 +236,26 @@ Twitter][Twitter] for updates.
 
 [Twitter]: https://twitter.com/cylonjs
 
+## Browser & Mobile Support
 
+Cylon.js can be run directly in-browser, using the `browserify` NPM module. You can also run it from withing a Chrome connected app, or a PhoneGap mobile app.
+
+For more info on browser support, and for help with different configurations, you can find more info [in our docs](/documentation/guides/browser-support).
+
+## API
+
+Cylon has a built-in API that you can interact with your robots.
+
+All you need to start up the API server is to place the following command in your `.js` file after you require Cylon.
+
+    :::javascript
+    var Cylon = require("cylon");
+    Cylon.api();
+
+Then visit `https://localhost:3000/` and you are ready to control your robots from a web browser!
+<img src="/images/screenshots/robeaux.png" style="margin-top: 15px; width: 100%">
+
+You can check out more information on the Cylon API in the docs [here](http://cylonjs.com/documentation/guides/api).
 
 ## CLI
 
