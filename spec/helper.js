@@ -1,7 +1,6 @@
 'use strict';
 
 process.env.NODE_ENV = 'test';
-global.CYLON_TEST = true;
 
 var path = require('path');
 
