@@ -191,6 +191,7 @@ devices. The following 31 platforms are currently supported:
 - [Joystick](http://en.wikipedia.org/wiki/Joystick) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-joystick)
 - [Keyboard](http://en.wikipedia.org/wiki/Computer_keyboard) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-keyboard)
 - [Leap Motion](https://www.leapmotion.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-leapmotion)
+- [MQTT](http://mqtt.org/) <==> [Adaptor/Drivers](https://github.com/hybridgroup/cylon-mqtt)
 - [Nest](http://nest.com/) <==> [Adaptor/Drivers](https://github.com/hybridgroup/cylon-nest)
 - [Neurosky](http://store.neurosky.com/products/mindwave-mobile) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-neurosky)
 - [OpenCV](http://opencv.org/) <==> [Adaptor/Drivers](https://github.com/hybridgroup/cylon-opencv)
