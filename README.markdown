@@ -175,7 +175,7 @@ cylon.robot({
 ## Hardware Support
 
 Cylon.js has an extensible syntax for connecting to multiple, different hardware
-devices. The following 27 platforms are currently supported:
+devices. The following 31 platforms are currently supported:
 
 - [Ardrone](http://ardrone2.parrot.com/) <==> [Adaptor/Drivers](https://github.com/hybridgroup/cylon-ardrone)
 - [Arduino](http://www.arduino.cc/) <==> [Adaptor](https://github.com/hybridgroup/cylon-firmata)
@@ -183,6 +183,7 @@ devices. The following 27 platforms are currently supported:
 - [AT&T M2X](https://m2x.att.com) <==> [Adaptor/Drivers](https://github.com/hybridgroup/cylon-m2x)
 - [Audio]() <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-audio)
 - [Beaglebone Black](http://beagleboard.org/Products/BeagleBone+Black/) <==> [Adaptor](https://github.com/hybridgroup/cylon-beaglebone)
+- [Bluetooth LE](http://en.wikipedia.org/wiki/Bluetooth_low_energy) <==> [Adaptor/Drivers](https://github.com/hybridgroup/cylon-ble)
 - [Crazyflie](http://www.bitcraze.se/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-crazyflie)
 - [Digispark](http://digistump.com/products/1) <==> [Adaptor](https://github.com/hybridgroup/cylon-digispark)
 - [Intel Edison](http://www.intel.com/content/www/us/en/do-it-yourself/edison.html) <==> [Adaptor](https://github.com/hybridgroup/cylon-intel-iot)
@@ -196,6 +197,7 @@ devices. The following 27 platforms are currently supported:
 - [Phillips Hue](http://www2.meethue.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-hue)
 - [Pebble](http://www.getpebble.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-pebble)
 - [Pinoccio](https://pinocc.io) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-pinoccio)
+- [PowerUp 3.0](http://www.poweruptoys.com/products/powerup-v3) <==> [Driver](https://github.com/hybridgroup/cylon-powerup)
 - [Rapiro](http://www.rapiro.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-rapiro)
 - [Raspberry Pi](http://www.raspberrypi.org/) <==> [Adaptor](https://github.com/hybridgroup/cylon-raspi)
 - [Salesforce](http://www.force.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-force)
@@ -204,6 +206,7 @@ devices. The following 27 platforms are currently supported:
 - [Speech]() <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-speech)
 - [Sphero](http://www.gosphero.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-sphero)
 - [Tessel](https://tessel.io/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-tessel)
+- [WICED Sense](http://www.broadcom.com/products/wiced/sense/) <==> [Driver](https://github.com/hybridgroup/cylon-wiced-sense)
 
 Our implementation of GPIO (General Purpose Input/Output) allows for a shared
 set of drivers supporting a number of devices:
