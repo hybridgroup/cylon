@@ -84,16 +84,16 @@ Cylon.robot({
 var Cylon = require('cylon');
 
 Cylon.robot({
-  connections: [
-    { name: 'digispark', adaptor: 'digispark'},
-    { name: 'leapmotion', adaptor: 'leapmotion' }
-  ],
+  connections: {
+    digispark: { adaptor: 'digispark' },
+    leapmotion: { adaptor: 'leapmotion' }
+  },
 
-  devices: [
-    { name: 'servo1', driver: 'servo', pin: 0, connection: 'digispark' },
-    { name: 'servo2', driver: 'servo', pin: 1, connection: 'digispark' },
-    { name: 'leapmotion', driver: 'leapmotion', connection: 'leapmotion' }
-  ],
+  devices: {
+    servo1: { driver: 'servo', pin: 0, connection: 'digispark' },
+    servo2: { driver: 'servo', pin: 1, connection: 'digispark' },
+    leapmotion: { driver: 'leapmotion', connection: 'leapmotion' }
+  },
 
   work: function(my) {
     my.x = 90;

@@ -233,15 +233,16 @@ describe("Robot", function() {
     });
 
     context("when not passed anything", function() {
-      it("returns immediately", function() {
-        expect(bot.initConnections()).to.be.eql(undefined);
+      it("does not modify the bot's connections", function() {
+        bot.initConnections({});
+        expect(bot.connections).to.be.eql({});
       });
     });
 
     context("when passed a connection object", function() {
       it("instantiates a new connection with the provided object", function() {
         var connection = { name: 'loopback', adaptor: 'loopback' };
-        bot.initConnections(connection);
+        bot.initConnections({ connection: connection });
         expect(bot.connections['loopback']).to.be.instanceOf(Connection);
       });
     });
@@ -249,15 +250,19 @@ describe("Robot", function() {
     context("when passed an array of connection objects", function() {
       it("instantiates a new connection with each of the provided objects", function() {
         var connections = [{ name: 'loopback', adaptor: 'loopback' }]
-        bot.initConnections(connections);
+        bot.initConnections({ connections: connections });
         expect(bot.connections['loopback']).to.be.instanceOf(Connection);
       });
 
-      it("avoids name collisions collisions", function() {
-        bot.initConnections([
-          { name: 'loopback', adaptor: 'loopback' },
-          { name: 'loopback', adaptor: 'loopback' }
-        ]);
+      it("avoids name collisions", function() {
+        var opts = {
+          connections: [
+            { name: 'loopback', adaptor: 'loopback' },
+            { name: 'loopback', adaptor: 'loopback' }
+          ]
+        };
+
+        bot.initConnections(opts);
 
         var keys = Object.keys(bot.connections);
         expect(keys).to.be.eql(["loopback", "loopback-1"]);
@@ -275,36 +280,35 @@ describe("Robot", function() {
     });
 
     context("when not passed anything", function() {
-      it("returns immediately", function() {
-        expect(bot.initDevices()).to.be.eql(undefined);
+      it("does not modify the bot's devices", function() {
+        bot.initDevices({});
+        expect(bot.devices).to.be.eql({});
       });
     });
 
-    context("when passed a connection object", function() {
-      afterEach(function() { bot.devices = {}; });
-
+    context("when passed a devicw object", function() {
       it("instantiates a new device with the provided object", function() {
         var device = { name: 'ping', driver: 'ping' };
-        bot.initDevices(device);
+        bot.initDevices({ device: device });
         expect(bot.devices['ping']).to.be.instanceOf(Device);
       });
     });
 
     context("when passed an array of device objects", function() {
-      afterEach(function() { bot.devices = {}; });
-
       it("instantiates a new device with each of the provided objects", function() {
         var devices = [{ name: 'ping', driver: 'ping' }]
-        bot.initDevices(devices);
+        bot.initDevices({ devices: devices});
 
         expect(bot.devices['ping']).to.be.instanceOf(Device);
       });
 
       it("avoids name collisions collisions", function() {
-        bot.initDevices([
-          { name: 'ping', driver: 'ping' },
-          { name: 'ping', driver: 'ping' }
-        ]);
+        bot.initDevices({
+          devices: [
+            { name: 'ping', driver: 'ping' },
+            { name: 'ping', driver: 'ping' }
+          ]
+        });
 
         var keys = Object.keys(bot.devices);
         expect(keys).to.be.eql(["ping", "ping-1"]);
@@ -353,10 +357,10 @@ describe("Robot", function() {
 
     beforeEach(function() {
       bot = new Robot({
-        connections: [
-          { name: 'alpha', adaptor: 'loopback' },
-          { name: 'bravo', adaptor: 'loopback' }
-        ]
+        connections: {
+          alpha: { adaptor: 'loopback' },
+          bravo: { adaptor: 'loopback' }
+        }
       });
 
       stub(bot.connections.alpha, 'connect').returns(true);
@@ -376,11 +380,11 @@ describe("Robot", function() {
 
     beforeEach(function() {
       bot = new Robot({
-        connection: [{ name: 'loopback', adaptor: 'loopback' }],
-        devices: [
-          { name: 'alpha', driver: 'ping' },
-          { name: 'bravo', driver: 'ping' }
-        ]
+        connection: { name: 'loopback', adaptor: 'loopback' },
+        devices: {
+          alpha: { driver: 'ping' },
+          bravo: { driver: 'ping' }
+        }
       });
 
       stub(bot.devices.alpha, 'start').returns(true);
