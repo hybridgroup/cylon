@@ -1,11 +1,15 @@
 var Cylon = require('../..');
 
 Cylon.robot({
-  connections: [{ name: 'leapmotion', adaptor: 'leapmotion' },
-    { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' }],
+  connections: {
+    arduino: { adaptor: 'firmata', port: '/dev/ttyACM0' }
+    leapmotion: { adaptor: 'leapmotion' },
+  },
 
-  devices: [{ name: 'leapmotion', driver: 'leapmotion', connection: 'leapmotion' },
-    { name: 'led', driver: 'led', pin: 13, connection: 'arduino' }],
+  devices: {
+    led: { driver: 'led', pin: 13, connection: 'arduino' }
+    leapmotion: { driver: 'leapmotion', connection: 'leapmotion' },
+  },
 
   work: function(my) {
     my.leapmotion.on('frame', function(frame) {

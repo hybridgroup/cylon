@@ -12,16 +12,17 @@ Now that we have Cylon imported, we can start defining our robot
 
 Let's define the connections and devices:
 
-    connections: [
-        { name: 'leapmotion', adaptor: 'leapmotion' },
-        { name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1' },
-        { name: 'keyboard', adaptor: 'keyboard' }
-    ],
-    devices: [
-        { name: 'drone', driver: 'ardrone', connection:'ardrone' },
-        { name: 'leapmotion', driver: 'leapmotion', connection:'leapmotion' },
-        { name: 'keyboard', driver: 'keyboard', connection:'keyboard'}
-    ],
+    connections: {
+        leapmotion: { adaptor: 'leapmotion' },
+        ardrone: { adaptor: 'ardrone', port: '192.168.1.1' },
+        keyboard: { adaptor: 'keyboard' }
+    },
+
+    devices: {
+        drone: { driver: 'ardrone', connection:'ardrone' },
+        leapmotion: { driver: 'leapmotion', connection:'leapmotion' },
+        keyboard: { driver: 'keyboard', connection:'keyboard' }
+    },
 
 Now that Cylon knows about the necessary hardware we're going to be using, we'll
 tell it what work we want to do:

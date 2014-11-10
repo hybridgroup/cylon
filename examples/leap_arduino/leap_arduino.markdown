@@ -10,15 +10,15 @@ Now that we have Cylon imported, we can start defining our robot
 
 Let's define the connections and devices:
 
-      connections: [
-        { name: 'leapmotion', adaptor: 'leapmotion' },
-        { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' }
-      ],
+      connections: {
+        leapmotion: { adaptor: 'leapmotion' },
+        arduino: { adaptor: 'firmata', port: '/dev/ttyACM0' }
+      },
 
-      devices: [
-        { name: 'leapmotion', driver: 'leapmotion', connection: 'leapmotion' },
-        { name: 'led', driver: 'led', pin: 13, connection: 'arduino' }
-      ],
+      devices: {
+        leapmotion: { driver: 'leapmotion', connection: 'leapmotion' },
+        led: { driver: 'led', pin: 13, connection: 'arduino' }
+      },
 
 Now that Cylon knows about the necessary hardware we're going to be using, we'll
 tell it what work we want to do:
