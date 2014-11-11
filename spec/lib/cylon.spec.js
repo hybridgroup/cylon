@@ -1,6 +1,7 @@
 "use strict";
 
 var Cylon = source("cylon"),
+    Robot = source("robot"),
     Utils = source('utils');
 
 var API = source('api'),
@@ -164,8 +165,8 @@ describe("Cylon", function() {
     var json, bot1, bot2, echo;
 
     beforeEach(function() {
-      bot1 = {};
-      bot2 = {};
+      bot1 = new Robot();
+      bot2 = new Robot();
 
       Cylon.robots = { 'bot1': bot1, 'bot2': bot2 };
       Cylon.commands.echo = echo = function(arg) { return arg; };
@@ -174,7 +175,7 @@ describe("Cylon", function() {
     });
 
     it("contains all robots the MCP knows about", function() {
-      expect(json.robots).to.be.eql([bot1, bot2]);
+      expect(json.robots).to.be.eql([bot1.toJSON(), bot2.toJSON()]);
     });
 
     it("contains an array of MCP commands", function() {

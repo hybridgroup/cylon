@@ -107,13 +107,12 @@ describe('Basestar', function() {
     beforeEach(function() {
       basestar = new Basestar();
       basestar.connector = new EventEmitter();
-      basestar.connection = new EventEmitter();
     });
 
     it("proxies events between the connector and connection", function() {
       var eventSpy = spy();
 
-      basestar.connection.on('testevent', eventSpy);
+      basestar.on('testevent', eventSpy);
       basestar.defineAdaptorEvent({ eventName: "testevent" });
 
       basestar.connector.emit("testevent", "data");
@@ -124,7 +123,7 @@ describe('Basestar', function() {
       it("uses it as the eventName", function() {
         var eventSpy = spy();
 
-        basestar.connection.on('testevent', eventSpy);
+        basestar.on('testevent', eventSpy);
         basestar.defineAdaptorEvent("testevent");
 
         basestar.connector.emit("testevent", "data");
@@ -138,17 +137,16 @@ describe('Basestar', function() {
 
     beforeEach(function() {
       basestar = new Basestar();
-      basestar.connection = new EventEmitter();
-      basestar.device = new EventEmitter();
+      basestar.adaptor = new EventEmitter();
     });
 
     it("proxies events between the connection and device", function() {
       var eventSpy = spy();
 
-      basestar.device.on('testevent', eventSpy);
+      basestar.on('testevent', eventSpy);
       basestar.defineDriverEvent({ eventName: "testevent" });
 
-      basestar.connection.emit("testevent", "data");
+      basestar.adaptor.emit("testevent", "data");
       assert(eventSpy.calledWith('data'));
     });
 
@@ -156,10 +154,10 @@ describe('Basestar', function() {
       it("uses it as the eventName", function() {
         var eventSpy = spy();
 
-        basestar.device.on('testevent', eventSpy);
+        basestar.on('testevent', eventSpy);
         basestar.defineDriverEvent("testevent");
 
-        basestar.connection.emit("testevent", "data");
+        basestar.adaptor.emit("testevent", "data");
         assert(eventSpy.calledWith('data'));
       });
     });
