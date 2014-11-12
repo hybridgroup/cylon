@@ -7,22 +7,16 @@ var Driver = source("driver"),
     Utils = source('utils');
 
 describe("Driver", function() {
-  var connection, device, driver;
+  var adaptor, device, driver;
 
   beforeEach(function() {
-    connection = {
+    adaptor = {
       adaptor: 'adaptor'
-    };
-
-    device = {
-      connection: connection,
-      emit: spy()
     };
 
     driver = new Driver({
       name: 'driver',
-      device: device,
-      connection: connection
+      adaptor: adaptor,
     });
   });
 
@@ -31,16 +25,8 @@ describe("Driver", function() {
       expect(driver.name).to.be.eql('driver');
     });
 
-    it("sets @device to the provided device", function() {
-      expect(driver.device).to.be.eql(device);
-    });
-
-    it("sets @connection to the provided device's connection", function() {
-      expect(driver.connection).to.be.eql(device.connection);
-    });
-
-    it("sets @connection to the device's connection adaptor", function() {
-      expect(driver.adaptor).to.be.eql(device.connection.adaptor);
+    it("sets @adaptor to the provided adaptor", function() {
+      expect(driver.adaptor).to.be.eql(adaptor);
     });
 
     it("sets @commands to an empty object by default", function() {
@@ -52,9 +38,8 @@ describe("Driver", function() {
 
       driver = new Driver({
         name: 'driver',
-        device: device,
+        adaptor: adaptor,
         interval: 2000,
-        connection: { }
       });
 
       expect(driver.interval).to.be.eql(2000);
