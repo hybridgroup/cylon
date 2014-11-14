@@ -137,7 +137,7 @@ describe('Basestar', function() {
 
     beforeEach(function() {
       basestar = new Basestar();
-      basestar.adaptor = new EventEmitter();
+      basestar.connection = new EventEmitter();
     });
 
     it("proxies events between the connection and device", function() {
