@@ -146,7 +146,7 @@ describe('Basestar', function() {
       basestar.on('testevent', eventSpy);
       basestar.defineDriverEvent({ eventName: "testevent" });
 
-      basestar.adaptor.emit("testevent", "data");
+      basestar.connection.emit("testevent", "data");
       assert(eventSpy.calledWith('data'));
     });
 
@@ -157,7 +157,7 @@ describe('Basestar', function() {
         basestar.on('testevent', eventSpy);
         basestar.defineDriverEvent("testevent");
 
-        basestar.adaptor.emit("testevent", "data");
+        basestar.connection.emit("testevent", "data");
         assert(eventSpy.calledWith('data'));
       });
     });
