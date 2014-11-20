@@ -225,6 +225,32 @@ describe("Robot", function() {
     });
   });
 
+  describe("#connection", function() {
+    var opts, bot;
+
+    beforeEach(function() {
+      bot = new Robot();
+      opts = { name: 'loopback', adaptor: 'loopback' };
+    });
+
+    it("creates and adds a new Connection", function() {
+      expect(bot.connections.loopback).to.be.eql(undefined);
+      bot.connection(opts);
+      expect(bot.connections.loopback).to.be.an.instanceOf(Adaptor);
+    })
+
+    it("sets @robot on the Connection to be the Robot initializing it", function() {
+      bot.connection(opts);
+      expect(bot.connections.loopback.robot).to.be.eql(bot);
+    })
+
+    it("avoids name collisions", function() {
+      bot.connection(opts);
+      bot.connection(opts);
+      expect(Object.keys(bot.connections)).to.be.eql(['loopback', 'loopback-1']);
+    });
+  });
+
   describe("initConnections", function() {
     var bot;
 
@@ -267,6 +293,32 @@ describe("Robot", function() {
         var keys = Object.keys(bot.connections);
         expect(keys).to.be.eql(["loopback", "loopback-1"]);
       });
+    });
+  });
+
+  describe("#device", function() {
+    var opts, bot;
+
+    beforeEach(function() {
+      bot = new Robot();
+      opts = { name: 'ping', driver: 'ping' };
+    });
+
+    it("creates and adds a new Device", function() {
+      expect(bot.devices.ping).to.be.eql(undefined);
+      bot.device(opts);
+      expect(bot.devices.ping).to.be.an.instanceOf(Driver);
+    })
+
+    it("sets @robot on the Device to be the Robot initializing it", function() {
+      bot.device(opts);
+      expect(bot.devices.ping.robot).to.be.eql(bot);
+    })
+
+    it("avoids name collisions", function() {
+      bot.device(opts);
+      bot.device(opts);
+      expect(Object.keys(bot.devices)).to.be.eql(['ping', 'ping-1']);
     });
   });
 
