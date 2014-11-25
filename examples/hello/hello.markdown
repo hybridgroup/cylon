@@ -11,17 +11,21 @@ Let's start by importing Cylon:
 Now we can define our robot:
 
     Cylon.robot({
+      name: 'test',
+
+      connection: { name: 'loopback', adaptor: 'loopback' },
+      device: { name: 'ping', driver: 'ping' },
 
 For work, it's going to print a message to the console every second, and another
-message after ten seconds have elapsed.
+message after five seconds have elapsed.
 
-      work: function() {
-        every((1).second(), function() {
+      work: function(my) {
+        every((1).seconds(), function(){
           console.log("Hello, human!")
+          console.log(my.ping.ping());
         });
 
-        // This will happen only one time at the 5th second
-        after((5).seconds(), function() {
+        after((5).seconds(), function(){
           console.log("I've been at your command for 5 seconds now.")
         });
       }

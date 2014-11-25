@@ -1,18 +1,10 @@
 var Cylon = require('../..');
 
 Cylon.robot({
-  connection: {
-    name: 'digispark',
-    adaptor: 'digispark'
-  },
-  device: {
-    name: 'led',
-    driver: 'led',
-    pin: 1
-  },
+  connection: { name: 'digispark', adaptor: 'digispark' },
+  device: { name: 'led', driver: 'led', pin: 1 },
+
   work: function(my) {
-    return every(1..second(), function() {
-      return my.led.toggle();
-    });
+    every((1).second(), my.led.toggle);
   }
 }).start();

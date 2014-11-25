@@ -20,7 +20,9 @@ When we tell this robot to work, it's going to listen to the 'a' key on the
 keyboard and let us know when it's been pressed.
 
       work: function(my) {
-        my.keyboard.on('a', function(key) { console.log("A PRESSED!") });
+        my.keyboard.on('a', function(key) {
+          console.log("a pressed!")
+        });
       }
 
 With that done, let's get started!

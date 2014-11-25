@@ -4,6 +4,7 @@ Cylon.api();
 
 Cylon.robot({
   name: 'test',
+
   connection: { name: 'loopback', adaptor: 'loopback' },
   device: { name: 'ping', driver: 'ping' },
 

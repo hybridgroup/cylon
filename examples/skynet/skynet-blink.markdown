@@ -12,6 +12,7 @@ Let's define the connections and devices:
 
       connections: {
         arduino: { adaptor: 'firmata', port: '/dev/ttyACM0' },
+
         skynet: {
           adaptor: 'skynet',
           uuid: "96630051-a3dc-11e3-8442-5bf31d98c912",
@@ -25,16 +26,17 @@ Now that Cylon knows about the necessary hardware we're going to be using, we'll
 tell it what work we want to do:
 
       work: function(my) {
-        console.log("Skynet is listening...");
+        console.log("Skynet is listening");
 
         my.skynet.on('message', function(data) {
+          data = JSON.parse(data);
+
           console.log(data);
-          var data = JSON.parse(data);
-          if(data.message.red == 'on') {
-            my.led13.turnOn()
-          }
-          else if(data.message.red == 'off') {
-            my.led13.turnOff()
+
+          if (data.message.red === 'on') {
+            my.led13.turnOn();
+          } else {
+            my.led13.turnOff();
           }
         });
       }

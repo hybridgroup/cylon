@@ -7,50 +7,39 @@ First, let's import Cylon:
 Next up, we'll configure the API Cylon will serve, telling it to serve on port
 `8080`.
 
-    Cylon.config({
-      api: { host: '0.0.0.0', port: '8080' }
-    });
+    Cylon.api({ host: '0.0.0.0', port: '8080' });
 
-    Cylon.api();
-
-We'll also setup a convenince function for some binding we'll need to do later:
-
-    var bind = function(fn, me) {
-      return function() { return fn.apply(me, arguments); };
-    };
 
 Now that we have Cylon imported, we can start defining our Pebble robot:
 
-    var PebbleRobot = (function() {
+    Cylon.robot({
+      name: 'pebble',
 
 Let's define the connections and devices:
 
-      PebbleRobot.prototype.connection = { name: 'pebble', adaptor: 'pebble' };
-      PebbleRobot.prototype.device = { name: 'pebble', driver: 'pebble' };
-
-      PebbleRobot.prototype.message = function(robot, msg) {
-        robot.message_queue().push(msg);
-      };
+      connection: { name: 'pebble', adaptor: 'pebble' },
+      device: { name: 'pebble', driver: 'pebble' },
 
 Now that Cylon knows about the necessary hardware we're going to be using, we'll
 tell it what work we want to do:
 
-      PebbleRobot.prototype.work = function(me) {
-        me.pebble.on('connect', function() { console.log("Connected!"); });
-      };
+      message: function(msg) {
+        this.message_queue().push(msg);
+      },
 
-      return PebbleRobot;
-
-    })();
+      work: function(my) {
+        console.log('Pebble connected');
+      }
+    });
 
 Next, let's define our SalesForce robot:
 
-    var SalesforceRobot = (function() {
-      function SalesforceRobot() {}
+    Cylon.robot({
+      name: 'salesforce',
 
 Let's define the connections and devices:
 
-      SalesforceRobot.prototype.connection = {
+      connection: {
         name: 'sfcon',
         adaptor: 'force',
         sfuser: process.env.SF_USERNAME,
@@ -60,132 +49,45 @@ Let's define the connections and devices:
           clientSecret: process.env.SF_CLIENT_SECRET,
           redirectUri: 'http://localhost:3000/oauth/_callback'
         }
-      };
+      },
 
-      SalesforceRobot.prototype.device = { name: 'salesforce', driver: 'force' };
-
-      SalesforceRobot.prototype.spheroReport = {};
+      device: { name: 'salesforce', driver: 'force' },
 
 Tell it what work we want to do:
 
-      SalesforceRobot.prototype.work = function(me) {
-        me.salesforce.on('start', function() {
-          me.salesforce.subscribe('/topic/SpheroMsgOutbound', function(data) {
-            var bucks, key, msg, name, toPebble, val, _ref;
+      spheroReport: {},
 
-            name = data.sobject.Sphero_Name__c;
-            bucks = data.sobject.Bucks__c;
+      work: function(my) {
+        my.salesforce.on('start', function() {
+          my.salesforce.subscribe('/topic/SpheroMsgOutbound', function(data) {
+            var toPebble = "",
+                name = data.sobject.Sphero_Name__c,
+                bucks = data.sobject.Bucks__c;
 
-            msg = "Sphero: " + name + ",";
+            var msg = "Sphero: " + name + ",";
             msg += "data Bucks: " + bucks + ",";
             msg += "SM_Id: " + data.sobject.Id;
 
             console.log(msg);
 
-            var spheroBot = Cylon.robots[name];
-            spheroBot.react(spheroBot.devices.sphero);
+            var sphero = Cylon.robots[name];
+            sphero.react();
 
-            me.spheroReport[name] = bucks;
-            toPebble = "";
+            my.spheroReport[name] = bucks;
 
-            _ref = me.spheroReport;
-
-            for (key in _ref) {
-              val = _ref[key];
-              toPebble += "" + key + ": $" + val + "\n";
+            for (var key in my.spheroReport) {
+              var val = my.spheroReport[key];
+              toPebble += key + ": $" + val + "\n";
             }
 
-            var pebbleBot = Cylon.robots['pebble'];
-            pebbleBot.message(pebbleBot.devices.pebble, toPebble);
+            var pebble = Cylon.robots.pebble;
+            pebble.message(toPebble);
           });
         });
-      };
+      }
+    });
 
-      return SalesforceRobot;
-
-    })();
-
-Now, Let's define our Sphero robot
-
-    var SpheroRobot = (function() {
-      function SpheroRobot() {}
-
-      SpheroRobot.prototype.totalBucks = 1;
-
-      SpheroRobot.prototype.payingPower = true;
-
-      SpheroRobot.prototype.connection = { name: 'sphero', adaptor: 'sphero' };
-      SpheroRobot.prototype.device = { name: 'sphero', driver: 'sphero' };
-
-      SpheroRobot.prototype.react = function(device) {
-        device.setRGB(0x00FF00);
-        device.roll(90, Math.floor(Math.random() * 360));
-        this.payingPower = true;
-      };
-
-      SpheroRobot.prototype.bankrupt = function() {
-        var _this = this;
-        every(3..seconds(), function() {
-          if (_this.payingPower && _this.totalBucks > 0) {
-            _this.totalBucks += -1;
-            if (_this.totalBucks === 0) {
-              _this.sphero.setRGB(0xFF000);
-              _this.sphero.stop();
-            }
-          }
-        });
-      };
-
-      SpheroRobot.prototype.changeDirection = function() {
-        var _this = this;
-        every((1).seconds(), function() {
-          if (_this.payingPower) {
-            _this.sphero.roll(90, Math.floor(Math.random() * 360));
-          }
-        });
-      };
-
-Tell it what work we want to do:
-
-      SpheroRobot.prototype.work = function(me) {
-        me.sphero.on('connect', function() {
-          console.log('Setting up Collision Detection...');
-          me.sphero.detectCollisions();
-          me.sphero.stop();
-          me.sphero.setRGB(0x00FF00);
-          me.sphero.roll(90, Math.floor(Math.random() * 360));
-          me.bankrupt();
-          me.changeDirection();
-        });
-
-        me.sphero.on('collision', function(data) {
-          me.sphero.setRGB(0x0000FF);
-          me.sphero.stop();
-          me.payingPower = false;
-
-          data = JSON.stringify({
-            spheroName: "" + me.name,
-            bucks: "" + (me.totalBucks++)
-          });
-
-          var sf = Cylon.robots['salesforce'];
-          sf.devices.salesforce.push("SpheroController", "POST", data);
-        });
-      };
-
-      return SpheroRobot;
-
-    })();
-
-Now that we've defined all of our bots, let's tell Cylon about them:
-
-    var salesforceRobot = new SalesforceRobot();
-    salesforceRobot.name = "salesforce";
-    Cylon.robot(salesforceRobot);
-
-    var pebbleRobot = new PebbleRobot();
-    pebbleRobot.name = "pebble";
-    Cylon.robot(pebbleRobot);
+Now, Let's define our Sphero robots:
 
     var bots = [
       { port: '/dev/tty.Sphero-ROY-AMP-SPP', name: 'ROY' },
@@ -193,17 +95,82 @@ Now that we've defined all of our bots, let's tell Cylon about them:
       { port: '/dev/tty.Sphero-RRY-AMP-SPP', name: 'RRY' }
     ];
 
-    for (var i = 0; i < bots.length; i++) {
-      var bot = bots[i];
-      var robot = new SpheroRobot;
+    bots.forEach(function(bot) {
+      Cylon.robot({
+        name: bot.name,
 
-      robot.connection.port = bot.port;
-      robot.name = bot.name;
+        connection: { name: 'sphero', adaptor: 'sphero', port: bot.port },
+        device: { name: 'sphero', driver: 'sphero' },
 
-      Cylon.robot(robot);
-    }
+        totalBucks: 1,
+        payingPower: true,
 
-Now that Cylon knows about all our robots, and what they'll be doing, we can
-start:
+
+Tell them what work we want to do:
+
+        react: function() {
+          this.sphero.setRGB(0x00FF00);
+          this.sphero.roll(90, Math.floor(Math.random() * 360));
+
+          this.payingPower = true;
+        },
+
+        bankrupt: function() {
+          var my = this;
+
+          every((3).seconds(), function() {
+            if (my.payingPower && my.totalBucks > 0) {
+              my.totalBucks += -1;
+
+              if (my.totalBucks === 0) {
+                my.sphero.setRGB(0xFF000);
+                my.sphero.stop();
+              }
+            }
+          });
+        },
+
+        changeDirection: function() {
+          var my = this;
+
+          every((1).seconds(), function() {
+            if (my.payingPower) {
+              my.sphero.roll(90, Math.floor(Math.random() * 360));
+            }
+          });
+        },
+
+        work: function(my) {
+          console.log("Setting up collision detection for " + my.name);
+
+          my.sphero.detectCollisions();
+
+          my.sphero.stop();
+
+          my.sphero.setRGB(0x00FF00);
+
+          my.sphero.roll(90, Math.floor(Math.random() * 360));
+
+          my.bankrupt();
+          my.changeDirection();
+
+          my.sphero.on('collision', function() {
+            my.sphero.setRGB(0x0000FF);
+            my.sphero.stop();
+            my.payingPower = false;
+
+            var data = JSON.stringify({
+              spheroName: my.name,
+              bucks: "" + (my.totalBucks++)
+            });
+
+            var sf = Cylon.robots['salesforce'];
+            sf.devices.salesforce.push("SpheroController", "POST", data);
+          });
+        }
+      });
+    });
+
+Now that Cylon knows about all our robots, and what they'll be doing, we can start:
 
     Cylon.start();

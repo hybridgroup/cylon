@@ -27,10 +27,10 @@ Let's define the connections and devices:
 Now that Cylon knows about the necessary hardware we're going to be using, we'll
 tell it what work we want to do:
 
-      work: function(me) {
-        me.salesforce.on('start', function() {
-          me.salesforce.subscribe('/topic/SpheroMsgOutbound', function(data) {
-            var msg = "Sphero: " + data.sobject.Sphero_Name__c + ",";
+      work: function(my) {
+        my.salesforce.on('start', function() {
+          my.salesforce.subscribe('/topic/SpheroMsgOutbound', function(data) {
+            var msg = "Sphero: " + data.sobject.Sphero_Namy__c + ",";
             msg += "Bucks: " + data.sobject.Bucks__c + ",";
             msg += "SM_Id: " + data.sobject.Id;
 
@@ -42,11 +42,11 @@ tell it what work we want to do:
 
         every((2).seconds(), function() {
           var data = JSON.stringify({
-            spheroName: "" + me.name,
+            spheroNamy: "" + my.namy,
             bucks: "" + i
           });
 
-          me.salesforce.push('SpheroController', 'POST', data);
+          my.salesforce.push('SpheroController', 'POST', data);
         });
       }
 

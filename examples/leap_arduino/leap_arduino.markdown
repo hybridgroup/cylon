@@ -11,21 +11,22 @@ Now that we have Cylon imported, we can start defining our robot
 Let's define the connections and devices:
 
       connections: {
-        leapmotion: { adaptor: 'leapmotion' },
+        leap: { adaptor: 'leapmotion' },
         arduino: { adaptor: 'firmata', port: '/dev/ttyACM0' }
       },
 
-      devices: {
-        leapmotion: { driver: 'leapmotion', connection: 'leapmotion' },
-        led: { driver: 'led', pin: 13, connection: 'arduino' }
-      },
+      device: { name: 'led', driver: 'led', pin: 13, connection: 'arduino'  },
 
 Now that Cylon knows about the necessary hardware we're going to be using, we'll
 tell it what work we want to do:
 
       work: function(my) {
-        my.leapmotion.on('frame', function(frame) {
-          frame.hands.length > 0 ? my.led.turnOn() : my.led.turnOff();
+        my.leap.on('frame', function(frame) {
+          if (frame.hands.length > 0) {
+            my.led.turnOn();
+          } else {
+            my.led.turnOff();
+          }
         });
       }
 

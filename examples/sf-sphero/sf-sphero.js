@@ -1,13 +1,9 @@
-var __bind = function(fn, me) {
-  return function() { return fn.apply(me, arguments); };
-};
-
 var Cylon = require('../..');
 
-var SalesforceRobot = (function() {
-  function SalesforceRobot() {}
+Cylon.robot({
+  name: 'salesforce',
 
-  SalesforceRobot.prototype.connection = {
+  connection: {
     name: 'sfcon',
     adaptor: 'force',
     sfuser: process.env.SF_USERNAME,
@@ -17,74 +13,58 @@ var SalesforceRobot = (function() {
       clientSecret: process.env.SF_CLIENT_SECRET,
       redirectUri: 'http://localhost:3000/oauth/_callback'
     }
-  };
+  },
 
-  SalesforceRobot.prototype.device = { name: 'salesforce', driver: 'force' };
+  device: { name: 'salesforce', driver: 'force' },
 
-  SalesforceRobot.prototype.work = function(me) {
-    me.salesforce.on('start', function() {
-      me.salesforce.subscribe('/topic/SpheroMsgOutbound', function(data) {
-        var msg;
-        msg = "Sphero: " + data.sobject.Sphero_Name__c + ",";
-        msg += "Bucks: " + data.sobject.Bucks__c + ",";
-        msg += "SM_Id: " + data.sobject.Id;
+  work: function(my) {
+    my.salesforce.on('start', function() {
+      my.salesforce.subscribe('/topic/SpheroMsgOutbound', function(data) {
+        var msg = "Sphero: " + data.sobject.Sphero_Name__c + ",";
+            msg += "Bucks: " + data.sobject.Bucks__c + ",";
+            msg += "SM_Id: " + data.sobject.Id;
+
         console.log(msg);
-        var spheroBot = Cylon.robots[data.sobject.Sphero_Name__c];
-        spheroBot.react(spheroBot.devices.sphero);
+
+        var sphero = Cylon.robots[data.sobject.Sphero_Name__c];
+        sphero.react();
       });
     });
-  };
-
-  return SalesforceRobot;
-
-})();
-
-var SpheroRobot = (function() {
-  function SpheroRobot() {
-    this.react = __bind(this.react, this);
   }
+});
 
-  SpheroRobot.prototype.totalBucks = 0;
+Cylon.robot({
+  name: 'ROY',
+  connection: { name: 'sphero', adaptor: 'sphero' },
+  device: { name: 'sphero', driver: 'sphero' },
 
-  SpheroRobot.prototype.connection = { name: 'sphero', adaptor: 'sphero' };
-  SpheroRobot.prototype.device = { name: 'sphero', driver: 'sphero' };
+  react: function() {
+    this.sphero.setRGB(0x00FF00);
+    this.sphero.roll(90, Math.floor(Math.random() * 360));
+  },
 
-  SpheroRobot.prototype.react = function(robot) {
-    robot.setRGB(0x00FF00);
-    robot.roll(90, Math.floor(Math.random() * 360));
-  };
+  work: function(my) {
+    console.log('Setting up collision detection.');
+    my.sphero.detectCollisions();
 
-  SpheroRobot.prototype.work = function(me) {
-    me.sphero.on('connect', function() {
-      console.log('Setting up Collision Detection...');
-      me.sphero.detectCollisions();
-      me.sphero.stop();
-      me.sphero.setRGB(0x00FF00);
-      me.sphero.roll(90, Math.floor(Math.random() * 360));
-    });
-    me.sphero.on('collision', function(data) {
-      me.sphero.setRGB(0x0000FF, me);
-      me.sphero.stop();
-      data = JSON.stringify({
-        spheroName: "" + me.name,
-        bucks: "" + (me.totalBucks++)
+    my.sphero.stop();
+    my.sphero.setRGB(0x00FF00);
+
+    my.sphero.roll(90, Math.floor(Math.random() * 360));
+
+    my.sphero.on('collision', function() {
+      my.sphero.setRGB(0x0000FF, my);
+      my.sphero.stop();
+
+      var data = JSON.stringify({
+        spheroName: my.name,
+        bucks: "" + (my.totalBucks++)
       });
-      var sf = Cylon.robots['salesforce'];
+
+      var sf = Cylon.robots.salesforce;
       sf.devices.salesforce.push('SpheroController', 'POST', data);
     });
-  };
-
-  return SpheroRobot;
-
-})();
-
-var sfRobot = new SalesforceRobot();
-sfRobot.name = "salesforce";
-Cylon.robot(sfRobot);
-
-var spheroRobot = new SpheroRobot();
-spheroRobot.name = 'ROY';
-spheroRobot.connection.port = '/dev/rfcomm0';
-Cylon.robot(spheroRobot);
+  }
+});
 
 Cylon.start();

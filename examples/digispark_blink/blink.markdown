@@ -11,7 +11,6 @@ Now that we have Cylon imported, we can start defining our robot
 Let's define the connections and devices:
 
       connection: { name: 'digispark', adaptor: 'digispark' },
-
       device: { name: 'led', driver: 'led', pin: 1 },
 
 Now that Cylon knows about the necessary hardware we're going to be using, we'll
