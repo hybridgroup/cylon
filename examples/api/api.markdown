@@ -13,11 +13,10 @@ First, let's import Cylon:
 Next up, we'll configure the API Cylon will serve, telling it to serve on port
 `8080`.
 
-    Cylon.config({
-      api: { host: '0.0.0.0', port: '8080' }
+    Cylon.api({
+      host: '0.0.0.0',
+      port: '8080'
     });
-
-    Cylon.api();
 
 Since we're making two very similar robots (Spheros, in this case), let's put
 the different parts of each robot in objects so we can initialize them later.

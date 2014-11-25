@@ -25,17 +25,17 @@ Now that Cylon knows about the necessary hardware we're going to be using, we'll
 tell it what work we want to do:
 
       work: function(my) {
-        my['x'] = 90;
-        my['z'] = 90;
+        my.x = 90;
+        my.z = 90;
 
         my.leapmotion.on('hand', function(hand) {
-          my['x'] = hand.palmX.fromScale(-300, 300).toScale(30, 150);
-          my['z'] = hand.palmZ.fromScale(-300, 300).toScale(30, 150);
+          my.x = hand.palmX.fromScale(-300, 300).toScale(30, 150);
+          my.z = hand.palmZ.fromScale(-300, 300).toScale(30, 150);
         });
 
         every(100, function() {
-          my.servo1.angle(my['x']);
-          my.servo2.angle(my['z']);
+          my.servo1.angle(my.x);
+          my.servo2.angle(my.z);
 
           console.log("Current Angle: " + my.servo1.currentAngle() + ", " + my.servo2.currentAngle());
         });

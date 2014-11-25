@@ -1,20 +1,28 @@
-var Cylon = require('..'),
-    arduino1, arduino2;
+var Cylon = require('../..');
 
-Arduino = (function(){
-  function Arduino(){}
+var arduinos = [
+  {
+    name: "arduino0",
+    port: "/dev/ttyACM0",
+    devices: {
+      led00: { driver: 'led', pin: 13 }
+    }
+  },
 
-  Arduino.prototype.connection = { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' };
-
-  Arduino.prototype.work = function(my) {
-    console.log("Name =====>");
-    console.log(my.name);
+  {
+    name: "arduin01",
+    port: "/dev/ttyACM1",
+    devices: {
+      led10: { driver: 'led', pin: 11 }
+      led11: { driver: 'led', pin: 12 }
+      led12: { driver: 'led', pin: 13 }
+    }
   }
+];
 
-  return Arduino;
-})();
+Cylon.robot({
+  name: "SkynetBot",
 
-skynet = {
   connection: {
     name: 'skynet',
     adaptor: 'skynet',
@@ -22,44 +30,42 @@ skynet = {
     token: "2s67o7ek98pycik98f43reqr90t6s9k9"
   },
 
-  work: function(my) {
-    console.log("Skynet is listening...");
+  handler: function(data) {
+    if (data.payload == null) {
+      return;
+    }
 
-    my.skynet.on('message', function(data) {
-      console.log(data);
-      if (data.payload != null){
-        var robot,
-            bot,
-            robots = data.payload.robots;
-        for(var index in robots){
-          robot = robots[index];
-          console.log(robot);
+    console.log("Data: ", data);
+
+    for (var i in data.payload.robots) {
+      var robot = data.payload.robots[i],
           bot = Cylon.robots[robot.name];
-          if (robot.cmd == 'on')
-            bot.devices[robot.device].turnOn();
-          else
-            bot.devices[robot.device].turnOff();
-        }
+
+      if (robot.cmd === 'on') {
+        bot.devices[robot.device].turnOn();
+      } else {
+        bot.devices[robot.device].turnOff();
       }
-    });
+    }
+  },
+
+  work: function(my) {
+    my.skynet.on('message', my.handler)
+    console.log("Skynet is listening");
   }
-}
-Cylon.robot(skynet);
+});
 
-arduino0 = new Arduino();
-console.log(arduino0);
-arduino0.name = 'arduino0';
-arduino0.device = {name: 'led00', driver: 'led', pin: 13};
-Cylon.robot(arduino0);
+arduinos.forEach(function(bot) {
+  Cylon.robot({
+    name: bot.name,
 
-arduino1 = new Arduino();
-arduino1.name = 'arduino1'
-arduino1.connection.port = '/dev/ttyACM1';
-arduino1.devices = [
-  {name: 'led10', driver: 'led', pin: 11},
-  {name: 'led11', driver: 'led', pin: 12},
-  {name: 'led12', driver: 'led', pin: 13}
-];
-Cylon.robot(arduino1);
+    connection: { name: 'arduino', adaptor: 'firmata', port: bot.port },
+    devices: bot.devices,
+
+    work: function(my) {
+      console.log(my.name + " is online");
+    }
+  });
+});
 
 Cylon.start();
