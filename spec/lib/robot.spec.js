@@ -73,7 +73,9 @@ describe("Robot", function() {
         var fn = function() {
           return new Robot({
             name: 'BrokenBot',
-            device: { name: 'ping', driver: 'ping' }
+            devices: {
+              ping: { driver: 'ping' }
+            }
           });
         };
 
@@ -198,8 +200,13 @@ describe("Robot", function() {
 
   describe("#toJSON", function() {
     var bot = new Robot({
-      connection: { name: 'loopback', adaptor: 'loopback' },
-      device: { name: 'ping', driver: 'ping' }
+      connections: {
+        loopback: { adaptor: 'loopback' }
+      },
+
+      devices: {
+        ping: { driver: 'ping' }
+      }
     });
 
     var json = bot.toJSON();
@@ -327,7 +334,9 @@ describe("Robot", function() {
 
     beforeEach(function() {
       bot = new Robot({
-        connection: { name: 'loopback', adaptor: 'loopback' }
+        connections: {
+          loopback: { adaptor: 'loopback' }
+        }
       });
     });
 
@@ -432,7 +441,10 @@ describe("Robot", function() {
 
     beforeEach(function() {
       bot = new Robot({
-        connection: { name: 'loopback', adaptor: 'loopback' },
+        connections: {
+          loopback: { adaptor: 'loopback' }
+        },
+
         devices: {
           alpha: { driver: 'ping' },
           bravo: { driver: 'ping' }
@@ -456,8 +468,13 @@ describe("Robot", function() {
 
     beforeEach(function() {
       bot = new Robot({
-        device: { name: 'ping', driver: 'ping' },
-        connection: { name: 'loopback', adaptor: 'loopback' }
+        devices: {
+          ping: { driver: 'ping' }
+        },
+
+        connections: {
+          loopback: { adaptor: 'loopback' }
+        }
       });
 
       device = bot.devices.ping;
