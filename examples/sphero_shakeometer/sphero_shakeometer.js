@@ -1,8 +1,13 @@
 var Cylon = require('cylon');
 
 Cylon.robot({
-  connection: { name: 'sphero', adaptor: 'sphero', port: '/dev/tty.Sphero-YBW-RN-SPP' },
-  device: { name: 'sphero', driver: 'sphero' },
+  connections: {
+    sphero: { adaptor: 'sphero', port: '/dev/tty.Sphero-YBW-RN-SPP' }
+  },
+
+  devices: {
+    sphero: { driver: 'sphero' }
+  },
 
   work: function(my) {
     var max = 0;

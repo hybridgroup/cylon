@@ -21,7 +21,9 @@ bots.forEach(function(bot) {
       skynet: { adaptor: "skynet", uuid: bot.uuid, token: bot.port }
     },
 
-    device: { name: "led13", driver: "led", pin: 13, connection: "arduino" },
+    devices: {
+      led13: { driver: "led", pin: 13, connection: "arduino" }
+    },
 
     work: function(my) {
       my.skynet.on('message', function(data) {

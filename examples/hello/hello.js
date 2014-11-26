@@ -5,8 +5,13 @@ Cylon.api();
 Cylon.robot({
   name: 'test',
 
-  connection: { name: 'loopback', adaptor: 'loopback' },
-  device: { name: 'ping', driver: 'ping' },
+  connections: {
+    loopback: { adaptor: 'loopback' }
+  },
+
+  devices: {
+    ping: { driver: 'ping' }
+  },
 
   work: function(my) {
     every((1).seconds(), function(){

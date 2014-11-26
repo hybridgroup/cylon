@@ -6,7 +6,9 @@ Cylon.robot({
     arduino: { adaptor: 'firmata', port: '/dev/ttyACM0' }
   },
 
-  devices: { name: 'led', driver: 'led', pin: 13, connection: 'arduino' },
+  devices: {
+    led: { driver: 'led', pin: 13, connection: 'arduino' }
+  },
 
   work: function(my) {
     my.leapmotion.on('frame', function(frame) {

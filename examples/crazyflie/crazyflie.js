@@ -1,8 +1,13 @@
 var Cylon = require('../..');
 
 Cylon.robot({
-  connection: { name: 'crazyflie', adaptor: 'crazyflie', port: "radio://1/10/250KPS" },
-  device: { name: 'drone', driver: 'crazyflie' },
+  connections: {
+    crazyflie: { adaptor: 'crazyflie', port: "radio://1/10/250KPS" }
+  },
+
+  devices: {
+    drone: { driver: 'crazyflie' }
+  }
 
   work: function(my) {
     my.drone.on('start', function() {

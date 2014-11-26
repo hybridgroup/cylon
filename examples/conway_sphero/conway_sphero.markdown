@@ -59,8 +59,13 @@ device (you guessed it, a Sphero).
       Cylon.robot({
         name: name,
 
-        connection: { name: 'sphero', adaptor: 'sphero', port: port },
-        device: { name: 'sphero', driver: 'sphero' },
+        connections: {
+          sphero: { adaptor: 'sphero', port: port }
+        },
+
+        devices: {
+          sphero: { driver: 'sphero' }
+        },
 
 Now that the pieces are there, we can set up our robot's work. It starts by
 being "born", then moves every three seconds if it's alive, celebrates it's

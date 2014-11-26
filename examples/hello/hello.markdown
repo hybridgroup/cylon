@@ -13,8 +13,13 @@ Now we can define our robot:
     Cylon.robot({
       name: 'test',
 
-      connection: { name: 'loopback', adaptor: 'loopback' },
-      device: { name: 'ping', driver: 'ping' },
+      connections: {
+        loopback: { adaptor: 'loopback' }
+      },
+
+      devices: {
+        ping: { driver: 'ping' }
+      },
 
 For work, it's going to print a message to the console every second, and another
 message after five seconds have elapsed.

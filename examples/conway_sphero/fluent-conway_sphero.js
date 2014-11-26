@@ -15,8 +15,8 @@ Object.keys(bots).forEach(function(name) {
 
   var robot = Cylon.robot({ name: name, });
 
-  robot.connection({ name: 'sphero', adaptor: 'sphero', port: port });
-  robot.device({ name: 'sphero', driver: 'sphero' });
+  robot.connection('sphero', { adaptor: 'sphero', port: port });
+  robot.device('sphero', { driver: 'sphero' });
 
   robot.move = function() {
     robot.sphero.roll(60, Math.floor(Math.random() * 360));

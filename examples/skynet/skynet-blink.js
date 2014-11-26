@@ -11,7 +11,9 @@ Cylon.robot({
     }
   },
 
-  device: { name: 'led13', driver: 'led', pin: 13, connection: 'arduino' },
+  devices: {
+    led13: { driver: 'led', pin: 13, connection: 'arduino' }
+  },
 
   work: function(my) {
     console.log("Skynet is listening");

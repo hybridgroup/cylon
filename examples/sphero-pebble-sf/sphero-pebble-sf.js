@@ -5,8 +5,13 @@ Cylon.api({ host: '0.0.0.0', port: '8080' });
 Cylon.robot({
   name: 'pebble',
 
-  connection: { name: 'pebble', adaptor: 'pebble' },
-  device: { name: 'pebble', driver: 'pebble' },
+  connections: {
+    pebble: { adaptor: 'pebble' }
+  },
+
+  devices: {
+    pebble: { driver: 'pebble' }
+  },
 
   message: function(msg) {
     this.message_queue().push(msg);
@@ -20,19 +25,22 @@ Cylon.robot({
 Cylon.robot({
   name: 'salesforce',
 
-  connection: {
-    name: 'sfcon',
-    adaptor: 'force',
-    sfuser: process.env.SF_USERNAME,
-    sfpass: process.env.SF_SECURITY_TOKEN,
-    orgCreds: {
-      clientId: process.env.SF_CLIENT_ID,
-      clientSecret: process.env.SF_CLIENT_SECRET,
-      redirectUri: 'http://localhost:3000/oauth/_callback'
+  connections: {
+    sfcon: {
+      adaptor: 'force',
+      sfuser: process.env.SF_USERNAME,
+      sfpass: process.env.SF_SECURITY_TOKEN,
+      orgCreds: {
+        clientId: process.env.SF_CLIENT_ID,
+        clientSecret: process.env.SF_CLIENT_SECRET,
+        redirectUri: 'http://localhost:3000/oauth/_callback'
+      }
     }
   },
 
-  device: { name: 'salesforce', driver: 'force' },
+  devices: {
+    salesforce: { driver: 'force' }
+  },
 
   spheroReport: {},
 
@@ -76,8 +84,13 @@ bots.forEach(function(bot) {
   Cylon.robot({
     name: bot.name,
 
-    connection: { name: 'sphero', adaptor: 'sphero', port: bot.port },
-    device: { name: 'sphero', driver: 'sphero' },
+    connections: {
+      sphero: { adaptor: 'sphero', port: bot.port }
+    },
+
+    devices: {
+      sphero: { driver: 'sphero' }
+    },
 
     totalBucks: 1,
     payingPower: true,

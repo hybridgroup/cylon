@@ -23,11 +23,12 @@ var arduinos = [
 Cylon.robot({
   name: "SkynetBot",
 
-  connection: {
-    name: 'skynet',
-    adaptor: 'skynet',
-    uuid: "96630051-a3dc-11e3-8442-5bf31d98c912",
-    token: "2s67o7ek98pycik98f43reqr90t6s9k9"
+  connections: {
+    skynet: {
+      adaptor: 'skynet',
+      uuid: "96630051-a3dc-11e3-8442-5bf31d98c912",
+      token: "2s67o7ek98pycik98f43reqr90t6s9k9"
+    }
   },
 
   handler: function(data) {
@@ -59,7 +60,10 @@ arduinos.forEach(function(bot) {
   Cylon.robot({
     name: bot.name,
 
-    connection: { name: 'arduino', adaptor: 'firmata', port: bot.port },
+    connections: {
+      arduino: { adaptor: 'firmata', port: bot.port }
+    },
+
     devices: bot.devices,
 
     work: function(my) {

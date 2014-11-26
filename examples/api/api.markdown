@@ -39,12 +39,16 @@ Now we can define the basic robot both of our Sphero robots will be based on.
 Both robots will be connecting to Spheros, and so using the cylon-sphero
 adaptor:
 
-        connection: { name: 'sphero', adaptor: 'sphero', port: port },
+        connections: {
+          sphero: { adaptor: 'sphero', port: port }
+        },
 
 And both will be connecting to the same kind of device (you guessed it,
 a Sphero).
 
-        device: { name: 'sphero', driver: 'sphero' },
+        devices: {
+          sphero: { driver: 'sphero' }
+        },
 
 Both robots will be performing the same kind of work as well.  Every second,
 they'll print their name to the console, set themselves to a random color, and

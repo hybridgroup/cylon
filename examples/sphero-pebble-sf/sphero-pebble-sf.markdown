@@ -9,7 +9,6 @@ Next up, we'll configure the API Cylon will serve, telling it to serve on port
 
     Cylon.api({ host: '0.0.0.0', port: '8080' });
 
-
 Now that we have Cylon imported, we can start defining our Pebble robot:
 
     Cylon.robot({
@@ -17,8 +16,13 @@ Now that we have Cylon imported, we can start defining our Pebble robot:
 
 Let's define the connections and devices:
 
-      connection: { name: 'pebble', adaptor: 'pebble' },
-      device: { name: 'pebble', driver: 'pebble' },
+      connections: {
+        pebble: { adaptor: 'pebble' }
+      },
+
+      devices: {
+        pebble: { driver: 'pebble' }
+      },
 
 Now that Cylon knows about the necessary hardware we're going to be using, we'll
 tell it what work we want to do:
@@ -39,19 +43,22 @@ Next, let's define our SalesForce robot:
 
 Let's define the connections and devices:
 
-      connection: {
-        name: 'sfcon',
-        adaptor: 'force',
-        sfuser: process.env.SF_USERNAME,
-        sfpass: process.env.SF_SECURITY_TOKEN,
-        orgCreds: {
-          clientId: process.env.SF_CLIENT_ID,
-          clientSecret: process.env.SF_CLIENT_SECRET,
-          redirectUri: 'http://localhost:3000/oauth/_callback'
+      connections: {
+        sfcon: {
+          adaptor: 'force',
+          sfuser: process.env.SF_USERNAME,
+          sfpass: process.env.SF_SECURITY_TOKEN,
+          orgCreds: {
+            clientId: process.env.SF_CLIENT_ID,
+            clientSecret: process.env.SF_CLIENT_SECRET,
+            redirectUri: 'http://localhost:3000/oauth/_callback'
+          }
         }
       },
 
-      device: { name: 'salesforce', driver: 'force' },
+      devices: {
+        salesforce: { driver: 'force' }
+      },
 
 Tell it what work we want to do:
 
@@ -99,8 +106,13 @@ Now, Let's define our Sphero robots:
       Cylon.robot({
         name: bot.name,
 
-        connection: { name: 'sphero', adaptor: 'sphero', port: bot.port },
-        device: { name: 'sphero', driver: 'sphero' },
+        connections: {
+          sphero: { adaptor: 'sphero', port: bot.port }
+        },
+
+        devices: {
+          sphero: { driver: 'sphero' }
+        },
 
         totalBucks: 1,
         payingPower: true,

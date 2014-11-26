@@ -13,8 +13,13 @@ With that done, let's define our robot:
 
 It will have a single connection and device, both to the keyboard.
 
-      connection: { name: 'keyboard', adaptor: 'keyboard' },
-      device: { name: 'keyboard', driver: 'keyboard' },
+      connections: {
+        keyboard: { adaptor: 'keyboard' }
+      },
+
+      devices: {
+        keyboard: { driver: 'keyboard' }
+      },
 
 When we tell this robot to work, it's going to listen to the 'a' key on the
 keyboard and let us know when it's been pressed.

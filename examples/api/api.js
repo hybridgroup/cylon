@@ -16,8 +16,13 @@ Object.keys(bots).forEach(function(name) {
   Cylon.robot({
     name: name,
 
-    connection: { name: 'sphero', adaptor: 'sphero', port: port },
-    device: { name: 'sphero', driver: 'sphero' },
+    connections: {
+      sphero: { adaptor: 'sphero', port: port }
+    },
+
+    devices: {
+      sphero: { driver: 'sphero' }
+    },
 
     work: function(my) {
       every((1).seconds(), function() {

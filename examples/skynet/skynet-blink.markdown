@@ -20,7 +20,9 @@ Let's define the connections and devices:
         }
       },
 
-      device: { name: 'led13', driver: 'led', pin: 13, connection: 'arduino' },
+      devices: {
+        led13: { driver: 'led', pin: 13, connection: 'arduino' } 
+      },
 
 Now that Cylon knows about the necessary hardware we're going to be using, we'll
 tell it what work we want to do:

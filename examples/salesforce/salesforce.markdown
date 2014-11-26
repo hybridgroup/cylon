@@ -10,19 +10,22 @@ Now that we have Cylon imported, we can start defining our robot
 
 Let's define the connections and devices:
 
-      connection: {
-        name: 'sfcon',
-        adaptor: 'force',
-        sfuser: process.env.SF_USERNAME,
-        sfpass: process.env.SF_SECURITY_TOKEN,
-        orgCreds: {
-          clientId: process.env.SF_CLIENT_ID,
-          clientSecret: process.env.SF_CLIENT_SECRET,
-          redirectUri: 'http://localhost:3000/oauth/_callback'
+      connections: {
+        sfcon: {
+          adaptor: 'force',
+          sfuser: process.env.SF_USERNAME,
+          sfpass: process.env.SF_SECURITY_TOKEN,
+          orgCreds: {
+            clientId: process.env.SF_CLIENT_ID,
+            clientSecret: process.env.SF_CLIENT_SECRET,
+            redirectUri: 'http://localhost:3000/oauth/_callback'
+          }
         }
       },
 
-      device: { name: 'salesforce', driver: 'force' },
+      devices: {
+        salesforce: { driver: 'force' }
+      },
 
 Now that Cylon knows about the necessary hardware we're going to be using, we'll
 tell it what work we want to do:

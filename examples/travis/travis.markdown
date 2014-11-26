@@ -41,13 +41,17 @@ We use a connection to tell Cylon what port it can use to communicate with our
 Sphero, along with what adaptor it should require (`cylon-sphero`) to connect to
 it. We give it a name to make it easier to reference later on.
 
-      connection: { name: 'sphero', adaptor: 'sphero', port: '/dev/rfcomm0' },
+      connections: {
+        sphero: { adaptor: 'sphero', port: '/dev/rfcomm0' ;n
+      },
 
 Devices are set up in a similar fashion, but allow us to directly issue commands
 to the sphero. These are added to the robot's namespace directly to make them
 easy to access.
 
-      device: {name: 'sphero', driver: 'sphero' },
+      devices: {
+        sphero: { driver: 'sphero' }
+      },
 
 Now that we've told our robot what hardware it has access to, we can start
 telling it what it should do. The work function passes along one argument,

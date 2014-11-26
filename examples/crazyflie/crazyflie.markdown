@@ -15,13 +15,13 @@ Now that we've got that set up, we can start defining our robot:
 We'll be using one connection and one device for this robot, both using the
 crazyflie adaptor. We'll be connecting to the Crazyflie using the CrazyRadio.
 
-      connection: {
-        name: 'crazyflie',
-        adaptor: 'crazyflie',
-        port: "radio://1/10/250KPS"
+      connections: {
+        crazyflie: { adaptor: 'crazyflie', port: "radio://1/10/250KPS" }
       },
 
-      device: { name: 'drone', driver: 'crazyflie' }
+      devices: {
+        drone: { driver: 'crazyflie' }
+      }
 
 With the parts in place, we can start defining our robot's work.
 
