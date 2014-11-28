@@ -36,6 +36,15 @@ describe('Logger', function() {
         expect(Logger.toString()).to.be.eql("custom");
       });
     });
+
+    context("with a custom logger, provided directly", function() {
+      it("uses the custom logger", function() {
+        var logger = { toString: function() { return "custom"; } };
+        Logger.setup({ logger: logger });
+        expect(Logger.toString()).to.be.eql("custom");
+        expect(Config.logging.logger).to.be.eql(logger);
+      });
+    });
   });
 
   describe("proxies", function() {
