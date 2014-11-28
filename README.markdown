@@ -294,6 +294,8 @@ on the [https://github.com/hybridgroup/cylon-site](https://github.com/hybridgrou
 
 ## Release History
 
+Version 0.21.1 - Add back debug logging for starting/connecting devices/connections
+
 Version 0.21.0 - Remove Connection/Device objects, update Robot
                  connection/device syntax, fluent syntax updates
 
