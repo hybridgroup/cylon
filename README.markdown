@@ -48,8 +48,13 @@ var Cylon = require('cylon');
 // define the robot
 var robot = Cylon.robot({
   // change the port to the correct one for your Arduino
-  connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
-  device: { name: 'led', driver: 'led', pin: 13 },
+  connections: {
+    arduino: { adaptor: 'firmata', port: '/dev/ttyACM0' }
+  },
+
+  devices: {
+    led: { driver: 'led', pin: 13 }
+  },
 
   work: function(my) {
     every((1).second(), my.led.toggle);
@@ -66,8 +71,13 @@ robot.start();
 var Cylon = require('cylon');
 
 Cylon.robot({
-  connection: { name: 'ardrone', adaptor: 'ardrone', port: '192.168.1.1' },
-  device: { name: 'drone', driver: 'ardrone' },
+  connections: {
+    ardrone: { adaptor: 'ardrone', port: '192.168.1.1' }
+  },
+
+  devices: {
+    drone: { driver: 'ardrone' }
+  },
 
   work: function(my) {
     my.drone.takeoff();
@@ -132,8 +142,13 @@ bots.forEach(function(bot) {
   Cylon.robot({
     name: bot.name,
 
-    connection: { name: "sphero", adaptor: "sphero", port: bot.port },
-    device: { name: "sphero", driver: "sphero" },
+    connections: {
+      sphero: { adaptor: "sphero", port: bot.port }
+    },
+
+    devices: {
+      sphero: { driver: "sphero" }
+    },
 
     work: function(my) {
       every((1).second(), function() {
@@ -156,20 +171,19 @@ libraries, Cylon.JS also supports a fluent syntax:
 
 
 ```javascript
-var cylon = require('cylon');
+var Cylon = require('cylon');
 
-cylon.robot({
-  connection: { name: 'arduino', adaptor: 'firmata', port: '/dev/ttyACM0' },
-  device: { name: 'led', driver: 'led', pin: 13 }
-})
+Cylon
+  .robot()
+  .connection('arduino', { adaptor: 'firmata', port: '/dev/ttyACM0' })
+  .device('led', { driver: 'led', pin: 13 })
+  .on('ready', function(bot) {
+    setInterval(function() {
+      bot.led.toggle();
+    }, 1000);
+  });
 
-.on('ready', function(bot) {
-  setInterval(function() {
-    bot.led.toggle();
-  }, 1000);
-})
-
-.start();
+Cylon.start();
 ```
 
 ## Hardware Support
