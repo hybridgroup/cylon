@@ -175,7 +175,7 @@ cylon.robot({
 ## Hardware Support
 
 Cylon.js has an extensible syntax for connecting to multiple, different hardware
-devices. The following 31 platforms are currently supported:
+devices. The following 32 platforms are currently supported:
 
 - [Ardrone](http://ardrone2.parrot.com/) <==> [Adaptor/Drivers](https://github.com/hybridgroup/cylon-ardrone)
 - [Arduino](http://www.arduino.cc/) <==> [Adaptor](https://github.com/hybridgroup/cylon-firmata)
@@ -194,6 +194,7 @@ devices. The following 31 platforms are currently supported:
 - [MQTT](http://mqtt.org/) <==> [Adaptor/Drivers](https://github.com/hybridgroup/cylon-mqtt)
 - [Nest](http://nest.com/) <==> [Adaptor/Drivers](https://github.com/hybridgroup/cylon-nest)
 - [Neurosky](http://store.neurosky.com/products/mindwave-mobile) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-neurosky)
+- [Ollie](http://gosphero.com/ollie) <==> [Driver](https://github.com/hybridgroup/cylon-ollie)
 - [OpenCV](http://opencv.org/) <==> [Adaptor/Drivers](https://github.com/hybridgroup/cylon-opencv)
 - [Phillips Hue](http://www2.meethue.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-hue)
 - [Pebble](http://www.getpebble.com/) <==> [Adaptor/Driver](https://github.com/hybridgroup/cylon-pebble)
