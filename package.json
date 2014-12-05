@@ -46,6 +46,6 @@
     "async":       "0.9.0",
     "express":     "4.9.8",
     "body-parser": "1.9.0",
-    "robeaux":     "0.2.0"
+    "robeaux":     "0.3.0"
   }
 }
