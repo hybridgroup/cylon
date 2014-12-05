@@ -314,6 +314,7 @@ on the [https://github.com/hybridgroup/cylon-site](https://github.com/hybridgrou
 
 Version | Notes
 ------- | -----
+0.21.2  | Update Robeaux version
 0.21.1  | Add back debug logging for starting/connecting devices/connections
 0.21.0  | Remove Connection/Device objects, update Robot connection/device syntax, fluent syntax updates
 0.20.2  | Correct API issues, possible issue with test setups
