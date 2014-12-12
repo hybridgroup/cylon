@@ -12,7 +12,7 @@
   "eqnull": true,
   "node": true,
 
-  "predef": [
+  "globals": [
     "Adaptor",
     "Cylon",
     "CylonConfig",
