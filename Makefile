@@ -15,7 +15,7 @@ cover:
 	@istanbul cover $(BIN)/_mocha $(TEST_FILES) --report lcovonly -- -R spec
 
 lint:
-	@jshint ./lib
+	@jshint ./lib/**/*.js ./spec/lib/**/*.js ./examples/**/*.js
 
 release:
 	@git push origin master
