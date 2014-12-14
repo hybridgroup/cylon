@@ -1,10 +1,11 @@
+/* jshint expr:true */
 "use strict";
 
-var Registry = source('registry');
+var Registry = source("registry");
 
-var path = './../spec/support/mock_module.js';
+var path = "./../spec/support/mock_module.js";
 
-var module = require('./../support/mock_module.js')
+var module = require("./../support/mock_module.js")
 
 describe("Registry", function() {
   var original;
@@ -27,8 +28,8 @@ describe("Registry", function() {
       expect(Registry.data).to.be.eql({
         "./../spec/support/mock_module.js": {
           module: module,
-          drivers: ['test-driver'],
-          adaptors: ['test-adaptor'],
+          drivers: ["test-driver"],
+          adaptors: ["test-adaptor"],
           dependencies: []
         }
       });
@@ -41,7 +42,7 @@ describe("Registry", function() {
     });
 
     it("finds the appropriate module containing the adaptor", function() {
-      expect(Registry.findByAdaptor('test-adaptor')).to.be.eql(module);
+      expect(Registry.findByAdaptor("test-adaptor")).to.be.eql(module);
     });
   });
 
@@ -51,7 +52,7 @@ describe("Registry", function() {
     });
 
     it("finds the appropriate module containing the driver", function() {
-      expect(Registry.findByDriver('test-driver')).to.be.eql(module);
+      expect(Registry.findByDriver("test-driver")).to.be.eql(module);
     });
   });
 });

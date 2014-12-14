@@ -1,14 +1,15 @@
-'use strict';
+/* jshint expr:true */
+"use strict";
 
-var logger = source('logger/basic_logger');
+var logger = source("logger/basic_logger");
 
 var date = new Date(0).toISOString();
 
-describe('BasicLogger', function() {
+describe("BasicLogger", function() {
   var clock;
 
   beforeEach(function() {
-    stub(console, 'log');
+    stub(console, "log");
     clock = sinon.useFakeTimers(0);
   });
 
@@ -19,7 +20,7 @@ describe('BasicLogger', function() {
 
   describe("#toString", function() {
     it("returns 'BasicLogger'", function() {
-      expect(logger.toString()).to.be.eql('BasicLogger');
+      expect(logger.toString()).to.be.eql("BasicLogger");
     });
   });
 

@@ -1,6 +1,7 @@
+/* jshint expr:true */
 "use strict";
 
-var Utils = source('io/utils.js');
+var Utils = source("io/utils.js");
 
 describe("IOUtils", function() {
   describe("#periodAndDuty", function() {
@@ -12,12 +13,12 @@ describe("IOUtils", function() {
     });
 
     it("calculates values for servos", function() {
-      var value = fn(0.5, 50, { min: 500, max: 2400 }, 'high');
+      var value = fn(0.5, 50, { min: 500, max: 2400 }, "high");
       expect(value).to.be.eql({ duty: 1450000, period: 20000000 })
     });
 
     it("calculates values for different polarities", function() {
-      var value = fn(0.5, 50, { min: 500, max: 2400 }, 'low');
+      var value = fn(0.5, 50, { min: 500, max: 2400 }, "low");
       expect(value).to.be.eql({ duty: 18550000, period: 20000000 })
     });
   });
