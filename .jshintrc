@@ -10,8 +10,13 @@
     "expect": true,
     "source": true,
     "describe": true,
+    "context": true,
     "beforeEach": true,
-    "afterEach": true
+    "afterEach": true,
+    "stub": true,
+    "spy": true,
+    "chai": true,
+    "sinon": true
   },
 
   "boss": true,
