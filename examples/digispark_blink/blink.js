@@ -1,12 +1,14 @@
-var Cylon = require('../..');
+"use strict";
+
+var Cylon = require("../..");
 
 Cylon.robot({
   connections: {
-    digispark: { adaptor: 'digispark' }
+    digispark: { adaptor: "digispark" }
   },
 
   devices: {
-    led: { driver: 'led', pin: 1 }
+    led: { driver: "led", pin: 1 }
   },
 
   work: function(my) {

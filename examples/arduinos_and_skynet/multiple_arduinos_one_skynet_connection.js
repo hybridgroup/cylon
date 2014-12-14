@@ -1,11 +1,13 @@
-var Cylon = require('../..');
+"use strict";
+
+var Cylon = require("../..");
 
 var arduinos = [
   {
     name: "arduino0",
     port: "/dev/ttyACM0",
     devices: {
-      led00: { driver: 'led', pin: 13 }
+      led00: { driver: "led", pin: 13 }
     }
   },
 
@@ -13,9 +15,9 @@ var arduinos = [
     name: "arduin01",
     port: "/dev/ttyACM1",
     devices: {
-      led10: { driver: 'led', pin: 11 }
-      led11: { driver: 'led', pin: 12 }
-      led12: { driver: 'led', pin: 13 }
+      led10: { driver: "led", pin: 11 },
+      led11: { driver: "led", pin: 12 },
+      led12: { driver: "led", pin: 13 }
     }
   }
 ];
@@ -25,7 +27,7 @@ Cylon.robot({
 
   connections: {
     skynet: {
-      adaptor: 'skynet',
+      adaptor: "skynet",
       uuid: "96630051-a3dc-11e3-8442-5bf31d98c912",
       token: "2s67o7ek98pycik98f43reqr90t6s9k9"
     }
@@ -42,7 +44,7 @@ Cylon.robot({
       var robot = data.payload.robots[i],
           bot = Cylon.robots[robot.name];
 
-      if (robot.cmd === 'on') {
+      if (robot.cmd === "on") {
         bot.devices[robot.device].turnOn();
       } else {
         bot.devices[robot.device].turnOff();
@@ -51,7 +53,7 @@ Cylon.robot({
   },
 
   work: function(my) {
-    my.skynet.on('message', my.handler)
+    my.skynet.on("message", my.handler);
     console.log("Skynet is listening");
   }
 });
@@ -61,7 +63,7 @@ arduinos.forEach(function(bot) {
     name: bot.name,
 
     connections: {
-      arduino: { adaptor: 'firmata', port: bot.port }
+      arduino: { adaptor: "firmata", port: bot.port }
     },
 
     devices: bot.devices,

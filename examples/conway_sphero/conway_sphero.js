@@ -1,13 +1,15 @@
+"use strict";
+
 var Cylon = require("../..");
 
 var Green = 0x0000FF,
     Red = 0xFF0000;
 
 var bots = {
-  'Thelma': '/dev/rfcomm0',
-  'Louise': '/dev/rfcomm1',
-  'Grace':  '/dev/rfcomm2',
-  'Ada':    '/dev/rfcomm3'
+  "Thelma": "/dev/rfcomm0",
+  "Louise": "/dev/rfcomm1",
+  "Grace":  "/dev/rfcomm2",
+  "Ada":    "/dev/rfcomm3"
 };
 
 Object.keys(bots).forEach(function(name) {
@@ -17,17 +19,17 @@ Object.keys(bots).forEach(function(name) {
     name: name,
 
     connections: {
-      sphero: { adaptor: 'sphero', port: port }
+      sphero: { adaptor: "sphero", port: port }
     },
 
     devices: {
-      sphero: { driver: 'sphero' }
+      sphero: { driver: "sphero" }
     },
 
     work: function(my) {
       my.born();
 
-      my.sphero.on('collision', function() {
+      my.sphero.on("collision", function() {
         my.contacts += 1;
       });
 
@@ -72,7 +74,15 @@ Object.keys(bots).forEach(function(name) {
       this.age += 1;
 
       if (this.alive) {
-        console.log("Happy birthday, " + this.name + ". You are " + this.age + " and had " + this.contacts + " contacts.");
+        var str = "Happy birthday, ";
+        str += this.name;
+        str += ". You are ";
+        str += this.age;
+        str += " and had ";
+        str += this.contacts;
+        str += " contacts.";
+
+        console.log(str);
       }
 
       if (this.enoughContacts()) {

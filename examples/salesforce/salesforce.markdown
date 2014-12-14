@@ -33,7 +33,7 @@ tell it what work we want to do:
       work: function(my) {
         my.salesforce.on('start', function() {
           my.salesforce.subscribe('/topic/SpheroMsgOutbound', function(data) {
-            var msg = "Sphero: " + data.sobject.Sphero_Namy__c + ",";
+            var msg = "Sphero: " + data.sobject.Sphero_Name__c + ",";
             msg += "Bucks: " + data.sobject.Bucks__c + ",";
             msg += "SM_Id: " + data.sobject.Id;
 
@@ -45,7 +45,7 @@ tell it what work we want to do:
 
         every((2).seconds(), function() {
           var data = JSON.stringify({
-            spheroNamy: "" + my.namy,
+            spheroName: "" + my.name,
             bucks: "" + i
           });
 

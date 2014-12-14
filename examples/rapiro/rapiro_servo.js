@@ -1,13 +1,15 @@
-var Cylon = require('../..');
+"use strict";
+
+var Cylon = require("../..");
 
 Cylon.robot({
   connections: {
-    arduino: { adaptor: 'firmata', port: '/dev/ttyUSB0' }
+    arduino: { adaptor: "firmata", port: "/dev/ttyUSB0" }
   },
 
   devices: {
-    led: { driver: 'led', pin: 17 },
-    servo: { driver: 'servo', pin: 2, range: { min: 30, max: 150 } }
+    led: { driver: "led", pin: 17 },
+    servo: { driver: "servo", pin: 2, range: { min: 30, max: 150 } }
   },
 
   work: function(my) {
@@ -16,7 +18,7 @@ Cylon.robot({
     var angle = 30;
     var increment = 40;
 
-    every(1..seconds(), function() {
+    every((1).seconds(), function() {
       angle += increment;
       my.servo.angle(angle);
 
