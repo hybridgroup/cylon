@@ -292,6 +292,17 @@ describe("Robot", function() {
       });
     });
 
+    context("when passed an object containing connection details", function() {
+      it("creates new connections with each of the ones provided", function() {
+        var connections = {
+          loopback: { adaptor: "loopback" }
+        };
+
+        bot.initConnections({ connections: connections });
+        expect(bot.connections.loopback).to.be.instanceOf(Adaptor);
+      });
+    });
+
     context("when passed an array of connection objects", function() {
       it("creates new connections with each of the ones provided", function() {
         var connections = [{ name: "loopback", adaptor: "loopback" }];
@@ -364,6 +375,17 @@ describe("Robot", function() {
         var device = { name: "ping", driver: "ping" };
         bot.initDevices({ device: device });
         expect(bot.devices["ping"]).to.be.instanceOf(Driver);
+      });
+    });
+
+    context("when passed an object containing device details", function() {
+      it("creates new devices with each of the ones provided", function() {
+        var devices = {
+          ping: { driver: "ping" }
+        };
+
+        bot.initDevices({ devices: devices });
+        expect(bot.devices.ping).to.be.instanceOf(Driver);
       });
     });
 
