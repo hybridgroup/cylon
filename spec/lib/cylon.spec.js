@@ -2,8 +2,7 @@
 "use strict";
 
 var Cylon = source("cylon"),
-    Robot = source("robot"),
-    Utils = source("utils");
+    Robot = source("robot");
 
 var API = source("api"),
     Logger = source("logger"),
@@ -47,16 +46,16 @@ describe("Cylon", function() {
       var opts = { name: "Ultron" };
       var robot = Cylon.robot(opts);
 
-      expect(robot.toString()).to.be.eql("[Robot name='Ultron']")
+      expect(robot.toString()).to.be.eql("[Robot name='Ultron']");
       expect(Cylon.robots["Ultron"]).to.be.eql(robot);
     });
 
     it("avoids duplicating names", function() {
-      Cylon.robot({ name: "Ultron" })
-      Cylon.robot({ name: "Ultron" })
+      Cylon.robot({ name: "Ultron" });
+      Cylon.robot({ name: "Ultron" });
 
       var bots = Object.keys(Cylon.robots);
-      expect(bots).to.be.eql(["Ultron", "Ultron-1"])
+      expect(bots).to.be.eql(["Ultron", "Ultron-1"]);
     });
   });
 
@@ -78,7 +77,7 @@ describe("Cylon", function() {
       Cylon.config({ api: { port: "1234" }});
       Cylon.api();
       expect(Cylon.api_instance.port).to.be.eql("1234");
-    })
+    });
   });
 
   describe("#start", function() {
@@ -142,7 +141,7 @@ describe("Cylon", function() {
 
       Cylon.config({ a: 1, logging: { logger: false } });
       expect(Logger.setup).to.be.called;
-    })
+    });
   });
 
   describe("#halt", function() {
@@ -181,6 +180,6 @@ describe("Cylon", function() {
 
     it("contains an array of MCP commands", function() {
       expect(json.commands).to.be.eql(["echo"]);
-    })
+    });
   });
 });

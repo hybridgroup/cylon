@@ -10,7 +10,7 @@ describe("Basestar", function() {
   describe("#proxyMethods", function() {
     var methods = ["asString", "toString", "returnString"];
 
-    var ProxyClass = function ProxyClass() {}
+    var ProxyClass = function ProxyClass() {};
 
     ProxyClass.prototype.asString = function() {
       return "[object ProxyClass]";
@@ -25,27 +25,27 @@ describe("Basestar", function() {
     };
 
     var TestClass = function TestClass() {
-      this.testInstance = new ProxyClass;
+      this.testInstance = new ProxyClass();
       this.proxyMethods(methods, this.testInstance, this, true);
-    }
+    };
 
     Utils.subclass(TestClass, Basestar);
 
     it("can alias methods", function() {
-      var testclass = new TestClass;
-      expect(testclass.asString).to.be.a("function")
+      var testclass = new TestClass();
+      expect(testclass.asString).to.be.a("function");
       expect(testclass.asString()).to.be.equal("[object ProxyClass]");
     });
 
     it("can alias existing methods if forced to", function() {
-      var testclass = new TestClass;
-      expect(testclass.toString).to.be.a("function")
+      var testclass = new TestClass();
+      expect(testclass.toString).to.be.a("function");
       expect(testclass.toString()).to.be.equal("[object ProxyClass]");
     });
 
     it("can alias methods with arguments", function() {
-      var testclass = new TestClass;
-      expect(testclass.returnString).to.be.a("function")
+      var testclass = new TestClass();
+      expect(testclass.returnString).to.be.a("function");
       expect(testclass.returnString("testString")).to.be.equal("testString");
     });
   });
@@ -63,7 +63,7 @@ describe("Basestar", function() {
         target: this.proxy,
         sendUpdate: update
       });
-    }
+    };
 
     Utils.subclass(ProxyClass, Basestar);
     Utils.subclass(EmitterClass, Basestar);
@@ -76,7 +76,7 @@ describe("Basestar", function() {
       proxy.on("testevent", eventSpy);
       testclass.emit("testevent", "data");
 
-      assert(eventSpy.calledWith("data"))
+      expect(eventSpy).to.be.calledWith("data");
     });
 
     it("emits an 'update' event if told to", function() {
@@ -87,7 +87,7 @@ describe("Basestar", function() {
       proxy.on("update", updateSpy);
       testclass.emit("testevent", "data");
 
-      assert(updateSpy.calledWith("testevent", "data"));
+      expect(updateSpy).to.be.calledWith("testevent", "data");
     });
 
     it("does not emit an 'update' event by default", function() {
@@ -98,7 +98,7 @@ describe("Basestar", function() {
       proxy.on("update", updateSpy);
       testclass.emit("testevent", "data");
 
-      assert(!updateSpy.calledWith("testevent", "data"));
+      expect(updateSpy).to.not.be.calledWith("testevent", "data");
     });
   });
 
@@ -117,7 +117,7 @@ describe("Basestar", function() {
       basestar.defineAdaptorEvent({ eventName: "testevent" });
 
       basestar.connector.emit("testevent", "data");
-      assert(eventSpy.calledWith("data"));
+      expect(eventSpy).to.be.calledWith("data");
     });
 
     context("when given a string", function() {
@@ -128,7 +128,7 @@ describe("Basestar", function() {
         basestar.defineAdaptorEvent("testevent");
 
         basestar.connector.emit("testevent", "data");
-        assert(eventSpy.calledWith("data"));
+        expect(eventSpy).to.be.calledWith("data");
       });
     });
   });
@@ -148,7 +148,7 @@ describe("Basestar", function() {
       basestar.defineDriverEvent({ eventName: "testevent" });
 
       basestar.connection.emit("testevent", "data");
-      assert(eventSpy.calledWith("data"));
+      expect(eventSpy).to.be.calledWith("data");
     });
 
     context("when given a string", function() {
@@ -159,7 +159,7 @@ describe("Basestar", function() {
         basestar.defineDriverEvent("testevent");
 
         basestar.connection.emit("testevent", "data");
-        assert(eventSpy.calledWith("data"));
+        expect(eventSpy).to.be.calledWith("data");
       });
     });
   });

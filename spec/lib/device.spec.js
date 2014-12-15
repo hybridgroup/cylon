@@ -2,11 +2,11 @@
 "use strict";
 
 var Ping = source("test/ping"),
-    Device = source("device");
+    device = source("device");
 
 describe("Device", function() {
   it("returns a Driver instance", function() {
-    var driver = Device({
+    var driver = device({
       name: "test",
       driver: "ping"
     });

@@ -1,9 +1,7 @@
 /* jshint expr:true */
 "use strict";
 
-var Adaptor = source("adaptor"),
-    Logger = source("logger"),
-    Utils = source("utils");
+var Adaptor = source("adaptor");
 
 describe("Adaptor", function() {
   var adaptor = new Adaptor({ name: "adaptor" });

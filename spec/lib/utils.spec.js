@@ -46,12 +46,16 @@ describe("Utils", function() {
           expect((0.5).toScale(0, 10)).to.be.eql(5);
         });
 
-        it("bottom of scale should be returned when value goes below it", function() {
-          expect((-5).toScale(0, 10)).to.be.eql(0);
+        context("when value goes below bottom of scale", function() {
+          it("returns the bottom of the scale", function() {
+            expect((-5).toScale(0, 10)).to.be.eql(0);
+          });
         });
 
-        it("top of scale should be returned when value goes above it", function() {
-          expect((15).toScale(0, 10)).to.be.eql(10);
+        context("when value goes above top of scale", function() {
+          it("returns the top of the scale", function() {
+            expect((15).toScale(0, 10)).to.be.eql(10);
+          });
         });
 
         it("converts to floats", function() {
@@ -92,7 +96,7 @@ describe("Utils", function() {
       this.clock.restore();
     });
 
-    it("sets a function to be called every time an interval passes", function() {
+    it("sets a function to be called when an interval passes", function() {
       var func = spy();
       utils.every(10, func);
       this.clock.tick(25);
@@ -109,7 +113,7 @@ describe("Utils", function() {
       this.clock.restore();
     });
 
-    it("sets a function to be called after time an interval passes", function() {
+    it("sets a function to be called after an interval passes", function() {
       var func = spy();
       utils.after(10, func);
       this.clock.tick(15);

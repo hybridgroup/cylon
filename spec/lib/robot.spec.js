@@ -3,8 +3,7 @@
 
 var Driver = source("driver"),
     Adaptor = source("adaptor"),
-    Robot = source("robot"),
-    Utils = source("utils");
+    Robot = source("robot");
 
 describe("Robot", function() {
   var work, extraFunction, robot;
@@ -28,7 +27,7 @@ describe("Robot", function() {
     describe("name", function() {
       context("if provided", function() {
         it("is set to the passed value", function() {
-          expect(robot.name).to.be.eql("Robby")
+          expect(robot.name).to.be.eql("Robby");
         });
       });
 
@@ -91,7 +90,7 @@ describe("Robot", function() {
         robot = new Robot({
           name: "NewBot",
           otherThings: { more: "details" },
-          sayHello: function() { return "Hello!" }
+          sayHello: function() { return "Hello!"; }
         });
       });
 
@@ -107,12 +106,12 @@ describe("Robot", function() {
         robot = new Robot({
           name: "NewBot",
 
-          sayHello: function() { return this.name + " says hello" },
+          sayHello: function() { return this.name + " says hello"; },
 
           commands: function() {
             return {
               say_hello: this.sayHello
-            }
+            };
           }
         });
       });
@@ -125,20 +124,25 @@ describe("Robot", function() {
         var fn;
         beforeEach(function() {
           fn = function() {
-            new Robot({
+            var bot = new Robot({
               name: "NewBot",
 
               commands: function() {
                 return [];
               }
             });
-          }
+
+            return bot;
+          };
         });
 
         it("throws an error", function() {
-          expect(fn).to.throw(Error, "#commands function must return an object");
+          expect(fn).to.throw(
+            Error,
+            "#commands function must return an object"
+          );
         });
-      })
+      });
     });
 
     context("if a commands object is provided", function() {
@@ -148,7 +152,7 @@ describe("Robot", function() {
         robot = new Robot({
           name: "NewBot",
 
-          sayHello: function() { return this.name + " says hello" },
+          sayHello: function() { return this.name + " says hello"; },
 
           commands: {
            say_hello: function() {}
@@ -173,16 +177,20 @@ describe("Robot", function() {
           },
 
           start: "start"
-        })
+        });
       });
 
-      it("passes them through if they don't conflict with built-ins", function() {
-        expect(robot.hiThere).to.be.eql("hi there");
-        expect(robot.sayHi()).to.be.eql("hi");
+      context("if they don't conflict with built-ins", function() {
+        it("passes them through", function() {
+          expect(robot.hiThere).to.be.eql("hi there");
+          expect(robot.sayHi()).to.be.eql("hi");
+        });
       });
 
-      it("doesn't work if they conflict with built-in properties", function() {
-        expect(robot.start).to.be.a("function");
+      context("if they do conflict with built-ins", function() {
+        it("doesn't pass them through", function() {
+          expect(robot.start).to.be.a("function");
+        });
       });
     });
   });
@@ -196,7 +204,7 @@ describe("Robot", function() {
 
     it("makes Jack a dull boy", function() {
       expect(playBot.work).to.be.eql(play);
-    })
+    });
   });
 
   describe("#toJSON", function() {
@@ -245,17 +253,20 @@ describe("Robot", function() {
       expect(bot.connections.loopback).to.be.eql(undefined);
       bot.connection("loopback", opts);
       expect(bot.connections.loopback).to.be.an.instanceOf(Adaptor);
-    })
+    });
 
-    it("sets @robot on the Connection to be the Robot initializing it", function() {
+    it("sets connection.robot on to the Robot initializing it", function() {
       bot.connection("loopback", opts);
       expect(bot.connections.loopback.robot).to.be.eql(bot);
-    })
+    });
 
     it("avoids name collisions", function() {
       bot.connection("loopback", opts);
       bot.connection("loopback", opts);
-      expect(Object.keys(bot.connections)).to.be.eql(["loopback", "loopback-1"]);
+
+      var conns = Object.keys(bot.connections);
+
+      expect(conns).to.be.eql(["loopback", "loopback-1"]);
     });
   });
 
@@ -282,8 +293,8 @@ describe("Robot", function() {
     });
 
     context("when passed an array of connection objects", function() {
-      it("instantiates a new connection with each of the provided objects", function() {
-        var connections = [{ name: "loopback", adaptor: "loopback" }]
+      it("creates new connections with each of the ones provided", function() {
+        var connections = [{ name: "loopback", adaptor: "loopback" }];
         bot.initConnections({ connections: connections });
         expect(bot.connections["loopback"]).to.be.instanceOf(Adaptor);
       });
@@ -316,12 +327,12 @@ describe("Robot", function() {
       expect(bot.devices.ping).to.be.eql(undefined);
       bot.device("ping", opts);
       expect(bot.devices.ping).to.be.an.instanceOf(Driver);
-    })
+    });
 
     it("sets @robot on the Device to be the Robot initializing it", function() {
       bot.device("ping", opts);
       expect(bot.devices.ping.robot).to.be.eql(bot);
-    })
+    });
 
     it("avoids name collisions", function() {
       bot.device("ping", opts);
@@ -357,8 +368,8 @@ describe("Robot", function() {
     });
 
     context("when passed an array of device objects", function() {
-      it("instantiates a new driver with each of the provided objects", function() {
-        var devices = [{ name: "ping", driver: "ping" }]
+      it("instantiates new drivers with provided objects", function() {
+        var devices = [{ name: "ping", driver: "ping" }];
         bot.initDevices({ devices: devices});
 
         expect(bot.devices["ping"]).to.be.instanceOf(Driver);
@@ -406,7 +417,7 @@ describe("Robot", function() {
     });
 
     it("emits the 'ready' event", function() {
-      expect(robot.emit).to.be.calledWith("ready", robot)
+      expect(robot.emit).to.be.calledWith("ready", robot);
     });
 
     it("returns the robot", function() {

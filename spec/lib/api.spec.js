@@ -1,13 +1,10 @@
 /* jshint expr:true */
 "use strict";
 
-var express = require("express"),
-    https = require("https"),
-    fs = require("fs"),
+var https = require("https"),
     path = require("path");
 
 var API = source("api"),
-    Utils = source("utils"),
     Logger = source("logger");
 
 var MockRequest = require("../support/mock_request"),
@@ -32,11 +29,9 @@ describe("API", function() {
 
     it("sets @express to an Express instance", function() {
       expect(api.express.listen).to.be.a("function");
-    })
+    });
 
     it("sets default values", function() {
-      var sslPath = path.normalize(__dirname + "/../../lib/api/ssl/");
-
       expect(api.host).to.be.eql("127.0.0.1");
       expect(api.port).to.be.eql("3000");
     });
@@ -104,7 +99,7 @@ describe("API", function() {
       });
 
       it("logs that the API is insecure", function() {
-        expect(Logger.warn).to.be.calledWithMatch("insecure connection")
+        expect(Logger.warn).to.be.calledWithMatch("insecure connection");
       });
 
       it("sets @server to @express", function() {
@@ -116,7 +111,7 @@ describe("API", function() {
   describe("#setupAuth", function() {
     context("when auth.type is basic", function() {
       beforeEach(function() {
-        api.auth = { type: "basic", user: "user", pass: "pass" }
+        api.auth = { type: "basic", user: "user", pass: "pass" };
       });
 
       it("returns a basic auth middleware function", function() {
@@ -125,7 +120,7 @@ describe("API", function() {
             res = new MockResponse(),
             next = spy();
 
-        var auth = "Basic " + new Buffer("user:pass").toString("base64")
+        var auth = "Basic " + new Buffer("user:pass").toString("base64");
 
         req.headers.authorization = auth;
 

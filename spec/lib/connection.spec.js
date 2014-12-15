@@ -2,11 +2,11 @@
 "use strict";
 
 var Loopback = source("test/loopback"),
-    Connection = source("connection");
+    connection = source("connection");
 
 describe("Connection", function() {
   it("returns a Adaptor instance", function() {
-    var conn = Connection({
+    var conn = connection({
       name: "test",
       adaptor: "loopback"
     });

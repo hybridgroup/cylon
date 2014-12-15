@@ -1,14 +1,10 @@
 /* jshint expr:true */
 "use strict";
 
-var EventEmitter = require("events").EventEmitter;
-
-var Driver = source("driver"),
-    Logger = source("logger"),
-    Utils = source("utils");
+var Driver = source("driver");
 
 describe("Driver", function() {
-  var connection, device, driver;
+  var connection, driver;
 
   beforeEach(function() {
     connection = {

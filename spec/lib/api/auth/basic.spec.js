@@ -1,5 +1,5 @@
 /* jshint expr:true */
-"use strict"
+"use strict";
 
 var basic = source("api/auth/basic");
 
@@ -65,7 +65,7 @@ describe("Basic Auth", function() {
 
     it("doesn't modify the response", function() {
       expect(res.end).to.not.be.called;
-    })
+    });
   });
 
   context("if the user/pass don't match", function() {
@@ -91,7 +91,7 @@ describe("Basic Auth", function() {
 
     it("doesn't modify the response", function() {
       expect(res.end).to.not.be.called;
-    })
+    });
   });
 
   context("if there are no authorization headers", function() {

@@ -7,7 +7,7 @@ var DigitalPin = source("io/digital-pin"),
     Utils = source("utils");
 
 describe("Cylon.IO.DigitalPin", function() {
-  var pin = new DigitalPin({ pin: "4", mode: "w" })
+  var pin = new DigitalPin({ pin: "4", mode: "w" });
 
   describe("constructor", function() {
     it("sets @pinNum to the pin number passed in opts", function() {
@@ -185,8 +185,6 @@ describe("Cylon.IO.DigitalPin", function() {
   });
 
   describe("#digitalRead", function() {
-    var path = "/sys/class/gpio/gpio4/value";
-
     beforeEach(function() {
       this.clock = sinon.useFakeTimers();
     });
@@ -295,7 +293,7 @@ describe("Cylon.IO.DigitalPin", function() {
   describe("#toggle", function() {
     context("when @status is 'high'", function() {
       beforeEach(function() {
-        stub(pin, "setLow")
+        stub(pin, "setLow");
         pin.status = "high";
       });
 
@@ -311,7 +309,7 @@ describe("Cylon.IO.DigitalPin", function() {
 
     context("when @status is 'low'", function() {
       beforeEach(function() {
-        stub(pin, "setHigh")
+        stub(pin, "setHigh");
         pin.status = "low";
       });
 
@@ -342,8 +340,8 @@ describe("Cylon.IO.DigitalPin", function() {
 
       it("writes the pin number to the GPIO export path", function() {
         pin._createGPIOPin();
-        expect(fs.writeFile).to.be.calledWith(path, "4")
-      })
+        expect(fs.writeFile).to.be.calledWith(path, "4");
+      });
 
       it("calls #_openPin", function() {
         pin._createGPIOPin();
@@ -367,7 +365,7 @@ describe("Cylon.IO.DigitalPin", function() {
         expect(pin.emit).to.be.calledWith("error");
       });
     });
-  })
+  });
 
   describe("#_openPin", function() {
     beforeEach(function() {
@@ -419,7 +417,7 @@ describe("Cylon.IO.DigitalPin", function() {
 
       it("emits a 'close' event with the pin number", function() {
         expect(pin.emit).to.be.calledWith("close", "4");
-      })
+      });
     });
   });
 
