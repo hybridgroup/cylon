@@ -6,10 +6,10 @@ VERSION := $(shell node -e "console.log(require('./package.json').version)")
 
 .PHONY: cover test bdd lint ci release
 
-test:
+test: lint
 	@$(BIN)/mocha --colors -R dot $(TEST_FILES)
 
-bdd:
+bdd: lint
 	@$(BIN)/mocha --colors -R spec $(TEST_FILES)
 
 cover:
