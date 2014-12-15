@@ -1,16 +1,18 @@
-var Cylon = require('../..');
+"use strict";
+
+var Cylon = require("../..");
 
 Cylon.robot({
   connections: {
-    keyboard: { adaptor: 'keyboard' }
+    keyboard: { adaptor: "keyboard" }
   },
 
   devices: {
-    keyboard: { driver: 'keyboard' }
+    keyboard: { driver: "keyboard" }
   },
 
   work: function(my) {
-    my.keyboard.on('a', function(key) {
+    my.keyboard.on("a", function() {
       console.log("a pressed!");
     });
   }

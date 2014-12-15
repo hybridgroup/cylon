@@ -1,16 +1,17 @@
+/* jshint expr:true */
 "use strict";
 
-var fs = require('fs');
+var fs = require("fs");
 
-var DigitalPin = source('io/digital-pin'),
-    Utils = source('utils');
+var DigitalPin = source("io/digital-pin"),
+    Utils = source("utils");
 
 describe("Cylon.IO.DigitalPin", function() {
-  var pin = new DigitalPin({ pin: '4', mode: 'w' })
+  var pin = new DigitalPin({ pin: "4", mode: "w" });
 
   describe("constructor", function() {
     it("sets @pinNum to the pin number passed in opts", function() {
-      expect(pin.pinNum).to.be.eql('4');
+      expect(pin.pinNum).to.be.eql("4");
     });
 
     it("sets @status to 'low' by default", function() {
@@ -31,8 +32,8 @@ describe("Cylon.IO.DigitalPin", function() {
 
     context("if the GPIO file for the pin exists", function() {
       beforeEach(function() {
-        stub(fs, 'exists').callsArgWith(1, true);
-        stub(pin, '_openPin');
+        stub(fs, "exists").callsArgWith(1, true);
+        stub(pin, "_openPin");
       });
 
       afterEach(function() {
@@ -49,8 +50,8 @@ describe("Cylon.IO.DigitalPin", function() {
 
     context("if the GPIO file for the pin doesn't exist", function() {
       beforeEach(function() {
-        stub(fs, 'exists').callsArgWith(1, false);
-        stub(pin, '_createGPIOPin');
+        stub(fs, "exists").callsArgWith(1, false);
+        stub(pin, "_createGPIOPin");
       });
 
       afterEach(function() {
@@ -70,8 +71,8 @@ describe("Cylon.IO.DigitalPin", function() {
     var path = "/sys/class/gpio/unexport";
 
     beforeEach(function() {
-      stub(fs, 'writeFile').callsArgWith(2, false);
-      stub(pin, '_closeCallback');
+      stub(fs, "writeFile").callsArgWith(2, false);
+      stub(pin, "_closeCallback");
     });
 
     afterEach(function() {
@@ -81,7 +82,7 @@ describe("Cylon.IO.DigitalPin", function() {
 
     it("writes to the GPIO unexport path with the pin's value", function() {
       pin.close();
-      expect(fs.writeFile).to.be.calledWith(path, '4');
+      expect(fs.writeFile).to.be.calledWith(path, "4");
     });
 
     it("calls the closeCallback", function() {
@@ -94,8 +95,8 @@ describe("Cylon.IO.DigitalPin", function() {
     var path = "/sys/class/gpio/unexport";
 
     beforeEach(function() {
-      stub(fs, 'writeFileSync');
-      stub(pin, '_closeCallback');
+      stub(fs, "writeFileSync");
+      stub(pin, "_closeCallback");
     });
 
     afterEach(function() {
@@ -105,7 +106,7 @@ describe("Cylon.IO.DigitalPin", function() {
 
     it("writes to the GPIO unexport path with the pin's value", function() {
       pin.closeSync();
-      expect(fs.writeFileSync).to.be.calledWith(path, '4');
+      expect(fs.writeFileSync).to.be.calledWith(path, "4");
     });
 
     it("calls the closeCallback", function() {
@@ -119,8 +120,8 @@ describe("Cylon.IO.DigitalPin", function() {
 
     context("if pin mode isn't 'w'", function() {
       beforeEach(function() {
-        stub(fs, 'writeFile');
-        stub(pin, '_setMode');
+        stub(fs, "writeFile");
+        stub(pin, "_setMode");
       });
 
       afterEach(function() {
@@ -129,17 +130,17 @@ describe("Cylon.IO.DigitalPin", function() {
       });
 
       it("sets the pin mode to 'w'", function() {
-        pin.mode = 'r';
+        pin.mode = "r";
         pin.digitalWrite(1);
-        expect(pin._setMode).to.be.calledWith('w');
+        expect(pin._setMode).to.be.calledWith("w");
       });
     });
 
     context("when successful", function() {
       beforeEach(function() {
-        pin.mode = 'w';
-        stub(fs, 'writeFile').callsArgWith(2, null);
-        stub(pin, 'emit');
+        pin.mode = "w";
+        stub(fs, "writeFile").callsArgWith(2, null);
+        stub(pin, "emit");
       });
 
       afterEach(function() {
@@ -150,7 +151,7 @@ describe("Cylon.IO.DigitalPin", function() {
       it("emits a digitalWrite event with the written value", function()  {
         pin.digitalWrite(1);
         expect(fs.writeFile).to.be.calledWith(path, 1);
-        expect(pin.emit).to.be.calledWith('digitalWrite', 1);
+        expect(pin.emit).to.be.calledWith("digitalWrite", 1);
       });
 
       it("returns the passed value", function() {
@@ -158,17 +159,17 @@ describe("Cylon.IO.DigitalPin", function() {
       });
 
       it("changes the pin's @status", function() {
-        pin.status = 'low';
+        pin.status = "low";
         pin.digitalWrite(1);
-        expect(pin.status).to.be.eql('high');
+        expect(pin.status).to.be.eql("high");
       });
     });
 
     context("when there is an error", function() {
       beforeEach(function() {
-        pin.mode = 'w';
-        stub(fs, 'writeFile').callsArgWith(2, true);
-        stub(pin, 'emit');
+        pin.mode = "w";
+        stub(fs, "writeFile").callsArgWith(2, true);
+        stub(pin, "emit");
       });
 
       afterEach(function() {
@@ -178,14 +179,12 @@ describe("Cylon.IO.DigitalPin", function() {
 
       it("emits an error message", function() {
         pin.digitalWrite(1);
-        expect(pin.emit).to.be.calledWith('error');
+        expect(pin.emit).to.be.calledWith("error");
       });
     });
   });
 
   describe("#digitalRead", function() {
-    var path = "/sys/class/gpio/gpio4/value";
-
     beforeEach(function() {
       this.clock = sinon.useFakeTimers();
     });
@@ -196,8 +195,8 @@ describe("Cylon.IO.DigitalPin", function() {
 
     context("if the mode isn't 'r'", function() {
       beforeEach(function() {
-        stub(Utils, 'every');
-        stub(pin, '_setMode');
+        stub(Utils, "every");
+        stub(pin, "_setMode");
       });
 
       afterEach(function() {
@@ -206,16 +205,16 @@ describe("Cylon.IO.DigitalPin", function() {
       });
 
       it("sets the pin mode to 'r'", function() {
-        pin.mode = 'w';
+        pin.mode = "w";
         pin.digitalRead(500);
-        expect(pin._setMode).to.be.calledWith('r');
+        expect(pin._setMode).to.be.calledWith("r");
       });
     });
 
     context("when successful", function() {
       beforeEach(function() {
-        stub(fs, 'readFile').callsArgWith(1, null, 1);
-        stub(pin, 'emit');
+        stub(fs, "readFile").callsArgWith(1, null, 1);
+        stub(pin, "emit");
       });
 
       afterEach(function() {
@@ -237,14 +236,14 @@ describe("Cylon.IO.DigitalPin", function() {
         pin.digitalRead(500);
         this.clock.tick(510);
 
-        expect(pin.emit).to.be.calledWith('digitalRead', 1);
+        expect(pin.emit).to.be.calledWith("digitalRead", 1);
       });
     });
 
     context("when an error occurs", function() {
       beforeEach(function() {
-        stub(fs, 'readFile').callsArgWith(1, true, null);
-        stub(pin, 'emit');
+        stub(fs, "readFile").callsArgWith(1, true, null);
+        stub(pin, "emit");
       });
 
       afterEach(function() {
@@ -256,14 +255,14 @@ describe("Cylon.IO.DigitalPin", function() {
         pin.digitalRead(500);
         this.clock.tick(500);
 
-        expect(pin.emit).to.be.calledWith('error');
+        expect(pin.emit).to.be.calledWith("error");
       });
     });
   });
 
   describe("#setHigh", function() {
     beforeEach(function() {
-      stub(pin, 'digitalWrite');
+      stub(pin, "digitalWrite");
     });
 
     afterEach(function() {
@@ -278,7 +277,7 @@ describe("Cylon.IO.DigitalPin", function() {
 
   describe("#setLow", function() {
     beforeEach(function() {
-      stub(pin, 'digitalWrite');
+      stub(pin, "digitalWrite");
     });
 
     afterEach(function() {
@@ -294,7 +293,7 @@ describe("Cylon.IO.DigitalPin", function() {
   describe("#toggle", function() {
     context("when @status is 'high'", function() {
       beforeEach(function() {
-        stub(pin, 'setLow')
+        stub(pin, "setLow");
         pin.status = "high";
       });
 
@@ -310,7 +309,7 @@ describe("Cylon.IO.DigitalPin", function() {
 
     context("when @status is 'low'", function() {
       beforeEach(function() {
-        stub(pin, 'setHigh')
+        stub(pin, "setHigh");
         pin.status = "low";
       });
 
@@ -330,7 +329,7 @@ describe("Cylon.IO.DigitalPin", function() {
 
     context("when successful", function() {
       beforeEach(function() {
-        stub(fs, 'writeFile').callsArgWith(2, null);
+        stub(fs, "writeFile").callsArgWith(2, null);
         stub(pin, "_openPin");
       });
 
@@ -341,8 +340,8 @@ describe("Cylon.IO.DigitalPin", function() {
 
       it("writes the pin number to the GPIO export path", function() {
         pin._createGPIOPin();
-        expect(fs.writeFile).to.be.calledWith(path, "4")
-      })
+        expect(fs.writeFile).to.be.calledWith(path, "4");
+      });
 
       it("calls #_openPin", function() {
         pin._createGPIOPin();
@@ -352,7 +351,7 @@ describe("Cylon.IO.DigitalPin", function() {
 
     context("when an error occurs", function() {
       beforeEach(function() {
-        stub(fs, 'writeFile').callsArgWith(2, true);
+        stub(fs, "writeFile").callsArgWith(2, true);
         stub(pin, "emit");
       });
 
@@ -363,15 +362,15 @@ describe("Cylon.IO.DigitalPin", function() {
 
       it("emits an error", function() {
         pin._createGPIOPin();
-        expect(pin.emit).to.be.calledWith('error');
+        expect(pin.emit).to.be.calledWith("error");
       });
     });
-  })
+  });
 
   describe("#_openPin", function() {
     beforeEach(function() {
-      stub(pin, '_setMode');
-      stub(pin, 'emit');
+      stub(pin, "_setMode");
+      stub(pin, "emit");
     });
 
     afterEach(function() {
@@ -386,14 +385,14 @@ describe("Cylon.IO.DigitalPin", function() {
 
     it("emits the 'open' event", function() {
       pin._openPin();
-      expect(pin.emit).to.be.calledWith('open');
+      expect(pin.emit).to.be.calledWith("open");
     });
   });
 
   describe("_closeCallback", function() {
     context("if there is an error", function() {
       beforeEach(function() {
-        stub(pin, 'emit');
+        stub(pin, "emit");
         pin._closeCallback(true);
       });
 
@@ -402,13 +401,13 @@ describe("Cylon.IO.DigitalPin", function() {
       });
 
       it("emits an error", function() {
-        expect(pin.emit).to.be.calledWith('error');
+        expect(pin.emit).to.be.calledWith("error");
       });
     });
 
     context("if there is no error", function() {
       beforeEach(function() {
-        stub(pin, 'emit');
+        stub(pin, "emit");
         pin._closeCallback(false);
       });
 
@@ -417,8 +416,8 @@ describe("Cylon.IO.DigitalPin", function() {
       });
 
       it("emits a 'close' event with the pin number", function() {
-        expect(pin.emit).to.be.calledWith('close', '4');
-      })
+        expect(pin.emit).to.be.calledWith("close", "4");
+      });
     });
   });
 
@@ -426,8 +425,8 @@ describe("Cylon.IO.DigitalPin", function() {
     var path = "/sys/class/gpio/gpio4/direction";
 
     beforeEach(function() {
-      stub(fs, 'writeFile').callsArgWith(2, 'error');
-      stub(pin, '_setModeCallback');
+      stub(fs, "writeFile").callsArgWith(2, "error");
+      stub(pin, "_setModeCallback");
     });
 
     afterEach(function() {
@@ -437,27 +436,27 @@ describe("Cylon.IO.DigitalPin", function() {
 
     context("when mode is 'w'", function() {
       it("writes to the pin's direction path with 'out'", function() {
-        pin._setMode('w');
-        expect(fs.writeFile).to.be.calledWith(path, 'out');
+        pin._setMode("w");
+        expect(fs.writeFile).to.be.calledWith(path, "out");
       });
 
       it("calls #_setModeCallback with any error message", function() {
-        pin._setMode('w', true);
-        expect(pin._setModeCallback).to.be.calledWith('error', true);
+        pin._setMode("w", true);
+        expect(pin._setModeCallback).to.be.calledWith("error", true);
       });
     });
 
     context("when mode is 'r'", function() {
       it("writes to the pin's direction path with 'in'", function() {
-        pin._setMode('r');
-        expect(fs.writeFile).to.be.calledWith(path, 'in');
+        pin._setMode("r");
+        expect(fs.writeFile).to.be.calledWith(path, "in");
       });
     });
   });
 
   describe("#_setModeCallback", function() {
     beforeEach(function() {
-      stub(pin, 'emit');
+      stub(pin, "emit");
     });
 
     afterEach(function() {
@@ -474,15 +473,15 @@ describe("Cylon.IO.DigitalPin", function() {
       context("when emitConnect is true", function() {
         it("emits a 'connect' event with the pin's mode", function() {
           pin._setModeCallback(false, true);
-          expect(pin.emit).to.be.calledWith('connect', pin.mode);
+          expect(pin.emit).to.be.calledWith("connect", pin.mode);
         });
       });
     });
 
     context("when passed an error", function() {
-      it('emits an error', function() {
+      it("emits an error", function() {
         pin._setModeCallback(true);
-        expect(pin.emit).to.be.calledWith('error');
+        expect(pin.emit).to.be.calledWith("error");
       });
     });
   });

@@ -1,28 +1,25 @@
-'use strict';
+/* jshint expr:true */
+"use strict";
 
-var EventEmitter = require('events').EventEmitter;
-
-var Driver = source("driver"),
-    Logger = source('logger'),
-    Utils = source('utils');
+var Driver = source("driver");
 
 describe("Driver", function() {
-  var connection, device, driver;
+  var connection, driver;
 
   beforeEach(function() {
     connection = {
-      connection: 'connection'
+      connection: "connection"
     };
 
     driver = new Driver({
-      name: 'driver',
+      name: "driver",
       connection: connection,
     });
   });
 
   describe("#constructor", function() {
     it("sets @name to the provided name", function() {
-      expect(driver.name).to.be.eql('driver');
+      expect(driver.name).to.be.eql("driver");
     });
 
     it("sets @connection to the provided connection", function() {
@@ -37,7 +34,7 @@ describe("Driver", function() {
       expect(driver.interval).to.be.eql(10);
 
       driver = new Driver({
-        name: 'driver',
+        name: "driver",
         connection: connection,
         interval: 2000,
       });

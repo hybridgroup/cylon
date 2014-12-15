@@ -1,6 +1,8 @@
-var Cylon = require('../..');
+"use strict";
 
-var bots = [ 'Huey', 'Dewey', 'Louie' ];
+var Cylon = require("../..");
+
+var bots = [ "Huey", "Dewey", "Louie" ];
 
 bots.forEach(function(name) {
   Cylon.robot({

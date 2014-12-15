@@ -1,6 +1,7 @@
+/* jshint expr:true */
 "use strict";
 
-var router = source('api/routes');
+var router = source("api/routes");
 
 describe("API routes", function() {
   var routes = [

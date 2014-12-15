@@ -1,13 +1,15 @@
-var Cylon = require('../..');
+"use strict";
+
+var Cylon = require("../..");
 
 Cylon.api({
-  host: '0.0.0.0',
-  port: '8080'
+  host: "0.0.0.0",
+  port: "8080"
 });
 
 var bots = {
-  'Thelma': '/dev/rfcomm0',
-  'Louise': '/dev/rfcomm1'
+  "Thelma": "/dev/rfcomm0",
+  "Louise": "/dev/rfcomm1"
 };
 
 Object.keys(bots).forEach(function(name) {
@@ -17,11 +19,11 @@ Object.keys(bots).forEach(function(name) {
     name: name,
 
     connections: {
-      sphero: { adaptor: 'sphero', port: port }
+      sphero: { adaptor: "sphero", port: port }
     },
 
     devices: {
-      sphero: { driver: 'sphero' }
+      sphero: { driver: "sphero" }
     },
 
     work: function(my) {

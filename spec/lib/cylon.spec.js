@@ -1,14 +1,14 @@
+/* jshint expr:true */
 "use strict";
 
 var Cylon = source("cylon"),
-    Robot = source("robot"),
-    Utils = source('utils');
+    Robot = source("robot");
 
-var API = source('api'),
-    Logger = source('logger'),
-    Adaptor = source('adaptor'),
-    Driver = source('driver'),
-    Config = source('config');
+var API = source("api"),
+    Logger = source("logger"),
+    Adaptor = source("adaptor"),
+    Driver = source("driver"),
+    Config = source("config");
 
 describe("Cylon", function() {
   describe("exports", function() {
@@ -46,38 +46,38 @@ describe("Cylon", function() {
       var opts = { name: "Ultron" };
       var robot = Cylon.robot(opts);
 
-      expect(robot.toString()).to.be.eql("[Robot name='Ultron']")
-      expect(Cylon.robots['Ultron']).to.be.eql(robot);
+      expect(robot.toString()).to.be.eql("[Robot name='Ultron']");
+      expect(Cylon.robots["Ultron"]).to.be.eql(robot);
     });
 
     it("avoids duplicating names", function() {
-      Cylon.robot({ name: "Ultron" })
-      Cylon.robot({ name: "Ultron" })
+      Cylon.robot({ name: "Ultron" });
+      Cylon.robot({ name: "Ultron" });
 
       var bots = Object.keys(Cylon.robots);
-      expect(bots).to.be.eql(["Ultron", "Ultron-1"])
+      expect(bots).to.be.eql(["Ultron", "Ultron-1"]);
     });
   });
 
   describe("#api", function() {
     beforeEach(function() {
-      stub(API.prototype, 'listen');
+      stub(API.prototype, "listen");
     });
 
     afterEach(function() {
       API.prototype.listen.restore();
     });
 
-    it('creates a new API instance', function() {
+    it("creates a new API instance", function() {
       Cylon.api();
       expect(Cylon.api_instance).to.be.an.instanceOf(API);
     });
 
-    it('passes configuration to the API constructor', function() {
-      Cylon.config({ api: { port: '1234' }});
+    it("passes configuration to the API constructor", function() {
+      Cylon.config({ api: { port: "1234" }});
       Cylon.api();
-      expect(Cylon.api_instance.port).to.be.eql('1234');
-    })
+      expect(Cylon.api_instance.port).to.be.eql("1234");
+    });
   });
 
   describe("#start", function() {
@@ -86,8 +86,8 @@ describe("Cylon", function() {
           bot2 = { start: spy() };
 
       Cylon.robots = {
-        'bot1': bot1,
-        'bot2': bot2
+        "bot1": bot1,
+        "bot2": bot2
       };
 
       Cylon.start();
@@ -103,7 +103,7 @@ describe("Cylon", function() {
         delete Config[c];
       }
 
-      stub(Logger, 'setup');
+      stub(Logger, "setup");
     });
 
     afterEach(function() {
@@ -141,7 +141,7 @@ describe("Cylon", function() {
 
       Cylon.config({ a: 1, logging: { logger: false } });
       expect(Logger.setup).to.be.called;
-    })
+    });
   });
 
   describe("#halt", function() {
@@ -150,8 +150,8 @@ describe("Cylon", function() {
           bot2 = { halt: spy() };
 
       Cylon.robots = {
-        'bot1': bot1,
-        'bot2': bot2
+        "bot1": bot1,
+        "bot2": bot2
       };
 
       Cylon.halt();
@@ -168,7 +168,7 @@ describe("Cylon", function() {
       bot1 = new Robot();
       bot2 = new Robot();
 
-      Cylon.robots = { 'bot1': bot1, 'bot2': bot2 };
+      Cylon.robots = { "bot1": bot1, "bot2": bot2 };
       Cylon.commands.echo = echo = function(arg) { return arg; };
 
       json = Cylon.toJSON();
@@ -179,7 +179,7 @@ describe("Cylon", function() {
     });
 
     it("contains an array of MCP commands", function() {
-      expect(json.commands).to.be.eql(['echo']);
-    })
+      expect(json.commands).to.be.eql(["echo"]);
+    });
   });
 });

@@ -1,3 +1,5 @@
+"use strict";
+
 var Cylon = require("../..");
 
 var bots = [
@@ -26,10 +28,10 @@ bots.forEach(function(bot) {
     },
 
     work: function(my) {
-      my.skynet.on('message', function(data) {
-        if (data.led13 === 'on') {
+      my.skynet.on("message", function(data) {
+        if (data.led13 === "on") {
           my.led13.turnOn();
-        } else if (data.led13 === 'off') {
+        } else if (data.led13 === "off") {
           my.led13.turnOff();
         }
 

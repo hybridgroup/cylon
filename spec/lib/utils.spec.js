@@ -1,3 +1,4 @@
+/* jshint expr:true */
 "use strict";
 
 var utils = source("utils");
@@ -23,15 +24,20 @@ describe("Utils", function() {
         });
 
         it("converts floats", function() {
-          expect(2.5.fromScale(0, 10)).to.be.eql(0.25);
+          expect((2.5).fromScale(0, 10)).to.be.eql(0.25);
         });
 
-        it("should return 1 if the number goes above the top of the scale", function() {
-          expect((15).fromScale(0, 10)).to.be.eql(1);
+        context("if the number goes above the top of the scale", function() {
+          it("should return 1", function() {
+            expect((15).fromScale(0, 10)).to.be.eql(1);
+          });
         });
 
-        it("should return 0 if the number goes below the bottom of the scale", function() {
-          expect((5).fromScale(10, 20)).to.be.eql(0);
+        context("if the number goes below the bottom of the scale", function() {
+          it("should return 0", function() {
+            expect((15).fromScale(0, 10)).to.be.eql(1);
+            expect((5).fromScale(10, 20)).to.be.eql(0);
+          });
         });
       });
 
@@ -40,16 +46,20 @@ describe("Utils", function() {
           expect((0.5).toScale(0, 10)).to.be.eql(5);
         });
 
-        it("bottom of scale should be returned when value goes below it", function() {
-          expect((-5).toScale(0, 10)).to.be.eql(0);
+        context("when value goes below bottom of scale", function() {
+          it("returns the bottom of the scale", function() {
+            expect((-5).toScale(0, 10)).to.be.eql(0);
+          });
         });
 
-        it("top of scale should be returned when value goes above it", function() {
-          expect((15).toScale(0, 10)).to.be.eql(10);
+        context("when value goes above top of scale", function() {
+          it("returns the top of the scale", function() {
+            expect((15).toScale(0, 10)).to.be.eql(10);
+          });
         });
 
         it("converts to floats", function() {
-          expect(0.25.toScale(0, 10)).to.be.eql(2.5);
+          expect((0.25).toScale(0, 10)).to.be.eql(2.5);
         });
 
         it("can be chained with #fromScale", function() {
@@ -86,7 +96,7 @@ describe("Utils", function() {
       this.clock.restore();
     });
 
-    it("sets a function to be called every time an interval passes", function() {
+    it("sets a function to be called when an interval passes", function() {
       var func = spy();
       utils.every(10, func);
       this.clock.tick(25);
@@ -103,7 +113,7 @@ describe("Utils", function() {
       this.clock.restore();
     });
 
-    it("sets a function to be called after time an interval passes", function() {
+    it("sets a function to be called after an interval passes", function() {
       var func = spy();
       utils.after(10, func);
       this.clock.tick(15);
@@ -113,7 +123,7 @@ describe("Utils", function() {
 
   describe("constantly", function() {
     beforeEach(function() {
-      stub(global, 'every').returns(0);
+      stub(global, "every").returns(0);
     });
 
     afterEach(function() {
@@ -129,27 +139,19 @@ describe("Utils", function() {
   });
 
   describe("#subclass", function() {
-    var BaseClass = (function() {
-      function BaseClass(opts) {
-        this.greeting = opts.greeting;
-      };
+    var BaseClass = function BaseClass(opts) {
+      this.greeting = opts.greeting;
+    };
 
-      BaseClass.prototype.sayHi = function() {
-        return "Hi!";
-      };
+    BaseClass.prototype.sayHi = function() {
+      return "Hi!";
+    };
 
-      return BaseClass
-    })();
+    var SubClass = function SubClass() {
+      SubClass.__super__.constructor.apply(this, arguments);
+    };
 
-    var SubClass = (function(klass) {
-      utils.subclass(SubClass, klass);
-
-      function SubClass(opts) {
-        SubClass.__super__.constructor.apply(this, arguments);
-      };
-
-      return SubClass;
-    })(BaseClass);
+    utils.subclass(SubClass, BaseClass);
 
     it("adds inheritance to Javascript classes", function() {
       var sub = new SubClass({greeting: "Hello World"});
@@ -159,7 +161,7 @@ describe("Utils", function() {
   });
 
   describe("#proxyFunctionsToObject", function() {
-    var methods = ['asString', 'toString', 'returnString'];
+    var methods = ["asString", "toString", "returnString"];
 
     var ProxyClass = (function() {
       function ProxyClass() {}
@@ -181,7 +183,7 @@ describe("Utils", function() {
 
     var TestClass = (function() {
       function TestClass() {
-        this.testInstance = new ProxyClass;
+        this.testInstance = new ProxyClass();
         utils.proxyFunctionsToObject(methods, this.testInstance, this, true);
       }
 
@@ -190,28 +192,28 @@ describe("Utils", function() {
 
     var testclass = new TestClass();
 
-    it('can alias methods', function() {
+    it("can alias methods", function() {
       expect(testclass.asString()).to.be.eql("[object ProxyClass]");
     });
 
-    it('can alias existing methods if forced to', function() {
+    it("can alias existing methods if forced to", function() {
       expect(testclass.toString()).to.be.eql("[object ProxyClass]");
     });
 
-    it('can alias methods with arguments', function() {
-      expect(testclass.returnString).to.be.a('function');
+    it("can alias methods with arguments", function() {
+      expect(testclass.returnString).to.be.a("function");
     });
   });
 
   describe("#fetch", function() {
     var fetch = utils.fetch,
-        obj = { property: 'hello world', 'false': false, 'null': null };
+        obj = { property: "hello world", "false": false, "null": null };
 
     context("if the property exists on the object", function() {
       it("returns the value", function() {
-        expect(fetch(obj, 'property')).to.be.eql('hello world');
-        expect(fetch(obj, 'false')).to.be.eql(false);
-        expect(fetch(obj, 'null')).to.be.eql(null);
+        expect(fetch(obj, "property")).to.be.eql("hello world");
+        expect(fetch(obj, "false")).to.be.eql(false);
+        expect(fetch(obj, "null")).to.be.eql(null);
       });
     });
 
@@ -219,21 +221,21 @@ describe("Utils", function() {
       context("and no fallback value has been provided", function() {
         it("throws an Error", function() {
           var fn = function() { return fetch(obj, "notaproperty"); };
-          expect(fn).to.throw(Error, 'key not found: "notaproperty"');
+          expect(fn).to.throw(Error, "key not found: \"notaproperty\"");
         });
       });
 
       context("and a fallback value has been provided", function() {
-        it('returns the fallback value', function() {
-          expect(fetch(obj, 'notakey', 'fallback')).to.be.eql('fallback');
+        it("returns the fallback value", function() {
+          expect(fetch(obj, "notakey", "fallback")).to.be.eql("fallback");
         });
       });
 
       context("and a fallback function has been provided", function() {
         context("if the function has no return value", function() {
           it("throws an Error", function() {
-            var fn = function() { fetch(obj, 'notakey', function() {}); },
-                str = 'no return value from provided fallback function';
+            var fn = function() { fetch(obj, "notakey", function() {}); },
+                str = "no return value from provided fallback function";
 
             expect(fn).to.throw(Error, str);
           });
@@ -241,10 +243,10 @@ describe("Utils", function() {
 
         context("if the function returns a value", function() {
           it("returns the value returned by the fallback function", function() {
-            var fn = function(key) { return "Couldn't find " + key },
+            var fn = function(key) { return "Couldn't find " + key; },
                 value = "Couldn't find notakey";
 
-            expect(fetch(obj, 'notakey', fn)).to.be.eql(value);
+            expect(fetch(obj, "notakey", fn)).to.be.eql(value);
           });
         });
       });

@@ -1,52 +1,54 @@
+"use strict";
+
 var Cylon = require("../..");
 
-Cylon.api({ host: '0.0.0.0', port: '8080' });
+Cylon.api({ host: "0.0.0.0", port: "8080" });
 
 Cylon.robot({
-  name: 'pebble',
+  name: "pebble",
 
   connections: {
-    pebble: { adaptor: 'pebble' }
+    pebble: { adaptor: "pebble" }
   },
 
   devices: {
-    pebble: { driver: 'pebble' }
+    pebble: { driver: "pebble" }
   },
 
   message: function(msg) {
     this.message_queue().push(msg);
   },
 
-  work: function(my) {
-    console.log('Pebble connected');
+  work: function() {
+    console.log("Pebble connected");
   }
 });
 
 Cylon.robot({
-  name: 'salesforce',
+  name: "salesforce",
 
   connections: {
     sfcon: {
-      adaptor: 'force',
+      adaptor: "force",
       sfuser: process.env.SF_USERNAME,
       sfpass: process.env.SF_SECURITY_TOKEN,
       orgCreds: {
         clientId: process.env.SF_CLIENT_ID,
         clientSecret: process.env.SF_CLIENT_SECRET,
-        redirectUri: 'http://localhost:3000/oauth/_callback'
+        redirectUri: "http://localhost:3000/oauth/_callback"
       }
     }
   },
 
   devices: {
-    salesforce: { driver: 'force' }
+    salesforce: { driver: "force" }
   },
 
   spheroReport: {},
 
   work: function(my) {
-    my.salesforce.on('start', function() {
-      my.salesforce.subscribe('/topic/SpheroMsgOutbound', function(data) {
+    my.salesforce.on("start", function() {
+      my.salesforce.subscribe("/topic/SpheroMsgOutbound", function(data) {
         var toPebble = "",
             name = data.sobject.Sphero_Name__c,
             bucks = data.sobject.Bucks__c;
@@ -75,9 +77,9 @@ Cylon.robot({
 });
 
 var bots = [
-  { port: '/dev/tty.Sphero-ROY-AMP-SPP', name: 'ROY' },
-  { port: '/dev/tty.Sphero-GBO-AMP-SPP', name: 'GBO' },
-  { port: '/dev/tty.Sphero-RRY-AMP-SPP', name: 'RRY' }
+  { port: "/dev/tty.Sphero-ROY-AMP-SPP", name: "ROY" },
+  { port: "/dev/tty.Sphero-GBO-AMP-SPP", name: "GBO" },
+  { port: "/dev/tty.Sphero-RRY-AMP-SPP", name: "RRY" }
 ];
 
 bots.forEach(function(bot) {
@@ -85,11 +87,11 @@ bots.forEach(function(bot) {
     name: bot.name,
 
     connections: {
-      sphero: { adaptor: 'sphero', port: bot.port }
+      sphero: { adaptor: "sphero", port: bot.port }
     },
 
     devices: {
-      sphero: { driver: 'sphero' }
+      sphero: { driver: "sphero" }
     },
 
     totalBucks: 1,
@@ -141,7 +143,7 @@ bots.forEach(function(bot) {
       my.bankrupt();
       my.changeDirection();
 
-      my.sphero.on('collision', function() {
+      my.sphero.on("collision", function() {
         my.sphero.setRGB(0x0000FF);
         my.sphero.stop();
         my.payingPower = false;
@@ -151,7 +153,7 @@ bots.forEach(function(bot) {
           bucks: "" + (my.totalBucks++)
         });
 
-        var sf = Cylon.robots['salesforce'];
+        var sf = Cylon.robots["salesforce"];
         sf.devices.salesforce.push("SpheroController", "POST", data);
       });
     }

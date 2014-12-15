@@ -1,22 +1,24 @@
+"use strict";
+
 var Cylon = require("../..");
 
 var Green = 0x0000FF,
     Red = 0xFF0000;
 
 var bots = {
-  'Thelma': '/dev/rfcomm0',
-  'Louise': '/dev/rfcomm1',
-  'Grace':  '/dev/rfcomm2',
-  'Ada':    '/dev/rfcomm3'
+  "Thelma": "/dev/rfcomm0",
+  "Louise": "/dev/rfcomm1",
+  "Grace":  "/dev/rfcomm2",
+  "Ada":    "/dev/rfcomm3"
 };
 
 Object.keys(bots).forEach(function(name) {
   var port = bots[name];
 
-  var robot = Cylon.robot({ name: name, });
+  var robot = Cylon.robot({ name: name });
 
-  robot.connection('sphero', { adaptor: 'sphero', port: port });
-  robot.device('sphero', { driver: 'sphero' });
+  robot.connection("sphero", { adaptor: "sphero", port: port });
+  robot.device("sphero", { driver: "sphero" });
 
   robot.move = function() {
     robot.sphero.roll(60, Math.floor(Math.random() * 360));
@@ -48,7 +50,15 @@ Object.keys(bots).forEach(function(name) {
     robot.age += 1;
 
     if (robot.alive) {
-      console.log("Happy birthday, " + robot.name + ". You are " + robot.age + " and had " + robot.contacts + " contacts.");
+      var str = "Happy birthday, ";
+      str += robot.name;
+      str += ". You are ";
+      str += robot.age;
+      str += " and had ";
+      str += robot.contacts;
+      str += " contacts.";
+
+      console.log(str);
     }
 
     if (robot.enoughContacts()) {
@@ -62,10 +72,10 @@ Object.keys(bots).forEach(function(name) {
     robot.contacts = 0;
   };
 
-  robot.on('ready', function() {
+  robot.on("ready", function() {
     robot.born();
 
-    robot.sphero.on('collision', function() {
+    robot.sphero.on("collision", function() {
       robot.contacts += 1;
     });
 

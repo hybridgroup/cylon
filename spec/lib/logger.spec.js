@@ -1,13 +1,13 @@
-'use strict';
+/* jshint expr:true */
+"use strict";
 
-var Logger = source('logger'),
-    Config = source('config'),
-    Utils = source('utils');
+var Logger = source("logger"),
+    Config = source("config");
 
-describe('Logger', function() {
+describe("Logger", function() {
   afterEach(function() {
     // to be friendly to other specs
-    Config.logging = { logger: false, level: 'debug' };
+    Config.logging = { logger: false, level: "debug" };
     Logger.setup();
   });
 
@@ -112,13 +112,13 @@ describe('Logger', function() {
 
       Config.logging = {
         logger: logger,
-        level: 'warn'
-      }
+        level: "warn"
+      };
 
       Logger.setup();
     });
 
-    it("prevents logging of anything below the specified log level", function() {
+    it("prevents logging below the specified level", function() {
       Logger.debug("debug message");
       Logger.info("info message");
 
@@ -126,14 +126,14 @@ describe('Logger', function() {
       expect(logger.info).to.not.be.called;
     });
 
-    it("still logs anything equal or greater than the specified log level", function() {
+    it("still logs levels equal/greater than the specified level", function() {
       Logger.warn("warn message");
       Logger.error("error message");
       Logger.fatal("fatal message");
 
-      expect(logger.warn).to.be.calledWith('warn message');
-      expect(logger.error).to.be.calledWith('error message');
-      expect(logger.fatal).to.be.calledWith('fatal message');
+      expect(logger.warn).to.be.calledWith("warn message");
+      expect(logger.error).to.be.calledWith("error message");
+      expect(logger.fatal).to.be.calledWith("fatal message");
     });
 
     it("defaults to 'info' level", function() {
@@ -144,7 +144,7 @@ describe('Logger', function() {
       Logger.info("info message");
 
       expect(logger.debug).to.not.be.called;
-      expect(logger.info).to.be.calledWith('info message');
-    })
+      expect(logger.info).to.be.calledWith("info message");
+    });
   });
 });

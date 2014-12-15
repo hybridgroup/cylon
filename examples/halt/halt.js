@@ -1,15 +1,17 @@
-var Cylon = require('../..');
+"use strict";
+
+var Cylon = require("../..");
 
 Cylon.robot({
   connections: {
-    loopback: { adaptor: 'loopback' }
+    loopback: { adaptor: "loopback" }
   },
 
   devices: {
-    ping: { driver: 'ping' }
+    ping: { driver: "ping" }
   },
 
-  work: function(my) {
+  work: function() {
     after((1).second(), function() {
       console.log("Hello human!");
       console.log("I'm going to automatically stop in a few seconds.");

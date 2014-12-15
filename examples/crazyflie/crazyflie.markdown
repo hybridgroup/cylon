@@ -21,7 +21,7 @@ crazyflie adaptor. We'll be connecting to the Crazyflie using the CrazyRadio.
 
       devices: {
         drone: { driver: 'crazyflie' }
-      }
+      },
 
 With the parts in place, we can start defining our robot's work.
 

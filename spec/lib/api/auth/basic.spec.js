@@ -1,12 +1,13 @@
-'use strict'
+/* jshint expr:true */
+"use strict";
 
-var basic = source('api/auth/basic');
+var basic = source("api/auth/basic");
 
-var MockRequest = require('../../../support/mock_request'),
-    MockResponse = require('../../../support/mock_response');
+var MockRequest = require("../../../support/mock_request"),
+    MockResponse = require("../../../support/mock_response");
 
 describe("Basic Auth", function() {
-  var opts = { user: 'user', pass: 'pass' },
+  var opts = { user: "user", pass: "pass" },
       req,
       res,
       next;
@@ -18,7 +19,7 @@ describe("Basic Auth", function() {
     res = new MockResponse();
     next = spy();
 
-    var auth = new Buffer("user:pass", "utf8").toString('base64');
+    var auth = new Buffer("user:pass", "utf8").toString("base64");
     req.headers = { authorization: "Basic " + auth };
   });
 
@@ -64,12 +65,12 @@ describe("Basic Auth", function() {
 
     it("doesn't modify the response", function() {
       expect(res.end).to.not.be.called;
-    })
+    });
   });
 
   context("if the user/pass don't match", function() {
     beforeEach(function() {
-      var auth = new Buffer("bad:wrong", "utf8").toString('base64');
+      var auth = new Buffer("bad:wrong", "utf8").toString("base64");
       req.headers = { authorization: "Basic " + auth };
     });
 
@@ -80,7 +81,7 @@ describe("Basic Auth", function() {
     var result;
 
     beforeEach(function() {
-      req.user = 'user';
+      req.user = "user";
       result = basic(req, res, next);
     });
 
@@ -90,7 +91,7 @@ describe("Basic Auth", function() {
 
     it("doesn't modify the response", function() {
       expect(res.end).to.not.be.called;
-    })
+    });
   });
 
   context("if there are no authorization headers", function() {
@@ -103,7 +104,7 @@ describe("Basic Auth", function() {
 
   context("the authorization type isn't Basic", function() {
     beforeEach(function() {
-      var auth = new Buffer("user:pass", "utf8").toString('base64');
+      var auth = new Buffer("user:pass", "utf8").toString("base64");
       req.headers = { authorization: "Digest " + auth };
     });
 
@@ -120,7 +121,7 @@ describe("Basic Auth", function() {
 
   context("if the authorization header isn't formatted correctly", function() {
     beforeEach(function() {
-      var auth = new Buffer("user-pass", "utf8").toString('base64');
+      var auth = new Buffer("user-pass", "utf8").toString("base64");
       req.headers = { authorization: "Basic " + auth };
     });
 

@@ -1,9 +1,11 @@
-var Cylon = require('../..');
+"use strict";
+
+var Cylon = require("../..");
 
 Cylon.api();
 
 Cylon.robot({
-  name: 'Frankie',
+  name: "Frankie",
 
   sayRelax: function() {
     return this.name + " says relax";
