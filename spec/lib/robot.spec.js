@@ -139,7 +139,7 @@ describe("Robot", function() {
         it("throws an error", function() {
           expect(fn).to.throw(
             Error,
-            "#commands function must return an object"
+            "#commands must be an object or a function that returns an object"
           );
         });
       });
