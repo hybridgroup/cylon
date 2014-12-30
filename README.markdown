@@ -275,7 +275,7 @@ Cylon.api();
 ```
 
 Then visit `https://localhost:3000/` and you are ready to control your robots from a web browser!
-<img src="http://cylonjs.com/images/screenshots/robeaux.png" style="margin-top: 15px; width: 100%">
+<img src="http://cylonjs.com/images/screenshots/robeaux.jpg" style="margin-top: 15px; width: 100%">
 
 You can check out more information on the Cylon API in the docs [here](http://cylonjs.com/documentation/guides/api).
 
