@@ -189,7 +189,7 @@ Cylon.start();
 ## Hardware Support
 
 Cylon.js has an extensible syntax for connecting to multiple, different hardware
-devices. The following 32 platforms are currently supported:
+devices. The following 34 platforms are currently supported:
 
 Platform  | Support
 --------  | -------
@@ -202,11 +202,13 @@ Platform  | Support
 [Bluetooth LE](http://en.wikipedia.org/wiki/Bluetooth_low_energy)                                     | [cylon-ble](https://github.com/hybridgroup/cylon-ble)
 [Crazyflie](http://www.bitcraze.se/)                                                                  | [cylon-crazyflie](https://github.com/hybridgroup/cylon-crazyflie)
 [Digispark](http://digistump.com/products/1)                                                          | [cylon-digispark](https://github.com/hybridgroup/cylon-digispark)
+[Electric Imp](https://electricimp.com/product/)                                                      | [cylon-imp](https://github.com/hybridgroup/cylon-imp)
 [Intel Edison](http://www.intel.com/content/www/us/en/do-it-yourself/edison.html)                     | [cylon-intel-iot](https://github.com/hybridgroup/cylon-intel-iot)
 [Intel Galileo](http://www.intel.com/content/www/us/en/do-it-yourself/galileo-maker-quark-board.html) | [cylon-intel-iot](https://github.com/hybridgroup/cylon-intel-iot)
 [Joystick](http://en.wikipedia.org/wiki/Joystick)                                                     | [cylon-joystick](https://github.com/hybridgroup/cylon-joystick)
 [Keyboard](http://en.wikipedia.org/wiki/Computer_keyboard)                                            | [cylon-keyboard](https://github.com/hybridgroup/cylon-keyboard)
 [Leap Motion](https://www.leapmotion.com/)                                                            | [cylon-leapmotion](https://github.com/hybridgroup/cylon-leapmotion)
+[MiP](http://www.wowwee.com/mip/)                                                                     | [cylon-mip](https://github.com/hybridgroup/cylon-mip)
 [MQTT](http://mqtt.org/)                                                                              | [cylon-mqtt](https://github.com/hybridgroup/cylon-mqtt)
 [Nest](http://nest.com/)                                                                              | [cylon-nest](https://github.com/hybridgroup/cylon-nest)
 [Neurosky](http://store.neurosky.com/products/mindwave-mobile)                                        | [cylon-neurosky](https://github.com/hybridgroup/cylon-neurosky)
@@ -275,7 +277,7 @@ Cylon.api();
 ```
 
 Then visit `https://localhost:3000/` and you are ready to control your robots from a web browser!
-<img src="http://cylonjs.com/images/screenshots/robeaux.png" style="margin-top: 15px; width: 100%">
+<img src="http://cylonjs.com/images/screenshots/robeaux.jpg" style="margin-top: 15px; width: 100%">
 
 You can check out more information on the Cylon API in the docs [here](http://cylonjs.com/documentation/guides/api).
 
