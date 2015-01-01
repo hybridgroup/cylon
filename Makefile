@@ -4,12 +4,14 @@ TEST_FILES := spec/helper.js $(shell find spec/lib -type f -name "*.js")
 
 VERSION := $(shell node -e "console.log(require('./package.json').version)")
 
-.PHONY: cover test bdd lint ci release
+.PHONY: default cover test bdd lint ci release
 
-test: lint
+default: lint test
+
+test:
 	@$(BIN)/mocha --colors -R dot $(TEST_FILES)
 
-bdd: lint
+bdd:
 	@$(BIN)/mocha --colors -R spec $(TEST_FILES)
 
 cover:
