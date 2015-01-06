@@ -215,7 +215,9 @@ describe("Robot", function() {
 
       devices: {
         ping: { driver: "ping" }
-      }
+      },
+
+      events: ["hello", "world"]
     });
 
     var json = bot.toJSON();
@@ -238,6 +240,13 @@ describe("Robot", function() {
 
     it("contains the robot's connections", function() {
       expect(json.connections).to.eql([bot.connections.loopback.toJSON()]);
+    });
+
+    it("contains the robot's events, or an empty array", function() {
+      expect(json.events).to.eql(["hello", "world"]);
+
+      var bot = new Robot();
+      expect(bot.toJSON().events).to.be.eql([]);
     });
   });
 

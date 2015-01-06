@@ -181,5 +181,9 @@ describe("Cylon", function() {
     it("contains an array of MCP commands", function() {
       expect(json.commands).to.be.eql(["echo"]);
     });
+
+    it("contains an array of MCP events", function() {
+      expect(json.events).to.be.eql(["robot_added", "robot_removed"]);
+    });
   });
 });
