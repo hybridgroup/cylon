@@ -4,8 +4,7 @@
 var Cylon = source("cylon"),
     Robot = source("robot");
 
-var API = source("api"),
-    Logger = source("logger"),
+var Logger = source("logger"),
     Adaptor = source("adaptor"),
     Driver = source("driver"),
     Config = source("config");
@@ -24,8 +23,8 @@ describe("Cylon", function() {
       expect(Cylon.Driver).to.be.eql(Driver);
     });
 
-    it("sets @api_instance to null by default", function() {
-      expect(Cylon.api_instance).to.be.eql(null);
+    it("sets @apiInstances to an empty array by default", function() {
+      expect(Cylon.apiInstances).to.be.eql([]);
     });
 
     it("sets @robots to an empty object by default", function() {
@@ -60,23 +59,37 @@ describe("Cylon", function() {
   });
 
   describe("#api", function() {
-    beforeEach(function() {
-      stub(API.prototype, "listen");
-    });
-
     afterEach(function() {
-      API.prototype.listen.restore();
+      Cylon.apiInstances = [];
     });
 
-    it("creates a new API instance", function() {
-      Cylon.api();
-      expect(Cylon.api_instance).to.be.an.instanceOf(API);
-    });
+    context("with a provided API server and opts", function() {
+      var API, opts, instance;
 
-    it("passes configuration to the API constructor", function() {
-      Cylon.config({ api: { port: "1234" }});
-      Cylon.api();
-      expect(Cylon.api_instance.port).to.be.eql("1234");
+      beforeEach(function() {
+        instance = { listen: spy() };
+        opts = { https: false };
+        API = stub().returns(instance);
+
+        Cylon.api(API, opts);
+      });
+
+      it("creates an API instance", function() {
+        expect(API).to.be.calledWithNew;
+        expect(API).to.be.calledWith(opts);
+      });
+
+      it("passes Cylon through to the instance as opts.mcp", function() {
+        expect(opts.mcp).to.be.eql(Cylon);
+      });
+
+      it("stores the API instance in @apiInstances", function() {
+        expect(Cylon.apiInstances).to.be.eql([instance]);
+      });
+
+      it("tells the API instance to start listening", function() {
+        expect(instance.listen).to.be.called;
+      });
     });
   });
 
