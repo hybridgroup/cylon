@@ -310,6 +310,35 @@ describe("Robot", function() {
         bot.initConnections({ connections: connections });
         expect(bot.connections.loopback).to.be.instanceOf(Adaptor);
       });
+
+      context("when the object contains device details", function() {
+        var opts;
+
+        beforeEach(function() {
+          opts = {
+            connections: {
+              loopback: {
+                adaptor: "loopback",
+                devices: {
+                  ping: { driver: "ping", pin: 1 }
+                }
+              }
+            }
+          };
+
+          bot.initConnections(opts);
+        });
+
+        it("adds the devices to opts.devices", function() {
+          expect(opts.devices).to.be.eql({
+            ping: { driver: "ping", pin: 1, connection: "loopback" }
+          });
+        });
+
+        it("removes the device details from optsconnections", function() {
+          expect(opts.connections.devices).to.be.eql(undefined);
+        });
+      });
     });
 
     context("when passed an array of connection objects", function() {
