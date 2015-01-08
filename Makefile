@@ -1,5 +1,5 @@
 BIN := ./node_modules/.bin
-FILES := $(shell find lib spec/lib examples  -type f -name "*.js")
+FILES := $(shell find lib spec/lib examples -type f -name "*.js" | grep -v lodash)
 TEST_FILES := spec/helper.js $(shell find spec/lib -type f -name "*.js")
 
 VERSION := $(shell node -e "console.log(require('./package.json').version)")
