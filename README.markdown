@@ -126,6 +126,12 @@ Cylon.robot({
 
 ### Multiple Spheros + API Server
 
+To use the API server, first install the plugin:
+
+    $ npm install cylon-api-http
+
+Then it can be used in Cylon scripts:
+
 ```javascript
 var Cylon = require('cylon');
 
@@ -267,9 +273,14 @@ For more info on browser support, and for help with different configurations, yo
 
 ## API
 
-Cylon has a built-in API that you can interact with your robots.
+Cylon's HTTP API plugin can be used to interact with your robots remotely.
 
-All you need to start up the API server is to place the following command in your `.js` file after you require Cylon.
+To use it, install it alongside Cylon:
+
+    $ npm install cylon-api-http
+
+
+Then, all you need to do is call `Cylon#api` in your robot's script:
 
 ```javascript
 var Cylon = require("cylon");
@@ -277,6 +288,7 @@ Cylon.api();
 ```
 
 Then visit `https://localhost:3000/` and you are ready to control your robots from a web browser!
+
 <img src="http://cylonjs.com/images/screenshots/robeaux.jpg" style="margin-top: 15px; width: 100%">
 
 You can check out more information on the Cylon API in the docs [here](http://cylonjs.com/documentation/guides/api).
