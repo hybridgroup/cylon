@@ -2,6 +2,8 @@
 
 var Cylon = require("../..");
 
+// ensure you install the API plugin first:
+// $ npm install cylon-api-http
 Cylon.api({ host: "0.0.0.0", port: "8080" });
 
 Cylon.robot({

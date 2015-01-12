@@ -16,6 +16,8 @@ First, let's make sure to load up Cylon:
 
 Now that we've got that, let's set up the api:
 
+    // ensure you install the API plugin first:
+    // $ npm install cylon-api-http
     Cylon.api();
 
 And with that done let's define our robot:

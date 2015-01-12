@@ -13,6 +13,8 @@ First, let's import Cylon:
 Next up, we'll configure the API Cylon will serve, telling it to serve on port
 `8080`.
 
+    // ensure you install the API plugin first:
+    // $ npm install cylon-api-http
     Cylon.api({
       host: '0.0.0.0',
       port: '8080'
