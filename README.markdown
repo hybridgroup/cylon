@@ -195,7 +195,7 @@ Cylon.start();
 ## Hardware Support
 
 Cylon.js has an extensible syntax for connecting to multiple, different hardware
-devices. The following 34 platforms are currently supported:
+devices. The following 35 platforms are currently supported:
 
 Platform  | Support
 --------  | -------
@@ -211,6 +211,7 @@ Platform  | Support
 [Electric Imp](https://electricimp.com/product/)                                                      | [cylon-imp](https://github.com/hybridgroup/cylon-imp)
 [Intel Edison](http://www.intel.com/content/www/us/en/do-it-yourself/edison.html)                     | [cylon-intel-iot](https://github.com/hybridgroup/cylon-intel-iot)
 [Intel Galileo](http://www.intel.com/content/www/us/en/do-it-yourself/galileo-maker-quark-board.html) | [cylon-intel-iot](https://github.com/hybridgroup/cylon-intel-iot)
+[Intel IoT Analytics](https://software.intel.com/en-us/intel-iot-developer-kit-cloud-based-analytics-user-guide) | [cylon-intel-iot-analytics](https://github.com/hybridgroup/cylon-intel-iot-analytics)
 [Joystick](http://en.wikipedia.org/wiki/Joystick)                                                     | [cylon-joystick](https://github.com/hybridgroup/cylon-joystick)
 [Keyboard](http://en.wikipedia.org/wiki/Computer_keyboard)                                            | [cylon-keyboard](https://github.com/hybridgroup/cylon-keyboard)
 [Leap Motion](https://www.leapmotion.com/)                                                            | [cylon-leapmotion](https://github.com/hybridgroup/cylon-leapmotion)
