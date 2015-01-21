@@ -3,7 +3,8 @@
 
 var Driver = source("driver"),
     Adaptor = source("adaptor"),
-    Robot = source("robot");
+    Robot = source("robot"),
+    Logger = source("logger");
 
 describe("Robot", function() {
   var work, extraFunction, robot;
@@ -572,6 +573,27 @@ describe("Robot", function() {
   describe("#toString", function() {
     it("returns basic information about the robot", function() {
       expect(robot.toString()).to.be.eql("[Robot name='Robby']");
+    });
+  });
+
+  describe("#log", function() {
+    beforeEach(function() {
+      stub(Logger, "info");
+      stub(Logger, "fatal");
+
+      robot.log("info", "an informative message");
+      robot.log("fatal", "a fatal error");
+    });
+
+    afterEach(function() {
+      Logger.info.restore();
+      Logger.fatal.restore();
+    });
+
+    it("it passes messages onto Logger, with the Robot's name", function() {
+      var nameStr = "[" + robot.name + "] -";
+      expect(Logger.info).to.be.calledWith(nameStr, "an informative message");
+      expect(Logger.fatal).to.be.calledWith(nameStr, "a fatal error");
     });
   });
 });
