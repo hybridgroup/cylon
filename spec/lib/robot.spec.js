@@ -550,6 +550,8 @@ describe("Robot", function() {
         }
       });
 
+      bot.isRunning = true;
+
       device = bot.devices.ping;
       connection = bot.connections.loopback;
 
