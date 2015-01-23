@@ -35,24 +35,4 @@ describe("Registry", function() {
       });
     });
   });
-
-  describe("#findByAdaptor", function() {
-    beforeEach(function() {
-      Registry.register(path);
-    });
-
-    it("finds the appropriate module containing the adaptor", function() {
-      expect(Registry.findByAdaptor("test-adaptor")).to.be.eql(mod);
-    });
-  });
-
-  describe("#findByDriver", function() {
-    beforeEach(function() {
-      Registry.register(path);
-    });
-
-    it("finds the appropriate module containing the driver", function() {
-      expect(Registry.findByDriver("test-driver")).to.be.eql(mod);
-    });
-  });
 });
