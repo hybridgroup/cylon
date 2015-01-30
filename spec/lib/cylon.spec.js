@@ -67,7 +67,7 @@ describe("Cylon", function() {
       var API, opts, instance;
 
       beforeEach(function() {
-        instance = { listen: spy() };
+        instance = { start: spy() };
         opts = { https: false };
         API = stub().returns(instance);
 
@@ -87,8 +87,8 @@ describe("Cylon", function() {
         expect(Cylon.apiInstances).to.be.eql([instance]);
       });
 
-      it("tells the API instance to start listening", function() {
-        expect(instance.listen).to.be.called;
+      it("tells the API instance to start", function() {
+        expect(instance.start).to.be.called;
       });
     });
   });
