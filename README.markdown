@@ -274,7 +274,8 @@ For more info on browser support, and for help with different configurations, yo
 
 ## API
 
-Cylon's HTTP API plugin can be used to interact with your robots remotely.
+Cylon.js has support for different API plugins that can be used to interact with your robots remotely. At this time we have support for `http` and `socket.io` plugins
+with more comming in the near future.
 
 To use it, install it alongside Cylon:
 
@@ -285,7 +286,13 @@ Then, all you need to do is call `Cylon#api` in your robot's script:
 
 ```javascript
 var Cylon = require("cylon");
-Cylon.api();
+
+// For http
+Cylon.api('http');
+
+// Or for Socket.io
+Cylon.api('socketio');
+
 ```
 
 Then visit `https://localhost:3000/` and you are ready to control your robots from a web browser!
