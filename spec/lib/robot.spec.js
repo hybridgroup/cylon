@@ -294,14 +294,6 @@ describe("Robot", function() {
       });
     });
 
-    context("when passed a connection object", function() {
-      it("instantiates a new connection with the provided object", function() {
-        var connection = { name: "loopback", adaptor: "loopback" };
-        bot.initConnections({ connection: connection });
-        expect(bot.connections["loopback"]).to.be.instanceOf(Adaptor);
-      });
-    });
-
     context("when passed an object containing connection details", function() {
       it("creates new connections with each of the ones provided", function() {
         var connections = {
@@ -339,28 +331,6 @@ describe("Robot", function() {
         it("removes the device details from optsconnections", function() {
           expect(opts.connections.devices).to.be.eql(undefined);
         });
-      });
-    });
-
-    context("when passed an array of connection objects", function() {
-      it("creates new connections with each of the ones provided", function() {
-        var connections = [{ name: "loopback", adaptor: "loopback" }];
-        bot.initConnections({ connections: connections });
-        expect(bot.connections["loopback"]).to.be.instanceOf(Adaptor);
-      });
-
-      it("avoids name collisions", function() {
-        var opts = {
-          connections: [
-            { name: "loopback", adaptor: "loopback" },
-            { name: "loopback", adaptor: "loopback" }
-          ]
-        };
-
-        bot.initConnections(opts);
-
-        var keys = Object.keys(bot.connections);
-        expect(keys).to.be.eql(["loopback", "loopback-1"]);
       });
     });
   });
@@ -409,14 +379,6 @@ describe("Robot", function() {
       });
     });
 
-    context("when passed a device object", function() {
-      it("instantiates a new driver with the provided object", function() {
-        var device = { name: "ping", driver: "ping" };
-        bot.initDevices({ device: device });
-        expect(bot.devices["ping"]).to.be.instanceOf(Driver);
-      });
-    });
-
     context("when passed an object containing device details", function() {
       it("creates new devices with each of the ones provided", function() {
         var devices = {
@@ -425,27 +387,6 @@ describe("Robot", function() {
 
         bot.initDevices({ devices: devices });
         expect(bot.devices.ping).to.be.instanceOf(Driver);
-      });
-    });
-
-    context("when passed an array of device objects", function() {
-      it("instantiates new drivers with provided objects", function() {
-        var devices = [{ name: "ping", driver: "ping" }];
-        bot.initDevices({ devices: devices});
-
-        expect(bot.devices["ping"]).to.be.instanceOf(Driver);
-      });
-
-      it("avoids name collisions collisions", function() {
-        bot.initDevices({
-          devices: [
-            { name: "ping", driver: "ping" },
-            { name: "ping", driver: "ping" }
-          ]
-        });
-
-        var keys = Object.keys(bot.devices);
-        expect(keys).to.be.eql(["ping", "ping-1"]);
       });
     });
   });
