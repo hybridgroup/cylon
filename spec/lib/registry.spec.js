@@ -34,5 +34,22 @@ describe("Registry", function() {
         }
       });
     });
+
+    context("when the module already exists", function() {
+      it("returns the module", function() {
+        expect(Registry.data).to.be.eql({});
+
+        var result = Registry.register(path);
+
+        // should register the module and return it
+        expect(result).to.be.eql(mod);
+
+        result = Registry.register(path);
+
+        // should just return the existing module
+        expect(result).to.be.eql(mod);
+
+      });
+    });
   });
 });
