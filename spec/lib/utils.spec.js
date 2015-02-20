@@ -252,4 +252,37 @@ describe("Utils", function() {
       });
     });
   });
+
+  describe("#merge", function() {
+    var merge = utils.merge;
+
+    var base = {
+      fruits: ["apple"],
+      vegetables: ["beet"],
+      thing: null,
+      otherThing: "hello!",
+      data: [{ "user": "barney" }, { "user": "fred" }]
+    };
+
+    var source = {
+      fruits: ["banana"],
+      vegetables: ["carrot"],
+      thing: "hello!",
+      otherThing: null,
+      data: [{ "age": 36 }, { "age": 40 }]
+    };
+
+    var expected = {
+      data: [ { age: 36, user: "barney" }, { age: 40, user: "fred" } ],
+      fruits: [ "apple", "banana" ],
+      vegetables: [ "beet", "carrot" ],
+      thing: "hello!",
+      otherThing: null
+    };
+
+    it("merges two objects", function() {
+      var merged = merge(base, source);
+      expect(merged).to.be.eql(expected);
+    });
+  });
 });
