@@ -220,4 +220,22 @@ describe("Helpers", function() {
       expect(fn).to.be.calledWith("one");
     });
   });
+
+  describe("#partial", function() {
+    it("partially applies a function's arguments", function() {
+      var fn = spy();
+      var one = _.partial(fn, "one", "two");
+      one("three");
+      expect(fn).to.be.calledWith("one", "two", "three");
+    });
+  });
+
+  describe("#partialRight", function() {
+    it("partially applies arguments to the end of a fn call", function() {
+      var fn = spy();
+      var one = _.partialRight(fn, "two", "three");
+      one("one");
+      expect(fn).to.be.calledWith("one", "two", "three");
+    });
+  });
 });
