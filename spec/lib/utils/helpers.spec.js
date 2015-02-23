@@ -212,6 +212,45 @@ describe("Helpers", function() {
     });
   });
 
+  describe("#reduce", function() {
+    var arr = [1, 2, 3, 4, 5, 6],
+        obj = { a: 1, b: 2 };
+
+    function add(sum, n) { return sum + n; }
+
+    it("reduces over a collection with the provided iteratee", function() {
+      expect(_.reduce(arr, add, 0)).to.be.eql(21);
+      expect(_.reduce(obj, add, 0)).to.be.eql(3);
+    });
+
+    it("defaults to the first value for the accumulator", function() {
+      var obj = {
+        a: { name: "hello" },
+        b: { name: "world" }
+      };
+
+      expect(_.reduce(arr, add)).to.be.eql(21);
+      expect(
+        _.reduce(obj, function(acc, val) {
+          acc.name += " " + val.name;
+          return acc;
+        })
+      ).to.be.eql({ name: "hello world"});
+    });
+
+    it("supports providing a `this` value", function() {
+      var self = {
+        toString: function(y) { return y.toString(); }
+      };
+
+      var fn = function(acc, val) {
+        return acc + this.toString(val);
+      };
+
+      expect(_.reduce(arr, fn, 1, self)).to.be.eql("123456");
+    });
+  });
+
   describe("#arity", function() {
     it("creates a function that only takes a certain # of args", function() {
       var fn = spy();
