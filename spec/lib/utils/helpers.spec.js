@@ -1,3 +1,4 @@
+// jshint expr:true
 "use strict";
 
 var _ = source("utils/helpers");
@@ -275,6 +276,115 @@ describe("Helpers", function() {
       var one = _.partialRight(fn, "two", "three");
       one("one");
       expect(fn).to.be.calledWith("one", "two", "three");
+    });
+  });
+
+  describe("#debounce", function() {
+    var clock, fn;
+
+    beforeEach(function() {
+      clock = sinon.useFakeTimers();
+      fn = stub().returns("hello, world");
+    });
+
+    afterEach(function() {
+      clock.restore();
+    });
+
+    it("delays passed fn invocation until a delay has passed", function() {
+      var debounced = _.debounce(fn, 250);
+
+      debounced();
+      expect(fn).to.not.be.called;
+
+      clock.tick(200);
+      debounced();
+      expect(fn).to.not.be.called;
+
+      clock.tick(250);
+      debounced();
+      expect(fn).to.be.calledOnce;
+
+      debounced();
+      clock.tick(250);
+      expect(fn).to.be.calledTwice;
+    });
+
+    it("resets after the delay", function() {
+      var debounced = _.debounce(fn, 250);
+
+      debounced();
+      clock.tick(250);
+      expect(fn).to.be.calledOnce;
+
+      debounced();
+      clock.tick(250);
+      expect(fn).to.be.calledTwice;
+    });
+
+    it("defaults to a 100ms delay", function() {
+      var debounced = _.debounce(fn);
+
+      debounced();
+      clock.tick(99);
+      expect(fn).to.not.be.called;
+
+      debounced();
+      clock.tick(100);
+      expect(fn).to.be.calledOnce;
+    });
+
+    it("passes the function's return value", function() {
+      var debounced = _.debounce(fn, 250);
+      expect(debounced()).to.be.eql(undefined);
+
+      clock.tick(250);
+      expect(debounced()).to.be.eql("hello, world");
+    });
+
+    context("if the 'immediate' param is set to true", function() {
+      var immediate;
+
+      beforeEach(function() {
+        immediate = _.debounce(fn, 250, true);
+      });
+
+      it("calls the debounced function immediately, but only once", function() {
+        immediate();
+        expect(fn).to.be.calledOnce;
+
+        clock.tick(150);
+        immediate();
+        expect(fn).to.be.calledOnce;
+
+        clock.tick(250);
+        immediate();
+        expect(fn).to.be.calledTwice;
+      });
+
+      it("holds onto the return value, returning it on calls", function() {
+        expect(immediate()).to.be.eql("hello, world");
+        clock.tick(150);
+        expect(immediate()).to.be.eql("hello, world");
+
+        expect(fn).to.be.calledOnce;
+      });
+    });
+
+    describe("#cancel", function() {
+      it("cancels the current debounce", function() {
+        var immediate = _.debounce(fn, 100, true);
+
+        immediate();
+        expect(fn).to.be.calledOnce;
+
+        immediate();
+        expect(fn).to.be.calledOnce;
+
+        immediate.cancel();
+        immediate();
+        expect(fn).to.be.calledTwice;
+      });
     });
   });
 });
