@@ -52,4 +52,22 @@ describe("Registry", function() {
       });
     });
   });
+
+  describe("#findBy", function() {
+    beforeEach(function() {
+      stub(Registry, "search");
+    });
+
+    afterEach(function() {
+      Registry.search.restore();
+    });
+
+    it("calls #search, pluralizing if necessary", function() {
+      Registry.findBy("adaptors", "testing");
+      expect(Registry.search).to.be.calledWith("adaptors", "testing");
+
+      Registry.findBy("driver", "testing");
+      expect(Registry.search).to.be.calledWith("drivers", "testing");
+    });
+  });
 });
