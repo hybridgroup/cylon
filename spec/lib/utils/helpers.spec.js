@@ -277,4 +277,16 @@ describe("Helpers", function() {
       expect(fn).to.be.calledWith("one", "two", "three");
     });
   });
+
+  describe("#includes", function() {
+    it("checks if an array includes a value", function() {
+      var fn = _.includes;
+
+      var arr = [1, "2", 3];
+
+      expect(fn(arr, 1)).to.be.eql(true);
+      expect(fn(arr, "2")).to.be.eql(true);
+      expect(fn(arr, {})).to.be.eql(false);
+    });
+  });
 });
