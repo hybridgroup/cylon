@@ -65,7 +65,7 @@ describe("Robot", function() {
     });
 
     it("sets other obj params as values on the robot", function() {
-      expect(robot.extraFunction).to.be.eql(extraFunction);
+      expect(robot.extraFunction).to.be.a("function");
       expect(robot.extraValue).to.be.eql("Hello World");
     });
 
@@ -96,7 +96,7 @@ describe("Robot", function() {
       });
 
       it("sets #commands to the additionally provided functions", function() {
-        expect(robot.commands).to.be.eql({ sayHello: robot.sayHello });
+        expect(robot.commands.sayHello).to.be.a("function");
       });
     });
 
