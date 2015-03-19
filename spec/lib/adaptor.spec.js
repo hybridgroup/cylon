@@ -4,7 +4,11 @@
 var Adaptor = source("adaptor");
 
 describe("Adaptor", function() {
-  var adaptor = new Adaptor({ name: "adaptor" });
+  var adaptor;
+
+  beforeEach(function() {
+    adaptor = new Adaptor({ name: "adaptor" });
+  });
 
   describe("#constructor", function() {
     it("sets @name to the provided name", function() {
