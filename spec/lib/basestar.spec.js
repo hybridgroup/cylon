@@ -50,8 +50,34 @@ describe("Basestar", function() {
     });
   });
 
-  describe("#defineEvent", function() {
+  describe("#respond", function() {
+    var listener, callback, child;
 
+    var Child = function Child() {};
+
+    Utils.subclass(Child, Basestar);
+
+    beforeEach(function() {
+      child = new Child();
+
+      listener = spy();
+      callback = spy();
+
+      child.on("event", listener);
+
+      child.respond("event", callback, "arg1", 2, { three: true });
+    });
+
+    it("triggers the callback with all additional arguments", function() {
+      expect(callback).to.be.calledWith("arg1", 2, { three: true });
+    });
+
+    it("emits an event with all additional arguments", function() {
+      expect(listener).to.be.calledWith("arg1", 2, { three: true });
+    });
+  });
+
+  describe("#defineEvent", function() {
     var ProxyClass = function ProxyClass() {};
 
     var EmitterClass = function EmitterClass(update) {
