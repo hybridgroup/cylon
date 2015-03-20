@@ -1,7 +1,8 @@
 /* jshint expr:true */
 "use strict";
 
-var Driver = source("driver");
+var Driver = source("driver"),
+    Utils = source("utils");
 
 describe("Driver", function() {
   var connection, driver;
@@ -44,6 +45,34 @@ describe("Driver", function() {
       });
 
       expect(driver.interval).to.be.eql(2000);
+    });
+  });
+
+  describe("#interface methods", function() {
+    var child;
+
+    var Child = function Child() {};
+
+    Utils.subclass(Child, Driver);
+
+    beforeEach(function() {
+      child = new Child();
+    });
+
+    describe("#start", function() {
+      it("throws an error unless overwritten", function() {
+        expect(child.start).to.throw();
+        child.start = function() {};
+        expect(child.start).to.not.throw();
+      });
+    });
+
+    describe("#halt", function() {
+      it("throws an error unless overwritten", function() {
+        expect(child.halt).to.throw();
+        child.halt = function() {};
+        expect(child.halt).to.not.throw();
+      });
     });
   });
 
