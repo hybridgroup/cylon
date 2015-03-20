@@ -261,6 +261,14 @@ through a shared `cylon-i2c` module:
   - MPL115A2 Barometer/Thermometer
   - MPU6050
 
+In addition to our supported platforms, we have the following user contributed platforms:
+
+Platform  | Support
+--------  | -------
+[Parrot Rolling Spider](http://www.parrot.com/usa/products/rolling-spider/)                           | [cylon-rolling-spider](https://github.com/ChrisTheBaron/cylon-rolling-spider)
+[PCDuino](http://www.pcduino.com/)                                                                    | [cylon-pcduino](https://github.com/alexwang2013/cylon-pcduino)
+[iBeacon](https://developer.apple.com/ibeacon/)                                                       | [cylon-beacon](https://github.com/juliancheal/cylon-beacon)
+
 We'll also have many more platforms and drivers coming soon, [follow us on
 Twitter][Twitter] for updates.
 
