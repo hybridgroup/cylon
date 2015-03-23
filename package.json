@@ -39,7 +39,9 @@
     "sinon-chai": "2.6.0",
     "chai":       "1.10.0",
     "mocha":      "2.0.1",
-    "sinon":      "1.12.1"
+    "sinon":      "1.12.1",
+    "browserify": "9.0.3",
+    "uglify-js":  "2.4.16"
   },
 
   "dependencies": {
