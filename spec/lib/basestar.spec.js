@@ -76,13 +76,14 @@ describe("Basestar", function() {
     });
 
     context("when err is not null", function() {
-      var errListener, err;
+      var errListener;
 
       beforeEach(function() {
         errListener = spy();
         child = new Child();
         child.on("error", errListener);
-        child.respond("event", callback, "Error on event!", "arg1", 2, { three: true });
+        child.respond("event", callback, 
+                      "Error on event!", "arg1", 2, { three: true });
       });
 
       it ("emits an error event", function() {
