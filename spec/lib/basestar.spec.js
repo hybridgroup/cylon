@@ -52,7 +52,6 @@ describe("Basestar", function() {
 
   describe("#respond", function() {
     var listener, callback, child;
-
     var Child = function Child() {};
 
     Utils.subclass(Child, Basestar);
@@ -65,15 +64,31 @@ describe("Basestar", function() {
 
       child.on("event", listener);
 
-      child.respond("event", callback, "arg1", 2, { three: true });
+      child.respond("event", callback, null, "arg1", 2, { three: true });
     });
 
     it("triggers the callback with all additional arguments", function() {
-      expect(callback).to.be.calledWith("arg1", 2, { three: true });
+      expect(callback).to.be.calledWith(null, "arg1", 2, { three: true });
     });
 
     it("emits an event with all additional arguments", function() {
       expect(listener).to.be.calledWith("arg1", 2, { three: true });
+    });
+
+    context("when err is not null", function() {
+      var errListener;
+
+      beforeEach(function() {
+        errListener = spy();
+        child = new Child();
+        child.on("error", errListener);
+        child.respond("event", callback, 
+                      "Error on event!", "arg1", 2, { three: true });
+      });
+
+      it ("emits an error event", function() {
+        expect(errListener).to.be.calledWith("Error on event!");
+      });
     });
   });
 
