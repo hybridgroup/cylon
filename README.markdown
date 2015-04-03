@@ -336,6 +336,7 @@ on the [https://github.com/hybridgroup/cylon-site](https://github.com/hybridgrou
 
 Version | Notes
 ------- | -----
+0.22.2  | Bug-fix for Registry loader
 0.22.1  | Remove lodash, misc. bug fixes
 0.22.0  | API extraction, new devices syntax.
 0.21.2  | Update Robeaux version
