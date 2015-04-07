@@ -27,9 +27,9 @@ All you need to get started on a new robot is the `cylon` module:
     npm install cylon
 
 With the core module installed, now install the modules for whatever hardware
-support you need. For the Arduino + LED blink example, we'll need the `firmata` module:
+support you need. For the Arduino + LED blink example, we'll need the `firmata`, `gpio`, and `i2c` modules:
 
-    npm install cylon-firmata
+    npm install cylon-firmata cylon-gpio cylon-i2c
 
 ## Examples
 
