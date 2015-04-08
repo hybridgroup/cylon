@@ -1,6 +1,6 @@
 {
   "name": "cylon",
-  "version": "0.22.2",
+  "version": "1.0.0",
   "main": "lib/cylon.js",
   "description": "A JavaScript robotics framework for Node.js",
   "homepage": "http://cylonjs.com",
@@ -13,7 +13,6 @@
     "Andrew Stewart <andrew@hybridgroup.com>",
     "Edgar Silva <edgar@hybridgroup.com>",
     "Mario 'Kuroir' Ricalde <mario@hybridgroup.com>",
-    "Gize Bonilla <gize@hybridgroup.com>",
     "Adrian Zankich <adrian@hybridgroup.com>"
   ],
 
