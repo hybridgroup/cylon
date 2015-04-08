@@ -37,7 +37,7 @@
   "devDependencies": {
     "sinon-chai": "2.7.0",
     "chai":       "2.2.0",
-    "mocha":      "2.2.1",
+    "mocha":      "2.2.4",
     "sinon":      "1.14.1"
   },
 
