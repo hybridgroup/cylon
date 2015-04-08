@@ -124,20 +124,19 @@ Cylon.robot({
 }).start();
 ```
 
-### Multiple Spheros + API Server
+### Multiple Spheros + HTTP API Plugin
 
-To use the API server, first install the plugin:
+To use the HTTP API plugin, first install it's NPM module:
 
     $ npm install cylon-api-http
 
-Then it can be used in Cylon scripts:
+Then it can be used in scripts:
 
 ```javascript
 var Cylon = require('cylon');
 
-// tell the API server to listen for requests at
-// https://localhost:4000
-Cylon.api({ port: 4000 });
+// tell the HTTP API plugin to listen for requests at https://localhost:4000
+Cylon.api("http", { port: 4000 });
 
 var bots = [
   { port: '/dev/rfcomm0', name: 'Thelma' },
@@ -173,7 +172,7 @@ Cylon.start();
 ## Fluent Syntax
 
 For those more familiar with jQuery, D3, or other fluent-style JavaScript
-libraries, Cylon.JS also supports a fluent syntax:
+libraries, Cylon.JS also supports a chainable syntax:
 
 
 ```javascript
@@ -265,30 +264,29 @@ In addition to our supported platforms, we have the following user contributed p
 
 Platform  | Support
 --------  | -------
-[Parrot Rolling Spider](http://www.parrot.com/usa/products/rolling-spider/)                           | [cylon-rolling-spider](https://github.com/ChrisTheBaron/cylon-rolling-spider)
-[PCDuino](http://www.pcduino.com/)                                                                    | [cylon-pcduino](https://github.com/alexwang2013/cylon-pcduino)
-[iBeacon](https://developer.apple.com/ibeacon/)                                                       | [cylon-beacon](https://github.com/juliancheal/cylon-beacon)
+[Parrot Rolling Spider](http://www.parrot.com/usa/products/rolling-spider/) | [cylon-rolling-spider](https://github.com/ChrisTheBaron/cylon-rolling-spider)
+[PCDuino](http://www.pcduino.com/)                                          | [cylon-pcduino](https://github.com/alexwang2013/cylon-pcduino)
+[iBeacon](https://developer.apple.com/ibeacon/)                             | [cylon-beacon](https://github.com/juliancheal/cylon-beacon)
 
-We'll also have many more platforms and drivers coming soon, [follow us on
-Twitter][Twitter] for updates.
+We'll also have many more platforms and drivers coming soon, [follow us on Twitter][Twitter] for updates.
 
 [Twitter]: https://twitter.com/cylonjs
 
 ## Browser & Mobile Support
 
-Cylon.js can be run directly in-browser, using the `browserify` NPM module. You can also run it from withing a Chrome connected app, or a PhoneGap mobile app.
+Cylon.js can be run directly in-browser, using the `browserify` NPM module.
+You can also run it from withing a Chrome connected app, or a PhoneGap mobile app.
 
 For more info on browser support, and for help with different configurations, you can find more info [in our docs](/documentation/guides/browser-support).
 
-## API
+## API Plugins
 
-Cylon.js has support for different API plugins that can be used to interact with your robots remotely. At this time we have support for `http` and `socket.io` plugins
-with more comming in the near future.
+Cylon.js has support for different API plugins that can be used to interact with your robots remotely.
+At this time we have support for `http`, `mqtt`, and `socket.io` plugins with more coming in the near future.
 
-To use it, install it alongside Cylon:
+To use an API plugin, install it alongside Cylon:
 
-    $ npm install cylon-api-http
-
+    $ npm install cylon-api-http cylon-api-socketio
 
 Then, all you need to do is call `Cylon#api` in your robot's script:
 
@@ -300,7 +298,6 @@ Cylon.api('http');
 
 // Or for Socket.io
 Cylon.api('socketio');
-
 ```
 
 Then visit `https://localhost:3000/` and you are ready to control your robots from a web browser!
@@ -317,11 +314,9 @@ Cylon also has its own CLI to generate new robots, adaptors, and drivers. You ca
 
 ## Documentation
 
-We're busy adding documentation to our website, check it out at
-[cylonjs.com/documentation][docs].
+We're busy adding documentation to our website, check it out at [cylonjs.com/documentation][docs].
 
-If you want to help with documentation, you can find the code for our website at
-on the [https://github.com/hybridgroup/cylon-site](https://github.com/hybridgroup/cylon-site).
+If you want to help with documentation, you can find the code for our website at on the [https://github.com/hybridgroup/cylon-site](https://github.com/hybridgroup/cylon-site).
 
 [docs]: http://cylonjs.com/documentation
 [docs site]: https://github.com/hybridgroup/cylon-site
