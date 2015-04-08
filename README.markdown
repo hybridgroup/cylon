@@ -339,7 +339,7 @@ If you want to help with documentation, you can find the code for our website at
 
 Version | Notes
 ------- | -----
-1.0.0   | Remove deprecated Device and Connection syntax.
+1.0.0   | Remove deprecated Device and Connection syntax, add Basestar#respond method
 0.22.2  | Bug-fix for Registry loader
 0.22.1  | Remove lodash, misc. bug fixes
 0.22.0  | API extraction, new devices syntax.
