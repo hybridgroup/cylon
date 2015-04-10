@@ -245,8 +245,9 @@ set of drivers supporting a number of devices:
   - IR Rangefinder
   - LED
   - MakeyButton
-  - Motor
   - Maxbotix Ultrasonic Range Finder
+  - Motor
+  - RGB LED
   - Servo
 
 Additionally, we also support a number of I2C (Inter-Integrated Circuit) devices
@@ -257,8 +258,12 @@ through a shared `cylon-i2c` module:
   - BMP180
   - HMC6352 Digital Compass
   - LCD Display
+  - LIDAR-Lite
+  - LSM9DS0G 9 Degrees of Freedom IMU
+  - LSM9DS0XM 9 Degrees of Freedom IMU
   - MPL115A2 Barometer/Thermometer
-  - MPU6050
+  - MPU6050 Triple Axis Accelerometer and Gyro
+  - PCA9685 16-Channel 12-bit PWM/Servo Driver
 
 In addition to our supported platforms, we have the following user contributed platforms:
 
