@@ -1,7 +1,6 @@
 [![Cylon.js](http://i.imgur.com/U3paNhR.png)](http://cylonjs.com)
 
-Cylon.js is a JavaScript framework for robotics and physical computing built on
-top of Node.js.
+Cylon.js is a JavaScript framework for robotics, physical computing, and the Internet of Things (IoT).
 
 It provides a simple, but powerful way to create solutions that incorporate
 multiple, different hardware devices concurrently.
@@ -287,7 +286,7 @@ For more info on browser support, and for help with different configurations, yo
 ## API Plugins
 
 Cylon.js has support for different API plugins that can be used to interact with your robots remotely.
-At this time we have support for `http`, `mqtt`, and `socket.io` plugins with more coming in the near future.
+At this time we have support for [http/https](https://github.com/hybridgroup/cylon-api-http), [mqtt](https://github.com/hybridgroup/cylon-api-mqtt), and [socket.io](https://github.com/hybridgroup/cylon-api-socketio) with more coming in the near future.
 
 To use an API plugin, install it alongside Cylon:
 
