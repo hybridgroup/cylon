@@ -1,4 +1,3 @@
-/* jshint expr:true */
 "use strict";
 
 var Adaptor = source("adaptor"),

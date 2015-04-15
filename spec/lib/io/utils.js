@@ -1,4 +1,3 @@
-/* jshint expr:true */
 "use strict";
 
 var Utils = source("io/utils.js");

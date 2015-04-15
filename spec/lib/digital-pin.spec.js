@@ -1,4 +1,4 @@
-/* jshint expr:true */
+/* eslint no-sync: 0 */
 "use strict";
 
 var fs = require("fs");
@@ -148,7 +148,7 @@ describe("Cylon.IO.DigitalPin", function() {
         pin.emit.restore();
       });
 
-      it("emits a digitalWrite event with the written value", function()  {
+      it("emits a digitalWrite event with the written value", function() {
         pin.digitalWrite(1);
         expect(fs.writeFile).to.be.calledWith(path, 1);
         expect(pin.emit).to.be.calledWith("digitalWrite", 1);

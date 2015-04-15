@@ -26,8 +26,9 @@ Cylon.robot({
     my.salesforce.on("start", function() {
       my.salesforce.subscribe("/topic/SpheroMsgOutbound", function(data) {
         var msg = "Sphero: " + data.sobject.Sphero_Name__c + ",";
-            msg += "Bucks: " + data.sobject.Bucks__c + ",";
-            msg += "SM_Id: " + data.sobject.Id;
+
+        msg += "Bucks: " + data.sobject.Bucks__c + ",";
+        msg += "SM_Id: " + data.sobject.Id;
 
         console.log(msg);
 

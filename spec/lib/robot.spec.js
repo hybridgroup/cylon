@@ -1,4 +1,3 @@
-/* jshint expr:true */
 "use strict";
 
 var Driver = source("driver"),
@@ -85,8 +84,6 @@ describe("Robot", function() {
     });
 
     context("if no commands are provided", function() {
-      var robot;
-
       beforeEach(function() {
         robot = new Robot({
           name: "NewBot",
@@ -101,8 +98,6 @@ describe("Robot", function() {
     });
 
     context("if a commands function is provided", function() {
-      var robot;
-
       beforeEach(function() {
         robot = new Robot({
           name: "NewBot",
@@ -147,8 +142,6 @@ describe("Robot", function() {
     });
 
     context("if a commands object is provided", function() {
-      var robot;
-
       beforeEach(function() {
         robot = new Robot({
           name: "NewBot",
@@ -246,7 +239,7 @@ describe("Robot", function() {
     it("contains the robot's events, or an empty array", function() {
       expect(json.events).to.eql(["hello", "world"]);
 
-      var bot = new Robot();
+      bot = new Robot();
       expect(bot.toJSON().events).to.be.eql([]);
     });
   });

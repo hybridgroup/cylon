@@ -17,7 +17,7 @@ Cylon.robot({
 
     my.sphero.setDataStreaming(["velocity"], { n: 40, m: 1, pcnt: 0 });
     my.sphero.on("data", function(data) {
-      if(!changingColor) {
+      if (!changingColor) {
         var x = Math.abs(data[0]),
             y = Math.abs(data[1]);
 

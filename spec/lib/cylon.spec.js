@@ -1,4 +1,3 @@
-/* jshint expr:true */
 "use strict";
 
 var Cylon = source("cylon"),
@@ -46,7 +45,7 @@ describe("Cylon", function() {
       var robot = Cylon.robot(opts);
 
       expect(robot.toString()).to.be.eql("[Robot name='Ultron']");
-      expect(Cylon.robots["Ultron"]).to.be.eql(robot);
+      expect(Cylon.robots.Ultron).to.be.eql(robot);
     });
 
     it("avoids duplicating names", function() {
@@ -99,8 +98,8 @@ describe("Cylon", function() {
           bot2 = { start: spy() };
 
       Cylon.robots = {
-        "bot1": bot1,
-        "bot2": bot2
+        bot1: bot1,
+        bot2: bot2
       };
 
       Cylon.start();
@@ -163,8 +162,8 @@ describe("Cylon", function() {
           bot2 = { halt: spy() };
 
       Cylon.robots = {
-        "bot1": bot1,
-        "bot2": bot2
+        bot1: bot1,
+        bot2: bot2
       };
 
       Cylon.halt();
@@ -175,14 +174,14 @@ describe("Cylon", function() {
   });
 
   describe("#toJSON", function() {
-    var json, bot1, bot2, echo;
+    var json, bot1, bot2;
 
     beforeEach(function() {
       bot1 = new Robot();
       bot2 = new Robot();
 
-      Cylon.robots = { "bot1": bot1, "bot2": bot2 };
-      Cylon.commands.echo = echo = function(arg) { return arg; };
+      Cylon.robots = { bot1: bot1, bot2: bot2 };
+      Cylon.commands.echo = function(arg) { return arg; };
 
       json = Cylon.toJSON();
     });

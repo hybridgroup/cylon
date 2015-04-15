@@ -10,8 +10,8 @@ Cylon.api({
 });
 
 var bots = {
-  "Thelma": "/dev/rfcomm0",
-  "Louise": "/dev/rfcomm1"
+  Thelma: "/dev/rfcomm0",
+  Louise: "/dev/rfcomm1"
 };
 
 Object.keys(bots).forEach(function(name) {

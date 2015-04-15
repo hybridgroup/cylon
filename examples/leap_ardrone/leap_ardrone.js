@@ -33,9 +33,9 @@ Cylon.robot({
   },
 
   devices: {
-    drone: { driver: "ardrone", connection:"ardrone" },
-    leapmotion: { driver: "leapmotion", connection:"leapmotion" },
-    keyboard: { driver: "keyboard", connection:"keyboard" }
+    drone: { driver: "ardrone", connection: "ardrone" },
+    leapmotion: { driver: "leapmotion", connection: "leapmotion" },
+    keyboard: { driver: "keyboard", connection: "keyboard" }
   },
 
   work: function(my) {
@@ -92,11 +92,11 @@ Cylon.robot({
           signal = handStartDirection[0] - hand.direction[0];
           value = (horizontal - TURN_TRESHOLD) * TURN_SPEED_FACTOR;
 
-          if (signal > 0){
+          if (signal > 0) {
             my.drone.counterClockwise(value);
           }
 
-          if (signal < 0){
+          if (signal < 0) {
             my.drone.clockwise(value);
           }
         }
@@ -132,51 +132,51 @@ Cylon.robot({
           }
 
           if (hand.palmNormal[2] < 0) {
-              value = Math.abs(
-                Math.round(hand.palmNormal[2] * 10 - DIRECTION_THRESHOLD) *
-                DIRECTION_SPEED_FACTOR
-              );
+            value = Math.abs(
+              Math.round(hand.palmNormal[2] * 10 - DIRECTION_THRESHOLD) *
+              DIRECTION_SPEED_FACTOR
+            );
 
-              my.drone.back(value);
+            my.drone.back(value);
           }
         }
 
         // DIRECTION LEFT/RIGHT
-        if ((Math.abs(hand.palmNormal[0])>DIRECTION_THRESHOLD)) {
+        if (Math.abs(hand.palmNormal[0]) > DIRECTION_THRESHOLD) {
           if (hand.palmNormal[0] > 0) {
-              value = Math.abs(
-                Math.round(hand.palmNormal[0] * 10 + DIRECTION_THRESHOLD) *
-                DIRECTION_SPEED_FACTOR
-              );
+            value = Math.abs(
+              Math.round(hand.palmNormal[0] * 10 + DIRECTION_THRESHOLD) *
+              DIRECTION_SPEED_FACTOR
+            );
 
-              my.drone.left(value);
+            my.drone.left(value);
           }
 
           if (hand.palmNormal[0] < 0) {
-              value = Math.abs(
-                Math.round(hand.palmNormal[0] * 10 - DIRECTION_THRESHOLD) *
-                DIRECTION_SPEED_FACTOR
-              );
+            value = Math.abs(
+              Math.round(hand.palmNormal[0] * 10 - DIRECTION_THRESHOLD) *
+              DIRECTION_SPEED_FACTOR
+            );
 
-              my.drone.right(value);
+            my.drone.right(value);
           }
         }
 
         // AUTO FREEZE
         if (
-            // within left/right threshold
-            (Math.abs(hand.palmNormal[0]) < DIRECTION_THRESHOLD) &&
+          // within left/right threshold
+          (Math.abs(hand.palmNormal[0]) < DIRECTION_THRESHOLD) &&
 
-            // within forward/back threshold
-            (Math.abs(hand.palmNormal[2]) < DIRECTION_THRESHOLD) &&
+          // within forward/back threshold
+          (Math.abs(hand.palmNormal[2]) < DIRECTION_THRESHOLD) &&
 
-            // within up/down threshold
-            Math.abs(hand.palmPosition[1] - handStartPosition[1]) <
-            UP_CONTROL_THRESHOLD &&
+          // within up/down threshold
+          Math.abs(hand.palmPosition[1] - handStartPosition[1]) <
+          UP_CONTROL_THRESHOLD &&
 
-            // within turn threshold
-            Math.abs(handStartDirection[0] - hand.direction[0]) <
-            TURN_TRESHOLD) {
+          // within turn threshold
+          Math.abs(handStartDirection[0] - hand.direction[0]) <
+          TURN_TRESHOLD) {
           my.drone.stop();
         }
       }

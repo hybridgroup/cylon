@@ -1,4 +1,3 @@
-/* jshint expr:true */
 "use strict";
 
 var Driver = source("driver"),
@@ -77,7 +76,7 @@ describe("Driver", function() {
   });
 
   describe("#toJSON", function() {
-    var driver, json;
+    var json;
 
     beforeEach(function() {
       driver = new Driver({
@@ -125,8 +124,8 @@ describe("Driver", function() {
       var commands = ["helloWorld", "otherTestCommand"],
           snake_case = ["hello_world", "other_test_command"];
 
-      commands.forEach(function(cmd) {
-        driver[cmd] = spy();
+      commands.forEach(function(name) {
+        driver[name] = spy();
       });
 
       driver.setupCommands(commands);
