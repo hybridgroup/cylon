@@ -1,4 +1,3 @@
-/* jshint expr:true */
 "use strict";
 
 var utils = source("utils");
@@ -207,7 +206,7 @@ describe("Utils", function() {
 
   describe("#fetch", function() {
     var fetch = utils.fetch,
-        obj = { property: "hello world", "false": false, "null": null };
+        obj = { property: "hello world", false: false, null: null };
 
     context("if the property exists on the object", function() {
       it("returns the value", function() {

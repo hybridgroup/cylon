@@ -155,7 +155,7 @@ bots.forEach(function(bot) {
           bucks: "" + (my.totalBucks++)
         });
 
-        var sf = Cylon.robots["salesforce"];
+        var sf = Cylon.robots.salesforce;
         sf.devices.salesforce.push("SpheroController", "POST", data);
       });
     }

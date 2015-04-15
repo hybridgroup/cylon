@@ -6,10 +6,10 @@ var Green = 0x0000FF,
     Red = 0xFF0000;
 
 var bots = {
-  "Thelma": "/dev/rfcomm0",
-  "Louise": "/dev/rfcomm1",
-  "Grace":  "/dev/rfcomm2",
-  "Ada":    "/dev/rfcomm3"
+  Thelma: "/dev/rfcomm0",
+  Louise: "/dev/rfcomm1",
+  Grace: "/dev/rfcomm2",
+  Ada: "/dev/rfcomm3"
 };
 
 Object.keys(bots).forEach(function(name) {

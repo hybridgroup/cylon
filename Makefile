@@ -1,5 +1,4 @@
 BIN := ./node_modules/.bin
-FILES := $(shell find lib spec/lib examples -type f -name "*.js")
 TEST_FILES := spec/helper.js $(shell find spec/lib -type f -name "*.js")
 
 VERSION := $(shell node -e "console.log(require('./package.json').version)")
@@ -18,7 +17,7 @@ cover:
 	@istanbul cover $(BIN)/_mocha $(TEST_FILES) --report lcovonly -- -R spec
 
 lint:
-	@jshint $(FILES)
+	@eslint lib spec examples
 
 ci: lint cover
 

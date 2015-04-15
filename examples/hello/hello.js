@@ -18,12 +18,12 @@ Cylon.robot({
   },
 
   work: function(my) {
-    every((1).seconds(), function(){
+    every((1).seconds(), function() {
       console.log("Hello, human!");
       console.log(my.ping.ping());
     });
 
-    after((5).seconds(), function(){
+    after((5).seconds(), function() {
       console.log("I've been at your command for 5 seconds now.");
     });
   }

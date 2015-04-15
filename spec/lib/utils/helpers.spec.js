@@ -11,7 +11,7 @@ describe("Helpers", function() {
       vegetables: ["beet"],
       thing: null,
       otherThing: "hello!",
-      data: [{ "user": "barney" }, { "user": "fred" }]
+      data: [{ user: "barney" }, { user: "fred" }]
     };
 
     var source = {
@@ -19,7 +19,7 @@ describe("Helpers", function() {
       vegetables: ["carrot"],
       thing: "hello!",
       otherThing: null,
-      data: [{ "age": 36 }, { "age": 40 }]
+      data: [{ age: 36 }, { age: 40 }]
     };
 
     var expected = {
@@ -37,7 +37,7 @@ describe("Helpers", function() {
   });
 
   describe("isObject", function() {
-    var fn =_.isObject;
+    var fn = _.isObject;
 
     it("checks if a value is an Object", function() {
       var Klass = function() {},
@@ -54,7 +54,7 @@ describe("Helpers", function() {
   });
 
   describe("isFunction", function() {
-    var fn =_.isFunction;
+    var fn = _.isFunction;
 
     it("checks if a value is a Function", function() {
       expect(fn(function() {})).to.be.eql(true);
@@ -224,14 +224,14 @@ describe("Helpers", function() {
     });
 
     it("defaults to the first value for the accumulator", function() {
-      var obj = {
+      var object = {
         a: { name: "hello" },
         b: { name: "world" }
       };
 
       expect(_.reduce(arr, add)).to.be.eql(21);
       expect(
-        _.reduce(obj, function(acc, val) {
+        _.reduce(object, function(acc, val) {
           acc.name += " " + val.name;
           return acc;
         })

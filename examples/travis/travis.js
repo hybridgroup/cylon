@@ -23,6 +23,10 @@ Cylon.robot({
       my.sphero.setColor("blue", true);
 
       travis.repos({ owner_name: user, name: name }, function(err, res) {
+        if (err) {
+          console.log(err);
+        }
+
         if (res.repo === undefined) { my.sphero.setColor("blue", true); }
 
         switch (res.repo.last_build_state) {

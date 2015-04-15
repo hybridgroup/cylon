@@ -2,6 +2,6 @@
 "use strict";
 
 module.exports = {
-  adaptors: [ 'test-adaptor' ],
-  drivers: [ 'test-driver' ]
+  adaptors: [ "test-adaptor" ],
+  drivers: [ "test-driver" ]
 };

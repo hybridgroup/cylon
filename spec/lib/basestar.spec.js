@@ -1,4 +1,3 @@
-/* jshint expr:true */
 "use strict";
 
 var Basestar = source("basestar"),
@@ -82,11 +81,16 @@ describe("Basestar", function() {
         errListener = spy();
         child = new Child();
         child.on("error", errListener);
-        child.respond("event", callback, 
-                      "Error on event!", "arg1", 2, { three: true });
+        child.respond(
+          "event",
+          callback,
+          "Error on event!",
+          "arg1",
+          2,
+          { three: true });
       });
 
-      it ("emits an error event", function() {
+      it("emits an error event", function() {
         expect(errListener).to.be.calledWith("Error on event!");
       });
     });
