@@ -269,9 +269,10 @@ In addition to our supported platforms, we have the following user contributed p
 
 Platform  | Support
 --------  | -------
-[Parrot Rolling Spider](http://www.parrot.com/usa/products/rolling-spider/) | [cylon-rolling-spider](https://github.com/ChrisTheBaron/cylon-rolling-spider)
-[PCDuino](http://www.pcduino.com/)                                          | [cylon-pcduino](https://github.com/alexwang2013/cylon-pcduino)
-[iBeacon](https://developer.apple.com/ibeacon/)                             | [cylon-beacon](https://github.com/juliancheal/cylon-beacon)
+[Parrot Rolling Spider](http://www.parrot.com/usa/products/rolling-spider/)       | [cylon-rolling-spider](https://github.com/ChrisTheBaron/cylon-rolling-spider)
+[PCDuino](http://www.pcduino.com/)                                                | [cylon-pcduino](https://github.com/alexwang2013/cylon-pcduino)
+[iBeacon](https://developer.apple.com/ibeacon/)                                   | [cylon-beacon](https://github.com/juliancheal/cylon-beacon)
+[WeMo](http://www.belkin.com/us/Products/home-automation/c/wemo-home-automation/) | [cylon-wemo](https://github.com/ChrisTheBaron/cylon-wemo)
 
 We'll also have many more platforms and drivers coming soon, [follow us on Twitter][Twitter] for updates.
 
