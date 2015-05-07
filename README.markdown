@@ -193,16 +193,17 @@ Cylon.start();
 ## Hardware Support
 
 Cylon.js has an extensible syntax for connecting to multiple, different hardware
-devices. The following 35 platforms are currently supported:
+devices. The following 36 platforms are currently supported:
 
 Platform  | Support
 --------  | -------
-[Ardrone](http://ardrone2.parrot.com/)                                                                | [cylon-ardrone](https://github.com/hybridgroup/cylon-ardrone)
+[ARDrone](http://ardrone2.parrot.com/)                                                                | [cylon-ardrone](https://github.com/hybridgroup/cylon-ardrone)
 [Arduino](http://www.arduino.cc/)                                                                     | [cylon-firmata](https://github.com/hybridgroup/cylon-firmata)
 [Arduino YUN](http://arduino.cc/en/Main/ArduinoBoardYun?from=Products.ArduinoYUN)                     | [cylon-firmata](https://github.com/hybridgroup/cylon-firmata)
 [AT&T M2X](https://m2x.att.com)                                                                       | [cylon-m2x](https://github.com/hybridgroup/cylon-m2x)
 [Audio]()                                                                                             | [cylon-audio](https://github.com/hybridgroup/cylon-audio)
 [Beaglebone Black](http://beagleboard.org/Products/BeagleBone+Black/)                                 | [cylon-beaglebone](https://github.com/hybridgroup/cylon-beaglebone)
+[Bebop](http://www.parrot.com/products/bebop-drone/)                                                  | [cylon-bebop](https://github.com/hybridgroup/cylon-bebop)
 [Bluetooth LE](http://en.wikipedia.org/wiki/Bluetooth_low_energy)                                     | [cylon-ble](https://github.com/hybridgroup/cylon-ble)
 [Crazyflie](http://www.bitcraze.se/)                                                                  | [cylon-crazyflie](https://github.com/hybridgroup/cylon-crazyflie)
 [Digispark](http://digistump.com/products/1)                                                          | [cylon-digispark](https://github.com/hybridgroup/cylon-digispark)
