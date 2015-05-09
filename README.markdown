@@ -247,7 +247,6 @@ set of drivers supporting a number of devices:
   - MakeyButton
   - Maxbotix Ultrasonic Range Finder
   - Motor
-  - Relay
   - RGB LED
   - Servo
 
