@@ -251,4 +251,22 @@ describe("Utils", function() {
       });
     });
   });
+
+  describe("#classCallCheck", function() {
+    it("checks that an object is an instance of a constructor", function() {
+      var fn = function(instance, Constructor) {
+        return utils.classCallCheck.bind(null, instance, Constructor);
+      };
+
+      function Class() {
+        utils.classCallCheck(this, Class);
+      }
+
+      expect(fn([], Array)).to.not.throw;
+      expect(fn([], Number)).to.throw(TypeError);
+
+      expect(Class).to.throw(TypeError);
+      expect(function() { return new Class(); }).not.to.throw(TypeError);
+    });
+  });
 });
