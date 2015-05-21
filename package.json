@@ -21,7 +21,7 @@
     "url": "https://github.com/hybridgroup/cylon"
   },
 
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
 
   "hardware": {
     "*": false,
