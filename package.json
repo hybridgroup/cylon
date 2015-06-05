@@ -23,6 +23,17 @@
 
   "license": "Apache-2.0",
 
+  "keywords": [
+    "cylon",
+    "cylonjs",
+    "cylons",
+    "robot"
+    "robots"
+    "robotics",
+    "iot",
+    "hardware"
+  ],
+
   "hardware": {
     "*": false,
     "./": false,
