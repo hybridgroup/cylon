@@ -1,5 +1,7 @@
 # Contributing to Cylon.js
 
+This document is based on the [io.js contribution guidelines](https://github.com/nodejs/io.js/blob/master/CONTRIBUTING.md)
+
 ## Issue Contributions
 
 When opening new issues or commenting on existing issues on this repository
