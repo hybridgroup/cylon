@@ -32,17 +32,8 @@ describe("Robot", function() {
       });
 
       context("if not provided", function() {
-        beforeEach(function() {
-          stub(Robot, "randomName").returns("New Robot");
-        });
-
-        afterEach(function() {
-          Robot.randomName.restore();
-        });
-
-        it("is set to a random name", function() {
-          var bot = new Robot({});
-          expect(bot.name).to.be.eql("New Robot");
+        it("is set to an incrementing name", function() {
+          expect(new Robot({}).name).to.match(/Robot \d/);
         });
       });
     });
