@@ -3,8 +3,8 @@
 
 var fs = require("fs");
 
-var DigitalPin = source("io/digital-pin"),
-    Utils = source("utils");
+var DigitalPin = lib("io/digital-pin"),
+    Utils = lib("utils");
 
 describe("Cylon.IO.DigitalPin", function() {
   var pin = new DigitalPin({ pin: "4", mode: "w" });

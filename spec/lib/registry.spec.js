@@ -1,6 +1,6 @@
 "use strict";
 
-var Registry = source("registry");
+var Registry = lib("registry");
 
 var path = "./../spec/support/mock_module.js";
 

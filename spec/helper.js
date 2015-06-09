@@ -22,11 +22,11 @@ global.spy = sinon.spy;
 global.stub = sinon.stub;
 
 // convenience function to require modules in lib directory
-global.source = function(module) {
+global.lib = function(module) {
   return require(path.normalize("./../lib/" + module));
 };
 
-var Cylon = source("cylon");
+var Cylon = lib("cylon");
 
 Cylon.config({
   mode: "manual",

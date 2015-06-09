@@ -1,9 +1,9 @@
 "use strict";
 
-var Driver = source("driver"),
-    Adaptor = source("adaptor"),
-    Robot = source("robot"),
-    Logger = source("logger");
+var Driver = lib("driver"),
+    Adaptor = lib("adaptor"),
+    Robot = lib("robot"),
+    Logger = lib("logger");
 
 describe("Robot", function() {
   var work, extraFunction, robot;

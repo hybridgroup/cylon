@@ -1,6 +1,6 @@
 "use strict";
 
-var utils = source("utils");
+var utils = lib("utils");
 
 describe("Utils", function() {
   describe("Monkey-patches", function() {

@@ -1,7 +1,7 @@
 "use strict";
 
-var Basestar = source("basestar"),
-    Utils = source("utils");
+var Basestar = lib("basestar"),
+    Utils = lib("utils");
 
 var EventEmitter = require("events").EventEmitter;
 

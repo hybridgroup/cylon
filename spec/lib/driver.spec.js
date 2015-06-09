@@ -1,7 +1,7 @@
 "use strict";
 
-var Driver = source("driver"),
-    Utils = source("utils");
+var Driver = lib("driver"),
+    Utils = lib("utils");
 
 describe("Driver", function() {
   var connection, driver;

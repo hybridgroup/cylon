@@ -1,6 +1,6 @@
 "use strict";
 
-var logger = source("logger/basic_logger");
+var logger = lib("logger/basic_logger");
 
 var date = new Date(0).toISOString();
 

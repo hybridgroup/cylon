@@ -1,12 +1,12 @@
 "use strict";
 
-var Cylon = source("cylon"),
-    Robot = source("robot");
+var Cylon = lib("cylon"),
+    Robot = lib("robot");
 
-var Logger = source("logger"),
-    Adaptor = source("adaptor"),
-    Driver = source("driver"),
-    Config = source("config");
+var Logger = lib("logger"),
+    Adaptor = lib("adaptor"),
+    Driver = lib("driver"),
+    Config = lib("config");
 
 describe("Cylon", function() {
   describe("exports", function() {

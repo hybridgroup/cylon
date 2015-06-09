@@ -1,6 +1,6 @@
 "use strict";
 
-var _ = source("utils/helpers");
+var _ = lib("utils/helpers");
 
 describe("Helpers", function() {
   describe("extend", function() {

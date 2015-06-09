@@ -1,6 +1,6 @@
 "use strict";
 
-var Utils = source("io/utils.js");
+var Utils = lib("io/utils.js");
 
 describe("IOUtils", function() {
   describe("#periodAndDuty", function() {

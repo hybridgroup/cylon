@@ -1,7 +1,7 @@
 "use strict";
 
-var Logger = source("logger"),
-    Config = source("config");
+var Logger = lib("logger"),
+    Config = lib("config");
 
 describe("Logger", function() {
   afterEach(function() {

@@ -1,7 +1,7 @@
 "use strict";
 
-var Adaptor = source("adaptor"),
-    Utils = source("utils");
+var Adaptor = lib("adaptor"),
+    Utils = lib("utils");
 
 describe("Adaptor", function() {
   var adaptor;
