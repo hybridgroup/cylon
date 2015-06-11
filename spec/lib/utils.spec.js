@@ -96,32 +96,24 @@ describe("Utils", function() {
   describe("#proxyFunctionsToObject", function() {
     var methods = ["asString", "toString", "returnString"];
 
-    var ProxyClass = (function() {
-      function ProxyClass() {}
+    var ProxyClass = function ProxyClass() {};
 
-      ProxyClass.prototype.asString = function() {
-        return "[object ProxyClass]";
-      };
+    ProxyClass.prototype.asString = function() {
+      return "[object ProxyClass]";
+    };
 
-      ProxyClass.prototype.toString = function() {
-        return "[object ProxyClass]";
-      };
+    ProxyClass.prototype.toString = function() {
+      return "[object ProxyClass]";
+    };
 
-      ProxyClass.prototype.returnString = function(string) {
-        return string;
-      };
+    ProxyClass.prototype.returnString = function(string) {
+      return string;
+    };
 
-      return ProxyClass;
-    })();
-
-    var TestClass = (function() {
-      function TestClass() {
-        this.testInstance = new ProxyClass();
-        utils.proxyFunctionsToObject(methods, this.testInstance, this, true);
-      }
-
-      return TestClass;
-    })();
+    var TestClass = function TestClass() {
+      this.testInstance = new ProxyClass();
+      utils.proxyFunctionsToObject(methods, this.testInstance, this, true);
+    };
 
     var testclass = new TestClass();
 
