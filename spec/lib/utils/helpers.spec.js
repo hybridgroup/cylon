@@ -289,4 +289,90 @@ describe("Helpers", function() {
       expect(fn(arr, {})).to.be.eql(false);
     });
   });
+
+  describe("#parallel", function() {
+    var fn1, fn2, fn3, callback;
+
+    beforeEach(function() {
+      fn1 = stub();
+      fn2 = stub();
+      fn3 = stub();
+      callback = stub();
+    });
+
+    it("executes a set of functions in parallel", function() {
+      _.parallel([fn1, fn2, fn3], callback);
+
+      expect(fn1).to.be.called;
+      expect(fn2).to.be.called;
+      expect(fn3).to.be.called;
+      expect(callback).to.not.be.called;
+
+      fn1.yield(null, true);
+      expect(callback).to.not.be.called;
+      fn2.yield(null, true);
+      expect(callback).to.not.be.called;
+      fn3.yield(null, true);
+
+      expect(callback).to.be.calledWith(null, [true, true, true]);
+    });
+
+    it("stops immediately if there's an error", function() {
+      _.parallel([fn1, fn2, fn3], callback);
+
+      fn1.yield(true, null);
+
+      expect(callback).to.be.calledWith(true);
+
+      fn2.yields(null, true);
+      fn3.yields(null, true);
+
+      expect(callback).to.be.calledOnce;
+    });
+  });
+
+  describe("#series", function() {
+    var fn1, fn2, fn3, callback;
+
+    beforeEach(function() {
+      fn1 = stub();
+      fn2 = stub();
+      fn3 = stub();
+      callback = stub();
+    });
+
+    it("executes a set of functions in series", function() {
+      _.series([fn1, fn2, fn3], callback);
+
+      expect(fn1).to.be.called;
+      expect(fn2).to.not.be.called;
+      expect(fn3).to.not.be.called;
+      expect(callback).to.not.be.called;
+
+      fn1.yield(null, true);
+
+      expect(fn2).to.be.called;
+      expect(fn3).to.not.be.called;
+      expect(callback).to.not.be.called;
+
+      fn2.yield(null, true);
+
+      expect(fn3).to.be.called;
+      expect(callback).to.not.be.called;
+
+      fn3.yield(null, true);
+
+      expect(callback).to.be.calledWith(null, [true, true, true]);
+    });
+
+    it("stops immediately if there's an error", function() {
+      _.series([fn1, fn2, fn3], callback);
+
+      fn1.yield(true, null);
+
+      expect(fn2).to.not.be.called;
+      expect(fn3).to.not.be.called;
+      expect(callback).to.be.calledWith(true);
+    });
+  });
 });
