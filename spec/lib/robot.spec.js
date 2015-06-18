@@ -475,7 +475,7 @@ describe("Robot", function() {
         }
       });
 
-      bot.isRunning = true;
+      bot.running = true;
 
       device = bot.devices.ping;
       connection = bot.connections.loopback;
