@@ -26,7 +26,7 @@ global.lib = function(module) {
   return require(path.normalize("./../lib/" + module));
 };
 
-var Cylon = lib("cylon");
+var Cylon = require("./../");
 
 Cylon.config({
   mode: "manual",

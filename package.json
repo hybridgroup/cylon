@@ -1,7 +1,6 @@
 {
   "name": "cylon",
   "version": "1.0.0",
-  "main": "lib/cylon.js",
   "description": "A JavaScript robotics framework for Node.js",
   "homepage": "http://cylonjs.com",
   "bugs": "https://github.com/hybridgroup/cylon/issues",
@@ -37,7 +36,8 @@
   "hardware": {
     "*": false,
     "./": false,
-    "./lib": true
+    "./lib": true,
+    "index.js": true
   },
 
   "engines" : {

@@ -1,186 +1,78 @@
 "use strict";
 
-var Cylon = lib("cylon"),
-    Robot = lib("robot");
+var Cylon = lib("../index");
 
-var Logger = lib("logger"),
-    Adaptor = lib("adaptor"),
+var MCP = lib("mcp"),
+    API = lib("api"),
+    Robot = lib("robot"),
     Driver = lib("driver"),
-    Config = lib("config");
+    Adaptor = lib("adaptor"),
+    Utils = lib("utils"),
+    Config = lib("config"),
+    Logger = lib("logger");
+
+var IO = {
+  DigitalPin: lib("io/digital-pin"),
+  Utils: lib("io/utils")
+};
 
 describe("Cylon", function() {
-  describe("exports", function() {
-    it("sets Logger to the Logger module", function() {
-      expect(Cylon.Logger).to.be.eql(Logger);
-    });
+  it("exports the MCP as Cylon.MCP", function() {
+    expect(Cylon.MCP).to.be.eql(MCP);
+  });
 
-    it("sets Adaptor to the Adaptor module", function() {
-      expect(Cylon.Adaptor).to.be.eql(Adaptor);
-    });
+  it("exports the Robot as Cylon.Robot", function() {
+    expect(Cylon.Robot).to.be.eql(Robot);
+  });
 
-    it("sets Driver to the Driver module", function() {
-      expect(Cylon.Driver).to.be.eql(Driver);
-    });
+  it("exports the Driver as Cylon.Driver", function() {
+    expect(Cylon.Driver).to.be.eql(Driver);
+  });
 
-    it("sets @apiInstances to an empty array by default", function() {
-      expect(Cylon.apiInstances).to.be.eql([]);
-    });
+  it("exports the Adaptor as Cylon.Adaptor", function() {
+    expect(Cylon.Adaptor).to.be.eql(Adaptor);
+  });
 
-    it("sets @robots to an empty object by default", function() {
-      expect(Cylon.robots).to.be.eql({});
-    });
+  it("exports the Utils as Cylon.Utils", function() {
+    expect(Cylon.Utils).to.be.eql(Utils);
+  });
 
-    it("sets @robots to an empty object by default", function() {
-      expect(Cylon.commands).to.be.eql({});
-    });
+
+  it("exports the Logger as Cylon.Logger", function() {
+    expect(Cylon.Logger).to.be.eql(Logger);
+  });
+
+  it("exports the IO DigitalPin and Utils as Cylon.IO", function() {
+    expect(Cylon.IO).to.be.eql(IO);
   });
 
   describe("#robot", function() {
-    afterEach(function() {
-      Cylon.robots = {};
-    });
-
-    it("uses passed options to create a new Robot", function() {
-      var opts = { name: "Ultron" };
-      var robot = Cylon.robot(opts);
-
-      expect(robot.toString()).to.be.eql("[Robot name='Ultron']");
-      expect(Cylon.robots.Ultron).to.be.eql(robot);
-    });
-
-    it("avoids duplicating names", function() {
-      Cylon.robot({ name: "Ultron" });
-      Cylon.robot({ name: "Ultron" });
-
-      var bots = Object.keys(Cylon.robots);
-      expect(bots).to.be.eql(["Ultron", "Ultron-1"]);
-    });
-  });
-
-  describe("#api", function() {
-    afterEach(function() {
-      Cylon.apiInstances = [];
-    });
-
-    context("with a provided API server and opts", function() {
-      var API, opts, instance;
-
-      beforeEach(function() {
-        instance = { start: spy() };
-        opts = { https: false };
-        API = stub().returns(instance);
-
-        Cylon.api(API, opts);
-      });
-
-      it("creates an API instance", function() {
-        expect(API).to.be.calledWithNew;
-        expect(API).to.be.calledWith(opts);
-      });
-
-      it("passes Cylon through to the instance as opts.mcp", function() {
-        expect(opts.mcp).to.be.eql(Cylon);
-      });
-
-      it("stores the API instance in @apiInstances", function() {
-        expect(Cylon.apiInstances).to.be.eql([instance]);
-      });
-
-      it("tells the API instance to start", function() {
-        expect(instance.start).to.be.called;
-      });
+    it("proxies to MCP.create", function() {
+      expect(Cylon.robot).to.be.eql(MCP.create);
     });
   });
 
   describe("#start", function() {
-    it("calls #start() on all robots", function() {
-      var bot1 = { start: spy() },
-          bot2 = { start: spy() };
-
-      Cylon.robots = {
-        bot1: bot1,
-        bot2: bot2
-      };
-
-      Cylon.start();
-
-      expect(bot1.start).to.be.called;
-      expect(bot2.start).to.be.called;
-    });
-  });
-
-  describe("#config", function() {
-    beforeEach(function() {
-      delete Config.a;
-      delete Config.b;
-    });
-
-    it("sets config variables", function() {
-      Cylon.config({ a: 1, b: 2 });
-      expect(Config.a).to.be.eql(1);
-      expect(Config.b).to.be.eql(2);
-    });
-
-    it("updates existing config", function() {
-      Cylon.config({ a: 1, b: 2 });
-      Cylon.config({ a: 3 });
-      expect(Config.a).to.be.eql(3);
-      expect(Config.b).to.be.eql(2);
-    });
-
-    it("returns updated config", function() {
-      var config = Cylon.config({ a: 1, b: 2 });
-      expect(Config).to.be.eql(config);
-    });
-
-    it("doesn't ignores non-object arguments", function() {
-      var config = Cylon.config({ a: 1, b: 2 });
-      Cylon.config(["a", 1, "b", 2]);
-      Cylon.config("hello world");
-      expect(Config).to.be.eql(config);
+    it("proxies to MCP.start", function() {
+      expect(Cylon.start).to.be.eql(MCP.start);
     });
   });
 
   describe("#halt", function() {
-    it("calls #halt() on all robots", function() {
-      var bot1 = { halt: spy() },
-          bot2 = { halt: spy() };
-
-      Cylon.robots = {
-        bot1: bot1,
-        bot2: bot2
-      };
-
-      Cylon.halt();
-
-      expect(bot1.halt).to.be.called;
-      expect(bot2.halt).to.be.called;
+    it("proxies to MCP.halt", function() {
+      expect(Cylon.halt).to.be.eql(MCP.halt);
     });
   });
 
-  describe("#toJSON", function() {
-    var json, bot1, bot2;
-
-    beforeEach(function() {
-      bot1 = new Robot();
-      bot2 = new Robot();
-
-      Cylon.robots = { bot1: bot1, bot2: bot2 };
-      Cylon.commands.echo = function(arg) { return arg; };
-
-      json = Cylon.toJSON();
+  describe("#api", function() {
+    it("proxies to API.create", function() {
+      expect(Cylon.api).to.be.eql(API.create);
     });
+  });
 
-    it("contains all robots the MCP knows about", function() {
-      expect(json.robots).to.be.eql([bot1.toJSON(), bot2.toJSON()]);
-    });
-
-    it("contains an array of MCP commands", function() {
-      expect(json.commands).to.be.eql(["echo"]);
-    });
-
-    it("contains an array of MCP events", function() {
-      expect(json.events).to.be.eql(["robot_added", "robot_removed"]);
+  describe("#config", function() {
+    it("proxies to Config.update", function() {
+      expect(Cylon.config).to.be.eql(Config.update);
     });
   });
 });
