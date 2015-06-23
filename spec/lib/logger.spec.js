@@ -1,7 +1,8 @@
 "use strict";
 
 var Logger = lib("logger"),
-    Config = lib("config");
+    Config = lib("config"),
+    NullLogger = lib("logger/null_logger");
 
 describe("Logger", function() {
   afterEach(function() {
@@ -145,5 +146,12 @@ describe("Logger", function() {
       expect(logger.debug).to.not.be.called;
       expect(logger.info).to.be.calledWith("info message");
     });
+  });
+
+  it("automatically updates if configuration changed", function() {
+    var custom = spy();
+    expect(Logger.logger).to.be.eql(NullLogger);
+    Config.update({ logging: { logger: custom } });
+    expect(Logger.logger).to.be.eql(custom);
   });
 });
