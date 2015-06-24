@@ -37,7 +37,6 @@
   "hardware": {
     "*": false,
     "./": false,
-    "async": true,
     "./lib": true
   },
 
@@ -51,9 +50,5 @@
     "mocha":      "2.2.4",
     "sinon":      "1.14.1",
     "eslint":     "0.22.1"
-  },
-
-  "dependencies": {
-    "async": "0.9.0"
   }
 }
