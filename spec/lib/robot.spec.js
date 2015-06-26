@@ -70,7 +70,7 @@ describe("Robot", function() {
           });
         };
 
-        expect(fn).to.throw(Error, "No connections specified");
+        expect(fn).to.throw(Error);
       });
     });
 
@@ -264,27 +264,20 @@ describe("Robot", function() {
     });
   });
 
-  describe("initConnections", function() {
+  describe("initRobot", function() {
     var bot;
 
     beforeEach(function() {
       bot = new Robot();
     });
 
-    context("when not passed anything", function() {
-      it("does not modify the bot's connections", function() {
-        bot.initConnections({});
-        expect(bot.connections).to.be.eql({});
-      });
-    });
-
-    context("when passed an object containing connection details", function() {
+    context("when connection details are provided", function() {
       it("creates new connections with each of the ones provided", function() {
         var connections = {
           loopback: { adaptor: "loopback" }
         };
 
-        bot.initConnections({ connections: connections });
+        bot.initRobot({ connections: connections });
         expect(bot.connections.loopback).to.be.instanceOf(Adaptor);
       });
 
@@ -303,7 +296,7 @@ describe("Robot", function() {
             }
           };
 
-          bot.initConnections(opts);
+          bot.initRobot(opts);
         });
 
         it("adds the devices to opts.devices", function() {
@@ -315,6 +308,23 @@ describe("Robot", function() {
         it("removes the device details from optsconnections", function() {
           expect(opts.connections.devices).to.be.eql(undefined);
         });
+      });
+    });
+
+    context("when device details are provided", function() {
+      it("creates new devices with each of the ones provided", function() {
+        var opts = {
+          connections: {
+            loopback: { adaptor: "loopback" }
+          },
+
+          devices: {
+            ping: { driver: "ping" }
+          }
+        };
+
+        bot.initRobot(opts);
+        expect(bot.devices.ping).to.be.instanceOf(Driver);
       });
     });
   });
@@ -345,34 +355,7 @@ describe("Robot", function() {
     });
   });
 
-  describe("initDevices", function() {
-    var bot;
-
-    beforeEach(function() {
-      bot = new Robot({
-        connections: {
-          loopback: { adaptor: "loopback" }
-        }
-      });
-    });
-
-    context("when not passed anything", function() {
-      it("does not modify the bot's devices", function() {
-        bot.initDevices({});
-        expect(bot.devices).to.be.eql({});
-      });
-    });
-
-    context("when passed an object containing device details", function() {
-      it("creates new devices with each of the ones provided", function() {
-        var devices = {
-          ping: { driver: "ping" }
-        };
-
-        bot.initDevices({ devices: devices });
-        expect(bot.devices.ping).to.be.instanceOf(Driver);
-      });
-    });
+  describe("initRobot", function() {
   });
 
   describe("#start", function() {
