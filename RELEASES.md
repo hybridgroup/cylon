@@ -2,6 +2,7 @@
 
 Version | Notes
 ------- | -----
+1.1.0   | Clean ups, refactorings, misc. bug fixes.
 1.0.0   | Remove deprecated Device and Connection syntax, add Basestar#respond method
 0.22.2  | Bug-fix for Registry loader
 0.22.1  | Remove lodash, misc. bug fixes
