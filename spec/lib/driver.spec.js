@@ -139,8 +139,23 @@ describe("Driver", function() {
     });
 
     it("handles edge cases", function() {
-      var commands = ["HelloWorld", "getPNGStream", "getHSetting"],
-          snake_case = ["hello_world", "get_png_stream", "get_h_setting"];
+      var commands = [
+        "HelloWorld",
+        "getPNGStream",
+        "getHSetting",
+        "getRGB",
+        "convertRGBToHSL",
+        "getTemperatureInF"
+      ];
+
+      var snake_case = [
+        "hello_world",
+        "get_png_stream",
+        "get_h_setting",
+        "get_rgb",
+        "convert_rgb_to_hsl",
+        "get_temperature_in_f"
+      ];
 
       commands.forEach(function(cmd) {
         driver[cmd] = function() {};
