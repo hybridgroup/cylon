@@ -1,24 +1,22 @@
 "use strict";
 
-function lib(path) { return require("./lib/" + path); }
-
-var Config = lib("config"),
-    MCP = lib("mcp"),
-    API = lib("api");
+var Config = require("./lib/config"),
+    MCP = require("./lib/mcp"),
+    API = require("./lib/api");
 
 var exports = module.exports = {};
 
-exports.MCP = lib("mcp");
-exports.Robot = lib("robot");
-exports.Driver = lib("driver");
-exports.Adaptor = lib("adaptor");
+exports.MCP = require("./lib/mcp");
+exports.Robot = require("./lib/robot");
+exports.Driver = require("./lib/driver");
+exports.Adaptor = require("./lib/adaptor");
 
-exports.Utils = lib("utils");
-exports.Logger = lib("logger");
+exports.Utils = require("./lib/utils");
+exports.Logger = require("./lib/logger");
 
 exports.IO = {
-  DigitalPin: lib("io/digital-pin"),
-  Utils: lib("io/utils")
+  DigitalPin: require("./lib/io/digital-pin"),
+  Utils: require("./lib/io/utils")
 };
 
 exports.robot = MCP.create;
