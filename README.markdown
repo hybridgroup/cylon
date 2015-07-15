@@ -201,7 +201,7 @@ Platform  | Support
 [Arduino](http://www.arduino.cc/)                                                                     | [cylon-firmata](https://github.com/hybridgroup/cylon-firmata)
 [Arduino YUN](http://arduino.cc/en/Main/ArduinoBoardYun?from=Products.ArduinoYUN)                     | [cylon-firmata](https://github.com/hybridgroup/cylon-firmata)
 [AT&T M2X](https://m2x.att.com)                                                                       | [cylon-m2x](https://github.com/hybridgroup/cylon-m2x)
-[Audio]()                                                                                             | [cylon-audio](https://github.com/hybridgroup/cylon-audio)
+Audio                                                                                                 | [cylon-audio](https://github.com/hybridgroup/cylon-audio)
 [Beaglebone Black](http://beagleboard.org/Products/BeagleBone+Black/)                                 | [cylon-beaglebone](https://github.com/hybridgroup/cylon-beaglebone)
 [Bebop](http://www.parrot.com/products/bebop-drone/)                                                  | [cylon-bebop](https://github.com/hybridgroup/cylon-bebop)
 [Bluetooth LE](http://en.wikipedia.org/wiki/Bluetooth_low_energy)                                     | [cylon-ble](https://github.com/hybridgroup/cylon-ble)
@@ -229,7 +229,7 @@ Platform  | Support
 [Salesforce](http://www.force.com/)                                                                   | [cylon-force](https://github.com/hybridgroup/cylon-force)
 [Skynet](http://skynet.im/)                                                                           | [cylon-skynet](https://github.com/hybridgroup/cylon-skynet)
 [Spark](http://www.spark.io/)                                                                         | [cylon-spark](https://github.com/hybridgroup/cylon-spark)
-[Speech]()                                                                                            | [cylon-speech](https://github.com/hybridgroup/cylon-speech)
+Speech                                                                                                | [cylon-speech](https://github.com/hybridgroup/cylon-speech)
 [Sphero](http://www.gosphero.com/)                                                                    | [cylon-sphero](https://github.com/hybridgroup/cylon-sphero)
 [Tessel](https://tessel.io/)                                                                          | [cylon-tessel](https://github.com/hybridgroup/cylon-tessel)
 [WICED Sense](http://www.broadcom.com/products/wiced/sense/)                                          | [cylon-wiced-sense](https://github.com/hybridgroup/cylon-wiced-sense)
@@ -330,15 +330,11 @@ If you want to help with documentation, you can find the code for our website at
 
 ## Contributing
 
-For our contribution guidelines, please go to [https://github.com/hybridgroup/cylon/blob/master/CONTRIBUTING.md
-](https://github.com/hybridgroup/cylon/blob/master/CONTRIBUTING.md
-).
+For our contribution guidelines, please go to [CONTRIBUTING.md](https://github.com/hybridgroup/cylon/blob/master/CONTRIBUTING.md).
 
 ## Release History
 
-For the release history, please go to [https://github.com/hybridgroup/cylon/blob/master/RELEASES.md
-](https://github.com/hybridgroup/cylon/blob/master/RELEASES.md
-).
+For the release history, please go to [RELEASES.md](https://github.com/hybridgroup/cylon/blob/master/RELEASES.md).
 
 ## License
 
