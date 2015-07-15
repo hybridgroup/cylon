@@ -1,36 +1,33 @@
 "use strict";
 
-var Config = require("./lib/config"),
-    MCP = require("./lib/mcp"),
-    API = require("./lib/api");
+var MCP = require("./lib/mcp");
 
-var exports = module.exports = {};
+module.exports = {
+  MCP: require("./lib/mcp"),
 
-exports.MCP = require("./lib/mcp");
-exports.Robot = require("./lib/robot");
-exports.Driver = require("./lib/driver");
-exports.Adaptor = require("./lib/adaptor");
+  Robot: require("./lib/robot"),
 
-exports.Utils = require("./lib/utils");
-exports.Logger = require("./lib/logger");
+  Driver: require("./lib/driver"),
+  Adaptor: require("./lib/adaptor"),
 
-exports.IO = {
-  DigitalPin: require("./lib/io/digital-pin"),
-  Utils: require("./lib/io/utils")
+  Utils: require("./lib/utils"),
+  Logger: require("./lib/logger"),
+
+  IO: {
+    DigitalPin: require("./lib/io/digital-pin"),
+    Utils: require("./lib/io/utils")
+  },
+
+  robot: MCP.create,
+  api: require("./lib/api").create,
+  config: require("./lib/config").update,
+
+  start: MCP.start,
+  halt: MCP.halt
 };
 
-exports.robot = MCP.create;
-exports.start = MCP.start;
-exports.halt = MCP.halt;
-
-exports.api = API.create;
-
-exports.config = Config.update;
-
 process.on("SIGINT", function() {
-  exports.halt(function() {
-    process.kill(process.pid);
-  });
+  MCP.halt(process.kill.bind(process, process.pid));
 });
 
 if (process.platform === "win32") {
