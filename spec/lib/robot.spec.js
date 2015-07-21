@@ -463,13 +463,8 @@ describe("Robot", function() {
       device = bot.devices.ping;
       connection = bot.connections.loopback;
 
-      stub(device, "halt").yields(true);
-      stub(connection, "disconnect").yields(true);
-    });
-
-    afterEach(function() {
-      device.halt.restore();
-      connection.disconnect.restore();
+      stub(device, "halt").yields();
+      stub(connection, "disconnect").yields();
     });
 
     it("calls #halt on all devices and connections", function() {
@@ -477,6 +472,38 @@ describe("Robot", function() {
 
       expect(device.halt).to.be.called;
       expect(connection.disconnect).to.be.called;
+    });
+
+    context("if a subcall triggers it's callback with an error", function() {
+      beforeEach(function() {
+        bot = new Robot({
+          devices: {
+            ping: { driver: "ping" },
+            ping2: { driver: "ping" }
+          },
+
+          connections: {
+            loopback: { adaptor: "loopback" },
+            loopback2: { adaptor: "loopback" }
+          }
+        });
+
+        bot.running = true;
+
+        stub(bot.devices.ping, "halt").yields("error!");
+        stub(bot.devices.ping2, "halt").yields();
+        stub(bot.connections.loopback, "disconnect").yields("another err!");
+        stub(bot.connections.loopback2, "disconnect").yields();
+      });
+
+      it("doesn't effect the rest of the shutdown", function() {
+        bot.halt();
+
+        expect(bot.devices.ping.halt).to.be.called;
+        expect(bot.devices.ping2.halt).to.be.called;
+        expect(bot.connections.loopback.disconnect).to.be.called;
+        expect(bot.connections.loopback2.disconnect).to.be.called;
+      });
     });
   });
 
