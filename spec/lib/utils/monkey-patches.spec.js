@@ -59,6 +59,24 @@ describe("monkey-patches", function() {
       });
     });
 
+    describe("#milliseconds", function() {
+      it("allows for expressing time in milliseconds", function() {
+        expect((5).milliseconds()).to.be.eql(5);
+      });
+    });
+
+    describe("#ms", function() {
+      it("allows for expressing time in milliseconds", function() {
+        expect((5).ms()).to.be.eql(5);
+      });
+    });
+
+    describe("#microseconds", function() {
+      it("allows for expressing time in microseconds", function() {
+        expect((5000).microseconds()).to.be.eql(5);
+      });
+    });
+
     describe("#fromScale", function() {
       it("converts a value from one scale to 0-1 scale", function() {
         expect((5).fromScale(0, 10)).to.be.eql(0.5);
