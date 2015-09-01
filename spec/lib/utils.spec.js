@@ -71,6 +71,25 @@ describe("Utils", function() {
     });
   });
 
+  describe("#finish", function() {
+    beforeEach(function() {
+      this.clock = sinon.useFakeTimers();
+    });
+
+    afterEach(function() {
+      this.clock.restore();
+    });
+
+    it("stops calling an interval function", function() {
+      var func = spy();
+      var interval = utils.every(10, func);
+      this.clock.tick(15);
+      utils.finish(interval);
+      this.clock.tick(15);
+      expect(func).to.be.calledOnce;
+    });
+  });
+
   describe("#subclass", function() {
     var BaseClass = function BaseClass(opts) {
       this.greeting = opts.greeting;
