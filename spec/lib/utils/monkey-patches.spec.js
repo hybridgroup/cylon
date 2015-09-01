@@ -77,6 +77,18 @@ describe("monkey-patches", function() {
       });
     });
 
+    describe("#minutes", function() {
+      it("allows for expressing time in minutes", function() {
+        expect((5).minutes()).to.be.eql(300000);
+      });
+    });
+
+    describe("#minute", function() {
+      it("allows for expressing time per minute", function() {
+        expect((1).minute()).to.be.eql(60000);
+      });
+    });
+
     describe("#fromScale", function() {
       it("converts a value from one scale to 0-1 scale", function() {
         expect((5).fromScale(0, 10)).to.be.eql(0.5);
