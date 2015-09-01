@@ -7,6 +7,7 @@ describe("Logger", function() {
   afterEach(function() {
     // to be friendly to other specs
     Config.logger = false;
+    Config.silent = false;
     Logger.setup();
   });
 

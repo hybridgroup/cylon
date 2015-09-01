@@ -4,7 +4,6 @@ var config = lib("config");
 
 describe("config", function() {
   it("contains configuration options", function() {
-    expect(config.logging).to.be.an("object");
     expect(config.testMode).to.be.eql(false);
   });
 

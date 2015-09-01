@@ -30,9 +30,7 @@ var Cylon = require("./../");
 
 Cylon.config({
   mode: "manual",
-  logging: {
-    logger: false
-  }
+  silent: true
 });
 
 Cylon.Logger.setup();
