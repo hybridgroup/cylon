@@ -515,22 +515,17 @@ describe("Robot", function() {
 
   describe("#log", function() {
     beforeEach(function() {
-      stub(Logger, "info");
-      stub(Logger, "fatal");
-
-      robot.log("info", "an informative message");
-      robot.log("fatal", "a fatal error");
+      stub(Logger, "log");
+      robot.log("an informative message");
     });
 
     afterEach(function() {
-      Logger.info.restore();
-      Logger.fatal.restore();
+      Logger.log.restore();
     });
 
     it("it passes messages onto Logger, with the Robot's name", function() {
-      var nameStr = "[" + robot.name + "] -";
-      expect(Logger.info).to.be.calledWith(nameStr, "an informative message");
-      expect(Logger.fatal).to.be.calledWith(nameStr, "a fatal error");
+      var nameStr = "[" + robot.name + "] - ";
+      expect(Logger.log).to.be.calledWith(nameStr + "an informative message");
     });
   });
 });
