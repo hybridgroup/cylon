@@ -442,6 +442,25 @@ describe("Robot", function() {
       expect(bot.devices.alpha.start).to.be.called;
       expect(bot.devices.bravo.start).to.be.called;
     });
+
+    it("runs #start on each device only once", function() {
+      bot.startDevices();
+      bot.startDevices();
+
+      expect(bot.devices.alpha.start).to.be.called.once;
+      expect(bot.devices.bravo.start).to.be.called.once;
+    });
+
+    it("runs #start on a newly added device", function() {
+      bot.startDevices();
+      bot.device("charlie", { driver: "ping" });
+      stub(bot.devices.charlie, "start").returns(true);
+      bot.startDevices();
+
+      expect(bot.devices.alpha.start).to.be.called.once;
+      expect(bot.devices.bravo.start).to.be.called.once;
+      expect(bot.devices.charlie.start).to.be.called.once;
+    });
   });
 
   describe("#halt", function() {
