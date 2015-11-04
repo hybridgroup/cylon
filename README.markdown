@@ -274,6 +274,8 @@ Platform  | Support
 [PCDuino](http://www.pcduino.com/)                                                | [cylon-pcduino](https://github.com/alexwang2013/cylon-pcduino)
 [iBeacon](https://developer.apple.com/ibeacon/)                                   | [cylon-beacon](https://github.com/juliancheal/cylon-beacon)
 [WeMo](http://www.belkin.com/us/Products/home-automation/c/wemo-home-automation/) | [cylon-wemo](https://github.com/ChrisTheBaron/cylon-wemo)
+[Telegram](https://telegram.org/) | [cylon-telegram](https://github.com/afoninsky/cylon-telegram)
+[APC UPS](http://www.apcupsd.org/) | [cylon-apcupsd](https://github.com/afoninsky/cylon-apcupsd)
 
 We'll also have many more platforms and drivers coming soon, [follow us on Twitter][Twitter] for updates.
 
