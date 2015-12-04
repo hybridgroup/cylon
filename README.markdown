@@ -266,7 +266,7 @@ through a shared `cylon-i2c` module:
   - MPU6050 Triple Axis Accelerometer and Gyro
   - PCA9685 16-Channel 12-bit PWM/Servo Driver
 
-In addition to our supported platforms, we have the following user contributed platforms:
+In addition to our officially supported platforms, we have the following 7 user contributed platforms:
 
 Platform  | Support
 --------  | -------
@@ -276,6 +276,7 @@ Platform  | Support
 [WeMo](http://www.belkin.com/us/Products/home-automation/c/wemo-home-automation/) | [cylon-wemo](https://github.com/ChrisTheBaron/cylon-wemo)
 [Telegram](https://telegram.org/) | [cylon-telegram](https://github.com/afoninsky/cylon-telegram)
 [APC UPS](http://www.apcupsd.org/) | [cylon-apcupsd](https://github.com/afoninsky/cylon-apcupsd)
+[Myo](https://www.myo.com/) | [cylon-myo](https://github.com/adaemi/cylon-myo)
 
 We'll also have many more platforms and drivers coming soon, [follow us on Twitter][Twitter] for updates.
 
