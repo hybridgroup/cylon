@@ -264,7 +264,9 @@ through a shared `cylon-i2c` module:
   - LSM9DS0XM 9 Degrees of Freedom IMU
   - MPL115A2 Barometer/Thermometer
   - MPU6050 Triple Axis Accelerometer and Gyro
+  - PCA9544a 4-Channel I2C Mux
   - PCA9685 16-Channel 12-bit PWM/Servo Driver
+
 
 In addition to our officially supported platforms, we have the following 7 user contributed platforms:
 
@@ -341,4 +343,4 @@ For the release history, please go to [RELEASES.md](https://github.com/hybridgro
 
 ## License
 
-Copyright (c) 2013-2015 The Hybrid Group. Licensed under the Apache 2.0 license.
+Copyright (c) 2013-2016 The Hybrid Group. Licensed under the Apache 2.0 license.
