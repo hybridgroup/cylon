@@ -218,7 +218,6 @@ Audio                                                                           
 [MQTT](http://mqtt.org/)                                                                              | [cylon-mqtt](https://github.com/hybridgroup/cylon-mqtt)
 [Nest](http://nest.com/)                                                                              | [cylon-nest](https://github.com/hybridgroup/cylon-nest)
 [Neurosky](http://store.neurosky.com/products/mindwave-mobile)                                        | [cylon-neurosky](https://github.com/hybridgroup/cylon-neurosky)
-[Ollie](http://gosphero.com/ollie)                                                                    | [cylon-ollie](https://github.com/hybridgroup/cylon-ollie)
 [OpenCV](http://opencv.org/)                                                                          | [cylon-opencv](https://github.com/hybridgroup/cylon-opencv)
 [Phillips Hue](http://www2.meethue.com/)                                                              | [cylon-hue](https://github.com/hybridgroup/cylon-hue)
 [Pebble](http://www.getpebble.com/)                                                                   | [cylon-pebble](https://github.com/hybridgroup/cylon-pebble)
@@ -231,6 +230,7 @@ Audio                                                                           
 [Spark](http://www.spark.io/)                                                                         | [cylon-spark](https://github.com/hybridgroup/cylon-spark)
 Speech                                                                                                | [cylon-speech](https://github.com/hybridgroup/cylon-speech)
 [Sphero](http://www.gosphero.com/)                                                                    | [cylon-sphero](https://github.com/hybridgroup/cylon-sphero)
+[Sphero BLE](http://sphero.com/bb8)                                                                    | [cylon-sphero-ble](https://github.com/hybridgroup/cylon-sphero-ble)
 [Tessel](https://tessel.io/)                                                                          | [cylon-tessel](https://github.com/hybridgroup/cylon-tessel)
 [WICED Sense](http://www.broadcom.com/products/wiced/sense/)                                          | [cylon-wiced-sense](https://github.com/hybridgroup/cylon-wiced-sense)
 
