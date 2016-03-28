@@ -415,6 +415,13 @@ describe("Robot", function() {
       expect(bot.connections.alpha.connect).to.be.called;
       expect(bot.connections.bravo.connect).to.be.called;
     });
+
+    it("defines a named connection on robot for each connection", function() {
+      bot.startConnections();
+
+      expect(bot["alpha"]).to.be.an.instanceOf(Adaptor);
+      expect(bot["bravo"]).to.be.an.instanceOf(Adaptor);
+    });
   });
 
   describe("#startDevices", function() {
@@ -460,6 +467,13 @@ describe("Robot", function() {
       expect(bot.devices.alpha.start).to.be.called.once;
       expect(bot.devices.bravo.start).to.be.called.once;
       expect(bot.devices.charlie.start).to.be.called.once;
+    });
+
+    it("defines a named device on robot for each device", function() {
+      bot.startDevices();
+
+      expect(bot["alpha"]).to.be.an.instanceOf(Driver);
+      expect(bot["bravo"]).to.be.an.instanceOf(Driver);
     });
   });
 
