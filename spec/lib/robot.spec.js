@@ -419,8 +419,8 @@ describe("Robot", function() {
     it("defines a named connection on robot for each connection", function() {
       bot.startConnections();
 
-      expect(bot["alpha"]).to.be.an.instanceOf(Adaptor);
-      expect(bot["bravo"]).to.be.an.instanceOf(Adaptor);
+      expect(bot.alpha).to.be.an.instanceOf(Adaptor);
+      expect(bot.bravo).to.be.an.instanceOf(Adaptor);
     });
   });
 
@@ -472,8 +472,8 @@ describe("Robot", function() {
     it("defines a named device on robot for each device", function() {
       bot.startDevices();
 
-      expect(bot["alpha"]).to.be.an.instanceOf(Driver);
-      expect(bot["bravo"]).to.be.an.instanceOf(Driver);
+      expect(bot.alpha).to.be.an.instanceOf(Driver);
+      expect(bot.bravo).to.be.an.instanceOf(Driver);
     });
   });
 
