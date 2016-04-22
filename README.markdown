@@ -5,6 +5,8 @@ Cylon.js is a JavaScript framework for robotics, physical computing, and the Int
 It provides a simple, but powerful way to create solutions that incorporate
 multiple, different hardware devices concurrently.
 
+Want to use Node.js for robots, drones, and IoT devices? You are in the right place.
+
 Want to use Ruby on robots? Check out our sister project, [Artoo][].
 
 Want to use Golang to power your robots? Check out our sister project,
@@ -255,18 +257,18 @@ Additionally, we also support a number of I2C (Inter-Integrated Circuit) devices
 through a shared `cylon-i2c` module:
 
 - [I2C](https://en.wikipedia.org/wiki/I%C2%B2C) <=> [Drivers](https://github.com/hybridgroup/cylon-i2c)
-  - BlinkM
-  - BMP180
+  - BlinkM RGB LED
+  - BMP180 Barometric Pressure + Temperature sensor
   - HMC6352 Digital Compass
-  - LCD Display
+  - JHD1313M1 LCD with RGB Backlight
+  - LCD
   - LIDAR-Lite
   - LSM9DS0G 9 Degrees of Freedom IMU
   - LSM9DS0XM 9 Degrees of Freedom IMU
-  - MPL115A2 Barometer/Thermometer
+  - MPL115A2 Digital Barometer & Thermometer
   - MPU6050 Triple Axis Accelerometer and Gyro
   - PCA9544a 4-Channel I2C Mux
   - PCA9685 16-Channel 12-bit PWM/Servo Driver
-
 
 In addition to our officially supported platforms, we have the following 7 user contributed platforms:
 

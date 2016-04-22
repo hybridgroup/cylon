@@ -2,7 +2,8 @@
 
 Version | Notes
 ------- | -----
-1.2.0   | Dynamic connections & devices, more time helpers, simplified logging 
+1.3.0   | Smarter module loading rules, adaptor alias 
+1.2.0   | Dynamic connections & devices, more time helpers, simplified logging
 1.1.0   | Clean ups, refactorings, misc. bug fixes.
 1.0.0   | Remove deprecated Device and Connection syntax, add Basestar#respond method
 0.22.2  | Bug-fix for Registry loader
