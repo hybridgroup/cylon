@@ -237,7 +237,7 @@ Speech                                                                          
 [WICED Sense](http://www.broadcom.com/products/wiced/sense/)                                          | [cylon-wiced-sense](https://github.com/hybridgroup/cylon-wiced-sense)
 
 Our implementation of GPIO (General Purpose Input/Output) allows for a shared
-set of drivers supporting a number of devices:
+set of drivers supporting 12 different devices:
 
 - [GPIO](https://en.wikipedia.org/wiki/General_Purpose_Input/Output) <=> [Drivers](https://github.com/hybridgroup/cylon-gpio)
   - Analog Sensor
@@ -253,18 +253,20 @@ set of drivers supporting a number of devices:
   - RGB LED
   - Servo
 
-Additionally, we also support a number of I2C (Inter-Integrated Circuit) devices
+We also support 14 different I2C (Inter-Integrated Circuit) devices
 through a shared `cylon-i2c` module:
 
 - [I2C](https://en.wikipedia.org/wiki/I%C2%B2C) <=> [Drivers](https://github.com/hybridgroup/cylon-i2c)
   - BlinkM RGB LED
   - BMP180 Barometric Pressure + Temperature sensor
+  - Direct I2C
   - HMC6352 Digital Compass
-  - JHD1313M1 LCD with RGB Backlight
+  - JHD1313M1 LCD with RGB Backlight  
   - LCD
   - LIDAR-Lite
   - LSM9DS0G 9 Degrees of Freedom IMU
   - LSM9DS0XM 9 Degrees of Freedom IMU
+  - MAG3110 3-Axis Digital Magnetometer
   - MPL115A2 Digital Barometer & Thermometer
   - MPU6050 Triple Axis Accelerometer and Gyro
   - PCA9544a 4-Channel I2C Mux
@@ -274,13 +276,14 @@ In addition to our officially supported platforms, we have the following 7 user 
 
 Platform  | Support
 --------  | -------
+[APC UPS](http://www.apcupsd.org/) | [cylon-apcupsd](https://github.com/afoninsky/cylon-apcupsd)
+[iBeacon](https://developer.apple.com/ibeacon/)                                   | [cylon-beacon](https://github.com/juliancheal/cylon-beacon)
+[Myo](https://www.myo.com/) | [cylon-myo](https://github.com/adaemi/cylon-myo)
+[One-Wire](https://en.wikipedia.org/wiki/1-Wire) | [cylon-one-wire](https://github.com/rkelly92/cylon-one-wire)
 [Parrot Rolling Spider](http://www.parrot.com/usa/products/rolling-spider/)       | [cylon-rolling-spider](https://github.com/ChrisTheBaron/cylon-rolling-spider)
 [PCDuino](http://www.pcduino.com/)                                                | [cylon-pcduino](https://github.com/alexwang2013/cylon-pcduino)
-[iBeacon](https://developer.apple.com/ibeacon/)                                   | [cylon-beacon](https://github.com/juliancheal/cylon-beacon)
-[WeMo](http://www.belkin.com/us/Products/home-automation/c/wemo-home-automation/) | [cylon-wemo](https://github.com/ChrisTheBaron/cylon-wemo)
 [Telegram](https://telegram.org/) | [cylon-telegram](https://github.com/afoninsky/cylon-telegram)
-[APC UPS](http://www.apcupsd.org/) | [cylon-apcupsd](https://github.com/afoninsky/cylon-apcupsd)
-[Myo](https://www.myo.com/) | [cylon-myo](https://github.com/adaemi/cylon-myo)
+[WeMo](http://www.belkin.com/us/Products/home-automation/c/wemo-home-automation/) | [cylon-wemo](https://github.com/ChrisTheBaron/cylon-wemo)
 
 We'll also have many more platforms and drivers coming soon, [follow us on Twitter][Twitter] for updates.
 
