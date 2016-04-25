@@ -272,7 +272,7 @@ through a shared `cylon-i2c` module:
   - PCA9544a 4-Channel I2C Mux
   - PCA9685 16-Channel 12-bit PWM/Servo Driver
 
-In addition to our officially supported platforms, we have the following 7 user contributed platforms:
+In addition to our officially supported platforms, we have the following 8 user contributed platforms:
 
 Platform  | Support
 --------  | -------
