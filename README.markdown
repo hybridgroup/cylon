@@ -291,7 +291,7 @@ We'll also have many more platforms and drivers coming soon, [follow us on Twitt
 Cylon.js can be run directly in-browser, using the `browserify` NPM module.
 You can also run it from withing a Chrome connected app, or a PhoneGap mobile app.
 
-For more info on browser support, and for help with different configurations, you can find more info [in our docs](/documentation/guides/browser-support).
+For more info on browser support, and for help with different configurations, you can find more info [in our docs](https://cylonjs.com/documentation/guides/browser-support/).
 
 ## API Plugins
 
