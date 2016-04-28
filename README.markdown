@@ -237,21 +237,23 @@ Speech                                                                          
 [WICED Sense](http://www.broadcom.com/products/wiced/sense/)                                          | [cylon-wiced-sense](https://github.com/hybridgroup/cylon-wiced-sense)
 
 Our implementation of GPIO (General Purpose Input/Output) allows for a shared
-set of drivers supporting 12 different devices:
+set of drivers supporting 14 different devices:
 
 - [GPIO](https://en.wikipedia.org/wiki/General_Purpose_Input/Output) <=> [Drivers](https://github.com/hybridgroup/cylon-gpio)
   - Analog Sensor
   - Button
   - Continuous Servo
   - Direct Pin
-  - IR Rangefinder
+  - IR Range Sensor
   - LED
-  - MakeyButton
+  - Makey Button (high-resistance button like the [MakeyMakey](http://www.makeymakey.com/))
   - Maxbotix Ultrasonic Range Finder
   - Motor
   - Relay
   - RGB LED
   - Servo
+  - Temperature Sensor
+  - TP401 Gas Sensor
 
 We also support 14 different I2C (Inter-Integrated Circuit) devices
 through a shared `cylon-i2c` module:
