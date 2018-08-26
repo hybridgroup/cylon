@@ -10,10 +10,10 @@ Want to use Node.js for robots, drones, and IoT devices? You are in the right pl
 Want to use Ruby on robots? Check out our sister project, [Artoo][].
 
 Want to use Golang to power your robots? Check out our sister project,
-[Gobot][].
+[Gobot][https://gobot.io/].
 
-[Artoo]: http://artoo.io
-[Gobot]: http://gobot.io
+[Artoo]: https://artoo.io
+[Gobot]: https://gobot.io/
 
 ## Build Status:
 
@@ -40,7 +40,7 @@ The below example connects to an Arduino over a serial connection, and blinks an
 LED once per second.
 
 The example requires that the Arduino have the Firmata sketch installed; which
-can be obtained either through the Ardunio IDE or the `gort arduino upload
+can be obtained either through the Arduino IDE or the `gort arduino upload
 firmata` command available in [gort](http://gort.io).
 
 ```javascript
